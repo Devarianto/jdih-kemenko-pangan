@@ -1,0 +1,7 @@
+/*!
+ * Milligram-scss v1.3.0
+ * https://milligram.github.io
+ *
+ * Copyright (c) 2017 CJ Patoilo
+ * Licensed under the MIT license
+ */b{font-weight:600}strong{font-weight:700}p{margin-top:0;line-height:1.8}small{font-size:.75rem}.title-large,.title-medium,h1,h2,h3,h4,h5,h6{margin-bottom:20px;margin-top:0;letter-spacing:0}h1{font-size:2.875rem;line-height:1.2}.title-large,.title-medium,h1,h2,h3,h4{font-weight:700}.title-large{font-size:4rem;line-height:1.25}.title-medium{font-size:3.5rem;line-height:1.25}h2{font-size:3rem;line-height:1.25}h3{font-size:2.5rem;line-height:1.3}h4{font-size:2rem;line-height:1.35}h5,h6{font-weight:700}h5{font-size:1.5rem;line-height:1.5}h6{font-size:1.25rem;line-height:1.4}@media all and (max-width: 1200px){.title-large{font-size:3.25rem}.title-medium{font-size:2.875rem}h2{font-size:2.5rem}h3{font-size:2rem}h4{font-size:1.75rem}h5{font-size:1.375rem}h6{font-size:1.125rem}}@media all and (max-width: 767px){.title-large{font-size:2.25rem}.title-medium{font-size:2rem}h2{font-size:1.75rem}h3{font-size:1.5rem}h4{font-size:1.25rem}h5{font-size:1.125rem}h6{font-size:1rem}p{font-size:.938rem}}

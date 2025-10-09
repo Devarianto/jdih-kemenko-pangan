@@ -1,0 +1,645 @@
+/*!
+ * Milligram-scss v1.3.0
+ * https://milligram.github.io
+ *
+ * Copyright (c) 2017 CJ Patoilo
+ * Licensed under the MIT license
+ */
+
+// Form
+// ––––––––––––––––––––––––––––––––––––––––––––––––––
+
+input[type="email"],
+input[type="number"],
+input[type="password"],
+input[type="search"],
+input[type="tel"],
+input[type="text"],
+input[type="url"],
+textarea,
+select {
+  appearance: none; // Removes awkward default styles on some inputs for iOS
+  background-color: transparent;
+  border: 1px solid var(--c-neutral-gray-2);
+  border-radius: 8px;
+  box-shadow: none;
+  box-sizing: inherit; // Forced to replace inherit values of the normalize.css
+  height: 40px;
+  padding: 0 12px; // The .6rem vertically centers text on FF, ignored by Webkit
+  width: 100%;
+  font-family: var(--font-primary);
+  font-size: 1rem;
+  color: var(--c-neutral-black);
+  appearance: none;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+
+  &::-webkit-input-placeholder {
+    /* Edge */
+    color: var(--c-neutral-gray-2);
+  }
+  &:-ms-input-placeholder {
+    /* Internet Explorer 10-11 */
+    color: var(--c-neutral-gray-2);
+  }
+  &::placeholder {
+    color: var(--c-neutral-gray-2);
+  }
+
+  &:focus {
+    border: 2px solid var(--c-primary-main);
+    outline: 0;
+  }
+
+  &.textfield-large {
+    height: 48px;
+  }
+  &.textfield-small {
+    height: 36px;
+  }
+
+  &[disabled] {
+    background-color: var(--c-neutral-gray-1);
+  }
+}
+
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+select {
+  background: url("@images/chevron-down.svg") no-repeat center right 12px;
+  padding-right: 38px;
+}
+
+textarea {
+  min-height: 160px;
+  resize: none;
+  padding-top: 12px;
+  padding-bottom: 12px;
+}
+
+label,
+legend {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 400;
+  margin-bottom: 8px;
+  color: var(--c-neutral-gray-4);
+}
+
+fieldset {
+  border-width: 0;
+  padding: 0;
+}
+
+input[type="checkbox"],
+input[type="radio"] {
+  display: inline;
+}
+
+.label-inline {
+  display: inline-block;
+  font-weight: normal;
+  margin-left: 8px;
+}
+
+.supporting-text {
+  font-size: 0.75rem;
+  padding-left: 12px;
+  color: var(--c-neutral-gray-3);
+  &__no-space {
+    padding-left: 0;
+  }
+}
+
+.box-form {
+  .row,
+  &.row {
+    .column {
+      margin-bottom: 16px;
+    }
+  }
+}
+
+// Error Field
+.error-field {
+  label,
+  legend,
+  .supporting-text,
+  .wa-icon,
+  i {
+    color: var(--c-negative);
+  }
+
+  input[type="email"],
+  input[type="number"],
+  input[type="password"],
+  input[type="search"],
+  input[type="tel"],
+  input[type="text"],
+  input[type="url"],
+  textarea,
+  select,
+  .textfield-label__box,
+  .textfield-bline__box {
+    border-width: 1px;
+    border-color: var(--c-negative);
+    &:focus {
+      ~ .textfield-label__box {
+        border: 1px solid var(--c-negative) !important;
+      }
+      ~ .textfield-bline__box {
+        border-bottom: 1px solid var(--c-negative) !important;
+      }
+    }
+  }
+}
+
+// Textfield Icon
+.textfields-icon-left,
+.textfields-icon-right,
+.textfields-icon-lr {
+  position: relative;
+  margin-bottom: 4px;
+  margin-top: 0;
+
+  input[type="email"],
+  input[type="number"],
+  input[type="password"],
+  input[type="search"],
+  input[type="tel"],
+  input[type="text"],
+  input[type="url"],
+  textarea,
+  select {
+    margin-bottom: 0;
+  }
+
+  .wa-icon,
+  i {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--c-neutral-gray-3);
+  }
+}
+
+.textfields-icon-left {
+  input[type="email"],
+  input[type="number"],
+  input[type="password"],
+  input[type="search"],
+  input[type="tel"],
+  input[type="text"],
+  input[type="url"],
+  textarea,
+  select {
+    padding-left: 48px !important;
+  }
+
+  .wa-icon,
+  i {
+    left: 16px;
+  }
+}
+.textfields-icon-right {
+  input[type="email"],
+  input[type="number"],
+  input[type="password"],
+  input[type="search"],
+  input[type="tel"],
+  input[type="text"],
+  input[type="url"],
+  textarea,
+  select {
+    padding-right: 48px !important;
+  }
+
+  .wa-icon,
+  i {
+    right: 16px;
+  }
+  input[type="file"] {
+    border: 0;
+    width: 100%;
+  }
+}
+.textfields-icon-lr {
+  input[type="email"],
+  input[type="number"],
+  input[type="password"],
+  input[type="search"],
+  input[type="tel"],
+  input[type="text"],
+  input[type="url"],
+  textarea,
+  select {
+    padding-left: 48px !important;
+    padding-right: 48px !important;
+  }
+
+  .wa-icon,
+  i {
+    &:first-of-type {
+      left: 16px;
+    }
+    &:last-of-type {
+      right: 16px;
+    }
+  }
+}
+
+// Textfield Label Inner
+.textfield-label,
+.textfield-bline {
+  position: relative;
+  &__box {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+  }
+
+  .wa-icon,
+  i {
+    top: auto;
+    bottom: 12px;
+    transform: translateY(0);
+  }
+
+  label,
+  legend {
+    padding: 12px 12px 0;
+    margin-bottom: 0;
+  }
+
+  input[type="email"],
+  input[type="number"],
+  input[type="password"],
+  input[type="search"],
+  input[type="tel"],
+  input[type="text"],
+  input[type="url"],
+  textarea,
+  select {
+    border: none;
+    &[disabled] {
+      background-color: transparent;
+      ~ .textfield-label__box,
+      ~ .textfield-bline__box {
+        background-color: var(--c-neutral-gray-1);
+      }
+    }
+  }
+
+  textarea {
+    min-height: 80px;
+  }
+}
+
+.textfield-label {
+  &__box {
+    border: 1px solid var(--c-neutral-gray-2);
+    border-radius: 8px;
+  }
+
+  input[type="email"],
+  input[type="number"],
+  input[type="password"],
+  input[type="search"],
+  input[type="tel"],
+  input[type="text"],
+  input[type="url"],
+  textarea,
+  select {
+    &:focus {
+      ~ .textfield-label__box {
+        border: 2px solid var(--c-primary-main);
+      }
+    }
+  }
+}
+
+.textfield-bline {
+  &__box {
+    border-bottom: 1px solid var(--c-neutral-gray-2);
+    border-radius: 0;
+  }
+
+  label,
+  legend {
+    padding: 12px 0 0;
+  }
+
+  input[type="email"],
+  input[type="number"],
+  input[type="password"],
+  input[type="search"],
+  input[type="tel"],
+  input[type="text"],
+  input[type="url"],
+  textarea,
+  select {
+    padding: 0;
+
+    &:focus {
+      ~ .textfield-bline__box {
+        border-bottom: 2px solid var(--c-primary-main);
+      }
+    }
+  }
+}
+
+// Radio Button Custom
+.radio-custom {
+  position: relative;
+  padding-left: 32px;
+  display: inline-flex;
+  align-items: center;
+  min-height: 24px;
+  input {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 2;
+    opacity: 0;
+    cursor: pointer;
+    margin-bottom: 0;
+    &:checked {
+      + i:before {
+        opacity: 1;
+      }
+    }
+    &:disabled {
+      cursor: default;
+    }
+  }
+  i {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background: var(--c-primary-surface);
+    border: 1px solid var(--c-primary-border);
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    &::before {
+      content: "";
+      background: var(--c-primary-main);
+      width: 15px;
+      height: 15px;
+      border-radius: 50%;
+      display: block;
+      opacity: 0;
+    }
+  }
+  &__small {
+    padding-left: 22px;
+    font-size: 0.75rem;
+    i {
+      width: 16px;
+      height: 16px;
+      top: 3px;
+      &::before {
+        width: 10px;
+        height: 10px;
+      }
+    }
+  }
+}
+
+// Checkbox Button Custom
+.checkbox-custom {
+  position: relative;
+  padding-left: 32px;
+  display: inline-flex;
+  align-items: center;
+  min-height: 24px;
+  input {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 2;
+    opacity: 0;
+    cursor: pointer;
+    margin-bottom: 0;
+    &:checked {
+      + i:before {
+        content: "\e92b";
+        position: relative;
+        top: 1px;
+      }
+    }
+    &:disabled {
+      cursor: default;
+    }
+  }
+  i {
+    position: absolute;
+    top: -1px;
+    left: 0;
+    width: 24px;
+    height: 24px;
+    background: var(--c-primary-surface);
+    border: 1px solid var(--c-primary-border);
+    border-radius: 4px;
+    text-align: center;
+    &::before {
+      color: var(--c-primary-main);
+      font-size: 20px;
+    }
+  }
+  span {
+    a {
+      font-weight: 700;
+    }
+  }
+  &__small {
+    padding-left: 22px;
+    font-size: 0.75rem;
+    i {
+      width: 16px;
+      height: 16px;
+      top: 3px;
+      &::before {
+        font-size: 12px;
+      }
+    }
+  }
+}
+
+// Switch Option Custom
+.switch-custom {
+  position: relative;
+  display: inline-block;
+  input {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 2;
+    opacity: 0;
+    cursor: pointer;
+    margin-bottom: 0;
+    &:checked {
+      + i {
+        background: var(--c-primary-main);
+        &::before {
+          left: calc(100% - 2px);
+          transform: translateX(-100%);
+        }
+      }
+    }
+    &.active {
+      &:checked {
+        + i {
+          background: var(--c-neutral-gray-2);
+        }
+      }
+    }
+    &:active {
+      + i {
+        &::before {
+          width: 30px;
+        }
+      }
+    }
+    &:disabled {
+      cursor: default;
+    }
+  }
+  i {
+    display: block;
+    width: 48px;
+    height: 24px;
+    border-radius: 30px;
+    background: var(--c-neutral-gray-2);
+    position: relative;
+    padding: 2px;
+    &::before {
+      content: "";
+      background: var(--c-neutral-white);
+      display: block;
+      width: 20px;
+      height: 20px;
+      border-radius: 20px;
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      transition: all ease-out 0.2s;
+    }
+  }
+
+  &__small {
+    input {
+      &:active {
+        + i {
+          &::before {
+            width: 20px;
+          }
+        }
+      }
+    }
+    i {
+      width: 32px;
+      height: 16px;
+      &::before {
+        width: 12px;
+        height: 12px;
+      }
+    }
+  }
+}
+
+// Slide Range Custom
+.range-slider {
+  position: relative;
+  height: 6px;
+  background: var(--c-neutral-gray-1);
+  border-radius: 6px;
+  input[type="range"] {
+    width: 100%;
+    position: absolute;
+    top: 50%;
+    z-index: 3;
+    transform: translateY(-50%);
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 6px;
+    opacity: 0;
+    margin: 0;
+    &::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 30px;
+      height: 30px;
+      cursor: pointer;
+      border-radius: 50%;
+      opacity: 0;
+    }
+    &::-moz-range-thumb {
+      width: 30px;
+      height: 30px;
+      cursor: pointer;
+      border-radius: 50%;
+      opacity: 0;
+    }
+  }
+  &__thumb {
+    width: 30px;
+    height: 30px;
+    border: 3px solid var(--c-primary-main);
+    border-radius: 50%;
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: var(--c-neutral-white);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 700;
+    font-size: 0;
+    color: #303030;
+    z-index: 2;
+  }
+  &__line {
+    height: 6px;
+    width: 100%;
+    background-color: var(--c-primary-main);
+    top: 50%;
+    transform: translateY(-50%);
+    left: 0;
+    position: absolute;
+    z-index: 1;
+    border-radius: 6px 0 0 6px;
+  }
+
+  &__small {
+    .range-slider__thumb {
+      width: 22px;
+      height: 22px;
+    }
+  }
+}

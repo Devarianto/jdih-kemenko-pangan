@@ -1,0 +1,29 @@
+/*!
+ * Milligram-scss v1.3.0
+ * https://milligram.github.io
+ *
+ * Copyright (c) 2017 CJ Patoilo
+ * Licensed under the MIT license
+ */
+
+
+// Image
+// ––––––––––––––––––––––––––––––––––––––––––––––––––
+
+img {
+	max-width: 100%;
+}
+
+figure{
+	margin: 0;
+	img{
+		vertical-align: top;
+	}
+}
+
+// ex content pages
+// .content-pages{
+// 	figure{
+// 		img{}
+// 	}
+// }

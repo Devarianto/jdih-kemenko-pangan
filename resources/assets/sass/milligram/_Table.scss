@@ -1,0 +1,64 @@
+/*!
+ * Milligram-scss v1.3.0
+ * https://milligram.github.io
+ *
+ * Copyright (c) 2017 CJ Patoilo
+ * Licensed under the MIT license
+ */
+
+// Table
+// ––––––––––––––––––––––––––––––––––––––––––––––––––
+
+table {
+  border-spacing: 0;
+  width: 100%;
+}
+
+td,
+th {
+  border-bottom: 1px solid var(--c-secondary-surface);
+  padding: 12px 15px;
+  text-align: left;
+
+  &:first-child {
+    padding-left: 0;
+  }
+
+  &:last-child {
+    padding-right: 0;
+  }
+}
+
+// example content pages
+.table-content {
+  max-width: 100%;
+  overflow-x: auto;
+  &__small {
+    table {
+      font-size: 0.75rem;
+    }
+  }
+}
+.content-pages {
+  table {
+    font-size: 0.875rem;
+    color: var(--c-neutral-black);
+    th,
+    td {
+      padding: 12px;
+    }
+    thead {
+      background: var(--c-primary-main);
+      color: var(--c-neutral-white);
+    }
+  }
+  .table-content {
+    max-width: 100%;
+    overflow-x: auto;
+    &__small {
+      table {
+        font-size: 0.75rem;
+      }
+    }
+  }
+}
