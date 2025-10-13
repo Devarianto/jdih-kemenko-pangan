@@ -20,12 +20,12 @@ input[type="submit"] {
   color: var(--c-neutral-white);
   cursor: pointer;
   display: inline-block;
-  font-size: 1rem;
+  font-size: 14px;
   font-weight: 700;
   height: 42px;
   letter-spacing: 0;
   line-height: 36px;
-  padding: 0 36px;
+  padding: 0 24px;
   text-align: center;
   text-decoration: none;
   text-transform: none;
@@ -78,11 +78,40 @@ input[type="submit"] {
   &.button-outline {
     background-color: transparent;
     color: var(--c-primary-main);
-
+    transition: .2s all ease-out;
+    overflow: hidden;
+    position: relative;
+    span{
+      position: relative;
+      z-index: 2;
+    }
+    .wave {
+      position: absolute;
+      width: 100%;
+      height: 50%;
+      background: url('@images/wave.svg');
+      background-size: 200% 100%;
+      top: 100%;
+      left: 0;
+      animation: wave 2s linear infinite;
+      transition: 0.5s;
+      z-index: 1;
+    }
+     @keyframes wave {
+        from {
+          background-position-x: 0;
+        }
+        to {
+          background-position-x: 200%;
+        }
+      }
     &:hover {
-      background-color: var(--c-primary-surface);
-      border-color: var(--c-primary-surface);
-      color: var(--c-primary-main);
+      border-color: transparent;
+      color:white;
+      background-color: var(--c-primary-main);
+      .wave{
+        top: 70%;
+      }
     }
 
     &:active {

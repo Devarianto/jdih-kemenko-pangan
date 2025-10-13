@@ -10,8 +10,7 @@
   font-display: block;
 }
 
-.wa-icon,
-i {
+.wa-icon{
   /* use !important to prevent issues with browser extensions that change fonts */
   font-family: 'Webarq-Icons' !important;
   speak: never;

@@ -1,7 +1,108 @@
+import $ from 'jquery'; //import jquery module
+import Swiper  from 'swiper/bundle';
+
 const home = {};
+home.sliderDocument = () => {
+  if($('.swiper .document__listing--item').length <= 4){
+    $('.document').addClass('disable-arrow')
+    return  
+  }
+  const swiper = new Swiper('.document__listing.swiper', {
+    loop: true,
+    spaceBetween: 24,
+    slidesPerView: 4,
+    slidesOffsetBefore: 0,  // penting: jangan offset dari kiri lagi
+    slidesOffsetAfter: 0,
+    navigation: {
+      nextEl: ".document__title .swiper-next",
+      prevEl: ".document__title .swiper-prev",
+    },
+    autoplay: {
+      delay: 6000,
+      disableOnInteraction: false,
+    },
+  });
+}
+home.ratingHome = () => {
+  if (typeof ratingData === 'undefined') {
+    console.warn('ratingData belum didefinisikan!');
+    return;
+  }
+
+  const total = Object.values(ratingData.breakdown).reduce((a, b) => a + b, 0);
+
+  // Kosongkan elemen target agar tidak duplikat render
+  $('#ratingBreakdown').empty();
+
+  // Render bar rating (5 → 1)
+  for (let i = 5; i >= 1; i--) {
+    const count = ratingData.breakdown[i] || 0;
+    const percent = (count / total) * 100;
+    const bar = `
+      <div class="bar">
+        <span>${i}</span>
+        <span class="star">★</span>
+        <div class="progress">
+          <div class="fill" style="width:${percent}%;"></div>
+        </div>
+      </div>
+    `;
+    $('#ratingBreakdown').append(bar);
+  }
+
+  // Update angka & total
+  $('#average').text(ratingData.average.toFixed(1));
+  $('#total-reviews').text(`${ratingData.total} Penilaian`);
+
+  // Render bintang dinamis
+  const renderStars = (avg) => {
+    let stars = '';
+    const fullStars = Math.floor(avg);
+    const hasHalf = avg % 1 >= 0.5;
+    const color = getStarColor(avg);
+
+    for (let i = 1; i <= 5; i++) {
+      if (i <= fullStars) {
+        stars += `<span style="color:${color};">★</span>`;
+      } else if (i === fullStars + 1 && hasHalf) {
+        stars += `<span style="color:${color}; opacity:0.5;">★</span>`;
+      } else {
+        stars += `<span style="color:#ddd;">★</span>`;
+      }
+    }
+    return stars;
+  };
+
+  // Warna bintang sesuai rating
+  const getStarColor = (avg) => {
+    if (avg >= 4.5) return '#FFD21E'; // emas terang
+    if (avg >= 3.5) return '#FFD21E'; // kuning cerah
+    if (avg >= 2.5) return '#FFD21E'; // oranye muda
+    if (avg >= 1.5) return '#FFD21E'; // kuning kusam
+    return '#999'; // abu-abu
+  };
+
+  $('#stars').html(renderStars(ratingData.average));
+};
+
+home.sliderLogo = () => {
+  const swiper = new Swiper('.logo-slider.swiper', {
+    loop: true,
+    slidesPerView: 6,
+    spaceBetween: 20,
+    slidesOffsetBefore: -80, // offset kiri agar tampak terpotong
+    slidesOffsetAfter: -80,  // offset kanan agar tampak terpotong
+    autoplay: {
+      delay: 6000,
+      disableOnInteraction: false,
+    },
+  });
+}
 
 home.init = function () {
-
+  this.sliderDocument()
+  this.ratingHome()
+  this.sliderLogo()
 }
 
 home.init();
