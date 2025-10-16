@@ -20,11 +20,11 @@ textarea,
 select {
   appearance: none; // Removes awkward default styles on some inputs for iOS
   background-color: transparent;
-  border: 1px solid var(--c-neutral-gray-2);
+  border: 1px solid #D3D3D3;
   border-radius: 8px;
   box-shadow: none;
   box-sizing: inherit; // Forced to replace inherit values of the normalize.css
-  height: 40px;
+  height: 48px;
   padding: 0 12px; // The .6rem vertically centers text on FF, ignored by Webkit
   width: 100%;
   font-family: var(--font-primary);
@@ -91,9 +91,9 @@ label,
 legend {
   display: block;
   font-size: 0.875rem;
-  font-weight: 400;
+  font-weight: 600;
   margin-bottom: 8px;
-  color: var(--c-neutral-gray-4);
+  color: #303030;
 }
 
 fieldset {
@@ -124,7 +124,10 @@ input[type="radio"] {
 .box-form {
   .row,
   &.row {
+    margin-left: -8px;
+    width: calc(100% + 16px);
     .column {
+      padding: 0 8px;
       margin-bottom: 16px;
     }
   }

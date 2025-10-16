@@ -16,10 +16,10 @@ export default ($) => ({
     $('.popup__overlay').on('click', function (e) {
       $(this).parent().removeClass('popup__show')
       $('body').css({ 'overflow': 'auto' })
-      $('.popup-container .popup-content').each(function () {
+       $('.popup__content').each(function () {
         let iframe = $(this).find('iframe');
         iframe.each(function () {
-          $(this).attr('src', $(this).attr('src'));
+          $(this).attr('src','');
           return false;
         });
       });
@@ -27,10 +27,10 @@ export default ($) => ({
     $('.popup__close').on('click', function (e) {
       $(this).parents('.popup').removeClass('popup__show')
       $('body').css({ 'overflow': 'auto' })
-      $('.popup-container .popup-content').each(function () {
+      $('.popup__content').each(function () {
         let iframe = $(this).find('iframe');
         iframe.each(function () {
-          $(this).attr('src', $(this).attr('src'));
+          $(this).attr('src','');
           return false;
         });
       });

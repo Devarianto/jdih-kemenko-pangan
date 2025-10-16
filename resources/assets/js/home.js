@@ -22,6 +22,7 @@ home.sliderDocument = () => {
       disableOnInteraction: false,
     },
   });
+
 }
 home.ratingHome = () => {
   if (typeof ratingData === 'undefined') {
@@ -99,14 +100,41 @@ home.sliderLogo = () => {
   });
 }
 
+home.sliderPopup = () => {
+  const sliderThumbnail = new Swiper('.photo-slider-thumbs.swiper', {
+    slidesPerView: 6,
+    freeMode: true,
+    spaceBetween:16,
+    watchSlidesVisibility: true,
+    watchSlidesProgress: true,
+  });
+
+  const slider = new Swiper('.swiper.photo-slider', {
+    slidesPerView: 1,
+    thumbs: {
+      swiper: sliderThumbnail
+    }
+  });
+}
+home.playVideo = function () {
+  $(".grid__item .icon-play").on('click',function(){
+    openPopup('#popup-video')
+    let container = $('#popup-video');
+    let iframe = container.find(".wrap-video iframe");
+    let videoUrl = $(this).parents('.grid__item').data("video") + "?autoplay=1";
+    // Set src baru
+    iframe.attr("src", videoUrl);
+  });
+}
 home.init = function () {
   this.sliderDocument()
-  this.ratingHome()
   this.sliderLogo()
+  this.ratingHome()
+  this.playVideo()
+  this.sliderPopup()
 }
 
 home.init();
 
 window.onload = () => {
-
 }

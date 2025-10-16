@@ -5,8 +5,7 @@
     <a href="">3</a>
     <a href="">4</a>
     <a href="">5</a>
-    <a href="">6</a>
-    <a href="">7</a>
-    <a href="">8</a>
+    <a><span>...</span></a>
+    <a href="">40</a>
     <a class="arr next"><span></span></a>
 </div>

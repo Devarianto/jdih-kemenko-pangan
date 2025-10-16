@@ -1,0 +1,322 @@
+/*=============================================================================================
+  Company    : PT Web Architect Technology - webarq.com
+  Document   : Stylesheet
+  Author     : Your Name
+==============================================================================================*/
+/* helper
+----------------------------------------------------------------------------------------------*/
+// @import "../milligram/Color";    // import your general color from milligram
+
+.section-text{
+  display: flex;
+  &__left{
+    width: 450px;
+  }
+  &__right{
+    flex: 1;
+    padding-left: 60px;
+    p{
+      color: #636363;
+    }
+  }
+  h4{
+    font-weight: 600;
+  }
+}
+.tag{
+  padding: 4px 16px 4px 32px;
+  color: var(--c-primary-main);
+  background-color: #CBD8EE;
+  border-radius: 4px;
+  display: inline-block;
+  font-size: 14px;
+  font-weight: 600;
+  position: relative;
+  margin-bottom: 16px;
+  &::before{
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 16px;
+    transform: translateY(-50%);
+    width: 4px;
+    height: 4px;
+    background-color: var(--c-primary-main);
+  }
+}
+.list-pdf{
+  margin-top: 48px;
+  &__item{
+    margin-bottom: 16px;
+  }
+  span{
+    margin-bottom:16px;
+    padding-left: 12px;
+    position: relative;
+    font-size: 14px;
+    font-weight: 600;
+    display: inline-block;
+    color: #636363;
+    &::before{
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 0;
+      transform: translateY(-50%);
+      width: 4px;
+      height: 4px;
+      background-color: #636363;
+    }
+  }
+  .inner{
+    display: flex;
+    align-items: center;
+    padding: 24px 32px;
+    border-radius: 8px;
+    border: 1px solid rgba(217, 217, 217, 0.75);
+    background: #FFF;
+    box-shadow: 0 14px 34px 0 rgba(9, 29, 119, 0.06);
+  }
+  h6{
+    margin-bottom: 0;
+    font-size:1rem;
+    font-weight: 600;
+    margin: 0 48px 0 16px;
+  }
+  figure{
+    flex: 0 0 42px;
+    max-width: 42px; 
+  }
+  
+  .button{
+    margin-left: auto;
+    flex: 0 0 auto;
+  }
+}
+.visi{
+  figure{
+    position: relative;
+    border-radius: 8px;
+    overflow: hidden;
+    &::before{
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(241deg, rgba(0, 20, 98, 0.00) -1.45%, rgba(0, 20, 98, 0.38) 44.4%, #01104F 112.85%);
+    }
+    img{
+      width: 100%;
+      min-height: 250px;
+      object-fit: cover;
+    }
+    figcaption{
+      position: absolute;
+      bottom: 54px;
+      left: 64px;
+      right: 0;
+      z-index: 2;
+      color: white;
+      max-width: 639px;
+      p{
+        margin-bottom: 16px;
+        font-size: 18px;
+        letter-spacing: 1.8px;
+        text-transform: uppercase;
+      }
+      h6{
+        margin-bottom: 0;
+        font-weight: 500;
+      }
+    }
+  }
+}
+.misi{
+  margin-top: 40px;
+  h6{
+    font-size: 18px;
+    margin-bottom: 16px;
+    text-transform: uppercase;
+    font-weight: 500;
+    letter-spacing: 1.8px;
+  }
+}
+.organisasi{
+  margin-bottom: 80px;
+  text-align: center;
+  &:last-child{
+    margin-bottom: 0;
+  }
+}
+
+.box-shadow{
+  border-radius: 8px;
+  background: #FFF;
+  padding: 24px 32px;
+  box-sizing: border-box;
+  box-shadow: 0 14px 34px 0 rgba(9, 29, 119, 0.06);
+  margin-bottom: 48px;
+  &:last-child{
+    margin-bottom: 0;
+  }
+  p{
+    font-weight:600;
+  }
+}
+.filter-right{
+  display: flex;
+  justify-content: flex-end;
+  .col{
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    select{
+      min-width: 278px;
+      margin-bottom: 0;
+    }
+    label{
+      margin-bottom: 0;
+      white-space: nowrap;
+    }
+  }
+}
+.statistik{
+  display: flex;
+  align-items: flex-start;
+  margin: 46px 0 80px;
+  &__left{
+    flex: 0 0 390px;
+    max-width: 390px;
+  }
+  &__right{
+    flex: 0 0 calc(100% - 390px);
+    max-width: calc(100% - 390px);
+    padding-left: 49px;
+    padding-top: 24px;
+  }
+  #chartPeraturan{
+    width: 100% !important;
+    height: auto !important;
+    min-height: 340px !important;
+  }
+  table{
+    border-collapse: collapse;
+    td{
+      border-bottom: 1px solid #D3D3D3;
+    }
+    td,th{
+      vertical-align: middle;
+      &:last-child{
+        text-align: center;
+      }
+    }
+  }
+}
+.chart-year{
+  p{
+    margin-bottom: 32px;
+    color: #636363;
+  }
+  .chart{
+    height: 440px;
+  }
+}
+.contact-highlight{
+  position: relative;
+  display: flex;
+  min-height: 270px;
+  border-radius: 8px;
+  overflow: hidden;
+  &::before{
+    content: '';
+    position: absolute;
+    inset: 0;
+    top: 40px;
+    border-radius: 8px;
+    background: linear-gradient(93deg, #091D77 -45.62%, #1840AA -4.75%, #3272DD 47.43%);
+    backdrop-filter: blur(17px);
+    z-index: -1;
+  }
+  &__left{
+    align-self: center;
+    padding: 70px 0 50px 52px;
+    color: white;
+    max-width: 623px;
+    z-index: 2;
+    p{
+      margin-bottom: 24px;
+      font-weight: 600;
+    }
+    .wrap-col{
+      display: flex;
+      gap: 20px;
+      p{
+        opacity: .9;
+        font-weight: 400;
+      }
+    }
+    a{
+      color: white;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 600;
+      &.external-link{
+        text-decoration-line: underline;
+        text-decoration-style: solid;
+        text-decoration-skip-ink: auto;
+        text-decoration-thickness: auto;
+        text-underline-offset: auto;
+        text-underline-position: from-font;
+        position: relative;
+        padding-right: 30px;
+        &::after{
+          content: '\e960';
+          position: absolute;
+          right: 0;
+          top: 2px;
+          font-family: var(--font-webarq-icon);
+          font-weight: 300;
+          font-size: 20px;
+          line-height: 1;
+        }
+      }
+    }
+  }
+  figure{    
+    position: absolute;
+    right:0;
+    bottom:0;
+    top: 0;
+    img{
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    &::before{
+      content: '';
+      position: absolute;
+      inset: 0;
+      top: 40px;
+      right: auto;
+      width: 60%;
+      background: linear-gradient(90deg, #3272DD 0%, rgba(50, 114, 221, 0.69) 50.59%, rgba(50, 114, 221, 0.00) 100%);
+    }
+  }
+}
+
+.box-form{
+  margin-top: 40px;
+  h5{
+    font-weight: 500;
+    text-transform: uppercase;
+  }
+}
+
+.banner-middle{
+  &::before{
+    background: linear-gradient(0deg, rgba(3, 11, 43, 0.00) 0%, rgba(3, 11, 43, 0.70) 100%);
+  }
+  &::after{
+    background: linear-gradient(180deg, rgba(3, 11, 43, 0.00) 19.05%, rgba(3, 11, 43, 0.50) 51.52%, rgba(3, 11, 43, 0.70) 100%);
+  }
+}

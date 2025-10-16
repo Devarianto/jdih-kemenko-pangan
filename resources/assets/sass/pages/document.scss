@@ -1,0 +1,89 @@
+/*=============================================================================================
+  Company    : PT Web Architect Technology - webarq.com
+  Document   : Stylesheet
+  Author     : Your Name
+==============================================================================================*/
+/* helper
+----------------------------------------------------------------------------------------------*/
+.listing-rules{
+  &__item{
+    display: flex;
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 24px;
+    &:last-child{
+      margin-bottom: 0;
+    }
+    figure{
+      flex: 0 0 240px;
+      max-width: 240px;
+      align-self: stretch;
+      img{
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+    figcaption{
+      background-color: white;
+      flex: 0 0 calc(100% - 240px);
+      max-width: calc(100% - 240px);
+      padding: 24px 32px;
+      .category{
+        border-radius: 40px;
+        background: #70AC74;
+        color: white;
+        padding: 3px 8px;
+        overflow: hidden;
+        font-size: 11px;
+        font-weight: 700;
+        display: inline-block;
+        margin-bottom: 8px;
+      }
+      p{
+        margin-bottom: 8px;
+        font-weight: 600;
+      }
+      small{
+        font-size: 14px;
+      }
+      .bottom{
+        margin-top: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding-top: 16px;
+        border-top: 1px solid #D9D9D9;
+        &__left{
+          display: flex;
+          gap: 19px;
+        }
+        &__right{
+          display: flex;
+          gap:12px;
+        }
+        small{
+          font-size: 10px;
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+        }
+        .button{
+          border-radius: 6px;
+          border-color: #2063D2;
+          color: #2063D2;
+          font-size: 10px;
+          padding: 8px 16px;
+          &:hover{
+            color: white;
+            svg{
+              path{
+                stroke: white;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

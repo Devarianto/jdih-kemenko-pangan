@@ -26,6 +26,43 @@
           </svg>
         </button>
       </div>
+      <div class="wrap-filter">
+        <a href="">Pencarian Spesifik</a>
+        <div class="filter">
+          <div class="filter__title">
+            <h6>Pencarian Spesifik</h6>
+            <div class="filter__close"></div>
+          </div>
+          <form action="">
+            <div class="row">
+              <div class="column column-35">
+                <label for="">Jenis Peraturan</label>
+                <select name="" id="">
+                  <option value="" selected disabled>Pilih Peraturan</option>
+                  <option value="">Peraturan</option>
+                </select>
+              </div>
+              <div class="column column-30">
+                <label for="">Tema</label>
+                <select name="" id="">
+                  <option value="" selected disabled>Pilih Tema</option>
+                  <option value="">Tema</option>
+                </select>
+              </div>
+              <div class="column column-20">
+                <label for="">Tahun</label>
+                <select name="" id="">
+                  <option value="" selected disabled>Pilih Tahun</option>
+                  <option value="">Tema</option>
+                </select>
+              </div>
+              <div class="column column-15">
+                <button type="submit" class="button button-gradient">Cari</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
     </div>
     <div class="wave">
       <svg xmlns="http://www.w3.org/2000/svg" widht="3000" height="250" viewBox="0 180 2500 200" fill="#EEF4FE">
@@ -539,7 +576,7 @@
           @endfor
         </div>
       </div>
-      <div class="grid__item">
+      <div class="grid__item photo" onclick="openPopup('#popup-photo')">
          <div class="tag photo">
           <svg xmlns="http://www.w3.org/2000/svg" width="12" height="13" viewBox="0 0 12 13" fill="none">
             <path d="M9.6175 1.375H2.3825C1.5515 1.375 0.875 2.051 0.875 2.8825V10.118C0.875 10.949 1.551 11.6255 2.3825 11.6255H9.618C10.449 11.6255 11.1255 10.9495 11.1255 10.118V2.8825C11.125 2.051 10.449 1.375 9.6175 1.375ZM10.522 10.1175C10.522 10.616 10.1165 11.022 9.6175 11.022H2.3825C1.884 11.022 1.478 10.6165 1.478 10.1175V9.027L3.911 6.3235L7.1975 9.311L9.015 7.7965L10.5225 9.0525L10.522 10.1175ZM10.522 8.268L9.0145 7.012L7.214 8.512L3.8685 5.47L1.478 8.126V2.8825C1.478 2.384 1.8835 1.978 2.3825 1.978H9.618C10.1165 1.978 10.5225 2.3835 10.5225 2.8825L10.522 8.268Z" fill="white" stroke="white" stroke-width="0.6"/>
@@ -553,7 +590,7 @@
           <p>Rapat Koordinasi JDIH untuk kordinasi Nasional tentang Pangan</p>
         </figcaption>
       </div>
-      <div class="grid__item">
+      <div class="grid__item" data-video="https://www.youtube.com/embed/ScMzIvxBSi4">
          <div class="tag video">
           <svg xmlns="http://www.w3.org/2000/svg" width="12" height="13" viewBox="0 0 12 13" fill="none">
             <path d="M9.6175 1.375H2.3825C1.5515 1.375 0.875 2.051 0.875 2.8825V10.118C0.875 10.949 1.551 11.6255 2.3825 11.6255H9.618C10.449 11.6255 11.1255 10.9495 11.1255 10.118V2.8825C11.125 2.051 10.449 1.375 9.6175 1.375ZM10.522 10.1175C10.522 10.616 10.1165 11.022 9.6175 11.022H2.3825C1.884 11.022 1.478 10.6165 1.478 10.1175V9.027L3.911 6.3235L7.1975 9.311L9.015 7.7965L10.5225 9.0525L10.522 10.1175ZM10.522 8.268L9.0145 7.012L7.214 8.512L3.8685 5.47L1.478 8.126V2.8825C1.478 2.384 1.8835 1.978 2.3825 1.978H9.618C10.1165 1.978 10.5225 2.3835 10.5225 2.8825L10.522 8.268Z" fill="white" stroke="white" stroke-width="0.6"/>
@@ -561,11 +598,20 @@
           </svg>
           Galeri Video
         </div>
-        <figure><img src="{{ asset('images/content/news-2.jpg') }}" alt=""></figure>
+        <figure>
+          <img src="{{ asset('images/content/news-2.jpg') }}" alt="">
+          
+        </figure>
         <figcaption>
           <span class="date">30 Juli 2025</span>
           <p>Rapat Koordinasi JDIH untuk kordinasi Nasional tentang Pangan</p>
         </figcaption>
+        <div class="icon-play">
+          <svg xmlns="http://www.w3.org/2000/svg" width="66" height="66" viewBox="0 0 66 66" fill="none">
+            <path d="M64.6206 17.1146C63.8616 14.2748 61.6256 12.0387 58.7858 11.2798C53.6383 9.90039 32.9997 9.90039 32.9997 9.90039C32.9997 9.90039 12.3612 9.90039 7.21359 11.2798C4.37443 12.0387 2.13778 14.2748 1.37878 17.1146C0 22.2616 0 33.0005 0 33.0005C0 33.0005 0 43.7394 1.37878 48.8859C2.13778 51.7257 4.37443 53.9624 7.21359 54.7212C12.3612 56.1001 32.9997 56.1001 32.9997 56.1001C32.9997 56.1001 53.6383 56.1001 58.7858 54.7212C61.6256 53.9624 63.8616 51.7257 64.6206 48.8859C66 43.7394 66 33.0005 66 33.0005C66 33.0005 66 22.2616 64.6206 17.1146Z" fill="#ED1F24"/>
+            <path d="M26.4004 42.9018L43.5472 33.0017L26.4004 23.1016V42.9018Z" fill="white"/>
+          </svg>
+        </div>
       </div>
     </div>
   </section>
@@ -592,7 +638,7 @@
           <div class="rating-breakdown" id="ratingBreakdown"></div>
         </div>
         <p>Terima kasih atas penilaian yang telah anda berikan, masukan anda sangat bermanfaat agar terus memperbaiki dan meningkatkan kualitas pelayanan bagi masyarakat</p>
-        <a href="" class="button button-outline">
+        <a href="javascript:void(0)" class="button button-outline" onclick="openPopup('#popup-rating')">
           <span>Lihat Selengkapnya</span>
           <div class="wave"></div>
         </a>
@@ -619,19 +665,133 @@
       </div>
     </div>
   </section>
+  <div class="popup popup-rating" id="popup-rating">
+    <div class="popup__overlay"></div>
+    <div class="popup__box popup__box--large">
+      <div class="popup__content">
+        <h6>BERIKAN RATING</h6>
+        <form action="">
+          <div class="row row-wrap">
+            <div class="column column-100">
+              <label for="">Rating</label>
+              <div class="rates">
+                <input type="radio" id="starR5" name="rateR" value="5">
+                <label for="starR5">
+                <svg xmlns="http://www.w3.org/2000/svg" width="26.522" height="24.864" viewBox="0 0 26.522 24.864">
+                    <path id="star" d="M12.539,1.515a.8.8,0,0,1,1.444,0L17.05,7.951a.8.8,0,0,0,.624.45l7.138.884a.8.8,0,0,1,.445,1.381L20.025,15.5a.8.8,0,0,0-.242.74L21.133,23.2a.8.8,0,0,1-1.167.856l-6.324-3.432a.8.8,0,0,0-.763,0L6.555,24.055A.8.8,0,0,1,5.388,23.2l1.351-6.956A.8.8,0,0,0,6.5,15.5L1.265,10.667A.8.8,0,0,1,1.71,9.285L8.847,8.4a.8.8,0,0,0,.624-.45Z" fill="#e6e6e6"/>
+                </svg>
+                </label>
+                <input type="radio" id="starR4" name="rateR" value="4">
+                <label for="starR4">
+                <svg xmlns="http://www.w3.org/2000/svg" width="26.522" height="24.864" viewBox="0 0 26.522 24.864">
+                    <path id="star" d="M12.539,1.515a.8.8,0,0,1,1.444,0L17.05,7.951a.8.8,0,0,0,.624.45l7.138.884a.8.8,0,0,1,.445,1.381L20.025,15.5a.8.8,0,0,0-.242.74L21.133,23.2a.8.8,0,0,1-1.167.856l-6.324-3.432a.8.8,0,0,0-.763,0L6.555,24.055A.8.8,0,0,1,5.388,23.2l1.351-6.956A.8.8,0,0,0,6.5,15.5L1.265,10.667A.8.8,0,0,1,1.71,9.285L8.847,8.4a.8.8,0,0,0,.624-.45Z" fill="#e6e6e6"/>
+                </svg>
+                </label>
+                <input type="radio" id="starR3" name="rateR" value="3">
+                <label for="starR3">
+                <svg xmlns="http://www.w3.org/2000/svg" width="26.522" height="24.864" viewBox="0 0 26.522 24.864">
+                    <path id="star" d="M12.539,1.515a.8.8,0,0,1,1.444,0L17.05,7.951a.8.8,0,0,0,.624.45l7.138.884a.8.8,0,0,1,.445,1.381L20.025,15.5a.8.8,0,0,0-.242.74L21.133,23.2a.8.8,0,0,1-1.167.856l-6.324-3.432a.8.8,0,0,0-.763,0L6.555,24.055A.8.8,0,0,1,5.388,23.2l1.351-6.956A.8.8,0,0,0,6.5,15.5L1.265,10.667A.8.8,0,0,1,1.71,9.285L8.847,8.4a.8.8,0,0,0,.624-.45Z" fill="#e6e6e6"/>
+                </svg>
+                </label>
+                <input type="radio" id="starR2" name="rateR" value="2">
+                <label for="starR2">
+                <svg xmlns="http://www.w3.org/2000/svg" width="26.522" height="24.864" viewBox="0 0 26.522 24.864">
+                    <path id="star" d="M12.539,1.515a.8.8,0,0,1,1.444,0L17.05,7.951a.8.8,0,0,0,.624.45l7.138.884a.8.8,0,0,1,.445,1.381L20.025,15.5a.8.8,0,0,0-.242.74L21.133,23.2a.8.8,0,0,1-1.167.856l-6.324-3.432a.8.8,0,0,0-.763,0L6.555,24.055A.8.8,0,0,1,5.388,23.2l1.351-6.956A.8.8,0,0,0,6.5,15.5L1.265,10.667A.8.8,0,0,1,1.71,9.285L8.847,8.4a.8.8,0,0,0,.624-.45Z" fill="#e6e6e6"/>
+                </svg>
+                </label>
+                <input type="radio" id="starR1" name="rateR" value="1">
+                <label for="starR1">
+                <svg xmlns="http://www.w3.org/2000/svg" width="26.522" height="24.864" viewBox="0 0 26.522 24.864">
+                    <path id="star" d="M12.539,1.515a.8.8,0,0,1,1.444,0L17.05,7.951a.8.8,0,0,0,.624.45l7.138.884a.8.8,0,0,1,.445,1.381L20.025,15.5a.8.8,0,0,0-.242.74L21.133,23.2a.8.8,0,0,1-1.167.856l-6.324-3.432a.8.8,0,0,0-.763,0L6.555,24.055A.8.8,0,0,1,5.388,23.2l1.351-6.956A.8.8,0,0,0,6.5,15.5L1.265,10.667A.8.8,0,0,1,1.71,9.285L8.847,8.4a.8.8,0,0,0,.624-.45Z" fill="#e6e6e6"/>
+                </svg>
+                </label>
+              </div>
+            </div>
+            <div class="column column-100">
+              <label for="">Nama</label>
+              <input type="text" placeholder="Nama Lengkap">
+            </div>
+            <div class="column column-100">
+              <label for="">Email</label>
+              <input type="text" placeholder="Alamat Email">
+            </div>
+            <div class="column column-100">
+              <label for="">Komentar</label>
+              <textarea name="" id="" placeholder="Tuliskan Komentar Anda"></textarea>
+            </div>
+            <div class="column column-100">
+              <button type="submit" class="button button-gradient">Kirim</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="popup popup-video" id="popup-video">
+    <div class="popup__overlay"></div>
+    <div class="popup__box popup__box--large">
+      <div class="popup__content">
+        <div class="wrap-video">
+          <iframe src="" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="popup popup-photo" id="popup-photo">
+    <div class="popup__overlay"></div>
+    <div class="popup__box popup__box--large">
+      <div class="popup__close">
+        <i class="wa-icon wa-ic-close-solid"></i>
+      </div>
+      <div class="popup__content">
+        <div class="wrap-slider">
+          <div class="swiper photo-slider">
+            <div class="swiper-wrapper">
+              @for ($i = 1; $i <= 6; $i++)
+              <div class="swiper-slide">
+                <figure>
+                  <img src="{{ asset('images/content/news-xlarge.jpg') }}" alt="">
+                  <figcaption>
+                    <span class="date">30 Juli 2025</span>
+                    <p>Rapat Koordinasi JDIH untuk kordinasi Nasional tentang Pangan</p>
+                  </figcaption>
+                </figure>
+              </div>
+              @endfor
+            </div>
+          </div>
+          <div class="photo-slider-thumbs swiper">
+            <div class="swiper-wrapper">
+              @for ($a = 1; $a <= 2; $a++)
+                @for ($i = 1; $i <= 3; $i++)
+                <div class="swiper-slide">
+                  <figure>
+                    <img src="{{ asset('images/content/news-thumb-'.$i.'.jpg') }}" alt="">
+                  </figure>
+                </div>
+                @endfor
+              @endfor
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
   <!-- end of middle -->
   @push('head')
     <link rel="stylesheet" type="text/css" href="{{ Vite::asset('resources/assets/sass/pages/home.scss')}}" preload>
   @endpush
   @push('footer')
-    <script type="module" async type="text/javascript" src="{{ Vite::asset('resources/assets/js/home.js') }}"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
       const ratingData = {
         average: 4.7,
         total: 10,
         breakdown: { 5: 5, 4: 3, 3: 2, 2: 0, 1: 0 }
       };
+    </script>
+    <script type="module" async type="text/javascript" src="{{ Vite::asset('resources/assets/js/home.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
       document.addEventListener("DOMContentLoaded", function(event) { 
         const ctx = $("#statusChart");
         new Chart(ctx, {

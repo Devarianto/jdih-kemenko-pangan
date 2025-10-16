@@ -98,13 +98,13 @@ input[type="submit"] {
       z-index: 1;
     }
      @keyframes wave {
-        from {
-          background-position-x: 0;
-        }
-        to {
-          background-position-x: 200%;
-        }
+      from {
+        background-position-x: 0;
       }
+      to {
+        background-position-x: 200%;
+      }
+    }
     &:hover {
       border-color: transparent;
       color:white;
@@ -174,7 +174,15 @@ input[type="submit"] {
       color: var(--c-neutral-gray-2);
     }
   }
-
+  &.button-gradient{
+    border-radius: 50px;
+    background: linear-gradient(94deg, #1840AA 3.44%, #091D77 100.03%);
+    border: none; 
+    padding: 0 32px;
+  }
+  &.button-full{
+    width: 100%;
+  }
   &.button-large {
     height: 48px;
     line-height: 46px;
@@ -200,6 +208,7 @@ input[type="submit"] {
   align-items: center;
   justify-content: center;
   padding: 0 20px;
+  gap:0 10px;
   i {
     font-size: 1.125rem;
     align-self:center;
