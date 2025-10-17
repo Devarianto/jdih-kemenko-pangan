@@ -75,6 +75,36 @@ Route::name('front.')->group(function () {
       $compact = [];
       return view('static.pages.document-peraturan', $compact);
     })->name('document-peraturan');
+
+    # Document Peraturan Detail
+    Route::get('/document-peraturan-detail', function () {
+      $compact = [];
+      return view('static.pages.document-peraturan-detail', $compact);
+    })->name('document-peraturan-detail');
+
+    # Document Monografi
+    Route::get('/document-monografi', function () {
+      $compact = [];
+      return view('static.pages.document-monografi', $compact);
+    })->name('document-monografi');
+
+     # Document article
+    Route::get('/document-article', function () {
+      $compact = [];
+      return view('static.pages.document-article', $compact);
+    })->name('document-article');
+
+    # Document Kipling
+    Route::get('/document-kipling', function () {
+      $compact = [];
+      return view('static.pages.document-kipling', $compact);
+    })->name('document-kipling');
+
+    # Document Putusan
+    Route::get('/document-putusan', function () {
+      $compact = [];
+      return view('static.pages.document-putusan', $compact);
+    })->name('document-putusan');
     
   });
 });

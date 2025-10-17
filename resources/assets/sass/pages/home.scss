@@ -95,7 +95,9 @@
 			}
 		}
 	}
-	
+	.wrap-filter{
+		margin-bottom: 0;
+	}
 	.wave{
 		position: absolute;
 		bottom: -60px;
@@ -195,14 +197,7 @@
 		}
 	}
 }
-.visited{
-	display: flex;
-	align-items: center;
-	color: #999;
-	font-size: 10px;
-	font-weight: 700;
-	gap: 4px;
-}
+
 .tema{
 	position: relative;
 	min-height: 800px;
@@ -345,76 +340,7 @@
 			}
 		}
 	}
-	.listing-card{
-		display: flex;
-		gap: 0 22px;
-		&__item{
-			width: calc(25% - 11px);
-			border-radius: 8px;
-			overflow: hidden;
-			position: relative;
-			top: 0;
-			transition: .2s all ease-out;
-			&:hover{
-				top: -2px;
-				box-shadow: 0 2px 20px -17px #000;
-				figure{
-					img{
-						transform: scale(1.05);
-					}
-				}
-				P{
-					color: var(--c-primary-main);
-				}
-			}
-		}
-		figcaption{
-			padding: 16px;
-			background-color: white;
-			p{
-				margin-bottom: 8px;
-				line-height: 1.5;
-				font-weight: 500;
-				color: #373737;
-			}
-		}
-		figure{
-			overflow: hidden;
-			height: 120px;
-			img{
-				width: 100%;
-				transition: .2s all ease-out;
-			}
-		}
-		span{
-			font-size: 14px;
-			line-height: 1.4;
-			color: #636363;
-			display: -webkit-box;
-			-webkit-box-orient: vertical;
-			-webkit-line-clamp: 3;
-			line-clamp: 3;
-			overflow: hidden;
-			margin-bottom: 42px;
-		}
-		&.without-box{
-			.listing-card__item{
-				border-radius: 0;
-				&:hover{
-					box-shadow: unset;
-					top:0;
-				}
-			}
-			figure{
-				border-radius: 4px;
-				height: auto;
-			}
-			figcaption{
-				background-color: transparent;
-				padding: 15px 0;
-			}
-		}
-	}
+	
 	.wrapper{
 		display: flex;
 		align-items: flex-start;

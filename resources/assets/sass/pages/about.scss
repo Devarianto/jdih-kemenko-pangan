@@ -44,55 +44,7 @@
     background-color: var(--c-primary-main);
   }
 }
-.list-pdf{
-  margin-top: 48px;
-  &__item{
-    margin-bottom: 16px;
-  }
-  span{
-    margin-bottom:16px;
-    padding-left: 12px;
-    position: relative;
-    font-size: 14px;
-    font-weight: 600;
-    display: inline-block;
-    color: #636363;
-    &::before{
-      content: '';
-      position: absolute;
-      top: 50%;
-      left: 0;
-      transform: translateY(-50%);
-      width: 4px;
-      height: 4px;
-      background-color: #636363;
-    }
-  }
-  .inner{
-    display: flex;
-    align-items: center;
-    padding: 24px 32px;
-    border-radius: 8px;
-    border: 1px solid rgba(217, 217, 217, 0.75);
-    background: #FFF;
-    box-shadow: 0 14px 34px 0 rgba(9, 29, 119, 0.06);
-  }
-  h6{
-    margin-bottom: 0;
-    font-size:1rem;
-    font-weight: 600;
-    margin: 0 48px 0 16px;
-  }
-  figure{
-    flex: 0 0 42px;
-    max-width: 42px; 
-  }
-  
-  .button{
-    margin-left: auto;
-    flex: 0 0 auto;
-  }
-}
+
 .visi{
   figure{
     position: relative;
@@ -162,27 +114,11 @@
     font-weight:600;
   }
 }
-.filter-right{
-  display: flex;
-  justify-content: flex-end;
-  .col{
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    select{
-      min-width: 278px;
-      margin-bottom: 0;
-    }
-    label{
-      margin-bottom: 0;
-      white-space: nowrap;
-    }
-  }
-}
+
 .statistik{
   display: flex;
   align-items: flex-start;
-  margin: 46px 0 80px;
+  margin: 0 0 80px;
   &__left{
     flex: 0 0 390px;
     max-width: 390px;

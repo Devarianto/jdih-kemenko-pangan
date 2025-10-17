@@ -85,5 +85,34 @@
         }
       }
     }
+    .wrap-flex{
+      display: flex;
+      gap:0 40px;
+      .button{
+        align-self: center;
+        margin-left: auto;
+        padding: 0 16px;
+        flex: 0 0 auto;
+      }
+    }
+  }
+  &.without-bottom{
+    .listing-rules__item{
+      position: relative;
+      figcaption{
+        padding-right: 230px;
+        .bottom{
+          border-top: none;
+          padding-top: 0;
+        }
+      }
+      .button{
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        right: 32px;
+        left: auto;
+      }
+    }
   }
 }

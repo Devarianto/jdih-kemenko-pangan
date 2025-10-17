@@ -27,13 +27,17 @@
   <section class="middle">
     <div class="wrapper">
       <div class="middle__search">
-        <label for="">Nama Peraturan</label>
-        <div class="wrap-input">
-          <input type="text" placeholder="Ketik Kata Kunci Pencarian">
-          <button type="submit" class="button-icon button-gradient">
-            Cari
-            <i class="wa-icon wa-ic-search-outline"></i>
-          </button>
+        <div class="row">
+          <div class="column column-85">
+            <label for="">Nama Peraturan</label>
+            <input type="text" placeholder="Ketik Kata Kunci Pencarian">
+          </div>
+          <div class="column column-15">
+            <button type="submit" class="button-icon button-gradient">
+              Cari
+              <i class="wa-icon wa-ic-search-outline"></i>
+            </button>
+          </div>
         </div>
         <div class="wrap-filter">
           <a href="">Pencarian Spesifik</a>
@@ -81,9 +85,14 @@
           <div class="listing-rules__item">
             <figure><img src="{{ asset('images/content/rules-1.jpg') }}" alt=""></figure>
             <figcaption>
-              <span class="category">Baru</span>
-              <p>Undang-Undang Nomor 31 Tahun 2025</p>
-              <small>Tentang Perubahan Keempat Atas Undang-Undang Nomor 4 Tahun 2009 Tentang</small>
+              <div class="wrap-flex">
+                <div class="text">
+                  <span class="category">Baru</span>
+                  <p>Undang-Undang Nomor 31 Tahun 2025</p>
+                  <small>Tentang Perubahan Keempat Atas Undang-Undang Nomor 4 Tahun 2009 Tentang</small>
+                </div>
+                <a href="{{ route('front.document-peraturan-detail') }}" class="button button-outline">Lihat Selengkapnya</a>
+              </div>
               <div class="bottom">
                 <div class="bottom__left">
                   <small class="visited">
@@ -101,7 +110,7 @@
                   </small>
                 </div>
                 <div class="bottom__right">
-                  <a href="" class="button button-outline button-icon">
+                  <span class="button button-outline button-icon">
                     Abstrak
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
                       <path d="M9.33366 1.33301H4.00033C3.6467 1.33301 3.30756 1.47348 3.05752 1.72353C2.80747 1.97358 2.66699 2.31272 2.66699 2.66634V13.333C2.66699 13.6866 2.80747 14.0258 3.05752 14.2758C3.30756 14.5259 3.6467 14.6663 4.00033 14.6663H12.0003C12.3539 14.6663 12.6931 14.5259 12.9431 14.2758C13.1932 14.0258 13.3337 13.6866 13.3337 13.333V5.33301L9.33366 1.33301Z" stroke="#2063D2" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -110,13 +119,13 @@
                       <path d="M10.6663 11.333H5.33301" stroke="#2063D2" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
                       <path d="M6.66634 6H5.99967H5.33301" stroke="#2063D2" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
-                  </a>
-                  <a href="" class="button button-outline button-icon">
+                  </span>
+                  <span class="button button-outline button-icon" download>
                     Unduh
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
                       <path fill-rule="evenodd" clip-rule="evenodd" d="M14.6663 10.6663V13.333C14.6663 14.0694 14.0694 14.6663 13.333 14.6663H2.66634C1.92996 14.6663 1.33301 14.0694 1.33301 13.333V10.6663H2.66634V13.333H13.333V10.6663H14.6663ZM8.66634 8.3902L10.8616 6.19494L11.8044 7.13775L7.99967 10.9425L4.19494 7.13775L5.13775 6.19494L7.33301 8.3902V1.33301H8.66634V8.3902Z" fill="#2063D2"/>
                     </svg>
-                  </a>
+                  </span>
                 </div>
               </div>
             </figcaption>

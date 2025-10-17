@@ -130,8 +130,8 @@ input[type="submit"] {
 
   &.button-outline-secondary {
     background-color: transparent;
-    color: var(--c-secondary-main);
-    border: 2px solid var(--c-secondary-main);
+    color: white;
+    border: 1px solid white;
 
     &:hover {
       background-color: var(--c-secondary-surface);
