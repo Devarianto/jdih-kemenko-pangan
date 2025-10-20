@@ -39,6 +39,20 @@ a {
       }
     }
   }
+  &.back{
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 600;
+    color: #373737;
+    &::before{
+      content: '\e909';
+      font-family: var(--font-webarq-icon);
+      font-size: 1rem;
+      position: relative;
+      line-height: 1;
+    }
+  }
 }
 
 

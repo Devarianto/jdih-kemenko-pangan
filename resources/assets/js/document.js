@@ -1,4 +1,5 @@
 import $ from 'jquery'; //import jquery module
+import Swiper  from 'swiper/bundle';
 
 const document = {};
 document.tabbing = () => {
@@ -25,8 +26,51 @@ document.tabbing = () => {
     $tabs.filter('[data-tab="'+initTab+'"]').fadeIn();
   }
 }
+document.sliderDetail = () => {
+   const swiper = new Swiper('.slider-caption.swiper', {
+    loop: true,
+    slidesPerView: 1,
+    navigation: {
+      nextEl: ".slider-caption__utils .swiper-next",
+      prevEl: ".slider-caption__utils .swiper-prev",
+    },
+    pagination: {
+      el: '.swiper-pagination',
+      clickable: true,
+      dynamicBullets: true, // Enable dynamic bullets
+      dynamicMainBullets:5,
+    },
+  });
+  const totalSlides = $('.slider-caption.with-pagination .swiper-slide').length;
+  const $current = $('.current-slide');
+  const $total = $('.total-slide');
+  $total.text(totalSlides); // Set total slides on init
+  const swiper2 = new Swiper('.slider-caption.with-pagination', {
+    loop: true,
+    slidesPerView: 1,
+    navigation: {
+      nextEl: ".slider-caption__utils .swiper-next",
+      prevEl: ".slider-caption__utils .swiper-prev",
+    },
+    pagination: {
+      el: '.swiper-pagination',
+      clickable: true,
+      dynamicBullets: true, // Enable dynamic bullets
+      dynamicMainBullets:5,
+    },
+    on: {
+      init: function () {
+        $current.text(1);
+      },
+      slideChange: function () {
+        $current.text(this.realIndex + 1);
+      }
+    }
+  });
+}
 document.init = function () {
   this.tabbing()
+  this.sliderDetail()
 }
 
 document.init();

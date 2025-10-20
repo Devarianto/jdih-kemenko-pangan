@@ -2,8 +2,9 @@ export default ($) => ({
   floatingMenu() {
     let header = $("header"),
       fnc = {},
-      ww = $(window).width();
-
+      ww = $(window).width()
+      
+    
     fnc.runfnc = function () {
       let topmin = 0;
       if ($(window).scrollTop() > topmin) {

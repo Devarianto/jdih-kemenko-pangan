@@ -88,11 +88,23 @@ Route::name('front.')->group(function () {
       return view('static.pages.document-monografi', $compact);
     })->name('document-monografi');
 
+     # Document Monografi Detail
+    Route::get('/document-monografi-detail', function () {
+      $compact = [];
+      return view('static.pages.document-monografi-detail', $compact);
+    })->name('document-monografi-detail');
+
      # Document article
     Route::get('/document-article', function () {
       $compact = [];
       return view('static.pages.document-article', $compact);
     })->name('document-article');
+
+    # Document article Detail
+    Route::get('/document-article-detail', function () {
+      $compact = [];
+      return view('static.pages.document-article-detail', $compact);
+    })->name('document-article-detail');
 
     # Document Kipling
     Route::get('/document-kipling', function () {
@@ -100,11 +112,52 @@ Route::name('front.')->group(function () {
       return view('static.pages.document-kipling', $compact);
     })->name('document-kipling');
 
+     # Document Kipling
+    Route::get('/document-kipling-detail', function () {
+      $compact = [];
+      return view('static.pages.document-kipling-detail', $compact);
+    })->name('document-kipling-detail');
+
     # Document Putusan
     Route::get('/document-putusan', function () {
       $compact = [];
       return view('static.pages.document-putusan', $compact);
     })->name('document-putusan');
+
+    # Document Putusan Detail
+    Route::get('/document-putusan-detail', function () {
+      $compact = [];
+      return view('static.pages.document-putusan-detail', $compact);
+    })->name('document-putusan-detail');
     
+    # Document Lainnya Kamus Hukum
+    Route::get('/documentlainnya-kamus-hukum', function () {
+      $compact = [];
+      return view('static.pages.documentlainnya-kamus-hukum', $compact);
+    })->name('documentlainnya-kamus-hukum');
+
+      # Document Lainnya Kamus Hukum detail
+    Route::get('/documentlainnya-kamus-hukum-detail', function () {
+      $compact = [];
+      return view('static.pages.documentlainnya-kamus-hukum-detail', $compact);
+    })->name('documentlainnya-kamus-hukum-detail');
+
+    # Document Lainnya Info grafis
+    Route::get('/documentlainnya-infografis', function () {
+      $compact = [];
+      return view('static.pages.documentlainnya-infografis', $compact);
+    })->name('documentlainnya-infografis');
+
+    # Document Lainnya Info grafis Detail
+    Route::get('/documentlainnya-infografis-detail', function () {
+      $compact = [];
+      return view('static.pages.documentlainnya-infografis-detail', $compact);
+    })->name('documentlainnya-infografis-detail');
+
+     # Document Lainnya Berita
+    Route::get('/documentlainnya-berita', function () {
+      $compact = [];
+      return view('static.pages.documentlainnya-berita', $compact);
+    })->name('documentlainnya-berita');
   });
 });

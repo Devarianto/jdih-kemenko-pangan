@@ -38,6 +38,13 @@ document.addEventListener("DOMContentLoaded", () => {
   $(document).on('click', function(){
     $('.filter').fadeOut();
   });
+
+  if ($('.detail-pages').length) {
+    $("header").addClass("white"); 
+  }
+  if ($('.with-other').length) {
+    $("footer").addClass("gray"); 
+  }
 })
 
 window.openPopup = (id) => {
