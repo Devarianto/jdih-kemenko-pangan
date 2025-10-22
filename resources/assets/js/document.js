@@ -68,9 +68,38 @@ document.sliderDetail = () => {
     }
   });
 }
+
+document.sliderPopup = () => {
+  const sliderThumbnail = new Swiper('.photo-slider-thumbs.swiper', {
+    slidesPerView: 6,
+    freeMode: true,
+    spaceBetween:16,
+    watchSlidesVisibility: true,
+    watchSlidesProgress: true,
+  });
+
+  const slider = new Swiper('.swiper.photo-slider', {
+    slidesPerView: 1,
+    thumbs: {
+      swiper: sliderThumbnail
+    }
+  });
+}
+document.playVideo = function () {
+  $(".listing-galeri__item .icon-play").on('click',function(){
+    openPopup('#popup-video')
+    let container = $('#popup-video');
+    let iframe = container.find(".wrap-video iframe");
+    let videoUrl = $(this).parents('.listing-galeri__item').data("video") + "?autoplay=1";
+    // Set src baru
+    iframe.attr("src", videoUrl);
+  });
+}
 document.init = function () {
   this.tabbing()
   this.sliderDetail()
+  this.sliderPopup()
+  this.playVideo()
 }
 
 document.init();

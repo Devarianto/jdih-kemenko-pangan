@@ -159,5 +159,53 @@ Route::name('front.')->group(function () {
       $compact = [];
       return view('static.pages.documentlainnya-berita', $compact);
     })->name('documentlainnya-berita');
+
+    # Document Lainnya Berita Detail
+    Route::get('/documentlainnya-berita-detail', function () {
+      $compact = [];
+      return view('static.pages.documentlainnya-berita-detail', $compact);
+    })->name('documentlainnya-berita-detail');
+
+     # Informasi Lainnya Galeri
+    Route::get('/informasi-galeri', function () {
+      $compact = [];
+      return view('static.pages.informasi-galeri', $compact);
+    })->name('informasi-galeri');
+
+    # Informasi Lainnya Rancangan Hukum
+    Route::get('/informasi-rancangan', function () {
+      $compact = [];
+      return view('static.pages.informasi-rancangan', $compact);
+    })->name('informasi-rancangan');
+
+     # Dashboard
+    Route::get('/dashboard', function () {
+      $compact = [];
+      return view('static.pages.dashboard', $compact);
+    })->name('dashboard');
+
+    # Dashboard Usulan Detail
+    Route::get('/dashboard-usulan-detail', function () {
+      $compact = [];
+      return view('static.pages.dashboard-usulan-detail', $compact);
+    })->name('dashboard-usulan-detail');
+
+    # Dashboard Formulir Usulan Project
+    Route::get('/dashboard-formulir-usulan', function () {
+      $compact = [];
+      return view('static.pages.dashboard-formulir-usulan', $compact);
+    })->name('dashboard-formulir-usulan');
+
+    # Dashboard Daftar Project
+    Route::get('/dashboard-daftar', function () {
+      $compact = [];
+      return view('static.pages.dashboard-daftar', $compact);
+    })->name('dashboard-daftar');
+
+    # Dashboard Daftar Detail
+    Route::get('/dashboard-daftar-detail', function () {
+      $compact = [];
+      return view('static.pages.dashboard-daftar-detail', $compact);
+    })->name('dashboard-daftar-detail');
   });
 });

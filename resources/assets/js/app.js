@@ -39,7 +39,7 @@ document.addEventListener("DOMContentLoaded", () => {
     $('.filter').fadeOut();
   });
 
-  if ($('.detail-pages').length) {
+  if ($('.detail-pages, .dashboard').length) {
     $("header").addClass("white"); 
   }
   if ($('.with-other').length) {

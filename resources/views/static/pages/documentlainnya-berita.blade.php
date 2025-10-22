@@ -38,7 +38,7 @@
       </div>
       <div class="listing-card col-3">
         @for ($i = 1; $i <= 3; $i++)
-          <a href="" class="listing-card__item">
+          <a href="{{ route('front.documentlainnya-berita-detail') }}" class="listing-card__item">
             <figure><img src="{{asset('images/content/mon-1.jpg')}}" alt=""></figure>
             <figcaption>
               <span class="date">30 Juli 2025</span>
@@ -46,7 +46,7 @@
               <span class="link"><b>Selengkapnya</b></span>
             </figcaption>
           </a>
-          <a href="" class="listing-card__item">
+          <a href="{{ route('front.documentlainnya-berita-detail') }}" class="listing-card__item">
             <figure><img src="{{asset('images/content/mon-2.jpg')}}" alt=""></figure>
             <figcaption>
               <span class="date">30 Juli 2025</span>
@@ -54,7 +54,7 @@
               <span class="link"><b>Selengkapnya</b></span>
             </figcaption>
           </a>
-          <a href="" class="listing-card__item">
+          <a href="{{ route('front.documentlainnya-berita-detail') }}" class="listing-card__item">
             <figure><img src="{{asset('images/content/mon-3.jpg')}}" alt=""></figure>
             <figcaption>
               <span class="date">30 Juli 2025</span>
@@ -62,7 +62,7 @@
               <span class="link"><b>Selengkapnya</b></span>
             </figcaption>
           </a>
-          <a href="" class="listing-card__item">
+          <a href="{{ route('front.documentlainnya-berita-detail') }}" class="listing-card__item">
             <figure><img src="{{asset('images/content/mon-4.jpg')}}" alt=""></figure>
             <figcaption>
               <span class="date">30 Juli 2025</span>

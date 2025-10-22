@@ -1,0 +1,267 @@
+/*=============================================================================================
+  Company    : PT Web Architect Technology - webarq.com
+  Document   : Stylesheet
+  Author     : Your Name
+==============================================================================================*/
+/* helper
+----------------------------------------------------------------------------------------------*/
+// @import "../milligram/Color";    // import your general color from milligram
+
+.dashboard{
+  padding: 220px 0 102px;
+  &::before{
+    content: '';
+    position: absolute;
+    inset: 0;
+    bottom: auto;
+    right: auto;
+    background: url('@images/circle-left.png')no-repeat bottom right;
+    width: 404px;
+    height: 474px;
+    background-size: cover;
+    z-index: -1;
+
+  }
+  &::after{
+    content: '';
+    position: absolute;
+    inset: 0;
+    left: auto;
+    bottom: auto;
+    width: 399px;
+    height: 580px;
+    background: url('@images/circle-right.png')no-repeat bottom left;
+    background-size: cover;
+    z-index: -1;
+  }
+  .wrapper{
+    display: flex;
+    align-items: flex-start;
+  }
+  &__left{
+    flex: 0 0 280px;
+    max-width: 280px;
+    border-radius: 16px;
+    background: linear-gradient(147deg, #091D77 -41.45%, #1840AA 34.08%, #3272DD 100.17%);
+    backdrop-filter: blur(17px);
+    padding: 40px 32px;
+    box-sizing: border-box;
+    color: white;
+    min-height: 300px;
+    a{
+      color: white;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 17px;
+      opacity: .8;
+      transition: .2s all ease-out;
+      &:hover,&.active{
+        opacity: 1;
+      }
+    }
+  }
+  &__right{
+    flex: 0 0 calc(100% - 280px);
+    max-width: calc(100% - 280px);
+    padding-left: 40px;
+    h5{
+      text-transform: uppercase;
+    }
+    &--title{
+      display: flex;
+      align-items: center;
+      margin-bottom: 21px;
+      h5{
+        margin-bottom: 0;
+      }
+      .button{
+        margin-left: auto;
+        background-color: #F8F8F8;
+      }
+    }
+  }
+}
+.box-white{
+  padding: 40px 30px;
+  border-radius: 8px;
+  background-color: #fff;
+  margin-bottom: 16px;
+  &:last-child{
+    margin-bottom: 0;
+  }
+  &.table{
+    table{
+      td{
+        padding: 6px 0;
+        border:none;
+        font-size: 1rem;
+        &:first-child{
+          width: 30%;
+          color: #636363;
+          position: relative;
+          padding-right: 10px;
+          &::after{
+            content: ':';
+            position: absolute;
+            right: 4px;
+            top: 4px;
+          }
+        }
+        &:last-child{
+          width: 70%;
+          font-weight: 500;
+        }
+      }
+    }
+  }
+  h5{
+    margin-bottom: 24px;
+  }
+  .wrap-btn{
+    display: flex;
+    justify-content: flex-end;
+    gap: 11px;
+  }
+}
+.search{
+  .row{
+    width: calc(100% + 12px);
+    margin-left: -6px;
+    align-items: flex-end;
+    .column{
+      padding: 0 6px;
+    }
+  }
+  input,select{
+    margin-bottom: 0;
+  }
+  button{
+    padding: 0 32px;
+    font-size: 1rem;
+  }
+}
+.with-table{
+  table{
+    border: 1px solid #D3D3D3;
+    border-collapse: separate;
+    border-radius: 8px;
+    td{
+      border-bottom: 1px solid #D3D3D3;
+      vertical-align: middle;
+      white-space: nowrap;
+    }
+    tr{
+      &:last-child{
+        td{
+          border: none;
+        }
+      }
+    }
+  }
+  button{
+    padding: 0 20px;
+  }
+  .pagination{
+    justify-content: flex-end;
+    margin: 0;
+    margin-top: 24px;
+    .arr{
+      &.prev{
+        margin-right: 20px;
+      }
+      &.next{
+        margin-left: 20px;
+      }
+    }
+  }
+}
+.status{
+  padding: 2px 12px;
+  border-radius: 4px;
+  background: #E9E9E9;
+  color: #636363;
+  font-size: 14px;
+  &.rejected{
+    background:rgba(255, 155, 155, 0.30);
+    color: #E32A27;
+  }
+  &.done{
+    color: #00A904;
+    background: rgba(0, 169, 4, 0.20);
+  }
+  &.plan-1{
+    color: #3373DD;
+    background: rgba(51, 115, 221, 0.20);
+  }
+  &.plan-2{
+    color: #188E90;
+    background: rgba(21, 196, 199, 0.20);
+  }
+}
+
+.status-project{
+  &__step{
+    display: flex;
+    align-items: flex-start;
+    gap: 32px;
+    position: relative;
+    min-height: 140px;
+    + .status-project__step::before{
+      content: "";
+      position: absolute;
+      left: 20px;
+      bottom: 100%;
+      width: 3px;
+      height: 90%;
+      background: repeating-linear-gradient(
+        to bottom,
+        #999 0,
+        #999 10px,
+        transparent 10px,
+        transparent 20px
+      );
+    }
+    &.done{
+      .icon{
+        svg{
+          >*{
+            stroke:#2063D2;
+          }
+        }
+      }
+      &::before{
+        background: repeating-linear-gradient(
+          to bottom,
+          #2063D2 0,
+          #2063D2 10px,
+          transparent 10px,
+          transparent 20px
+        );
+      }
+    }
+    .icon{
+      position: relative;
+      z-index: 2;
+    }
+    svg{
+      flex: 0 0 auto;
+      max-width: 44px;
+    }
+    .date{
+      flex: 0 0 auto;
+      max-width: 100px;
+      padding-top: 10px;
+    }
+    .text{
+      padding-top: 10px;
+      p{
+        color: #636363;
+        margin-bottom:8px;
+        b{
+          color: #373737;
+        }
+      }
+    }
+  }
+}

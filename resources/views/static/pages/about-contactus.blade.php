@@ -31,6 +31,7 @@
         <p>Ada pertanyaan seputar JDIH Kementerian Kordinator Bidang Pangan ? Kirim pesan kepada kami!</p>
       </div>
       <div class="contact-highlight">
+        <figure class="bg"><img src="{{ asset('images/content/bg-contactus.png') }}" alt=""></figure>
         <div class="contact-highlight__left">
           <p>KANTOR KAMI</p>
           <div class="wrap-col">
@@ -52,7 +53,6 @@
             Petunjuk Arah
           </a>
         </div>
-        <figure><img src="{{ asset('images/content/highlight-contact.png') }}" alt=""></figure>
       </div>
       <div class="box-form">
         <h5>HUBUNGI KAMI</h5>

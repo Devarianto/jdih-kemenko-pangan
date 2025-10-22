@@ -52,9 +52,9 @@ input[type="submit"] {
   }
 
   &.button-secondary {
-    background-color: var(--c-secondary-main);
-    border-color: var(--c-secondary-main);
-
+    background-color:#DFDFDF;
+    border-color:#DFDFDF;
+    color: #373737;
     &:focus,
     &:hover {
       background-color: var(--c-secondary-hover);
