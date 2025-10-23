@@ -74,7 +74,8 @@
       </svg>
     </div>
   </div>
-  <section class="document">
+  <section class="document animating-scroll" data-animate-trigger=".trigger-1">
+    <div class="trigger trigger-1"></div>
     <div class="wrapper">
       <div class="document__title">
         <h4>DOKUMEN TERBARU</h4>
@@ -159,7 +160,8 @@
       </div>
     </div>
   </section>
-  <section class="tema">
+  <section class="tema animating-scroll" data-animate-trigger=".trigger-2">
+    <div class="trigger trigger-2"></div>
     <div class="bg"><img src="{{asset('images/content/bg-tema.jpg')}}" alt="" /> </div>
     <div class="wave">
       <svg xmlns="http://www.w3.org/2000/svg" widht="5000" height="200" viewBox="0 180 2500 200" fill="#F8F8F8">
@@ -210,7 +212,8 @@
       </div>
     </div>
   </section>
-  <section class="artikel">
+  <section class="artikel animating-scroll" data-animate-trigger=".trigger-3">
+    <div class="trigger trigger-3"></div>
     <div class="wrapper">
       <div class="artikel__left">
         <div class="list">
@@ -546,7 +549,8 @@
       </div>
     </div>
   </section>
-  <section class="news">
+  <section class="news animating-scroll" data-animate-trigger=".trigger-4">
+    <div class="trigger trigger-4"></div>
     <div class="grid">
       <div class="grid__item">
         <div class="tag news">
@@ -615,7 +619,8 @@
       </div>
     </div>
   </section>
-  <section class="statistik">
+  <section class="statistik animating-scroll" data-animate-trigger=".trigger-5">
+    <div class="trigger trigger-5"></div>
     <div class="wrapper">
       <div class="statistik__left box">
         <h5>Grafik Statistik Hukum</h5>
@@ -645,7 +650,8 @@
       </div>
     </div>
   </section>
-  <section class="partner">
+  <section class="partner animating-scroll" data-animate-trigger=".trigger-6">
+    <div class="trigger trigger-6"></div>
     <div class="wrapper">
       <h5>Institusi Terkait</h5>
     </div>

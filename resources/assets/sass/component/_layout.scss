@@ -61,10 +61,73 @@ header{
     display: flex;
     margin-bottom: 0;
     gap: 32px;
-    li{
+    >li{
       padding: 32px 0;
       a{
         color: white;
+        transition: .2s all ease-out;
+      }
+      &:hover{
+        >a{
+          color: #C1CCFF !important;
+        }
+      }
+      &.have-child{
+        position: relative;
+        .child{
+          position: absolute;
+          top: 100%;
+          left: -40px;
+          z-index: 2;
+          min-width: 170px;
+          padding: 20px 16px;
+          opacity: 0;
+          visibility: hidden;
+          transition: .2s all ease-out;
+          &::before{
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-color: white;
+            box-shadow: 0 0 20px -15px #000;
+            border-radius: 8px;
+            z-index: -1;
+          }
+          &::after{
+            content: '';
+            position: absolute;
+            top: auto;
+            left:0;
+            right: 0;
+            margin: 0 auto;
+            bottom: 100%;
+            width: 0; 
+            height: 0; 
+            border-left: 5px solid transparent;
+            border-right: 5px solid transparent;
+            border-bottom: 5px solid white;
+            box-shadow: 0 0 20px -17px #000;
+            z-index: -1;
+          }
+          ul{
+            flex-direction: column;
+            gap: 4px;
+            li{
+              display: block;
+              padding: 0;
+              a{
+                font-size: 14px;
+                color: black;
+              }
+            }
+          }
+        }
+        &:hover{
+          .child{
+            opacity: 1;
+            visibility: visible;
+          }
+        }
       }
     }
   }
@@ -124,6 +187,18 @@ header{
       height: 100%;
       opacity: 1;
       visibility: visible;
+    }
+  }
+  &.undermaintenance{
+    display: flex;
+    justify-content: center;
+    box-shadow: unset;
+    position: relative;
+    &::before{
+      height: 0;
+    }
+    .logo{
+      padding-top: 32px;
     }
   }
 }

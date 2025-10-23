@@ -4,6 +4,7 @@ import '/node_modules/select2/dist/css/select2.css';
 import select2 from 'select2';
 import header from "./libs/header.js";
 import responsiveImage from './libs/responsive-images.js';
+import animatingScroll from './libs/animatingScroll.js';
 
 // window.$ = $
 window.$ = window.jQuery = jQuery;
@@ -13,7 +14,7 @@ document.addEventListener("DOMContentLoaded", () => {
   popup($).closeGeneral()
   select2()
   header($).init()
-
+  animatingScroll().animating(".animating-scroll");
   const elemBanner = $('.banner-middle img');
   responsive.init(elemBanner, {
     type: 'image'
@@ -39,7 +40,7 @@ document.addEventListener("DOMContentLoaded", () => {
     $('.filter').fadeOut();
   });
 
-  if ($('.detail-pages, .dashboard').length) {
+  if ($('.detail-pages, .dashboard, .misc').length) {
     $("header").addClass("white"); 
   }
   if ($('.with-other').length) {

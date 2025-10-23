@@ -207,5 +207,17 @@ Route::name('front.')->group(function () {
       $compact = [];
       return view('static.pages.dashboard-daftar-detail', $compact);
     })->name('dashboard-daftar-detail');
+
+    # Misc 404
+    Route::get('/page-404', function () {
+      $compact = [];
+      return view('static.pages.page-404', $compact);
+    })->name('page-404');
+
+    # Undermaintenance
+    Route::get('/undermaintenance', function () {
+      $compact = [];
+      return view('static.pages.undermaintenance', $compact);
+    })->name('undermaintenance');
   });
 });

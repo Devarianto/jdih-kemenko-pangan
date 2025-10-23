@@ -5,8 +5,19 @@
   <div class="right-header">
     <nav>
       <ul>
-        <li><a href="">Beranda</a></li>
-        <li><a href="">Tentang Kami</a></li>
+        <li>
+          <a href="">Beranda</a>
+        </li>
+        <li class="have-child">
+          <a href="">Tentang Kami</a>
+          <div class="child">
+            <ul>
+              <li><a href="">Child 1</a></li>
+              <li><a href="">Child 1</a></li>
+              <li><a href="">Child 1</a></li>
+            </ul>
+          </div>
+        </li>
         <li><a href="">Dokumen Hukum</a></li>
         <li><a href="">Informasi Lainnya</a></li>
         <li><a href="">FAQ</a></li>

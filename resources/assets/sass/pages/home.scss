@@ -10,6 +10,7 @@
 /* general
 ----------------------------------------------------------------------------------------------*/
 @use "swiper/css/bundle";
+@use "../milligram/Mixins" as a;
 
 .banner-homepage{
 	position: relative;
@@ -353,9 +354,9 @@
 	&__right{
 		flex: 0 0 300px;
 		max-width: 300px;
-		position: sticky;
+		position: sticky !important;
 		right: 0;
-		top: 160px;
+		top: 160px !important;
 		&-title{
 			margin-bottom: 20px;
 			h5{
@@ -673,6 +674,102 @@
 			display: flex;
 			align-items: center;
 			justify-content: flex-start;
+		}
+	}
+}
+
+.banner-homepage{
+	.banner-homepage__caption{
+		@include a.anim-indicator(from, top, -20px, 0, 0, "h3","h6",".wrap-input",".wrap-filter");
+	}
+	&.after-animate{
+		&.banner-homepage{
+			.banner-homepage__caption{
+				@include a.anim-indicator(to, top, 0px, 0.2, 0.6, "h3","h6",".wrap-input",".wrap-filter");
+			}
+		}
+	}
+}
+.animating-scroll {
+  position: relative;
+  // animation scroll //
+  .trigger {
+    height: 40%;
+    margin: auto;
+    position: absolute;
+    inset: 0;
+    top: 0;
+    z-index: -1;
+  }
+	&.document{
+		.document__title{
+			@include a.anim-indicator(from, top, -20px, 0, 0, "h4",".arrow");
+		}
+		.swiper-slide{
+			 @include a.anim-listing(from, top, 50px, 0.1, 0.3, 100);
+		}
+	}
+	&.tema{
+		.tema__title{
+			@include a.anim-indicator(from, top, -20px, 0, 0, "h3","p");
+		}
+		.tema__listing--item{
+			@include a.anim-listing(from, top, 50px, 0.1, 0.3, 4);
+		}
+	}
+	&.artikel{
+		@include a.anim-indicator(from, top, -20px, 0, 0, ".artikel__left",".artikel__right");
+	}
+	&.news{
+		.grid__item{
+			@include a.anim-listing(from, top, 50px, 0.1, 0.3, 3);
+		}
+	}
+	&.statistik{
+		@include a.anim-indicator(from, top, -20px, 0, 0, ".statistik__left",".statistik__right");
+	}
+	&.statistik{
+		@include a.anim-indicator(from, top, -20px, 0, 0, ".statistik__left",".statistik__right");
+	}
+	&.partner{
+		@include a.anim-indicator(from, top, -20px, 0, 0, "h5");
+		.swiper-slide{
+			@include a.anim-listing(from, top, 50px, 0.1, 0.3, 100);
+		}
+	}
+	&.after-animate{
+		&.document{
+			.document__title{
+				@include a.anim-indicator(to, top, 0px, 0.2, 0.4, "h4",".arrow");
+			}
+			.swiper-slide{
+				@include a.anim-listing(to, top, 0, 0.2, 0.6, 100);
+			}
+		}
+		&.tema{
+			.tema__title{
+				@include a.anim-indicator(to, top, 0px, 0.2, 0.5, "h3","p");
+			}
+			.tema__listing--item{
+				@include a.anim-listing(to, top, 0, 0.2, 0.6, 4);
+			}
+		}
+		&.artikel{
+			@include a.anim-indicator(to, top, 0px, 0.2, 0.5, ".artikel__left",".artikel__right");
+		}
+		&.news{
+			.grid__item{
+				@include a.anim-listing(to, top, 0px, 0.2, 0.6, 3);
+			}
+		}
+		&.statistik{
+			@include a.anim-indicator(to, top, 0px, 0.4, 0.8, ".statistik__left",".statistik__right");
+		}
+		&.partner{
+			@include a.anim-indicator(to, top, 0px, 0.2, 0.4, "h5");
+			.swiper-slide{
+				@include a.anim-listing(to, top, 0px, 0.2, 0.8, 100);
+			}
 		}
 	}
 }

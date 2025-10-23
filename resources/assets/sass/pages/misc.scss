@@ -1,0 +1,59 @@
+/*=============================================================================================
+  Company    : PT Web Architect Technology - webarq.com
+  Document   : Stylesheet
+  Author     : Your Name
+==============================================================================================*/
+/* helper
+----------------------------------------------------------------------------------------------*/
+// @import "../milligram/Color";    // import your general color from milligram
+
+.misc{
+  height: calc(100svh - 200px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .wrapper-content{
+    display: flex;
+    align-items: center;
+    padding-top: 100px;
+  }
+  &__left{
+    flex: 0 0 300px;
+    max-width: 300px;
+  }
+  &__right{
+    flex: 0 0 calc(100% - 300px);
+    max-width: calc(100% - 300px);
+    padding-left: 80px;
+  }
+  &.under{
+    .wrapper-content{
+      padding-top: 0;
+    }
+    .medsos{
+      label{
+        display: block;
+        font-size: 1rem;
+        font-weight: 600;
+        margin-bottom: 12px;
+      }
+      .wrap{
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        a{
+          width: 40px;
+          height: 40px;
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          border: 1px solid rgba(20, 64, 164, 0.20);
+          img{
+            filter: invert(25%) sepia(89%) saturate(1612%) hue-rotate(204deg) brightness(99%) contrast(92%);
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,20 +1,15 @@
-@mixin anim-indicator(
-  $from: "to",
-  $property,
-  $val: 0,
-  $delay: 0,
-  $d: 1,
-  $selectors...
-) {
+@mixin anim-indicator($from : 'to', $property, $val: 0, $delay : 0, $d: 1, $selectors...) {
   @for $i from 0 to length($selectors) {
     #{nth($selectors, $i + 1)} {
       #{$property}: $val;
 
-      @if $from == "from" {
+      @if $from =='from' {
         position: relative;
         opacity: 0;
         transition: 0.4s $property ease-out, 0.4s opacity ease-out;
-      } @else {
+      }
+
+      @else {
         opacity: 1;
       }
 
@@ -29,25 +24,27 @@
 @mixin anim-transition-delay {
   @for $i from 1 through 4 {
     &:nth-child(#{$i}) {
-      transition-delay: #{1 + ($i * 0.1)}s;
+      transition-delay: #{1 + ($i * .1)}s;
     }
   }
 }
 
 // anim-listing
 // @include anim-listing(to, bottom, 0, 0.2, 1, 3);
-@mixin anim-listing($from: "to", $property, $val: 0, $delay: 0, $d: 1, $count) {
+@mixin anim-listing($from : 'to', $property, $val: 0, $delay : 0, $d : 1, $count) {
   @for $i from 1 through $count {
     &:nth-child(#{$i}) {
-      @if $property != "" {
+      @if $property !='' {
         #{$property}: $val;
       }
 
-      @if $from == "from" {
+      @if $from =='from' {
         position: relative;
         opacity: 0;
         transition: 0.4s $property ease-out, 0.4s opacity ease-out;
-      } @else {
+      }
+
+      @else {
         opacity: 1;
       }
 
