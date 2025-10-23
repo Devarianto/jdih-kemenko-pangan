@@ -6,10 +6,10 @@
     <nav>
       <ul>
         <li>
-          <a href="">Beranda</a>
+          <a href="{{ route('front.dashboard') }}">Beranda</a>
         </li>
         <li class="have-child">
-          <a href="">Tentang Kami</a>
+          <a href="{{ route('front.about') }}">Tentang Kami</a>
           <div class="child">
             <ul>
               <li><a href="">Child 1</a></li>
@@ -18,8 +18,8 @@
             </ul>
           </div>
         </li>
-        <li><a href="">Dokumen Hukum</a></li>
-        <li><a href="">Informasi Lainnya</a></li>
+        <li><a href="{{ route('front.document-peraturan') }}">Dokumen Hukum</a></li>
+        <li><a href="{{ route('front.documentlainnya-kamus-hukum') }}">Informasi Lainnya</a></li>
         <li><a href="">FAQ</a></li>
       </ul>
     </nav>
