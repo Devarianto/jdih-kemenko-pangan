@@ -174,3 +174,14 @@
     background: linear-gradient(180deg, rgba(3, 11, 43, 0.00) 19.05%, rgba(3, 11, 43, 0.50) 51.52%, rgba(3, 11, 43, 0.70) 100%);
   }
 }
+
+@media all and (max-width: 1200px) {
+  .visi{
+    figure{
+      figcaption{
+        bottom: 60px;
+        left: 48px;
+      }
+    }
+  }
+}

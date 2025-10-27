@@ -19,6 +19,7 @@
     background: linear-gradient(180deg, rgba(3, 11, 43, 0.00) 0%, rgba(3, 11, 43, 0.38) 40.12%, rgba(3, 11, 43, 0.60) 100%);
   }
   figure{
+    height: 100%;
     img{
       display: block;
       width: 100%;
@@ -44,7 +45,7 @@
   }
   .wave{
     position: absolute;
-    bottom:-90px;
+    bottom:-15px;
     left: 0;
     width: 100%;
     z-index: 2;
@@ -461,6 +462,8 @@
     position: relative;
     top: 0;
     transition: .2s all ease-out;
+    display: flex;
+    flex-direction: column;
     &:hover{
       top: -2px;
       box-shadow: 0 2px 20px -17px #000;
@@ -475,22 +478,44 @@
     }
   }
   figcaption{
-    padding: 16px;
+    padding: 16px 16px 40px;
     background-color: white;
+    flex: 1 0 auto;
+    position: relative;
     p{
       margin-bottom: 8px;
       line-height: 1.5;
       font-weight: 600;
       color: #373737;
     }
+    .visited{
+      position: absolute;
+      bottom: 16px;
+      left: 16px;
+      right: 16px;
+    }
+    .date{
+      font-size: 14px;
+      color: #636363;
+      font-weight: 600;
+      display: inline-block;
+      margin-bottom: 8px;
+    }
   }
   figure{
     overflow: hidden;
-    height: 120px;
+    flex:0 0 120px;
+    max-height: 120px;
     img{
       width: 100%;
       transition: .2s all ease-out;
     }
+  }
+  .tag{
+    font-size: 12px;
+    color: #373737;
+    display: block;
+    margin-bottom: 9px;
   }
   span{
     font-size: 14px;
@@ -501,7 +526,7 @@
     -webkit-line-clamp: 3;
     line-clamp: 3;
     overflow: hidden;
-    margin-bottom: 42px;
+    margin-bottom: 24px;
     &.link{
       margin-bottom: 0;
       color: var(--c-primary-main);
@@ -524,11 +549,16 @@
     }
     figure{
       border-radius: 4px;
-      height: auto;
+      flex: 0 0 auto;
+      max-height: 100%;
     }
     figcaption{
       background-color: transparent;
       padding: 15px 0;
+      .visited{
+        left: 0;
+        bottom: 0;
+      }
     }
   }
   &.col-3{
@@ -689,7 +719,82 @@
 
 /* responsive tablet landscape
 ----------------------------------------------------------------------------------------------*/
-// @media all and (max-width: 1200px) {}
+@media all and (max-width: 1200px) {
+  .banner-middle{
+    height: 376px;
+    .wave{
+      svg{
+        height: 90px;
+      }
+    }
+  }
+  .middle{
+    padding: 54px 0 80px;
+    &__search{
+      margin-left: 0;
+      margin-right: 0;
+      margin-top: -150px;
+      padding: 48px 40px 0;
+      .row .column{
+        &.column-65{
+          flex:0 0 55%;
+          max-width: 55%;
+        }
+        &.column-20{
+          flex: 0 0 30%;
+          max-width: 30%;
+        }
+      }
+    }
+  }
+  .box-detail-page{
+    .wrapper-content{
+      padding: 48px 32px;
+    }
+  }
+  .contact-highlight{
+    &__left{
+      p{
+        margin-bottom: 12px;
+      }
+    }
+  }
+  .listing-card{
+    gap:22px;
+    &__item{
+      width: calc(33.333% - 16px);
+    }
+  }
+  .other-listing{
+    .listing-card{
+      gap: 20px;
+      &__item{
+        width: calc(25% - 15px);
+      }
+    }
+  }
+  .banner-detail{
+    &__caption{
+      padding-top: 88px;
+    }
+  }
+  .detail-pages{
+    padding-top: 124px;
+    &.no-banner{
+      padding-top: 170px;
+      &::before{
+        top: 125px;
+      }
+    }
+  }
+  .listing-card{
+    figcaption{
+      .date{
+        font-size: 12px;
+      }
+    }
+  }
+}
 
 
 

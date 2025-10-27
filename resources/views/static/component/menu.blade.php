@@ -1,5 +1,5 @@
 <div class="wrapper">
-  <a href="" class="logo">
+  <a href="{{ route('front.index') }}" class="logo">
     <img src="{{asset('images/material/logo.svg')}}" alt="">
   </a>
   <div class="right-header">
@@ -35,6 +35,11 @@
     </div>
     <div class="right-header__lang">
       <img src="{{asset('images/material/flag-idn.svg')}}" alt="">
+    </div>
+    <div class="toggle-menu">
+      <span></span>
+      <span></span>
+      <span></span>
     </div>
   </div>
 </div>
@@ -75,3 +80,39 @@
     </div>
   </div>
 </div>
+
+<section class="menu-mobile">
+  <nav>
+    <ul>
+      <li><a href="">Beranda</a></li>
+      <li><a href="">Tentang Kami</a></li>
+      <li>
+        <a href="">Dokumen Hukum</a>
+        <i class="wa-icon wa-ic-chevron-down-solid"></i>
+        <div class="child">
+          <a href="">Peraturan Hukum</a>
+          <a href="">Monografi Hukum</a>
+          <a href="">Artikel Hukum</a>
+          <a href="">Putusan Hukum</a>
+          <a href="">Simplifikasi</a>
+        </div>
+      </li>
+      <li><a href="">Informasi Lainnya</a></li>
+      <li><a href="">FAQ</a></li>
+    </ul>
+  </nav>
+  <div class="menu-mobile__bottom">
+    <div class="lang">
+      <select name="" id="">
+        <option value="">EN</option>
+        <option value="">ID</option>
+      </select>
+    </div>
+    <form action="" class="search">
+      <input type="text" placeholder="Search">
+      <button type="submit">
+        <i class="wa-icon wa-ic-search-outline"></i>
+      </button>
+    </form>
+  </div>
+</section>

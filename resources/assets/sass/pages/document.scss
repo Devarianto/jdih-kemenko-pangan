@@ -468,3 +468,12 @@
     max-width: 420px;
   }
 }
+@media all and (max-width: 1200px) {
+  .search-by-abjad{
+    padding: 0 40px;
+    gap:6px;
+  }
+  .listing-galeri__item{
+    min-height: 300px;
+  }
+}

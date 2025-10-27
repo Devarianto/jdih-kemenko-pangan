@@ -3,14 +3,16 @@ import Swiper  from 'swiper/bundle';
 
 const home = {};
 home.sliderDocument = () => {
-  if($('.swiper .document__listing--item').length <= 4){
-    $('.document').addClass('disable-arrow')
-    return  
+  if($(window).width() > 1024 ){
+    if($('.swiper .document__listing--item').length <= 4){
+      $('.document').addClass('disable-arrow')
+      return  
+    }
   }
   const swiper = new Swiper('.document__listing.swiper', {
     loop: true,
     spaceBetween: 24,
-    slidesPerView: 4,
+    slidesPerView: 'auto',
     slidesOffsetBefore: 0,  // penting: jangan offset dari kiri lagi
     slidesOffsetAfter: 0,
     navigation: {
@@ -20,6 +22,11 @@ home.sliderDocument = () => {
     autoplay: {
       delay: 6000,
       disableOnInteraction: false,
+    },
+    breakpoints: {
+      1200: {
+        slidesPerView:4,
+      }
     },
   });
 
@@ -89,13 +96,20 @@ home.ratingHome = () => {
 home.sliderLogo = () => {
   const swiper = new Swiper('.logo-slider.swiper', {
     loop: true,
-    slidesPerView: 6,
+    slidesPerView: 4,
     spaceBetween: 20,
-    slidesOffsetBefore: -80, // offset kiri agar tampak terpotong
-    slidesOffsetAfter: -80,  // offset kanan agar tampak terpotong
+    slidesOffsetBefore: -40, // offset kiri agar tampak terpotong
+    slidesOffsetAfter: -40,  // offset kanan agar tampak terpotong
     autoplay: {
       delay: 6000,
       disableOnInteraction: false,
+    },
+    breakpoints: {
+      1023: {
+        slidesPerView:6,
+        slidesOffsetBefore: -80, 
+        slidesOffsetAfter: -80,  
+      }
     },
   });
 }

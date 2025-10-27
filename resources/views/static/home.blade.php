@@ -65,11 +65,18 @@
       </div>
     </div>
     <div class="wave">
-      <svg xmlns="http://www.w3.org/2000/svg" widht="3000" height="250" viewBox="0 180 2500 200" fill="#EEF4FE">
-        <path class="st1" d="M 0 250 C 1200 400 1200 50 3000 250 L 3000 550 L 0 550 L 0 250">
-            <animate attributeName="d" dur="5s" values="M 0 250 C 1200 400 1200 50 3000 250 L 3000 550 L 0 550 L 0 250;
-            M 0 250 C 400 50 400 400 3000 250 L 3000 550 L 0 550 L 0 250;
-            M 0 250 C 1200 400 1200 50 3000 250 L 3000 550 L 0 550 L 0 250" repeatCount="indefinite"></animate>
+      <svg xmlns="http://www.w3.org/2000/svg"
+        width="100%" height="140"
+        viewBox="0 180 2500 200"
+        fill="#EEF4FE"
+        preserveAspectRatio="none">
+        <path class="st1"
+          d="M 0 250 C 1200 320 1200 100 3000 250 L 3000 550 L 0 550 L 0 250">
+          <animate attributeName="d" dur="5s"
+            values="M 0 250 C 1200 320 1200 100 3000 250 L 3000 550 L 0 550 L 0 250;
+                    M 0 250 C 400 100 400 320 3000 250 L 3000 550 L 0 550 L 0 250;
+                    M 0 250 C 1200 280 1200 100 3000 250 L 3000 550 L 0 550 L 0 250"
+            repeatCount="indefinite" />
         </path>
       </svg>
     </div>
@@ -220,7 +227,7 @@
           <div class="list-monografi">
             <div class="list-title">
               <h5>Monografi (67)</h5>
-              <a class="readmore">Lihat Semua</a>
+              <a href="{{ route('front.document-monografi') }}" class="readmore">Lihat Semua</a>
             </div>
             <div class="listing-card without-box">
               <a href="" class="listing-card__item">
@@ -280,7 +287,7 @@
           <div class="list-rules">
             <div class="list-title">
               <h5>PERATURAN HUKUM (148)</h5>
-              <a class="readmore">Lihat Semua</a>
+              <a href="{{ route('front.document-peraturan') }}" class="readmore">Lihat Semua</a>
             </div>
             <div class="listing-card">
               <a href="" class="listing-card__item">
@@ -344,14 +351,14 @@
           <div class="list-putusan">
             <div class="list-title">
               <h5>Putusan Hukum (197)</h5>
-              <a class="readmore">Lihat Semua</a>
+              <a href="{{ route('front.document-putusan') }}" class="readmore">Lihat Semua</a>
             </div>
             <div class="listing-card">
               <a href="" class="listing-card__item">
                 <figure><img src="{{asset('images/content/mon-1.jpg')}}" alt=""></figure>
                 <figcaption>
-                  <p>Undang-Undang Nomor 31 Tahun 2025</p>
-                  <span>Tentang Perubahan Keempat Atas Undang-Undang Nomor 4 Tahun 2009 Tentang</span>
+                  <small class="tag"># Putusan Komisi</small>
+                  <p>Putusan Komisi Informasi Pusat Republik Indonesia Nomor 023/IV/KIP-PS-A/2022</p>
                   <small class="visited">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
                       <path d="M8 3.5C4.967 3.5 2.399 5.388 1.5 8C2.399 10.612 4.967 12.5 8 12.5C11.033 12.5 13.601 10.612 14.5 8C13.601 5.388 11.033 3.5 8 3.5Z" stroke="#999999" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
@@ -364,8 +371,8 @@
               <a href="" class="listing-card__item">
                 <figure><img src="{{asset('images/content/mon-2.jpg')}}" alt=""></figure>
                 <figcaption>
-                  <p>Undang-Undang Nomor 45 1Tahun 2025</p>
-                  <span>Tentang Perubahan Keempat Atas Undang-Undang Nomor 4 Tahun 2009 Tentang</span>
+                  <small class="tag"># Putusan Komisi</small>
+                  <p>Putusan Komisi Informasi Pusat Republik Indonesia Nomor 023/IV/KIP-PS-A/2022</p>
                   <small class="visited">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
                       <path d="M8 3.5C4.967 3.5 2.399 5.388 1.5 8C2.399 10.612 4.967 12.5 8 12.5C11.033 12.5 13.601 10.612 14.5 8C13.601 5.388 11.033 3.5 8 3.5Z" stroke="#999999" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
@@ -378,8 +385,8 @@
               <a href="" class="listing-card__item">
                 <figure><img src="{{asset('images/content/mon-3.jpg')}}" alt=""></figure>
                 <figcaption>
-                  <p>Undang-Undang Nomor 200 Tahun 2025</p>
-                  <span>Tentang Perubahan Keempat Atas Undang-Undang Nomor 4 Tahun 2009 Tentang</span>
+                  <small class="tag"># Putusan Komisi</small>
+                  <p>Putusan Komisi Informasi Pusat Republik Indonesia Nomor 023/IV/KIP-PS-A/2022</p>
                   <small class="visited">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
                       <path d="M8 3.5C4.967 3.5 2.399 5.388 1.5 8C2.399 10.612 4.967 12.5 8 12.5C11.033 12.5 13.601 10.612 14.5 8C13.601 5.388 11.033 3.5 8 3.5Z" stroke="#999999" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
@@ -392,8 +399,8 @@
               <a href="" class="listing-card__item">
                 <figure><img src="{{asset('images/content/mon-4.jpg')}}" alt=""></figure>
                 <figcaption>
-                  <p>Undang-Undang Nomor 18 Tahun 2025</p>
-                  <span>Tentang Perubahan Keempat Atas Undang-Undang Nomor 4 Tahun 2009 Tentang</span>
+                  <small class="tag"># Putusan Komisi</small>
+                  <p>Putusan Komisi Informasi Pusat Republik Indonesia Nomor 023/IV/KIP-PS-A/2022</p>
                   <small class="visited">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
                       <path d="M8 3.5C4.967 3.5 2.399 5.388 1.5 8C2.399 10.612 4.967 12.5 8 12.5C11.033 12.5 13.601 10.612 14.5 8C13.601 5.388 11.033 3.5 8 3.5Z" stroke="#999999" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
@@ -408,14 +415,14 @@
           <div class="list-artikel">
             <div class="list-title">
               <h5>artikel Hukum (311)</h5>
-              <a class="readmore">Lihat Semua</a>
+              <a href="{{ route('front.document-article') }}" class="readmore">Lihat Semua</a>
             </div>
             <div class="listing-card">
               <a href="" class="listing-card__item">
                 <figure><img src="{{asset('images/content/mon-1.jpg')}}" alt=""></figure>
                 <figcaption>
-                  <p>Undang-Undang Nomor 31 Tahun 2025</p>
-                  <span>Tentang Perubahan Keempat Atas Undang-Undang Nomor 4 Tahun 2009 Tentang</span>
+                  <small class="date">Edisi Desember 2025</small>
+                  <p>Kedaulatan pangan dalam perspektif hukum dan keamanan manusia</p>
                   <small class="visited">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
                       <path d="M8 3.5C4.967 3.5 2.399 5.388 1.5 8C2.399 10.612 4.967 12.5 8 12.5C11.033 12.5 13.601 10.612 14.5 8C13.601 5.388 11.033 3.5 8 3.5Z" stroke="#999999" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
@@ -428,8 +435,8 @@
               <a href="" class="listing-card__item">
                 <figure><img src="{{asset('images/content/mon-2.jpg')}}" alt=""></figure>
                 <figcaption>
-                  <p>Undang-Undang Nomor 45 1Tahun 2025</p>
-                  <span>Tentang Perubahan Keempat Atas Undang-Undang Nomor 4 Tahun 2009 Tentang</span>
+                  <small class="date">Edisi Desember 2025</small>
+                  <p>Perlindungan hukum dan partisipasi masyrakat untuk menjaga</p>
                   <small class="visited">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
                       <path d="M8 3.5C4.967 3.5 2.399 5.388 1.5 8C2.399 10.612 4.967 12.5 8 12.5C11.033 12.5 13.601 10.612 14.5 8C13.601 5.388 11.033 3.5 8 3.5Z" stroke="#999999" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
@@ -442,8 +449,8 @@
               <a href="" class="listing-card__item">
                 <figure><img src="{{asset('images/content/mon-3.jpg')}}" alt=""></figure>
                 <figcaption>
-                  <p>Undang-Undang Nomor 200 Tahun 2025</p>
-                  <span>Tentang Perubahan Keempat Atas Undang-Undang Nomor 4 Tahun 2009 Tentang</span>
+                  <small class="date">Edisi Desember 2025</small>
+                  <p>Perlindungan hukum dan partisipasi masyrakat untuk menjaga</p>
                   <small class="visited">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
                       <path d="M8 3.5C4.967 3.5 2.399 5.388 1.5 8C2.399 10.612 4.967 12.5 8 12.5C11.033 12.5 13.601 10.612 14.5 8C13.601 5.388 11.033 3.5 8 3.5Z" stroke="#999999" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
@@ -456,8 +463,8 @@
               <a href="" class="listing-card__item">
                 <figure><img src="{{asset('images/content/mon-4.jpg')}}" alt=""></figure>
                 <figcaption>
-                  <p>Undang-Undang Nomor 18 Tahun 2025</p>
-                  <span>Tentang Perubahan Keempat Atas Undang-Undang Nomor 4 Tahun 2009 Tentang</span>
+                  <small class="date">Edisi Desember 2025</small>
+                  <p>Perlindungan hukum dan partisipasi masyrakat untuk menjaga</p>
                   <small class="visited">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
                       <path d="M8 3.5C4.967 3.5 2.399 5.388 1.5 8C2.399 10.612 4.967 12.5 8 12.5C11.033 12.5 13.601 10.612 14.5 8C13.601 5.388 11.033 3.5 8 3.5Z" stroke="#999999" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>

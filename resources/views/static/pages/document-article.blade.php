@@ -15,11 +15,18 @@
       <h2>MONOGRAFI HUKUM</h2>
     </figcaption>
     <div class="wave">
-      <svg xmlns="http://www.w3.org/2000/svg" widht="3000" height="180" viewBox="0 180 2500 200" fill="#F8F8F8">
-        <path class="st1" d="M 0 250 C 1200 400 1200 50 3000 250 L 3000 550 L 0 550 L 0 250">
-            <animate attributeName="d" dur="5s" values="M 0 250 C 1200 400 1200 50 3000 250 L 3000 550 L 0 550 L 0 250;
-            M 0 250 C 400 50 400 400 3000 250 L 3000 550 L 0 550 L 0 250;
-            M 0 250 C 1200 400 1200 50 3000 250 L 3000 550 L 0 550 L 0 250" repeatCount="indefinite"></animate>
+      <svg xmlns="http://www.w3.org/2000/svg"
+        width="100%" height="140"
+        viewBox="0 180 2500 200"
+        fill="#F8F8F8"
+        preserveAspectRatio="none">
+        <path class="st1"
+          d="M 0 250 C 1200 320 1200 100 3000 250 L 3000 550 L 0 550 L 0 250">
+          <animate attributeName="d" dur="5s"
+            values="M 0 250 C 1200 320 1200 100 3000 250 L 3000 550 L 0 550 L 0 250;
+                    M 0 250 C 400 100 400 320 3000 250 L 3000 550 L 0 550 L 0 250;
+                    M 0 250 C 1200 280 1200 100 3000 250 L 3000 550 L 0 550 L 0 250"
+            repeatCount="indefinite" />
         </path>
       </svg>
     </div>
@@ -48,7 +55,7 @@
       </div>
       <div class="listing-card">
         @for ($i = 1; $i <= 3; $i++)
-          <a href="" class="listing-card__item">
+          <a href="{{ route('front.document-article-detail') }}" class="listing-card__item">
             <figure><img src="{{asset('images/content/mon-1.jpg')}}" alt=""></figure>
             <figcaption>
               <p>Undang-Undang Nomor 31 Tahun 2025</p>
@@ -62,7 +69,7 @@
               </small>
             </figcaption>
           </a>
-          <a href="" class="listing-card__item">
+          <a href="{{ route('front.document-article-detail') }}" class="listing-card__item">
             <figure><img src="{{asset('images/content/mon-2.jpg')}}" alt=""></figure>
             <figcaption>
               <p>Undang-Undang Nomor 45 1Tahun 2025</p>
@@ -76,7 +83,7 @@
               </small>
             </figcaption>
           </a>
-          <a href="" class="listing-card__item">
+          <a href="{{ route('front.document-article-detail') }}" class="listing-card__item">
             <figure><img src="{{asset('images/content/mon-3.jpg')}}" alt=""></figure>
             <figcaption>
               <p>Undang-Undang Nomor 200 Tahun 2025</p>
@@ -90,7 +97,7 @@
               </small>
             </figcaption>
           </a>
-          <a href="" class="listing-card__item">
+          <a href="{{ route('front.document-article-detail') }}" class="listing-card__item">
             <figure><img src="{{asset('images/content/mon-4.jpg')}}" alt=""></figure>
             <figcaption>
               <p>Undang-Undang Nomor 18 Tahun 2025</p>

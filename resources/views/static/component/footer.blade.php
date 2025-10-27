@@ -17,7 +17,8 @@
         <div class="logo"><img src="{{ asset('images/material/logo.svg') }}" alt=""></div>
         <p>Jaringan Dokumentasi dan Informasi Hukum - Kementerian Kordinator Republik Indonesia</p>
         <address>Graha Mandiri, Jalan Imam Bonjol No. 61, Thamrin, Jakarta Pusat</address>
-        <a href="" class="button button-outline">
+        <a href="" class="button button-icon button-outline ">
+          <i class="wa-icon wa-ic-phone-solid"></i>
           (021) 319 36802
         </a>
       </div>
