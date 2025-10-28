@@ -38,12 +38,22 @@
         <p>Ada pertanyaan seputar JDIH Kementerian Kordinator Bidang Pangan ? Kirim pesan kepada kami!</p>
       </div>
       <div class="contact-highlight">
-        <figure class="bg"><img src="{{ asset('images/content/bg-contactus.png') }}" alt=""></figure>
+        <figure class="bg">
+          <img 
+          src="{{ asset('images/content/bg-contactus.png') }}" 
+          data-img-large="{{ asset('images/content/bg-contactus.png') }}"
+          data-img-medium="{{ asset('images/content/bg-contactus-medium.png') }}"
+          data-img-small="{{ asset('images/content/banner-about.webp') }}"
+          width="996" height="288" alt="img">
+        </figure>
         <div class="contact-highlight__left">
           <p>KANTOR KAMI</p>
           <div class="wrap-col">
             <div class="col">
               <p>Graha Mandiri, Jl. Imam Bonjol, No. 61, Menteng, Kec. Menteng, Jakarta Pusat, Jakarta, 10310</p>
+              <a href="" class="external-link">
+                Petunjuk Arah
+              </a>
             </div>
             <div class="col">
               <a href="">
@@ -56,9 +66,7 @@
               </a>
             </div>
           </div>
-          <a href="" class="external-link">
-            Petunjuk Arah
-          </a>
+        
         </div>
       </div>
       <div class="box-form">

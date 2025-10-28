@@ -487,6 +487,11 @@
       line-height: 1.5;
       font-weight: 600;
       color: #373737;
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 3;
+      line-clamp: 3;
+      overflow: hidden;
     }
     .visited{
       position: absolute;
@@ -508,6 +513,8 @@
     max-height: 120px;
     img{
       width: 100%;
+      height: 100%;
+      object-fit: cover;
       transition: .2s all ease-out;
     }
   }
@@ -563,14 +570,24 @@
   }
   &.col-3{
     gap: 48px 22px;
-    figure{
-      height: 210px;
-    }
-    figcaption{
-      padding: 24px 16px;
-    }
     .listing-card__item{
       width: calc(33.3333% - 14.6667px);
+    }
+  }
+  &.news{
+    figure{
+      flex: 0 0 210px;
+      max-height: 210px;
+    }
+    figcaption{
+      padding: 16px 24px;
+      p{
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 3;
+        line-clamp: 3;
+        overflow: hidden;
+      }
     }
   }
 }
@@ -800,7 +817,128 @@
 
 /* responsive tablet potrait
 ----------------------------------------------------------------------------------------------*/
-// @media all and (max-width: 1023px) {}
+@media all and (max-width: 1023px) {
+  .list-pdf{
+    .inner{
+      padding: 20px;
+    }
+    .button{
+      padding: 0 10px;
+    }
+  }
+  .banner-middle{
+    h2{
+      font-size: 27px;
+    }
+    figcaption{
+      left: 0;
+      right: 0;
+      transform: translateY(-50%);
+      margin: 0 40px;
+    }
+  }
+  .contact-highlight{
+    &__left{
+      max-width: 337px;
+      top: 50%;
+      left: 33px;
+      a{
+        margin-bottom: 24px;
+        &:last-child{
+          margin-bottom: 0;
+        }
+      }
+    }
+    .wrap-col{
+      flex-direction: column;
+    }
+  }
+  .middle{
+    &__search{
+      padding: 48px 19px 0;
+      button{
+        padding: 0 10px;
+      }
+      .row{
+        .column{
+          &.column-85{
+            flex: 0 0 80%;
+            max-width: 80%;
+          }
+          &.column-15{
+            flex: 0 0 20%;
+            max-width: 20%;
+          }
+          &.column-20{
+            flex: 0 0 25%;
+            max-width: 25%;
+          }
+        }
+      }
+    }
+  }
+  .wrap-filter{
+    .filter{
+      .row{
+        flex-flow: row wrap;
+        .column{
+          &:last-child{
+            flex: 0 0 100%;
+            max-width: 100%;
+            margin-top:16px;
+          }
+          &.column-30{
+            flex: 0 0 40%;
+            max-width: 40%;
+          }
+          &.column-35,&.column-20{
+            flex: 0 0 30%;
+            max-width: 30%;
+          }
+        }
+      }
+    } 
+  }
+  .detail-pages{
+    padding-top: 110px;
+    &.no-banner{
+      padding-top: 140px;
+      &::before{
+        display: none;
+      }
+    }
+  } 
+  .banner-detail{
+    &__caption{
+      padding-top:80px;
+    }
+  }
+  .box-detail-page{
+    &__pdf{
+      .wrap-iframe{
+        height: 549px;
+      }
+    }
+  }
+  .listing-card{
+    gap:48px 20px;
+    &__item{
+      width: calc(33.333% - 14px);
+    }
+    &.news{
+      figure{
+        flex: 0 0 140px;
+        max-height: 140px;
+      }
+      figcaption{
+        padding: 16px;
+      }
+    }
+  }
+  .filter-right{
+    margin-bottom: 40px;
+  }
+}
 
 
 

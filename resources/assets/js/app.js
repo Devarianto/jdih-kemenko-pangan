@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", () => {
   select2()
   header($).init()
   animatingScroll().animating(".animating-scroll");
-  const elemBanner = $('.banner-middle img');
+  const elemBanner = $('.banner-middle img, .contact-highlight .bg img');
   responsive.init(elemBanner, {
     type: 'image'
   })

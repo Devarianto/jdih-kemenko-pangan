@@ -43,7 +43,7 @@
           </div>
         </form>
       </div>
-      <div class="listing-card col-3">
+      <div class="listing-card col-3 news">
         @for ($i = 1; $i <= 3; $i++)
           <a href="{{ route('front.documentlainnya-berita-detail') }}" class="listing-card__item">
             <figure><img src="{{asset('images/content/mon-1.jpg')}}" alt=""></figure>

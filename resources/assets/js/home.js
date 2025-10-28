@@ -1,5 +1,6 @@
 import $ from 'jquery'; //import jquery module
 import Swiper  from 'swiper/bundle';
+import 'slick-carousel';
 
 const home = {};
 home.sliderDocument = () => {
@@ -140,12 +141,23 @@ home.playVideo = function () {
     iframe.attr("src", videoUrl);
   });
 }
+home.sliderTablet = function (){
+  if($(window).width() < 1024){
+    $('.artikel .document__listing').slick({
+      variableWidth:true,
+      arrows:false,
+      dots:false,
+      autoplay:true
+    })
+  }
+}
 home.init = function () {
   this.sliderDocument()
   this.sliderLogo()
   this.ratingHome()
   this.playVideo()
   this.sliderPopup()
+  this.sliderTablet()
 }
 
 home.init();

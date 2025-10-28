@@ -65,16 +65,16 @@
       </div>
       <div class="listing-rules without-bottom">
         @for ($i = 1; $i <= 9; $i++)
-          <div class="listing-rules__item">
+          <a href="{{ route('front.document-putusan-detail') }}" class="listing-rules__item">
             <figure><img src="{{ asset('images/content/rules-1.jpg') }}" alt=""></figure>
             <figcaption>
               <div class="wrap-flex">
                 <div class="text">
                   <span class="category">Baru</span>
+                  <span class="tag">#Putusan Hukum</span>
                   <p>Undang-Undang Nomor 31 Tahun 2025</p>
-                  <small>Tentang Perubahan Keempat Atas Undang-Undang Nomor 4 Tahun 2009 Tentang</small>
                 </div>
-                <a href="{{ route('front.document-putusan-detail') }}" class="button button-outline">Lihat Selengkapnya</a>
+                <span class="button button-outline">Lihat Selengkapnya</span>
               </div>
               <div class="bottom">
                 <div class="bottom__left">
@@ -88,7 +88,7 @@
                 </div>
               </div>
             </figcaption>
-          </div>
+          </a>
         @endfor
       </div>
       @include('static.component.pagination')

@@ -494,6 +494,22 @@
         }
       }
     }
+    &-photo{
+      .photo-slider{
+        figure{
+          height: 410px;
+          figcaption{
+            padding: 24px 32px;
+          }
+        }
+      }
+      .popup__box{
+        max-width: 600px;
+      }
+    }
+    &-video .popup__box{
+      max-width: 600px;
+    }
   }
 }
 

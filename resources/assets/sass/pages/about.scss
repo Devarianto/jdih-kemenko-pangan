@@ -185,3 +185,48 @@
     }
   }
 }
+
+@media all and (max-width: 1023px) {
+  .section-text{
+    flex-direction: column;
+    &__left,&__right{
+      flex: unset;
+      max-width: 100%;
+      width: 100%;
+      padding: 0;
+    }
+  }
+  .visi{
+    figure{
+      figcaption{
+        width: 395px;
+        left: 42px;
+        bottom: 42px;
+        p,h6{
+          font-size: 17px;
+        }
+      }
+    }
+  }
+  .statistik{
+    table{
+      th,td{
+        font-size: 13px;
+        padding: 8px;
+      }
+    }
+    &__left{
+      flex: 0 0 250px;
+      max-width: 250px;
+    }
+    &__right{
+      flex: 0 0 calc(100% - 250px);
+      max-width: calc(100% - 250px);
+      padding-left: 12px;
+    }
+  
+    #chartPeraturan{
+      min-height: 0 !important;
+    }
+  }
+}

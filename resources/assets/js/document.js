@@ -71,11 +71,16 @@ document.sliderDetail = () => {
 
 document.sliderPopup = () => {
   const sliderThumbnail = new Swiper('.photo-slider-thumbs.swiper', {
-    slidesPerView: 6,
+    slidesPerView: 5,
     freeMode: true,
     spaceBetween:16,
     watchSlidesVisibility: true,
     watchSlidesProgress: true,
+    breakpoints: {
+      1023: {
+        slidesPerView:6,
+      }
+    },
   });
 
   const slider = new Swiper('.swiper.photo-slider', {

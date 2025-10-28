@@ -10,11 +10,11 @@
 /* general
 ----------------------------------------------------------------------------------------------*/
 @use "swiper/css/bundle";
+@use "slick-carousel/slick/slick.css";
 @use "../milligram/Mixins" as a;
 
 .banner-homepage{
 	position: relative;
-	overflow: hidden;
 	figure{
 		position: relative;
 		&::before{
@@ -893,6 +893,10 @@
 			margin: 0 40px;
 		}
 	}
+	.wrap-filter .filter button{
+		padding: 0 10px;
+		width: 100%;
+	}
 	.tema{
 		min-height: 800px;
 		&__listing{
@@ -909,6 +913,7 @@
 		}
 	}
 	.artikel{
+		padding: 30px 0 80px;
 		.wrapper{
 			flex-flow: row wrap;
 		}
@@ -963,6 +968,7 @@
 		}
 	}
 	.statistik{
+		padding: 54px 0 67px;
 		p{
 			font-size: 14px;
 		}
@@ -988,6 +994,20 @@
 			}
 			.rating-breakdown{
 				width: calc(100% - 120px);
+			}
+		}
+	}
+	.partner{
+		padding-bottom: 30px;
+	}
+	.artikel{
+		.document__listing{
+			margin-right: -40px;
+			margin-bottom: 52px;
+			&--item{
+				display: flex !important;
+				width: 210px !important;
+				margin:0px 8px;
 			}
 		}
 	}

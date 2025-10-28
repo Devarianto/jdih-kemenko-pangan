@@ -39,7 +39,14 @@
         <p>Berikut daftar SOP yang berkaitan dengan bidang hukum, antara lain:</p>
       </div>
       <div class="contact-highlight">
-        <figure class="bg"><img src="{{ asset('images/content/bg-rancangan.png') }}" alt=""></figure>
+        <figure class="bg">
+          <img 
+          src="{{ asset('images/content/bg-rancangan.png') }}" 
+          data-img-large="{{ asset('images/content/bg-rancangan.png') }}"
+          data-img-medium="{{ asset('images/content/bg-rancangan-medium.png') }}"
+          data-img-small="{{ asset('images/content/banner-about.webp') }}"
+          width="996" height="288" alt="img">
+        </figure>
         <div class="contact-highlight__left">
           <h5>PENGAJUAN USULAN</h5>
           <p>Pengajuan usulan permenko, peraturan perundang-undangan, evaluasi hukum dan naskah hukum</p>
