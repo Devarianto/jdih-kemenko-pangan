@@ -57,3 +57,40 @@
     }
   }
 }
+
+@media all and (max-width: 1023px) {
+  .misc{
+    .wrapper-content{
+      flex-direction: column;
+      justify-content: center;
+      max-width: 488px;
+      margin: 0 auto;
+      gap: 40px;
+      padding-top: 150px;
+    }
+    &__left,&__right{
+      flex: unset;
+      max-width: 100%;
+    }
+    &__right{
+      padding-left: 0;
+      text-align: center;
+      h2{
+        font-size: 32px;
+      }
+    }
+    figure{
+      width: 246px;
+    }
+    &.under{
+      .wrapper-content{
+        padding-top: 25px;
+      }
+      .medsos{
+        .wrap{
+          justify-content: center;
+        }
+      }
+    }
+  } 
+}

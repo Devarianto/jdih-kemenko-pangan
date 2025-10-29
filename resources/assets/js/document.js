@@ -1,8 +1,8 @@
 import $ from 'jquery'; //import jquery module
 import Swiper  from 'swiper/bundle';
 
-const document = {};
-document.tabbing = () => {
+const doc = {};
+doc.tabbing = () => {
   const $links = $('.box-detail-page__pdf nav ul li a');
   const $tabs = $('.box-detail-page__pdf .content-tab');
 
@@ -26,7 +26,7 @@ document.tabbing = () => {
     $tabs.filter('[data-tab="'+initTab+'"]').fadeIn();
   }
 }
-document.sliderDetail = () => {
+doc.sliderDetail = () => {
    const swiper = new Swiper('.slider-caption.swiper', {
     loop: true,
     slidesPerView: 1,
@@ -69,7 +69,7 @@ document.sliderDetail = () => {
   });
 }
 
-document.sliderPopup = () => {
+doc.sliderPopup = () => {
   const sliderThumbnail = new Swiper('.photo-slider-thumbs.swiper', {
     slidesPerView: 5,
     freeMode: true,
@@ -90,7 +90,7 @@ document.sliderPopup = () => {
     }
   });
 }
-document.playVideo = function () {
+doc.playVideo = function () {
   $(".listing-galeri__item .icon-play").on('click',function(){
     openPopup('#popup-video')
     let container = $('#popup-video');
@@ -100,11 +100,11 @@ document.playVideo = function () {
     iframe.attr("src", videoUrl);
   });
 }
-document.init = function () {
+doc.init = function () {
   this.tabbing()
   this.sliderDetail()
   this.sliderPopup()
   this.playVideo()
 }
 
-document.init();
+doc.init();

@@ -510,6 +510,23 @@
     &-video .popup__box{
       max-width: 600px;
     }
+    &-login{
+      .popup__box{
+        max-width: 688px;
+      }
+      figure{
+        flex: 0 0 240px;
+        max-width: 240px;
+      }
+      figcaption{
+        flex: 0 0 calc(100% - 240px);
+        max-width: calc(100% - 240px);
+        padding: 47px 40px;
+      }
+      small{
+        margin-top: 22px;
+      }
+    }
   }
 }
 

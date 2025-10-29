@@ -217,7 +217,7 @@ footer{
   padding-top: 160px;
   .wave{
     position: absolute;
-    top: -80px;
+    top: -35px;
     z-index: 2;
     transform: rotate(180deg);
   }
@@ -631,4 +631,36 @@ footer{
 
 /* responsive mobile
 ----------------------------------------------------------------------------------------------*/
-// @media all and (max-width: 767px) {}
+@media all and (max-width: 767px) {
+  footer{
+    .top{
+      gap: 24px;
+      .box{
+        flex: unset !important;
+        max-width: 100% !important;
+        width: 100% !important;
+        a{
+          display: block;
+          width: max-content;
+          &:last-child{
+            margin-bottom: 0;
+          }
+        }
+      }
+    }
+    .bot{
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      gap: 24px;
+      padding: 32px 0 28px;
+      p{
+        padding: 0 30px;
+      }
+      &__right{
+        margin: 0;
+      }
+    }
+  }
+}

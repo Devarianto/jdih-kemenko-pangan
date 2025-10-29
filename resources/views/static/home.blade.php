@@ -4,7 +4,12 @@
   <!-- middle -->
   <div class="banner-homepage">
     <figure>
-      <img src="{{asset('images/content/banner-homepage.jpg')}}" alt="">
+      <img 
+      src="{{asset('images/content/banner-homepage.jpg')}}" 
+      data-img-large="{{ asset('images/content/banner-homepage.jpg') }}"
+      data-img-medium="{{ asset('images/content/banner-homepage-m.jpg') }}"
+      data-img-small="{{ asset('images/content/banner-homepage-s.jpg') }}"
+      width="1380" height="620" alt="img">
     </figure>
     <div class="banner-homepage__caption">
       <h3>Selamat Datang di JDIH</h3>
@@ -169,7 +174,14 @@
   </section>
   <section class="tema animating-scroll" data-animate-trigger=".trigger-2">
     <div class="trigger trigger-2"></div>
-    <div class="bg"><img src="{{asset('images/content/bg-tema.jpg')}}" alt="" /> </div>
+    <div class="bg">
+      <img 
+      src="{{asset('images/content/bg-tema.jpg')}}" 
+      data-img-large="{{ asset('images/content/bg-tema.jpg') }}"
+      data-img-medium="{{ asset('images/content/bg-tema-m.jpg') }}"
+      data-img-small="{{ asset('images/content/bg-tema-s.jpg') }}"
+      width="1380" height="620" alt="img">
+    </div>
     <div class="wave">
       <svg xmlns="http://www.w3.org/2000/svg" widht="5000" height="200" viewBox="0 180 2500 200" fill="#F8F8F8">
         <path class="st1" d="M 0 250 C 1200 400 1200 50 3000 250 L 3000 550 L 0 550 L 0 250">

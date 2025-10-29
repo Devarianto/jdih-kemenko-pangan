@@ -13,7 +13,7 @@ home.sliderDocument = () => {
   const swiper = new Swiper('.document__listing.swiper', {
     loop: true,
     spaceBetween: 24,
-    slidesPerView: 'auto',
+    slidesPerView: 1.2,
     slidesOffsetBefore: 0,  // penting: jangan offset dari kiri lagi
     slidesOffsetAfter: 0,
     navigation: {
@@ -25,6 +25,12 @@ home.sliderDocument = () => {
       disableOnInteraction: false,
     },
     breakpoints: {
+      767: {
+        slidesPerView:2.2,
+      },
+      1023: {
+        slidesPerView:3,
+      },
       1200: {
         slidesPerView:4,
       }
@@ -97,10 +103,11 @@ home.ratingHome = () => {
 home.sliderLogo = () => {
   const swiper = new Swiper('.logo-slider.swiper', {
     loop: true,
-    slidesPerView: 4,
-    spaceBetween: 20,
-    slidesOffsetBefore: -40, // offset kiri agar tampak terpotong
-    slidesOffsetAfter: -40,  // offset kanan agar tampak terpotong
+    slidesPerView: 3,
+    spaceBetween: 45,
+    slidesOffsetBefore: 0, // offset kiri agar tampak terpotong
+    slidesOffsetAfter:0,  // offset kanan agar tampak terpotong
+    centeredSlides:true,
     autoplay: {
       delay: 6000,
       disableOnInteraction: false,
@@ -110,6 +117,8 @@ home.sliderLogo = () => {
         slidesPerView:6,
         slidesOffsetBefore: -80, 
         slidesOffsetAfter: -80,  
+        centeredSlides:false,
+        spaceBetween:24
       }
     },
   });

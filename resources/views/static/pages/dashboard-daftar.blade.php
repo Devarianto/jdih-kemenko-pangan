@@ -79,7 +79,7 @@
                     <td>15 Juli 2025</td>
                     <td>24 Juli 2025</td>
                     <td><span class="status done">Selesai</span></td>
-                    <td><a href="{{ route('front.dashboard-usulan-detail') }}" class="button button-outline">Detail</a></td>
+                    <td><a href="{{ route('front.dashboard-daftar-detail') }}" class="button button-outline">Detail</a></td>
                   </tr>
                   <tr>
                     <td>2</td>
@@ -89,7 +89,7 @@
                     <td>15 Juli 2025</td>
                     <td>24 Juli 2025</td>
                     <td><span class="status plan-1">Perencanaan</span></td>
-                    <td><a href="{{ route('front.dashboard-usulan-detail') }}" class="button button-outline">Detail</a></td>
+                    <td><a href="{{ route('front.dashboard-daftar-detail') }}" class="button button-outline">Detail</a></td>
                   </tr>
                   <tr>
                     <td>3</td>
@@ -99,7 +99,7 @@
                     <td>15 Juli 2025</td>
                     <td>24 Juli 2025</td>
                     <td><span class="status plan-2">Perencanaan</span></td>
-                    <td><a href="{{ route('front.dashboard-usulan-detail') }}" class="button button-outline">Detail</a></td>
+                    <td><a href="{{ route('front.dashboard-daftar-detail') }}" class="button button-outline">Detail</a></td>
                   </tr>
                   <tr>
                     <td>4</td>
@@ -109,7 +109,7 @@
                     <td>15 Juli 2025</td>
                     <td>24 Juli 2025</td>
                     <td><span class="status done">Selesai</span></td>
-                    <td><a href="{{ route('front.dashboard-usulan-detail') }}" class="button button-outline">Detail</a></td>
+                    <td><a href="{{ route('front.dashboard-daftar-detail') }}" class="button button-outline">Detail</a></td>
                   </tr>
                   <tr>
                     <td>5</td>
@@ -119,7 +119,7 @@
                     <td>15 Juli 2025</td>
                     <td>24 Juli 2025</td>
                     <td><span class="status plan-1">Perencanaan</span></td>
-                    <td><a href="{{ route('front.dashboard-usulan-detail') }}" class="button button-outline">Detail</a></td>
+                    <td><a href="{{ route('front.dashboard-daftar-detail') }}" class="button button-outline">Detail</a></td>
                   </tr>
                 </tbody>
               </table>
@@ -134,6 +134,6 @@
     <link rel="stylesheet" type="text/css" href="{{ Vite::asset('resources/assets/sass/pages/dashboard.scss')}}" preload>
   @endpush
   @push('footer')
-    <!-- <script type="module" async type="text/javascript" src="{{ Vite::asset('resources/assets/js/document.js') }}"></script> -->
+   <script type="module" async type="text/javascript" src="{{ Vite::asset('resources/assets/js/document.js') }}"></script>
   @endpush
 @endsection
