@@ -21,6 +21,13 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->web(append: [
             \App\Http\Middleware\Frontend::class,
         ]);
+
+        $middleware->alias([
+            'root' => \Cactuar\Admin\Http\Middleware\Root::class,
+            'admin' => \Cactuar\Admin\Http\Middleware\Admin::class,
+            'minify' => \Cactuar\Admin\Http\Middleware\Minify::class,
+            'front' => \App\Http\Middleware\Front::class
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //
