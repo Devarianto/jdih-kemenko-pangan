@@ -35,7 +35,12 @@
     <div class="wrapper-content">
      <div class="visi">
       <figure>
-        <img src="{{ asset('images/content/bg-visi.png') }}" alt="">
+        <img 
+        src="{{ asset('images/content/bg-visi.png') }}" 
+        data-img-large="{{ asset('images/content/bg-visi.png') }}"
+        data-img-medium="{{ asset('images/content/bg-visi.png') }}"
+        data-img-small="{{ asset('images/content/bg-visi-s.png') }}"
+        width="1380" height="400" alt="img">
         <figcaption>
           <p>Visi Kami</p>
           <h6>Terwujudnya pengelolaan dokumentasi dan informasi hukum di bidang pangan yang tertib, terpadu, berkesinambungan, serta mudah diakses untuk mendukung transparansi dan kepastian hukum.</h6>

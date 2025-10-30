@@ -633,6 +633,13 @@ footer{
 ----------------------------------------------------------------------------------------------*/
 @media all and (max-width: 767px) {
   footer{
+    padding-top: 100px;
+    .wave{
+      top: -15px;
+      svg{
+        height: 80px;
+      }
+    }
     .top{
       gap: 24px;
       .box{
@@ -655,9 +662,6 @@ footer{
       text-align: center;
       gap: 24px;
       padding: 32px 0 28px;
-      p{
-        padding: 0 30px;
-      }
       &__right{
         margin: 0;
       }

@@ -15,14 +15,16 @@
             </div>
           @endfor
         </div>
-        <div class="custom-pagination">
-          <span class="current-slide">1</span>/
-          <span class="total-slide">4</span>
-        </div>
-        <div class="slider-caption__utils">
-          <div class="swiper-arrow swiper-prev"></div>
-          <div class="swiper-pagination"></div>
-          <div class="swiper-arrow swiper-next"></div>
+        <div class="slider-caption__bottom">
+          <div class="custom-pagination">
+            <span class="current-slide">1</span>/
+            <span class="total-slide">4</span>
+          </div>
+          <div class="slider-caption__utils">
+            <div class="swiper-arrow swiper-prev"></div>
+            <div class="swiper-pagination"></div>
+            <div class="swiper-arrow swiper-next"></div>
+          </div>
         </div>
       </div>
       <div class="content-pages">

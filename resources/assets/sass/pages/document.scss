@@ -163,6 +163,7 @@
   }
   &__bottom{
     display: flex;
+    align-items: flex-start;
     p{
       margin-bottom: 0;
       font-size: 14px;
@@ -171,15 +172,13 @@
       }
     }
   }
-  .slider-caption__utils{
-    position: absolute;
-    bottom: 20px;
-    right: 0;
+  &__utils{
+    position: relative;
     max-width: 200px;
     margin-left: auto;
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    justify-content: space-between;
     background-color: #F8F8F8;
     z-index: 3;
   }
@@ -233,16 +232,12 @@
     }
   }
   &.with-pagination{
-    padding-bottom: 40px;
     .slider-caption__utils{
       bottom: 0;
     }
     .custom-pagination{
       color: #999;
       font-size: 19px;
-      position: absolute;
-      bottom: 0;
-      left: 0;
     }
     .current-slide{
       font-weight: 500;
@@ -321,11 +316,14 @@
     }
   }
 }
+.wrap-result{
+  padding-bottom: 32px;
+  margin-bottom: 32px;
+  border-bottom: 1px solid #D9D9D9;
+}
 .result-kamus{
   &__item{
-    padding-bottom: 32px;
-    margin-bottom: 32px;
-    border-bottom: 1px solid #D9D9D9;
+
     p{
       margin-bottom: 0;
     }
@@ -558,4 +556,152 @@
  .filter-galeri nav ul li a{
   padding: 11px 24px;
  }
+}
+
+@media all and (max-width: 767px) {
+  .listing-rules{
+    &__item{
+      flex-direction: column;
+      figure{
+        max-width: 100%;
+        flex: 0 0 124px;
+        max-height: 124px;
+      }
+      figcaption{
+        flex: unset;
+        max-width: 100%;
+        padding: 24px 16px;
+        .bottom{
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 16px;
+          &__left,&__right{
+            width: 100%;
+          }
+          .button{
+            width: calc(50% - 6px);
+          }
+        }
+      }
+    }
+  }
+  .text-images{
+    flex-direction: column;
+    figure{
+      flex:unset;
+      width: 100%;
+      max-width: 100%;
+      overflow: hidden;
+      border-radius: 8px;
+      img{
+        width: 100%;
+        object-fit: cover;
+        height: 100%;
+      }
+    }
+    figcaption{
+      width: 100%;
+      flex: unset;
+      max-width: 100%;
+      padding: 26px 0 80px;
+      .button{
+        width: 100%;
+      }
+    }
+  }
+  .slider-caption{
+    margin-bottom: 0;
+    padding-bottom: 0;
+    figure{
+      img{
+        height: 240px;        
+      }
+    }
+    &__bottom{
+      flex-direction: column;
+      gap: 12px;
+      p{
+        order: 2;
+        margin-bottom: 20px;
+        a{
+          display: block;
+        }
+      }
+     
+    }
+    &__utils{
+      margin: 0 auto;
+      order: 1;
+    }
+    &.with-pagination{
+      margin-bottom: 24px;
+      .custom-pagination{
+        align-self: center;
+        font-size: 1rem;
+      }
+    }
+  }
+  .search-by-abjad{
+    padding: 0 20px;
+    gap: 12px;
+    span{
+      padding: 10px 15px;
+      font-size: 14px;
+      &.all{
+        padding: 10px 22px;
+      }
+    }
+  }
+  .listing-kamus{
+    &__item{
+      flex-direction: column;
+      align-items: flex-start;
+      min-height: 220px;
+      &--text{
+        max-width: 100%;
+      }
+      .button{
+        margin: 0;
+        margin-top: auto;
+        align-self: flex-start;
+      }
+      p{
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        margin-bottom: 12px;
+      }
+    }
+  }
+  .wrap-result{
+    position: relative;
+    padding-bottom: 100px;
+    .medsos{
+      bottom: 30px;
+    }
+  }
+  .referensi{
+    a{
+      font-size: 14px;
+    }
+  }
+  .filter-galeri{
+    flex-direction: column;
+    align-items: center;
+    gap: 44px;
+    .filter-right{
+      margin: 0;
+      width: 100%;
+      label{
+        display: none;
+      }
+    }
+  }
+  .listing-galeri{
+    &__item{
+      flex: unset;
+      max-width: 100%;
+      min-height: 320px;
+    }
+  }
 }

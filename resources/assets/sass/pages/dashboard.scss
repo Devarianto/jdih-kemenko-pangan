@@ -399,3 +399,34 @@
     }
   }
 }
+@media all and (max-width: 767px) {
+  .dashboard{
+    &__right{
+      &--title{
+        flex-direction: column; 
+        align-items: flex-start;
+        gap: 24px;
+        .button{
+          margin-left: 0;
+        }
+      }
+      .row{
+        flex-direction: column;
+        gap: 12px;
+        .column{
+          flex: unset !important;
+          max-width: 100% !important;
+          width: 100%;
+        }
+
+      }
+    }
+  }
+  .box-white{
+    padding: 32px 14px;
+    .wrap-btn{
+      flex-direction: column;
+    }
+  }
+}
+

@@ -232,10 +232,78 @@
 }
 
 @media all and (max-width: 767px) {
+  .banner-middle{
+    .wave{
+      svg{
+        height: 70px;
+      }
+    }
+  }
   .tag{
     padding: 4px 12px 4px 30px;
+    text-align: left;
     &::before{
       top: 15px;
+    }
+  }
+  .visi{
+    figure{
+      &::before{
+        display: none;
+      }
+      img{
+        min-height: 520px;
+      }
+      figcaption{
+        width: auto;
+        left: 36px;
+        right: 36px;
+        top: 48px;
+        bottom: auto;
+        p{
+          font-weight: 600;
+        }
+        h6{
+          font-size: 1rem;
+          line-height: 1.6;
+        }
+      }
+    }
+  }
+  .box-shadow{
+    padding: 16px;
+    margin-bottom: 32px;
+  }
+  .statistik{
+    flex-direction: column;
+    margin-bottom: 40px;
+    &__left,&__right{
+      flex: unset;
+      max-width: 100%;
+    }
+    &__left{
+      order: 2;
+    }
+    &__right{
+      padding-left: 0;
+      width: 100%;
+      order: 1;
+      padding-top: 0;
+      margin-bottom: 40px;
+    }
+    .chart{
+      min-height: 0;
+      height: 300px;
+      position: relative;
+    }
+    #chartPeraturan{
+      width: 100% !important;
+      height: 100% !important;
+    }
+  }
+  .chart-year{
+    .chart{
+      height: 300px;
     }
   }
 }
