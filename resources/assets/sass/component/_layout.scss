@@ -496,6 +496,9 @@ footer{
         gap: 27px;
         padding: 40px 96px;
         background-color: white;
+        .login{
+          display: none;
+        }
         .lang{
           width: 40px;
           select{
@@ -632,6 +635,41 @@ footer{
 /* responsive mobile
 ----------------------------------------------------------------------------------------------*/
 @media all and (max-width: 767px) {
+  header{
+    .right-header{
+      &__login{
+        display: none;
+      }
+    }
+    .menu-mobile{
+      padding: 16px 24px 32px;
+      .login{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        height: 40px;
+        color: white;
+        width: 100%;
+        border-radius: 50px;
+        background: linear-gradient(94deg, #1840AA 3.44%, #091D77 100.03%), linear-gradient(124deg, #3272DD 29.99%, #091D77 117.93%);
+      }
+      &__bottom{
+        flex-direction: column;
+        padding: 16px 24px;
+        gap: 16px;
+        .search{
+          display: none;
+        }
+      }
+      nav{
+        height: calc(100svh - 200px);
+        ul{
+          height: calc(100svh - 200px);
+        }
+      }
+    }
+  }
   footer{
     padding-top: 100px;
     .wave{
