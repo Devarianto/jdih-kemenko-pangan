@@ -71,6 +71,14 @@ return [
 		'fa'=>'coin',
 		'routes'=>['get'=>['index','request'],'post'=>['request']],
 	],
+
+    'menu' => [
+        'label' => 'Menu',
+        'parent' => 'content',
+        'fa' => 'file',
+		'controller' => 'App\Http\Controllers\Admin\MenuController',
+        'routes' => admin::moduleRoutes(['index','edit','delete','create','publish']),
+    ],
 	
     /* tambahkan module lain disini */
     
@@ -108,13 +116,6 @@ return [
 
 	/* ------- Additional Module ---------- *//*
     
-    'menu' => [
-        'label' => 'Menu',
-        'parent' => 'content',
-        'fa' => 'file',
-		'controller' => 'App\Http\Controllers\Admin\MenuController',
-        'routes' => admin::moduleRoutes(['index','edit','delete','create','publish']),
-    ],
     'translation' => [
         'label' => 'Translation',
         'parent' => 'setting',

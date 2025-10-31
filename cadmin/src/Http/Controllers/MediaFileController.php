@@ -24,10 +24,7 @@ class MediaFileController extends Controller
             'types' => [
                 'files' => [
                     'ext' => [
-                            'doc',
-                            'docx',
                             'pdf',
-							'mp4',
                         ]
                     ],
                 ],

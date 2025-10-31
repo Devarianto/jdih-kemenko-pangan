@@ -2,6 +2,6 @@
 
 return [
     'codes' => ['en','id'],
-    'default' => 'en',
+    'default' => 'id',
     'labels' => ['en' => 'English', 'id' => 'Indonesia']
 ];
