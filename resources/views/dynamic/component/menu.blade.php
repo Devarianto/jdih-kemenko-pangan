@@ -1,26 +1,29 @@
 <div class="wrapper">
-  <a href="{{ route('front.index') }}" class="logo">
+  <a href="{{ lang::url('/') }}" class="logo">
     <img src="{{asset('images/material/logo.svg')}}" alt="">
   </a>
   <div class="right-header">
     <nav>
       <ul>
-        <li>
-          <a href="{{ route('front.dashboard') }}">Beranda</a>
-        </li>
+        @foreach($mainMenu as $main)
+        @php($childs = $main->childs()->fe()->get())
+        @if($childs->count() > 0)
         <li class="have-child">
-          <a href="{{ route('front.about') }}">Tentang Kami</a>
+          <a href="{{ $main->fullUrl }}">{{ $main->label }}</a>
           <div class="child">
             <ul>
-              <li><a href="">Child 1</a></li>
-              <li><a href="">Child 1</a></li>
-              <li><a href="">Child 1</a></li>
+              @foreach($childs as $child)
+              <li><a href="{{ $child->fullUrl }}">{{ $child->label }}</a></li>
+              @endforeach
             </ul>
           </div>
         </li>
-        <li><a href="{{ route('front.document-peraturan') }}">Dokumen Hukum</a></li>
-        <li><a href="{{ route('front.documentlainnya-kamus-hukum') }}">Informasi Lainnya</a></li>
-        <li><a href="">FAQ</a></li>
+        @else
+        <li>
+          <a href="{{ $main->fullUrl }}">{{ $main->label }}</a>
+        </li>
+        @endif
+        @endforeach
       </ul>
     </nav>
     <div class="right-header__login">

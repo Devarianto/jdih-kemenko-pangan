@@ -639,8 +639,10 @@ class adminForm
                 $html.='</div>';
             }
         }
-		
-		if ($info)
+
+        if (isset($attributes['maxlength'])) {
+			$html .= '<em class="form-info">maximum '.$attributes['maxlength'].' character</em>';
+        } else if ($info)
 			$html .= '<em class="form-info">'.$info.'</em>';
             
         if (count($ai) >= 1) {
@@ -661,9 +663,11 @@ class adminForm
         }
         
 		//open widget
-		$html = '
-			<div class="widgets" widget-source="'.$key.'" widget-min="'.array_get($widget, 'min').'" widget-max="'.array_get($widget, 'max').'">
-				<div class="widget-container" widget-source="'.$key.'">';
+		$html = '<div class="widgets" widget-source="'.$key.'" widget-min="'.array_get($widget, 'min').'" widget-max="'.array_get($widget, 'max').'">';
+
+        if (array_get($widget, 'child-subtitle'))
+			$html .= '<h3 class="form-subtitle" origin="'.$key.'">'.array_get($widget, 'child-subtitle').'</h3>';
+		$html.= '<div class="widget-container" widget-source="'.$key.'">';
 		
 		//define count, min & max
         $min = array_get($widget,'min');

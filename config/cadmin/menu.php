@@ -79,7 +79,12 @@ return [
 		'controller' => 'App\Http\Controllers\Admin\MenuController',
         'routes' => admin::moduleRoutes(['index','edit','delete','create','publish']),
     ],
-	
+	'contact' => [
+        'label' => 'Contact',
+        'fa' => 'list',
+		'controller' => 'App\Http\Controllers\Admin\ContactController',
+        'routes' => admin::moduleRoutes(['index','edit','delete','create','publish']),
+    ],
     /* tambahkan module lain disini */
     
     'media' => [

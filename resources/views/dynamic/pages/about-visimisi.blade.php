@@ -1,57 +1,26 @@
-@extends('static.layouts.layout')
+@extends('dynamic.layouts.layout')
 
 @section('content')
-  <section class="banner-middle">
-    <figure>
-      <img 
-        src="{{asset('images/content/banner-about.webp')}}" 
-        data-img-large="{{ asset('images/content/banner-about.webp') }}"
-        data-img-medium="{{ asset('images/content/banner-about.webp') }}"
-        data-img-small="{{ asset('images/content/banner-about.webp') }}"
-        width="1380" height="400" alt="img">
-    </figure>
-    <figcaption>
-      <small>TENTANG KAMI</small>
-      <h2>Visi Misi</h2>
-    </figcaption>
-    <div class="wave">
-      <svg xmlns="http://www.w3.org/2000/svg"
-        width="100%" height="140"
-        viewBox="0 180 2500 200"
-        fill="#F8F8F8"
-        preserveAspectRatio="none">
-        <path class="st1"
-          d="M 0 250 C 1200 320 1200 100 3000 250 L 3000 550 L 0 550 L 0 250">
-          <animate attributeName="d" dur="5s"
-            values="M 0 250 C 1200 320 1200 100 3000 250 L 3000 550 L 0 550 L 0 250;
-                    M 0 250 C 400 100 400 320 3000 250 L 3000 550 L 0 550 L 0 250;
-                    M 0 250 C 1200 280 1200 100 3000 250 L 3000 550 L 0 550 L 0 250"
-            repeatCount="indefinite" />
-        </path>
-      </svg>
-    </div>
-  </section>
+  @include('dynamic.component.banner')
   <section class="middle">
     <div class="wrapper-content">
-     <div class="visi">
-      <figure>
-        <img src="{{ asset('images/content/bg-visi.png') }}" alt="">
-        <figcaption>
-          <p>Visi Kami</p>
-          <h6>Terwujudnya pengelolaan dokumentasi dan informasi hukum di bidang pangan yang tertib, terpadu, berkesinambungan, serta mudah diakses untuk mendukung transparansi dan kepastian hukum.</h6>
-        </figcaption>
-      </figure>
-     </div>
-     <div class="misi content-pages">
-      <h6>MISI KAMI</h6>
-      <ul>
-        <li>Menyediakan peraturan perundang-undangan dan dokumen hukum bidang pangan secara lengkap, akurat, dan mutakhir</li>
-        <li>Mengembangkan sistem informasi hukum yang cepat, mudah diakses, dan ramah pengguna</li>
-        <li>Meningkatkan koordinasi dan integrasi dokumentasi hukum antarunit kerja di lingkungan Kemenko Pangan</li>
-        <li>Memberikan pelayanan informasi hukum secara terbuka, transparan, dan dapat dipertanggungjawabkan</li>
-        <li>Mendukung pelaksanaan tugas pokok dan fungsi Kemenko Pangan melalui ketersediaan dokumentasi dan informasi hukum yang berkualitas</li>
-      </ul>
-     </div>
+      @foreach(widget($menu->id, 'menu', 'vision') as $vision)
+      <div class="visi">
+        <figure>
+          {!! media::initial($vision->image)->html !!}
+          <figcaption>
+            <p>{{ $vision->translated('subtitle') }}</p>
+            <h6>{{ $vision->translated('title') }}</h6>
+          </figcaption>
+        </figure>
+      </div>
+      @endforeach
+      @foreach(widget($menu->id, 'menu', 'mission') as $mission)
+      <div class="misi content-pages">
+        <h6>{{ $mission->translated('title') }}</h6>
+        {!! $mission->translated('content') !!}
+      </div>
+      @endforeach
     </div>
   </section>
   @push('head')

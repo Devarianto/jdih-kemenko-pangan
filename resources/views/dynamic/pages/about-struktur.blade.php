@@ -1,51 +1,22 @@
-@extends('static.layouts.layout')
+@extends('dynamic.layouts.layout')
 
 @section('content')
-  <section class="banner-middle">
-    <figure>
-      <img 
-        src="{{asset('images/content/banner-about.webp')}}" 
-        data-img-large="{{ asset('images/content/banner-about.webp') }}"
-        data-img-medium="{{ asset('images/content/banner-about.webp') }}"
-        data-img-small="{{ asset('images/content/banner-about.webp') }}"
-        width="1380" height="400" alt="img">
-    </figure>
-    <figcaption>
-      <small>TENTANG KAMI</small>
-      <h2>Struktur Organisasi</h2>
-    </figcaption>
-    <div class="wave">
-      <svg xmlns="http://www.w3.org/2000/svg"
-        width="100%" height="140"
-        viewBox="0 180 2500 200"
-        fill="#F8F8F8"
-        preserveAspectRatio="none">
-        <path class="st1"
-          d="M 0 250 C 1200 320 1200 100 3000 250 L 3000 550 L 0 550 L 0 250">
-          <animate attributeName="d" dur="5s"
-            values="M 0 250 C 1200 320 1200 100 3000 250 L 3000 550 L 0 550 L 0 250;
-                    M 0 250 C 400 100 400 320 3000 250 L 3000 550 L 0 550 L 0 250;
-                    M 0 250 C 1200 280 1200 100 3000 250 L 3000 550 L 0 550 L 0 250"
-            repeatCount="indefinite" />
-        </path>
-      </svg>
-    </div>
-  </section>
+  @include('dynamic.component.banner')
+
   <section class="middle">
     <div class="wrapper-content">
+      @foreach(widget($menu->id, 'menu', 'content') as $content)
       <div class="middle__title">
-        <h4>Berdasarkan Peraturan Menteri Koordinator Bidang Kemaritiman dan Investasi Nomor 2 Tahun 2020 tentang Organisasi dan Tata kerja Kementerian Koordinator Bidang Kemaritiman dan Investasi </h4>
+        <h4>{{ $content->translated('title') }}</h4>
       </div>
+      @endforeach
+      @foreach(widget($menu->id, 'menu', 'structure') as $structure)
       <div class="organisasi">
-        <span class="tag">Struktur Organisasi JDIH Kementerian Kordinator Bidang Pangan</span>
-        <p>Jaringan Dokumentasi dan Informasi Hukum Kementerian Kordinator Bidang Pangan</p>
-        <figure><img src="{{ asset('images/content/struktur-1.png') }}" alt=""></figure>
+        <span class="tag">{{ $structure->translated('subtitle') }}</span>
+        <p>{{ $structure->translated('title') }}</p>
+        <figure>{!! media::initial($structure->translated('image'))->html !!}</figure>
       </div>
-      <div class="organisasi">
-        <span class="tag">Struktur Organisasi Biro Hukum Kementerian Kordinator Bidang Pangan</span>
-        <p>Biro Hukum Kementerian Kordinator Bidang Pangan</p>
-        <figure><img src="{{ asset('images/content/struktur-2.png') }}" alt=""></figure>
-      </div>
+      @endforeach
     </div>
   </section>
   @push('head')

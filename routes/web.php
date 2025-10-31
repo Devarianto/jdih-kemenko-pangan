@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 
 use Cactuar\Admin\Models\Permalink;
 use App\Http\Controllers\Front\PageController;
+use App\Http\Controllers\Front\ContactController;
 
 Route::group(['middleware' => ['web','front']],function() {
 
@@ -15,5 +16,6 @@ Route::group(['middleware' => ['web','front']],function() {
 
     lang::routes(function() {
         Route::get('/', [PageController::class, 'home'])->name('home');
+        Route::post('/contact/submit', [ContactController::class, 'postSubmit'])->name('contact.submit');
     });
 });

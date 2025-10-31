@@ -1,7 +1,7 @@
 @extends('dynamic.layouts.layout')
 
 @section('content')
-    @include('dynamic.component.banner')
+  @include('dynamic.component.banner')
 
   <section class="middle">
     <div class="wrapper-content">

@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'codes' => ['en','id'],
+    'codes' => ['id','en'],
     'default' => 'id',
-    'labels' => ['en' => 'English', 'id' => 'Indonesia']
+    'labels' => ['id' => 'Indonesia','en' => 'English']
 ];

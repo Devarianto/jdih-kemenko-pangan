@@ -7,9 +7,13 @@ use Illuminate\Http\Response;
 
 use Cactuar\Admin\Helpers\lang;
 use Cactuar\Admin\Helpers\helper;
+use Cactuar\Admin\Models\Menu;
 use Cactuar\Admin\Models\Conf;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Redirect;
+
+use Validator;
+use recaptcha;
 
 class Front
 {
@@ -36,6 +40,30 @@ class Front
                 return Redirect::to($request->fullUrl(), 301);
             }
         }*/
+
+        Validator::extend('recaptcha', function($attr, $value, $param) {
+			return recaptcha::validate($value);
+		});
+
+        Validator::extend('rejectxss',function($a,$b,$c) {
+            if (is_string($b) && preg_match('/(<script\b[^>]*>|<[^>]+on\w+=|javascript:|&#x[0-9a-f]+;)/i', $b)) {
+                return false;
+            }
+
+            return true;
+        }, 'Request rejected because contains invalid content');
+
+        Validator::extend('custom_email', function($a, $b, $c) {
+            if (is_string($b) && preg_match('/^[\w\.+-]+@([\w-]+\.)+[\w-]{2,4}$/', $b)) {
+                return true;
+            }
+
+            return false;
+        }, \lang::translate('validate.email-format'));
+
+        view()->share('mainMenu', Menu::position('main'));
+        view()->share('footTopMenu', Menu::position('foot-top'));
+        view()->share('footBottomMenu', Menu::position('foot-bottom'));
         
         view()->share('webConfig', $webConfig);
 		$request->attributes->add(['webConfig' => $webConfig]);

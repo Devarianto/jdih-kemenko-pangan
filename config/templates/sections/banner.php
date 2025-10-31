@@ -13,7 +13,7 @@ return [
                 'class' => 'required cfind',
                 'cfind-type' => 'image',
                 'cfind-alt' => 1,
-                'cfind-thumb' => '1440x600',
+                'cfind-thumb' => '1440x400',
                 'cfind-convert' => 'webp',
             ],
         ],
