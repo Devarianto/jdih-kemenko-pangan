@@ -29,13 +29,14 @@ return [
         'default-action'=>'config',
         'routes'=> admin::moduleRoutes(['config']),
     ],
-    /*'404-center'=>[
+    '404-page'=>[
         'label'=>'404 page',
         'parent'=>'setting',
         'controller'=>'App\Http\Controllers\Admin\Misc\Page404CenterController',
         'default-action'=>'config',
         'routes'=> admin::moduleRoutes(['config']),
     ],
+    /*
     '404-aside'=>[
         'label'=>'404 page',
         'parent'=>'setting',

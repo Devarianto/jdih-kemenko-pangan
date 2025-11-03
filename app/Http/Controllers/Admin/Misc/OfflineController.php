@@ -11,21 +11,16 @@ class OfflineController extends Controller
 	public function configFields()
 	{
 		return [
-			'background'=>[
+			'image'=>[
 				'type'=>'text',
-				'label'=>'Background',
+				'label'=>'Image',
 				'attributes'=>[
 					'class'=>'required cfind',
 					'cfind-type'=>'image',
 					'cfind-alt'=>1,
-					'cfind-thumb'=>'offline-background',
+					'cfind-thumb'=>'310x316',
 					'cfind-convert'=>'webp',
 				],
-			],
-			'subtitle'=>[
-				'type'=>'text',
-				'label'=>'Subtitle',
-				'multilang'=>true,
 			],
 			'title'=>[
 				'type'=>'text',
@@ -37,6 +32,30 @@ class OfflineController extends Controller
 				'label'=>'Intro',
 				'multilang'=>true,
 			],
+			'social-media' => [
+				'type' => 'widget',
+				'subtitle' => 'Social Media',
+				'more-label' => 'Add Section',
+				'widgets' => [
+					'image' => [
+						'type' => 'text',
+						'label' => 'Image',
+						'attributes'=>[
+							'class'=>'cfind required',
+							'cfind-type' => 'image',
+							'cfind-alt'=>1,
+						],
+					],
+					'link' => [
+						'type' => 'text',
+						'label' => 'Link',
+						'info' => 'eg: https://instagram.com',
+						'attributes' => [
+							'class' => 'required url'
+						]
+					]
+				]
+			]
 		];	
 	}
 }	

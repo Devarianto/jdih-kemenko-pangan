@@ -11,21 +11,16 @@ class Page404CenterController extends Controller
 	public function configFields()
 	{
 		return [
-			'background'=>[
+			'image'=>[
 				'type'=>'text',
 				'label'=>'Background',
 				'attributes'=>[
 					'class'=>'required cfind',
 					'cfind-type'=>'image',
 					'cfind-alt'=>1,
-					'cfind-thumb'=>'404-center-background',
+					'cfind-thumb'=>'300x218',
 					'cfind-convert'=>'webp',
 				],
-			],
-			'subtitle'=>[
-				'type'=>'text',
-				'label'=>'Subtitle',
-				'multilang'=>true,
 			],
 			'title'=>[
 				'type'=>'text',
@@ -36,12 +31,7 @@ class Page404CenterController extends Controller
 				'type'=>'textarea',
 				'label'=>'Intro',
 				'multilang'=>true,
-			],
-			'button'=>[
-				'type'=>'text',
-				'label'=>'Button',
-				'multilang'=>true,
-			],
+			]
 		];	
 	}
 }	

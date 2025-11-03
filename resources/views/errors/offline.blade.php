@@ -4,18 +4,17 @@
   <section class="misc under">
     <div class="wrapper-content">
       <div class="misc__left">
-        <figure><img src="{{ asset('images/content/misc-under.png') }}" alt=""></figure>
+        <figure><img src="{{ media::url(conf('offline-page')->image) }}" alt="{{ media::initial(conf('offline-page')->image)->alt }}"></figure>
       </div>
       <div class="misc__right">
-        <h2>UNDER MAINTENANCE</h2>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam</p>
+        <h2>{{ conf('offline-page')->translated('title') }}</h2>
+        <p>{{ conf('offline-page')->translated('intro') }}</p>
         <div class="medsos">
-          <label for="">SOCIAL MEDIA</label>
+          <label for="">{{ lang::translate('offline-page.social-media') }}</label>
           <div class="wrap">
-            <a href=""><img src="{{ asset('images/material/ic-link.svg') }}" alt=""></a>
-            <a href=""><img src="{{ asset('images/material/ic-wa.svg') }}" alt=""></a>
-            <a href=""><img src="{{ asset('images/material/ic-x.svg') }}" alt=""></a>
-            <a href=""><img src="{{ asset('images/material/ic-fb.svg') }}" alt=""></a>
+            @foreach (widget_conf('offline-page', 'social-media') as $social)
+            <a href=""><img src="{{ media::url($social->image) }}" alt="{{ media::initial($social->image)->alt }}"></a>
+            @endforeach
           </div>
         </div>
       </div>

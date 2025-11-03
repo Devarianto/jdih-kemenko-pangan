@@ -1,6 +1,9 @@
 <?php
 
 return [
+	'offline-page' => [
+		'social-media' => 'SOCIAL MEDIA'
+	],
 	'global' => [
 		'download-pdf' => 'Download PDF'
 	],

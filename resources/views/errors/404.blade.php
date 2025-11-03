@@ -1,14 +1,30 @@
+@php
+use Cactuar\Admin\Models\Menu;
+
+	try {
+		$webConfig = conf('site-setting');
+    $mainMenu = Cactuar\Admin\Models\Menu::position('main');
+    $footTopMenu = Cactuar\Admin\Models\Menu::position('foot-top');
+    $footBottomMenu = Cactuar\Admin\Models\Menu::position('foot-bottom');
+    if (!$webConfig || $webConfig->status == 'offline') {
+        echo view('dynamic.errors.offline');
+        die();
+    }
+
+	} catch(\Exception $e) {}
+@endphp
+
 @extends('dynamic.layouts.layout')
 
 @section('content')
   <section class="misc">
     <div class="wrapper-content">
       <div class="misc__left">
-        <figure><img src="{{ asset('images/content/misc-404.png') }}" alt=""></figure>
+        <figure><img src="{{ media::url(conf('404-page')->image) }}" alt="{{ media::initial(conf('404-page')->image)->alt }}"></figure>
       </div>
       <div class="misc__right">
-        <h2>404 PAGE NOT FOUND</h2>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam</p>
+        <h2>{{ conf('404-page')->translated('title') }}</h2>
+        <p>{{ conf('404-page')->translated('intro') }}</p>
       </div>
     </div>
   </section>
