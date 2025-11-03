@@ -7,7 +7,10 @@
       @foreach(widget($menu->id, 'menu', 'vision') as $vision)
       <div class="visi">
         <figure>
-          {!! media::initial($vision->image)->html !!}
+          <img src="{{ media::initial($vision->image)->url }}" 
+            data-img-large="{{ media::initial($vision->image)->url }}" 
+            data-img-medium="{{ media::initial($vision->value('image-medium'))->url }}" 
+            data-img-small="{{ media::initial($vision->value('image-small'))->url }}" alt="{{ media::initial($vision->image)->alt }}">
           <figcaption>
             <p>{{ $vision->translated('subtitle') }}</p>
             <h6>{{ $vision->translated('title') }}</h6>

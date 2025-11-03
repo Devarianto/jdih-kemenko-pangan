@@ -58,7 +58,7 @@ return [
                     'attributes' => [
                         'class' => 'cfind',
                         'cfind-type' => 'image',
-                        'cfind-thumb' => '375x340',
+                        'cfind-thumb' => '327x624',
                         'cfind-convert' => 'webp'
                     ],
                 ],

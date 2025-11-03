@@ -13,7 +13,7 @@ return [
             'widgets' => [
                 'image' => [
                     'type' => 'text',
-                    'label' => 'Image',
+                    'label' => 'Image Large',
                     'attributes' => [
                         'class' => 'required cfind',
                         'cfind-type' => 'image',
@@ -21,6 +21,26 @@ return [
                         'cfind-convert' => 'webp',
                         'cfind-alt' => 1
                     ]
+                ],
+                'image-medium' => [
+                    'type' => 'text',
+                    'label' => 'Image Medium',
+                    'attributes' => [
+                        'class' => 'cfind',
+                        'cfind-type' => 'image',
+                        'cfind-thumb' => '1024x400',
+                        'cfind-convert' => 'webp'
+                    ],
+                ],
+                'image-small' => [
+                    'type' => 'text',
+                    'label' => 'Image Small',
+                    'attributes' => [
+                        'class' => 'cfind',
+                        'cfind-type' => 'image',
+                        'cfind-thumb' => '327x520',
+                        'cfind-convert' => 'webp'
+                    ],
                 ],
                 'subtitle' => [
                     'type' => 'text',
