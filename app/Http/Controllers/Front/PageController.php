@@ -9,6 +9,8 @@ use Cactuar\Admin\Helpers\helper;
 use Cactuar\Admin\Models\Menu;
 use Cactuar\Admin\Models\Permalink;
 
+use App\Models\Gallery;
+
 class PageController extends Controller
 {
     public function home()
@@ -59,5 +61,26 @@ class PageController extends Controller
     public function getAboutContactUs($menu)
     {
         return view('dynamic.pages.about-contactus', compact('menu'));
+    }
+
+    public function getInformasiGaleri($menu)
+    {
+        $galleries = Gallery::translate()->whereIsActive(1);
+
+        if (request()->query('filter') == 'image') {
+            $galleries = $galleries->where('type', 'image');
+        } else if (request()->query('filter') == 'video') {
+            $galleries = $galleries->where('type', 'video');
+        }
+
+        if (request()->query('sort') == 'latest') {
+            $galleries = $galleries->orderBy('date', 'desc');
+        } else if (request()->query('sort') == 'oldest') {
+            $galleries = $galleries->orderBy('date', 'asc');
+        }
+        
+        $galleries = $galleries->paginate(9);
+        
+        return view('dynamic.pages.informasi-galeri', compact('menu', 'galleries'));
     }
 }

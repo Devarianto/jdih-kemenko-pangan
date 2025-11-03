@@ -80,6 +80,18 @@ return [
 		'controller' => 'App\Http\Controllers\Admin\MenuController',
         'routes' => admin::moduleRoutes(['index','edit','delete','create','publish']),
     ],
+    'information' => [
+        'label' => 'Information',
+        'parent' => null,
+        'fa' => 'info'
+    ],
+    'information-gallery' => [
+        'label' => 'Gallery',
+        'parent' => 'information',
+        'fa' => 'image',
+        'controller' => 'App\Http\Controllers\Admin\GalleryController',
+        'routes' => admin::moduleRoutes(['index', 'edit', 'delete', 'create', 'publish'])
+    ],
 	'contact' => [
         'label' => 'Contact',
         'fa' => 'list',

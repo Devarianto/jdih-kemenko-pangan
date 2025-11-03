@@ -5,7 +5,23 @@ return [
 		'social-media' => 'SOCIAL MEDIA'
 	],
 	'global' => [
-		'download-pdf' => 'Download PDF'
+		'download-pdf' => 'Download PDF',
+		'sorting' => [
+			'title' => 'Urutkan',
+			'latest' => 'Terbaru',
+			'oldest' => 'Terlama'
+		]
+	],
+	'gallery' => [
+		'tag' => [
+			'video' => 'Galeri Video',
+			'image' => 'Galeri Foto'
+		],
+		'filter' => [
+			'all' => 'Semua',
+			'image' => 'Foto',
+			'video' => 'Video' 
+		]
 	],
 	'about' => [
 		'file-iteration' => 'Landasan Hukum ke-:count'
