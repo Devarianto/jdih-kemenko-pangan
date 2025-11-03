@@ -152,6 +152,8 @@
             }]
           },
           options: {
+            responsive: true,
+            maintainAspectRatio: false, // ini penting agar height dari container diikuti
             plugins: {
               legend: { display: false },
               tooltip: {

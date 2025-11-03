@@ -71,12 +71,15 @@ doc.sliderDetail = () => {
 
 doc.sliderPopup = () => {
   const sliderThumbnail = new Swiper('.photo-slider-thumbs.swiper', {
-    slidesPerView: 5,
+    slidesPerView: 3.5,
     freeMode: true,
     spaceBetween:16,
     watchSlidesVisibility: true,
     watchSlidesProgress: true,
     breakpoints: {
+      767: {
+        slidesPerView:5,
+      },
       1023: {
         slidesPerView:6,
       }

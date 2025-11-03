@@ -24,16 +24,17 @@
           @for ($i = 1; $i <= 10; $i++)
             <div class="swiper-slide">
               <figure><img src="{{ asset('images/content/content-detail-1.jpg') }}" alt=""></figure>
-              <div class="slider-caption__bottom">
-                <p>Klik untuk baca artikel: <a href="">“Peran Kemenko Pangan dalam Strategis Kordinasi Swasembada Pangan”</a> </p>
-              </div>
+             
             </div>
           @endfor
         </div>
-        <div class="slider-caption__utils">
-          <div class="swiper-arrow swiper-prev"></div>
-          <div class="swiper-pagination"></div>
-          <div class="swiper-arrow swiper-next"></div>
+        <div class="slider-caption__bottom">
+          <p>Klik untuk baca artikel: <a href="">“Peran Kemenko Pangan dalam Strategis Kordinasi Swasembada Pangan”</a> </p>
+          <div class="slider-caption__utils">
+            <div class="swiper-arrow swiper-prev"></div>
+            <div class="swiper-pagination"></div>
+            <div class="swiper-arrow swiper-next"></div>
+          </div>
         </div>
       </div>
     </div>

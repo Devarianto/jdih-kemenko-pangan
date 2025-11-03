@@ -1024,7 +1024,7 @@
 			}
 		}
 		&__caption{
-			margin: 0 30px;
+			margin: 0 26px;
 			.wrap-input{
 				.voice{
 					margin-right: 8px;
@@ -1070,6 +1070,10 @@
 		}
 	}
 	.artikel{
+		.trigger{
+			top: 5%;
+			bottom: auto;
+		}
 		.document__listing{
 			&--item{
 				width: 290px !important;
@@ -1098,6 +1102,10 @@
 		}
 	}
 	.news{
+		.trigger{
+			bottom: auto;
+			top: 5%;
+		}
 		.grid{
 			&__item{
 				&:nth-child(1){
@@ -1124,6 +1132,10 @@
 		}
 	}
 	.statistik{
+		.trigger{
+			bottom: auto;
+			top: 5%;
+		}
 		.wrapper{
 			flex-direction: column;
 		}
@@ -1140,12 +1152,14 @@
 		}
 	}
 	.partner .logo-slider{
+		position: relative;
+		z-index: 2;
 		&::after{
-			width: 100px;
+			width: 60px;
 			background: linear-gradient(90deg, rgba(248, 248, 248, 0.00) 0%, #F8F8F8 100%);
 		}
 		&::before{
-			width: 100px;
+			width: 60px;
 			background: linear-gradient(270deg, rgba(248, 248, 248, 0.00) 0%, #F8F8F8 100%);
 		}
 		a{

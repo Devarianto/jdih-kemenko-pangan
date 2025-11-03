@@ -44,7 +44,7 @@
           src="{{ asset('images/content/bg-rancangan.png') }}" 
           data-img-large="{{ asset('images/content/bg-rancangan.png') }}"
           data-img-medium="{{ asset('images/content/bg-rancangan-medium.png') }}"
-          data-img-small="{{ asset('images/content/banner-about.webp') }}"
+          data-img-small="{{ asset('images/content/bg-rancangan-s.png') }}"
           width="996" height="288" alt="img">
         </figure>
         <div class="contact-highlight__left">

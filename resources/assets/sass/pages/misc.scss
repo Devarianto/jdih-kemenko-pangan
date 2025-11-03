@@ -94,3 +94,19 @@
     }
   } 
 }
+@media all and (max-width: 767px) {
+  .misc{
+    .wrapper-content{
+      max-width: 100%;
+      margin: 0 30px;
+    }
+    &__right{
+      h2{
+        font-size: 28px;
+      }
+    }
+    &.under{
+      height: calc(100svh - 180px);
+    }
+  }
+}

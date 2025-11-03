@@ -43,7 +43,7 @@
           src="{{ asset('images/content/bg-contactus.png') }}" 
           data-img-large="{{ asset('images/content/bg-contactus.png') }}"
           data-img-medium="{{ asset('images/content/bg-contactus-medium.png') }}"
-          data-img-small="{{ asset('images/content/banner-about.webp') }}"
+          data-img-small="{{ asset('images/content/bg-contactus-s.png') }}"
           width="996" height="288" alt="img">
         </figure>
         <div class="contact-highlight__left">

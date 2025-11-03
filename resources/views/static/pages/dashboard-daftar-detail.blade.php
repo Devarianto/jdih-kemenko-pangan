@@ -78,9 +78,11 @@
                   <path d="M16.8008 22.6L21.3008 28L31.2008 19" stroke="#999999" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
               </div>
-              <span class="date">15 Juli 2025</span>
-              <div class="text">
-                <p><b>Perencanaan</b></p>
+              <div class="wrap-right">
+                <span class="date">15 Juli 2025</span>
+                <div class="text">
+                  <p><b>Perencanaan</b></p>
+                </div>
               </div>
             </div>
             <div class="status-project__step done">
@@ -90,11 +92,13 @@
                   <path d="M16.8008 22.6L21.3008 28L31.2008 19" stroke="#999999" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
               </div>
-              <span class="date">15 Juli 2025</span>
-              <div class="text">
-                <p><b>Penyusunan</b></p>
-                <p>Project ini dalam proses di divisi pengembangan</p>
-                <a href="">dokumen-usulan.pdf</a>
+              <div class="wrap-right">
+                <span class="date">15 Juli 2025</span>
+                <div class="text">
+                  <p><b>Penyusunan</b></p>
+                  <p>Project ini dalam proses di divisi pengembangan</p>
+                  <a href="">dokumen-usulan.pdf</a>
+                </div>
               </div>
             </div>
             <div class="status-project__step done">
@@ -104,11 +108,13 @@
                   <path d="M16.8008 22.6L21.3008 28L31.2008 19" stroke="#999999" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
               </div>
-              <span class="date">15 Juli 2025</span>
-              <div class="text">
-                <p><b>Pembahasan</b></p>
-                <p>Project ini dalam proses di divisi pengembangan</p>
-                <a href="">dokumen-usulan.pdf</a>
+              <div class="wrap-right">
+                <span class="date">15 Juli 2025</span>
+                <div class="text">
+                  <p><b>Pembahasan</b></p>
+                  <p>Project ini dalam proses di divisi pengembangan</p>
+                  <a href="">dokumen-usulan.pdf</a>
+                </div>
               </div>
             </div>
             <div class="status-project__step">
@@ -118,11 +124,13 @@
                   <path d="M16.8008 22.6L21.3008 28L31.2008 19" stroke="#999999" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
               </div>
-              <span class="date">15 Juli 2025</span>
-              <div class="text">
-                <p><b>Penyusunan</b></p>
-                <p>Project ini dalam proses di divisi pengembangan</p>
-                <a href="">dokumen-usulan.pdf</a>
+              <div class="wrap-right">
+                <span class="date">15 Juli 2025</span>
+                <div class="text">
+                  <p><b>Penyusunan</b></p>
+                  <p>Project ini dalam proses di divisi pengembangan</p>
+                  <a href="">dokumen-usulan.pdf</a>
+                </div>
               </div>
             </div>
           </div>

@@ -284,7 +284,6 @@
         cursor: pointer;
         float: right;
         margin-right: 10px;
-        font-size: 30px;
         white-space: nowrap;
         overflow: hidden;
       }
@@ -355,6 +354,7 @@
     .popup__box{
       max-width: 792px;
       padding: 30px 30px 0;
+      box-sizing: border-box;
     }
     .popup__close{
       top: -40px;
@@ -408,6 +408,7 @@
     }
     .photo-slider-thumbs{
       padding: 20px 0;
+      box-sizing: border-box;
       figure{
         height: 78px;
         margin-bottom: 0;
@@ -511,6 +512,10 @@
       max-width: 600px;
     }
     &-login{
+      .popup__close{
+        top: 5px;
+        right: 20px;
+      }
       .popup__box{
         max-width: 688px;
       }
@@ -535,6 +540,8 @@
 @media all and (max-width: 767px) {
   .popup {
     &__box {
+      max-width: 100%;
+      margin: 0 16px;
       &--large {
         margin: 0 16px;
         padding: 24px;
@@ -608,6 +615,85 @@
             left: -32px;
           }
         }
+      }
+    }
+    &-login{
+      .popup__close{
+        z-index: 2;
+        right: 15px;
+      }
+      .popup__box{
+        max-width: 100%;
+      }
+      .popup__content{
+        flex-direction: column;
+      }
+      figure,figcaption{
+        flex: unset;
+        max-width: 100%;
+      }
+      figure{
+        img{
+          height: 160px;
+          object-position: top;
+          object-fit: cover;
+        }
+      }
+      figcaption{
+        padding: 23px 24px;
+        p{
+          display: none;
+        }
+      }
+      small{
+        margin-top: 10px;
+        font-size: 12px;
+        text-align: left;
+      }
+    }
+    &-rating{
+      .popup__box{
+        max-width: 100%;
+      }
+      .rates{
+        svg{
+          width: 45px;
+          height: 45px;
+        }
+        > label{
+          margin-bottom: 0;
+        }
+      }
+      input,textarea{
+        border-radius: 8px;
+      }
+      textarea{
+        min-height: 90px;
+      }
+      button{
+        width: 100%;
+      }
+      
+    }
+    &-photo{
+      .popup__box{
+        max-width: 350px;
+        padding: 30px 14px;
+        width: auto;
+        margin: 0;
+      }
+      .photo-slider{
+        figure{
+          height: 240px;
+          figcaption{
+            padding: 24px;
+          }
+        }
+      }
+    }
+    &-video{
+      .wrap-video{
+        height: 300px;
       }
     }
   }
