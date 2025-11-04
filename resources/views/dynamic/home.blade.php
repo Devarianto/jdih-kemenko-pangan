@@ -580,23 +580,23 @@
           Berita
         </div>
         <figure>
-          <img src="{{ asset('images/content/large-news.jpg') }}" alt="">
+          <img src="{{ media::initial($news_first->thumbnail_home_large)->url }}" alt="{{ media::initial($news_first->thumbnail_home_large)->alt }}">
         </figure>
         <div class="grid__item--caption">
-          <span class="date">30 Juli 2025</span>
-          <h4>Pemerintah akan mengirim bantuan strategis untuk swasembada pangan di daerah terpencil</h4>
-          <a href="" class="readmore">Baca Selengkapnya</a>
+          <span class="date">{{ date2string($news_first->date) }}</span>
+          <h4>{{ $news_first->translated('title') }}</h4>
+          <a href="{{ $news_first->permalink }}" class="readmore">{{ lang::translate('news.read-more') }}</a>
         </div>
         <div class="highlight">
-          @for ($i = 1; $i <= 3; $i++)
-          <a href="" class="highlight-item">
-            <figure><img src="{{ asset('images/content/news-small-'.$i.'.jpg') }}" alt=""></figure>
+          @foreach ($news_others as $news)
+          <a href="{{ $news->permalink }}" class="highlight-item">
+            <figure><img src="{{ media::initial($news->thumbnail_home_small)->url }}" alt="{{ media::initial($news->thumbnail_home_small)->alt }}"></figure>
             <figcaption>
-              <p>Rapat Pembahasan Tentang Perkembangan Situasi Terkini di Rangkaian dengan Rakor Pengendalian Inflasi Tahun 2025</p>
-              <small class="date">30 Juli 2025</small>
+              <p>{{ $news->translated('title') }}</p>
+              <small class="date">{{ date2string($news->date) }}</small>
             </figcaption>
           </a>
-          @endfor
+          @endforeach
         </div>
       </div>
       <div class="grid__item photo" onclick="openPopup('#popup-photo')">

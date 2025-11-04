@@ -15,7 +15,6 @@
         </nav>
         <div class="filter-right">
           <form action="">
-            <input type="hidden" name="filter">
             <div class="col">
               <label for="">{{ lang::translate('global.sorting.title') }}</label>
               <select name="sort" id="">

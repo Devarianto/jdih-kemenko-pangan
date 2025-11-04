@@ -12,6 +12,10 @@ Route::group(['middleware' => ['web','front']],function() {
         if ($permalink->module == 'menu'){
             Route::get($permalink->permalink, [PageController::class, 'getTemplate']);
         }
+
+        if ($permalink->module == 'information-news'){
+            Route::get($permalink->permalink, [PageController::class, 'getNewsDetail']);
+        }
     }
 
     lang::routes(function() {

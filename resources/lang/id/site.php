@@ -12,6 +12,12 @@ return [
 			'oldest' => 'Terlama'
 		]
 	],
+	'news' => [
+		'other-news' => 'Berita Lainnya',
+		'back-to-news' => 'Kembali ke Berita',
+		'share' => 'Share:',
+		'read-more' => 'Selengkapnya'	
+	],
 	'gallery' => [
 		'tag' => [
 			'video' => 'Galeri Video',

@@ -92,6 +92,13 @@ return [
         'controller' => 'App\Http\Controllers\Admin\GalleryController',
         'routes' => admin::moduleRoutes(['index', 'edit', 'delete', 'create', 'publish'])
     ],
+    'information-news' => [
+        'label' => 'News',
+        'parent' => 'information',
+        'fa' => 'image',
+        'controller' => 'App\Http\Controllers\Admin\NewsController',
+        'routes' => admin::moduleRoutes(['index', 'edit', 'delete', 'create', 'publish'])
+    ],
 	'contact' => [
         'label' => 'Contact',
         'fa' => 'list',

@@ -73,7 +73,8 @@ class GalleryController extends Controller
                 'attributes' => [
                     'class' => 'required',
                     'maxlength' => 255
-                ]
+                ],
+                'ai' => ['translate', 'meta-title','correction'],
             ],
             'thumbnail' => [
                 'label' => 'Thumbnail',

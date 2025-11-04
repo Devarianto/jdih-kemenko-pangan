@@ -10,12 +10,16 @@ use Cactuar\Admin\Models\Menu;
 use Cactuar\Admin\Models\Permalink;
 
 use App\Models\Gallery;
+use App\Models\News;
 
 class PageController extends Controller
 {
     public function home()
     {
-        return view('dynamic.home');
+        $news_first = News::translate()->whereIsActive(1)->orderBy('date', 'desc')->first();
+        $news_others = News::translate()->whereIsActive(1)->offset(1)->limit(3)->orderBy('date', 'desc')->get();
+
+        return view('dynamic.home', compact('news_first', 'news_others'));
     }
 
     private function find($id=null)
@@ -77,10 +81,38 @@ class PageController extends Controller
             $galleries = $galleries->orderBy('date', 'desc');
         } else if (request()->query('sort') == 'oldest') {
             $galleries = $galleries->orderBy('date', 'asc');
+        } else {
+            $galleries = $galleries->orderBy('date', 'desc');
         }
         
         $galleries = $galleries->paginate(9);
         
         return view('dynamic.pages.informasi-galeri', compact('menu', 'galleries'));
+    }
+
+    public function getNews($menu)
+    {
+        $news = News::translate()->whereIsActive(1);
+
+
+        if (request()->query('sort') == 'latest') {
+            $news = $news->orderBy('date', 'desc');
+        } else if (request()->query('sort') == 'oldest') {
+            $news = $news->orderBy('date', 'asc');
+        } else {
+            $news = $news->orderBy('date', 'desc');
+        }
+        
+        $news = $news->paginate(12);
+        
+        return view('dynamic.pages.documentlainnya-berita', compact('menu', 'news'));
+    }
+
+    public function getNewsDetail(){
+        $id = Permalink::active()->uniqid;
+        $news = News::translate()->whereIsActive(1)->findOrFail($id);
+        $menu = Menu::fe()->whereIsActive(1)->where('type', 'news')->first();
+        $others = News::translate()->whereIsActive(1)->where('id', '!=', $news->id)->inRandomOrder()->limit(3)->get();
+        return view('dynamic.pages.documentlainnya-berita-detail', compact('news', 'menu', 'others'));
     }
 }
