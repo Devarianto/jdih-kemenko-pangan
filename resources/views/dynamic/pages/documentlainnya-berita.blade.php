@@ -1,4 +1,4 @@
-@extends('static.layouts.layout')
+@extends('dynamic.layouts.layout')
 
 @section('content')
   @include('dynamic.component.banner')
