@@ -72,6 +72,13 @@ return [
 		'fa'=>'coin',
 		'routes'=>['get'=>['index','request'],'post'=>['request']],
 	],
+    'account' => [
+        'label' => 'User JDIH',
+        'parent' => null,
+        'controller' => 'App\Http\Controllers\Admin\AccountController',
+        'fa' => 'user',
+        'routes' => admin::moduleRoutes(['index', 'create', 'edit', 'delete', 'publish', 'email-template'], ['new-password'],['new-password'])
+    ],
 
     'menu' => [
         'label' => 'Menu',
@@ -81,29 +88,29 @@ return [
         'routes' => admin::moduleRoutes(['index','edit','delete','create','publish']),
     ],
     'information' => [
-        'label' => 'Information',
+        'label' => 'Informasi',
         'parent' => null,
         'fa' => 'info'
     ],
     'information-gallery' => [
-        'label' => 'Gallery',
+        'label' => 'Galeri',
         'parent' => 'information',
         'fa' => 'image',
         'controller' => 'App\Http\Controllers\Admin\GalleryController',
         'routes' => admin::moduleRoutes(['index', 'edit', 'delete', 'create', 'publish'])
     ],
     'information-news' => [
-        'label' => 'News',
+        'label' => 'Berita',
         'parent' => 'information',
         'fa' => 'image',
         'controller' => 'App\Http\Controllers\Admin\NewsController',
         'routes' => admin::moduleRoutes(['index', 'edit', 'delete', 'create', 'publish'])
     ],
 	'contact' => [
-        'label' => 'Contact',
-        'fa' => 'list',
+        'label' => 'Hubungi Kami',
+        'fa' => 'phone',
 		'controller' => 'App\Http\Controllers\Admin\ContactController',
-        'routes' => admin::moduleRoutes(['index','edit','delete','create','publish']),
+        'routes' => admin::moduleRoutes(['index','edit','delete','create','publish', 'email-template']),
     ],
     /* tambahkan module lain disini */
     
