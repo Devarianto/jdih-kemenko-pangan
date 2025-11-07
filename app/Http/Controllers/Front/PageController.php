@@ -11,6 +11,9 @@ use Cactuar\Admin\Models\Permalink;
 
 use App\Models\Gallery;
 use App\Models\News;
+use App\Models\Document;
+use App\Models\RuleType;
+use App\Models\RuleTheme;
 
 class PageController extends Controller
 {
@@ -108,11 +111,162 @@ class PageController extends Controller
         return view('dynamic.pages.documentlainnya-berita', compact('menu', 'news'));
     }
 
-    public function getNewsDetail(){
+    public function getNewsDetail()
+    {
         $id = Permalink::active()->uniqid;
         $news = News::translate()->whereIsActive(1)->findOrFail($id);
         $menu = Menu::fe()->whereIsActive(1)->where('type', 'news')->first();
         $others = News::translate()->whereIsActive(1)->where('id', '!=', $news->id)->inRandomOrder()->limit(3)->get();
         return view('dynamic.pages.documentlainnya-berita-detail', compact('news', 'menu', 'others'));
+    }
+
+    public function getPeraturanHukum($menu)
+    {
+        $documents = Document::translate()->whereIsActive(1)->where('master_document_id', Document::PERATURAN);
+
+        if (request()->query('search')) {
+            $documents = $documents->where('title', 'like', '%'.request()->query('search').'%');
+        }
+
+        if (request()->query('rule_type')) {
+            $documents = $documents->where('rule_type_id', request()->query('rule_type'));
+        }
+
+        if (request()->query('theme')) {
+            $documents = $documents->where('rule_theme_id', request()->query('theme'));
+        }
+
+        if (request()->query('year')) {
+            $documents = $documents->where('year', request()->query('year'));
+        }
+        
+        $documents = $documents->orderBy('id', 'desc')->paginate(9);
+
+        $rule_types = RuleType::whereIsActive(1)->get();
+        $rule_themes = RuleTheme::whereIsActive(1)->get();
+        $years = Document::select('year')
+            ->whereIsActive(1)
+            ->where('master_document_id', Document::PERATURAN)
+            ->groupBy('year')
+            ->get();
+        
+        return view('dynamic.pages.document-peraturan', compact('menu', 'documents', 'rule_types', 'rule_themes', 'years'));
+    }
+
+    public function getPeraturanHukumDetail()
+    {
+        $id = Permalink::active()->uniqid;
+        $document = Document::whereIsActive(1)->where('master_document_id', Document::PERATURAN)->where('id', $id)->firstOrFail();
+        $document->view_count += 1;
+        $document->save();
+        
+        $menu = Menu::fe()->whereIsActive(1)->where('type', 'peraturan-hukum')->first();
+
+        return view('dynamic.pages.document-peraturan-detail', compact('document', 'menu'));
+    }
+
+    public function getJurnalHukum($menu)
+    {
+        $documents = Document::translate()->whereIsActive(1)->where('master_document_id', Document::JURNAL);
+
+        if (request()->query('search')) {
+            $documents = $documents->where('title', 'like', '%'.request()->query('search').'%');
+        }
+
+        if (request()->query('year')) {
+            $documents = $documents->where('tahun_terbit', request()->query('year'));
+        }
+        
+        $documents = $documents->orderBy('id', 'desc')->paginate(9);
+
+        $years = Document::select('tahun_terbit')
+            ->whereIsActive(1)
+            ->where('master_document_id', Document::JURNAL)
+            ->groupBy('tahun_terbit')
+            ->get();
+        
+        return view('dynamic.pages.document-jurnal', compact('menu', 'documents', 'years'));
+    }
+
+    public function getJurnalHukumDetail()
+    {
+        $id = Permalink::active()->uniqid;
+        $document = Document::whereIsActive(1)->where('master_document_id', Document::JURNAL)->where('id', $id)->firstOrFail();
+        $document->view_count += 1;
+        $document->save();
+        
+        $menu = Menu::fe()->whereIsActive(1)->where('type', 'jurnal-hukum')->first();
+
+        return view('dynamic.pages.document-jurnal-detail', compact('document', 'menu'));
+    }
+
+    public function getKlipingHukum($menu)
+    {
+        $documents = Document::translate()->whereIsActive(1)->where('master_document_id', Document::KLIPING);
+
+        if (request()->query('search')) {
+            $documents = $documents->where('title', 'like', '%'.request()->query('search').'%');
+        }
+
+        if (request()->query('year')) {
+            $documents = $documents->where('tahun_terbit', request()->query('year'));
+        }
+        
+        $documents = $documents->orderBy('id', 'desc')->paginate(9);
+
+        $years = Document::select('tahun_terbit')
+            ->whereIsActive(1)
+            ->where('master_document_id', Document::KLIPING)
+            ->groupBy('tahun_terbit')
+            ->get();
+        
+        return view('dynamic.pages.document-kliping', compact('menu', 'documents', 'years'));
+    }
+
+    public function getKlipingHukumDetail()
+    {
+        $id = Permalink::active()->uniqid;
+        $document = Document::whereIsActive(1)->where('master_document_id', Document::KLIPING)->where('id', $id)->firstOrFail();
+        $document->view_count += 1;
+        $document->save();
+        
+        $menu = Menu::fe()->whereIsActive(1)->where('type', 'kliping-hukum')->first();
+
+        return view('dynamic.pages.document-kliping-detail', compact('document', 'menu'));
+    }
+
+    public function getMajalahHukum($menu)
+    {
+        $documents = Document::translate()->whereIsActive(1)->where('master_document_id', Document::MAJALAH);
+
+        if (request()->query('search')) {
+            $documents = $documents->where('title', 'like', '%'.request()->query('search').'%');
+        }
+
+        if (request()->query('year')) {
+            $documents = $documents->where('tahun_terbit', request()->query('year'));
+        }
+        
+        $documents = $documents->orderBy('id', 'desc')->paginate(9);
+
+        $years = Document::select('tahun_terbit')
+            ->whereIsActive(1)
+            ->where('master_document_id', Document::MAJALAH)
+            ->groupBy('tahun_terbit')
+            ->get();
+        
+        return view('dynamic.pages.document-article', compact('menu', 'documents', 'years'));
+    }
+
+    public function getMajalahHukumDetail()
+    {
+        $id = Permalink::active()->uniqid;
+        $document = Document::whereIsActive(1)->where('master_document_id', Document::MAJALAH)->where('id', $id)->firstOrFail();
+        $document->view_count += 1;
+        $document->save();
+        
+        $menu = Menu::fe()->whereIsActive(1)->where('type', 'majalah-hukum')->first();
+
+        return view('dynamic.pages.document-article-detail', compact('document', 'menu'));
     }
 }

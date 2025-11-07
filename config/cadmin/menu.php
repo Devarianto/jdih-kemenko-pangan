@@ -87,6 +87,86 @@ return [
 		'controller' => 'App\Http\Controllers\Admin\MenuController',
         'routes' => admin::moduleRoutes(['index','edit','delete','create','publish']),
     ],
+    'master-document' => [
+        'label' => 'Master Dokumen',
+        'parent' => null,
+        'fa' => 'list'
+    ],
+    'master-document-list' => [
+        'label' => 'Dokumen',
+        'parent' => 'master-document',
+        'fa' => 'list',
+        'controller' => 'App\Http\Controllers\Admin\Document\MasterDocumentController',
+        'routes' => admin::moduleRoutes(['index', 'edit', 'publish'])
+    ],
+    'master-document-rule-theme' => [
+        'label' => 'Tema Peraturan',
+        'parent' => 'master-document',
+        'fa' => 'list',
+        'controller' => 'App\Http\Controllers\Admin\Document\RuleThemeController',
+        'routes' => admin::moduleRoutes(['index', 'edit', 'publish'])
+    ],
+    'master-document-rule-type' => [
+        'label' => 'Jenis Peraturan',
+        'parent' => 'master-document',
+        'fa' => 'list',
+        'controller' => 'App\Http\Controllers\Admin\Document\RuleTypeController',
+        'routes' => admin::moduleRoutes(['index', 'create', 'edit', 'delete', 'publish'])
+    ],
+    'master-document-type' => [
+        'label' => 'Tipe Dokumen',
+        'parent' => 'master-document',
+        'fa' => 'list',
+        'controller' => 'App\Http\Controllers\Admin\Document\DocumentTypeController',
+        'routes' => admin::moduleRoutes(['index', 'create', 'edit', 'delete', 'publish'])
+    ],
+    'document' => [
+        'label' => 'Dokumen Hukum',
+        'parent' => null,
+        'fa' => 'file',
+    ],
+    'document-peraturan' => [
+        'label' => 'Peraturan Hukum',
+        'parent' => 'document',
+        'controller' => 'App\Http\Controllers\Admin\Document\DocumentController',
+        'routes' => admin::moduleRoutes(['index', 'create', 'edit', 'delete', 'publish'])
+    ],
+    'document-jurnal' => [
+        'label' => 'Jurnal Hukum',
+        'parent' => 'document',
+        'controller' => 'App\Http\Controllers\Admin\Document\DocumentController',
+        'routes' => admin::moduleRoutes(['index', 'create', 'edit', 'delete', 'publish'])
+    ],
+    'document-kliping' => [
+        'label' => 'Kliping Hukum',
+        'parent' => 'document',
+        'controller' => 'App\Http\Controllers\Admin\Document\DocumentController',
+        'routes' => admin::moduleRoutes(['index', 'create', 'edit', 'delete', 'publish'])
+    ],
+    'document-majalah' => [
+        'label' => 'Majalah Hukum',
+        'parent' => 'document',
+        'controller' => 'App\Http\Controllers\Admin\Document\DocumentController',
+        'routes' => admin::moduleRoutes(['index', 'create', 'edit', 'delete', 'publish'])
+    ],
+    'document-putusan' => [
+        'label' => 'Putusan Hukum',
+        'parent' => 'document',
+        'controller' => 'App\Http\Controllers\Admin\Document\DocumentController',
+        'routes' => admin::moduleRoutes(['index', 'create', 'edit', 'delete', 'publish'])
+    ],
+    'document-monografi' => [
+        'label' => 'Monografi Hukum',
+        'parent' => 'document',
+        'controller' => 'App\Http\Controllers\Admin\Document\DocumentController',
+        'routes' => admin::moduleRoutes(['index', 'create', 'edit', 'delete', 'publish'])
+    ],
+    'document-naskah' => [
+        'label' => 'Naskah Kerja Sama',
+        'parent' => 'document',
+        'controller' => 'App\Http\Controllers\Admin\Document\DocumentController',
+        'routes' => admin::moduleRoutes(['index', 'create', 'edit', 'delete', 'publish'])
+    ],
     'information' => [
         'label' => 'Informasi',
         'parent' => null,

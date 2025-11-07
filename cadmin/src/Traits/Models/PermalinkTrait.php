@@ -13,4 +13,9 @@ trait PermalinkTrait
             $this->permalinkModule = $this->module;
         return Model::permalink($this->permalinkModule,$this->id,lang::active()); 
     }
+
+    public function customPermalink($module)
+    {
+        return Model::permalink($module, $this->id, lang::active());
+    }
 }
