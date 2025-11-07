@@ -13,6 +13,9 @@ const responsive = responsiveImage($)
 document.addEventListener("DOMContentLoaded", () => {
   popup($).closeGeneral()
   select2()
+  $('.select2').select2({
+    width: '100%'
+  });
   header($).init()
   animatingScroll().animating(".animating-scroll");
   const elemBanner = $('.banner-middle img, .contact-highlight .bg img, .banner-homepage figure img , .tema .bg img, .visi figure img');
