@@ -509,7 +509,7 @@
         </div>
         <div class="document__listing">
           <a href="" class="document__listing--item ">
-            <figure><img src="{{asset('images/content/dok-1.jpg')}}" alt=""></figure>
+            <figure><img src="{{asset('images/content/mon-2.jpg')}}" alt=""></figure>
             <figcaption>
               <span class="tag" style="background-color: #D2E3FF; color:#2063D2;">PUTUSAN HUKUM</span>
               <p>Keputusan Menteri Nomor 1841 Tahun 2026 Nomor 1841 Tahun 2026</p>
@@ -523,7 +523,7 @@
             </figcaption>
           </a>
           <a href="" class="document__listing--item ">
-            <figure><img src="{{asset('images/content/dok-2.jpg')}}" alt=""></figure>
+            <figure><img src="{{asset('images/content/mon-1.jpg')}}" alt=""></figure>
             <figcaption>
               <span class="tag" style="background-color: #C1CCFF; color:#091D77;">PERATURAN HUKUM</span>
               <p>Putusan Komisi Informasi Pusat Republik Indonesia Nomor 023/023</p>

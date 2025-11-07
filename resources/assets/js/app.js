@@ -72,6 +72,9 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     }
   });
+  $('.right-header__lang >img').on('click',function(){
+    $(this).next('.drop-language').slideToggle()
+  })
 })
 
 window.openPopup = (id) => {

@@ -68,9 +68,19 @@ doc.sliderDetail = () => {
     }
   });
 }
+doc.playVideo = function () {
+  $(".listing-galeri__item .icon-play").on('click',function(){
+    openPopup('#popup-video')
+    let container = $('#popup-video');
+    let iframe = container.find(".wrap-video iframe");
+    let videoUrl = $(this).parents('.listing-galeri__item').data("video") + "?autoplay=1";
+    // Set src baru
+    iframe.attr("src", videoUrl);
+  });
+}
 
-doc.sliderPopup = () => {
-  const sliderThumbnail = new Swiper('.photo-slider-thumbs.swiper', {
+doc.sliderPopup = (target) => {
+  const sliderThumbnail = new Swiper(target + ' .photo-slider-thumbs.swiper', {
     slidesPerView: 3.5,
     freeMode: true,
     spaceBetween:16,
@@ -86,28 +96,36 @@ doc.sliderPopup = () => {
     },
   });
 
-  const slider = new Swiper('.swiper.photo-slider', {
+  const slider = new Swiper(target + ' .swiper.photo-slider', {
     slidesPerView: 1,
     thumbs: {
       swiper: sliderThumbnail
     }
   });
 }
-doc.playVideo = function () {
-  $(".listing-galeri__item .icon-play").on('click',function(){
-    openPopup('#popup-video')
-    let container = $('#popup-video');
-    let iframe = container.find(".wrap-video iframe");
-    let videoUrl = $(this).parents('.listing-galeri__item').data("video") + "?autoplay=1";
-    // Set src baru
-    iframe.attr("src", videoUrl);
+
+doc.popupSliderGaleri = function(){
+   $(document).on('click', '.listing-galeri__item.photo', function () {
+      let target = $(this).data('target'),
+      popupId = $('#popup-photo');
+      popupId.find('.wrap-slider').removeClass('active').hide()
+      $('.wrap-slider .swiper.photo-slider').each(function(){
+        if (this.swiper && typeof this.swiper.destroy === 'function') {
+          this.swiper.destroy(true, true);
+        }
+      });
+      popupId.find(target).addClass('active').show()
+      openPopup('#popup-photo')
+      setTimeout(() => {
+        doc.sliderPopup(target)
+      }, 80);
   });
 }
 doc.init = function () {
   this.tabbing()
   this.sliderDetail()
-  this.sliderPopup()
   this.playVideo()
+  this.popupSliderGaleri()
 }
 
 doc.init();

@@ -54,6 +54,32 @@ header{
       }
       img{
         display: block;
+        cursor: pointer;
+      }
+      .drop-language{
+        position: absolute;
+        top: calc(100% + 10px);
+        left: -14px;
+        background-color: white;
+        padding:12px 4px;
+        box-sizing: border-box;
+        width: 60px;
+        border-radius: 8px;
+        z-index: 9;
+        box-shadow: 0 0 20px -15px #000;
+        display: none;
+        text-align: center;
+        a{
+          display: block;
+          width: 25px;
+          margin: 0 auto 10px;
+          img{
+            width: 100%;
+          }
+          &:last-child{
+            margin-bottom: 0;
+          }
+        }
       }
     }
   }
@@ -218,6 +244,7 @@ footer{
   .wave{
     position: absolute;
     top: -35px;
+    width: 100%;
     z-index: 2;
     transform: rotate(180deg);
   }
