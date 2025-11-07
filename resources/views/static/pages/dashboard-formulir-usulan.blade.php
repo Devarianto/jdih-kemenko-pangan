@@ -79,7 +79,10 @@
               <div class="row row-wrap">
                 <div class="column column-100">
                   <label for="">Divisi/Pemohon Terkait</label>
-                  <input type="text" placeholder="Ketik Kata Tag Pencarian">
+                  <select class="select2" multiple="multiple">
+                    <option value="AL">Alabama</option>
+                    <option value="WY">Wyoming</option>
+                  </select>
                 </div>
                 <div class="column column-100">
                   <label for="">Nama Pemohon</label>
