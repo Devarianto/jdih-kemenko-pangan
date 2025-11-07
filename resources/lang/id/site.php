@@ -88,6 +88,17 @@ return [
 			],
 			'button' => 'Cari'
 		],
+		'search-putusan' => [
+			'title' => 'Nama Putusan',
+			'placeholder' => 'Ketik Kata Kunci Pencarian',
+			'form-title' => [
+				'year' => 'Tahun'
+			],
+			'form-placeholder' => [
+				'year' => 'Pilih Tahun'
+			],
+			'button' => 'Cari'
+		],
 		'status-berlaku' => [
 			'ya' => 'Berlaku',
 			'tidak' => 'Tidak Berlaku'
@@ -98,6 +109,7 @@ return [
 		],
 		'read-more' => 'Lihat Selengkapnya',
 		'read-rule' => 'Baca Peraturan',
+		'read-decision' => 'Baca Putusan',
 		'description' => 'Deskripsi',
 		'download' => [
 			'abstract' => 'Abstrak',
@@ -139,6 +151,14 @@ return [
 
 			'lampiran' => 'Lampiran',
 
+			'no-putusan' => 'No Putusan',
+			'jenis-peradilan' => 'Jenis Peradilan',
+			'singkatan-peradilan' => 'Singkatan Jenis Peradilan',
+			'tempat-peradilan' => 'Tempat Peradilan',
+			'tanggal-dibacakan' => 'Tanggal Dibacakan',
+			'status-putusan' => 'Status Putusan',
+			'bidang-hukum-perkara' => 'Bidang Hukum/Jenis Perkara',
+
 			'jumlah-unduh' => 'Jumlah Unduhan',
 			'jumlah-tayang' => 'Jumlah Tayang',
 			'count' => [
@@ -163,6 +183,7 @@ return [
 			'jurnal' => 'Kembali ke menu jurnal',
 			'kliping' => 'Kembali ke menu kliping',
 			'majalah' => 'Kembali ke menu majalah',
+			'putusan' => 'Kembali ke menu putusan',
 		],
 		'share' => 'Share:',
 	],

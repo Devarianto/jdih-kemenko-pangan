@@ -29,19 +29,27 @@ class Document {
                 'tempat_terbit' => 'Tempat Terbit',
                 'tahun_terbit' => 'Tahun Terbit'
             ];
-        } else if ($type =='kliping') {
+        } else if ($type == 'kliping') {
             return [
                 'title' => 'Judul',
                 'teu' => 'T.E.U Orang/Badan',
                 'tempat_terbit' => 'Tempat Terbit',
                 'tahun_terbit' => 'Tahun Terbit'
             ];
-        } else if ($type =='majalah') {
+        } else if ($type == 'majalah') {
             return [
                 'title' => 'Judul',
                 'teu' => 'T.E.U Orang/Badan',
                 'tempat_terbit' => 'Tempat Terbit',
                 'tahun_terbit' => 'Tahun Terbit'
+            ];
+        } else if ($type == 'putusan') {
+            return [
+                'title' => 'Judul',
+                'no_putusan' => 'No. Putusan',
+                'jenis_peradilan' => 'Jenis Peradilan',
+                'singkatan_peradilan' => 'Singkatan Jenis Peradilan',
+                'tempat_peradilan' => 'Tempat Peradilan'
             ];
         }
     }
@@ -577,6 +585,110 @@ class Document {
                 'class' => 'required cfind',
                 'cfind-type' => 'image',
                 'cfind-thumb' => '317x410',
+                'cfind-convert' => 'webp',
+                'cfind-alt' => 1,
+            ]
+        ];
+
+        if ($type == 'edit') {
+            unset($form['pdf']['attributes']['class']);
+        }
+
+        return $form;
+    }
+
+    private static function formPutusan($form, $type)
+    {
+        $form += [
+            'teu' => [
+                'subtitle' => 'Meta Data', 
+                'label' => 'T.E.U. Orang/Badan',
+                'type' => 'text',
+                'multilang' => true,
+            ],
+            'no_putusan' => [
+                'label' => 'No. Putusan',
+                'type' => 'text',
+            ],
+            'jenis_peradilan' => [
+                'label' => 'Jenis Peradilan',
+                'type' => 'text',
+                'multilang' => true,
+            ],
+            'singkatan_peradilan' => [
+                'label' => 'Singkatan Jenis Peradilan',
+                'type' => 'text',
+                'multilang' => true,
+            ],
+            'tempat_peradilan' => [
+                'label' => 'Tempat Peradilan',
+                'type' => 'text'
+            ],
+            'tanggal_dibacakan' => [
+                'label' => 'Tanggal Dibacakan',
+                'type' => 'text',
+                'attributes' => [
+                    'class' => 'required datepicker'
+                ]
+            ],
+            'sumber' => [
+                'label' => 'Sumber',
+                'type' => 'text',
+                'multilang' => true,
+            ],
+            'subjek' => [
+                'label' => 'Subjek',
+                'type' => 'text',
+                'multilang' => true,
+            ],
+            'status_berlaku' => [
+                'label' => 'Status Putusan (Berlaku/Tidak Berlaku)',
+                'type' => 'select',
+                'options' => [
+                    0 => 'Tidak',
+                    1 => 'Ya'
+                ],
+                'attributes' => [
+                    'class' => 'required'
+                ]
+            ],
+            'bahasa' => [
+                'label' => 'Bahasa',
+                'type' => 'text',
+                'multilang' => true,
+            ],
+            'bidang_hukum' => [
+                'label' => 'Bidang Hukum/Jenis Perkara',
+                'type' => 'text',
+                'multilang' => true,
+            ],
+            'lokasi' => [
+                'label' => 'Lokasi',
+                'type' => 'text',
+            ],
+            'pdf_name' => [
+                'subtitle' => 'File',
+                'label' => 'File Name',
+                'type' => 'text',
+                'multilang' => true
+            ],
+            'pdf' => [
+                'label' => 'PDF',
+                'type' => 'file',
+                'attributes' => [
+                    'class' => 'required',
+                    'accept' => 'pdf'
+                ]
+            ],
+        ];
+
+        $form['thumbnail'] = [
+            'label' => 'Thumbnail',
+            'type' => 'text',
+            'attributes' => [
+                'class' => 'required cfind',
+                'cfind-type' => 'image',
+                'cfind-thumb' => '240x220',
                 'cfind-convert' => 'webp',
                 'cfind-alt' => 1,
             ]

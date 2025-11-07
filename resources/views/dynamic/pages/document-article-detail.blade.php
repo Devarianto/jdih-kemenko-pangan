@@ -101,7 +101,7 @@
           </div>
           <div class="content-tab" data-tab="peraturan">
             <div class="wrap-iframe">
-              <iframe src="{{ asset('pdf/sample.pdf') }}#toolbar=1&navpanes=0&scrollbar=1" width="100%" allowfullscreen></iframe>
+              <iframe src="{{ route('document.stream', ['type' => 'pdf', 'id' => $document->id]) }}#toolbar=1&navpanes=0&scrollbar=1" width="100%" allowfullscreen></iframe>
             </div>
             <section class="list-pdf">
               <div class="list-pdf__item">

@@ -33,6 +33,10 @@ Route::group(['middleware' => ['web','front']],function() {
         if ($permalink->module == 'document-majalah') {
             Route::get($permalink->permalink, [PageController::class, 'getMajalahHukumDetail']);
         }
+
+        if ($permalink->module == 'document-putusan') {
+            Route::get($permalink->permalink, [PageController::class, 'getPutusanHukumDetail']);
+        }
     }
 
     lang::routes(function() {

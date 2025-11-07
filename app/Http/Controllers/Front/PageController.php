@@ -269,4 +269,46 @@ class PageController extends Controller
 
         return view('dynamic.pages.document-article-detail', compact('document', 'menu'));
     }
+
+    public function getPutusanHukum($menu)
+    {
+        $documents = Document::translate()->whereIsActive(1)->where('master_document_id', Document::PUTUSAN);
+
+        if (request()->query('search')) {
+            $documents = $documents->where('title', 'like', '%'.request()->query('search').'%');
+        }
+
+        if (request()->query('year')) {
+            $documents = $documents->whereYear('tanggal_peradilan', request()->query('year'));
+        }
+
+        if (request()->query('sort') == 'oldest') {
+            $documents = $documents->orderBy('tanggal_peradilan', 'asc');
+        } else {
+            $documents = $documents->orderBy('tanggal_peradilan', 'desc');
+        }
+        
+        $documents = $documents->orderBy('id', 'desc')->paginate(9);
+
+        $years = Document::selectRaw('YEAR(tanggal_peradilan) as year')
+            ->whereIsActive(1)
+            ->where('master_document_id', Document::PUTUSAN)
+            ->distinct()
+            ->orderBy('year', 'desc')
+            ->get();
+
+        return view('dynamic.pages.document-putusan', compact('menu', 'documents', 'years'));
+    }
+
+    public function getPutusanHukumDetail()
+    {
+        $id = Permalink::active()->uniqid;
+        $document = Document::whereIsActive(1)->where('master_document_id', Document::PUTUSAN)->where('id', $id)->firstOrFail();
+        $document->view_count += 1;
+        $document->save();
+        
+        $menu = Menu::fe()->whereIsActive(1)->where('type', 'putusan-hukum')->first();
+
+        return view('dynamic.pages.document-putusan-detail', compact('document', 'menu'));
+    }
 }

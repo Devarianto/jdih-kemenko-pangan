@@ -81,10 +81,10 @@ class DocumentController extends Controller
                     if (Storage::exists($item->pdf))
                         Storage::delete($item->pdf);
                 }
+
                 $original = pathinfo($request['pdf']->getClientOriginalName(), PATHINFO_FILENAME);
                 $ext = $request['pdf']->getClientOriginalExtension();
                 $filename = $original . '_' . time() . '.' . $ext;
-
                 $path = $request['pdf']->storeAs('upload/pdf', $filename);
                 
                 $post['main']['pdf'] = $path;
@@ -108,7 +108,6 @@ class DocumentController extends Controller
             }
         }
         
-
         return $post;
     }
 
