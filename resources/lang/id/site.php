@@ -99,6 +99,28 @@ return [
 			],
 			'button' => 'Cari'
 		],
+		'search-monografi' => [
+			'title' => 'Nama Monografi',
+			'placeholder' => 'Ketik Kata Kunci Pencarian',
+			'form-title' => [
+				'year' => 'Tahun'
+			],
+			'form-placeholder' => [
+				'year' => 'Pilih Tahun'
+			],
+			'button' => 'Cari'
+		],
+		'search-naskah' => [
+			'title' => 'Nama Naskah',
+			'placeholder' => 'Ketik Kata Kunci Pencarian',
+			'form-title' => [
+				'year' => 'Tahun'
+			],
+			'form-placeholder' => [
+				'year' => 'Pilih Tahun'
+			],
+			'button' => 'Cari'
+		],
 		'status-berlaku' => [
 			'ya' => 'Berlaku',
 			'tidak' => 'Tidak Berlaku'
@@ -159,6 +181,17 @@ return [
 			'status-putusan' => 'Status Putusan',
 			'bidang-hukum-perkara' => 'Bidang Hukum/Jenis Perkara',
 
+			'deskripsi-fisik' => 'Deskripsi Fisik',
+
+			'pihak-internal' => 'Pihak Internal',
+			'pihak-eksternal' => 'Pihak Eksternal',
+			'nomor-perjanjian' => 'Nomor Perjanjian',
+			'tanggal-berlaku' => 'Tanggal Berlaku',
+			'tanggal-berakhir' => 'Tanggal Berakhir',
+			'jangka-waktu' => 'Jangka Waktu',
+			'tempat-penandatanganan' => 'Tempat Penandatanganan',
+			'status-berlaku' => 'Status Berlaku',
+
 			'jumlah-unduh' => 'Jumlah Unduhan',
 			'jumlah-tayang' => 'Jumlah Tayang',
 			'count' => [
@@ -184,6 +217,8 @@ return [
 			'kliping' => 'Kembali ke menu kliping',
 			'majalah' => 'Kembali ke menu majalah',
 			'putusan' => 'Kembali ke menu putusan',
+			'monografi' => 'Kembali ke menu monografi',
+			'naskah' => 'Kembali ke menu naskah',
 		],
 		'share' => 'Share:',
 	],

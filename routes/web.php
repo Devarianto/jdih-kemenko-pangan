@@ -37,6 +37,14 @@ Route::group(['middleware' => ['web','front']],function() {
         if ($permalink->module == 'document-putusan') {
             Route::get($permalink->permalink, [PageController::class, 'getPutusanHukumDetail']);
         }
+
+        if ($permalink->module == 'document-monografi') {
+            Route::get($permalink->permalink, [PageController::class, 'getMonografiHukumDetail']);
+        }
+
+        if ($permalink->module == 'document-naskah') {
+            Route::get($permalink->permalink, [PageController::class, 'getNaskahHukumDetail']);
+        }
     }
 
     lang::routes(function() {

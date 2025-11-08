@@ -177,7 +177,7 @@ class PageController extends Controller
             $documents = $documents->where('tahun_terbit', request()->query('year'));
         }
         
-        $documents = $documents->orderBy('id', 'desc')->paginate(9);
+        $documents = $documents->orderBy('id', 'desc')->paginate(12);
 
         $years = Document::select('tahun_terbit')
             ->whereIsActive(1)
@@ -283,9 +283,9 @@ class PageController extends Controller
         }
 
         if (request()->query('sort') == 'oldest') {
-            $documents = $documents->orderBy('tanggal_dibacakan', 'asc');
+            $documents = $documents->orderBy('id', 'asc');
         } else {
-            $documents = $documents->orderBy('tanggal_dibacakan', 'desc');
+            $documents = $documents->orderBy('id', 'desc');
         }
         
         $documents = $documents->orderBy('id', 'desc')->paginate(9);
@@ -310,5 +310,76 @@ class PageController extends Controller
         $menu = Menu::fe()->whereIsActive(1)->where('type', 'putusan-hukum')->first();
 
         return view('dynamic.pages.document-putusan-detail', compact('document', 'menu'));
+    }
+
+    public function getMonografiHukum($menu)
+    {
+        $documents = Document::translate()->whereIsActive(1)->where('master_document_id', Document::MONOGRAFI);
+
+        if (request()->query('search')) {
+            $documents = $documents->where('title', 'like', '%'.request()->query('search').'%');
+        }
+
+        if (request()->query('year')) {
+            $documents = $documents->where('tahun_terbit', request()->query('year'));
+        }
+        
+        $documents = $documents->orderBy('id', 'desc')->paginate(12);
+
+        $years = Document::select('tahun_terbit')
+            ->whereIsActive(1)
+            ->where('master_document_id', Document::MONOGRAFI)
+            ->groupBy('tahun_terbit')
+            ->get();
+        
+        return view('dynamic.pages.document-monografi', compact('menu', 'documents', 'years'));
+    }
+
+    public function getMonografiHukumDetail()
+    {
+        $id = Permalink::active()->uniqid;
+        $document = Document::whereIsActive(1)->where('master_document_id', Document::MONOGRAFI)->where('id', $id)->firstOrFail();
+        $document->view_count += 1;
+        $document->save();
+        
+        $menu = Menu::fe()->whereIsActive(1)->where('type', 'monografi-hukum')->first();
+
+        return view('dynamic.pages.document-monografi-detail', compact('document', 'menu'));
+    }
+
+    public function getNaskahHukum($menu)
+    {
+        $documents = Document::translate()->whereIsActive(1)->where('master_document_id', Document::NASKAH);
+
+        if (request()->query('search')) {
+            $documents = $documents->where('title', 'like', '%'.request()->query('search').'%');
+        }
+
+        if (request()->query('year')) {
+            $documents = $documents->whereYear('tanggal_berlaku', request()->query('year'));
+        }
+        
+        $documents = $documents->orderBy('id', 'desc')->paginate(12);
+
+        $years = Document::selectRaw('YEAR(tanggal_berlaku) as year')
+            ->whereIsActive(1)
+            ->where('master_document_id', Document::NASKAH)
+            ->distinct()
+            ->orderBy('year', 'desc')
+            ->get();
+
+        return view('dynamic.pages.document-naskah', compact('menu', 'documents', 'years'));
+    }
+
+    public function getNaskahHukumDetail()
+    {
+        $id = Permalink::active()->uniqid;
+        $document = Document::whereIsActive(1)->where('master_document_id', Document::NASKAH)->where('id', $id)->firstOrFail();
+        $document->view_count += 1;
+        $document->save();
+        
+        $menu = Menu::fe()->whereIsActive(1)->where('type', 'naskah-hukum')->first();
+
+        return view('dynamic.pages.document-naskah-detail', compact('document', 'menu'));
     }
 }

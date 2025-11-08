@@ -49,7 +49,25 @@ class Document {
                 'no_putusan' => 'No. Putusan',
                 'jenis_peradilan' => 'Jenis Peradilan',
                 'singkatan_peradilan' => 'Singkatan Jenis Peradilan',
-                'tempat_peradilan' => 'Tempat Peradilan'
+                'tempat_peradilan' => 'Tempat Peradilan',
+                'status_berlaku' => 'Status Berlaku'
+            ];
+        } else if ($type == 'monografi') {
+            return [
+                'title' => 'Judul',
+                'no_panggil' => 'No. Panggil',
+                'edisi' => 'Cetakan/Edisi',
+                'tempat_terbit' => 'Tempat Terbit',
+                'tahun_terbit' => 'Tahun Terbit',
+                'status_tersedia' => 'Status Tersedia',
+            ];
+        } else if ($type == 'naskah') {
+            return [
+                'title' => 'Judul',
+                'nomor_perjanjian' => 'No. Perjanjian',
+                'tanggal_berlaku' => 'Tanggal Berlaku',
+                'tanggal_berakhir' => 'Tempat Berakhir',
+                'status_berlaku' => 'Status Berlaku',
             ];
         }
     }
@@ -665,6 +683,217 @@ class Document {
             'lokasi' => [
                 'label' => 'Lokasi',
                 'type' => 'text',
+            ],
+            'pdf_name' => [
+                'subtitle' => 'File',
+                'label' => 'File Name',
+                'type' => 'text',
+                'multilang' => true
+            ],
+            'pdf' => [
+                'label' => 'PDF',
+                'type' => 'file',
+                'attributes' => [
+                    'class' => 'required',
+                    'accept' => 'pdf'
+                ]
+            ],
+        ];
+
+        $form['thumbnail'] = [
+            'label' => 'Thumbnail',
+            'type' => 'text',
+            'attributes' => [
+                'class' => 'required cfind',
+                'cfind-type' => 'image',
+                'cfind-thumb' => '240x220',
+                'cfind-convert' => 'webp',
+                'cfind-alt' => 1,
+            ]
+        ];
+
+        if ($type == 'edit') {
+            unset($form['pdf']['attributes']['class']);
+        }
+
+        return $form;
+    }
+
+    private static function formMonografi($form, $type)
+    {
+        $form += [
+            'teu' => [
+                'subtitle' => 'Meta Data', 
+                'label' => 'T.E.U. Orang/Badan',
+                'type' => 'text',
+                'multilang' => true,
+            ],
+            'no_panggil' => [
+                'label' => 'No. Panggil',
+                'type' => 'text',
+            ],
+            'edisi' => [
+                'label' => 'Edisi',
+                'type' => 'text',
+                'multilang' => true,
+            ],
+            'tempat_terbit' => [
+                'label' => 'Tempat Terbit',
+                'type' => 'text',
+            ],
+            'penerbit' => [
+                'label' => 'Penerbit',
+                'type' => 'text',
+            ],
+            'tahun_terbit' => [
+                'label' => 'Tahun Terbit',
+                'type' => 'number',
+                'attributes' => [
+                    'minlength' => 1
+                ]
+            ],
+            'deskripsi_fisik' => [
+                'label' => 'Deskripsi Fisik',
+                'type' => 'text',
+                'multilang' => true
+            ],
+            'subjek' => [
+                'label' => 'Subjek',
+                'type' => 'text',
+                'multilang' => true
+            ],
+            'isbn' => [
+                'label' => 'ISBN',
+                'type' => 'text'
+            ],
+            'bahasa' => [
+                'label' => 'Bahasa',
+                'type' => 'text',
+                'multilang' => true
+            ],
+            'bidang_hukum' => [
+                'label' => 'Bidang Hukum',
+                'type' => 'text',
+                'multilang' => true
+            ],
+            'nomor_induk_buku' => [
+                'label' => 'Nomor Induk Buku',
+                'type' => 'text'
+            ],
+            'lokasi' => [
+                'label' => 'Lokasi',
+                'type' => 'text',
+            ],
+            'status_tersedia' => [
+                'label' => 'Status Tersedia',
+                'type' => 'select',
+                'options' => [
+                    0 => 'Tidak',
+                    1 => 'Ya'
+                ]
+            ],
+            'pdf_name' => [
+                'subtitle' => 'File',
+                'label' => 'File Name',
+                'type' => 'text',
+                'multilang' => true
+            ],
+            'pdf' => [
+                'label' => 'PDF',
+                'type' => 'file',
+                'attributes' => [
+                    'class' => 'required',
+                    'accept' => 'pdf'
+                ]
+            ]
+        ];
+        
+        $form['thumbnail'] = [
+            'label' => 'Thumbnail',
+            'type' => 'text',
+            'attributes' => [
+                'class' => 'required cfind',
+                'cfind-type' => 'image',
+                'cfind-thumb' => '220x284',
+                'cfind-convert' => 'webp',
+                'cfind-alt' => 1,
+            ]
+        ];
+
+        $form['image'] = [
+            'label' => 'Image',
+            'type' => 'text',
+            'attributes' => [
+                'class' => 'required cfind',
+                'cfind-type' => 'image',
+                'cfind-thumb' => '317x410',
+                'cfind-convert' => 'webp',
+                'cfind-alt' => 1,
+            ]
+        ];
+
+        if ($type == 'edit') {
+            unset($form['pdf']['attributes']['class']);
+        }
+
+        return $form;
+    }
+
+    private static function formNaskah($form, $type)
+    {
+        $form += [
+            'pihak_internal' => [
+                'label' => 'Pihak Internal',
+                'type' => 'text'
+            ],
+            'pihak_eksternal' => [
+                'label' => 'Pihak Eksternal',
+                'type' => 'text'
+            ],
+            'nomor_perjanjian' => [
+                'label' => 'No. Perjanjian',
+                'type' => 'text'
+            ],
+            'tempat_penandatanganan' => [
+                'label' => 'Tempat Penandatanganan',
+                'type' => 'text'
+            ],
+            'tanggal_berlaku' => [
+                'label' => 'Tanggal Berlaku',
+                'type' => 'text',
+                'attributes' => [
+                    'class' => 'required datepicker'
+                ]
+            ],
+            'tanggal_berakhir' => [
+                'label' => 'Tanggal Berakhir',
+                'type' => 'text',
+                'attributes' => [
+                    'class' => 'required datepicker'
+                ]
+            ],
+            'jangka_waktu' => [
+                'label' => 'Jangka Waktu',
+                'type' => 'text',
+                'multilang' => true
+            ],
+            'status_berlaku' => [
+                'label' => 'Status Berlaku',
+                'type' => 'select',
+                'options' => [
+                    0 => 'Tidak',
+                    1 => 'Ya'
+                ]
+            ],
+            'bahasa' => [
+                'label' => 'Bahasa',
+                'type' => 'text',
+                'multilang' => true
+            ],
+            'lampiran' => [
+                'label' => 'Lampiran',
+                'type' => 'textarea',
+                'multilang' => true
             ],
             'pdf_name' => [
                 'subtitle' => 'File',

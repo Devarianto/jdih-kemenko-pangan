@@ -54,6 +54,8 @@ class DocumentController extends Controller
             return date2string($value);
         } else if ($key == 'status_berlaku') {
             return $item->display_status_berlaku;
+        } else if ($key == 'status_tersedia') {
+            return $item->front_status_tersedia;
         }
 
         return e($value);
