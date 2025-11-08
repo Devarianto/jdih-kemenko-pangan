@@ -279,18 +279,18 @@ class PageController extends Controller
         }
 
         if (request()->query('year')) {
-            $documents = $documents->whereYear('tanggal_peradilan', request()->query('year'));
+            $documents = $documents->whereYear('tanggal_dibacakan', request()->query('year'));
         }
 
         if (request()->query('sort') == 'oldest') {
-            $documents = $documents->orderBy('tanggal_peradilan', 'asc');
+            $documents = $documents->orderBy('tanggal_dibacakan', 'asc');
         } else {
-            $documents = $documents->orderBy('tanggal_peradilan', 'desc');
+            $documents = $documents->orderBy('tanggal_dibacakan', 'desc');
         }
         
         $documents = $documents->orderBy('id', 'desc')->paginate(9);
 
-        $years = Document::selectRaw('YEAR(tanggal_peradilan) as year')
+        $years = Document::selectRaw('YEAR(tanggal_dibacakan) as year')
             ->whereIsActive(1)
             ->where('master_document_id', Document::PUTUSAN)
             ->distinct()
