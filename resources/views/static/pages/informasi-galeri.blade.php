@@ -53,8 +53,7 @@
         </div>
       </div>
       <div class="listing-galeri">
-        @for ($i = 1; $i <= 3; $i++)
-        <div class="listing-galeri__item photo" onclick="openPopup('#popup-photo')">
+        <div class="listing-galeri__item photo" data-target="#list-1">
           <div class="tag photo">
             <svg xmlns="http://www.w3.org/2000/svg" width="12" height="13" viewBox="0 0 12 13" fill="none">
               <path d="M9.6175 1.375H2.3825C1.5515 1.375 0.875 2.051 0.875 2.8825V10.118C0.875 10.949 1.551 11.6255 2.3825 11.6255H9.618C10.449 11.6255 11.1255 10.9495 11.1255 10.118V2.8825C11.125 2.051 10.449 1.375 9.6175 1.375ZM10.522 10.1175C10.522 10.616 10.1165 11.022 9.6175 11.022H2.3825C1.884 11.022 1.478 10.6165 1.478 10.1175V9.027L3.911 6.3235L7.1975 9.311L9.015 7.7965L10.5225 9.0525L10.522 10.1175ZM10.522 8.268L9.0145 7.012L7.214 8.512L3.8685 5.47L1.478 8.126V2.8825C1.478 2.384 1.8835 1.978 2.3825 1.978H9.618C10.1165 1.978 10.5225 2.3835 10.5225 2.8825L10.522 8.268Z" fill="white" stroke="white" stroke-width="0.6"/>
@@ -91,7 +90,7 @@
             </svg>
           </div>
         </div>
-        <div class="listing-galeri__item photo" onclick="openPopup('#popup-photo')">
+        <div class="listing-galeri__item photo" data-target="#list-2">
           <div class="tag photo">
             <svg xmlns="http://www.w3.org/2000/svg" width="12" height="13" viewBox="0 0 12 13" fill="none">
               <path d="M9.6175 1.375H2.3825C1.5515 1.375 0.875 2.051 0.875 2.8825V10.118C0.875 10.949 1.551 11.6255 2.3825 11.6255H9.618C10.449 11.6255 11.1255 10.9495 11.1255 10.118V2.8825C11.125 2.051 10.449 1.375 9.6175 1.375ZM10.522 10.1175C10.522 10.616 10.1165 11.022 9.6175 11.022H2.3825C1.884 11.022 1.478 10.6165 1.478 10.1175V9.027L3.911 6.3235L7.1975 9.311L9.015 7.7965L10.5225 9.0525L10.522 10.1175ZM10.522 8.268L9.0145 7.012L7.214 8.512L3.8685 5.47L1.478 8.126V2.8825C1.478 2.384 1.8835 1.978 2.3825 1.978H9.618C10.1165 1.978 10.5225 2.3835 10.5225 2.8825L10.522 8.268Z" fill="white" stroke="white" stroke-width="0.6"/>
@@ -105,7 +104,6 @@
             <p>Rapat Koordinasi JDIH untuk kordinasi Nasional tentang Pangan</p>
           </figcaption>
         </div>
-        @endfor
       </div>
       @include('static.component.pagination')
     </div>
@@ -127,7 +125,37 @@
         <i class="wa-icon wa-ic-close-solid"></i>
       </div>
       <div class="popup__content">
-        <div class="wrap-slider">
+        <div class="wrap-slider" id="list-1">
+          <div class="swiper photo-slider">
+            <div class="swiper-wrapper">
+              @for ($i = 1; $i <= 6; $i++)
+              <div class="swiper-slide">
+                <figure>
+                  <img src="{{ asset('images/content/news-xlarge.jpg') }}" alt="">
+                  <figcaption>
+                    <span class="date">30 Juli 2025</span>
+                    <p>Rapat Koordinasi JDIH untuk kordinasi Nasional tentang Pangan</p>
+                  </figcaption>
+                </figure>
+              </div>
+              @endfor
+            </div>
+          </div>
+          <div class="photo-slider-thumbs swiper">
+            <div class="swiper-wrapper">
+              @for ($a = 1; $a <= 2; $a++)
+                @for ($i = 1; $i <= 3; $i++)
+                <div class="swiper-slide">
+                  <figure>
+                    <img src="{{ asset('images/content/news-thumb-'.$i.'.jpg') }}" alt="">
+                  </figure>
+                </div>
+                @endfor
+              @endfor
+            </div>
+          </div>
+        </div>
+        <div class="wrap-slider" id="list-2">
           <div class="swiper photo-slider">
             <div class="swiper-wrapper">
               @for ($i = 1; $i <= 6; $i++)
