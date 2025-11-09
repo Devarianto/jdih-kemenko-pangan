@@ -90,7 +90,7 @@
     <div class="trigger trigger-1"></div>
     <div class="wrapper">
       <div class="document__title">
-        <h4>DOKUMEN TERBARU</h4>
+        <h4>{{ lang::translate('home.newest-document') }}</h4>
         <div class="arrow">
           <div class="swiper-arrow swiper-prev"></div>
           <div class="swiper-arrow swiper-next"></div>
@@ -98,76 +98,22 @@
       </div>
       <div class="document__listing swiper">
         <div class="swiper-wrapper">
-          <a href="" class="document__listing--item swiper-slide">
-            <figure><img src="{{asset('images/content/dok-1.jpg')}}" alt=""></figure>
+          @foreach ($newest_documents as $document)
+          <a href="{{ $document->permalink_document }}" class="document__listing--item swiper-slide">
+            <figure><img src="{{ media::initial($document->thumbnail)->url }}" alt="{{ media::initial($document->thumbnail)->alt }}"></figure>
             <figcaption>
-              <span class="tag" style="background-color: #D2E3FF; color:#2063D2;">PUTUSAN HUKUM</span>
-              <p>Keputusan Menteri Nomor 1841 Tahun 2026 Nomor 1841 Tahun 2026</p>
+              <span class="tag" style="background-color: #D2E3FF; color: {{ $document->tag_color_home }};">{{ $document->master_document->label }}</span>
+              <p>{{ $document->translated('title') }}</p>
               <small class="visited">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
                   <path d="M8 3.5C4.967 3.5 2.399 5.388 1.5 8C2.399 10.612 4.967 12.5 8 12.5C11.033 12.5 13.601 10.612 14.5 8C13.601 5.388 11.033 3.5 8 3.5Z" stroke="#999999" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
                   <path d="M8 10.5C9.38071 10.5 10.5 9.38071 10.5 8C10.5 6.61929 9.38071 5.5 8 5.5C6.61929 5.5 5.5 6.61929 5.5 8C5.5 9.38071 6.61929 10.5 8 10.5Z" stroke="#999999" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
-                124,000 Dilihat
+                {{ lang::translate('document.count.view', ['count' => $document->view_count]) }}
               </small>
             </figcaption>
           </a>
-          <a href="" class="document__listing--item swiper-slide">
-            <figure><img src="{{asset('images/content/dok-2.jpg')}}" alt=""></figure>
-            <figcaption>
-              <span class="tag" style="background-color: #C1CCFF; color:#091D77;">PERATURAN HUKUM</span>
-              <p>Putusan Komisi Informasi Pusat Republik Indonesia Nomor 023/023</p>
-              <small class="visited">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
-                  <path d="M8 3.5C4.967 3.5 2.399 5.388 1.5 8C2.399 10.612 4.967 12.5 8 12.5C11.033 12.5 13.601 10.612 14.5 8C13.601 5.388 11.033 3.5 8 3.5Z" stroke="#999999" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
-                  <path d="M8 10.5C9.38071 10.5 10.5 9.38071 10.5 8C10.5 6.61929 9.38071 5.5 8 5.5C6.61929 5.5 5.5 6.61929 5.5 8C5.5 9.38071 6.61929 10.5 8 10.5Z" stroke="#999999" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-                124,000 Dilihat
-              </small>
-            </figcaption>
-          </a>
-          <a href="" class="document__listing--item swiper-slide">
-            <figure><img src="{{asset('images/content/dok-3.jpg')}}" alt=""></figure>
-            <figcaption>
-              <span class="tag" style="background-color: #D2E8ED; color:#0086A7;">ARTIKEL HUKUM</span>
-              <p>Perlindungan hukum dan partisipasi masyrakat untuk mengetahui</p>
-              <small class="visited">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
-                  <path d="M8 3.5C4.967 3.5 2.399 5.388 1.5 8C2.399 10.612 4.967 12.5 8 12.5C11.033 12.5 13.601 10.612 14.5 8C13.601 5.388 11.033 3.5 8 3.5Z" stroke="#999999" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
-                  <path d="M8 10.5C9.38071 10.5 10.5 9.38071 10.5 8C10.5 6.61929 9.38071 5.5 8 5.5C6.61929 5.5 5.5 6.61929 5.5 8C5.5 9.38071 6.61929 10.5 8 10.5Z" stroke="#999999" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-                124,000 Dilihat
-              </small>
-            </figcaption>
-          </a>
-          <a href="" class="document__listing--item swiper-slide">
-            <figure><img src="{{asset('images/content/dok-4.jpg')}}" alt=""></figure>
-            <figcaption>
-              <span class="tag" style="background-color: #C1CCFF; color:#091D77;">PERATURAN HUKUM</span>
-              <p>Perlindungan hukum dan partisipasi masyrakat untuk mengetahui</p>
-              <small class="visited">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
-                  <path d="M8 3.5C4.967 3.5 2.399 5.388 1.5 8C2.399 10.612 4.967 12.5 8 12.5C11.033 12.5 13.601 10.612 14.5 8C13.601 5.388 11.033 3.5 8 3.5Z" stroke="#999999" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
-                  <path d="M8 10.5C9.38071 10.5 10.5 9.38071 10.5 8C10.5 6.61929 9.38071 5.5 8 5.5C6.61929 5.5 5.5 6.61929 5.5 8C5.5 9.38071 6.61929 10.5 8 10.5Z" stroke="#999999" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-                124,000 Dilihat
-              </small>
-            </figcaption>
-          </a>
-          <a href="" class="document__listing--item swiper-slide">
-            <figure><img src="{{asset('images/content/dok-4.jpg')}}" alt=""></figure>
-            <figcaption>
-              <span class="tag" style="background-color: #C1CCFF; color:#091D77;">PERATURAN HUKUM</span>
-              <p>Perlindungan hukum dan partisipasi masyrakat untuk mengetahui</p>
-              <small class="visited">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
-                  <path d="M8 3.5C4.967 3.5 2.399 5.388 1.5 8C2.399 10.612 4.967 12.5 8 12.5C11.033 12.5 13.601 10.612 14.5 8C13.601 5.388 11.033 3.5 8 3.5Z" stroke="#999999" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
-                  <path d="M8 10.5C9.38071 10.5 10.5 9.38071 10.5 8C10.5 6.61929 9.38071 5.5 8 5.5C6.61929 5.5 5.5 6.61929 5.5 8C5.5 9.38071 6.61929 10.5 8 10.5Z" stroke="#999999" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-                124,000 Dilihat
-              </small>
-            </figcaption>
-          </a>
+          @endforeach
         </div>
       </div>
     </div>
@@ -236,258 +182,187 @@
     <div class="wrapper">
       <div class="artikel__left">
         <div class="list">
+          @if ($menus['monografi'] != null)
           <div class="list-monografi">
             <div class="list-title">
-              <h5>Monografi (67)</h5>
-              <a href="{{ route('front.document-monografi') }}" class="readmore">Lihat Semua</a>
+              <h5>{{ lang::translate('home.document.monografi') }} ({{ $monografi_count }})</h5>
+              <a href="{{ $menus['monografi']->permalink }}" class="readmore">{{ lang::translate('home.read-more') }}</a>
             </div>
             <div class="listing-card without-box">
-              <a href="" class="listing-card__item">
-                <figure><img src="{{asset('images/content/mon-1.jpg')}}" alt=""></figure>
+              @foreach ($document_monografi as $document)
+              <a href="{{ $document->permalink_document }}" class="listing-card__item">
+                <figure><img src="{{ media::initial($document->thumbnail)->url }}" alt="{{ media::initial($document->thumbnail)->alt }}"></figure>
                 <figcaption>
-                  <p>Peran Strategis Kordinasi Swasembada Pangan</p>
+                  <p>{{ $document->translated('title') }}</p>
                   <small class="visited">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
                       <path d="M8 3.5C4.967 3.5 2.399 5.388 1.5 8C2.399 10.612 4.967 12.5 8 12.5C11.033 12.5 13.601 10.612 14.5 8C13.601 5.388 11.033 3.5 8 3.5Z" stroke="#999999" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
                       <path d="M8 10.5C9.38071 10.5 10.5 9.38071 10.5 8C10.5 6.61929 9.38071 5.5 8 5.5C6.61929 5.5 5.5 6.61929 5.5 8C5.5 9.38071 6.61929 10.5 8 10.5Z" stroke="#999999" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
-                    124,000 Dilihat
+                    {{ lang::translate('document.count.view', ['count' => $document->view_count]) }}
                   </small>
                 </figcaption>
               </a>
-              <a href="" class="listing-card__item">
-                <figure><img src="{{asset('images/content/mon-2.jpg')}}" alt=""></figure>
-                <figcaption>
-                  <p>Peran Strategis Kordinasi Swasembada Pangan</p>
-                  <small class="visited">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
-                      <path d="M8 3.5C4.967 3.5 2.399 5.388 1.5 8C2.399 10.612 4.967 12.5 8 12.5C11.033 12.5 13.601 10.612 14.5 8C13.601 5.388 11.033 3.5 8 3.5Z" stroke="#999999" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
-                      <path d="M8 10.5C9.38071 10.5 10.5 9.38071 10.5 8C10.5 6.61929 9.38071 5.5 8 5.5C6.61929 5.5 5.5 6.61929 5.5 8C5.5 9.38071 6.61929 10.5 8 10.5Z" stroke="#999999" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                    124,000 Dilihat
-                  </small>
-                </figcaption>
-              </a>
-              <a href="" class="listing-card__item">
-                <figure><img src="{{asset('images/content/mon-3.jpg')}}" alt=""></figure>
-                <figcaption>
-                  <p>Peran Strategis Kordinasi Swasembada Pangan</p>
-                  <small class="visited">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
-                      <path d="M8 3.5C4.967 3.5 2.399 5.388 1.5 8C2.399 10.612 4.967 12.5 8 12.5C11.033 12.5 13.601 10.612 14.5 8C13.601 5.388 11.033 3.5 8 3.5Z" stroke="#999999" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
-                      <path d="M8 10.5C9.38071 10.5 10.5 9.38071 10.5 8C10.5 6.61929 9.38071 5.5 8 5.5C6.61929 5.5 5.5 6.61929 5.5 8C5.5 9.38071 6.61929 10.5 8 10.5Z" stroke="#999999" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                    124,000 Dilihat
-                  </small>
-                </figcaption>
-              </a>
-              <a href="" class="listing-card__item">
-                <figure><img src="{{asset('images/content/mon-4.jpg')}}" alt=""></figure>
-                <figcaption>
-                  <p>Peran Strategis Kordinasi Swasembada Pangan</p>
-                  <small class="visited">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
-                      <path d="M8 3.5C4.967 3.5 2.399 5.388 1.5 8C2.399 10.612 4.967 12.5 8 12.5C11.033 12.5 13.601 10.612 14.5 8C13.601 5.388 11.033 3.5 8 3.5Z" stroke="#999999" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
-                      <path d="M8 10.5C9.38071 10.5 10.5 9.38071 10.5 8C10.5 6.61929 9.38071 5.5 8 5.5C6.61929 5.5 5.5 6.61929 5.5 8C5.5 9.38071 6.61929 10.5 8 10.5Z" stroke="#999999" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                    124,000 Dilihat
-                  </small>
-                </figcaption>
-              </a>
+              @endforeach
             </div>
           </div>
+          @endif
+          @if ($menus['peraturan'] != null)
           <div class="list-rules">
             <div class="list-title">
-              <h5>PERATURAN HUKUM (148)</h5>
-              <a href="{{ route('front.document-peraturan') }}" class="readmore">Lihat Semua</a>
+              <h5>{{ lang::translate('home.document.peraturan') }} ({{ $peraturan_count }})</h5>
+              <a href="{{ $menus['monografi']->permalink }}" class="readmore">{{ lang::translate('home.read-more') }}</a>
             </div>
             <div class="listing-card">
-              <a href="" class="listing-card__item">
-                <figure><img src="{{asset('images/content/mon-1.jpg')}}" alt=""></figure>
+              @foreach ($document_peraturan as $document)
+              <a href="{{ $document->permalink_document }}" class="listing-card__item">
+                <figure><img src="{{ media::initial($document->thumbnail)->url }}" alt="{{ media::initial($document->thumbnail)->alt }}"></figure>
                 <figcaption>
-                  <p>Undang-Undang Nomor 31 Tahun 2025</p>
-                  <span>Tentang Perubahan Keempat Atas Undang-Undang Nomor 4 Tahun 2009 Tentang</span>
+                  <p>{{ $document->translated('title') }}</p>
+                  <span>{{ $document->translated('intro') }}</span>
                   <small class="visited">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
                       <path d="M8 3.5C4.967 3.5 2.399 5.388 1.5 8C2.399 10.612 4.967 12.5 8 12.5C11.033 12.5 13.601 10.612 14.5 8C13.601 5.388 11.033 3.5 8 3.5Z" stroke="#999999" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
                       <path d="M8 10.5C9.38071 10.5 10.5 9.38071 10.5 8C10.5 6.61929 9.38071 5.5 8 5.5C6.61929 5.5 5.5 6.61929 5.5 8C5.5 9.38071 6.61929 10.5 8 10.5Z" stroke="#999999" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
-                    124,000 Dilihat
+                    {{ lang::translate('document.count.view', ['count' => $document->view_count]) }}
                   </small>
                 </figcaption>
               </a>
-              <a href="" class="listing-card__item">
-                <figure><img src="{{asset('images/content/mon-2.jpg')}}" alt=""></figure>
-                <figcaption>
-                  <p>Undang-Undang Nomor 45 1Tahun 2025</p>
-                  <span>Tentang Perubahan Keempat Atas Undang-Undang Nomor 4 Tahun 2009 Tentang</span>
-                  <small class="visited">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
-                      <path d="M8 3.5C4.967 3.5 2.399 5.388 1.5 8C2.399 10.612 4.967 12.5 8 12.5C11.033 12.5 13.601 10.612 14.5 8C13.601 5.388 11.033 3.5 8 3.5Z" stroke="#999999" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
-                      <path d="M8 10.5C9.38071 10.5 10.5 9.38071 10.5 8C10.5 6.61929 9.38071 5.5 8 5.5C6.61929 5.5 5.5 6.61929 5.5 8C5.5 9.38071 6.61929 10.5 8 10.5Z" stroke="#999999" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                    124,000 Dilihat
-                  </small>
-                </figcaption>
-              </a>
-              <a href="" class="listing-card__item">
-                <figure><img src="{{asset('images/content/mon-3.jpg')}}" alt=""></figure>
-                <figcaption>
-                  <p>Undang-Undang Nomor 200 Tahun 2025</p>
-                  <span>Tentang Perubahan Keempat Atas Undang-Undang Nomor 4 Tahun 2009 Tentang</span>
-                  <small class="visited">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
-                      <path d="M8 3.5C4.967 3.5 2.399 5.388 1.5 8C2.399 10.612 4.967 12.5 8 12.5C11.033 12.5 13.601 10.612 14.5 8C13.601 5.388 11.033 3.5 8 3.5Z" stroke="#999999" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
-                      <path d="M8 10.5C9.38071 10.5 10.5 9.38071 10.5 8C10.5 6.61929 9.38071 5.5 8 5.5C6.61929 5.5 5.5 6.61929 5.5 8C5.5 9.38071 6.61929 10.5 8 10.5Z" stroke="#999999" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                    124,000 Dilihat
-                  </small>
-                </figcaption>
-              </a>
-              <a href="" class="listing-card__item">
-                <figure><img src="{{asset('images/content/mon-4.jpg')}}" alt=""></figure>
-                <figcaption>
-                  <p>Undang-Undang Nomor 18 Tahun 2025</p>
-                  <span>Tentang Perubahan Keempat Atas Undang-Undang Nomor 4 Tahun 2009 Tentang</span>
-                  <small class="visited">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
-                      <path d="M8 3.5C4.967 3.5 2.399 5.388 1.5 8C2.399 10.612 4.967 12.5 8 12.5C11.033 12.5 13.601 10.612 14.5 8C13.601 5.388 11.033 3.5 8 3.5Z" stroke="#999999" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
-                      <path d="M8 10.5C9.38071 10.5 10.5 9.38071 10.5 8C10.5 6.61929 9.38071 5.5 8 5.5C6.61929 5.5 5.5 6.61929 5.5 8C5.5 9.38071 6.61929 10.5 8 10.5Z" stroke="#999999" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                    124,000 Dilihat
-                  </small>
-                </figcaption>
-              </a>
+              @endforeach
             </div>
           </div>
+          @endif
+          @if ($menus['putusan'] != null)
           <div class="list-putusan">
             <div class="list-title">
-              <h5>Putusan Hukum (197)</h5>
-              <a href="{{ route('front.document-putusan') }}" class="readmore">Lihat Semua</a>
+              <h5>{{ lang::translate('home.document.putusan') }} ({{ $putusan_count }})</h5>
+              <a href="{{ $menus['putusan']->permalink }}" class="readmore">{{ lang::translate('home.read-more') }}</a>
             </div>
             <div class="listing-card">
-              <a href="" class="listing-card__item">
-                <figure><img src="{{asset('images/content/mon-1.jpg')}}" alt=""></figure>
+              @foreach ($document_putusan as $document)
+              <a href="{{ $document->permalink_document }}" class="listing-card__item">
+                <figure><img src="{{ media::initial($document->thumbnail)->url }}" alt="{{ media::initial($document->thumbnail)->alt }}"></figure>
                 <figcaption>
-                  <small class="tag"># Putusan Komisi</small>
-                  <p>Putusan Komisi Informasi Pusat Republik Indonesia Nomor 023/IV/KIP-PS-A/2022</p>
+                  <small class="tag">{{ $document->translated('jenis_peradilan') }}</small>
+                  <p>{{ $document->translated('title') }}</p>
                   <small class="visited">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
                       <path d="M8 3.5C4.967 3.5 2.399 5.388 1.5 8C2.399 10.612 4.967 12.5 8 12.5C11.033 12.5 13.601 10.612 14.5 8C13.601 5.388 11.033 3.5 8 3.5Z" stroke="#999999" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
                       <path d="M8 10.5C9.38071 10.5 10.5 9.38071 10.5 8C10.5 6.61929 9.38071 5.5 8 5.5C6.61929 5.5 5.5 6.61929 5.5 8C5.5 9.38071 6.61929 10.5 8 10.5Z" stroke="#999999" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
-                    124,000 Dilihat
+                    {{ lang::translate('document.count.view', ['count' => $document->view_count]) }}
                   </small>
                 </figcaption>
               </a>
-              <a href="" class="listing-card__item">
-                <figure><img src="{{asset('images/content/mon-2.jpg')}}" alt=""></figure>
-                <figcaption>
-                  <small class="tag"># Putusan Komisi</small>
-                  <p>Putusan Komisi Informasi Pusat Republik Indonesia Nomor 023/IV/KIP-PS-A/2022</p>
-                  <small class="visited">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
-                      <path d="M8 3.5C4.967 3.5 2.399 5.388 1.5 8C2.399 10.612 4.967 12.5 8 12.5C11.033 12.5 13.601 10.612 14.5 8C13.601 5.388 11.033 3.5 8 3.5Z" stroke="#999999" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
-                      <path d="M8 10.5C9.38071 10.5 10.5 9.38071 10.5 8C10.5 6.61929 9.38071 5.5 8 5.5C6.61929 5.5 5.5 6.61929 5.5 8C5.5 9.38071 6.61929 10.5 8 10.5Z" stroke="#999999" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                    124,000 Dilihat
-                  </small>
-                </figcaption>
-              </a>
-              <a href="" class="listing-card__item">
-                <figure><img src="{{asset('images/content/mon-3.jpg')}}" alt=""></figure>
-                <figcaption>
-                  <small class="tag"># Putusan Komisi</small>
-                  <p>Putusan Komisi Informasi Pusat Republik Indonesia Nomor 023/IV/KIP-PS-A/2022</p>
-                  <small class="visited">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
-                      <path d="M8 3.5C4.967 3.5 2.399 5.388 1.5 8C2.399 10.612 4.967 12.5 8 12.5C11.033 12.5 13.601 10.612 14.5 8C13.601 5.388 11.033 3.5 8 3.5Z" stroke="#999999" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
-                      <path d="M8 10.5C9.38071 10.5 10.5 9.38071 10.5 8C10.5 6.61929 9.38071 5.5 8 5.5C6.61929 5.5 5.5 6.61929 5.5 8C5.5 9.38071 6.61929 10.5 8 10.5Z" stroke="#999999" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                    124,000 Dilihat
-                  </small>
-                </figcaption>
-              </a>
-              <a href="" class="listing-card__item">
-                <figure><img src="{{asset('images/content/mon-4.jpg')}}" alt=""></figure>
-                <figcaption>
-                  <small class="tag"># Putusan Komisi</small>
-                  <p>Putusan Komisi Informasi Pusat Republik Indonesia Nomor 023/IV/KIP-PS-A/2022</p>
-                  <small class="visited">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
-                      <path d="M8 3.5C4.967 3.5 2.399 5.388 1.5 8C2.399 10.612 4.967 12.5 8 12.5C11.033 12.5 13.601 10.612 14.5 8C13.601 5.388 11.033 3.5 8 3.5Z" stroke="#999999" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
-                      <path d="M8 10.5C9.38071 10.5 10.5 9.38071 10.5 8C10.5 6.61929 9.38071 5.5 8 5.5C6.61929 5.5 5.5 6.61929 5.5 8C5.5 9.38071 6.61929 10.5 8 10.5Z" stroke="#999999" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                    124,000 Dilihat
-                  </small>
-                </figcaption>
-              </a>
+              @endforeach
             </div>
           </div>
+          @endif
+          @if ($menus['majalah'] != null)
           <div class="list-artikel">
             <div class="list-title">
-              <h5>artikel Hukum (311)</h5>
-              <a href="{{ route('front.document-article') }}" class="readmore">Lihat Semua</a>
+              <h5>{{ lang::translate('home.document.majalah') }} ({{ $majalah_count }})</h5>
+              <a href="{{ $menus['majalah']->permalink }}" class="readmore">{{ lang::translate('home.read-more') }}</a>
             </div>
             <div class="listing-card">
-              <a href="" class="listing-card__item">
-                <figure><img src="{{asset('images/content/mon-1.jpg')}}" alt=""></figure>
+              @foreach ($document_majalah as $document)
+              <a href="{{ $document->permalink_document }}" class="listing-card__item">
+                <figure><img src="{{ media::initial($document->thumbnail)->url }}" alt="{{ media::initial($document->thumbnail)->alt }}"></figure>
                 <figcaption>
-                  <small class="date">Edisi Desember 2025</small>
-                  <p>Kedaulatan pangan dalam perspektif hukum dan keamanan manusia</p>
+                  <small class="date">{{ $document->translated('edisi') }}</small>
+                  <p>{{ $document->translated('title') }}</p>
                   <small class="visited">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
                       <path d="M8 3.5C4.967 3.5 2.399 5.388 1.5 8C2.399 10.612 4.967 12.5 8 12.5C11.033 12.5 13.601 10.612 14.5 8C13.601 5.388 11.033 3.5 8 3.5Z" stroke="#999999" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
                       <path d="M8 10.5C9.38071 10.5 10.5 9.38071 10.5 8C10.5 6.61929 9.38071 5.5 8 5.5C6.61929 5.5 5.5 6.61929 5.5 8C5.5 9.38071 6.61929 10.5 8 10.5Z" stroke="#999999" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
-                    124,000 Dilihat
+                    {{ lang::translate('document.count.view', ['count' => $document->view_count]) }}
                   </small>
                 </figcaption>
               </a>
-              <a href="" class="listing-card__item">
-                <figure><img src="{{asset('images/content/mon-2.jpg')}}" alt=""></figure>
-                <figcaption>
-                  <small class="date">Edisi Desember 2025</small>
-                  <p>Perlindungan hukum dan partisipasi masyrakat untuk menjaga</p>
-                  <small class="visited">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
-                      <path d="M8 3.5C4.967 3.5 2.399 5.388 1.5 8C2.399 10.612 4.967 12.5 8 12.5C11.033 12.5 13.601 10.612 14.5 8C13.601 5.388 11.033 3.5 8 3.5Z" stroke="#999999" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
-                      <path d="M8 10.5C9.38071 10.5 10.5 9.38071 10.5 8C10.5 6.61929 9.38071 5.5 8 5.5C6.61929 5.5 5.5 6.61929 5.5 8C5.5 9.38071 6.61929 10.5 8 10.5Z" stroke="#999999" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                    124,000 Dilihat
-                  </small>
-                </figcaption>
-              </a>
-              <a href="" class="listing-card__item">
-                <figure><img src="{{asset('images/content/mon-3.jpg')}}" alt=""></figure>
-                <figcaption>
-                  <small class="date">Edisi Desember 2025</small>
-                  <p>Perlindungan hukum dan partisipasi masyrakat untuk menjaga</p>
-                  <small class="visited">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
-                      <path d="M8 3.5C4.967 3.5 2.399 5.388 1.5 8C2.399 10.612 4.967 12.5 8 12.5C11.033 12.5 13.601 10.612 14.5 8C13.601 5.388 11.033 3.5 8 3.5Z" stroke="#999999" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
-                      <path d="M8 10.5C9.38071 10.5 10.5 9.38071 10.5 8C10.5 6.61929 9.38071 5.5 8 5.5C6.61929 5.5 5.5 6.61929 5.5 8C5.5 9.38071 6.61929 10.5 8 10.5Z" stroke="#999999" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                    124,000 Dilihat
-                  </small>
-                </figcaption>
-              </a>
-              <a href="" class="listing-card__item">
-                <figure><img src="{{asset('images/content/mon-4.jpg')}}" alt=""></figure>
-                <figcaption>
-                  <small class="date">Edisi Desember 2025</small>
-                  <p>Perlindungan hukum dan partisipasi masyrakat untuk menjaga</p>
-                  <small class="visited">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
-                      <path d="M8 3.5C4.967 3.5 2.399 5.388 1.5 8C2.399 10.612 4.967 12.5 8 12.5C11.033 12.5 13.601 10.612 14.5 8C13.601 5.388 11.033 3.5 8 3.5Z" stroke="#999999" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
-                      <path d="M8 10.5C9.38071 10.5 10.5 9.38071 10.5 8C10.5 6.61929 9.38071 5.5 8 5.5C6.61929 5.5 5.5 6.61929 5.5 8C5.5 9.38071 6.61929 10.5 8 10.5Z" stroke="#999999" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                    124,000 Dilihat
-                  </small>
-                </figcaption>
-              </a>
+              @endforeach
             </div>
           </div>
+          @endif
+          @if ($menus['kliping'] != null)
+          <div class="list-artikel">
+            <div class="list-title">
+              <h5>{{ lang::translate('home.document.kliping') }} ({{ $kliping_count }})</h5>
+              <a href="{{ $menus['kliping']->permalink }}" class="readmore">{{ lang::translate('home.read-more') }}</a>
+            </div>
+            <div class="listing-card">
+              @foreach ($document_kliping as $document)
+              <a href="{{ $document->permalink_document }}" class="listing-card__item">
+                <figure><img src="{{ media::initial($document->thumbnail)->url }}" alt="{{ media::initial($document->thumbnail)->alt }}"></figure>
+                <figcaption>
+                  <span class="date">{{ date2string($document->created_at) }}</span>
+                  <p>{{ $document->translated('title') }}</p>
+                  <small class="visited">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                      <path d="M8 3.5C4.967 3.5 2.399 5.388 1.5 8C2.399 10.612 4.967 12.5 8 12.5C11.033 12.5 13.601 10.612 14.5 8C13.601 5.388 11.033 3.5 8 3.5Z" stroke="#999999" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+                      <path d="M8 10.5C9.38071 10.5 10.5 9.38071 10.5 8C10.5 6.61929 9.38071 5.5 8 5.5C6.61929 5.5 5.5 6.61929 5.5 8C5.5 9.38071 6.61929 10.5 8 10.5Z" stroke="#999999" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    {{ lang::translate('document.count.view', ['count' => $document->view_count]) }}
+                  </small>
+                </figcaption>
+              </a>
+              @endforeach
+            </div>
+          </div>
+          @endif
+          @if ($menus['jurnal'] != null)
+          <div class="list-artikel">
+            <div class="list-title">
+              <h5>{{ lang::translate('home.document.jurnal') }} ({{ $jurnal_count }})</h5>
+              <a href="{{ $menus['jurnal']->permalink }}" class="readmore">{{ lang::translate('home.read-more') }}</a>
+            </div>
+            <div class="listing-card">
+              @foreach ($document_jurnal as $document)
+              <a href="{{ $document->permalink_document }}" class="listing-card__item">
+                <figure><img src="{{ media::initial($document->thumbnail)->url }}" alt="{{ media::initial($document->thumbnail)->alt }}"></figure>
+                <figcaption>
+                  <small class="date">{{ $document->translated('edisi') }}</small>
+                  <p>{{ $document->translated('title') }}</p>
+                  <small class="visited">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                      <path d="M8 3.5C4.967 3.5 2.399 5.388 1.5 8C2.399 10.612 4.967 12.5 8 12.5C11.033 12.5 13.601 10.612 14.5 8C13.601 5.388 11.033 3.5 8 3.5Z" stroke="#999999" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+                      <path d="M8 10.5C9.38071 10.5 10.5 9.38071 10.5 8C10.5 6.61929 9.38071 5.5 8 5.5C6.61929 5.5 5.5 6.61929 5.5 8C5.5 9.38071 6.61929 10.5 8 10.5Z" stroke="#999999" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    {{ lang::translate('document.count.view', ['count' => $document->view_count]) }}
+                  </small>
+                </figcaption>
+              </a>
+              @endforeach
+            </div>
+          </div>
+          @endif
+          @if ($menus['naskah'] != null)
+          <div class="list-rules">
+            <div class="list-title">
+              <h5>{{ lang::translate('home.document.naskah') }} ({{ $naskah_count }})</h5>
+              <a href="{{ $menus['monografi']->permalink }}" class="readmore">{{ lang::translate('home.read-more') }}</a>
+            </div>
+            <div class="listing-card">
+              @foreach ($document_naskah as $document)
+              <a href="{{ $document->permalink_document }}" class="listing-card__item">
+                <figure><img src="{{ media::initial($document->thumbnail)->url }}" alt="{{ media::initial($document->thumbnail)->alt }}"></figure>
+                <figcaption>
+                  <p>{{ $document->translated('title') }}</p>
+                  <span>{{ $document->translated('intro') }}</span>
+                  <small class="visited">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                      <path d="M8 3.5C4.967 3.5 2.399 5.388 1.5 8C2.399 10.612 4.967 12.5 8 12.5C11.033 12.5 13.601 10.612 14.5 8C13.601 5.388 11.033 3.5 8 3.5Z" stroke="#999999" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+                      <path d="M8 10.5C9.38071 10.5 10.5 9.38071 10.5 8C10.5 6.61929 9.38071 5.5 8 5.5C6.61929 5.5 5.5 6.61929 5.5 8C5.5 9.38071 6.61929 10.5 8 10.5Z" stroke="#999999" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    {{ lang::translate('document.count.view', ['count' => $document->view_count]) }}
+                  </small>
+                </figcaption>
+              </a>
+              @endforeach
+            </div>
+          </div>
+          @endif
         </div>
       </div>
       <div class="artikel__right">
@@ -504,66 +379,26 @@
                 </clipPath>
               </defs>
             </svg>
-            Terpopuler
+            {{ lang::translate('home.document.popular') }}
           </h5>
         </div>
         <div class="document__listing">
+          @foreach ($popular_documents as $document)
           <a href="" class="document__listing--item ">
-            <figure><img src="{{asset('images/content/dok-1.jpg')}}" alt=""></figure>
+            <figure><img src="{{ media::initial($document->thumbnail)->url }}" alt="{{ media::initial($document->thumbnail)->alt }}"></figure>
             <figcaption>
-              <span class="tag" style="background-color: #D2E3FF; color:#2063D2;">PUTUSAN HUKUM</span>
-              <p>Keputusan Menteri Nomor 1841 Tahun 2026 Nomor 1841 Tahun 2026</p>
+              <span class="tag" style="background-color: #D2E3FF; color:{{ $document->tag_color_home }};">{{ $document->master_document->label ?? '' }}</span>
+              <p>{{ $document->translated('title') }}</p>
               <small class="visited">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
                   <path d="M8 3.5C4.967 3.5 2.399 5.388 1.5 8C2.399 10.612 4.967 12.5 8 12.5C11.033 12.5 13.601 10.612 14.5 8C13.601 5.388 11.033 3.5 8 3.5Z" stroke="#999999" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
                   <path d="M8 10.5C9.38071 10.5 10.5 9.38071 10.5 8C10.5 6.61929 9.38071 5.5 8 5.5C6.61929 5.5 5.5 6.61929 5.5 8C5.5 9.38071 6.61929 10.5 8 10.5Z" stroke="#999999" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
-                124,000 Dilihat
+                {{ lang::translate('document.count.view', ['count' => $document->view_count]) }}
               </small>
             </figcaption>
           </a>
-          <a href="" class="document__listing--item ">
-            <figure><img src="{{asset('images/content/dok-2.jpg')}}" alt=""></figure>
-            <figcaption>
-              <span class="tag" style="background-color: #C1CCFF; color:#091D77;">PERATURAN HUKUM</span>
-              <p>Putusan Komisi Informasi Pusat Republik Indonesia Nomor 023/023</p>
-              <small class="visited">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
-                  <path d="M8 3.5C4.967 3.5 2.399 5.388 1.5 8C2.399 10.612 4.967 12.5 8 12.5C11.033 12.5 13.601 10.612 14.5 8C13.601 5.388 11.033 3.5 8 3.5Z" stroke="#999999" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
-                  <path d="M8 10.5C9.38071 10.5 10.5 9.38071 10.5 8C10.5 6.61929 9.38071 5.5 8 5.5C6.61929 5.5 5.5 6.61929 5.5 8C5.5 9.38071 6.61929 10.5 8 10.5Z" stroke="#999999" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-                124,000 Dilihat
-              </small>
-            </figcaption>
-          </a>
-          <a href="" class="document__listing--item ">
-            <figure><img src="{{asset('images/content/dok-3.jpg')}}" alt=""></figure>
-            <figcaption>
-              <span class="tag" style="background-color: #D2E8ED; color:#0086A7;">ARTIKEL HUKUM</span>
-              <p>Perlindungan hukum dan partisipasi masyrakat untuk mengetahui</p>
-              <small class="visited">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
-                  <path d="M8 3.5C4.967 3.5 2.399 5.388 1.5 8C2.399 10.612 4.967 12.5 8 12.5C11.033 12.5 13.601 10.612 14.5 8C13.601 5.388 11.033 3.5 8 3.5Z" stroke="#999999" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
-                  <path d="M8 10.5C9.38071 10.5 10.5 9.38071 10.5 8C10.5 6.61929 9.38071 5.5 8 5.5C6.61929 5.5 5.5 6.61929 5.5 8C5.5 9.38071 6.61929 10.5 8 10.5Z" stroke="#999999" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-                124,000 Dilihat
-              </small>
-            </figcaption>
-          </a>
-          <a href="" class="document__listing--item ">
-            <figure><img src="{{asset('images/content/dok-4.jpg')}}" alt=""></figure>
-            <figcaption>
-              <span class="tag" style="background-color: #C1CCFF; color:#091D77;">PERATURAN HUKUM</span>
-              <p>Perlindungan hukum dan partisipasi masyrakat untuk mengetahui</p>
-              <small class="visited">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
-                  <path d="M8 3.5C4.967 3.5 2.399 5.388 1.5 8C2.399 10.612 4.967 12.5 8 12.5C11.033 12.5 13.601 10.612 14.5 8C13.601 5.388 11.033 3.5 8 3.5Z" stroke="#999999" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
-                  <path d="M8 10.5C9.38071 10.5 10.5 9.38071 10.5 8C10.5 6.61929 9.38071 5.5 8 5.5C6.61929 5.5 5.5 6.61929 5.5 8C5.5 9.38071 6.61929 10.5 8 10.5Z" stroke="#999999" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-                124,000 Dilihat
-              </small>
-            </figcaption>
-          </a>
+          @endforeach
         </div>
       </div>
     </div>

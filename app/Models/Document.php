@@ -83,6 +83,31 @@ class Document extends Model
         return $this->belongsTo(DocumentType::class, 'document_type_id');
     }
 
+    public function master_document()
+    {
+        return $this->belongsTo(MasterDocument::class, 'master_document_id');
+    }
+
+    public function getTagColorHomeAttribute()
+    {
+        $master_document = $this->master_document == null ? null : $this->master_document->id;
+        if ($master_document == self::PUTUSAN) {
+            return '#091D77';
+        } else if ($master_document == self::PERATURAN) {
+            return '#091D77';
+        } else if ($master_document == self::KLIPING) {
+            return '#0086A7';
+        } else if ($master_document == self::MAJALAH) {
+            return '#0086A7';
+        } else if ($master_document == self::JURNAL) {
+            return '#0086A7';
+        } else if ($master_document == self::MONOGRAFI) {
+            return '#0086A7;';
+        } else if ($master_document == self::NASKAH) {
+            return '#091D77;';
+        }
+    }
+
     public function getDisplayStatusBerlakuAttribute()
     {
         if ($this->status_berlaku == 0) {
@@ -111,5 +136,25 @@ class Document extends Model
             return lang::translate('document.status-tersedia.ya');
         }
         return '-';
+    }
+
+    public function getPermalinkDocumentAttribute()
+    {
+        $master_document = $this->master_document == null ? null : $this->master_document->id;
+        if ($master_document == self::PUTUSAN) {
+            return $this->customPermalink('document-putusan');
+        } else if ($master_document == self::PERATURAN) {
+            return $this->customPermalink('document-peraturan');
+        } else if ($master_document == self::KLIPING) {
+            return $this->customPermalink('document-kliping');
+        } else if ($master_document == self::MAJALAH) {
+            return $this->customPermalink('document-majalah');
+        } else if ($master_document == self::JURNAL) {
+            return $this->customPermalink('document-jurnal');
+        } else if ($master_document == self::MONOGRAFI) {
+            return $this->customPermalink('document-monografi');
+        } else if ($master_document == self::NASKAH) {
+            return $this->customPermalink('document-naskah');
+        }
     }
 }

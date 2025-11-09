@@ -22,7 +22,90 @@ class PageController extends Controller
         $news_first = News::translate()->whereIsActive(1)->orderBy('date', 'desc')->first();
         $news_others = News::translate()->whereIsActive(1)->offset(1)->limit(3)->orderBy('date', 'desc')->get();
 
-        return view('dynamic.home', compact('news_first', 'news_others'));
+        $newest_documents = Document::translate()->whereIsActive(1)->orderBy('created_at', 'desc')->limit(5)->get();
+        $popular_documents = Document::translate()->whereIsActive(1)->orderBy('view_count', 'desc')->limit(4)->get();
+
+        $menus = [];
+        //Monografi
+        $document_monografi = Document::translate()
+            ->whereIsActive(1)
+            ->where('master_document_id', Document::MONOGRAFI)
+            ->orderBy('created_at', 'desc');
+        $monografi_count = $document_monografi->count();
+        $document_monografi = $document_monografi->limit(4)
+            ->get();
+        $menus['monografi'] = Menu::fe()->whereIsActive(1)->where('type', 'monografi-hukum')->first();
+
+        // Peraturan
+        $document_peraturan = Document::translate()
+            ->whereIsActive(1)
+            ->where('master_document_id', Document::PERATURAN)
+            ->orderBy('created_at', 'desc');
+        $peraturan_count = $document_peraturan->count();
+        $document_peraturan = $document_peraturan->limit(4)
+            ->get();
+        $menus['peraturan'] = Menu::fe()->whereIsActive(1)->where('type', 'peraturan-hukum')->first();
+
+        // Putusan
+        $document_putusan = Document::translate()
+            ->whereIsActive(1)
+            ->where('master_document_id', Document::PUTUSAN)
+            ->orderBy('created_at', 'desc');
+        $putusan_count = $document_putusan->count();
+        $document_putusan = $document_putusan->limit(4)
+            ->get();
+        $menus['putusan'] = Menu::fe()->whereIsActive(1)->where('type', 'putusan-hukum')->first();
+
+        // Jurnal
+        $document_jurnal = Document::translate()
+            ->whereIsActive(1)
+            ->where('master_document_id', Document::JURNAL)
+            ->orderBy('created_at', 'desc');
+        $jurnal_count = $document_jurnal->count();
+        $document_jurnal = $document_jurnal->limit(4)
+            ->get();
+        $menus['jurnal'] = Menu::fe()->whereIsActive(1)->where('type', 'jurnal-hukum')->first();
+
+        // Kliping
+        $document_kliping = Document::translate()
+            ->whereIsActive(1)
+            ->where('master_document_id', Document::KLIPING)
+            ->orderBy('created_at', 'desc');
+        $kliping_count = $document_kliping->count();
+        $document_kliping = $document_kliping->limit(4)
+            ->get();
+        $menus['kliping'] = Menu::fe()->whereIsActive(1)->where('type', 'kliping-hukum')->first();
+
+        // Majalah
+        $document_majalah = Document::translate()
+            ->whereIsActive(1)
+            ->where('master_document_id', Document::MAJALAH)
+            ->orderBy('created_at', 'desc');
+        $majalah_count = $document_majalah->count();
+        $document_majalah = $document_majalah->limit(4)
+            ->get();
+        $menus['majalah'] = Menu::fe()->whereIsActive(1)->where('type', 'majalah-hukum')->first();
+
+        // Naskah
+        $document_naskah = Document::translate()
+            ->whereIsActive(1)
+            ->where('master_document_id', Document::NASKAH)
+            ->orderBy('created_at', 'desc');
+        $naskah_count = $document_naskah->count();
+        $document_naskah = $document_naskah->limit(4)
+            ->get();
+        $menus['naskah'] = Menu::fe()->whereIsActive(1)->where('type', 'naskah-hukum')->first();
+
+
+        return view('dynamic.home', compact(
+            'news_first', 'news_others', 'newest_documents', 
+            'document_monografi', 'monografi_count', 
+            'document_peraturan', 'peraturan_count',
+            'document_putusan', 'putusan_count', 
+            'document_jurnal', 'jurnal_count', 
+            'document_majalah', 'majalah_count', 
+            'document_kliping', 'kliping_count', 
+            'document_naskah', 'naskah_count', 'menus', 'popular_documents'));
     }
 
     private function find($id=null)
@@ -153,18 +236,6 @@ class PageController extends Controller
         return view('dynamic.pages.document-peraturan', compact('menu', 'documents', 'rule_types', 'rule_themes', 'years'));
     }
 
-    public function getPeraturanHukumDetail()
-    {
-        $id = Permalink::active()->uniqid;
-        $document = Document::whereIsActive(1)->where('master_document_id', Document::PERATURAN)->where('id', $id)->firstOrFail();
-        $document->view_count += 1;
-        $document->save();
-        
-        $menu = Menu::fe()->whereIsActive(1)->where('type', 'peraturan-hukum')->first();
-
-        return view('dynamic.pages.document-peraturan-detail', compact('document', 'menu'));
-    }
-
     public function getJurnalHukum($menu)
     {
         $documents = Document::translate()->whereIsActive(1)->where('master_document_id', Document::JURNAL);
@@ -186,18 +257,6 @@ class PageController extends Controller
             ->get();
         
         return view('dynamic.pages.document-jurnal', compact('menu', 'documents', 'years'));
-    }
-
-    public function getJurnalHukumDetail()
-    {
-        $id = Permalink::active()->uniqid;
-        $document = Document::whereIsActive(1)->where('master_document_id', Document::JURNAL)->where('id', $id)->firstOrFail();
-        $document->view_count += 1;
-        $document->save();
-        
-        $menu = Menu::fe()->whereIsActive(1)->where('type', 'jurnal-hukum')->first();
-
-        return view('dynamic.pages.document-jurnal-detail', compact('document', 'menu'));
     }
 
     public function getKlipingHukum($menu)
@@ -223,18 +282,6 @@ class PageController extends Controller
         return view('dynamic.pages.document-kliping', compact('menu', 'documents', 'years'));
     }
 
-    public function getKlipingHukumDetail()
-    {
-        $id = Permalink::active()->uniqid;
-        $document = Document::whereIsActive(1)->where('master_document_id', Document::KLIPING)->where('id', $id)->firstOrFail();
-        $document->view_count += 1;
-        $document->save();
-        
-        $menu = Menu::fe()->whereIsActive(1)->where('type', 'kliping-hukum')->first();
-
-        return view('dynamic.pages.document-kliping-detail', compact('document', 'menu'));
-    }
-
     public function getMajalahHukum($menu)
     {
         $documents = Document::translate()->whereIsActive(1)->where('master_document_id', Document::MAJALAH);
@@ -256,18 +303,6 @@ class PageController extends Controller
             ->get();
         
         return view('dynamic.pages.document-article', compact('menu', 'documents', 'years'));
-    }
-
-    public function getMajalahHukumDetail()
-    {
-        $id = Permalink::active()->uniqid;
-        $document = Document::whereIsActive(1)->where('master_document_id', Document::MAJALAH)->where('id', $id)->firstOrFail();
-        $document->view_count += 1;
-        $document->save();
-        
-        $menu = Menu::fe()->whereIsActive(1)->where('type', 'majalah-hukum')->first();
-
-        return view('dynamic.pages.document-article-detail', compact('document', 'menu'));
     }
 
     public function getPutusanHukum($menu)
@@ -300,18 +335,6 @@ class PageController extends Controller
         return view('dynamic.pages.document-putusan', compact('menu', 'documents', 'years'));
     }
 
-    public function getPutusanHukumDetail()
-    {
-        $id = Permalink::active()->uniqid;
-        $document = Document::whereIsActive(1)->where('master_document_id', Document::PUTUSAN)->where('id', $id)->firstOrFail();
-        $document->view_count += 1;
-        $document->save();
-        
-        $menu = Menu::fe()->whereIsActive(1)->where('type', 'putusan-hukum')->first();
-
-        return view('dynamic.pages.document-putusan-detail', compact('document', 'menu'));
-    }
-
     public function getMonografiHukum($menu)
     {
         $documents = Document::translate()->whereIsActive(1)->where('master_document_id', Document::MONOGRAFI);
@@ -333,18 +356,6 @@ class PageController extends Controller
             ->get();
         
         return view('dynamic.pages.document-monografi', compact('menu', 'documents', 'years'));
-    }
-
-    public function getMonografiHukumDetail()
-    {
-        $id = Permalink::active()->uniqid;
-        $document = Document::whereIsActive(1)->where('master_document_id', Document::MONOGRAFI)->where('id', $id)->firstOrFail();
-        $document->view_count += 1;
-        $document->save();
-        
-        $menu = Menu::fe()->whereIsActive(1)->where('type', 'monografi-hukum')->first();
-
-        return view('dynamic.pages.document-monografi-detail', compact('document', 'menu'));
     }
 
     public function getNaskahHukum($menu)
@@ -369,17 +380,5 @@ class PageController extends Controller
             ->get();
 
         return view('dynamic.pages.document-naskah', compact('menu', 'documents', 'years'));
-    }
-
-    public function getNaskahHukumDetail()
-    {
-        $id = Permalink::active()->uniqid;
-        $document = Document::whereIsActive(1)->where('master_document_id', Document::NASKAH)->where('id', $id)->firstOrFail();
-        $document->view_count += 1;
-        $document->save();
-        
-        $menu = Menu::fe()->whereIsActive(1)->where('type', 'naskah-hukum')->first();
-
-        return view('dynamic.pages.document-naskah-detail', compact('document', 'menu'));
     }
 }

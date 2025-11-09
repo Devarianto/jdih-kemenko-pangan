@@ -1,6 +1,20 @@
 <?php
 
 return [
+	'home' => [
+		'newest-document' => 'DOKUMEN TERBARU',
+		'document' => [
+			'popular' => 'Terpopular',
+			'monografi' => 'MONOGRAFI',
+			'putusan' => 'PUTUSAN HUKUM',
+			'peraturan' => 'PERATURAN HUKUM',
+			'majalah' => 'MAJALAH',
+			'kliping' => 'KLIPING',
+			'jurnal' => 'JURNAL',
+			'naskah' => 'NASKAH KERJA SAMA',
+		],
+		'read-more' => 'Lihat Selengkapnya'
+	],
 	'offline-page' => [
 		'social-media' => 'SOCIAL MEDIA'
 	],
