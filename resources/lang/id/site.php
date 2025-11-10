@@ -13,6 +13,9 @@ return [
 			'jurnal' => 'JURNAL',
 			'naskah' => 'NASKAH KERJA SAMA',
 		],
+		'news' => 'Berita',
+		'gallery-image' => 'Galeri Foto', 
+		'gallery-video' => 'Galeri Video', 
 		'read-more' => 'Lihat Selengkapnya'
 	],
 	'offline-page' => [

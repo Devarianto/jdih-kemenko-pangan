@@ -22,6 +22,9 @@ class PageController extends Controller
         $news_first = News::translate()->whereIsActive(1)->orderBy('date', 'desc')->first();
         $news_others = News::translate()->whereIsActive(1)->offset(1)->limit(3)->orderBy('date', 'desc')->get();
 
+        $gallery_image = Gallery::translate()->whereIsActive(1)->where('type', 'image')->orderBy('date', 'desc')->first();
+        $gallery_video = Gallery::translate()->whereIsActive(1)->where('type', 'video')->orderBy('date', 'desc')->first();
+
         $newest_documents = Document::translate()->whereIsActive(1)->orderBy('created_at', 'desc')->limit(5)->get();
         $popular_documents = Document::translate()->whereIsActive(1)->orderBy('view_count', 'desc')->limit(4)->get();
 
@@ -105,7 +108,7 @@ class PageController extends Controller
             'document_jurnal', 'jurnal_count', 
             'document_majalah', 'majalah_count', 
             'document_kliping', 'kliping_count', 
-            'document_naskah', 'naskah_count', 'menus', 'popular_documents'));
+            'document_naskah', 'naskah_count', 'menus', 'popular_documents', 'gallery_image', 'gallery_video'));
     }
 
     private function find($id=null)
