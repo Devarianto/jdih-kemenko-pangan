@@ -47,7 +47,23 @@ return [
 		]
 	],
 	'about' => [
-		'file-iteration' => 'Landasan Hukum ke-:count'
+		'file-iteration' => 'Landasan Hukum ke-:count',
+	],
+	'about-statistik' => [
+		'year-select' => [
+			'title' => 'Tahun Grafik',
+			'placeholder' => 'Pilih Tahun'
+		],
+		'table-header' => [
+			'no' => 'No',
+			'jenis-peraturan' => 'Jenis Peraturan',
+			'total' => 'Jumlah'
+		],
+		'chart' => [
+			'title' => 'Jumlah Produk Hukum Berlaku/ Tidak Berlaku',
+			'berlaku' => 'Berlaku',
+			'tidak-berlaku' => 'Tidak Berlaku'
+		]
 	],
 	'validate' => [
 		'email-format' => 'Format email tidak valid!',

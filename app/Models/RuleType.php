@@ -6,5 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class RuleType extends Model
 {
-    //
+    public function documents()
+    {
+        return $this->hasMany(Document::class, 'rule_type_id');
+    }
 }

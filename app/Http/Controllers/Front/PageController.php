@@ -15,6 +15,8 @@ use App\Models\Document;
 use App\Models\RuleType;
 use App\Models\RuleTheme;
 
+use DB;
+
 class PageController extends Controller
 {
     public function home()
@@ -154,6 +156,79 @@ class PageController extends Controller
     public function getAboutContactUs($menu)
     {
         return view('dynamic.pages.about-contactus', compact('menu'));
+    }
+
+    public function getAboutStatistik($menu)
+    {
+        $rule_types = null;
+
+        if (request()->query('year')) {
+            $rule_types = RuleType::withCount([
+                'documents' => function($query) {
+                    $query->where('master_document_id', Document::PERATURAN)->where('year', request()->query('year'));
+                }
+            ])->whereIsActive(1)->get();
+        } else {
+            $rule_types = RuleType::withCount([
+            'documents' => function($query) {
+                $query->where('master_document_id', Document::PERATURAN);
+            }
+        ])->whereIsActive(1)->get();
+        }
+        
+
+        $years = Document::select('year')
+            ->whereIsActive(1)
+            ->where('master_document_id', Document::PERATURAN)
+            ->groupBy('year')
+            ->get();
+        
+        $colors = [];
+        $arr_rule_label = [];
+        $arr_rule_count = [];
+
+        foreach ($rule_types as $data) {
+            $colors[] = $data->chart_color;
+            $arr_rule_label[] = $data->label;
+            $arr_rule_count[] = $data->documents_count;
+        }
+
+        $year_berlaku = Document::select('year', DB::raw('count(year) as count_year'))
+            ->whereIsActive(1)
+            ->where('master_document_id', Document::PERATURAN)
+            ->where('status_berlaku', 1)
+            ->groupBy('year')
+            ->pluck('count_year', 'year')
+            ->toArray();
+
+        $year_tidak_berlaku = Document::select('year', DB::raw('count(year) as count_year'))
+            ->whereIsActive(1)
+            ->where('master_document_id', Document::PERATURAN)
+            ->where('status_berlaku', 0)
+            ->groupBy('year')
+            ->pluck('count_year', 'year')
+            ->toArray();
+
+        $arr_year_berlaku = [
+            'year' => [],
+            'data' => [],
+        ];
+        $arr_year_tidak_berlaku = [
+            'year' => [],
+            'data' => [],
+        ];
+
+        foreach ($years as $data) {
+            $arr_year_berlaku['year'][] = $data->year;
+            $arr_year_berlaku['data'][] = isset($year_berlaku[$data->year]) ? $year_berlaku[$data->year] : 0;
+        }
+
+        foreach ($years as $data) {
+            $arr_year_tidak_berlaku['year'][] = $data->year;
+            $arr_year_tidak_berlaku['data'][] = isset($year_tidak_berlaku[$data->year]) ? $year_tidak_berlaku[$data->year] : 0;
+        }
+
+        return view('dynamic.pages.about-statistik', compact('menu', 'rule_types', 'years', 'colors', 'arr_rule_label', 'arr_rule_count', 'arr_year_berlaku', 'arr_year_tidak_berlaku'));
     }
 
     public function getInformasiGaleri($menu)
