@@ -99,7 +99,7 @@
       <div class="document__listing swiper">
         <div class="swiper-wrapper">
           <a href="" class="document__listing--item swiper-slide">
-            <figure><img src="{{asset('images/content/mon-2.jpg')}}" alt=""></figure>
+            <figure><img src="{{asset('images/cover_370_240_news-xlarge.jpg.webp')}}" alt=""></figure>
             <figcaption>
               <span class="tag" style="background-color: #D2E3FF; color:#2063D2;">PUTUSAN HUKUM</span>
               <p>Keputusan Menteri Nomor 1841 Tahun 2026 Nomor 1841 Tahun 2026</p>
@@ -509,7 +509,7 @@
         </div>
         <div class="document__listing">
           <a href="" class="document__listing--item ">
-            <figure><img src="{{asset('images/content/mon-2.jpg')}}" alt=""></figure>
+            <figure><img src="{{asset('images/cover_370_240_news-xlarge.jpg.webp')}}" alt=""></figure>
             <figcaption>
               <span class="tag" style="background-color: #D2E3FF; color:#2063D2;">PUTUSAN HUKUM</span>
               <p>Keputusan Menteri Nomor 1841 Tahun 2026 Nomor 1841 Tahun 2026</p>
