@@ -17,15 +17,18 @@
   </div>
   <div class="wrapper">
     <div class="top">
+      @php($footer = widget(99, 'site-setting-conf', 'footer', false))
+      @if($footer)
       <div class="box">
-        <div class="logo"><img src="{{ asset('images/material/logo.svg') }}" alt=""></div>
-        <p>Jaringan Dokumentasi dan Informasi Hukum - Kementerian Kordinator Republik Indonesia</p>
-        <address>Graha Mandiri, Jalan Imam Bonjol No. 61, Thamrin, Jakarta Pusat</address>
-        <a href="" class="button button-icon button-outline ">
+        <div class="logo"><img src="{{ media::initial($footer->logo)->url }}" alt="{{ media::initial($footer->logo)->alt }}"></div>
+        <p>{{ $footer->translated('title') }}</p>
+        <address>{!! nl2br(strip_tags($footer->address, '<br>')) !!}</address>
+        <a href="tel:{{ preg_replace('/\D/', '', $footer->phone) }}" class="button button-icon button-outline ">
           <i class="wa-icon wa-ic-phone-solid"></i>
-          (021) 319 36802
+          {{ $footer->phone }}
         </a>
       </div>
+      @endif
       <div class="box">
         <h6>{{ lang::translate('footer.left') }}</h6>
         @foreach($footLeftMenu as $menu)
