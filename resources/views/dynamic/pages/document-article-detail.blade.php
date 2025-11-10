@@ -1,28 +1,28 @@
-@extends('static.layouts.layout')
+@extends('dynamic.layouts.layout')
 
 @section('content')
   <section class="detail-pages no-banner">
     <div class="wrapper-content">
       <div class="detail-pages--top">
-        <a href="" class="back">Kembali Ke Artikel Hukum</a>
+        <a href="{{ $menu->permalink }}" class="back">{{ lang::translate('document.back.majalah') }}</a>
         <div class="medsos">
-          <label for="">Share:</label>
+          <label for="">{{ lang::translate('document.share') }}</label>
           <div class="wrap">
-            <a href=""><img src="{{ asset('images/material/ic-link.svg') }}" alt=""></a>
-            <a href=""><img src="{{ asset('images/material/ic-wa.svg') }}" alt=""></a>
-            <a href=""><img src="{{ asset('images/material/ic-x.svg') }}" alt=""></a>
-            <a href=""><img src="{{ asset('images/material/ic-fb.svg') }}" alt=""></a>
+            <a href="{{ $document->share('link') }}" target="__BLANK"><img src="{{ asset('images/material/ic-link.svg') }}" alt=""></a>
+            <a href="{{ $document->share('wa') }}" target="__BLANK"><img src="{{ asset('images/material/ic-wa.svg') }}" alt=""></a>
+            <a href="{{ $document->share('twitter') }}" target="__BLANK"><img src="{{ asset('images/material/ic-x.svg') }}" alt=""></a>
+            <a href="{{ $document->share('tw') }}" target="__BLANK"><img src="{{ asset('images/material/ic-fb.svg') }}" alt=""></a>
           </div>
         </div>
       </div>
       <section class="text-images">
-        <figure><img src="{{ asset('images/content/monografi-det-1.jpg') }}" alt=""></figure>
+        <figure><img src="{{ media::initial($document->image)->url }}" alt="{{ media::initial($document->image)->alt }}"></figure>
         <figcaption>
-          <small class="date">Edisi Desember 2025</small>
-          <h3>Perlindungan hukum dan partisipasi masyrakat untuk menjaga</h3>
-          <p>Banyaknya Lembaga yang berwenang pengamanan dan penegakan hukum laut, dapat menyebabkan potensi gesekan antara lembaga yang satu dan yang lain. Untuk itulah,</p>
+          <small class="date">{{ $document->translated('edisi') }}</small>
+          <h3>{{ $document->translated('title') }}</h3>
+          <p>{{ $document->translated('intro') }}</p>
           <a href="" class="button button-icon">
-            Baca Selengkapnya
+            {{ lang::translate('document.read-more') }}
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
               <path d="M10.2352 18.1456C10.1869 18.1456 10.1385 18.1351 10.0938 18.1137L3.18651 14.8245C3.07204 14.7699 2.99902 14.6545 2.99902 14.5275V4.33103C2.99902 4.21821 3.05691 4.11328 3.1523 4.05276C3.24736 3.99257 3.36741 3.98566 3.46938 4.03402L10.2352 7.25578L17.0011 4.03369C17.1031 3.98566 17.2225 3.99224 17.3178 4.05276C17.4136 4.11328 17.4715 4.21821 17.4715 4.33103V14.5275C17.4715 14.6545 17.3984 14.7699 17.284 14.8245L10.3767 18.1137C10.3319 18.1351 10.2836 18.1456 10.2352 18.1456ZM3.65686 14.3196L10.2352 17.4523L16.8136 14.3196V4.85204L10.3767 7.91723C10.2875 7.95966 10.1833 7.95966 10.0941 7.91723L3.65686 4.85204V14.3196Z" fill="white" stroke="white" stroke-width="0.5"/>
               <path d="M10.2351 5.3562L4.50103 2.62584C4.3369 2.54756 4.2675 2.3512 4.34546 2.1874C4.42374 2.02327 4.61977 1.95452 4.7839 2.03149L10.2351 4.62765L15.6862 2.03149C15.8507 1.95452 16.0464 2.02327 16.1247 2.1874C16.2027 2.3512 16.1332 2.54756 15.9691 2.62584L10.2351 5.3562Z" fill="white" stroke="white" stroke-width="0.5"/>
@@ -35,106 +35,84 @@
     <section class="box-detail-page with-border">
       <div class="wrapper-content">
         <hr>
-        <h5>Deskripsi</h5>
+        <h5>{{ lang::translate('document.description') }}</h5>
         <table>
           <tr>
-            <th>Tipe</th>
-            <td>Peraturan Perundang-undangan</td>
+            <th>{{ lang::translate('document.content.tipe-dokumen') }}</th>
+            <td>{{ $document->document_type->label }}</td>
           </tr>
           <tr>
-            <th>Judul</th>
-            <td>Peraturan Menteri Koordinator Bidang Kemaritiman dan Investasi Nomor 6 Tahun 2024 tentang Pelaksanaan Tugas dan Wewenang Tim Koordinasi Peningkatan Peran Aktif Indonesia di Kawasan Dasar Laut Internasional</td>
+            <th>{{ lang::translate('document.content.judul') }}</th>
+            <td>{{ $document->translated('title') }}</td>
           </tr>
           <tr>
-            <th>T.E.U. Badan / Pengarang</th>
-            <td>Indonesia. Kementerian Koordinator Bidang Pangan</td>
+            <th>{{ lang::translate('document.content.teu-orang') }}</th>
+            <td>{{ $document->translated('teu') }}</td>
           </tr>
           <tr>
-            <th>No. Peraturan</th>
-            <td>6</td>
+            <th>{{ lang::translate('document.content.tempat-terbit') }}</th>
+            <td>{{ $document->tempat_terbit }}</td>
           </tr>
           <tr>
-            <th>Jenis/Bentuk Peraturan</th>
-            <td>Peraturan Menteri</td>
+            <th>{{ lang::translate('document.content.tahun-terbit') }}</th>
+            <td>{{ $document->tahun_terbit }}</td>
           </tr>
           <tr>
-            <th>Singkatan Jenis/ Bentuk Peraturan</th>
-            <td>Permen</td>
+            <th>{{ lang::translate('document.content.sumber') }}</th>
+            <td>{!! nl2br($document->translated('sumber')) !!}</td>
           </tr>
           <tr>
-            <th>Tempat Penetapan</th>
-            <td>Jakarta</td>
+            <th>{{ lang::translate('document.content.subjek') }}</th>
+            <td>{{ $document->translated('subjek') }}</td>
           </tr>
           <tr>
-            <th>Tanggal-Bulan-Tahun Penetapan</th>
-            <td>17 Oktober 2024</td>
+            <th>{{ lang::translate('document.content.bahasa') }}</th>
+            <td>{{ $document->translated('bahasa') }}</td>
           </tr>
           <tr>
-            <th>Tanggal-Bulan-Tahun Pengundangan</th>
-            <td>18 Oktober 2024</td>
+            <th>{{ lang::translate('document.content.bidang-hukum') }}</th>
+            <td>{{ $document->translated('bidang_hukum') }}</td>
           </tr>
           <tr>
-            <th>Sumber</th>
-            <td>BN 2024 (758): 7 hlm</td>
+            <th>{{ lang::translate('document.content.lokasi') }}</th>
+            <td>{{ $document->lokasi }}</td>
           </tr>
           <tr>
-            <th>Subjek</th>
-            <td>INDONESIA - KAWASAN PANGAN NEGARA - TUGAS DAN WEWENANG</td>
+            <th>{{ lang::translate('document.content.lampiran') }}</th>
+            <td>{!! nl2br($document->translated('lampiran')) !!}</td>
           </tr>
           <tr>
-            <th>Status Peraturan</th>
-            <td>Berlaku</td>
+            <th>{{ lang::translate('document.content.jumlah-unduh') }}</th>
+            <td>{{ lang::translate('document.content.count.download', ['count' => num2string($document->download_pdf_count)]) }}</td>
           </tr>
           <tr>
-            <th>Bahasa</th>
-            <td>Bahasa Indonesia</td>
-          </tr>
-          <tr>
-            <th>Lokasi</th>
-            <td>Biro Hukum Kementerian Koordinator Bidang Kemaritiman dan Investasi</td>
-          </tr>
-          <tr>
-            <th>Bidang Hukum</th>
-            <td>Hukum Administrasi Negara</td>
-          </tr>
-          <tr>
-            <th>Lampiran</th>
-            <td>-</td>
-          </tr>
-          <tr>
-            <th>Jumlah Unduhan</th>
-            <td>185 Kali Unduh</td>
-          </tr>
-          <tr>
-            <th>Jumlah Tayang</th>
-            <td>2,780 Kali Tayang</td>
+            <th>{{ lang::translate('document.content.jumlah-tayang') }}</th>
+            <td>{{ lang::translate('document.content.count.view', ['count' => num2string($document->view_count)]) }}</td>
           </tr>
         </table>
         <div class="box-detail-page__pdf">
           <div class="box-detail-page__pdf--title">
-            <h5>Dokumen</h5>
+            <h5>{{ lang::translate('document.file.title') }}</h5>
             <nav>
               <ul>
-                <li><a href="" class="active" data-tab="peraturan">Peraturan</a></li>
-                <li><a href="" data-tab="abstrak">Abstrak</a></li>
-                <li><a href="" data-tab="lampiran">Lampiran</a></li>
+                <li><a href="" class="active" data-tab="peraturan">{{ lang::translate('document.file.file') }}</a></li>
               </ul>
             </nav>
           </div>
           <div class="content-tab" data-tab="peraturan">
             <div class="wrap-iframe">
-              <iframe src="{{ asset('pdf/sample.pdf') }}#toolbar=1&navpanes=0&scrollbar=1" width="100%" allowfullscreen></iframe>
+              <iframe src="{{ route('document.stream', ['type' => 'pdf', 'id' => $document->id]) }}#toolbar=1&navpanes=0&scrollbar=1" width="100%" allowfullscreen></iframe>
             </div>
             <section class="list-pdf">
               <div class="list-pdf__item">
-                <span class="no-dots">Peraturan dapat diunduh melalui dokumen dibawah ini :</span>
+                <span class="no-dots">{{ lang::translate('document.file.info-file') }}</span>
                 <div class="inner">
                   <figure>
                     <img src="{{asset('images/material/pdf-icon.svg')}}" alt="pdf icon">
                   </figure>
-                  <h6>Undang-Undang Republik Indonesia Nomor 12 Tahun 2011 tentang Pembentukan Peraturan Perundang-undangan</h6>
-                  <a href="#" class="button button-outline button-icon" download>
-                    Download PDF
+                  <h6>{{ $document->translated('pdf_name') }}</h6>
+                  <a href="{{ route('document.download', ['type' => 'pdf', 'id' => $document->id]) }}" target="__BLANK" class="button button-outline button-icon">
+                    {{ lang::translate('document.file.button.download-pdf') }}
                     <i class="wa-icon wa-ic-download-outline"></i>
                   </a>
                 </div>

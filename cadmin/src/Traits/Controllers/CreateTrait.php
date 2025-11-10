@@ -15,6 +15,7 @@ trait CreateTrait
 		$module = $this->module();
         $fields = $this->fields('create');
         $res = $this->res('create');
+		$file = $this->createFile();
        
 		$form = adminForm::initial($module, $fields);
 		
@@ -24,8 +25,9 @@ trait CreateTrait
             'subMenu' => $this->subMenu($module, 'create'), 
 			'form' => $form->draw($res),
 			'append' => $form->widgetSource() . $append = $this->append('create'),
+			'file' => $file
 		];
-		
+
 		return view('cactuar::admin.create', compact('data'));
     }
     
@@ -82,6 +84,11 @@ trait CreateTrait
 	public function createMainMenu($menu)
 	{
 		return $menu;
+	}
+
+	public function createFile()
+	{
+		return false;
 	}
 	
 	public function createParam()

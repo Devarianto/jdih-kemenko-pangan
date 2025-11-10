@@ -588,8 +588,13 @@ class adminForm
                 $html .= $readonly ? $readonlyValue() : Form::text($key, $value, $attributes);
         }
         
-        if ($type == 'number')
-			$html .= $readonly ? $readonlyValue() : Form::number($key, $value, $attributes);
+        if ($type == 'number') {
+            $attribute_text = '';
+            foreach ($attributes as $k => $attb) {
+                $attribute_text .= $k.'="'.$attb.'"';
+            }
+			$html .= $readonly ? $readonlyValue() : '<input type="number" name="'.$key.'" value="'.$value.'" '.$attribute_text.'>';
+        }
 		
         if ($type == 'password')
             $html .= $readonly ? '****' : Form::password($key, $attributes);
@@ -599,6 +604,24 @@ class adminForm
         
 		if ($type == 'select') 
             $html .= $readonly ? $readonlyValue('select') : Form::select($key, $option, $value, $attributes);
+
+        if ($type == 'file') {
+            $attribute_text = '';
+            foreach ($attributes as $k => $attb) {
+                $attribute_text .= $k.'="'.$attb.'"';
+            }
+            $html .= $readonly ? $readonlyValue() : '<input type="file" name="'.$key.'" '.$attribute_text.'>';
+            if ($value != null && $value != "") {
+            $html .= '
+                <div class="old-file mt-2" style="margin-top:8px;">
+                    <small>
+                        File existing: 
+                        <a href="'.route('admin.download.file', ['type' => $key, 'id' => request()->query('unique')]).'" target="_blank">'.basename($value).'</a>
+                    </small>
+                </div>';
+            }
+            
+        }
 			
 		if ($type == 'multicheck' || $type == 'multicheck-table') {
             if ($readonly) {

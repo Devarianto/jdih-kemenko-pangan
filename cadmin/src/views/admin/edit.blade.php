@@ -13,7 +13,7 @@
 </div>
 @endif
 
-<form method="post" class="form-validate cactuar-form">
+<form method="post" class="form-validate cactuar-form" @if ($data['file']) enctype="multipart/form-data" @endif>
     <input type="hidden" name="_token" value="{!! csrf_token(); !!}">
     <div class="col-md-12 col-xs-12 ">
         <div class="box box-primary card">

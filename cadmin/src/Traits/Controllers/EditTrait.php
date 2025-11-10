@@ -14,6 +14,7 @@ trait EditTrait
         $module = $this->module();
         $fields = $this->fields('edit');
         $res = $this->res('edit')->findOrFail(request()->validated('unique','string|numeric',true));
+		$file = $this->createFile();
 		
 		if (method_exists($this,'publishAble') && $this->publishAble($res) != true && array_key_exists('is_active',$fields)) {
 			unset($fields['is_active']);
@@ -33,6 +34,7 @@ trait EditTrait
             'subMenu' => $this->subMenu($module, 'edit'), 
 			'form' => $form->draw($res),
 			'append' => $form->widgetSource() . $append,
+			'file' => $file
 		];
 		
 		return view('cactuar::admin.edit', compact('data'));
@@ -106,6 +108,10 @@ trait EditTrait
     public function editAble($item)
     {
         return true;
+    }
+	public function editFile($item)
+    {
+        return false;
     }
 	
 	public function editCallbackBefore($post,$item)

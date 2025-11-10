@@ -43,11 +43,19 @@
           <path d="M14.1654 5.83334C14.1654 3.53601 12.296 1.66667 9.9987 1.66667C7.70136 1.66667 5.83203 3.53601 5.83203 5.83334C5.83203 8.13067 7.70136 10 9.9987 10C12.296 10 14.1654 8.13067 14.1654 5.83334ZM7.4987 5.83334C7.4987 4.45476 8.62011 3.33334 9.9987 3.33334C11.3773 3.33334 12.4987 4.45476 12.4987 5.83334C12.4987 7.21192 11.3773 8.33334 9.9987 8.33334C8.62011 8.33334 7.4987 7.21192 7.4987 5.83334Z" fill="white"/>
         </svg>
         Login
-      </a>
+      </a> 
       @endif
     </div>
     <div class="right-header__lang">
-      <img src="{{asset('images/material/flag-idn.svg')}}" alt="">
+      @if (lang::active() == 'en')
+      <img src="{{asset('images/material/US.svg')}}" alt="">
+      @else
+      <img src="{{asset('images/material/IND.svg')}}" alt="">
+      @endif
+      <div class="drop-language">
+        <a href="{{ url()->lang('en') }}"><img src="{{ asset('images/material/US.svg') }}" alt=""></a>
+        <a href="{{ url()->lang('id') }}"><img src="{{ asset('images/material/IND.svg') }}" alt=""></a>
+      </div>
     </div>
     <div class="toggle-menu">
       <span></span>
@@ -98,28 +106,32 @@
 <section class="menu-mobile">
   <nav>
     <ul>
-      <li><a href="">Beranda</a></li>
-      <li><a href="">Tentang Kami</a></li>
+      @foreach($mainMenu as $main)
+      @php($childs = $main->childs()->fe()->get())
+      @if($childs->count() > 0)
       <li>
-        <a href="">Dokumen Hukum</a>
+        <a href="{{ $main->fullUrl }}">{{ $main->label }}</a>
         <i class="wa-icon wa-ic-chevron-down-solid"></i>
         <div class="child">
-          <a href="">Peraturan Hukum</a>
-          <a href="">Monografi Hukum</a>
-          <a href="">Artikel Hukum</a>
-          <a href="">Putusan Hukum</a>
-          <a href="">Simplifikasi</a>
+          @foreach($childs as $child)
+          <a href="{{ $child->fullUrl }}">{{ $child->label }}</a>
+          @endforeach
         </div>
       </li>
-      <li><a href="">Informasi Lainnya</a></li>
-      <li><a href="">FAQ</a></li>
+      @else
+      <li>
+        <a href="{{ $main->fullUrl }}">{{ $main->label }}</a>
+      </li>
+      @endif
+      @endforeach
     </ul>
   </nav>
   <div class="menu-mobile__bottom">
     <div class="lang">
-      <select name="" id="">
-        <option value="">EN</option>
-        <option value="">ID</option>
+      <select name="change_lang_mobile" id="" onchange="if(this.value) window.location.href=this.value;">
+        @foreach(lang::codes() as $lang)
+        <option value="{{ url()->lang($lang) }}" @selected($lang == lang::active())>{{ config('cadmin.lang.labels-fe.'.$lang) }}</option>
+        @endforeach
       </select>
     </div>
     <form action="" class="search">
