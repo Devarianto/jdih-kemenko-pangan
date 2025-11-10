@@ -1,4 +1,4 @@
-@extends('static.layouts.layout')
+@extends('dynamic.layouts.layout')
 
 @section('content')
   @include('dynamic.component.banner')
@@ -140,11 +140,11 @@
         new Chart(ctx2, {
           type: "bar",
           data: {
-            labels: @json($arr_year_berlaku['year']),
+            labels: @json($get_chart['berlaku']['year']),
             datasets: [
               {
                 label: "{{ lang::translate("about-statistik.chart.berlaku") }}",
-                data:  @json($arr_year_berlaku['data']),
+                data:  @json($get_chart['berlaku']['data']),
                 backgroundColor: "#2063D2",
                 borderRadius: 8,
                 barPercentage: 0.8,
@@ -152,7 +152,7 @@
               },
               {
                 label: "{{ lang::translate("about-statistik.chart.tidak-berlaku") }}",
-                data: @json($arr_year_tidak_berlaku['data']),
+                data: @json($get_chart['tidak-berlaku']['data']),
                 backgroundColor: "#8DB7FF",
                 borderRadius: 8,
                 barPercentage: 0.8,

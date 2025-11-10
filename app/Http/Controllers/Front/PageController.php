@@ -102,6 +102,16 @@ class PageController extends Controller
         $menus['naskah'] = Menu::fe()->whereIsActive(1)->where('type', 'naskah-hukum')->first();
 
 
+        $years = Document::select('year')
+            ->whereIsActive(1)
+            ->where('master_document_id', Document::PERATURAN)
+            ->groupBy('year')
+            ->get();
+
+        $get_chart = $this->getChartStatistic($years);
+
+        $menu_statistic = Menu::fe()->whereIsActive(1)->where('type', 'about-statistik')->first();
+
         return view('dynamic.home', compact(
             'news_first', 'news_others', 'newest_documents', 
             'document_monografi', 'monografi_count', 
@@ -110,7 +120,7 @@ class PageController extends Controller
             'document_jurnal', 'jurnal_count', 
             'document_majalah', 'majalah_count', 
             'document_kliping', 'kliping_count', 
-            'document_naskah', 'naskah_count', 'menus', 'popular_documents', 'gallery_image', 'gallery_video'));
+            'document_naskah', 'naskah_count', 'menus', 'popular_documents', 'gallery_image', 'gallery_video', 'get_chart', 'menu_statistic'));
     }
 
     private function find($id=null)
@@ -170,13 +180,12 @@ class PageController extends Controller
             ])->whereIsActive(1)->get();
         } else {
             $rule_types = RuleType::withCount([
-            'documents' => function($query) {
-                $query->where('master_document_id', Document::PERATURAN);
-            }
-        ])->whereIsActive(1)->get();
+                'documents' => function($query) {
+                    $query->where('master_document_id', Document::PERATURAN);
+                }
+            ])->whereIsActive(1)->get();
         }
         
-
         $years = Document::select('year')
             ->whereIsActive(1)
             ->where('master_document_id', Document::PERATURAN)
@@ -193,6 +202,13 @@ class PageController extends Controller
             $arr_rule_count[] = $data->documents_count;
         }
 
+        $get_chart = $this->getChartStatistic($years);
+
+        return view('dynamic.pages.about-statistik', compact('menu', 'rule_types', 'years', 'colors', 'arr_rule_label', 'arr_rule_count', 'get_chart'));
+    }
+
+    public function getChartStatistic($years)
+    {
         $year_berlaku = Document::select('year', DB::raw('count(year) as count_year'))
             ->whereIsActive(1)
             ->where('master_document_id', Document::PERATURAN)
@@ -228,7 +244,7 @@ class PageController extends Controller
             $arr_year_tidak_berlaku['data'][] = isset($year_tidak_berlaku[$data->year]) ? $year_tidak_berlaku[$data->year] : 0;
         }
 
-        return view('dynamic.pages.about-statistik', compact('menu', 'rule_types', 'years', 'colors', 'arr_rule_label', 'arr_rule_count', 'arr_year_berlaku', 'arr_year_tidak_berlaku'));
+        return ['berlaku' => $arr_year_berlaku, 'tidak-berlaku' => $arr_year_tidak_berlaku];
     }
 
     public function getInformasiGaleri($menu)

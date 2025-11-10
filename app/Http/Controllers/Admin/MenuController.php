@@ -9,12 +9,11 @@ class MenuController extends BaseController
 {
 	protected $templates = [];
     protected $mainMax = 7;
-    protected $footBottomMax = 2;
 
     protected $positions = [
         'main'=>'Main Menu',
-        'foot-top'=>'Top Footer Menu',
-        'foot-bottom'=>'Bottom Footer Menu'
+        'foot-left'=>'Left Footer Menu',
+        'foot-right'=>'Right Footer Menu'
     ];
     
     protected $deep = 2;
@@ -65,11 +64,6 @@ class MenuController extends BaseController
                     $mainMenu = Menu::position('main', true);
                     if (count($mainMenu) >= $this->mainMax) {
                         $error[] = 'Max position main is '.$this->mainMax.' menu, remove another menu from main position before continue.';
-                        return false;
-                    }
-                    $footBottomMenu = Menu::position('foot-bottom', true);
-                    if (count($footBottomMenu) >= $this->footBottomMax) {
-                        $error[] = 'Max position foot-bottom is '.$this->footBottomMax.' menu, remove another menu from foot-bottom position before continue.';
                         return false;
                     }
                 }

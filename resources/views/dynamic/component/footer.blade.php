@@ -27,20 +27,16 @@
         </a>
       </div>
       <div class="box">
-        <h6>DOKUMEN HUKUM</h6>
-        <a href="">Peraturan Hukum</a>
-        <a href="">Monografi Hukum</a>
-        <a href="">Artikel Hukum</a>
-        <a href="">Putusan Hukum</a>
-        <a href="">Simplifikasi</a>
+        <h6>{{ lang::translate('footer.left') }}</h6>
+        @foreach($footLeftMenu as $menu)
+        <a href="{{ $menu->fullUrl }}">{{ $menu->label }}</a>
+        @endforeach
       </div>
       <div class="box">
-        <h6>INFORMASI LAINNYA</h6>
-        <a href="">Rancangan Peraturan</a>
-        <a href="">Lacak Dokumen</a>
-        <a href="">Berita</a>
-        <a href="">Galeri</a>
-        <a href="">Infografis</a>
+        <h6>{{ lang::translate('footer.right') }}</h6>
+        @foreach($footRightMenu as $menu)
+        <a href="{{ $menu->fullUrl }}">{{ $menu->label }}</a>
+        @endforeach
       </div>
        <div class="box">
         <h6>JUMLAH PENGUNJUNG</h6>

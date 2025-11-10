@@ -1,6 +1,10 @@
 <?php
 
 return [
+	'footer' => [
+		'left' => 'DOKUMEN HUKUM',
+		'right' => 'INFORMASI HUKUM'
+	],
 	'home' => [
 		'newest-document' => 'DOKUMEN TERBARU',
 		'document' => [
@@ -16,7 +20,13 @@ return [
 		'news' => 'Berita',
 		'gallery-image' => 'Galeri Foto', 
 		'gallery-video' => 'Galeri Video', 
-		'read-more' => 'Lihat Selengkapnya'
+		'read-more' => 'Lihat Selengkapnya',
+		'chart' => [
+			'title' => 'Grafik Statistik Hukum',
+			'read-more' => 'Lihat Selengkapnya',
+			'berlaku' => 'Berlaku',
+			'tidak-berlaku' => 'Tidak Berlaku',
+		] 
 	],
 	'offline-page' => [
 		'social-media' => 'SOCIAL MEDIA'
