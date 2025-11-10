@@ -27,6 +27,15 @@
       </ul>
     </nav>
     <div class="right-header__login">
+      @if(Auth::guard('account')->check())
+      <form method="POST" action="{{ route('logout') }}">
+        @csrf
+        <a href="javascript:void(0)" class="button-icon" onclick="this.closest('form').submit()">
+          <i class="wa-icon wa-ic-logout-outline"></i>
+          logout
+        </a>
+      </form>
+      @else
       <a href="javascript:void(0)" onclick="openPopup('#popup-login')">
         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
           <path d="M15.344 15L15.5882 14.7558C15.9137 14.4303 15.9137 13.903 15.5882 13.5774C15.2627 13.2518 14.7354 13.2519 14.4098 13.5774L12.7437 15.2435C12.6666 15.3204 12.6055 15.4128 12.5632 15.5149C12.4789 15.7186 12.4789 15.948 12.5632 16.1516C12.6055 16.2538 12.6665 16.346 12.7437 16.423L14.4098 18.0891C14.5725 18.2519 14.7857 18.3333 14.9989 18.3333C15.2122 18.3333 15.4254 18.2519 15.5881 18.0892C15.9136 17.7637 15.9136 17.2363 15.5881 16.9108L15.344 16.6667H17.4989C17.9595 16.6667 18.3323 16.2935 18.3323 15.8333C18.3323 15.3732 17.9595 15 17.4989 15H15.344Z" fill="white"/>
@@ -35,6 +44,7 @@
         </svg>
         Login
       </a>
+      @endif
     </div>
     <div class="right-header__lang">
       <img src="{{asset('images/material/flag-idn.svg')}}" alt="">
@@ -63,15 +73,16 @@
       <figcaption>
         <h5>Masuk Akun </h5>
         <p>Silahkan masukkan username dan password anda untuk melanjutkan ke sistem JDIH Kemenko Pangan Internal</p>
-        <form action="">
+        <form method="POST" action="{{ route('login') }}">
+          @csrf
           <div class="row row-wrap">
             <div class="column column-100">
               <label for="">Email</label>
-              <input type="Email" placeholder="Masukan Email">
+              <input type="email" name="email" placeholder="Masukan Email" value="{{ old('email') }}">
             </div>
             <div class="column column-100">
               <label for="">Password</label>
-              <input type="password" placeholder="Masukan Password">
+              <input type="password" name="password" placeholder="Masukan Password">
             </div>
               <div class="column column-100">
               <button type="submit" class="button button-gradient button-full">Masuk Sekarang</button>

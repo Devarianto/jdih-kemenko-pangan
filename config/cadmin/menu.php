@@ -80,6 +80,35 @@ return [
         'routes' => admin::moduleRoutes(['index', 'create', 'edit', 'delete', 'publish', 'email-template'], ['new-password'],['new-password'])
     ],
 
+    'project' => [
+        'label' => 'Project',
+        'fa' => 'pencil-square',
+    ],
+
+    'kategori-project' => [
+        'label' => 'Kategori',
+        'fa' => 'tags',
+        'parent' => 'project',
+        'controller' => 'App\Http\Controllers\Admin\CategoryProjectController',
+        'routes' => admin::moduleRoutes(['index','edit','delete','create','publish']),
+    ],
+
+    'divisi-pemohon' => [
+        'label' => 'Divisi Pemohon',
+        'fa' => 'tags',
+        'parent' => 'project',
+        'controller' => 'App\Http\Controllers\Admin\ApplicantDivisionController',
+        'routes' => admin::moduleRoutes(['index','edit','delete','create','publish']),
+    ],
+
+    'usulan-project' => [
+        'label' => 'Usulan',
+        'fa' => 'file',
+        'parent' => 'project',
+        'controller' => 'App\Http\Controllers\Admin\UsulanController',
+        'routes' => admin::moduleRoutes(['index','edit','delete','create','publish','download']),
+    ],
+
     'menu' => [
         'label' => 'Menu',
         'parent' => 'content',

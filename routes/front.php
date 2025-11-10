@@ -12,6 +12,7 @@
 */
 
 use Illuminate\Support\Facades\Route;
+ 
 
 Route::name('front.')->group(function () {
 
