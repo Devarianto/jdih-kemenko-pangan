@@ -62,7 +62,7 @@
       </div>
     </div>
     <div class="bot">
-      <p>©2025  Biro Hukum Kementerian Kordinator Bidang Pangan. Site by <a href="https://webarq.com" target="_blank">WEBARQ</a></p>
+      <p>{!! og::copyright() !!}</p>
       <div class="bot__right">
         <a href=""><img src="{{asset('images/material/ic-ig.svg')  }}" alt=""></a>
         <a href=""><img src="{{asset('images/material/ic-x.svg')  }}" alt=""></a>

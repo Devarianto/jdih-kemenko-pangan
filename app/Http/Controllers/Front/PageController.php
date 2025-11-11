@@ -347,6 +347,9 @@ class PageController extends Controller
     {
         $id = Permalink::active()->uniqid;
         $kamus = KamusHukum::translate()->whereIsActive(1)->findOrFail($id);
+        $kamus->view_count += 1;
+        $kamus->save();
+
         $menu = Menu::fe()->whereIsActive(1)->where('type', 'informasi-kamus-hukum')->first();
         $others = KamusHukum::translate()->whereIsActive(1)->where('id', '!=', $kamus->id)->inRandomOrder()->limit(3)->get();
         return view('dynamic.pages.documentlainnya-kamus-hukum-detail', compact('kamus', 'menu', 'others'));
