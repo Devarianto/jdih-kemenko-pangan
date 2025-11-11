@@ -223,6 +223,20 @@ return [
         'controller' => 'App\Http\Controllers\Admin\NewsController',
         'routes' => admin::moduleRoutes(['index', 'edit', 'delete', 'create', 'publish'])
     ],
+    'information-infografis' => [
+        'label' => 'Infografis',
+        'parent' => 'information',
+        'fa' => 'image',
+        'controller' => 'App\Http\Controllers\Admin\InfografisController',
+        'routes' => admin::moduleRoutes(['index', 'edit', 'delete', 'create', 'publish'])
+    ],
+    'information-kamus-hukum' => [
+        'label' => 'Kamus Hukum',
+        'parent' => 'information',
+        'fa' => 'image',
+        'controller' => 'App\Http\Controllers\Admin\KamusHukumController',
+        'routes' => admin::moduleRoutes(['index', 'edit', 'delete', 'create', 'publish'])
+    ],
 	'contact' => [
         'label' => 'Hubungi Kami',
         'fa' => 'phone',

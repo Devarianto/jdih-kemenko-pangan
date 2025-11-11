@@ -27,6 +27,7 @@ class RuleTypeController extends Controller
     {
         return [
             'label' => 'Label',
+            'chart_color' => 'Chart Color',
         ];
     }
 
@@ -41,6 +42,14 @@ class RuleTypeController extends Controller
             'label' => [
                 'type' => 'text',
                 'label' => 'Label',
+                'attributes' => [
+                    'class' => 'required'
+                ]
+            ],
+            'chart_color' => [
+                'type' => 'text',
+                'label' => 'Chart Color',
+                'info' => 'eg: #5E5CE6',
                 'attributes' => [
                     'class' => 'required'
                 ]

@@ -1,51 +1,24 @@
-@extends('static.layouts.layout')
+@extends('dynamic.layouts.layout')
 
 @section('content')
-  <section class="banner-middle">
-    <figure>
-      <img 
-        src="{{asset('images/content/banner-about.webp')}}" 
-        data-img-large="{{ asset('images/content/banner-about.webp') }}"
-        data-img-medium="{{ asset('images/content/banner-about.webp') }}"
-        data-img-small="{{ asset('images/content/banner-about.webp') }}"
-        width="1380" height="400" alt="img">
-    </figure>
-    <figcaption>
-      <small>TENTANG KAMI</small>
-      <h2>Statistik Produk Hukum</h2>
-    </figcaption>
-     <div class="wave">
-      <svg xmlns="http://www.w3.org/2000/svg"
-        width="100%" height="140"
-        viewBox="0 180 2500 200"
-        fill="#F8F8F8"
-        preserveAspectRatio="none">
-        <path class="st1"
-          d="M 0 250 C 1200 320 1200 100 3000 250 L 3000 550 L 0 550 L 0 250">
-          <animate attributeName="d" dur="5s"
-            values="M 0 250 C 1200 320 1200 100 3000 250 L 3000 550 L 0 550 L 0 250;
-                    M 0 250 C 400 100 400 320 3000 250 L 3000 550 L 0 550 L 0 250;
-                    M 0 250 C 1200 280 1200 100 3000 250 L 3000 550 L 0 550 L 0 250"
-            repeatCount="indefinite" />
-        </path>
-      </svg>
-    </div>
-  </section>
+  @include('dynamic.component.banner')
   <section class="middle">
     <div class="wrapper-content">
+      @foreach(widget($menu->id, 'menu', 'content') as $content)
       <div class="middle__title">
-        <h4>Statistik Produk Hukum Berdasarkan Status</h4>
-        <p>Berikut ini disajikan data mengenai jumlah peraturan perundang-undangan yang telah diterbitkan pada tingkat pusat. Informasi ini mencakup keseluruhan regulasi yang berlaku secara nasional, yang terdiri dari berbagai jenis peraturan mulai dari Undang-Undang, Peraturan Pemerintah, Peraturan Presiden, hingga peraturan-peraturan lain yang menjadi bagian dari sistem hukum di Indonesia</p>
+        <h4>{{ $content->translated('title') }}</h4>
+        {!! $content->translated('description') !!}
       </div>
+      @endforeach
       <div class="filter-right">
         <form action="">
           <div class="col">
-            <label for="">Kategori Grafik</label>
-            <select name="tahun" id="tahun">
-              <option value="" disabled selected>Pilih Tahun</option>
-              @for ($year = date('Y'); $year >= 2000; $year--)
-                <option value="{{ $year }}">{{ $year }}</option>
-              @endfor
+            <label for="">{{ lang::translate('about-statistik.year-select.title') }}</label>
+            <select name="tahun" id="tahun" onchange="if(this.value) window.location.href=this.value;">
+              <option value="" disabled selected>{{ lang::translate('about-statistik.year-select.placeholder') }}</option>
+              @foreach ($years as $data)
+                <option value="{{ url()->current().'?year='.$data->year }}" @selected(request()->query('year') == $data->year)>{{ $data->year }}</option>
+              @endforeach
             </select>
           </div>
         </form>
@@ -55,47 +28,19 @@
           <table>
             <thead>
               <tr>
-                <th>No</th>
-                <th>Jenis Peraturan</th>
-                <th>Jumlah</th>
+                <th>{{ lang::translate('about-statistik.table-header.no') }}</th>
+                <th>{{ lang::translate('about-statistik.table-header.jenis-peraturan') }}</th>
+                <th>{{ lang::translate('about-statistik.table-header.total') }}</th>
               </tr>
             </thead>
             <tbody>
+              @foreach ($rule_types as $data)
               <tr>
-                <td>1</td>
-                <td>Undang - Undang Dasar</td>
-                <td>1</td>
+                <td>{{ $loop->iteration }}</td>
+                <td>{{ $data->label }}</td>
+                <td>{{ $data->documents_count }}</td>
               </tr>
-              <tr>
-                <td>2</td>
-                <td>Ketetapan MPR</td>
-                <td>0</td>
-              </tr>
-              <tr>
-                <td>3</td>
-                <td>Undang - Undang</td>
-                <td>104</td>
-              </tr>
-              <tr>
-                <td>4</td>
-                <td>Peraturan Pemerintah Pengganti Undang - Undang</td>
-                <td>22</td>
-              </tr>
-              <tr>
-                <td>5</td>
-                <td>Peraturan Pemerintah</td>
-                <td>212</td>
-              </tr>
-              <tr>
-                <td>6</td>
-                <td>Peraturan Presiden</td>
-                <td>90</td>
-              </tr>
-              <tr>
-                <td>7</td>
-                <td>Instruksi Presiden</td>
-                <td>32</td>
-              </tr>
+              @endforeach
             </tbody>
           </table>
         </div>
@@ -106,7 +51,7 @@
         </div>
       </div>
       <div class="chart-year">
-        <p>Jumlah Produk Hukum Berlaku/ Tidak Berlaku</p>
+        <p>{{ lang::translate('about-statistik.chart.title') }}</p>
         <div class="chart">
           <canvas id="statusChart"></canvas>
         </div>
@@ -126,27 +71,11 @@
         new Chart(ctx, {
           type: 'bar',
           data: {
-            labels: [
-              'Undang-Undang Dasar',
-              'Ketetapan MPR',
-              'Undang-Undang',
-              'Peraturan Pemerintah Pengganti Undang-Undang',
-              'Peraturan Pemerintah',
-              'Peraturan Presiden',
-              'Peraturan Daerah'
-            ],
+            labels: @json($arr_rule_label),
             datasets: [{
-              label: 'Berlaku',
-              data: [5, 15, 100, 10, 212, 100, 60],
-              backgroundColor: [
-                '#5E5CE6',
-                '#9E9CF0',
-                '#6699FF',
-                '#F4A261',
-                '#B197FC',
-                '#E63946',
-                '#3BA99C'
-              ],
+              label: '{{ lang::translate("about-statistik.chart.berlaku") }}',
+              data: @json($arr_rule_count),
+              backgroundColor: @json($colors),
               borderRadius: 6,
               borderSkipped: false
             }]
@@ -167,7 +96,7 @@
                 displayColors: true,
                 callbacks: {
                   title: (context) => context[0].label,
-                  label: (context) => `Berlaku  ${context.formattedValue}`,
+                  label: (context) => `{{ lang::translate("about-statistik.chart.berlaku") }}  ${context.formattedValue}`,
                   labelPointStyle: (context) => ({
                     pointStyle: 'circle',
                     rotation: 0,
@@ -211,19 +140,19 @@
         new Chart(ctx2, {
           type: "bar",
           data: {
-            labels: ["2020","2021","2022", "2023", "2024", "2025", "2026"],
+            labels: @json($get_chart['berlaku']['year']),
             datasets: [
               {
-                label: "Berlaku",
-                data: [50, 54 ,22, 44, 88, 68, 72],
+                label: "{{ lang::translate("about-statistik.chart.berlaku") }}",
+                data:  @json($get_chart['berlaku']['data']),
                 backgroundColor: "#2063D2",
                 borderRadius: 8,
                 barPercentage: 0.8,
                 categoryPercentage: 0.8
               },
               {
-                label: "Tidak Berlaku",
-                data: [22 ,40, 76, 72, 45, 40, 38],
+                label: "{{ lang::translate("about-statistik.chart.tidak-berlaku") }}",
+                data: @json($get_chart['tidak-berlaku']['data']),
                 backgroundColor: "#8DB7FF",
                 borderRadius: 8,
                 barPercentage: 0.8,

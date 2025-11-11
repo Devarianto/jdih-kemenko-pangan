@@ -88,7 +88,7 @@ class GalleryController extends Controller
                 ]
             ],
             'date' => [
-                'label' => 'Type',
+                'label' => 'Date',
                 'type' => 'text',
                 'attributes' => [
                     'class' => 'required datepicker',

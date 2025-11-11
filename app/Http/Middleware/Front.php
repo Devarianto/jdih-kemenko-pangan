@@ -62,8 +62,8 @@ class Front
         }, \lang::translate('validate.email-format'));
 
         view()->share('mainMenu', Menu::position('main'));
-        view()->share('footTopMenu', Menu::position('foot-top'));
-        view()->share('footBottomMenu', Menu::position('foot-bottom'));
+        view()->share('footLeftMenu', Menu::position('foot-left'));
+        view()->share('footRightMenu', Menu::position('foot-right'));
         
         view()->share('webConfig', $webConfig);
 		$request->attributes->add(['webConfig' => $webConfig]);

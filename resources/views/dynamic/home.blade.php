@@ -480,12 +480,12 @@
     <div class="trigger trigger-5"></div>
     <div class="wrapper">
       <div class="statistik__left box">
-        <h5>Grafik Statistik Hukum</h5>
+        <h5>{{ lang::translate('home.chart.title') }}</h5>
         <div class="wrap-chart">
           <canvas id="statusChart"></canvas>
         </div>
-        <a href="" class="button button-outline">
-          <span>Lihat Selengkapnya</span>
+        <a href="{{ $menu_statistic->permalink }}" class="button button-outline">
+          <span>{{ lang::translate('home.chart.read-more') }}</span>
           <div class="wave"></div>
         </a>
       </div>
@@ -659,19 +659,19 @@
         new Chart(ctx, {
           type: "bar",
           data: {
-            labels: ["2022", "2023", "2024", "2025", "2026"],
+            labels: @json($get_chart['berlaku']['year']),
             datasets: [
               {
-                label: "Berlaku",
-                data: [88, 68, 72, 83, 82],
+                label: "{{ lang::translate('home.chart.berlaku') }}",
+                data: @json($get_chart['berlaku']['data']),
                 backgroundColor: "#2063D2",
                 borderRadius: 8,
                 barPercentage: 0.8,
                 categoryPercentage: 0.8
               },
               {
-                label: "Tidak Berlaku",
-                data: [76, 72, 45, 40, 38],
+                label: "{{ lang::translate('home.chart.tidak-berlaku') }}",
+                data: @json($get_chart['tidak-berlaku']['data']),
                 backgroundColor: "#8DB7FF",
                 borderRadius: 8,
                 barPercentage: 0.8,

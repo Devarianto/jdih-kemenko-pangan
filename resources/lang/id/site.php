@@ -1,6 +1,10 @@
 <?php
 
 return [
+	'footer' => [
+		'left' => 'DOKUMEN HUKUM',
+		'right' => 'INFORMASI HUKUM'
+	],
 	'home' => [
 		'newest-document' => 'DOKUMEN TERBARU',
 		'document' => [
@@ -16,7 +20,13 @@ return [
 		'news' => 'Berita',
 		'gallery-image' => 'Galeri Foto', 
 		'gallery-video' => 'Galeri Video', 
-		'read-more' => 'Lihat Selengkapnya'
+		'read-more' => 'Lihat Selengkapnya',
+		'chart' => [
+			'title' => 'Grafik Statistik Hukum',
+			'read-more' => 'Lihat Selengkapnya',
+			'berlaku' => 'Berlaku',
+			'tidak-berlaku' => 'Tidak Berlaku',
+		] 
 	],
 	'offline-page' => [
 		'social-media' => 'SOCIAL MEDIA'
@@ -27,7 +37,26 @@ return [
 			'title' => 'Urutkan',
 			'latest' => 'Terbaru',
 			'oldest' => 'Terlama'
-		]
+		],
+		'view' => ':count Dilihat',
+	],
+	'infografis' => [
+		'other-infografis' => 'Infografis Lainnya',
+		'back-to-infografis' => 'Kembali ke Infografis',
+		'share' => 'Share:'
+	],
+	'kamus-hukum' => [
+		'search' => [
+			'title' => 'Nama Kamus',
+			'placeholder' => 'Ketik Kata Kunci Pencarian',
+			'button' => 'Cari'
+		],
+		'all' => 'Semua',
+		'read-more' => 'Lihat Selengkapnya',
+		'other-kamus' => 'Kamus Lainnya',
+		'back-to-kamus' => 'Kembali ke Kamus',
+		'share' => 'Share:',
+		'reference' => 'REFERENSI',
 	],
 	'news' => [
 		'other-news' => 'Berita Lainnya',
@@ -47,7 +76,23 @@ return [
 		]
 	],
 	'about' => [
-		'file-iteration' => 'Landasan Hukum ke-:count'
+		'file-iteration' => 'Landasan Hukum ke-:count',
+	],
+	'about-statistik' => [
+		'year-select' => [
+			'title' => 'Tahun Grafik',
+			'placeholder' => 'Pilih Tahun'
+		],
+		'table-header' => [
+			'no' => 'No',
+			'jenis-peraturan' => 'Jenis Peraturan',
+			'total' => 'Jumlah'
+		],
+		'chart' => [
+			'title' => 'Jumlah Produk Hukum Berlaku/ Tidak Berlaku',
+			'berlaku' => 'Berlaku',
+			'tidak-berlaku' => 'Tidak Berlaku'
+		]
 	],
 	'validate' => [
 		'email-format' => 'Format email tidak valid!',

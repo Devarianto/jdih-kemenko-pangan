@@ -17,30 +17,29 @@
   </div>
   <div class="wrapper">
     <div class="top">
+      @php($footer = widget(99, 'site-setting-conf', 'footer', false))
+      @if($footer)
       <div class="box">
-        <div class="logo"><img src="{{ asset('images/material/logo.svg') }}" alt=""></div>
-        <p>Jaringan Dokumentasi dan Informasi Hukum - Kementerian Kordinator Republik Indonesia</p>
-        <address>Graha Mandiri, Jalan Imam Bonjol No. 61, Thamrin, Jakarta Pusat</address>
-        <a href="" class="button button-icon button-outline ">
+        <div class="logo"><img src="{{ media::initial($footer->logo)->url }}" alt="{{ media::initial($footer->logo)->alt }}"></div>
+        <p>{{ $footer->translated('title') }}</p>
+        <address>{!! nl2br(strip_tags($footer->address, '<br>')) !!}</address>
+        <a href="tel:{{ preg_replace('/\D/', '', $footer->phone) }}" class="button button-icon button-outline ">
           <i class="wa-icon wa-ic-phone-solid"></i>
-          (021) 319 36802
+          {{ $footer->phone }}
         </a>
       </div>
+      @endif
       <div class="box">
-        <h6>DOKUMEN HUKUM</h6>
-        <a href="">Peraturan Hukum</a>
-        <a href="">Monografi Hukum</a>
-        <a href="">Artikel Hukum</a>
-        <a href="">Putusan Hukum</a>
-        <a href="">Simplifikasi</a>
+        <h6>{{ lang::translate('footer.left') }}</h6>
+        @foreach($footLeftMenu as $menu)
+        <a href="{{ $menu->fullUrl }}">{{ $menu->label }}</a>
+        @endforeach
       </div>
       <div class="box">
-        <h6>INFORMASI LAINNYA</h6>
-        <a href="">Rancangan Peraturan</a>
-        <a href="">Lacak Dokumen</a>
-        <a href="">Berita</a>
-        <a href="">Galeri</a>
-        <a href="">Infografis</a>
+        <h6>{{ lang::translate('footer.right') }}</h6>
+        @foreach($footRightMenu as $menu)
+        <a href="{{ $menu->fullUrl }}">{{ $menu->label }}</a>
+        @endforeach
       </div>
        <div class="box">
         <h6>JUMLAH PENGUNJUNG</h6>
@@ -63,7 +62,7 @@
       </div>
     </div>
     <div class="bot">
-      <p>©2025  Biro Hukum Kementerian Kordinator Bidang Pangan. Site by <a href="https://webarq.com" target="_blank">WEBARQ</a></p>
+      <p>{!! og::copyright() !!}</p>
       <div class="bot__right">
         <a href=""><img src="{{asset('images/material/ic-ig.svg')  }}" alt=""></a>
         <a href=""><img src="{{asset('images/material/ic-x.svg')  }}" alt=""></a>

@@ -14,6 +14,10 @@ use App\Models\News;
 use App\Models\Document;
 use App\Models\RuleType;
 use App\Models\RuleTheme;
+use App\Models\Infografis;
+use App\Models\KamusHukum;
+
+use DB;
 
 class PageController extends Controller
 {
@@ -100,6 +104,16 @@ class PageController extends Controller
         $menus['naskah'] = Menu::fe()->whereIsActive(1)->where('type', 'naskah-hukum')->first();
 
 
+        $years = Document::select('year')
+            ->whereIsActive(1)
+            ->where('master_document_id', Document::PERATURAN)
+            ->groupBy('year')
+            ->get();
+
+        $get_chart = $this->getChartStatistic($years);
+
+        $menu_statistic = Menu::fe()->whereIsActive(1)->where('type', 'about-statistik')->first();
+
         return view('dynamic.home', compact(
             'news_first', 'news_others', 'newest_documents', 
             'document_monografi', 'monografi_count', 
@@ -108,7 +122,7 @@ class PageController extends Controller
             'document_jurnal', 'jurnal_count', 
             'document_majalah', 'majalah_count', 
             'document_kliping', 'kliping_count', 
-            'document_naskah', 'naskah_count', 'menus', 'popular_documents', 'gallery_image', 'gallery_video'));
+            'document_naskah', 'naskah_count', 'menus', 'popular_documents', 'gallery_image', 'gallery_video', 'get_chart', 'menu_statistic'));
     }
 
     private function find($id=null)
@@ -156,6 +170,85 @@ class PageController extends Controller
         return view('dynamic.pages.about-contactus', compact('menu'));
     }
 
+    public function getAboutStatistik($menu)
+    {
+        $rule_types = null;
+
+        if (request()->query('year')) {
+            $rule_types = RuleType::withCount([
+                'documents' => function($query) {
+                    $query->where('master_document_id', Document::PERATURAN)->where('year', request()->query('year'));
+                }
+            ])->whereIsActive(1)->get();
+        } else {
+            $rule_types = RuleType::withCount([
+                'documents' => function($query) {
+                    $query->where('master_document_id', Document::PERATURAN);
+                }
+            ])->whereIsActive(1)->get();
+        }
+        
+        $years = Document::select('year')
+            ->whereIsActive(1)
+            ->where('master_document_id', Document::PERATURAN)
+            ->groupBy('year')
+            ->get();
+        
+        $colors = [];
+        $arr_rule_label = [];
+        $arr_rule_count = [];
+
+        foreach ($rule_types as $data) {
+            $colors[] = $data->chart_color;
+            $arr_rule_label[] = $data->label;
+            $arr_rule_count[] = $data->documents_count;
+        }
+
+        $get_chart = $this->getChartStatistic($years);
+
+        return view('dynamic.pages.about-statistik', compact('menu', 'rule_types', 'years', 'colors', 'arr_rule_label', 'arr_rule_count', 'get_chart'));
+    }
+
+    public function getChartStatistic($years)
+    {
+        $year_berlaku = Document::select('year', DB::raw('count(year) as count_year'))
+            ->whereIsActive(1)
+            ->where('master_document_id', Document::PERATURAN)
+            ->where('status_berlaku', 1)
+            ->groupBy('year')
+            ->pluck('count_year', 'year')
+            ->toArray();
+
+        $year_tidak_berlaku = Document::select('year', DB::raw('count(year) as count_year'))
+            ->whereIsActive(1)
+            ->where('master_document_id', Document::PERATURAN)
+            ->where('status_berlaku', 0)
+            ->groupBy('year')
+            ->pluck('count_year', 'year')
+            ->toArray();
+
+        $arr_year_berlaku = [
+            'year' => [],
+            'data' => [],
+        ];
+        $arr_year_tidak_berlaku = [
+            'year' => [],
+            'data' => [],
+        ];
+
+        foreach ($years as $data) {
+            $arr_year_berlaku['year'][] = $data->year;
+            $arr_year_berlaku['data'][] = isset($year_berlaku[$data->year]) ? $year_berlaku[$data->year] : 0;
+        }
+
+        foreach ($years as $data) {
+            $arr_year_tidak_berlaku['year'][] = $data->year;
+            $arr_year_tidak_berlaku['data'][] = isset($year_tidak_berlaku[$data->year]) ? $year_tidak_berlaku[$data->year] : 0;
+        }
+
+        return ['berlaku' => $arr_year_berlaku, 'tidak-berlaku' => $arr_year_tidak_berlaku];
+    }
+
     public function getInformasiGaleri($menu)
     {
         $galleries = Gallery::translate()->whereIsActive(1);
@@ -165,10 +258,8 @@ class PageController extends Controller
         } else if (request()->query('filter') == 'video') {
             $galleries = $galleries->where('type', 'video');
         }
-
-        if (request()->query('sort') == 'latest') {
-            $galleries = $galleries->orderBy('date', 'desc');
-        } else if (request()->query('sort') == 'oldest') {
+        
+        if (request()->query('sort') == 'oldest') {
             $galleries = $galleries->orderBy('date', 'asc');
         } else {
             $galleries = $galleries->orderBy('date', 'desc');
@@ -177,6 +268,35 @@ class PageController extends Controller
         $galleries = $galleries->paginate(9);
         
         return view('dynamic.pages.informasi-galeri', compact('menu', 'galleries'));
+    }
+
+    public function getInformasiInfografis($menu)
+    {
+        $infografis = Infografis::translate()->whereIsActive(1);
+
+        if (request()->query('sort') == 'latest') {
+            $infografis = $infografis->orderBy('date', 'desc');
+        } else if (request()->query('sort') == 'oldest') {
+            $infografis = $infografis->orderBy('date', 'asc');
+        } else {
+            $infografis = $infografis->orderBy('date', 'desc');
+        }
+        
+        $infografis = $infografis->paginate(12);
+        
+        return view('dynamic.pages.documentlainnya-infografis', compact('menu', 'infografis'));
+    }
+
+    public function getInformasiInfografisDetail()
+    {
+        $id = Permalink::active()->uniqid;
+        $infografis = Infografis::translate()->whereIsActive(1)->findOrFail($id);
+        $infografis->view_count += 1;
+        $infografis->save();
+        
+        $menu = Menu::fe()->whereIsActive(1)->where('type', 'informasi-infografis')->first();
+        $others = Infografis::translate()->whereIsActive(1)->where('id', '!=', $infografis->id)->inRandomOrder()->limit(3)->get();
+        return view('dynamic.pages.documentlainnya-infografis-detail', compact('infografis', 'menu', 'others'));
     }
 
     public function getNews($menu)
@@ -204,6 +324,35 @@ class PageController extends Controller
         $menu = Menu::fe()->whereIsActive(1)->where('type', 'news')->first();
         $others = News::translate()->whereIsActive(1)->where('id', '!=', $news->id)->inRandomOrder()->limit(3)->get();
         return view('dynamic.pages.documentlainnya-berita-detail', compact('news', 'menu', 'others'));
+    }
+
+    public function getInformasiKamusHukum($menu)
+    {
+        $kamus = KamusHukum::translate()->whereIsActive(1);
+
+        if (request()->query('option') && request()->query('option') != 'all') {
+            $kamus = $kamus->where('title', 'like', request()->query('option').'%');
+        }
+
+        if (request()->query('search')) {
+            $kamus = $kamus->where('title', 'like', '%'.request()->query('search').'%');
+        }
+        
+        $kamus = $kamus->paginate(6);
+        
+        return view('dynamic.pages.documentlainnya-kamus-hukum', compact('menu', 'kamus'));
+    }
+
+    public function getInformasiKamusHukumDetail()
+    {
+        $id = Permalink::active()->uniqid;
+        $kamus = KamusHukum::translate()->whereIsActive(1)->findOrFail($id);
+        $kamus->view_count += 1;
+        $kamus->save();
+
+        $menu = Menu::fe()->whereIsActive(1)->where('type', 'informasi-kamus-hukum')->first();
+        $others = KamusHukum::translate()->whereIsActive(1)->where('id', '!=', $kamus->id)->inRandomOrder()->limit(3)->get();
+        return view('dynamic.pages.documentlainnya-kamus-hukum-detail', compact('kamus', 'menu', 'others'));
     }
 
     public function getPeraturanHukum($menu)

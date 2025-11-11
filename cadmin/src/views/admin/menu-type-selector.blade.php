@@ -18,7 +18,7 @@
     .selector-body { max-width:1200px; }
     .selector { padding:10px; text-align:center; margin-bottom:40px; }
     .selector .figure { display:block; height:200px; background-size:contain; background-repeat:no-repeat; background-position:center center; margin-bottom:10px; }
-    .selector .btn { display:block; overflow:hidden; text-overflow:ellipsis; height: 32px;}
+    .selector .btn { display:block; overflow:hidden; text-overflow:ellipsis; height: 70px;}
     .col-md-2 { float:left; }
 </style>
 
@@ -44,12 +44,10 @@
                 @foreach ($templates as $k=>$v)
                     <div  class="selector col-xs-2 col-md-2">
                         <a href="{{ array_get($v, 'preview') }}" 
-                           style="background-image:url('{{ array_get($v, 'preview') }}')"
-                           class="figure"
-                           data-fancybox
-                           data-caption="{{ array_get($v, 'label') }}" 
+                           style="background-image:url('{{ array_get($v, 'preview') }}');"
+                           class="figure fancybox" 
                            >&nbsp;</a>
-                        <a href="{{ url::admin($module) }}/create?type={{ $k }}" class="btn btn-flat bg-orange btn-warning">{{ array_get($v,'label') }}</a>
+                        <a href="{{ url::admin($module) }}/create?type={{ $k }}" class="btn btn-flat bg-orange btn-warning" style="display:flex;align-items:center;justify-content:center;">{{ array_get($v,'label') }}</a>
                     </div>
                 @endforeach
             </div>
@@ -62,7 +60,7 @@
             <div class="selector-body">
                 @foreach ($defaultType as $k=>$v)
                     <div  class="selector col-md-2">
-                        <a href="{{ url::admin($module) }}/create?type={{ $k }}" class="btn btn-flat bg-orange btn-warning">{{ $v }}</a>
+                        <a href="{{ url::admin($module) }}/create?type={{ $k }}" class="btn btn-flat bg-orange btn-warning" style="display:flex;align-items:center;justify-content:center;">{{ $v }}</a>
                     </div>
                 @endforeach
             </div>
