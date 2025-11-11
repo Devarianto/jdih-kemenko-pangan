@@ -14,7 +14,7 @@ trait EditTrait
         $module = $this->module();
         $fields = $this->fields('edit');
         $res = $this->res('edit')->findOrFail(request()->validated('unique','string|numeric',true));
-		$file = $this->createFile();
+		$file = $this->editFile($res);
 		
 		if (method_exists($this,'publishAble') && $this->publishAble($res) != true && array_key_exists('is_active',$fields)) {
 			unset($fields['is_active']);

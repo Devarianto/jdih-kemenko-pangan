@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use Cactuar\Admin\Models\Permalink;
 use App\Http\Controllers\Front\PageController;
 use App\Http\Controllers\Front\ContactController;
+use App\Http\Controllers\Front\RatingController;
 use App\Http\Controllers\Front\DownloadFileController;
 use App\Http\Controllers\Front\DocumentController;
 
@@ -59,6 +60,7 @@ Route::group(['middleware' => ['web','front']],function() {
     lang::routes(function() {
         Route::get('/', [PageController::class, 'home'])->name('home');
         Route::post('/contact/submit', [ContactController::class, 'postSubmit'])->name('contact.submit');
+        Route::post('/rating/submit', [RatingController::class, 'postSubmit'])->name('rating.submit');
     });
 
     Route::get('document/download/{type}/{id}', [DownloadFileController::class, 'getDocumentDownload'])->name('document.download');

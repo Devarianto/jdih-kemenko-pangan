@@ -200,11 +200,17 @@ return [
         'controller' => 'App\Http\Controllers\Admin\KamusHukumController',
         'routes' => admin::moduleRoutes(['index', 'edit', 'delete', 'create', 'publish'])
     ],
+    'rating' => [
+        'label' => 'Rating',
+        'fa' => 'star',
+		'controller' => 'App\Http\Controllers\Admin\RatingController',
+        'routes' => admin::moduleRoutes(['index','create','edit','delete','menu','publish', 'email-template']),
+    ],
 	'contact' => [
         'label' => 'Hubungi Kami',
         'fa' => 'phone',
 		'controller' => 'App\Http\Controllers\Admin\ContactController',
-        'routes' => admin::moduleRoutes(['index','edit','delete','create','publish', 'email-template']),
+        'routes' => admin::moduleRoutes(['index','edit','delete','publish', 'email-template']),
     ],
     /* tambahkan module lain disini */
     

@@ -490,7 +490,7 @@
         </a>
       </div>
       <div class="statistik__right box">
-        <h5>Indeks Kepuasan Masyarakat</h5>
+        <h5>{{ lang::translate('home.rating.title') }}</h5>
         <div class="rating-box">
           <div class="rating-summary">
             <h2 id="average">0.0</h2>
@@ -499,9 +499,9 @@
           </div>
           <div class="rating-breakdown" id="ratingBreakdown"></div>
         </div>
-        <p>Terima kasih atas penilaian yang telah anda berikan, masukan anda sangat bermanfaat agar terus memperbaiki dan meningkatkan kualitas pelayanan bagi masyarakat</p>
+        <p>{{ lang::translate('home.rating.intro') }}</p>
         <a href="javascript:void(0)" class="button button-outline" onclick="openPopup('#popup-rating')">
-          <span>Lihat Selengkapnya</span>
+          <span>{{ lang::translate('home.rating.popup-button') }}</span>
           <div class="wave"></div>
         </a>
       </div>
@@ -532,37 +532,38 @@
     <div class="popup__overlay"></div>
     <div class="popup__box popup__box--large">
       <div class="popup__content">
-        <h6>BERIKAN RATING</h6>
-        <form action="">
+        <h6>{{ lang::translate('home.rating.popup.title') }}</h6>
+        <form action="{{ lang::url('rating/submit') }}" method="POST">
+          @csrf
           <div class="row row-wrap">
             <div class="column column-100">
-              <label for="">Rating</label>
+              <label for="">{{ lang::translate('home.rating.popup.form.title.rating') }}</label>
               <div class="rates">
-                <input type="radio" id="starR5" name="rateR" value="5">
+                <input type="radio" id="starR5" name="rating" value="5">
                 <label for="starR5">
                 <svg xmlns="http://www.w3.org/2000/svg" width="26.522" height="24.864" viewBox="0 0 26.522 24.864">
                     <path id="star" d="M12.539,1.515a.8.8,0,0,1,1.444,0L17.05,7.951a.8.8,0,0,0,.624.45l7.138.884a.8.8,0,0,1,.445,1.381L20.025,15.5a.8.8,0,0,0-.242.74L21.133,23.2a.8.8,0,0,1-1.167.856l-6.324-3.432a.8.8,0,0,0-.763,0L6.555,24.055A.8.8,0,0,1,5.388,23.2l1.351-6.956A.8.8,0,0,0,6.5,15.5L1.265,10.667A.8.8,0,0,1,1.71,9.285L8.847,8.4a.8.8,0,0,0,.624-.45Z" fill="#e6e6e6"/>
                 </svg>
                 </label>
-                <input type="radio" id="starR4" name="rateR" value="4">
+                <input type="radio" id="starR4" name="rating" value="4">
                 <label for="starR4">
                 <svg xmlns="http://www.w3.org/2000/svg" width="26.522" height="24.864" viewBox="0 0 26.522 24.864">
                     <path id="star" d="M12.539,1.515a.8.8,0,0,1,1.444,0L17.05,7.951a.8.8,0,0,0,.624.45l7.138.884a.8.8,0,0,1,.445,1.381L20.025,15.5a.8.8,0,0,0-.242.74L21.133,23.2a.8.8,0,0,1-1.167.856l-6.324-3.432a.8.8,0,0,0-.763,0L6.555,24.055A.8.8,0,0,1,5.388,23.2l1.351-6.956A.8.8,0,0,0,6.5,15.5L1.265,10.667A.8.8,0,0,1,1.71,9.285L8.847,8.4a.8.8,0,0,0,.624-.45Z" fill="#e6e6e6"/>
                 </svg>
                 </label>
-                <input type="radio" id="starR3" name="rateR" value="3">
+                <input type="radio" id="starR3" name="rating" value="3">
                 <label for="starR3">
                 <svg xmlns="http://www.w3.org/2000/svg" width="26.522" height="24.864" viewBox="0 0 26.522 24.864">
                     <path id="star" d="M12.539,1.515a.8.8,0,0,1,1.444,0L17.05,7.951a.8.8,0,0,0,.624.45l7.138.884a.8.8,0,0,1,.445,1.381L20.025,15.5a.8.8,0,0,0-.242.74L21.133,23.2a.8.8,0,0,1-1.167.856l-6.324-3.432a.8.8,0,0,0-.763,0L6.555,24.055A.8.8,0,0,1,5.388,23.2l1.351-6.956A.8.8,0,0,0,6.5,15.5L1.265,10.667A.8.8,0,0,1,1.71,9.285L8.847,8.4a.8.8,0,0,0,.624-.45Z" fill="#e6e6e6"/>
                 </svg>
                 </label>
-                <input type="radio" id="starR2" name="rateR" value="2">
+                <input type="radio" id="starR2" name="rating" value="2">
                 <label for="starR2">
                 <svg xmlns="http://www.w3.org/2000/svg" width="26.522" height="24.864" viewBox="0 0 26.522 24.864">
                     <path id="star" d="M12.539,1.515a.8.8,0,0,1,1.444,0L17.05,7.951a.8.8,0,0,0,.624.45l7.138.884a.8.8,0,0,1,.445,1.381L20.025,15.5a.8.8,0,0,0-.242.74L21.133,23.2a.8.8,0,0,1-1.167.856l-6.324-3.432a.8.8,0,0,0-.763,0L6.555,24.055A.8.8,0,0,1,5.388,23.2l1.351-6.956A.8.8,0,0,0,6.5,15.5L1.265,10.667A.8.8,0,0,1,1.71,9.285L8.847,8.4a.8.8,0,0,0,.624-.45Z" fill="#e6e6e6"/>
                 </svg>
                 </label>
-                <input type="radio" id="starR1" name="rateR" value="1">
+                <input type="radio" id="starR1" name="rating" value="1">
                 <label for="starR1">
                 <svg xmlns="http://www.w3.org/2000/svg" width="26.522" height="24.864" viewBox="0 0 26.522 24.864">
                     <path id="star" d="M12.539,1.515a.8.8,0,0,1,1.444,0L17.05,7.951a.8.8,0,0,0,.624.45l7.138.884a.8.8,0,0,1,.445,1.381L20.025,15.5a.8.8,0,0,0-.242.74L21.133,23.2a.8.8,0,0,1-1.167.856l-6.324-3.432a.8.8,0,0,0-.763,0L6.555,24.055A.8.8,0,0,1,5.388,23.2l1.351-6.956A.8.8,0,0,0,6.5,15.5L1.265,10.667A.8.8,0,0,1,1.71,9.285L8.847,8.4a.8.8,0,0,0,.624-.45Z" fill="#e6e6e6"/>
@@ -571,16 +572,19 @@
               </div>
             </div>
             <div class="column column-100">
-              <label for="">Nama</label>
-              <input type="text" placeholder="Nama Lengkap">
+              <label for="">{{ lang::translate('home.rating.popup.form.title.name') }}</label>
+              <input type="text" name="name" placeholder="{{ lang::translate('home.rating.popup.form.placeholder.name') }}">
             </div>
             <div class="column column-100">
-              <label for="">Email</label>
-              <input type="text" placeholder="Alamat Email">
+              <label for="">{{ lang::translate('home.rating.popup.form.title.email') }}</label>
+              <input type="text" name="email" placeholder="{{ lang::translate('home.rating.popup.form.placeholder.email') }}">
             </div>
             <div class="column column-100">
-              <label for="">Komentar</label>
-              <textarea name="" id="" placeholder="Tuliskan Komentar Anda"></textarea>
+              <label for="">{{ lang::translate('home.rating.popup.form.title.comment') }}</label>
+              <textarea name="comment" id="" placeholder="{{ lang::translate('home.rating.popup.form.placeholder.comment') }}"></textarea>
+            </div>
+            <div class="column column-100">
+            {!! recaptcha::draw() !!}
             </div>
             <div class="column column-100">
               <button type="submit" class="button button-gradient">Kirim</button>
@@ -638,6 +642,22 @@
       </div>
     </div>
   </div>
+  @if (Session::has('success'))
+  <div class="popup" id="popup-center">
+    <div class="popup__overlay"></div>
+    <div class="popup__box">
+      <div class="popup__close">
+        <i class="wa-icon wa-ic-close-solid"></i>
+      </div>
+      <div class="popup__content popup__content--center">
+        <img src="{{asset('images/material/checklist-bullet.svg')}}" alt="">
+        <h3>{{ lang::translate('home.rating.popup-success.title') }}</h3>
+        <p>{{ lang::translate('home.rating.popup-success.message') }}</p>
+        <a href="" class="button button-gradient">{{ lang::translate('home.rating.popup-success.button') }}</a>
+      </div>
+    </div>
+  </div>
+  @endif
   <!-- end of middle -->
   @push('head')
     <link rel="stylesheet" type="text/css" href="{{ Vite::asset('resources/assets/sass/pages/home.scss')}}" preload>
@@ -646,15 +666,19 @@
     <script type="module" async type="text/javascript" src="{{ Vite::asset('resources/assets/js/document.js') }}"></script>
     <script>
       const ratingData = {
-        average: 4.7,
-        total: 10,
-        breakdown: { 5: 5, 4: 3, 3: 2, 2: 0, 1: 0 }
+        average: {{ $avg_rating }},
+        total: {{ $total_rating }},
+        breakdown: {!! $rating !!}
       };
     </script>
     <script type="module" async type="text/javascript" src="{{ Vite::asset('resources/assets/js/home.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
       document.addEventListener("DOMContentLoaded", function(event) { 
+        @if (Session::has('success'))
+        openPopup('#popup-center');
+        @endif
+
         const ctx = $("#statusChart");
         new Chart(ctx, {
           type: "bar",
