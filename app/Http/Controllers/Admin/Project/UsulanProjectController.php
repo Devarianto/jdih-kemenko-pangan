@@ -8,15 +8,15 @@ use Cactuar\Admin\Traits\Controllers\BaseTrait;
 use Cactuar\Admin\Traits\Controllers\ListingTrait;
 use Cactuar\Admin\Traits\Controllers\DeleteTrait;
 use Cactuar\Admin\Traits\Controllers\DownloadTrait;
-use Cactuar\Admin\Traits\Controllers\EmailTemplateTrait;
 use App\Models\Project;
 use App\Models\StatusProject;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 class UsulanProjectController extends Controller
 {
-    use BaseTrait, ListingTrait, DeleteTrait, DownloadTrait, EmailTemplateTrait;
+    use BaseTrait, ListingTrait, DeleteTrait, DownloadTrait;
 
     public function listingRes()
     {
@@ -54,7 +54,7 @@ class UsulanProjectController extends Controller
             {
                 return "Belum di Proses";
             }else{
-                return $item->getStatus['label'];
+                return optional($item->getStatus)->label ?? '-';
             }
         }
 
@@ -141,6 +141,10 @@ class UsulanProjectController extends Controller
 
         // insert initial status to project_update table
         $firstStatus = StatusProject::whereIsActive(1)->orderBy('id', 'asc')->first();
+
+        $project->status_review = 2;
+        $project->status_project = $firstStatus->id;
+        $project->save();
         if ($firstStatus) {
             DB::table('project_update')->insert([
                 'user_id' => Auth::id(),
@@ -170,6 +174,17 @@ class UsulanProjectController extends Controller
         $project->status_review = 1;
         $project->save();
 
+        DB::table('project_update')->insert([
+            'user_id' => Auth::id(),
+            'project_id' => $project->id,
+            'project_name' => $project->name_project,
+            'id_status_project' => 0,
+            'label_status_project_id' => 'Tolak',
+            'label_status_project_en' => 'Reject',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
         return back()->with('success', 'Usulan berhasil di-reject.');
     }
 
@@ -189,12 +204,13 @@ class UsulanProjectController extends Controller
         if ($request->hasFile('file')) {
             $file = $request->file('file');
             $filename = time().'_'.preg_replace('/\s+/', '_', $file->getClientOriginalName());
-            $targetDir = public_path('uploads/projects');
+            $folder = Str::slug($project->no_project);
+            $targetDir = public_path('uploads/projects/'.$folder);
             if (!is_dir($targetDir)) {
                 @mkdir($targetDir, 0775, true);
             }
             $file->move($targetDir, $filename);
-            $dokumenPath = 'uploads/projects/'.$filename;
+            $dokumenPath = 'uploads/projects/'.$folder.'/'.$filename;
         }
 
         // get translated labels for selected status

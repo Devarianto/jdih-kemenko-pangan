@@ -43,17 +43,7 @@
                 -
                 @else
                   @foreach($files as $path)
-                    @php
-                      $href = $path;
-                      if (strpos($path, 'uploads/') === 0) {
-                        $href = $path;
-                      } elseif (strpos($path, 'storage/') === 0) {
-                        $href = $path;
-                      } else {
-                        $href = 'storage/'.$path;
-                      }
-                    @endphp
-                    <div><a href="{{ asset($href) }}" target="_blank">{{ basename($path) }}</a></div>
+                    <div><a href="{{ asset($path) }}" target="_blank">{{ basename($path) }}</a></div>
                   @endforeach
                 @endif
               </td>
@@ -66,7 +56,7 @@
               <td>Divisi/Pemohon</td>
               <td>
                 @if($project->applicantDivisions && $project->applicantDivisions->count())
-                  {{ $project->applicantDivisions->pluck('label')->join(', ') }}
+                  {{ $project->applicantDivisions()->pluck('label')->join(', ') }}
                 @else
                   -
                 @endif

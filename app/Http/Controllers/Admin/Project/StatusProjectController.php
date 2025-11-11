@@ -45,6 +45,19 @@ class StatusProjectController extends Controller
                 'attributes' => [
                     'class' => 'required',
                 ]
+            ],
+			'color' => [
+                'type' => 'select',
+                'label' => 'Color',
+                'attributes' => [
+                    'class' => 'required',
+                ],
+                'options'=>[
+                	'plan-1'=>'Plan 1',
+                	'plan-2'=>'Plan 2',
+                	'done'=>'Done',
+
+                ]
             ]
         ];
     }

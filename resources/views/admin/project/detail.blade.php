@@ -78,7 +78,7 @@
 		                -
 		                @else
 		                  @foreach($files as $path)
-		                    <div><a href="{{ asset($path) }}" target="_blank">{{ basename($path) }}</a></div>
+		                    <a href="{{ asset($path) }}" target="_blank">{{ basename($path) }}</a> <br>&nbsp;
 		                  @endforeach
 		                @endif
                         </div>

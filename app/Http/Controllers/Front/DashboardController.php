@@ -72,7 +72,7 @@ class DashboardController extends Controller
 
     public function listProject(Request $request)
     {
-        $query = Project::with('category')->where('status_review', 2);
+        $query = Project::with(['category','getStatus'])->where('status_review', 2);
 
         if ($request->filled('q')) {
             $query->where('name_project', 'like', '%' . $request->input('q') . '%');
@@ -131,13 +131,14 @@ class DashboardController extends Controller
         ]);
 
         $storedPaths = [];
-        $destinationPath = public_path('uploads/projects');
+        $folder = Str::slug($validated['no_project']);
+        $destinationPath = public_path('uploads/projects/' . $folder);
         File::ensureDirectoryExists($destinationPath);
         foreach ($request->file('files', []) as $uploadedFile) {
             if ($uploadedFile) {
                 $uniqueName = Str::uuid()->toString() . '.' . $uploadedFile->getClientOriginalExtension();
                 $uploadedFile->move($destinationPath, $uniqueName);
-                $storedPaths[] = 'uploads/projects/' . $uniqueName;
+                $storedPaths[] = 'uploads/projects/' . $folder . '/' . $uniqueName;
             }
         }
 

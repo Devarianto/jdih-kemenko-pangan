@@ -23,12 +23,17 @@ class Project extends Model
 
     public function applicantDivisions()
     {
-        return $this->belongsToMany(ApplicantDivision::class, 'project_applicant_division', 'project_id', 'applicant_division_id');
+        return $this->belongsToMany(ApplicantDivision::class, 'project_applicant_division', 'project_id', 'applicant_division_id')->select('label')->translate();
     }
 
     public function category()
     {
         return $this->belongsTo(CategoryProject::class, 'category_id', 'id')->translate();
+    }
+
+    public function getStatus()
+    {
+        return $this->belongsTo(StatusProject::class, 'status_project', 'id')->translate();
     }
 }
 

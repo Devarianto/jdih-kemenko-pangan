@@ -16,6 +16,7 @@ return new class extends Migration
 
         CactuarBlueprint::schema()->create('status_projects', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('color')->nullable();
             $table->publishable();
             $table->sortable();
             $table->timestamps();

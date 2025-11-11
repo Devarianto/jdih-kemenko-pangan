@@ -64,7 +64,9 @@
                     <td>{{ optional($project->category)->label }}</td>
                     <td>{{ \Carbon\Carbon::parse($project->date)->translatedFormat('d F Y') }}</td>
                     <td>-</td>
-                    <td><span class="status done">Selesai</span></td>
+                    <td>
+                      <span class="status {{ optional($project->getStatus)->color }}">{{ optional($project->getStatus)->label ?? '-' }}</span>
+                    </td>
                     <td><a href="{{ route('detail.project', ['id' => Crypt::encryptString($project->id)]) }}" class="button button-outline">Detail</a></td>
                   </tr>
                   @empty
