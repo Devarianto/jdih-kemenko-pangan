@@ -23,6 +23,10 @@ Route::group(['middleware' => ['web','front']],function() {
             Route::get($permalink->permalink, [PageController::class, 'getInformasiInfografisDetail']);
         }
 
+        if ($permalink->module == 'information-kamus-hukum'){
+            Route::get($permalink->permalink, [PageController::class, 'getInformasiKamusHukumDetail']);
+        }
+
         if ($permalink->module == 'document-peraturan') {
             Route::get($permalink->permalink, [DocumentController::class, 'getPeraturanHukumDetail']);
         }

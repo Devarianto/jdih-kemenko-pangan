@@ -45,6 +45,19 @@ return [
 		'back-to-infografis' => 'Kembali ke Infografis',
 		'share' => 'Share:'
 	],
+	'kamus-hukum' => [
+		'search' => [
+			'title' => 'Nama Kamus',
+			'placeholder' => 'Ketik Kata Kunci Pencarian',
+			'button' => 'Cari'
+		],
+		'all' => 'Semua',
+		'read-more' => 'Lihat Selengkapnya',
+		'other-kamus' => 'Kamus Lainnya',
+		'back-to-kamus' => 'Kembali ke Kamus',
+		'share' => 'Share:',
+		'reference' => 'REFERENSI',
+	],
 	'news' => [
 		'other-news' => 'Berita Lainnya',
 		'back-to-news' => 'Kembali ke Berita',

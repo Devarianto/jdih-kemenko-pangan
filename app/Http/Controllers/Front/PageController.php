@@ -15,6 +15,7 @@ use App\Models\Document;
 use App\Models\RuleType;
 use App\Models\RuleTheme;
 use App\Models\Infografis;
+use App\Models\KamusHukum;
 
 use DB;
 
@@ -323,6 +324,32 @@ class PageController extends Controller
         $menu = Menu::fe()->whereIsActive(1)->where('type', 'news')->first();
         $others = News::translate()->whereIsActive(1)->where('id', '!=', $news->id)->inRandomOrder()->limit(3)->get();
         return view('dynamic.pages.documentlainnya-berita-detail', compact('news', 'menu', 'others'));
+    }
+
+    public function getInformasiKamusHukum($menu)
+    {
+        $kamus = KamusHukum::translate()->whereIsActive(1);
+
+        if (request()->query('option') && request()->query('option') != 'all') {
+            $kamus = $kamus->where('title', 'like', request()->query('option').'%');
+        }
+
+        if (request()->query('search')) {
+            $kamus = $kamus->where('title', 'like', '%'.request()->query('search').'%');
+        }
+        
+        $kamus = $kamus->paginate(6);
+        
+        return view('dynamic.pages.documentlainnya-kamus-hukum', compact('menu', 'kamus'));
+    }
+
+    public function getInformasiKamusHukumDetail()
+    {
+        $id = Permalink::active()->uniqid;
+        $kamus = KamusHukum::translate()->whereIsActive(1)->findOrFail($id);
+        $menu = Menu::fe()->whereIsActive(1)->where('type', 'informasi-kamus-hukum')->first();
+        $others = KamusHukum::translate()->whereIsActive(1)->where('id', '!=', $kamus->id)->inRandomOrder()->limit(3)->get();
+        return view('dynamic.pages.documentlainnya-kamus-hukum-detail', compact('kamus', 'menu', 'others'));
     }
 
     public function getPeraturanHukum($menu)
