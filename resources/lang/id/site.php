@@ -37,7 +37,13 @@ return [
 			'title' => 'Urutkan',
 			'latest' => 'Terbaru',
 			'oldest' => 'Terlama'
-		]
+		],
+		'view' => ':count Dilihat',
+	],
+	'infografis' => [
+		'other-infografis' => 'Infografis Lainnya',
+		'back-to-infografis' => 'Kembali ke Infografis',
+		'share' => 'Share:'
 	],
 	'news' => [
 		'other-news' => 'Berita Lainnya',

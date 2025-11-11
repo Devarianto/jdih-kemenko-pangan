@@ -48,7 +48,7 @@
               <div class="wrap-flex">
                 <div class="text">
                   <span class="category" @if (!$document->status_berlaku) style="background-color: #C25A5A;" @endif>{{ $document->front_status_berlaku }}</span>
-                  {{-- <span class="tag">#Putusan Hukum</span> --}}
+                  <span class="tag">{{ $document->jenis_peradilan }}</span>
                   <p>{{ $document->translated('title') }}</p>
                 </div>
                 <span class="button button-outline">{{ lang::translate('document.read-more') }}</span>

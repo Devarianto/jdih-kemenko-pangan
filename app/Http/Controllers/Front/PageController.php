@@ -14,6 +14,7 @@ use App\Models\News;
 use App\Models\Document;
 use App\Models\RuleType;
 use App\Models\RuleTheme;
+use App\Models\Infografis;
 
 use DB;
 
@@ -256,10 +257,8 @@ class PageController extends Controller
         } else if (request()->query('filter') == 'video') {
             $galleries = $galleries->where('type', 'video');
         }
-
-        if (request()->query('sort') == 'latest') {
-            $galleries = $galleries->orderBy('date', 'desc');
-        } else if (request()->query('sort') == 'oldest') {
+        
+        if (request()->query('sort') == 'oldest') {
             $galleries = $galleries->orderBy('date', 'asc');
         } else {
             $galleries = $galleries->orderBy('date', 'desc');
@@ -268,6 +267,35 @@ class PageController extends Controller
         $galleries = $galleries->paginate(9);
         
         return view('dynamic.pages.informasi-galeri', compact('menu', 'galleries'));
+    }
+
+    public function getInformasiInfografis($menu)
+    {
+        $infografis = Infografis::translate()->whereIsActive(1);
+
+        if (request()->query('sort') == 'latest') {
+            $infografis = $infografis->orderBy('date', 'desc');
+        } else if (request()->query('sort') == 'oldest') {
+            $infografis = $infografis->orderBy('date', 'asc');
+        } else {
+            $infografis = $infografis->orderBy('date', 'desc');
+        }
+        
+        $infografis = $infografis->paginate(12);
+        
+        return view('dynamic.pages.documentlainnya-infografis', compact('menu', 'infografis'));
+    }
+
+    public function getInformasiInfografisDetail()
+    {
+        $id = Permalink::active()->uniqid;
+        $infografis = Infografis::translate()->whereIsActive(1)->findOrFail($id);
+        $infografis->view_count += 1;
+        $infografis->save();
+        
+        $menu = Menu::fe()->whereIsActive(1)->where('type', 'informasi-infografis')->first();
+        $others = Infografis::translate()->whereIsActive(1)->where('id', '!=', $infografis->id)->inRandomOrder()->limit(3)->get();
+        return view('dynamic.pages.documentlainnya-infografis-detail', compact('infografis', 'menu', 'others'));
     }
 
     public function getNews($menu)
