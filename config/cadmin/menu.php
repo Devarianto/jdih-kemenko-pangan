@@ -89,7 +89,7 @@ return [
         'label' => 'Kategori',
         'fa' => 'tags',
         'parent' => 'project',
-        'controller' => 'App\Http\Controllers\Admin\CategoryProjectController',
+        'controller' => 'App\Http\Controllers\Admin\Project\CategoryProjectController',
         'routes' => admin::moduleRoutes(['index','edit','delete','create','publish']),
     ],
 
@@ -97,7 +97,15 @@ return [
         'label' => 'Divisi Pemohon',
         'fa' => 'tags',
         'parent' => 'project',
-        'controller' => 'App\Http\Controllers\Admin\ApplicantDivisionController',
+        'controller' => 'App\Http\Controllers\Admin\Project\ApplicantDivisionController',
+        'routes' => admin::moduleRoutes(['index','edit','delete','create','publish']),
+    ],
+
+    'status-project' => [
+        'label' => 'Status Project',
+        'fa' => 'tags',
+        'parent' => 'project',
+        'controller' => 'App\Http\Controllers\Admin\Project\StatusProjectController',
         'routes' => admin::moduleRoutes(['index','edit','delete','create','publish']),
     ],
 
@@ -105,8 +113,8 @@ return [
         'label' => 'Usulan',
         'fa' => 'file',
         'parent' => 'project',
-        'controller' => 'App\Http\Controllers\Admin\UsulanController',
-        'routes' => admin::moduleRoutes(['index','edit','delete','create','publish','download']),
+        'controller' => 'App\Http\Controllers\Admin\Project\UsulanProjectController',
+        'routes' => admin::moduleRoutes(['index','edit','delete','create','publish','download'], ['detail'], ['approve','reject','update-status']),
     ],
 
     'menu' => [

@@ -9,6 +9,7 @@ class Project extends Model
     protected $table = 'projects';
 
     protected $fillable = [
+        'user_id',
         'no_project',
         'name_project',
         'category_id',
@@ -16,6 +17,8 @@ class Project extends Model
         'file',
         'applicant_name',
         'status_review',
+        'status_project',
+        'end_date',
     ];
 
     public function applicantDivisions()

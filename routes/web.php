@@ -63,7 +63,7 @@ Route::group(['middleware' => ['web','front']],function() {
         Route::get('/dashboard/formulir-usulan', [DashboardController::class, 'formUsulan'])->middleware('auth:account')->name('form.usulan');
         Route::get('/dashboard/detail-usulan/{id}', [DashboardController::class, 'detailUsulan'])->middleware('auth:account')->name('detail.usulan');
         Route::get('/dashboard/project', [DashboardController::class, 'listProject'])->middleware('auth:account')->name('project');
-        Route::get('/dashboard/detail-project', [DashboardController::class, 'detailProject'])->middleware('auth:account')->name('detail.project');
+        Route::get('/dashboard/detail-project/{id}', [DashboardController::class, 'detailProject'])->middleware('auth:account')->name('detail.project');
     });
 
     Route::get('document/download/{type}/{id}', [DownloadFileController::class, 'getDocumentDownload'])->name('document.download');

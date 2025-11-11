@@ -29,7 +29,23 @@ class AuthController extends Controller
 
         if (Auth::guard('account')->attempt($attemptCredentials, $remember)) {
             $request->session()->regenerate();
+            if ($request->expectsJson()) {
+                return response()->json([
+                    'success' => true,
+                    'redirect' => route('dashboard'),
+                ]);
+            }
             return redirect()->route('dashboard');
+        }
+
+        if ($request->expectsJson()) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Email atau password tidak sesuai, atau akun belum aktif.',
+                'errors' => [
+                    'email' => ['Email atau password tidak sesuai, atau akun belum aktif.'],
+                ],
+            ], 422);
         }
 
         return back()

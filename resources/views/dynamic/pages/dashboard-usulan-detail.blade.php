@@ -1,4 +1,4 @@
-@extends('static.layouts.layout')
+@extends('dynamic.layouts.layout')
 
 @section('content')
   <section class="dashboard">
@@ -43,7 +43,7 @@
                 -
                 @else
                   @foreach($files as $path)
-                    <div><a href="{{ asset('storage/'.$path) }}" target="_blank">{{ basename($path) }}</a></div>
+                    <div><a href="{{ asset($path) }}" target="_blank">{{ basename($path) }}</a></div>
                   @endforeach
                 @endif
               </td>

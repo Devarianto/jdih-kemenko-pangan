@@ -95,6 +95,9 @@
               <div class="column column-100">
               <button type="submit" class="button button-gradient button-full">Masuk Sekarang</button>
             </div>
+            <div class="column column-100">
+              <div id="login-error" style="color:#ffdddd; background:#7f1d1d; padding:8px 12px; border-radius:6px; display:none;"></div>
+            </div>
           </div>
         </form>
         <small>©2025 Biro Hukum ⋅ Kementerian Kordinator Bidang Pangan</small>
@@ -102,6 +105,76 @@
     </div>
   </div>
 </div>
+
+@push('footer')
+<script>
+  (function() {
+    const popup = document.getElementById('popup-login');
+    if (!popup) return;
+    const form = popup.querySelector('form');
+    const errorBox = document.getElementById('login-error');
+    if (!form) return;
+
+    form.addEventListener('submit', async function(e) {
+      e.preventDefault();
+      if (errorBox) {
+        errorBox.style.display = 'none';
+        errorBox.textContent = '';
+      }
+      const submitBtn = form.querySelector('button[type="submit"]');
+      const originalText = submitBtn ? submitBtn.textContent : '';
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Memproses...';
+      }
+      try {
+        const formData = new FormData(form);
+        const res = await fetch(form.action, {
+          method: 'POST',
+          headers: { 'Accept': 'application/json' },
+          body: formData,
+          credentials: 'same-origin'
+        });
+        if (res.ok) {
+          const data = await res.json();
+          if (data && data.redirect) {
+            window.location.href = data.redirect;
+          } else {
+            window.location.href = "{{ route('dashboard') }}";
+          }
+          return;
+        }
+        // handle validation/auth errors
+        let msg = 'Gagal login. Periksa kembali email dan password Anda.';
+        try {
+          const data = await res.json();
+          if (data && (data.message || (data.errors && data.errors.email && data.errors.email[0]))) {
+            msg = data.message || data.errors.email[0];
+          }
+        } catch (_) {}
+        if (errorBox) {
+          errorBox.textContent = msg;
+          errorBox.style.display = 'block';
+        } else {
+          alert(msg);
+        }
+      } catch (err) {
+        if (errorBox) {
+          errorBox.textContent = 'Terjadi kesalahan jaringan. Coba lagi.';
+          errorBox.style.display = 'block';
+        } else {
+          alert('Terjadi kesalahan jaringan. Coba lagi.');
+        }
+      } finally {
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.textContent = originalText;
+        }
+      }
+    });
+  })();
+  </script>
+@endpush
 
 <section class="menu-mobile">
   <nav>

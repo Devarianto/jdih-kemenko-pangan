@@ -17,9 +17,11 @@ return new class extends Migration
             $table->string('name_project');
             $table->integer('category_id');
             $table->date('date');
+            $table->date('end_date');
             $table->text('file');
             $table->string('applicant_name');
             $table->integer('status_review')->default('0');
+            $table->integer('status_project')->default('0');
             $table->timestamps();
         });
 

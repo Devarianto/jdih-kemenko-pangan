@@ -17,13 +17,16 @@ use App\Models\CategoryProject;
 use App\Models\ApplicantDivision;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
 {
     public function index(Request $request)
     {
 
-        $query = Project::with('category');
+        $query = Project::with('category')->whereIn('status_review', [0,1]);
 
         if ($request->filled('q')) {
             $query->where('name_project', 'like', '%' . $request->input('q') . '%');
@@ -69,17 +72,44 @@ class DashboardController extends Controller
 
     public function listProject(Request $request)
     {
-        $query = Project::with('category')->where('status_review', 1);
+        $query = Project::with('category')->where('status_review', 2);
+
+        if ($request->filled('q')) {
+            $query->where('name_project', 'like', '%' . $request->input('q') . '%');
+        }
+
+        if ($request->filled('year')) {
+            $query->where('date', 'like', $request->input('year') . '%');
+        }
 
         $projects = $query->orderBy('created_at','desc')->paginate(10);
 
-        return view('dynamic.pages.dashboard-project', compact('projects'));
+        $years = Project::selectRaw('LEFT(`date`, 4) as year')
+            ->where('status_review', 2)
+            ->whereNotNull('date')
+            ->where('date', '!=', '')
+            ->distinct()
+            ->orderBy('year', 'desc')
+            ->pluck('year');
+
+        return view('dynamic.pages.dashboard-project', compact('projects','years'));
 
     }
 
-    public function detailProject()
+    public function detailProject($id)
     {
-        return view('dynamic.pages.dashboard-detail-project');
+        try {
+            $realId = \Illuminate\Support\Facades\Crypt::decryptString($id);
+        } catch (\Throwable $e) {
+            abort(404);
+        }
+
+        $project = Project::with(['category','applicantDivisions'])->findOrFail($realId);
+        $updates = \DB::table('project_update')
+            ->where('project_id', $project->id)
+            ->orderBy('created_at', 'asc')
+            ->get();
+        return view('dynamic.pages.dashboard-detail-project', compact('project','updates'));
 
     }
 
@@ -89,11 +119,11 @@ class DashboardController extends Controller
     public function storeProject(Request $request)
     {
         $validated = $request->validate([
-            'no_project' => ['required', 'string', 'max:255'],
+            'no_project' => ['required', 'string', 'max:255', 'unique:projects,no_project'],
             'name_project' => ['required', 'string', 'max:255'],
             'category_id' => ['required', 'integer'],
             'date' => ['required', 'string', 'max:255'],
-            'files' => ['required', 'array', 'min:1'],
+            'files' => ['required', 'array', 'min:1', 'max:3'],
             'files.*' => ['file', 'mimes:jpg,jpeg,png,webp,pdf,doc,docx', 'max:5120'],
             'applicant_name' => ['required', 'string', 'max:255'],
             'applicant_divisions' => ['nullable', 'array'],
@@ -101,13 +131,18 @@ class DashboardController extends Controller
         ]);
 
         $storedPaths = [];
+        $destinationPath = public_path('uploads/projects');
+        File::ensureDirectoryExists($destinationPath);
         foreach ($request->file('files', []) as $uploadedFile) {
             if ($uploadedFile) {
-                $storedPaths[] = $uploadedFile->store('projects', 'public');
+                $uniqueName = Str::uuid()->toString() . '.' . $uploadedFile->getClientOriginalExtension();
+                $uploadedFile->move($destinationPath, $uniqueName);
+                $storedPaths[] = 'uploads/projects/' . $uniqueName;
             }
         }
 
         $project = Project::create([
+            'user_id' => Auth::guard('account')->id(),
             'no_project' => $validated['no_project'],
             'name_project' => $validated['name_project'],
             'category_id' => $validated['category_id'],

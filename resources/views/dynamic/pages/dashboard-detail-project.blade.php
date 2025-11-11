@@ -1,4 +1,4 @@
-@extends('static.layouts.layout')
+@extends('dynamic.layouts.layout')
 
 @section('content')
   <section class="dashboard">
@@ -15,23 +15,48 @@
           <table>
             <tr>
               <td>Nomor Project</td>
-              <td>A1234567HG</td>
+              <td>{{ $project->no_project }}</td>
             </tr>
              <tr>
               <td>Judul</td>
-              <td>Rancangan Peraturan Presiden</td>
+              <td>{{ $project->name_project }}</td>
             </tr>
             <tr>
               <td>Kategori</td>
-              <td>RUU</td>
+              <td>{{ optional($project->category)->label }}</td>
             </tr>
             <tr>
               <td>Tanggal Ulasan</td>
-              <td>15 Juli 2025</td>
+              <td>{{ \Carbon\Carbon::parse($project->date)->translatedFormat('d F Y') }}</td>
             </tr>
             <tr>
               <td>Lampiran</td>
-              <td><a href="">dokumen-usulan.pdf</a></td>
+              <td>
+                @php
+                  $files = [];
+                  if (is_string($project->file)) {
+                    $decoded = json_decode($project->file, true);
+                    $files = is_array($decoded) ? $decoded : (empty($project->file) ? [] : [$project->file]);
+                  }
+                @endphp
+                @if(count($files) === 0)
+                -
+                @else
+                  @foreach($files as $path)
+                    @php
+                      $href = $path;
+                      if (strpos($path, 'uploads/') === 0) {
+                        $href = $path;
+                      } elseif (strpos($path, 'storage/') === 0) {
+                        $href = $path;
+                      } else {
+                        $href = 'storage/'.$path;
+                      }
+                    @endphp
+                    <div><a href="{{ asset($href) }}" target="_blank">{{ basename($path) }}</a></div>
+                  @endforeach
+                @endif
+              </td>
             </tr>
           </table>
           <hr>
@@ -39,56 +64,47 @@
           <table>
             <tr>
               <td>Divisi/Pemohon</td>
-              <td>Dokumentasi, BPN</td>
+              <td>
+                @if($project->applicantDivisions && $project->applicantDivisions->count())
+                  {{ $project->applicantDivisions->pluck('label')->join(', ') }}
+                @else
+                  -
+                @endif
+              </td>
             </tr>
             <tr>
               <td>Nama Pemohon</td>
-              <td>John Doe</td>
+              <td>{{ $project->applicant_name }}</td>
             </tr>
           </table>
           <hr>
           <h5>Status Project</h5>
           <div class="status-project">
-            <div class="status-project__step done">
+            @forelse(($updates ?? []) as $u)
+            <div class="status-project__step {{ $loop->last ? '' : 'done' }}">
               <div class="icon">
                 <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48" fill="none">
                   <rect x="2" y="2" width="44" height="44" rx="22" fill="white" stroke="#999999" stroke-width="4"/>
                   <path d="M16.8008 22.6L21.3008 28L31.2008 19" stroke="#999999" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
               </div>
-              <span class="date">15 Juli 2025</span>
+              <span class="date">{{ \Carbon\Carbon::parse($u->created_at)->translatedFormat('d F Y') }}</span>
               <div class="text">
-                <p><b>Perencanaan</b></p>
+                @php
+                  $label = app()->getLocale() === 'en'
+                    ? ($u->label_status_project_en ?: $u->label_status_project_id)
+                    : ($u->label_status_project_id ?: $u->label_status_project_en);
+                @endphp
+                <p><b>{{ $label }}</b></p>
+                @if(!empty($u->note))
+                  <p>{{ $u->note }}</p>
+                @endif
+                @if(!empty($u->dokumen))
+                  <a href="{{ asset($u->dokumen) }}" target="_blank">{{ basename($u->dokumen) }}</a>
+                @endif
               </div>
             </div>
-            <div class="status-project__step done">
-              <div class="icon">
-                <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48" fill="none">
-                  <rect x="2" y="2" width="44" height="44" rx="22" fill="white" stroke="#999999" stroke-width="4"/>
-                  <path d="M16.8008 22.6L21.3008 28L31.2008 19" stroke="#999999" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-              </div>
-              <span class="date">15 Juli 2025</span>
-              <div class="text">
-                <p><b>Penyusunan</b></p>
-                <p>Project ini dalam proses di divisi pengembangan</p>
-                <a href="">dokumen-usulan.pdf</a>
-              </div>
-            </div>
-            <div class="status-project__step done">
-              <div class="icon">
-                <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48" fill="none">
-                  <rect x="2" y="2" width="44" height="44" rx="22" fill="white" stroke="#999999" stroke-width="4"/>
-                  <path d="M16.8008 22.6L21.3008 28L31.2008 19" stroke="#999999" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-              </div>
-              <span class="date">15 Juli 2025</span>
-              <div class="text">
-                <p><b>Pembahasan</b></p>
-                <p>Project ini dalam proses di divisi pengembangan</p>
-                <a href="">dokumen-usulan.pdf</a>
-              </div>
-            </div>
+            @empty
             <div class="status-project__step">
               <div class="icon">
                 <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48" fill="none">
@@ -96,13 +112,12 @@
                   <path d="M16.8008 22.6L21.3008 28L31.2008 19" stroke="#999999" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
               </div>
-              <span class="date">15 Juli 2025</span>
+              <span class="date">-</span>
               <div class="text">
-                <p><b>Penyusunan</b></p>
-                <p>Project ini dalam proses di divisi pengembangan</p>
-                <a href="">dokumen-usulan.pdf</a>
+                <p><b>Belum ada pembaruan status</b></p>
               </div>
             </div>
+            @endforelse
           </div>
         </div>
       </div>
