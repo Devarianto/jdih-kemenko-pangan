@@ -7,6 +7,7 @@ use App\Http\Controllers\Front\PageController;
 use App\Http\Controllers\Front\DashboardController;
 use App\Http\Controllers\Front\ContactController;
 use App\Http\Controllers\Front\AuthController;
+use App\Http\Controllers\Front\RatingController;
 use App\Http\Controllers\Front\DownloadFileController;
 use App\Http\Controllers\Front\DocumentController;
 
@@ -64,14 +65,15 @@ Route::group(['middleware' => ['web','front']],function() {
         Route::post('/login', [AuthController::class, 'login'])->name('login');
         Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
-        Route::post('/projects', [DashboardController::class, 'storeProject'])->middleware('auth:account')->name('projects.store');
-
-
-        Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('auth:account')->name('dashboard');
-        Route::get('/dashboard/formulir-usulan', [DashboardController::class, 'formUsulan'])->middleware('auth:account')->name('form.usulan');
-        Route::get('/dashboard/detail-usulan/{id}', [DashboardController::class, 'detailUsulan'])->middleware('auth:account')->name('detail.usulan');
-        Route::get('/dashboard/project', [DashboardController::class, 'listProject'])->middleware('auth:account')->name('project');
-        Route::get('/dashboard/detail-project/{id}', [DashboardController::class, 'detailProject'])->middleware('auth:account')->name('detail.project');
+        Route::middleware('auth:account')->group(function () {
+            Route::post('/projects', [DashboardController::class, 'storeProject'])->name('projects.store');
+            Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+            Route::get('/dashboard/formulir-usulan', [DashboardController::class, 'formUsulan'])->name('form.usulan');
+            Route::get('/dashboard/detail-usulan/{id}', [DashboardController::class, 'detailUsulan'])->name('detail.usulan');
+            Route::get('/dashboard/project', [DashboardController::class, 'listProject'])->name('project');
+            Route::get('/dashboard/detail-project/{id}', [DashboardController::class, 'detailProject'])->name('detail.project');
+        });
+        Route::post('/rating/submit', [RatingController::class, 'postSubmit'])->name('rating.submit');
     });
 
     Route::get('document/download/{type}/{id}', [DownloadFileController::class, 'getDocumentDownload'])->name('document.download');

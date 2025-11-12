@@ -19,7 +19,7 @@ class ContactController extends Controller
     {
         return [
             'contact-submit-admin' => [
-                'type' => 'Admin Custom',
+                'type' => 'Admin',
                 'label' => 'Send notif email to admin',
 		        'required' => true,
                 'keywords' => [

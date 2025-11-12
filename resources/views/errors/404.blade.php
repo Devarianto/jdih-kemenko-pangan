@@ -4,8 +4,8 @@ use Cactuar\Admin\Models\Menu;
 	try {
 		$webConfig = conf('site-setting');
     $mainMenu = Cactuar\Admin\Models\Menu::position('main');
-    $footTopMenu = Cactuar\Admin\Models\Menu::position('foot-top');
-    $footBottomMenu = Cactuar\Admin\Models\Menu::position('foot-bottom');
+    $footLeftMenu = Cactuar\Admin\Models\Menu::position('foot-left');
+    $footRightMenu = Cactuar\Admin\Models\Menu::position('foot-right');
     if (!$webConfig || $webConfig->status == 'offline') {
         echo view('dynamic.errors.offline');
         die();

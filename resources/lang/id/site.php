@@ -6,6 +6,23 @@ return [
 		'right' => 'INFORMASI HUKUM'
 	],
 	'home' => [
+		'search-peraturan' => [
+			'placeholder' => 'Ketik Kata Kunci Pencarian',
+			'specific-search' => [
+				'title' => 'Pencarian Spesifik',
+				'form-title' => [
+					'rule-type' => 'Jenis Peraturan',
+					'theme' => 'Tema',
+					'year' => 'Tahun'
+				],
+				'form-placeholder' => [
+					'rule-type' => 'Pilih Peraturan',
+					'theme' => 'Tema',
+					'year' => 'Pilih Tahun'
+				]
+			],
+			'button' => 'Cari'
+		],
 		'newest-document' => 'DOKUMEN TERBARU',
 		'document' => [
 			'popular' => 'Terpopular',
@@ -17,6 +34,10 @@ return [
 			'jurnal' => 'JURNAL',
 			'naskah' => 'NASKAH KERJA SAMA',
 		],
+		'tema-peraturan' => [
+			'title' => 'TEMA PERATURAN',
+			'subtitle' => 'Kumpulan peraturan yang saling berkaitan dari setiap deputi bidang'
+		],
 		'news' => 'Berita',
 		'gallery-image' => 'Galeri Foto', 
 		'gallery-video' => 'Galeri Video', 
@@ -26,7 +47,35 @@ return [
 			'read-more' => 'Lihat Selengkapnya',
 			'berlaku' => 'Berlaku',
 			'tidak-berlaku' => 'Tidak Berlaku',
-		] 
+		],
+		'rating' => [
+			'title' => 'INDEKS KEPUASAN MASYARAKAT',
+			'intro' => 'Terima kasih atas penilaian yang telah anda berikan, masukan anda sangat bermanfaat agar terus memperbaiki dan meningkatkan kualitas pelayanan bagi masyarakat',
+			'popup-button' => 'Berikan Rating',
+			'total' => ':count Penilaian',
+			'popup' => [
+				'title' => 'BERIKAN RATING',
+				'form' => [
+					'title' => [
+						'rating' => 'Rating',
+						'name' => 'Nama',
+						'email' => 'Email',
+						'comment' => 'Komentar'
+					],
+					'placeholder' => [
+						'name' => 'Nama Lengkap',
+						'email' => 'Alamat Email',
+						'comment' => 'Tuliskan Komentar Anda'
+					],
+					'button' => 'Kirim'
+				]
+			],
+			'popup-success' => [
+				'title' => 'Terimakasih!',
+				'message' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam ',
+				'button' => 'Kembali'
+			]
+		]
 	],
 	'offline-page' => [
 		'social-media' => 'SOCIAL MEDIA'

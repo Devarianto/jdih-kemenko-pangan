@@ -16,6 +16,7 @@ use App\Models\RuleType;
 use App\Models\RuleTheme;
 use App\Models\Infografis;
 use App\Models\KamusHukum;
+use App\Models\Rating;
 
 use DB;
 
@@ -23,6 +24,16 @@ class PageController extends Controller
 {
     public function home()
     {
+        $home = Menu::translate()->firstOrFail();
+
+        $rule_types = RuleType::whereIsActive(1)->get();
+        $rule_themes = RuleTheme::whereIsActive(1)->get();
+        $year_peraturan = Document::select('year')
+            ->whereIsActive(1)
+            ->where('master_document_id', Document::PERATURAN)
+            ->groupBy('year')
+            ->get();
+
         $news_first = News::translate()->whereIsActive(1)->orderBy('date', 'desc')->first();
         $news_others = News::translate()->whereIsActive(1)->offset(1)->limit(3)->orderBy('date', 'desc')->get();
 
@@ -114,6 +125,29 @@ class PageController extends Controller
 
         $menu_statistic = Menu::fe()->whereIsActive(1)->where('type', 'about-statistik')->first();
 
+        // Rating
+        $total_rating = Rating::count();
+        $average = Rating::avg('rating');
+        $avg_rating = round($average, 1);
+
+        $rating = [
+            1 => 0,
+            2 => 0,
+            3 => 0,
+            4 => 0,
+            5 => 0
+        ];
+
+        $get_rating = Rating::select('rating', DB::raw('count(rating) as count_rating'))->groupBy('rating')->pluck('count_rating', 'rating')->toArray();
+
+        foreach ($rating as $key => $data) {
+            if (isset($get_rating[$key])) {
+                $rating[$key] = $get_rating[$key];
+            }
+        }
+
+        $rating = json_encode($rating);
+
         return view('dynamic.home', compact(
             'news_first', 'news_others', 'newest_documents', 
             'document_monografi', 'monografi_count', 
@@ -122,7 +156,11 @@ class PageController extends Controller
             'document_jurnal', 'jurnal_count', 
             'document_majalah', 'majalah_count', 
             'document_kliping', 'kliping_count', 
-            'document_naskah', 'naskah_count', 'menus', 'popular_documents', 'gallery_image', 'gallery_video', 'get_chart', 'menu_statistic'));
+            'document_naskah', 'naskah_count', 
+            'menus', 'popular_documents', 
+            'gallery_image', 'gallery_video', 
+            'get_chart', 'menu_statistic',
+            'total_rating', 'avg_rating', 'rating', 'home', 'rule_types', 'rule_themes', 'year_peraturan'));
     }
 
     private function find($id=null)

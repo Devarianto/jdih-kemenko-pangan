@@ -74,6 +74,33 @@ class SettingController extends BaseController
                     ]
                 ]
             ],
+            'socmed' => [
+                'type' => 'widget',
+                'subtitle' => 'Social Media',
+                'more-label' => 'Add social media',
+                'max' => 4,
+                'widgets' => [
+                    'icon' => [
+                        'type' => 'text',
+                        'label' => 'Icon',
+                        'info' => 'Use SVG only. Recomended size width : 32 x height : 32',
+                        'attributes' => [
+                            'class' => 'required cfind',
+                            'cfind-type' => 'image',
+                            'cfind-ext' => 'svg',
+                            'cfind-alt' => 1,
+                        ],
+                    ],
+                    'link' => [
+                        'type' => 'text',
+                        'label' => 'Link',
+                        'info' => 'use http/https',
+                        'attributes' => [
+                            'class' => 'required',
+                        ],
+                    ],
+                ],
+            ],
             'meta-title' => [
                 'label' => 'Meta Title',
                 'subtitle' => 'Default Meta Data',

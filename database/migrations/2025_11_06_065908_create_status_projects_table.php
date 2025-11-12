@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\DB;
 
 use Cactuar\Admin\CactuarBlueprint;
 
@@ -26,6 +27,42 @@ return new class extends Migration
             $table->translated();
             $table->string('label');
         });
+
+        // Seed initial statuses (ID and EN)
+        $statuses = [
+            ['id' => 'Perencanaan', 'en' => 'Planning'],
+            ['id' => 'Penyusunan', 'en' => 'Drafting'],
+            ['id' => 'Pembahasan', 'en' => 'Deliberation'],
+            ['id' => 'Konsultasi Publik', 'en' => 'Public Consultation'],
+            ['id' => 'Harmonisasi', 'en' => 'Harmonization'],
+            ['id' => 'Persetujuan Presiden', 'en' => 'Presidential Approval'],
+            ['id' => 'Penetapan dan Pengundangan', 'en' => 'Enactment and Promulgation'],
+            ['id' => 'Penyebarluasan', 'en' => 'Dissemination'],
+            ['id' => 'Selesai', 'en' => 'Completed'],
+        ];
+
+        foreach ($statuses as $index => $labels) {
+            $baseId = DB::table('status_projects')->insertGetId([
+                'color' => null,
+                'is_active' => 1,
+                'sort_id' => $index + 1,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]);
+
+            DB::table('status_projects_lang')->insert([
+                [
+                    'base_id' => $baseId,
+                    'lang' => 'id',
+                    'label' => $labels['id'],
+                ],
+                [
+                    'base_id' => $baseId,
+                    'lang' => 'en',
+                    'label' => $labels['en'],
+                ],
+            ]);
+        }
     }
 
     /**

@@ -13,7 +13,7 @@ use Cactuar\Admin\Traits\Controllers\PublishTrait;
 
 class StatusProjectController extends Controller
 {
-	use BaseTrait, ListingTrait, CreateTrait, EditTrait, DeleteTrait, PublishTrait;
+	use BaseTrait, ListingTrait, EditTrait, PublishTrait;
 	
 	public function listingRes()
 	{
