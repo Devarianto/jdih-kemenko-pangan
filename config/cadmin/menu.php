@@ -22,6 +22,13 @@ return [
         'default-action' => 'config',
         'routes' => admin::moduleRoutes(['config']),
     ],
+    'translation' => [
+        'label' => 'Translation',
+        'parent' => 'setting',
+        'fa' => 'fas fa-language',
+        'controller' => 'Cactuar\Admin\Http\Controllers\TranslationController',
+        'routes' => ['get' => ['index', 'edit'], 'post' => ['edit']],
+    ],
     'offline-page'=>[
         'label'=>'Offline page',
         'parent'=>'setting',
@@ -78,6 +85,43 @@ return [
         'controller' => 'App\Http\Controllers\Admin\AccountController',
         'fa' => 'user',
         'routes' => admin::moduleRoutes(['index', 'create', 'edit', 'delete', 'publish', 'email-template'], ['new-password'],['new-password'])
+    ],
+
+    'project' => [
+        'label' => 'Project',
+        'fa' => 'pencil-square',
+    ],
+
+    'kategori-project' => [
+        'label' => 'Kategori',
+        'fa' => 'tags',
+        'parent' => 'project',
+        'controller' => 'App\Http\Controllers\Admin\Project\CategoryProjectController',
+        'routes' => admin::moduleRoutes(['index','edit','delete','create','publish']),
+    ],
+
+    'divisi-pemohon' => [
+        'label' => 'Divisi Pemohon',
+        'fa' => 'tags',
+        'parent' => 'project',
+        'controller' => 'App\Http\Controllers\Admin\Project\ApplicantDivisionController',
+        'routes' => admin::moduleRoutes(['index','edit','delete','create','publish']),
+    ],
+
+    'status-project' => [
+        'label' => 'Status Project',
+        'fa' => 'tags',
+        'parent' => 'project',
+        'controller' => 'App\Http\Controllers\Admin\Project\StatusProjectController',
+        'routes' => admin::moduleRoutes(['index','edit','delete','create','publish']),
+    ],
+
+    'usulan-project' => [
+        'label' => 'Usulan',
+        'fa' => 'file',
+        'parent' => 'project',
+        'controller' => 'App\Http\Controllers\Admin\Project\UsulanProjectController',
+        'routes' => admin::moduleRoutes(['index','edit','delete','create','publish','download'], ['detail'], ['approve','reject','update-status']),
     ],
 
     'menu' => [

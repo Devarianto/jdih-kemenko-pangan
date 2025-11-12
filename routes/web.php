@@ -4,7 +4,9 @@ use Illuminate\Support\Facades\Route;
 
 use Cactuar\Admin\Models\Permalink;
 use App\Http\Controllers\Front\PageController;
+use App\Http\Controllers\Front\DashboardController;
 use App\Http\Controllers\Front\ContactController;
+use App\Http\Controllers\Front\AuthController;
 use App\Http\Controllers\Front\RatingController;
 use App\Http\Controllers\Front\DownloadFileController;
 use App\Http\Controllers\Front\DocumentController;
@@ -57,9 +59,20 @@ Route::group(['middleware' => ['web','front']],function() {
         }
     }
 
-    lang::routes(function() {
+    \Cactuar\Admin\Helpers\lang::routes(function() {
         Route::get('/', [PageController::class, 'home'])->name('home');
         Route::post('/contact/submit', [ContactController::class, 'postSubmit'])->name('contact.submit');
+        Route::post('/login', [AuthController::class, 'login'])->name('login');
+        Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
+        Route::middleware('auth:account')->group(function () {
+            Route::post('/projects', [DashboardController::class, 'storeProject'])->name('projects.store');
+            Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+            Route::get('/dashboard/formulir-usulan', [DashboardController::class, 'formUsulan'])->name('form.usulan');
+            Route::get('/dashboard/detail-usulan/{id}', [DashboardController::class, 'detailUsulan'])->name('detail.usulan');
+            Route::get('/dashboard/project', [DashboardController::class, 'listProject'])->name('project');
+            Route::get('/dashboard/detail-project/{id}', [DashboardController::class, 'detailProject'])->name('detail.project');
+        });
         Route::post('/rating/submit', [RatingController::class, 'postSubmit'])->name('rating.submit');
     });
 
