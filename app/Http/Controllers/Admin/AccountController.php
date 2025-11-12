@@ -95,7 +95,7 @@ class AccountController extends Controller
         if ($type == 'create')
         {
             $form['password'] =[
-                    'type' => 'password',
+                    'type' => 'text',
                     'label' => 'Password',
                     'attributes' => [
                         'class' => 'required',
