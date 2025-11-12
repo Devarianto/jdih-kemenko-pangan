@@ -34,10 +34,6 @@ return [
 			'jurnal' => 'JURNAL',
 			'naskah' => 'NASKAH KERJA SAMA',
 		],
-		'tema-peraturan' => [
-			'title' => 'TEMA PERATURAN',
-			'subtitle' => 'Kumpulan peraturan yang saling berkaitan dari setiap deputi bidang'
-		],
 		'news' => 'Berita',
 		'gallery-image' => 'Galeri Foto', 
 		'gallery-video' => 'Galeri Video', 

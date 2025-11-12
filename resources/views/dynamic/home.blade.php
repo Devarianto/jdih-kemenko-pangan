@@ -16,8 +16,8 @@
       @if ($menus['peraturan'] != null)
       <form action="{{ $menus['peraturan']->permalink }}" id="frm-search">
         <div class="wrap-input">
-          <input type="text" name="search" value="{{ request()->query('search') }}" class="search-top" placeholder="{{ lang::translate('home.search-peraturan.placeholder') }}">
-          <button class="voice">
+          <input type="text" id="searchPeraturan" name="search" value="{{ request()->query('search') }}" class="search-top" placeholder="{{ lang::translate('home.search-peraturan.placeholder') }}">
+          <button type="button" class="voice" id="btnToggle">
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="21" viewBox="0 0 20 21" fill="none">
               <path d="M10 17.375C8.3424 17.375 6.75269 16.7165 5.58058 15.5444C4.40848 14.3723 3.75 12.7826 3.75 11.125C3.75 10.9592 3.81585 10.8003 3.93306 10.6831C4.05027 10.5658 4.20924 10.5 4.375 10.5C4.54076 10.5 4.69973 10.5658 4.81694 10.6831C4.93415 10.8003 5 10.9592 5 11.125C5 12.4511 5.52678 13.7229 6.46447 14.6605C7.40215 15.5982 8.67392 16.125 10 16.125C11.3261 16.125 12.5979 15.5982 13.5355 14.6605C14.4732 13.7229 15 12.4511 15 11.125C15 10.9592 15.0658 10.8003 15.1831 10.6831C15.3003 10.5658 15.4592 10.5 15.625 10.5C15.7908 10.5 15.9497 10.5658 16.0669 10.6831C16.1842 10.8003 16.25 10.9592 16.25 11.125C16.25 12.7826 15.5915 14.3723 14.4194 15.5444C13.2473 16.7165 11.6576 17.375 10 17.375Z" fill="#2063D2" stroke="#2063D2" stroke-width="0.2"/>
               <path d="M10 19.875C9.83424 19.875 9.67527 19.8092 9.55806 19.6919C9.44085 19.5747 9.375 19.4158 9.375 19.25V16.75C9.375 16.5842 9.44085 16.4253 9.55806 16.3081C9.67527 16.1908 9.83424 16.125 10 16.125C10.1658 16.125 10.3247 16.1908 10.4419 16.3081C10.5592 16.4253 10.625 16.5842 10.625 16.75V19.25C10.625 19.4158 10.5592 19.5747 10.4419 19.6919C10.3247 19.8092 10.1658 19.875 10 19.875Z" fill="#2063D2" stroke="#2063D2" stroke-width="0.2"/>
@@ -129,16 +129,16 @@
       </div>
     </div>
   </section>
-  @if ($menus['peraturan'] != null)
+  @foreach (widget($home->id, 'menu', 'rule-theme') as $data)
   <section class="tema animating-scroll" data-animate-trigger=".trigger-2">
     <div class="trigger trigger-2"></div>
     <div class="bg">
       <img 
-      src="{{asset('images/content/bg-tema.jpg')}}" 
-      data-img-large="{{ asset('images/content/bg-tema.jpg') }}"
-      data-img-medium="{{ asset('images/content/bg-tema-m.jpg') }}"
-      data-img-small="{{ asset('images/content/bg-tema-s.jpg') }}"
-      width="1380" height="620" alt="img">
+      src="{{ media::initial($data->image)->url }}" 
+      data-img-large="{{ media::initial($data->image)->url }}"
+      data-img-medium="{{ media::initial($data->value('image-medium'))->url }}"
+      data-img-small="{{ media::initial($data->value('image-small'))->url }}"
+      alt="{{ media::initial($data->image)->alt }}">
     </div>
     <div class="wave">
       <svg xmlns="http://www.w3.org/2000/svg" widht="5000" height="200" viewBox="0 180 2500 200" fill="#F8F8F8">
@@ -154,9 +154,10 @@
     </div>
     <div class="wrapper">
       <div class="tema__title">
-        <h3>{{ lang::translate('home.tema-peraturan.title') }}</h3>
-        <p>{{ lang::translate('home.tema-peraturan.subtitle') }}</p>
+        <h3>{{ $data->translated('title') }}</h3>
+        <p>{{ $data->translated('subtitle') }}</p>
       </div>
+      @if ($menus['peraturan'] != null)
       <div class="tema__listing">
         @foreach ($rule_themes as $data)
         <a href="{{ $menus['peraturan']->permalink.'?theme='.$data->id }}" class="tema__listing--item">
@@ -168,9 +169,10 @@
         </a>
         @endforeach
       </div>
+      @endif
     </div>
   </section>
-  @endif
+  @endforeach
   <section class="artikel animating-scroll" data-animate-trigger=".trigger-3">
     <div class="trigger trigger-3"></div>
     <div class="wrapper">
@@ -677,6 +679,45 @@
 
           this.submit();
         });
+
+        if (!window.SpeechRecognition) {
+          alert('Browser Anda tidak mendukung Speech Recognition.');
+        } else {
+          const rec = new window.SpeechRecognition();
+          rec.lang = 'id-ID';
+          rec.continuous = true;
+          rec.interimResults = true;
+
+          const btn = document.getElementById('btnToggle');
+          const input = document.getElementById('searchPeraturan');
+          let recognizing = false;
+          let finalTranscript = '';
+
+          rec.onresult = (event) => {
+            let interim = '';
+            for (let i = event.resultIndex; i < event.results.length; i++) {
+              const result = event.results[i];
+              if (result.isFinal) finalTranscript += result[0].transcript + ' ';
+              else interim += result[0].transcript;
+            }
+            input.value = finalTranscript + interim;
+          };
+
+          rec.onerror = (e) => console.error(e);
+          rec.onstart = () => recognizing = true;
+          rec.onend = () => recognizing = false;
+
+          btn.addEventListener('click', () => {
+            if (!recognizing) {
+              finalTranscript = input.value || '';
+              rec.start();
+              // btn.textContent = 'Berhenti';
+            } else {
+              rec.stop();
+              // btn.textContent = 'Mulai Bicara';
+            }
+          });
+        }
 
         const ctx = $("#statusChart");
         new Chart(ctx, {
