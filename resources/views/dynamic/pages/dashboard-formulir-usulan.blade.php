@@ -1,72 +1,65 @@
-@extends('static.layouts.layout')
+@extends('dynamic.layouts.layout')
 
 @section('content')
   <section class="dashboard">
     <div class="wrapper">
-      <div class="dashboard__left">
-        <h6>DASHBOARD</h6>
-        <nav>
-          <ul>
-            <li>
-              <a href="">
-                <svg xmlns="http://www.w3.org/2000/svg" width="23" height="24" viewBox="0 0 23 24" fill="none">
-                  <path d="M22.4397 14.6049L21.2603 13.4341C20.9064 13.0829 20.4051 12.878 19.9038 12.878C19.3731 12.878 18.9013 13.0829 18.5474 13.4341L12.0603 19.9024C11.8833 20.078 11.7949 20.2829 11.7949 20.5171V23.122C11.7949 23.6195 12.1782 24 12.6795 24H15.3038C15.5397 24 15.7756 23.9122 15.9231 23.7366L22.4397 17.2976C22.7936 16.9463 23 16.4488 23 15.9512C23 15.4537 22.7936 14.9561 22.4397 14.6049ZM19.9038 14.6341C19.9333 14.6341 19.9923 14.6341 20.0218 14.6927L21.2013 15.8634C21.2308 15.8927 21.2603 15.9512 21.2603 15.9805C21.2603 16.0098 21.2603 16.0683 21.2013 16.0976L20.4641 16.8293L19.0782 15.4537L19.8154 14.722C19.8154 14.6341 19.8744 14.6341 19.9038 14.6341ZM14.95 22.2439H13.5641V20.8683L17.7808 16.6829L19.1667 18.0585L14.95 22.2439ZM9.14103 21.0732H4.42308C2.56538 21.0732 1.76923 20.2829 1.76923 18.439V4.39024C1.76923 2.54634 2.56538 1.7561 4.42308 1.7561H10.6154V4.39024C10.6154 7.22927 12.1782 8.78049 15.0385 8.78049H17.6923V10.2439C17.6923 10.7415 18.0756 11.122 18.5769 11.122C19.0782 11.122 19.4615 10.7415 19.4615 10.2439V7.90244C19.4615 7.66829 19.3731 7.43415 19.1962 7.2878L12.1192 0.263415C11.9718 0.0878049 11.7359 0 11.5 0H4.42308C1.56282 0 0 1.55122 0 4.39024V18.439C0 21.278 1.56282 22.8293 4.42308 22.8293H9.14103C9.64231 22.8293 10.0256 22.4488 10.0256 21.9512C10.0256 21.4537 9.64231 21.0732 9.14103 21.0732ZM12.3846 4.39024V2.98537L16.4538 7.02439H15.0385C13.1808 7.02439 12.3846 6.23415 12.3846 4.39024ZM5.60256 10.5366C5.10128 10.5366 4.71795 10.9171 4.71795 11.4146C4.71795 11.9122 5.10128 12.2927 5.60256 12.2927H13.859C14.3603 12.2927 14.7436 11.9122 14.7436 11.4146C14.7436 10.9171 14.3603 10.5366 13.859 10.5366H5.60256ZM10.3205 15.2195H5.60256C5.10128 15.2195 4.71795 15.6 4.71795 16.0976C4.71795 16.5951 5.10128 16.9756 5.60256 16.9756H10.3205C10.8218 16.9756 11.2051 16.5951 11.2051 16.0976C11.2051 15.6 10.8218 15.2195 10.3205 15.2195Z" fill="white"/>
-                </svg>
-                Daftar Usulan Project
-              </a>
-            </li>
-            <li>
-              <a href="">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                  <path d="M10.3902 20.093H5.02439C3.33415 20.093 2.60976 19.3395 2.60976 17.5814V4.18605C2.60976 2.42791 3.33415 1.67442 5.02439 1.67442H10.6585V4.18605C10.6585 6.89302 12.0805 8.37209 14.6829 8.37209H17.0976V10.8837C17.0976 11.3581 17.4463 11.7209 17.9024 11.7209C18.3585 11.7209 18.7073 11.3581 18.7073 10.8837V7.53488C18.7073 7.31163 18.6268 7.08837 18.4659 6.94884L12.0268 0.251163C11.8927 0.0837209 11.678 0 11.4634 0H5.02439C2.42195 0 1 1.47907 1 4.18605V17.5814C1 20.2884 2.42195 21.7674 5.02439 21.7674H10.3902C10.8463 21.7674 11.1951 21.4047 11.1951 20.9302C11.1951 20.4558 10.8463 20.093 10.3902 20.093ZM12.2683 4.18605V2.84651L15.9707 6.69767H14.6829C12.9927 6.69767 12.2683 5.94419 12.2683 4.18605ZM13.6098 10.0465C14.0659 10.0465 14.4146 10.4093 14.4146 10.8837C14.4146 11.3581 14.0659 11.7209 13.6098 11.7209H6.09756C5.64146 11.7209 5.29268 11.3581 5.29268 10.8837C5.29268 10.4093 5.64146 10.0465 6.09756 10.0465H13.6098ZM11.1951 15.3488C11.1951 15.8233 10.8463 16.186 10.3902 16.186H6.09756C5.64146 16.186 5.29268 15.8233 5.29268 15.3488C5.29268 14.8744 5.64146 14.5116 6.09756 14.5116H10.3902C10.8463 14.5116 11.1951 14.8744 11.1951 15.3488ZM17.9024 13.3953C15.0854 13.3953 12.8049 15.7674 12.8049 18.6977C12.8049 21.6279 15.0854 24 17.9024 24C20.7195 24 23 21.6279 23 18.6977C23 15.7674 20.7195 13.3953 17.9024 13.3953ZM17.9024 22.3256C15.9707 22.3256 14.4146 20.707 14.4146 18.6977C14.4146 16.6884 15.9707 15.0698 17.9024 15.0698C19.8341 15.0698 21.3902 16.6884 21.3902 18.6977C21.3902 20.707 19.8341 22.3256 17.9024 22.3256ZM19.8073 17.1628C20.1293 17.4977 20.1293 18.0279 19.8073 18.3349L18.0098 20.2047C17.8488 20.3721 17.661 20.4558 17.4463 20.4558C17.2317 20.4558 17.0171 20.3721 16.8829 20.2047L15.9976 19.2837C15.6756 18.9488 15.6756 18.4186 15.9976 18.1116C16.3195 17.7767 16.8293 17.7767 17.1244 18.1116L17.4463 18.4465L18.6537 17.1907C19.0024 16.8558 19.4854 16.8558 19.8073 17.1628Z" fill="white"/>
-                </svg>
-                Daftar Project
-              </a>
-            </li>
-          </ul>
-        </nav>
-      </div>
+      @include('dynamic.component.dashboard-left', ['active' => 'usulan'])
       <div class="dashboard__right">
         <div class="dashboard__right--title">
-          <a href="{{ route('front.dashboard') }}" class="back">
-            Kembali
+          <a href="{{ route('dashboard') }}" class="back">
+            {{lang::translate('dashboard.kembali')}}
           </a>
         </div>
         <div class="box-white form">
-          <form action="">
+          @if ($errors->any())
+          <div class="alert alert-danger" style="margin-bottom:16px;">
+            <ul style="margin:0; padding-left:18px;">
+              @foreach ($errors->all() as $error)
+              <li>{{ $error }}</li>
+              @endforeach
+            </ul>
+          </div>
+          @endif
+          <form method="POST" action="{{ route('projects.store') }}" enctype="multipart/form-data">
+            @csrf
             <div class="box-form">
-              <h5>Formulir USULAN PROJECT</h5>
+              <h5>{{lang::translate('dashboard.usulan-project.formulir.title-form')}}</h5>
               <div class="row row-wrap">
                 <div class="column column-100">
-                  <label for="">Nomor Project</label>
-                  <input type="text" placeholder="Ketik Kata Kunci Pencarian">
+                  <label for="">{{lang::translate('dashboard.usulan-project.formulir.label-nomor-project')}}</label>
+                  <input type="text" placeholder="{{lang::translate('dashboard.usulan-project.formulir.placeholder-nomor-project')}}" value="{{ old('no_project', 'Auto') }}" disabled>
                 </div>
                 <div class="column column-100">
-                  <label for="">Nama Project</label>
-                  <input type="text" placeholder="Ketik Kata Kunci Pencarian">
+                  <label for="">{{lang::translate('dashboard.usulan-project.formulir.label-nama-project')}}</label>
+                  <input type="text" name="name_project" placeholder="{{lang::translate('dashboard.usulan-project.formulir.placeholder-nama-project')}}" value="{{ old('name_project') }}">
                 </div>
                 <div class="column column-50">
-                  <label for="">Kategori</label>
-                  <select name="" id="">
-                    <option value="">Pilih Kategori</option>
+                  <label for="">{{lang::translate('dashboard.usulan-project.formulir.label-kategori-project')}}</label>
+                  <select name="category_id" id="">
+                    <option value="">{{lang::translate('dashboard.usulan-project.formulir.placeholder-kategori-project')}}</option>
+                    @if(isset($categories))
+                    @foreach($categories as $id => $label)
+                    <option value="{{ $id }}" {{ old('category_id') == $id ? 'selected' : '' }}>{{ $label }}</option>
+                    @endforeach
+                    @endif
                   </select>
                 </div>
                 <div class="column column-50">
-                  <label for="">Tanggal Usulan</label>
-                  <input type="text" class="datepicker">
+                  <label for="">{{lang::translate('dashboard.usulan-project.formulir.label-tanggal-usulan')}}</label>
+                  <input type="date" name="date" class="datepicker" value="{{ old('date') }}" placeholder="{{lang::translate('dashboard.usulan-project.formulir.placeholder-tanggal-usulan')}}">
                 </div>
                <div class="column column-100">
-                 <label for="">Dokumen Terlampir</label>
+                 <label for="">{{lang::translate('dashboard.usulan-project.formulir.label-dokumen-terlampir')}}</label>
                   <div class="file-upload">
-                    <input type="file" id="fileUpload" @change="handleFileUpload" accept=".jpg,.png,.webp,.pdf,.doc,.docx" class="textfield-large">
+                    <input type="file" name="files[]" id="fileUpload" @change="handleFileUpload" accept=".jpg,.png,.webp,.pdf,.doc,.docx" class="textfield-large" multiple>
                     <div class="text">
                       <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40" fill="none">
                         <path d="M35 25V31.6667C35 32.5507 34.6488 33.3986 34.0237 34.0237C33.3986 34.6488 32.5507 35 31.6667 35H8.33333C7.44928 35 6.60143 34.6488 5.97631 34.0237C5.35119 33.3986 5 32.5507 5 31.6667V25" stroke="#2063D2" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
                         <path d="M28.3327 13.3333L19.9993 5L11.666 13.3333" stroke="#2063D2" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
                         <path d="M20 5V25" stroke="#2063D2" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
                       </svg>
-                      <span>Select a file to upload</span>
-                      <small>PDF/DOC format, Max 5MB</small>
+                      <span>{{lang::translate('dashboard.usulan-project.formulir.placeholder-dokumen-terlampir')}}</span>
+                      <small>{{lang::translate('dashboard.usulan-project.formulir.format-dokumen-terlampir')}}</small>
                     </div>
                     <span class="file-upload__box"></span>
                   </div>
@@ -75,21 +68,27 @@
                 </div>
               </div>
               <hr>
-              <h5>Informasi Pemohon</h5>
+              <h5>{{lang::translate('dashboard.usulan-project.formulir.title-pemohon')}}</h5>
               <div class="row row-wrap">
                 <div class="column column-100">
-                  <label for="">Divisi/Pemohon Terkait</label>
-                  <input type="text" placeholder="Ketik Kata Tag Pencarian">
+                  <label for="">{{lang::translate('dashboard.usulan-project.formulir.label-divisi-pemohon')}}</label>
+                  <select class="select2" multiple="multiple" name="applicant_divisions[]">
+                    @if(isset($applicantDivisions))
+                    @foreach($applicantDivisions as $id => $label)
+                    <option value="{{ $id }}" {{ collect(old('applicant_divisions', []))->contains($id) ? 'selected' : '' }}>{{ $label }}</option>
+                    @endforeach
+                    @endif
+                  </select>
                 </div>
                 <div class="column column-100">
-                  <label for="">Nama Pemohon</label>
-                  <input type="text" placeholder="Nama Lengkap">
+                  <label for="">{{lang::translate('dashboard.usulan-project.formulir.label-nama-pemohon')}}</label>
+                  <input type="text" name="applicant_name" placeholder="{{lang::translate('dashboard.usulan-project.formulir.placeholder-nama-pemohon')}}" value="{{ old('applicant_name') }}">
                 </div>
               </div>
             </div>
             <div class="wrap-btn">
-              <a href="" class="button button-secondary">Batalkan</a>
-              <button type="submit" class="button-gradient">Simpan</button>
+              <a href="" class="button button-secondary">{{lang::translate('dashboard.usulan-project.formulir.button-cancel')}}</a>
+              <button type="submit" class="button-gradient">{{lang::translate('dashboard.usulan-project.formulir.button-save')}}</button>
             </div>
           </form>
         </div>
@@ -102,27 +101,51 @@
   @push('footer')
     <!-- <script type="module" async type="text/javascript" src="{{ Vite::asset('resources/assets/js/document.js') }}"></script> -->
     <script>
+      let selectedFiles = [];
       document.getElementById("fileUpload").addEventListener("change", function(event) {
+        const input = document.getElementById("fileUpload");
         const fileList = document.getElementById("fileList");
-        // fileList.innerHTML = ""; // Reset list sebelum menampilkan file baru
-        
-        Array.from(event.target.files).forEach((file, index) => {
+        const fileError = document.getElementById("fileError");
+
+        // Merge existing selected files with newly chosen files (avoid duplicates by name+size+lastModified)
+        const newlyChosen = Array.from(input.files);
+        newlyChosen.forEach((file) => {
+          if (!selectedFiles.find(f => f.name === file.name && f.size === file.size && f.lastModified === file.lastModified)) {
+            selectedFiles.push(file);
+          }
+        });
+
+        // Enforce max 3 files
+        if (selectedFiles.length > 3) {
+          fileError.textContent = "{{lang::translate('dashboard.usulan-project.formulir.msg-error-dokumen-max-3')}}";
+          selectedFiles = selectedFiles.slice(0, 3);
+        } else {
+          fileError.textContent = "";
+        }
+
+        // Rebuild input.files with DataTransfer from selectedFiles
+        const dt = new DataTransfer();
+        selectedFiles.forEach(file => dt.items.add(file));
+        input.files = dt.files;
+
+        // Rebuild UI list from input.files
+        fileList.innerHTML = "";
+        Array.from(input.files).forEach((file) => {
           const listItem = document.createElement("div");
           listItem.classList.add("file-item");
-          listItem.setAttribute("data-filename", file.name); // Simpan nama file untuk identifikasi
+          listItem.setAttribute("data-filename", file.name);
           listItem.innerHTML = `
             <svg xmlns="http://www.w3.org/2000/svg" width="21" height="20" viewBox="0 0 21 20" fill="none">
               <path fill-rule="evenodd" clip-rule="evenodd" d="M3.8335 3.91211V15.5787C3.8335 16.9595 4.95279 18.0787 6.3335 18.0787H14.6668C16.0476 18.0787 17.1668 16.9595 17.1668 15.5787V7.24544C17.1668 5.86473 16.0476 4.74544 14.6668 4.74544H4.66683C4.2066 4.74544 3.8335 4.37234 3.8335 3.91211ZM6.54183 9.74541C6.54183 9.40024 6.82165 9.12041 7.16683 9.12041H13.8335C14.1787 9.12041 14.4585 9.40024 14.4585 9.74541C14.4585 10.0906 14.1787 10.3704 13.8335 10.3704H7.16683C6.82165 10.3704 6.54183 10.0906 6.54183 9.74541ZM6.54183 12.6621C6.54183 12.3169 6.82165 12.0371 7.16683 12.0371H11.7502C12.0953 12.0371 12.3752 12.3169 12.3752 12.6621C12.3752 13.0072 12.0953 13.2871 11.7502 13.2871H7.16683C6.82165 13.2871 6.54183 13.0072 6.54183 12.6621Z" fill="#292EC6"/>
               <path opacity="0.5" d="M15.5002 3.33397V4.88786C15.2395 4.79573 14.959 4.74561 14.6668 4.74561H4.66683C4.2066 4.74561 3.8335 4.37251 3.8335 3.91227V3.85307C3.8335 3.40888 4.1601 3.0323 4.59982 2.96948L13.5978 1.68406C14.6018 1.54062 15.5002 2.31972 15.5002 3.33397Z" fill="#292EC6"/>
             </svg>
             <span>${file.name}</span>
-            <div class="remove-btn" data-index="${index}">
+            <div class="remove-btn">
               <svg xmlns="http://www.w3.org/2000/svg" width="21" height="20" viewBox="0 0 21 20" fill="none">
                 <path d="M16.3048 4.19523C16.0445 3.93492 15.6224 3.93492 15.3621 4.19523L10.5 9.05736L5.63789 4.19523C5.37758 3.93492 4.95554 3.93492 4.69523 4.19523C4.43492 4.45554 4.43492 4.87758 4.69523 5.13788L9.55735 10L4.69525 14.8621C4.43494 15.1224 4.43494 15.5444 4.69525 15.8048C4.95555 16.0651 5.3776 16.0651 5.6379 15.8048L10.5 10.9426L15.3621 15.8048C15.6224 16.0651 16.0445 16.0651 16.3048 15.8048C16.5651 15.5444 16.5651 15.1224 16.3048 14.8621L11.4426 10L16.3048 5.13788C16.5651 4.87758 16.5651 4.45554 16.3048 4.19523Z" fill="#0F0F0F"/>
               </svg>
             </div>
           `;
-
           fileList.appendChild(listItem);
         });
       });
@@ -134,19 +157,19 @@
           const listItem = removeBtn.parentElement;
           const fileNameToRemove = listItem.getAttribute("data-filename");
           const input = document.getElementById("fileUpload");
-          const dt = new DataTransfer(); // Objek baru untuk menyimpan file yang tidak dihapus
-          
-          // Loop melalui semua file yang ada, tambahkan ke DataTransfer kecuali file yang ingin dihapus
-          Array.from(input.files).forEach((file) => {
-            if (file.name !== fileNameToRemove) {
-              dt.items.add(file);
-            }
-          });
-
-          input.files = dt.files; // Set ulang input file dengan daftar file yang tersisa
-          listItem.remove(); // Hapus elemen dari daftar tampilan
-
-          // console.log("File yang tersisa:", input.files);
+          // Update selectedFiles cache
+          selectedFiles = selectedFiles.filter(f => f.name !== fileNameToRemove);
+          // Rebuild input files
+          const dt = new DataTransfer();
+          selectedFiles.forEach(file => dt.items.add(file));
+          input.files = dt.files;
+          // Remove UI element
+          listItem.remove();
+          // Clear error if under limit
+          const fileError = document.getElementById("fileError");
+          if (selectedFiles.length <= 3) {
+            fileError.textContent = "";
+          }
         }
       });
     </script>

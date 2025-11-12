@@ -1,7 +1,0 @@
-/*!
- * Milligram-scss v1.3.0
- * https://milligram.github.io
- *
- * Copyright (c) 2017 CJ Patoilo
- * Licensed under the MIT license
- */a{color:var(--c-primary-main);text-decoration:none}a:focus,a:hover{color:var(--c-primary-hover)}a.readmore{font-weight:700;display:inline-flex;align-items:center}a.readmore i{font-size:1.25rem;margin-left:8px}@media all and (max-width: 767px){a.readmore{font-size:.875rem}a.readmore i{font-size:1rem}}

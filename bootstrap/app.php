@@ -23,6 +23,7 @@ return Application::configure(basePath: dirname(__DIR__))
         ]);
 
         $middleware->alias([
+            'auth' => \App\Http\Middleware\Authenticate::class,
             'root' => \Cactuar\Admin\Http\Middleware\Root::class,
             'admin' => \Cactuar\Admin\Http\Middleware\Admin::class,
             'minify' => \Cactuar\Admin\Http\Middleware\Minify::class,
