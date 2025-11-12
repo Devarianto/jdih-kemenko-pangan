@@ -1,13 +1,13 @@
 {
-  "_slick-CcPOKSJH.js": {
-    "file": "assets/slick-CcPOKSJH.js",
+  "_slick-CT93NgMn.js": {
+    "file": "assets/slick-CT93NgMn.js",
     "name": "slick",
     "imports": [
       "resources/assets/js/libs/htmlclone.js"
     ]
   },
-  "_swiper-bundle-B26aLmI2.js": {
-    "file": "assets/swiper-bundle-B26aLmI2.js",
+  "_swiper-bundle-Ds0aB7gj.js": {
+    "file": "assets/swiper-bundle-Ds0aB7gj.js",
     "name": "swiper-bundle"
   },
   "node_modules/jquery-ui-bundle/images/ui-icons_444444_256x240.png": {
@@ -35,13 +35,9 @@
     "src": "node_modules/jquery-ui-bundle/images/ui-icons_ffffff_256x240.png"
   },
   "resources/assets/css/reset.css": {
-    "file": "assets/reset-C6elfSzc.css",
+    "file": "assets/reset-D2571-nL.css",
     "src": "resources/assets/css/reset.css",
-    "isEntry": true,
-    "name": "reset",
-    "names": [
-      "reset.css"
-    ]
+    "isEntry": true
   },
   "resources/assets/fonts/webarq-icons/Webarq-Icons.eot": {
     "file": "assets/Webarq-Icons-CeM-yjNf.eot",
@@ -96,7 +92,7 @@
     "src": "resources/assets/images/wave2.svg"
   },
   "resources/assets/js/app.js": {
-    "file": "assets/app-CB23raGy.js",
+    "file": "assets/app-CKiytjv_.js",
     "name": "app",
     "src": "resources/assets/js/app.js",
     "isEntry": true,
@@ -108,28 +104,38 @@
       "resources/assets/js/libs/animatingScroll.js"
     ],
     "css": [
-      "assets/app-4su2jwNt.css"
+      "assets/app-Cqp94NjS.css"
     ]
   },
   "resources/assets/js/document.js": {
-    "file": "assets/document-BQdZwa4P.js",
+    "file": "assets/document-Kpx_p9ET.js",
     "name": "document",
     "src": "resources/assets/js/document.js",
     "isEntry": true,
     "imports": [
       "resources/assets/js/libs/htmlclone.js",
-      "_swiper-bundle-B26aLmI2.js"
+      "_swiper-bundle-Ds0aB7gj.js",
+      "resources/assets/js/libs/accordion-base-import.js"
     ]
   },
   "resources/assets/js/home.js": {
-    "file": "assets/home-C3vdKxm5.js",
+    "file": "assets/home-BMyMCTJj.js",
     "name": "home",
     "src": "resources/assets/js/home.js",
     "isEntry": true,
     "imports": [
       "resources/assets/js/libs/htmlclone.js",
-      "_swiper-bundle-B26aLmI2.js",
-      "_slick-CcPOKSJH.js"
+      "_swiper-bundle-Ds0aB7gj.js",
+      "_slick-CT93NgMn.js"
+    ]
+  },
+  "resources/assets/js/libs/accordion-base-import.js": {
+    "file": "assets/accordion-base-import-D8vstdK_.js",
+    "name": "accordion-base-import",
+    "src": "resources/assets/js/libs/accordion-base-import.js",
+    "isEntry": true,
+    "imports": [
+      "resources/assets/js/libs/htmlclone.js"
     ]
   },
   "resources/assets/js/libs/accordion.js": {
@@ -145,7 +151,7 @@
     "isEntry": true
   },
   "resources/assets/js/libs/animatingScroll.js": {
-    "file": "assets/animatingScroll-Cwwp_8Aq.js",
+    "file": "assets/animatingScroll-DU8OOBmf.js",
     "name": "animatingScroll",
     "src": "resources/assets/js/libs/animatingScroll.js",
     "isEntry": true,
@@ -160,7 +166,7 @@
     "isEntry": true
   },
   "resources/assets/js/libs/htmlclone.js": {
-    "file": "assets/htmlclone-_y_WsBzw.js",
+    "file": "assets/htmlclone-BNynzUCE.js",
     "name": "htmlclone",
     "src": "resources/assets/js/libs/htmlclone.js",
     "isEntry": true
@@ -184,17 +190,17 @@
     "isEntry": true
   },
   "resources/assets/js/sample.js": {
-    "file": "assets/sample-B-EdyCbg.js",
+    "file": "assets/sample-D0YSPo-i.js",
     "name": "sample",
     "src": "resources/assets/js/sample.js",
     "isEntry": true,
     "imports": [
       "resources/assets/js/libs/htmlclone.js",
-      "_swiper-bundle-B26aLmI2.js",
-      "_slick-CcPOKSJH.js"
+      "_swiper-bundle-Ds0aB7gj.js",
+      "_slick-CT93NgMn.js"
     ],
     "css": [
-      "assets/sample-CQyoz46X.css"
+      "assets/sample-DR_9-HJD.css"
     ],
     "assets": [
       "assets/ui-icons_444444_256x240-Bie7KTpW.png",
@@ -206,286 +212,159 @@
     ]
   },
   "resources/assets/sass/app.scss": {
-    "file": "assets/app-BEw7T7_5.css",
+    "file": "assets/app-CP-P9tu_.css",
     "src": "resources/assets/sass/app.scss",
-    "isEntry": true,
-    "name": "app",
-    "names": [
-      "app.css"
-    ]
+    "isEntry": true
   },
   "resources/assets/sass/component/_accordion.scss": {
-    "file": "assets/_accordion-tn0RQdqM.css",
+    "file": "assets/_accordion-Bv1JCJfy.css",
     "src": "resources/assets/sass/component/_accordion.scss",
-    "isEntry": true,
-    "name": "_Mixins",
-    "names": [
-      "_accordion.css",
-      "_Mixins.css"
-    ]
+    "isEntry": true
   },
   "resources/assets/sass/component/_layout.scss": {
-    "file": "assets/_layout-TJdphz__.css",
+    "file": "assets/_layout-DIj38ab_.css",
     "src": "resources/assets/sass/component/_layout.scss",
-    "isEntry": true,
-    "name": "_layout",
-    "names": [
-      "_layout.css"
-    ]
+    "isEntry": true
   },
   "resources/assets/sass/component/_popup.scss": {
-    "file": "assets/_popup-DM0yuqp4.css",
+    "file": "assets/_popup-DJ6rT6oZ.css",
     "src": "resources/assets/sass/component/_popup.scss",
-    "isEntry": true,
-    "name": "_popup",
-    "names": [
-      "_popup.css"
-    ]
+    "isEntry": true
   },
   "resources/assets/sass/milligram/_Base.scss": {
-    "file": "assets/_Base-CNLMPBD5.css",
+    "file": "assets/_Base-C2uLZJB0.css",
     "src": "resources/assets/sass/milligram/_Base.scss",
-    "isEntry": true,
-    "name": "_Base",
-    "names": [
-      "_Base.css"
-    ]
+    "isEntry": true
   },
   "resources/assets/sass/milligram/_Blockquote.scss": {
-    "file": "assets/_Blockquote-DHVrQmhJ.css",
+    "file": "assets/_Blockquote-1SzKLKD-.css",
     "src": "resources/assets/sass/milligram/_Blockquote.scss",
-    "isEntry": true,
-    "name": "_Blockquote",
-    "names": [
-      "_Blockquote.css"
-    ]
+    "isEntry": true
   },
   "resources/assets/sass/milligram/_Button.scss": {
-    "file": "assets/_Button-DDzlbrkl.css",
+    "file": "assets/_Button-B6rzGFKP.css",
     "src": "resources/assets/sass/milligram/_Button.scss",
-    "isEntry": true,
-    "name": "_Button",
-    "names": [
-      "_Button.css"
-    ]
+    "isEntry": true
   },
   "resources/assets/sass/milligram/_Code.scss": {
-    "file": "assets/_Code-BH31qZdo.css",
+    "file": "assets/_Code-DiZnR165.css",
     "src": "resources/assets/sass/milligram/_Code.scss",
-    "isEntry": true,
-    "name": "_Code",
-    "names": [
-      "_Code.css"
-    ]
+    "isEntry": true
   },
   "resources/assets/sass/milligram/_Color.scss": {
-    "file": "assets/_Color-B8RUkHqx.css",
+    "file": "assets/_Color-B2u3fhEF.css",
     "src": "resources/assets/sass/milligram/_Color.scss",
-    "isEntry": true,
-    "name": "_Color",
-    "names": [
-      "_Color.css"
-    ]
+    "isEntry": true
   },
   "resources/assets/sass/milligram/_Divider.scss": {
-    "file": "assets/_Divider-BXLTWeEr.css",
+    "file": "assets/_Divider-C85SIEyM.css",
     "src": "resources/assets/sass/milligram/_Divider.scss",
-    "isEntry": true,
-    "name": "_Divider",
-    "names": [
-      "_Divider.css"
-    ]
+    "isEntry": true
   },
   "resources/assets/sass/milligram/_Form.scss": {
-    "file": "assets/_Form-CmBHvDJP.css",
+    "file": "assets/_Form-CxNz_LTJ.css",
     "src": "resources/assets/sass/milligram/_Form.scss",
-    "isEntry": true,
-    "name": "_Form",
-    "names": [
-      "_Form.css"
-    ]
+    "isEntry": true
   },
   "resources/assets/sass/milligram/_Grid.scss": {
-    "file": "assets/_Grid-D86EBI2k.css",
+    "file": "assets/_Grid-SbvMO7lt.css",
     "src": "resources/assets/sass/milligram/_Grid.scss",
-    "isEntry": true,
-    "name": "_Grid",
-    "names": [
-      "_Grid.css"
-    ]
+    "isEntry": true
   },
   "resources/assets/sass/milligram/_Image.scss": {
-    "file": "assets/_Image-CApCvXv7.css",
+    "file": "assets/_Image-G_znLLvM.css",
     "src": "resources/assets/sass/milligram/_Image.scss",
-    "isEntry": true,
-    "name": "_Image",
-    "names": [
-      "_Image.css"
-    ]
+    "isEntry": true
   },
   "resources/assets/sass/milligram/_Link.scss": {
-    "file": "assets/_Link-C0bISBm8.css",
+    "file": "assets/_Link-2DBDIfsl.css",
     "src": "resources/assets/sass/milligram/_Link.scss",
-    "isEntry": true,
-    "name": "_Link",
-    "names": [
-      "_Link.css"
-    ]
+    "isEntry": true
   },
   "resources/assets/sass/milligram/_List.scss": {
-    "file": "assets/_List-DWzTp1sE.css",
+    "file": "assets/_List-di6NIUqg.css",
     "src": "resources/assets/sass/milligram/_List.scss",
-    "isEntry": true,
-    "name": "_List",
-    "names": [
-      "_List.css"
-    ]
+    "isEntry": true
   },
   "resources/assets/sass/milligram/_Mixins.scss": {
-    "file": "assets/_accordion-tn0RQdqM.css",
-    "src": "resources/assets/sass/component/_accordion.scss",
-    "isEntry": true,
+    "file": "assets/_Mixins-l0sNRNKZ.js",
     "name": "_Mixins",
-    "names": [
-      "_accordion.css",
-      "_Mixins.css"
-    ]
+    "src": "resources/assets/sass/milligram/_Mixins.scss",
+    "isEntry": true
   },
   "resources/assets/sass/milligram/_Spacing.scss": {
-    "file": "assets/_Spacing-DDe8Ltf1.css",
+    "file": "assets/_Spacing-Bc3pRd41.css",
     "src": "resources/assets/sass/milligram/_Spacing.scss",
-    "isEntry": true,
-    "name": "_Spacing",
-    "names": [
-      "_Spacing.css"
-    ]
+    "isEntry": true
   },
   "resources/assets/sass/milligram/_Table.scss": {
-    "file": "assets/_Table-Bval8503.css",
+    "file": "assets/_Table-_BLDNJgS.css",
     "src": "resources/assets/sass/milligram/_Table.scss",
-    "isEntry": true,
-    "name": "_Table",
-    "names": [
-      "_Table.css"
-    ]
+    "isEntry": true
   },
   "resources/assets/sass/milligram/_Typography.scss": {
-    "file": "assets/_Typography-B7CxBJqK.css",
+    "file": "assets/_Typography-AjvmMPCe.css",
     "src": "resources/assets/sass/milligram/_Typography.scss",
-    "isEntry": true,
-    "name": "_Typography",
-    "names": [
-      "_Typography.css"
-    ]
+    "isEntry": true
   },
   "resources/assets/sass/milligram/_Utility.scss": {
-    "file": "assets/_Utility-DxFGLuT9.css",
+    "file": "assets/_Utility-BbqdnhlM.css",
     "src": "resources/assets/sass/milligram/_Utility.scss",
-    "isEntry": true,
-    "name": "_Utility",
-    "names": [
-      "_Utility.css"
-    ]
+    "isEntry": true
   },
   "resources/assets/sass/milligram/_Variables.scss": {
-    "file": "assets/_Variables-CMSADfpw.css",
+    "file": "assets/_Variables-B_SvOSeC.css",
     "src": "resources/assets/sass/milligram/_Variables.scss",
-    "isEntry": true,
-    "name": "_Variables",
-    "names": [
-      "_Variables.css"
-    ]
+    "isEntry": true
   },
   "resources/assets/sass/milligram/milligram.scss": {
-    "file": "assets/milligram-CTDlYbFF.css",
-    "src": "resources/assets/sass/milligram/milligram.scss",
-    "isEntry": true,
-    "name": "milligram",
-    "names": [
-      "milligram.css",
-      "milligram.css"
-    ]
+    "file": "assets/milligram-F7JjTBoB.css",
+    "src": "resources/assets/sass/pages/milligram.scss",
+    "isEntry": true
   },
   "resources/assets/sass/pages/about.scss": {
-    "file": "assets/about-DwdP76Mz.css",
+    "file": "assets/about-D9rMGjTD.css",
     "src": "resources/assets/sass/pages/about.scss",
-    "isEntry": true,
-    "name": "about",
-    "names": [
-      "about.css"
-    ]
+    "isEntry": true
   },
   "resources/assets/sass/pages/dashboard.scss": {
-    "file": "assets/dashboard-rvEM9KG-.css",
+    "file": "assets/dashboard-Db1GU3Zf.css",
     "src": "resources/assets/sass/pages/dashboard.scss",
-    "isEntry": true,
-    "name": "dashboard",
-    "names": [
-      "dashboard.css"
-    ]
+    "isEntry": true
   },
   "resources/assets/sass/pages/document.scss": {
-    "file": "assets/document-iy6mBwSe.css",
+    "file": "assets/document--o2eVwBe.css",
     "src": "resources/assets/sass/pages/document.scss",
-    "isEntry": true,
-    "name": "document",
-    "names": [
-      "document.css"
-    ]
+    "isEntry": true
   },
   "resources/assets/sass/pages/general.scss": {
-    "file": "assets/general-CchpXdt1.css",
+    "file": "assets/general-C7L-BbUC.css",
     "src": "resources/assets/sass/pages/general.scss",
-    "isEntry": true,
-    "name": "general",
-    "names": [
-      "general.css"
-    ]
+    "isEntry": true
   },
   "resources/assets/sass/pages/home.scss": {
-    "file": "assets/home-B8j574L1.css",
+    "file": "assets/home-DLpYjDVY.css",
     "src": "resources/assets/sass/pages/home.scss",
-    "isEntry": true,
-    "name": "home",
-    "names": [
-      "home.css"
-    ]
+    "isEntry": true
   },
   "resources/assets/sass/pages/milligram.scss": {
-    "file": "assets/milligram-CTDlYbFF.css",
-    "src": "resources/assets/sass/milligram/milligram.scss",
-    "isEntry": true,
-    "name": "milligram",
-    "names": [
-      "milligram.css",
-      "milligram.css"
-    ]
+    "file": "assets/milligram-F7JjTBoB.css",
+    "src": "resources/assets/sass/pages/milligram.scss",
+    "isEntry": true
   },
   "resources/assets/sass/pages/misc.scss": {
-    "file": "assets/misc-CklaRRwM.css",
+    "file": "assets/misc-Nr6dT54W.css",
     "src": "resources/assets/sass/pages/misc.scss",
-    "isEntry": true,
-    "name": "misc",
-    "names": [
-      "misc.css"
-    ]
+    "isEntry": true
   },
   "resources/assets/sass/pages/sample.scss": {
-    "file": "assets/sample-qFofKsti.css",
+    "file": "assets/sample-HzPJciFP.css",
     "src": "resources/assets/sass/pages/sample.scss",
-    "isEntry": true,
-    "name": "sample",
-    "names": [
-      "sample.css"
-    ]
+    "isEntry": true
   },
   "resources/assets/sass/section/hero-banner/hero-banner.scss": {
-    "file": "assets/hero-banner-BWjWNJrP.css",
+    "file": "assets/hero-banner-CUDiTQ0U.css",
     "src": "resources/assets/sass/section/hero-banner/hero-banner.scss",
-    "isEntry": true,
-    "name": "hero-banner",
-    "names": [
-      "hero-banner.css"
-    ]
+    "isEntry": true
   }
 }

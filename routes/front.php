@@ -65,7 +65,7 @@ Route::name('front.')->group(function () {
       return view('static.pages.about-statistik', $compact);
     })->name('about-statistik');
 
-     # About Contact Us
+    # About Contact Us
     Route::get('/about-contactus', function () {
       $compact = [];
       return view('static.pages.about-contactus', $compact);
@@ -89,13 +89,13 @@ Route::name('front.')->group(function () {
       return view('static.pages.document-monografi', $compact);
     })->name('document-monografi');
 
-     # Document Monografi Detail
+    # Document Monografi Detail
     Route::get('/document-monografi-detail', function () {
       $compact = [];
       return view('static.pages.document-monografi-detail', $compact);
     })->name('document-monografi-detail');
 
-     # Document article
+    # Document article
     Route::get('/document-article', function () {
       $compact = [];
       return view('static.pages.document-article', $compact);
@@ -113,7 +113,7 @@ Route::name('front.')->group(function () {
       return view('static.pages.document-kipling', $compact);
     })->name('document-kipling');
 
-     # Document Kipling
+    # Document Kipling
     Route::get('/document-kipling-detail', function () {
       $compact = [];
       return view('static.pages.document-kipling-detail', $compact);
@@ -130,14 +130,14 @@ Route::name('front.')->group(function () {
       $compact = [];
       return view('static.pages.document-putusan-detail', $compact);
     })->name('document-putusan-detail');
-    
+
     # Document Lainnya Kamus Hukum
     Route::get('/documentlainnya-kamus-hukum', function () {
       $compact = [];
       return view('static.pages.documentlainnya-kamus-hukum', $compact);
     })->name('documentlainnya-kamus-hukum');
 
-      # Document Lainnya Kamus Hukum detail
+    # Document Lainnya Kamus Hukum detail
     Route::get('/documentlainnya-kamus-hukum-detail', function () {
       $compact = [];
       return view('static.pages.documentlainnya-kamus-hukum-detail', $compact);
@@ -155,7 +155,7 @@ Route::name('front.')->group(function () {
       return view('static.pages.documentlainnya-infografis-detail', $compact);
     })->name('documentlainnya-infografis-detail');
 
-     # Document Lainnya Berita
+    # Document Lainnya Berita
     Route::get('/documentlainnya-berita', function () {
       $compact = [];
       return view('static.pages.documentlainnya-berita', $compact);
@@ -167,7 +167,7 @@ Route::name('front.')->group(function () {
       return view('static.pages.documentlainnya-berita-detail', $compact);
     })->name('documentlainnya-berita-detail');
 
-     # Informasi Lainnya Galeri
+    # Informasi Lainnya Galeri
     Route::get('/informasi-galeri', function () {
       $compact = [];
       return view('static.pages.informasi-galeri', $compact);
@@ -179,7 +179,7 @@ Route::name('front.')->group(function () {
       return view('static.pages.informasi-rancangan', $compact);
     })->name('informasi-rancangan');
 
-     # Dashboard
+    # Dashboard
     Route::get('/dashboard', function () {
       $compact = [];
       return view('static.pages.dashboard', $compact);
@@ -220,5 +220,11 @@ Route::name('front.')->group(function () {
       $compact = [];
       return view('static.pages.undermaintenance', $compact);
     })->name('undermaintenance');
+
+    # FAQ
+    Route::get('/faq', function () {
+      $compact = [];
+      return view('static.pages.faq', $compact);
+    })->name('faq');
   });
 });

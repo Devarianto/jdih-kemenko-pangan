@@ -1,13 +1,13 @@
 import $ from 'jquery'; //import jquery module
-import Swiper  from 'swiper/bundle';
+import Swiper from 'swiper/bundle';
 import 'slick-carousel';
 
 const home = {};
 home.sliderDocument = () => {
-  if($(window).width() > 1024 ){
-    if($('.swiper .document__listing--item').length <= 4){
+  if ($(window).width() > 1024) {
+    if ($('.swiper .document__listing--item').length <= 4) {
       $('.document').addClass('disable-arrow')
-      return  
+      return
     }
   }
   const swiper = new Swiper('.document__listing.swiper', {
@@ -26,13 +26,13 @@ home.sliderDocument = () => {
     },
     breakpoints: {
       767: {
-        slidesPerView:2.2,
+        slidesPerView: 2.2,
       },
       1023: {
-        slidesPerView:3,
+        slidesPerView: 3,
       },
       1200: {
-        slidesPerView:4,
+        slidesPerView: 4,
       }
     },
   });
@@ -67,7 +67,7 @@ home.ratingHome = () => {
 
   // Update angka & total
   $('#average').text(ratingData.average.toFixed(1));
-  $('#total-reviews').text(`${ratingData.total} Penilaian`);
+  $('#total-reviews').text(`${ratingData.total} ${$('#total-reviews').data('title')}`);
 
   // Render bintang dinamis
   const renderStars = (avg) => {
@@ -106,19 +106,19 @@ home.sliderLogo = () => {
     slidesPerView: 3,
     spaceBetween: 45,
     slidesOffsetBefore: 0, // offset kiri agar tampak terpotong
-    slidesOffsetAfter:0,  // offset kanan agar tampak terpotong
-    centeredSlides:true,
+    slidesOffsetAfter: 0,  // offset kanan agar tampak terpotong
+    centeredSlides: true,
     autoplay: {
       delay: 6000,
       disableOnInteraction: false,
     },
     breakpoints: {
       1023: {
-        slidesPerView:6,
-        slidesOffsetBefore: -80, 
-        slidesOffsetAfter: -80,  
-        centeredSlides:false,
-        spaceBetween:24
+        slidesPerView: 6,
+        slidesOffsetBefore: -80,
+        slidesOffsetAfter: -80,
+        centeredSlides: false,
+        spaceBetween: 24
       }
     },
   });
@@ -128,15 +128,15 @@ home.sliderPopup = () => {
   const sliderThumbnail = new Swiper('.photo-slider-thumbs.swiper', {
     slidesPerView: 3.5,
     freeMode: true,
-    spaceBetween:16,
+    spaceBetween: 16,
     watchSlidesVisibility: true,
     watchSlidesProgress: true,
     breakpoints: {
       767: {
-        slidesPerView:5,
+        slidesPerView: 5,
       },
       1023: {
-        slidesPerView:6,
+        slidesPerView: 6,
       }
     },
   });
@@ -149,7 +149,7 @@ home.sliderPopup = () => {
   });
 }
 home.playVideo = function () {
-  $(".grid__item .icon-play").on('click',function(){
+  $(".grid__item .icon-play").on('click', function () {
     openPopup('#popup-video')
     let container = $('#popup-video');
     let iframe = container.find(".wrap-video iframe");
@@ -158,13 +158,13 @@ home.playVideo = function () {
     iframe.attr("src", videoUrl);
   });
 }
-home.sliderTablet = function (){
-  if($(window).width() < 1024){
+home.sliderTablet = function () {
+  if ($(window).width() < 1024) {
     $('.artikel .document__listing').slick({
-      variableWidth:true,
-      arrows:false,
-      dots:false,
-      autoplay:true
+      variableWidth: true,
+      arrows: false,
+      dots: false,
+      autoplay: true
     })
   }
 }
