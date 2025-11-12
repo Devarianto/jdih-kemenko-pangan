@@ -24,6 +24,16 @@ class PageController extends Controller
 {
     public function home()
     {
+        $home = Menu::translate()->firstOrFail();
+
+        $rule_types = RuleType::whereIsActive(1)->get();
+        $rule_themes = RuleTheme::whereIsActive(1)->get();
+        $year_peraturan = Document::select('year')
+            ->whereIsActive(1)
+            ->where('master_document_id', Document::PERATURAN)
+            ->groupBy('year')
+            ->get();
+
         $news_first = News::translate()->whereIsActive(1)->orderBy('date', 'desc')->first();
         $news_others = News::translate()->whereIsActive(1)->offset(1)->limit(3)->orderBy('date', 'desc')->get();
 
@@ -150,7 +160,7 @@ class PageController extends Controller
             'menus', 'popular_documents', 
             'gallery_image', 'gallery_video', 
             'get_chart', 'menu_statistic',
-            'total_rating', 'avg_rating', 'rating'));
+            'total_rating', 'avg_rating', 'rating', 'home', 'rule_types', 'rule_themes', 'year_peraturan'));
     }
 
     private function find($id=null)

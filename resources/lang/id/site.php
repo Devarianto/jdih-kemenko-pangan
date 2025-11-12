@@ -6,6 +6,23 @@ return [
 		'right' => 'INFORMASI HUKUM'
 	],
 	'home' => [
+		'search-peraturan' => [
+			'placeholder' => 'Ketik Kata Kunci Pencarian',
+			'specific-search' => [
+				'title' => 'Pencarian Spesifik',
+				'form-title' => [
+					'rule-type' => 'Jenis Peraturan',
+					'theme' => 'Tema',
+					'year' => 'Tahun'
+				],
+				'form-placeholder' => [
+					'rule-type' => 'Pilih Peraturan',
+					'theme' => 'Tema',
+					'year' => 'Pilih Tahun'
+				]
+			],
+			'button' => 'Cari'
+		],
 		'newest-document' => 'DOKUMEN TERBARU',
 		'document' => [
 			'popular' => 'Terpopular',
@@ -16,6 +33,10 @@ return [
 			'kliping' => 'KLIPING',
 			'jurnal' => 'JURNAL',
 			'naskah' => 'NASKAH KERJA SAMA',
+		],
+		'tema-peraturan' => [
+			'title' => 'TEMA PERATURAN',
+			'subtitle' => 'Kumpulan peraturan yang saling berkaitan dari setiap deputi bidang'
 		],
 		'news' => 'Berita',
 		'gallery-image' => 'Galeri Foto', 

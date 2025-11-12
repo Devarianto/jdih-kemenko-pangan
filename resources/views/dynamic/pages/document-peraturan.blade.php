@@ -52,7 +52,7 @@
                   <select name="year" id="">
                     <option value="" selected disabled>{{ lang::translate('document.search-peraturan.specific-search.form-placeholder.year') }}</option>
                     @foreach ($years as $data)
-                    <option value="{{ $data->year }}" @selected($data->id == request()->query('year'))>{{ $data->year }}</option>
+                    <option value="{{ $data->year }}" @selected($data->year == request()->query('year'))>{{ $data->year }}</option>
                     @endforeach
                   </select>
                 </div>

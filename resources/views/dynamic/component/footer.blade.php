@@ -64,10 +64,10 @@
     <div class="bot">
       <p>{!! og::copyright() !!}</p>
       <div class="bot__right">
-        <a href=""><img src="{{asset('images/material/ic-ig.svg')  }}" alt=""></a>
-        <a href=""><img src="{{asset('images/material/ic-x.svg')  }}" alt=""></a>
-        <a href=""><img src="{{asset('images/material/ic-yt.svg')  }}" alt=""></a>
-        <a href=""><img src="{{asset('images/material/ic-fb.svg')  }}" alt=""></a>
+        @php($socmed = widget(99, 'site-setting-conf', 'socmed'))
+        @foreach ($socmed as $data)
+        <a href="{{ $data->link }}" target="__BLANK"><img src="{{ media::initial($data->icon)->url }}" alt="{{ media::initial($data->icon)->alt }}"></a>
+        @endforeach
       </div>
     </div>
   </div>

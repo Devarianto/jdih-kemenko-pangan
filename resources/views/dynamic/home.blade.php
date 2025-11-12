@@ -2,72 +2,82 @@
 
 @section('content')
   <!-- middle -->
+  @foreach(widget($home->id, 'menu', 'banner-home') as $banner)
   <div class="banner-homepage">
     <figure>
-      <img 
-      src="{{asset('images/content/banner-homepage.jpg')}}" 
-      data-img-large="{{ asset('images/content/banner-homepage.jpg') }}"
-      data-img-medium="{{ asset('images/content/banner-homepage-m.jpg') }}"
-      data-img-small="{{ asset('images/content/banner-homepage-s.jpg') }}"
-      width="1380" height="620" alt="img">
+      <img src="{{ media::initial($banner->image)->url }}" 
+          data-img-large="{{ media::initial($banner->image)->url }}" 
+          data-img-medium="{{ media::initial($banner->value('image-medium'))->url }}" 
+          data-img-small="{{ media::initial($banner->value('image-small'))->url }}" alt="{{ media::initial($banner->image)->alt }}">
     </figure>
     <div class="banner-homepage__caption">
-      <h3>Selamat Datang di JDIH</h3>
-      <h6>Kementerian Kordinator Bidang Pangan</h6>
-      <div class="wrap-input">
-        <input type="text" placeholder="Ketik Kata Kunci Pencarian">
-        <button class="voice">
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="21" viewBox="0 0 20 21" fill="none">
-            <path d="M10 17.375C8.3424 17.375 6.75269 16.7165 5.58058 15.5444C4.40848 14.3723 3.75 12.7826 3.75 11.125C3.75 10.9592 3.81585 10.8003 3.93306 10.6831C4.05027 10.5658 4.20924 10.5 4.375 10.5C4.54076 10.5 4.69973 10.5658 4.81694 10.6831C4.93415 10.8003 5 10.9592 5 11.125C5 12.4511 5.52678 13.7229 6.46447 14.6605C7.40215 15.5982 8.67392 16.125 10 16.125C11.3261 16.125 12.5979 15.5982 13.5355 14.6605C14.4732 13.7229 15 12.4511 15 11.125C15 10.9592 15.0658 10.8003 15.1831 10.6831C15.3003 10.5658 15.4592 10.5 15.625 10.5C15.7908 10.5 15.9497 10.5658 16.0669 10.6831C16.1842 10.8003 16.25 10.9592 16.25 11.125C16.25 12.7826 15.5915 14.3723 14.4194 15.5444C13.2473 16.7165 11.6576 17.375 10 17.375Z" fill="#2063D2" stroke="#2063D2" stroke-width="0.2"/>
-            <path d="M10 19.875C9.83424 19.875 9.67527 19.8092 9.55806 19.6919C9.44085 19.5747 9.375 19.4158 9.375 19.25V16.75C9.375 16.5842 9.44085 16.4253 9.55806 16.3081C9.67527 16.1908 9.83424 16.125 10 16.125C10.1658 16.125 10.3247 16.1908 10.4419 16.3081C10.5592 16.4253 10.625 16.5842 10.625 16.75V19.25C10.625 19.4158 10.5592 19.5747 10.4419 19.6919C10.3247 19.8092 10.1658 19.875 10 19.875Z" fill="#2063D2" stroke="#2063D2" stroke-width="0.2"/>
-            <path d="M10 14.875C9.00544 14.875 8.05161 14.4799 7.34835 13.7767C6.64509 13.0734 6.25 12.1196 6.25 11.125V4.875C6.25 3.88044 6.64509 2.92661 7.34835 2.22335C8.05161 1.52009 9.00544 1.125 10 1.125C10.9946 1.125 11.9484 1.52009 12.6517 2.22335C13.3549 2.92661 13.75 3.88044 13.75 4.875V11.125C13.75 12.1196 13.3549 13.0734 12.6517 13.7767C11.9484 14.4799 10.9946 14.875 10 14.875ZM10 2.375C9.33696 2.375 8.70107 2.63839 8.23223 3.10723C7.76339 3.57607 7.5 4.21196 7.5 4.875V11.125C7.5 11.788 7.76339 12.4239 8.23223 12.8928C8.70107 13.3616 9.33696 13.625 10 13.625C10.663 13.625 11.2989 13.3616 11.7678 12.8928C12.2366 12.4239 12.5 11.788 12.5 11.125V4.875C12.5 4.21196 12.2366 3.57607 11.7678 3.10723C11.2989 2.63839 10.663 2.375 10 2.375Z" fill="#2063D2" stroke="#2063D2" stroke-width="0.2"/>
-          </svg>
-        </button>
-        <button type="submit" class="search">
-          Cari
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="21" viewBox="0 0 20 21" fill="none">
-            <path d="M9.16667 16.3333C12.8486 16.3333 15.8333 13.3486 15.8333 9.66667C15.8333 5.98477 12.8486 3 9.16667 3C5.48477 3 2.5 5.98477 2.5 9.66667C2.5 13.3486 5.48477 16.3333 9.16667 16.3333Z" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M17.625 17.625L14 14" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </button>
-      </div>
+      <h3>{{ $banner->translated('subtitle') }}</h3>
+      <h6>{{ $banner->translated('title') }}</h6>
+      @if ($menus['peraturan'] != null)
+      <form action="{{ $menus['peraturan']->permalink }}" id="frm-search">
+        <div class="wrap-input">
+          <input type="text" name="search" value="{{ request()->query('search') }}" class="search-top" placeholder="{{ lang::translate('home.search-peraturan.placeholder') }}">
+          <button class="voice">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="21" viewBox="0 0 20 21" fill="none">
+              <path d="M10 17.375C8.3424 17.375 6.75269 16.7165 5.58058 15.5444C4.40848 14.3723 3.75 12.7826 3.75 11.125C3.75 10.9592 3.81585 10.8003 3.93306 10.6831C4.05027 10.5658 4.20924 10.5 4.375 10.5C4.54076 10.5 4.69973 10.5658 4.81694 10.6831C4.93415 10.8003 5 10.9592 5 11.125C5 12.4511 5.52678 13.7229 6.46447 14.6605C7.40215 15.5982 8.67392 16.125 10 16.125C11.3261 16.125 12.5979 15.5982 13.5355 14.6605C14.4732 13.7229 15 12.4511 15 11.125C15 10.9592 15.0658 10.8003 15.1831 10.6831C15.3003 10.5658 15.4592 10.5 15.625 10.5C15.7908 10.5 15.9497 10.5658 16.0669 10.6831C16.1842 10.8003 16.25 10.9592 16.25 11.125C16.25 12.7826 15.5915 14.3723 14.4194 15.5444C13.2473 16.7165 11.6576 17.375 10 17.375Z" fill="#2063D2" stroke="#2063D2" stroke-width="0.2"/>
+              <path d="M10 19.875C9.83424 19.875 9.67527 19.8092 9.55806 19.6919C9.44085 19.5747 9.375 19.4158 9.375 19.25V16.75C9.375 16.5842 9.44085 16.4253 9.55806 16.3081C9.67527 16.1908 9.83424 16.125 10 16.125C10.1658 16.125 10.3247 16.1908 10.4419 16.3081C10.5592 16.4253 10.625 16.5842 10.625 16.75V19.25C10.625 19.4158 10.5592 19.5747 10.4419 19.6919C10.3247 19.8092 10.1658 19.875 10 19.875Z" fill="#2063D2" stroke="#2063D2" stroke-width="0.2"/>
+              <path d="M10 14.875C9.00544 14.875 8.05161 14.4799 7.34835 13.7767C6.64509 13.0734 6.25 12.1196 6.25 11.125V4.875C6.25 3.88044 6.64509 2.92661 7.34835 2.22335C8.05161 1.52009 9.00544 1.125 10 1.125C10.9946 1.125 11.9484 1.52009 12.6517 2.22335C13.3549 2.92661 13.75 3.88044 13.75 4.875V11.125C13.75 12.1196 13.3549 13.0734 12.6517 13.7767C11.9484 14.4799 10.9946 14.875 10 14.875ZM10 2.375C9.33696 2.375 8.70107 2.63839 8.23223 3.10723C7.76339 3.57607 7.5 4.21196 7.5 4.875V11.125C7.5 11.788 7.76339 12.4239 8.23223 12.8928C8.70107 13.3616 9.33696 13.625 10 13.625C10.663 13.625 11.2989 13.3616 11.7678 12.8928C12.2366 12.4239 12.5 11.788 12.5 11.125V4.875C12.5 4.21196 12.2366 3.57607 11.7678 3.10723C11.2989 2.63839 10.663 2.375 10 2.375Z" fill="#2063D2" stroke="#2063D2" stroke-width="0.2"/>
+            </svg>
+          </button>
+          <button type="submit" class="search">
+            {{ lang::translate('home.search-peraturan.button') }}
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="21" viewBox="0 0 20 21" fill="none">
+              <path d="M9.16667 16.3333C12.8486 16.3333 15.8333 13.3486 15.8333 9.66667C15.8333 5.98477 12.8486 3 9.16667 3C5.48477 3 2.5 5.98477 2.5 9.66667C2.5 13.3486 5.48477 16.3333 9.16667 16.3333Z" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M17.625 17.625L14 14" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+        </div>
+      </form>
       <div class="wrap-filter">
-        <a href="">Pencarian Spesifik</a>
+        <a href="">{{ lang::translate('home.search-peraturan.specific-search.title') }}</a>
         <div class="filter">
           <div class="filter__title">
-            <h6>Pencarian Spesifik</h6>
+            <h6>{{ lang::translate('home.search-peraturan.specific-search.title') }}</h6>
             <div class="filter__close"></div>
           </div>
-          <form action="">
+          <form action="{{ $menus['peraturan']->permalink }}" id="frm-specific-search">
+            <input type="hidden" name="search" class="hidden-search" value="{{ request()->query('search') }}">
             <div class="row">
               <div class="column column-35">
-                <label for="">Jenis Peraturan</label>
-                <select name="" id="">
-                  <option value="" selected disabled>Pilih Peraturan</option>
-                  <option value="">Peraturan</option>
+                <label for="">{{ lang::translate('home.search-peraturan.specific-search.form-title.rule-type') }}</label>
+                <select name="rule_type" id="">
+                  <option value="" selected disabled>{{ lang::translate('home.search-peraturan.specific-search.form-placeholder.rule-type') }}</option>
+                  @foreach ($rule_types as $data)
+                  <option value="{{ $data->id }}" @selected($data->id == request()->query('rule_type'))>{{ $data->label }}</option>
+                  @endforeach
                 </select>
               </div>
               <div class="column column-30">
-                <label for="">Tema</label>
-                <select name="" id="">
-                  <option value="" selected disabled>Pilih Tema</option>
-                  <option value="">Tema</option>
+                <label for="">{{ lang::translate('home.search-peraturan.specific-search.form-title.theme') }}</label>
+                <select name="theme" id="">
+                  <option value="" selected disabled>{{ lang::translate('home.search-peraturan.specific-search.form-placeholder.theme') }}</option>
+                  @foreach ($rule_themes as $data)
+                  <option value="{{ $data->id }}" @selected($data->id == request()->query('theme'))>{{ $data->label }}</option>
+                  @endforeach
                 </select>
               </div>
               <div class="column column-20">
-                <label for="">Tahun</label>
-                <select name="" id="">
-                  <option value="" selected disabled>Pilih Tahun</option>
-                  <option value="">Tema</option>
+                <label for="">{{ lang::translate('home.search-peraturan.specific-search.form-title.year') }}</label>
+                <select name="year" id="">
+                  <option value="" selected disabled>{{ lang::translate('home.search-peraturan.specific-search.form-placeholder.year') }}</option>
+                  @foreach ($year_peraturan as $data)
+                  <option value="{{ $data->year }}" @selected($data->year == request()->query('year'))>{{ $data->year }}</option>
+                  @endforeach
                 </select>
               </div>
               <div class="column column-15">
-                <button type="submit" class="button button-gradient">Cari</button>
+                <button type="submit" class="button button-gradient">{{ lang::translate('home.search-peraturan.button') }}</button>
               </div>
             </div>
           </form>
         </div>
       </div>
+      @endif
     </div>
     <div class="wave">
       <svg xmlns="http://www.w3.org/2000/svg"
@@ -86,6 +96,7 @@
       </svg>
     </div>
   </div>
+  @endforeach
   <section class="document animating-scroll" data-animate-trigger=".trigger-1">
     <div class="trigger trigger-1"></div>
     <div class="wrapper">
@@ -118,6 +129,7 @@
       </div>
     </div>
   </section>
+  @if ($menus['peraturan'] != null)
   <section class="tema animating-scroll" data-animate-trigger=".trigger-2">
     <div class="trigger trigger-2"></div>
     <div class="bg">
@@ -142,41 +154,23 @@
     </div>
     <div class="wrapper">
       <div class="tema__title">
-        <h3>TEMA PERATURAN</h3>
-        <p>Kumpulan peraturan yang saling berkaitan dari setiap deputi bidang</p>
+        <h3>{{ lang::translate('home.tema-peraturan.title') }}</h3>
+        <p>{{ lang::translate('home.tema-peraturan.subtitle') }}</p>
       </div>
       <div class="tema__listing">
-        <a href="" class="tema__listing--item">
-          <figure><img src="{{asset('images/content/tem-1.jpg')}}" alt=""></figure>
+        @foreach ($rule_themes as $data)
+        <a href="{{ $menus['peraturan']->permalink.'?theme='.$data->id }}" class="tema__listing--item">
+          <figure><img src="{{ media::initial($data->image)->url }}" alt="{{ media::initial($data->image)->alt }}"></figure>
           <figcaption>
-            <span class="ico"><img src="{{ asset('images/content/ic-tema-1.svg') }}" alt=""></span>
-            <h6>Tata Niaga dan Distribusi Pangan</h6>
+            <span class="ico"><img src="{{ media::initial($data->icon)->url }}" alt="{{ media::initial($data->icon)->alt }}"></span>
+            <h6>{{ $data->label }}</h6>
           </figcaption>
         </a>
-        <a href="" class="tema__listing--item">
-          <figure><img src="{{asset('images/content/tem-2.jpg')}}" alt=""></figure>
-          <figcaption>
-            <span class="ico"><img src="{{ asset('images/content/ic-tema-2.svg') }}" alt=""></span>
-            <h6>Usaha Pangan dan Pertanian</h6>
-          </figcaption>
-        </a>
-        <a href="" class="tema__listing--item">
-          <figure><img src="{{asset('images/content/tem-3.jpg')}}" alt=""></figure>
-          <figcaption>
-            <span class="ico"><img src="{{ asset('images/content/ic-tema-3.svg') }}" alt=""></span>
-            <h6>Keterjangkauan dan Keamanan Pangan</h6>
-          </figcaption>
-        </a>
-        <a href="" class="tema__listing--item">
-          <figure><img src="{{asset('images/content/tem-4.jpg')}}" alt=""></figure>
-          <figcaption>
-            <span class="ico"><img src="{{ asset('images/content/ic-tema-4.svg') }}" alt=""></span>
-            <h6>Sumber Daya Maritim</h6>
-          </figcaption>
-        </a>
+        @endforeach
       </div>
     </div>
   </section>
+  @endif
   <section class="artikel animating-scroll" data-animate-trigger=".trigger-3">
     <div class="trigger trigger-3"></div>
     <div class="wrapper">
@@ -384,7 +378,7 @@
         </div>
         <div class="document__listing">
           @foreach ($popular_documents as $document)
-          <a href="" class="document__listing--item ">
+          <a href="{{ $document->permalink_document }}" class="document__listing--item ">
             <figure><img src="{{ media::initial($document->thumbnail)->url }}" alt="{{ media::initial($document->thumbnail)->alt }}"></figure>
             <figcaption>
               <span class="tag" style="background-color: #D2E3FF; color:{{ $document->tag_color_home }};">{{ $document->master_document->label ?? '' }}</span>
@@ -507,27 +501,23 @@
       </div>
     </div>
   </section>
+  @foreach (widget($home->id, 'menu', 'institution') as $data)
   <section class="partner animating-scroll" data-animate-trigger=".trigger-6">
     <div class="trigger trigger-6"></div>
     <div class="wrapper">
-      <h5>Institusi Terkait</h5>
+      <h5>{{ $data->translated('title') }}</h5>
     </div>
     <div class="logo-slider swiper">
       <div class="swiper-wrapper">
-        @for ($i = 1; $i <= 5; $i++)
-        <a href="" class="swiper-slide">
-          <img src="{{ asset('images/content/partner-'.$i.'.png') }}" alt="">
+        @foreach ($data->childs('institution-images') as $image)
+        <a href="{{ $image->link }}" target="__BLANK" class="swiper-slide">
+          <img src="{{ media::initial($image->image)->url }}" alt="{{ media::initial($image->image)->alt }}">
         </a>
-        @endfor
-        <a href="" class="swiper-slide">
-          <img src="{{ asset('images/content/partner-1.png') }}" alt="">
-        </a>
-           <a href="" class="swiper-slide">
-          <img src="{{ asset('images/content/partner-2.png') }}" alt="">
-        </a>
+        @endforeach
       </div>
     </div>
   </section>
+  @endforeach
   <div class="popup popup-rating" id="popup-rating">
     <div class="popup__overlay"></div>
     <div class="popup__box popup__box--large">
@@ -678,6 +668,15 @@
         @if (Session::has('success'))
         openPopup('#popup-center');
         @endif
+
+        document.querySelector('#frm-specific-search').addEventListener('submit', function(e) {
+          e.preventDefault();
+
+          const inputValue = document.querySelector('.search-top').value;
+          document.querySelector('.hidden-search').value = inputValue;
+
+          this.submit();
+        });
 
         const ctx = $("#statusChart");
         new Chart(ctx, {
