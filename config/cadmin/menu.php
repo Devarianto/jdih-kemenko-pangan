@@ -22,6 +22,13 @@ return [
         'default-action' => 'config',
         'routes' => admin::moduleRoutes(['config']),
     ],
+    'translation' => [
+        'label' => 'Translation',
+        'parent' => 'setting',
+        'fa' => 'fas fa-language',
+        'controller' => 'Cactuar\Admin\Http\Controllers\TranslationController',
+        'routes' => ['get' => ['index', 'edit'], 'post' => ['edit']],
+    ],
     'offline-page'=>[
         'label'=>'Offline page',
         'parent'=>'setting',

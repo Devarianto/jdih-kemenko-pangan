@@ -7,7 +7,7 @@
       <div class="dashboard__right">
         <div class="dashboard__right--title">
           <a href="{{ route('dashboard') }}" class="back">
-            Kembali
+            {{lang::translate('dashboard.kembali')}}
           </a>
         </div>
         <div class="box-white form">
@@ -23,20 +23,20 @@
           <form method="POST" action="{{ route('projects.store') }}" enctype="multipart/form-data">
             @csrf
             <div class="box-form">
-              <h5>Formulir USULAN PROJECT</h5>
+              <h5>{{lang::translate('dashboard.usulan-project.formulir.title-form')}}</h5>
               <div class="row row-wrap">
                 <div class="column column-100">
-                  <label for="">Nomor Project</label>
-                  <input type="text" name="no_project" placeholder="Ketik Nomor Project" value="{{ old('no_project') }}">
+                  <label for="">{{lang::translate('dashboard.usulan-project.formulir.label-nomor-project')}}</label>
+                  <input type="text" placeholder="{{lang::translate('dashboard.usulan-project.formulir.placeholder-nomor-project')}}" value="{{ old('no_project', 'Auto') }}" disabled>
                 </div>
                 <div class="column column-100">
-                  <label for="">Nama Project</label>
-                  <input type="text" name="name_project" placeholder="Ketik Nama Project" value="{{ old('name_project') }}">
+                  <label for="">{{lang::translate('dashboard.usulan-project.formulir.label-nama-project')}}</label>
+                  <input type="text" name="name_project" placeholder="{{lang::translate('dashboard.usulan-project.formulir.placeholder-nama-project')}}" value="{{ old('name_project') }}">
                 </div>
                 <div class="column column-50">
-                  <label for="">Kategori</label>
+                  <label for="">{{lang::translate('dashboard.usulan-project.formulir.label-kategori-project')}}</label>
                   <select name="category_id" id="">
-                    <option value="">Pilih Kategori</option>
+                    <option value="">{{lang::translate('dashboard.usulan-project.formulir.placeholder-kategori-project')}}</option>
                     @if(isset($categories))
                     @foreach($categories as $id => $label)
                     <option value="{{ $id }}" {{ old('category_id') == $id ? 'selected' : '' }}>{{ $label }}</option>
@@ -45,11 +45,11 @@
                   </select>
                 </div>
                 <div class="column column-50">
-                  <label for="">Tanggal Usulan</label>
-                  <input type="date" name="date" class="datepicker" value="{{ old('date') }}">
+                  <label for="">{{lang::translate('dashboard.usulan-project.formulir.label-tanggal-usulan')}}</label>
+                  <input type="date" name="date" class="datepicker" value="{{ old('date') }}" placeholder="{{lang::translate('dashboard.usulan-project.formulir.placeholder-tanggal-usulan')}}">
                 </div>
                <div class="column column-100">
-                 <label for="">Dokumen Terlampir</label>
+                 <label for="">{{lang::translate('dashboard.usulan-project.formulir.label-dokumen-terlampir')}}</label>
                   <div class="file-upload">
                     <input type="file" name="files[]" id="fileUpload" @change="handleFileUpload" accept=".jpg,.png,.webp,.pdf,.doc,.docx" class="textfield-large" multiple>
                     <div class="text">
@@ -58,8 +58,8 @@
                         <path d="M28.3327 13.3333L19.9993 5L11.666 13.3333" stroke="#2063D2" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
                         <path d="M20 5V25" stroke="#2063D2" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
                       </svg>
-                      <span>Select a file to upload</span>
-                      <small>PDF/DOC format, Max 5MB</small>
+                      <span>{{lang::translate('dashboard.usulan-project.formulir.placeholder-dokumen-terlampir')}}</span>
+                      <small>{{lang::translate('dashboard.usulan-project.formulir.format-dokumen-terlampir')}}</small>
                     </div>
                     <span class="file-upload__box"></span>
                   </div>
@@ -68,10 +68,10 @@
                 </div>
               </div>
               <hr>
-              <h5>Informasi Pemohon</h5>
+              <h5>{{lang::translate('dashboard.usulan-project.formulir.title-pemohon')}}</h5>
               <div class="row row-wrap">
                 <div class="column column-100">
-                  <label for="">Divisi/Pemohon Terkait</label>
+                  <label for="">{{lang::translate('dashboard.usulan-project.formulir.label-divisi-pemohon')}}</label>
                   <select class="select2" multiple="multiple" name="applicant_divisions[]">
                     @if(isset($applicantDivisions))
                     @foreach($applicantDivisions as $id => $label)
@@ -81,14 +81,14 @@
                   </select>
                 </div>
                 <div class="column column-100">
-                  <label for="">Nama Pemohon</label>
-                  <input type="text" name="applicant_name" placeholder="Nama Lengkap" value="{{ old('applicant_name') }}">
+                  <label for="">{{lang::translate('dashboard.usulan-project.formulir.label-nama-pemohon')}}</label>
+                  <input type="text" name="applicant_name" placeholder="{{lang::translate('dashboard.usulan-project.formulir.placeholder-nama-pemohon')}}" value="{{ old('applicant_name') }}">
                 </div>
               </div>
             </div>
             <div class="wrap-btn">
-              <a href="" class="button button-secondary">Batalkan</a>
-              <button type="submit" class="button-gradient">Simpan</button>
+              <a href="" class="button button-secondary">{{lang::translate('dashboard.usulan-project.formulir.button-cancel')}}</a>
+              <button type="submit" class="button-gradient">{{lang::translate('dashboard.usulan-project.formulir.button-save')}}</button>
             </div>
           </form>
         </div>
@@ -117,7 +117,7 @@
 
         // Enforce max 3 files
         if (selectedFiles.length > 3) {
-          fileError.textContent = "Maksimal 3 file dapat diunggah.";
+          fileError.textContent = "{{lang::translate('dashboard.usulan-project.formulir.msg-error-dokumen-max-3')}}";
           selectedFiles = selectedFiles.slice(0, 3);
         } else {
           fileError.textContent = "";

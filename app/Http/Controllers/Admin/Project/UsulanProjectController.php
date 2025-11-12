@@ -130,6 +130,7 @@ class UsulanProjectController extends Controller
     {
         $validated = $request->validate([
             'unique' => 'required|numeric',
+            'end_date' => 'required|date',
         ]);
 
         $project = Project::findOrFail($validated['unique']);
@@ -137,6 +138,7 @@ class UsulanProjectController extends Controller
             return back()->with('error', 'Aksi tidak diizinkan. Usulan sudah direview.');
         }
         $project->status_review = 2;
+        $project->end_date = \Carbon\Carbon::parse($validated['end_date'])->format('Y-m-d');
         $project->save();
 
         // insert initial status to project_update table

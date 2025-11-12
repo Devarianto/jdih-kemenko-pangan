@@ -60,9 +60,15 @@
                         <div class="col-md-8">: {{ optional($data->category)->label }}</div>
                     </div>
                     <div class="row mb-2">
-                        <div class="col-md-4 fw-bold">Tanggal Ulasan</div>
+                        <div class="col-md-4 fw-bold">Tanggal Usulan</div>
                         <div class="col-md-8">: {{ \Carbon\Carbon::parse($data->date)->translatedFormat('d F Y') }}</div>
                     </div>
+                    @if((int) $data->status_review === 2)
+                    <div class="row mb-2">
+                        <div class="col-md-4 fw-bold">Tanggal Penyelesain</div>
+                        <div class="col-md-8">: {{ \Carbon\Carbon::parse($data->end_date)->translatedFormat('d F Y') }}</div>
+                    </div>
+                    @endif
                     <div class="row mb-2">
                         <div class="col-md-4 fw-bold">Lampiran</div>
                         <div class="col-md-8">
@@ -109,13 +115,9 @@
                     <!-- Tombol Approve & Reject -->
                     @if((int) $data->status_review === 0)
                     <div class="mt-4 d-flex gap-2">
-                        <form action="{{ url()->admin('usulan-project/approve') }}" method="POST" class="d-inline">
-                            @csrf
-                            <input type="hidden" name="unique" value="{{ $data->id }}">
-                            <button type="submit" class="btn btn-success px-4" onclick="return confirm('Approve usulan ini?')">
-                                <i class="align-middle me-1" data-feather="check-circle"></i> Approve
-                            </button>
-                        </form>
+                        <button type="button" class="btn btn-success px-4" data-bs-toggle="modal" data-bs-target="#approveModal">
+                            <i class="align-middle me-1" data-feather="check-circle"></i> Approve
+                        </button>
                         <form action="{{ url()->admin('usulan-project/reject') }}" method="POST" class="d-inline">
                             @csrf
                             <input type="hidden" name="unique" value="{{ $data->id }}">
@@ -129,7 +131,7 @@
                 </div>
             </div>
 
-            @if((int) $data->status_review === 2)
+            @if((int) $data->status_review !== 0)
             <!-- STATUS PROJECT -->
             <div class="card mb-4">
                 <div class="card-body">
@@ -153,17 +155,48 @@
                         </li>
                         @endforelse
                     </ul>
+
+                    @if((int) $data->status_review === 2)
 		            <!-- TOMBOL UPDATE STATUS -->
 		            <div class="mb-4">
 		                <button class="btn btn-primary px-4" data-bs-toggle="modal" data-bs-target="#updateStatusModal">
 		                    <i class="align-middle me-1" data-feather="edit-3"></i> Update Status
 		                </button>
 		            </div>
+                    @endif
             	</div>
         	</div>
             @endif
     </div>
 </div>
+
+<!-- MODAL APPROVE WITH DATE -->
+<div class="modal fade" id="approveModal" tabindex="-1" aria-labelledby="approveModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <form action="{{ url()->admin('usulan-project/approve') }}" method="POST">
+        @csrf
+        <input type="hidden" name="unique" value="{{ $data->id }}">
+        <div class="modal-header">
+          <h5 class="modal-title" id="approveModalLabel">Setujui Usulan</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="mb-3">
+            <label for="end_date" class="form-label fw-semibold">Tanggal Penyelesaian</label>
+            <input type="date" class="form-control" id="end_date" name="end_date" required>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+          <button type="submit" class="btn btn-success">
+            <i class="align-middle me-1" data-feather="check-circle"></i> Approve
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+  </div>
 
 <!-- MODAL UPDATE STATUS -->
 <div class="modal fade" id="updateStatusModal" tabindex="-1" aria-labelledby="updateStatusModalLabel" aria-hidden="true">

@@ -1,2 +1,2 @@
 <?php
-return include_once(__DIR__.'/../id/site.php');
+return include(__DIR__.'/../id/site.php');

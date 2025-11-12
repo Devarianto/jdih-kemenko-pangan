@@ -7,30 +7,30 @@
       <div class="dashboard__right">
         <div class="dashboard__right--title">
           <a href="{{ route('dashboard') }}" class="back">
-            Kembali
+            {{lang::translate('dashboard.kembali')}}
           </a>
         </div>
         <div class="box-white table">
-          <h5>DETAIL USULAN PROJECT</h5>
+          <h5>{{lang::translate('dashboard.daftar-project.detail.title-page')}}</h5>
           <table>
             <tr>
-              <td>Nomor Project</td>
+              <td>{{lang::translate('dashboard.daftar-project.detail.nomor-project')}}</td>
               <td>{{ $project->no_project }}</td>
             </tr>
              <tr>
-              <td>Judul</td>
+              <td>{{lang::translate('dashboard.daftar-project.detail.nama-project')}}</td>
               <td>{{ $project->name_project }}</td>
             </tr>
             <tr>
-              <td>Kategori</td>
+              <td>{{lang::translate('dashboard.daftar-project.detail.kategori-project')}}</td>
               <td>{{ optional($project->category)->label }}</td>
             </tr>
             <tr>
-              <td>Tanggal Ulasan</td>
+              <td>{{lang::translate('dashboard.daftar-project.detail.tanggal-usulan')}}</td>
               <td>{{ \Carbon\Carbon::parse($project->date)->translatedFormat('d F Y') }}</td>
             </tr>
             <tr>
-              <td>Lampiran</td>
+              <td>{{lang::translate('dashboard.daftar-project.detail.lampiran')}}</td>
               <td>
                 @php
                   $files = [];
@@ -50,10 +50,10 @@
             </tr>
           </table>
           <hr>
-          <h5>INFORMASI PEMOHON</h5>
+          <h5>{{lang::translate('dashboard.daftar-project.detail.title-pemohon')}}</h5>
           <table>
             <tr>
-              <td>Divisi/Pemohon</td>
+              <td>{{lang::translate('dashboard.daftar-project.detail.divisi-pemohon')}}</td>
               <td>
                 @if($project->applicantDivisions && $project->applicantDivisions->count())
                   {{ $project->applicantDivisions()->pluck('label')->join(', ') }}
@@ -63,12 +63,12 @@
               </td>
             </tr>
             <tr>
-              <td>Nama Pemohon</td>
+              <td>{{lang::translate('dashboard.daftar-project.detail.nama-pemohon')}}</td>
               <td>{{ $project->applicant_name }}</td>
             </tr>
           </table>
           <hr>
-          <h5>Status Project</h5>
+          <h5>{{lang::translate('dashboard.daftar-project.detail.status-project')}}</h5>
           <div class="status-project">
             @forelse(($updates ?? []) as $u)
             <div class="status-project__step {{ $loop->last ? '' : 'done' }}">
@@ -104,7 +104,7 @@
               </div>
               <span class="date">-</span>
               <div class="text">
-                <p><b>Belum ada pembaruan status</b></p>
+                <p><b>{{lang::translate('dashboard.daftar-project.detail.belum-ada-data')}}</b></p>
               </div>
             </div>
             @endforelse

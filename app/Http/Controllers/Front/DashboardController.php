@@ -119,7 +119,6 @@ class DashboardController extends Controller
     public function storeProject(Request $request)
     {
         $validated = $request->validate([
-            'no_project' => ['required', 'string', 'max:255', 'unique:projects,no_project'],
             'name_project' => ['required', 'string', 'max:255'],
             'category_id' => ['required', 'integer'],
             'date' => ['required', 'string', 'max:255'],
@@ -130,8 +129,11 @@ class DashboardController extends Controller
             'applicant_divisions.*' => ['integer'],
         ]);
 
+        // Generate unique no_project
+        $noProject = $this->generateNoProject();
+
         $storedPaths = [];
-        $folder = Str::slug($validated['no_project']);
+        $folder = Str::slug($noProject);
         $destinationPath = public_path('uploads/projects/' . $folder);
         File::ensureDirectoryExists($destinationPath);
         foreach ($request->file('files', []) as $uploadedFile) {
@@ -144,7 +146,7 @@ class DashboardController extends Controller
 
         $project = Project::create([
             'user_id' => Auth::guard('account')->id(),
-            'no_project' => $validated['no_project'],
+            'no_project' => $noProject,
             'name_project' => $validated['name_project'],
             'category_id' => $validated['category_id'],
             'date' => Carbon::parse($validated['date'])->format('Y-m-d'),
@@ -156,6 +158,14 @@ class DashboardController extends Controller
         $project->applicantDivisions()->sync($request->input('applicant_divisions', []));
 
         return redirect()->route('dashboard')->with('status', 'Usulan project berhasil disimpan.');
+    }
+
+    protected function generateNoProject(): string
+    {
+        do {
+            $candidate = 'PRJ-' . date('Ymd') . '-' . strtoupper(Str::random(6));
+        } while (Project::where('no_project', $candidate)->exists());
+        return $candidate;
     }
 
 }

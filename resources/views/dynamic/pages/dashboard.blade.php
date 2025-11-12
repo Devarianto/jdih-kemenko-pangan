@@ -6,22 +6,22 @@
       @include('dynamic.component.dashboard-left', ['active' => 'usulan'])
       <div class="dashboard__right">
         <div class="dashboard__right--title">
-          <h5>Usulan Project</h5>
+          <h5>{{lang::translate('dashboard.usulan-project.title-page')}}</h5>
           <a href="{{ route('form.usulan') }}" class="button button-outline button-icon">
-            Buat Usulan Project
+            {{lang::translate('dashboard.usulan-project.button-create-usulan')}}
           </a>
         </div>
         <div class="box-white search">
           <form method="GET" action="{{ route('dashboard') }}">
             <div class="row">
               <div class="column column-50">
-                <label for="">Nama Project</label>
-                <input type="text" name="q" placeholder="Ketik Kata Kunci Pencarian" value="{{ request('q') }}">
+                <label for="">{{lang::translate('dashboard.form-filter.label-name-project')}}</label>
+                <input type="text" name="q" placeholder="{{lang::translate('dashboard.form-filter.placeholder-name-project')}}" value="{{ request('q') }}">
               </div>
               <div class="column column-35">
-                <label for="">Tahun</label>
+                <label for="">{{lang::translate('dashboard.form-filter.label-year')}}</label>
                 <select name="year" id="">
-                  <option value="">Pilih Tahun</option>
+                  <option value="">{{lang::translate('dashboard.form-filter.placeholder-year')}}</option>
                   @if(isset($years))
                   @foreach($years as $y)
                   <option value="{{ $y }}" {{ request('year') == $y ? 'selected' : '' }}>{{ $y }}</option>
@@ -31,7 +31,7 @@
               </div>
               <div class="column column-15">
                 <button type="submit" class="button-gradient button-icon button-large">
-                  Cari
+                  {{lang::translate('dashboard.form-filter.button-search')}}
                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
                     <path d="M7.33333 12.6667C10.2789 12.6667 12.6667 10.2789 12.6667 7.33333C12.6667 4.38781 10.2789 2 7.33333 2C4.38781 2 2 4.38781 2 7.33333C2 10.2789 4.38781 12.6667 7.33333 12.6667Z" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                     <path d="M14.0992 13.7008L11.1992 10.8008" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -42,18 +42,18 @@
           </form>
         </div>
         <div class="box-white with-table">
-          <h5>DAFTAR USULAN PROJECT</h5>
+          <h5>{{lang::translate('dashboard.usulan-project.list-table.daftar-usulan-project')}}</h5>
           <div class="content-pages">
             <div class="table-content">
               <table>
                 <thead>
                   <tr>
-                    <th>No</th>
-                    <th>Nomor Project</th>
-                    <th>Nama Project</th>
-                    <th>Kategori</th>
-                    <th>Tanggal Usulan</th>
-                    <th>Status</th>
+                    <th>{{lang::translate('dashboard.usulan-project.list-table.no')}}</th>
+                    <th>{{lang::translate('dashboard.usulan-project.list-table.nomor-project')}}</th>
+                    <th>{{lang::translate('dashboard.usulan-project.list-table.nama-project')}}</th>
+                    <th>{{lang::translate('dashboard.usulan-project.list-table.kategori')}}</th>
+                    <th>{{lang::translate('dashboard.usulan-project.list-table.tanggal-usulan')}}</th>
+                    <th>{{lang::translate('dashboard.usulan-project.list-table.status')}}</th>
                     <th></th>
                   </tr>
                 </thead>
@@ -74,11 +74,11 @@
                     <td>{{ optional($project->category)->label }}</td>
                     <td>{{ \Carbon\Carbon::parse($project->date)->translatedFormat('d F Y') }}</td>
                     <td><span class="status {{ $status['class'] }}">{{ $status['label'] }}</span></td>
-                    <td><a href="{{ route('detail.usulan', ['id' => Crypt::encryptString($project->id)]) }}" class="button button-outline">Detail</a></td>
+                    <td><a href="{{ route('detail.usulan', ['id' => Crypt::encryptString($project->id)]) }}" class="button button-outline">{{lang::translate('dashboard.usulan-project.list-table.detail')}}</a></td>
                   </tr>
                   @empty
                   <tr>
-                    <td colspan="7" style="text-align:center;">Belum ada data</td>
+                    <td colspan="7" style="text-align:center;">{{lang::translate('dashboard.usulan-project.list-table.belum-ada-data')}}</td>
                   </tr>
                   @endforelse
                 </tbody>

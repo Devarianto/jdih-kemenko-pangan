@@ -304,5 +304,112 @@ return [
 			'message' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam ',
 			'button' => 'Kembali'
 		]
+	],
+	'dashboard' =>[
+		'dashboard'=> 'Dashboard',
+		'kembali'=> 'Kembali',
+		'logout'=> 'Logout',
+		'login' => 'Login',
+		'daftar-usulan-project-nav'=>'Daftar Usulan Project',
+		'daftar-project-nav'=>'Daftar Project',
+		'form-login'=>[
+			'title-form-login'=>'Masuk Akun',
+			'intro-form-login'=>'Silahkan masukkan username dan password anda untuk melanjutkan ke sistem JDIH Kemenko Pangan Internal',
+			'label-email'=>'Email',
+			'placeholder-email'=>'Masukan Email',
+			'label-password'=>'Masukan Password',
+			'placeholder-password'=>'Masukan Password',
+			'button-submit-login'=>'Masuk Sekarang'
+		],
+		'form-filter'=>[
+			'label-name-project'=>'Nama Project',
+			'placeholder-name-project'=>'Ketik Kata Kunci Pencarian',
+			'label-year'=>'Tahun',
+			'placeholder-year'=>'Pilih Tahun',
+			'button-search'=>'Cari',
+
+		],
+		'usulan-project'=>[
+			'title-page'=>'Usulan Project',
+			'button-create-usulan'=>'Buat Usulan Project',
+			'list-table'=>[
+				'daftar-usulan-project'=>'DAFTAR USULAN PROJECT',
+				'no'=>'no',  
+				'nomor-project'=>'Nomor Project',
+				'nama-project'=>'Nama Project',
+				'kategori'=>'Kategori',
+				'tanggal-usulan'=>'Tanggal Usulan',
+				'status'=>'Status',
+				'detail'=>'Detail',
+				'belum-ada-data'=>'Belum ada data'
+			],
+			'formulir'=>[
+				'title-form'=>'Formulir USULAN PROJECT',
+				'title-pemohon'=>'Informasi Pemohon',
+				'label-nomor-project'=>'Nomor Project',
+				'placeholder-nomor-project'=>'Nomor Project',
+				'label-nama-project'=>'Label Nama Project',
+				'placeholder-nama-project'=>'Label Nama Project',
+				'label-kategori-project'=>'label kategori project',
+				'placeholder-kategori-project'=>'placeholder kategori project',
+				'label-tanggal-usulan'=>'label tanggal usulan',
+				'placeholder-tanggal-usulan'=>'placeholder tanggal usulan',
+				'label-dokumen-terlampir'=>'Dokumen Terlampir',
+				'placeholder-dokumen-terlampir'=>'Select a file to upload',
+				'format-dokumen-terlampir'=>'PDF/DOC format, Max 5MB',
+				'msg-error-dokumen-max-3'=>'Maksimal 3 file dapat diunggah.',
+				'title-pemohon'=>'Informasi Pemohon',
+				'label-divisi-pemohon'=>'label divisi pemohon',
+				'label-nama-pemohon'=>'label nama pemohon',
+				'placeholder-nama-pemohon'=>'nama pemohon',
+				'button-cancel'=>'Batalkan',
+				'button-save'=>'Simpan'
+			],
+			'detail'=>[
+				'title-page'=>'DETAIL USULAN PROJECT',
+				'title-pemohon'=>'Informasi Pemohon',
+				'nomor-project'=>'Nomor Project',
+				'nama-project'=>'Judul',
+				'kategori-project'=>'kategori project',
+				'tanggal-usulan'=>'tanggal usulan',
+				'lampiran'=>'Lampiran',
+				'title-pemohon'=>'Informasi Pemohon',
+				'divisi-pemohon'=>'divisi pemohon',
+				'nama-pemohon'=>'nama pemohon',
+			]
+
+		],
+		'daftar-project'=>[
+			'title-page'=>'DAFTAR Project',
+			'button-create-usulan'=>'Buat Usulan Project',
+			'list-table'=>[
+				'daftar-project'=>'DAFTAR PROGRESS PROJECT',
+				'no'=>'no',  
+				'nomor-project'=>'Nomor Project',
+				'nama-project'=>'Nama Project',
+				'kategori'=>'Kategori',
+				'tanggal-usulan'=>'Tanggal Usulan',
+				'tanggal-penyelesain'=>'Tanggal Penyelesain',
+				'status'=>'Status',
+				'detail'=>'Detail',
+				'belum-ada-data'=>'Belum ada data'
+			],
+			'detail'=>[
+				'title-page'=>'DETAIL Daftar PROJECT',
+				'title-pemohon'=>'Informasi Pemohon',
+				'nomor-project'=>'Nomor Project',
+				'nama-project'=>'Judul',
+				'kategori-project'=>'kategori project',
+				'tanggal-usulan'=>'tanggal usulan',
+				'lampiran'=>'Lampiran',
+				'title-pemohon'=>'Informasi Pemohon',
+				'divisi-pemohon'=>'divisi pemohon',
+				'nama-pemohon'=>'nama pemohon',
+				'status-project'=>'Status Project',
+				'belum-ada-data'=>'Belum ada data'
+			]
+
+		]
+
 	]
 ];
