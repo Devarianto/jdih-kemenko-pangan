@@ -1,57 +1,26 @@
 @extends('cactuar::admin.layout-master')
 
 @section('content')
-<div class="container-fluid p-0">
-    <h1 class="h3 mb-3"><strong>Update</strong> Password</h1>
-
-
-    <div class="card">
-        <div class="card-body">
-            <form method="POST" action="{{ url()->admin('account/new-password') }}">
-                @csrf
-                <input type="hidden" name="unique" value="{{ $account->id }}">
-                <div class="mb-3">
-                    <label class="form-label">Akun</label>
-                    <input type="text" class="form-control" value="{{ $account->name }} ({{ $account->email }})" disabled>
-                </div>
-                <div class="mb-3">
-                    <label class="form-label">Password Baru</label>
-                    <input type="password" name="password" class="form-control" required>
-                </div>
-                <div class="mb-3">
-                    <label class="form-label">Konfirmasi Password</label>
-                    <input type="password" name="password_confirmation" class="form-control" required>
-                </div>
-                <div class="d-flex gap-2">
-                    <a href="{{ url()->admin('account') }}" class="btn btn-secondary">Kembali</a>
-                    <button type="submit" class="btn btn-primary">Simpan</button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-@endsection
-
-@extends('cactuar::admin.layout-master')
-
-@section('content')
-
 <div class="col-md-12 ">
-
 </div>
 
-<form method="post" class="form-validate">
-    <input type="hidden" name="_token" value="{!! csrf_token(); !!}">
+<form method="POST" action="{{ url()->admin('account/new-password') }}" id="generateform" class="form-validate">
+    @csrf
+    <input type="hidden" name="unique" value="{{ request()->get('unique', optional($account ?? null)->id) }}">
     <div class="col-md-6 col-xs-12 ">
         <div class="box box-primary card">
             <div class="box-header card-header">
                 <h3 class="box-title">Account</h3><br/>
-                <a href="{{ admin::url('account') }}" class="btn btn-flat bg-blue btn-info"><i class="fa fa-list"></i> Back to list</a>
+                <a href="{{ \Cactuar\Admin\Helpers\admin::url('account') }}" class="btn btn-flat bg-blue btn-info"><i class="fa fa-list"></i> Back to list</a>
             </div>
             <div class="box-body card-body">
                 <div class="form-group">
                     <label>New Password</label>
-                    <input type='password' name="password" class="form-control required" minlength="6">
+                    <input type="text" name="password" id="password" class="form-control required" minlength="6">
+                </div>
+                <div class="d-flex gap-2">
+                    <button type="button" class="btn btn-success" onclick="randomPassword(10)"><i class="fa fa-magic"></i> Generate</button>
+                    <button type="button" class="btn btn-default" onclick="copyPassword()"><i class="fa fa-copy"></i> Copy</button>
                 </div>
             </div>
         </div>
@@ -63,5 +32,24 @@
         <input type="submit" class="btn btn-primary" value="Update">
     </div>
 </form>
+
+<script>
+function randomPassword(length) {
+    var chars = "abcdefghijklmnopqrstuvwxyz!@#$%^&*()-+<>ABCDEFGHIJKLMNOP1234567890";
+    var pass = "";
+    for (var x = 0; x < length; x++) {
+        var i = Math.floor(Math.random() * chars.length);
+        pass += chars.charAt(i);
+    }
+    document.getElementById('password').value = pass;
+}
+function copyPassword() {
+  var copyText = document.getElementById("password");
+  copyText.select();
+  copyText.setSelectionRange(0, 99999);
+  document.execCommand("copy");
+  alert("Copied the new Password: " + copyText.value);
+}
+</script>
 
 @endsection

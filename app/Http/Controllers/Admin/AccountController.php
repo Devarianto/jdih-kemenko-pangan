@@ -96,7 +96,7 @@ class AccountController extends Controller
     {
         $validated = $request->validate([
             'unique' => 'required|numeric|exists:accounts,id',
-            'password' => 'required|string|min:6|confirmed',
+            'password' => 'required|string|min:6',
         ]);
 
         $account = Account::findOrFail($validated['unique']);
