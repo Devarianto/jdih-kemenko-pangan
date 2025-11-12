@@ -208,6 +208,11 @@ class PageController extends Controller
         return view('dynamic.pages.about-contactus', compact('menu'));
     }
 
+    public function getFAQ($menu)
+    {
+        return view('dynamic.pages.faq', compact('menu'));
+    }
+
     public function getAboutStatistik($menu)
     {
         $rule_types = null;

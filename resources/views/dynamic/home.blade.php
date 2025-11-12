@@ -491,7 +491,7 @@
           <div class="rating-summary">
             <h2 id="average">0.0</h2>
             <div class="stars" id="stars"></div>
-            <small id="total-reviews">0 Penilaian</small>
+            <small id="total-reviews" data-title="{{ lang::translate('home.rating.total') }}">0 Penilaian</small>
           </div>
           <div class="rating-breakdown" id="ratingBreakdown"></div>
         </div>

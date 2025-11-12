@@ -43,7 +43,6 @@ return [
             'multilang' => true,
             'ai' => ['translate','correction'],
             'attributes' => [
-                'class' => 'required',
                 'maxlength' => 50
             ],
         ],

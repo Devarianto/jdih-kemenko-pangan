@@ -48,7 +48,7 @@ return [
 			'title' => 'INDEKS KEPUASAN MASYARAKAT',
 			'intro' => 'Terima kasih atas penilaian yang telah anda berikan, masukan anda sangat bermanfaat agar terus memperbaiki dan meningkatkan kualitas pelayanan bagi masyarakat',
 			'popup-button' => 'Berikan Rating',
-			'total' => ':count Penilaian',
+			'total' => 'Penilaian',
 			'popup' => [
 				'title' => 'BERIKAN RATING',
 				'form' => [
