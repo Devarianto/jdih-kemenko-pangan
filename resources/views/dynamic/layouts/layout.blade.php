@@ -27,5 +27,28 @@
         @include('dynamic.component.footer')
         <!--end of Footer -->
         @stack('footer')
+        <script>
+            document.addEventListener("DOMContentLoaded", function(event) { 
+                function updateVisitorCount() {
+                fetch('{{ route('api.visitor') }}')
+                    .then(response => {
+                    if (!response.ok) throw new Error('Gagal mengambil data');
+                        return response.json();
+                    })
+                    .then(data => {
+                        document.getElementById('visitor-today').textContent = data.today;
+                        document.getElementById('visitor-yesterday').textContent = data.yesterday;
+                        document.getElementById('visitor-month').textContent = data.month;
+                        document.getElementById('visitor-total').textContent = data.total;
+                    })
+                    .catch(() => {
+                        console.log('Gagal mengambil data visitor');
+                    });
+                }
+
+                // Jalankan langsung
+                updateVisitorCount();
+            })
+        </script>
     </body>
 </html>

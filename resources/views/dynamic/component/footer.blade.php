@@ -42,22 +42,22 @@
         @endforeach
       </div>
        <div class="box">
-        <h6>JUMLAH PENGUNJUNG</h6>
+        <h6>{{ lang::translate('global.visitor.title') }}</h6>
         <div class="info">
-          <label>Hari Ini</label>
-          <span>85</span>
+          <label>{{ lang::translate('global.visitor.today') }}</label>
+          <span id="visitor-today">{{ lang::translate('global.visitor.loading') }}</span>
         </div>
           <div class="info">
-          <label>Kemarin</label>
-          <span>64</span>
+          <label>{{ lang::translate('global.visitor.yesterday') }}</label>
+          <span id="visitor-yesterday">{{ lang::translate('global.visitor.loading') }}</span>
         </div>
           <div class="info">
-          <label>Bulan</label>
-          <span>3.000</span>
+          <label>{{ lang::translate('global.visitor.month') }}</label>
+          <span id="visitor-month">{{ lang::translate('global.visitor.loading') }}</span>
         </div>
         <div class="info">
-          <label>Total</label>
-          <span>36.016.786</span>
+          <label>{{ lang::translate('global.visitor.total') }}</label>
+          <span id="visitor-total">{{ lang::translate('global.visitor.loading') }}</span>
         </div>
       </div>
     </div>

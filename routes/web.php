@@ -10,8 +10,9 @@ use App\Http\Controllers\Front\AuthController;
 use App\Http\Controllers\Front\RatingController;
 use App\Http\Controllers\Front\DownloadFileController;
 use App\Http\Controllers\Front\DocumentController;
+use App\Http\Controllers\Front\VisitorController;
 
-Route::group(['middleware' => ['web','front']],function() {
+Route::group(['middleware' => ['web','front', 'visitor-count']],function() {
 
     if ($permalink = Permalink::active()) {
         if ($permalink->module == 'menu'){
@@ -79,3 +80,5 @@ Route::group(['middleware' => ['web','front']],function() {
     Route::get('document/download/{type}/{id}', [DownloadFileController::class, 'getDocumentDownload'])->name('document.download');
     Route::get('document/stream/{type}/{id}', [DownloadFileController::class, 'getDocumentStream'])->name('document.stream');
 });
+
+Route::get('/api/visitor/get', [VisitorController::class, 'getVisitor'])->name('api.visitor');

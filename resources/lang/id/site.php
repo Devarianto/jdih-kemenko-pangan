@@ -74,7 +74,7 @@ return [
 		]
 	],
 	'offline-page' => [
-		'social-media' => 'SOCIAL MEDIA'
+		'social-media' => 'SOCIAL MEDIA',
 	],
 	'global' => [
 		'download-pdf' => 'Download PDF',
@@ -84,6 +84,14 @@ return [
 			'oldest' => 'Terlama'
 		],
 		'view' => ':count Dilihat',
+		'visitor' => [
+			'title' => 'Jumlah Pengunjung',
+			'loading' => 'Load...',
+			'today' => 'Hari Ini',
+			'yesterday' => 'Kemarin',
+			'month' => 'Bulan Ini',
+			'total' => 'Total'
+		]
 	],
 	'infografis' => [
 		'other-infografis' => 'Infografis Lainnya',
