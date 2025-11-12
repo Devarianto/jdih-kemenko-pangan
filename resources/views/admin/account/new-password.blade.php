@@ -1,6 +1,40 @@
 @extends('cactuar::admin.layout-master')
 
 @section('content')
+<div class="container-fluid p-0">
+    <h1 class="h3 mb-3"><strong>Update</strong> Password</h1>
+
+
+    <div class="card">
+        <div class="card-body">
+            <form method="POST" action="{{ url()->admin('account/new-password') }}">
+                @csrf
+                <input type="hidden" name="unique" value="{{ $account->id }}">
+                <div class="mb-3">
+                    <label class="form-label">Akun</label>
+                    <input type="text" class="form-control" value="{{ $account->name }} ({{ $account->email }})" disabled>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Password Baru</label>
+                    <input type="password" name="password" class="form-control" required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Konfirmasi Password</label>
+                    <input type="password" name="password_confirmation" class="form-control" required>
+                </div>
+                <div class="d-flex gap-2">
+                    <a href="{{ url()->admin('account') }}" class="btn btn-secondary">Kembali</a>
+                    <button type="submit" class="btn btn-primary">Simpan</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+@endsection
+
+@extends('cactuar::admin.layout-master')
+
+@section('content')
 
 <div class="col-md-12 ">
 

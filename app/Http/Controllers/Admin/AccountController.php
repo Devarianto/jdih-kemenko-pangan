@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use App\Models\Account;
 use App\Models\CategoryProject;
 use Cactuar\Admin\Traits\Controllers\BaseTrait;
@@ -71,6 +72,39 @@ class AccountController extends Controller
         return true;
     }
 
+
+
+    public function listingCustomActs($item)
+    {
+
+        return [
+            '<a href="'.url()->admin($this->module().'/new-password?unique='.$item->id).'" class="btn bg-success btn-flat btn-info"><i class="fa fa-key"></i> New Password</a>',
+        ];
+      
+    }
+
+    public function getNewPassword(Request $request)
+    {
+        if ($request->queryValidated('unique','numeric|required')) {
+            $account = Account::findOrFail($request->query('unique'));
+            return view('admin.account.new-password', compact('account'));
+        }
+        abort(404);
+    }
+
+    public function postNewPassword(Request $request)
+    {
+        $validated = $request->validate([
+            'unique' => 'required|numeric|exists:accounts,id',
+            'password' => 'required|string|min:6|confirmed',
+        ]);
+
+        $account = Account::findOrFail($validated['unique']);
+        $account->password = bcrypt($validated['password']);
+        $account->save();
+
+        return back()->with('success', 'Password berhasil diperbarui.');
+    }
 
     public function formFields($type)
     {
