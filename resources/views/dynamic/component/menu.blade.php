@@ -1,6 +1,6 @@
 <div class="wrapper">
   <a href="{{ lang::url('/') }}" class="logo">
-    <img src="{{asset('images/material/logo.svg')}}" alt="">
+    <img src="{{ media::initial(conf('site-setting')->value('logo'))->url }}" alt="{{ media::initial(conf('site-setting')->value('logo'))->alt }}">
   </a>
   <div class="right-header">
     <nav>
@@ -79,7 +79,7 @@
   <div class="popup__overlay"></div>
   <div class="popup__box popup__box--large">
     <div class="popup__content">
-      <figure><img src="{{ asset('images/content/content-login.jpg') }}" alt=""></figure>
+      <figure><img src="{{ media::initial(conf('site-setting')->value('login-image'))->url }}" alt="{{ media::initial(conf('site-setting')->value('login-image'))->alt }}"></figure>
       <figcaption>
         <h5> {{ lang::translate('dashboard.form-login.title-form-login') }} </h5>
         <p>{{ lang::translate('dashboard.form-login.intro-form-login') }}</p>

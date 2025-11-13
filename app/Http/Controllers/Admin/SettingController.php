@@ -38,6 +38,17 @@ class SettingController extends BaseController
                     'style' => 'max-width:200px',
                 ]
             ],*/
+            'login-image' => [
+                'label' => 'Login Image',
+                'type' => 'text',
+                'attributes' => [
+                    'class' => 'required cfind',
+                    'cfind-type' => 'image',
+                    'cfind-thumb' => '337x539',
+                    'cfind-convert' => 'webp',
+                    'cfind-alt' => 1,
+                ]
+            ],
             'footer' => [
                 'type' => 'widget',
                 'subtitle' => 'Footer',
