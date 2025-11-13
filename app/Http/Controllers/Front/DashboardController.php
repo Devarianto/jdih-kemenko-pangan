@@ -121,7 +121,7 @@ class DashboardController extends Controller
         $validated = $request->validate([
             'name_project' => ['required', 'string', 'max:255'],
             'category_id' => ['required', 'integer'],
-            'date' => ['required', 'string', 'max:255'],
+            'date' => ['required', 'string', 'date_format:d/m/Y'],
             'files' => ['required', 'array', 'min:1', 'max:3'],
             'files.*' => ['file', 'mimes:jpg,jpeg,png,webp,pdf,doc,docx', 'max:5120'],
             'applicant_name' => ['required', 'string', 'max:255'],
@@ -149,7 +149,7 @@ class DashboardController extends Controller
             'no_project' => $noProject,
             'name_project' => $validated['name_project'],
             'category_id' => $validated['category_id'],
-            'date' => Carbon::parse($validated['date'])->format('Y-m-d'),
+            'date' => Carbon::createFromFormat('d/m/Y', $validated['date'])->format('Y-m-d'),
             'file' => json_encode($storedPaths),
             'applicant_name' => $validated['applicant_name'],
             'status_review' => 0,
