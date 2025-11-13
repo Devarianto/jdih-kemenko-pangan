@@ -7,6 +7,7 @@ use Cactuar\Admin\Traits\Models\TranslateTrait;
 use Cactuar\Admin\Traits\Models\PermalinkTrait;
 
 use lang;
+use Carbon\Carbon;
 
 class Document extends Model
 {
@@ -157,4 +158,152 @@ class Document extends Model
             return $this->customPermalink('document-naskah');
         }
     }
+
+    public function getApiJenisAttribute()
+    {
+        $master_document = $this->master_document_id;
+
+        if ($master_document == self::PERATURAN) {
+            return $this->jenis_bentuk_peraturan;
+        } else {
+            return '-';
+        }
+    }
+
+    public function getApiTahunPengundanganAttribute()
+    {
+        $master_document = $this->master_document_id;
+
+        if ($master_document == self::PERATURAN) {
+            return !$this->tanggal_pengundangan ? '-' : Carbon::parse($this->tanggal_pengundangan)->format('Y');
+        } else {
+            return '-';
+        }
+    }
+
+    public function getApiTanggalPengundanganAttribute()
+    {
+        $master_document = $this->master_document_id;
+
+        if ($master_document == self::PERATURAN) {
+            return !$this->tanggal_pengundangan ? '-' : $this->tanggal_pengundangan;
+        } else {
+            return '-';
+        }
+    }
+
+    public function getApiNoPeraturanAttribute()
+    {
+        $master_document = $this->master_document_id;
+
+        if ($master_document == self::PERATURAN) {
+            return !$this->no_peraturan ? '-' : $this->no_peraturan;
+        } else {
+            return '-';
+        }
+    }
+
+    public function getApiJudulAttribute()
+    {
+        return $this->title;
+    }
+
+    public function getApiNoPanggilAttribute()
+    {
+        $master_document = $this->master_document_id;
+
+        if (in_array($master_document, [self::MONOGRAFI, self::JURNAL])) {
+            return !$this->no_panggil ? '-' : $this->no_panggil;
+        } else {
+            return '-';
+        }
+    }
+
+    public function getApiSingkatanJenisAttribute()
+    {
+        return $this->singkata_jenis_peraturan ?? '-';
+    }
+
+    public function getApiTempatTerbitAttribute()
+    {
+        return $this->tempat_terbit ?? '-';
+    }
+
+    public function getApiPenerbitAttribute()
+    {
+        $master_document = $this->master_document_id;
+        if ($master_document == self::MONOGRAFI) {
+            return !$this->penerbit ? '-' : $this->penerbit;
+        } else {
+            return '-';
+        }
+    }
+
+    public function getApiDeskripsiFisikAttribute()
+    {
+        $master_document = $this->master_document_id;
+
+        if ($master_document == self::MONOGRAFI) {
+            return !$this->deskripsi_fisik ? '-' : $this->deskripsi_fisik;
+        } else {
+            return '-';
+        }
+    }
+
+    public function getApiSumberAttribute()
+    {
+        return $this->sumber ?? '-';
+    }
+
+    public function getApiSubjekAttribute()
+    {
+        return $this->subjek ?? '-';
+    }
+
+    public function getApiStatusAttribute()
+    {
+        $master_document = $this->master_document_id;
+
+        if ($master_document == self::PERATURAN) {
+            if ($this->status_berlaku == 0) {
+                return 'tidak berlaku';
+            } else if ($this->status_berlaku == 1) {
+                return 'masih berlaku';
+            }
+        } else {
+            return '-';
+        }
+    }
+
+    public function getApiBahasaAttribute()
+    {
+        return $this->bahasa ?? '-';
+    }
+
+    public function getApiBidangHukumAttribute()
+    {
+        return $this->bidang_hukum ?? '-';
+    }
+
+    public function getApiIsbnAttribute()
+    {
+        return $this->isbn ?? '-';
+    }
+
+    public function getApiTeuBadanAttribute()
+    {
+        return $this->teu ?? '-';
+    }
+
+    public function getApiNomorIndukBukuAttribute()
+    {
+        $master_document = $this->master_document_id;
+
+        if ($master_document == self::MONOGRAFI) {
+            return $this->nomor_induk_buku ?? '';
+        } else {
+            return '-';
+        }
+    }
+    
 }

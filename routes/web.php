@@ -12,6 +12,8 @@ use App\Http\Controllers\Front\DownloadFileController;
 use App\Http\Controllers\Front\DocumentController;
 use App\Http\Controllers\Front\VisitorController;
 
+use App\Http\Controllers\APIController;
+
 Route::group(['middleware' => ['web','front', 'visitor-count']],function() {
 
     if ($permalink = Permalink::active()) {
@@ -82,3 +84,5 @@ Route::group(['middleware' => ['web','front', 'visitor-count']],function() {
 });
 
 Route::get('/api/visitor/get', [VisitorController::class, 'getVisitor'])->name('api.visitor');
+
+Route::get('jdihn-json', [APIController::class, 'apiJDIH']);//->middleware('auth.basic.once');
