@@ -65,6 +65,10 @@ class Front
         view()->share('footLeftMenu', Menu::position('foot-left'));
         view()->share('footRightMenu', Menu::position('foot-right'));
         
+        $menu_peraturan = Menu::fe()->whereIsActive(1)->where('type', 'peraturan-hukum')->first();
+
+        view()->share('menu_peraturan_front', $menu_peraturan);
+
         view()->share('webConfig', $webConfig);
 		$request->attributes->add(['webConfig' => $webConfig]);
 		

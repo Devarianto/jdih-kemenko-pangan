@@ -77,6 +77,7 @@ return [
 		'social-media' => 'SOCIAL MEDIA',
 	],
 	'global' => [
+		'search' => 'Ketik kata pencarian',
 		'download-pdf' => 'Download PDF',
 		'sorting' => [
 			'title' => 'Urutkan',

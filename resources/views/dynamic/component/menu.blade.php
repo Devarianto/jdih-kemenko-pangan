@@ -65,11 +65,15 @@
     </div>
   </div>
 </div>
+@if (!is_null($menu_peraturan_front))
 <div class="header-bot">
   <div class="wrapper">
-    <input type="text" placeholder="Ketik Kata Kunci Pencarian">
+    <form action="{{ $menu_peraturan_front->permalink }}" id="frm-search-global">
+      <input type="text" name="search" placeholder="{{ lang::translate('global.search') }}">
+    </form>
   </div>
 </div>
+@endif
 
 <div class="popup popup-login" id="popup-login">
   <div class="popup__overlay"></div>
@@ -98,7 +102,7 @@
             </div>
           </div>
         </form>
-        <small>©2025 Biro Hukum ⋅ Kementerian Kordinator Bidang Pangan</small>
+        <small>{!! og::copyright() !!}</small>
       </figcaption>
     </div>
   </div>

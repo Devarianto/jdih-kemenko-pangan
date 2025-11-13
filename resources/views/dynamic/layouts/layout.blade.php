@@ -48,6 +48,16 @@
 
                 // Jalankan langsung
                 updateVisitorCount();
+
+                const form = document.getElementById('frm-search-global');
+
+                form.addEventListener('keypress', function(event) {
+                    // Cek apakah tombol yang ditekan adalah Enter (key code 13)
+                    if (event.key === 'Enter') {
+                        event.preventDefault(); // Hindari submit default (jika ada input lain)
+                        form.submit(); // Submit form secara otomatis
+                    }
+                });
             })
         </script>
     </body>
