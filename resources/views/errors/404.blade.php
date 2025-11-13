@@ -6,6 +6,7 @@ use Cactuar\Admin\Models\Menu;
     $mainMenu = Cactuar\Admin\Models\Menu::position('main');
     $footLeftMenu = Cactuar\Admin\Models\Menu::position('foot-left');
     $footRightMenu = Cactuar\Admin\Models\Menu::position('foot-right');
+    $menu_peraturan = Menu::fe()->whereIsActive(1)->where('type', 'peraturan-hukum')->first();
     if (!$webConfig || $webConfig->status == 'offline') {
         echo view('dynamic.errors.offline');
         die();
