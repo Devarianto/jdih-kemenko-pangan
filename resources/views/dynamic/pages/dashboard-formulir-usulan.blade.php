@@ -46,7 +46,7 @@
                 </div>
                 <div class="column column-50">
                   <label for="">{{lang::translate('dashboard.usulan-project.formulir.label-tanggal-usulan')}}</label>
-                  <input type="date" name="date" class="datepicker" value="{{ old('date') }}" placeholder="{{lang::translate('dashboard.usulan-project.formulir.placeholder-tanggal-usulan')}}">
+                  <input type="text" name="date" class="datepicker" value="{{ old('date') }}" placeholder="{{lang::translate('dashboard.usulan-project.formulir.placeholder-tanggal-usulan')}}">
                 </div>
                <div class="column column-100">
                  <label for="">{{lang::translate('dashboard.usulan-project.formulir.label-dokumen-terlampir')}}</label>
@@ -172,6 +172,13 @@
           }
         }
       });
+      
+      window.addEventListener('load', function() {
+    $('.datepicker').datepicker({
+          autoclose: true,
+          format: 'dd/mm/yyyy'
+        });
+      })
     </script>
   @endpush
 @endsection
