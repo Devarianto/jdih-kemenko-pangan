@@ -31,7 +31,7 @@ class AccountController extends Controller
     
     public function listingFields()
     {
-        return ['name' => 'Name', 'email' => 'Email', 'status_users' => 'Role'];
+        return ['name' => 'Name', 'email' => 'Email'];
     }
     
     public function listingSearchs()
