@@ -3,6 +3,7 @@
 return [
     'label' => 'Home',
     'preview' => '/templates/home.png',
+    'max' => 1,
     'widgets' => [
         'banner-home' => [],
         'rule-theme' => [

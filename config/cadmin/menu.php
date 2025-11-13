@@ -126,7 +126,6 @@ return [
 
     'menu' => [
         'label' => 'Menu',
-        'parent' => 'content',
         'fa' => 'file',
 		'controller' => 'App\Http\Controllers\Admin\MenuController',
         'routes' => admin::moduleRoutes(['index','edit','delete','create','publish']),
@@ -248,7 +247,7 @@ return [
         'label' => 'Rating',
         'fa' => 'star',
 		'controller' => 'App\Http\Controllers\Admin\RatingController',
-        'routes' => admin::moduleRoutes(['index','create','edit','delete','menu','publish', 'email-template']),
+        'routes' => admin::moduleRoutes(['index','create','edit','delete','publish', 'email-template']),
     ],
 	'contact' => [
         'label' => 'Hubungi Kami',

@@ -213,6 +213,11 @@ class PageController extends Controller
         return view('dynamic.pages.faq', compact('menu'));
     }
 
+    public function getInformasiRancangan($menu)
+    {
+        return view('dynamic.pages.informasi-rancangan', compact('menu'));
+    }
+
     public function getAboutStatistik($menu)
     {
         $rule_types = null;

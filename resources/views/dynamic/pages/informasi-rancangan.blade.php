@@ -1,60 +1,40 @@
-@extends('static.layouts.layout')
+@extends('dynamic.layouts.layout')
 
 @section('content')
-  <section class="banner-middle">
-    <figure>
-      <img 
-        src="{{asset('images/content/banner-peraturan.webp')}}" 
-        data-img-large="{{ asset('images/content/banner-peraturan.webp') }}"
-        data-img-medium="{{ asset('images/content/banner-peraturan.webp') }}"
-        data-img-small="{{ asset('images/content/banner-peraturan.webp') }}"
-        width="1380" height="400" alt="img">
-    </figure>
-    <figcaption>
-      <small>INFORMASI LAINNYA</small>
-      <h2>RANCANGAN PERATURAN</h2>
-    </figcaption>
-    <div class="wave">
-      <svg xmlns="http://www.w3.org/2000/svg"
-        width="100%" height="140"
-        viewBox="0 180 2500 200"
-        fill="#F8F8F8"
-        preserveAspectRatio="none">
-        <path class="st1"
-          d="M 0 250 C 1200 320 1200 100 3000 250 L 3000 550 L 0 550 L 0 250">
-          <animate attributeName="d" dur="5s"
-            values="M 0 250 C 1200 320 1200 100 3000 250 L 3000 550 L 0 550 L 0 250;
-                    M 0 250 C 400 100 400 320 3000 250 L 3000 550 L 0 550 L 0 250;
-                    M 0 250 C 1200 280 1200 100 3000 250 L 3000 550 L 0 550 L 0 250"
-            repeatCount="indefinite" />
-        </path>
-      </svg>
-    </div>
-  </section>
+  @include('dynamic.component.banner')
   <section class="middle">
     <div class="wrapper-content">
+      @foreach (widget($menu->id, 'menu', 'content') as $content)
       <div class="content-pages">
-        <h4>SOP JDIH merupakan sebuah panduan yang bertujuan untuk memastikan pekerjaan dan kegiatan pengelolaan layanan JDIH berjalan dengan lancar.</h4>
-        <p>SOP di bidang hukum bertujuan untuk mewujudkan tata kelola pemerintahan yang baik dan menjamin kelancaran serta transparansi penyelesaian suatu jenis kegiatan pelayanan internal dan eksternal di lingkungan Kementerian Koordinator Bidang Pangan</p>
-        <p>Berikut daftar SOP yang berkaitan dengan bidang hukum, antara lain:</p>
+        <h4>{{ $content->translated('title') }}</h4>
+        {!! $content->translated('description') !!}
       </div>
+      @endforeach
+      @foreach (widget($menu->id, 'menu', 'box-content') as $content)
       <div class="contact-highlight">
         <figure class="bg">
           <img 
-          src="{{ asset('images/content/bg-rancangan.png') }}" 
-          data-img-large="{{ asset('images/content/bg-rancangan.png') }}"
-          data-img-medium="{{ asset('images/content/bg-rancangan-medium.png') }}"
-          data-img-small="{{ asset('images/content/banner-about.webp') }}"
-          width="996" height="288" alt="img">
+          src="{{ media::initial($content->image)->url }}" 
+          data-img-large="{{ media::initial($content->image)->url }}"
+          data-img-medium="{{ media::initial($content->value('image-medium'))->url }}"
+          data-img-small="{{ media::initial($content->value('image-small'))->url }}"
+          alt="{{ media::initial($content->image)->alt }}">
         </figure>
         <div class="contact-highlight__left">
-          <h5>PENGAJUAN USULAN</h5>
-          <p>Pengajuan usulan permenko, peraturan perundang-undangan, evaluasi hukum dan naskah hukum</p>
-          <a href="" class="button button-outline-secondary">
-            Ajukan Usulan Project
+          <h5>{{ $content->translated('title') }}</h5>
+          <p>{{ $content->translated('intro') }}</p>
+          @if (Auth::guard('account')->check())
+          <a href="{{ lang::url('dashboard') }}" class="button button-outline-secondary">
+            {{ $content->translated('button') }}
           </a>
+          @else
+          <a href="javascript:void(0)" onclick="openPopup('#popup-login')" class="button button-outline-secondary">
+            {{ $content->translated('button') }}
+          </a>
+          @endif
         </div>
       </div>
+      @endforeach
     </div>
   </section>
   @push('head')
