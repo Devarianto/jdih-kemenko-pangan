@@ -31,7 +31,7 @@
     
 	<div class="login-box card">
 		<div class="head">
-            <div class="logo">
+            <div class="logo" style="background: radial-gradient(44.17% 136.2% at 50% 50%, #076E95 0%, #00558F 100%)">
                 <img src="{{ media::url($website->logo) }}" alt="">
             </div>
             {{--<div class="login-img">

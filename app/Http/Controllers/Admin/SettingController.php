@@ -15,13 +15,18 @@ class SettingController extends BaseController
             'logo' => [
                 'label' => 'Logo',
                 'type' => 'text',
-                'info' => 'Use svg only',
-                'attributes' => ['class' => 'required cfind', 'cfind-type' => 'image', 'cfind-ext' => 'svg'],
+                'info' => 'Use svg only, Recomended size width : 32 x height : 32',
+                'attributes' => [
+                    'class' => 'required cfind', 
+                    'cfind-type' => 'image', 
+                    'cfind-ext' => 'svg',
+                    'cfind-alt' => 1,
+                ],
             ],
 			'favicon' => [
 				'label' => 'Fav Icon',
 				'type' => 'text',
-                'info' => 'ICO file only',
+                'info' => 'ICO file only, Recomended size width : 32 x height : 32',
 				'attributes' => ['class' => 'required cfind', 'cfind-type' => 'image', 'cfind-ext' => 'ico'],
 			],
             'copyright' => [
