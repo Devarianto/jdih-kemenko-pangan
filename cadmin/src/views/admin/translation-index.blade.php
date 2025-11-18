@@ -9,7 +9,7 @@
         </div>
         <div class="box-body card-body">
             <div class=" table-responsive">
-            
+
                 <div class="pull-right admin-filter" style="float:right;">
                     <div>
                         <div class="input-group">
@@ -18,7 +18,7 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <script>
                     $('input[name=search]').keyup(function() {
                         if (!$(this).val()) {
@@ -27,9 +27,9 @@
                             $('.cat').hide();
                             return;
                         }
-                        
+
                         var keyword = $(this).val().toLowerCase();
-                        
+
                         $('.table tr').each(function() {
                             if ($(this).find('th').length >= 1)
                                 return;
@@ -38,44 +38,46 @@
                                 if($(this).html().toLowerCase().indexOf(keyword) >= 0)
                                     found = true;
                             });
-                            
+
                             if (found == false)
                                 $(this).hide();
                             else
                                 $(this).show();
                         });
-                        
+
                         $('tr.subtitle').hide();
                         $('.cat').show();
                     });
                 </script>
                 <style>.cat { display:none; }</style>
-                
+
                 <table class="table table-hover">
-                    <caption>translation</caption>
                     <tr>
                         <th>Code</th>
                         @foreach (lang::codes() as $v)
-                        <th>Translation [{{strtoupper($v)}}]</th>
+                        <th>Translation {{ count(lang::codes()) > 1 ? '['.strtoupper($v).']' : '' }}</th>
                         @endforeach
                         <th width="100px">&nbsp;</th>
                     </tr>
                     <?php $onCat = ''; ?>
-                    @foreach ($translateKeys as $baseCode) 
-                    
+                    @foreach ($translateKeys as $baseCode)
+
                     @php
                         $ex = explode('.',$baseCode);
                         $code = array_pop($ex);
                         $cat = implode(' / ', $ex);
+                        // $cat = isset($ex[1]) ? 'Home / '.$ex[1] : $ex[0];
+                        $cat = $ex[0];
+                        $base = str_replace(' / ','.',strtolower($cat));
                     @endphp
-                    
+
                     @if($cat != $onCat)
                         @php($onCat = $cat)
                         <tr class="subtitle"><td colspan="{{ count(lang::codes()) + 3 }}" style="background:#3c8dbc;font-weight:bold;color:#fff;text-align:center;">@if($cat) {{ str_replace("/",">>",strtoupper($cat)) }} @else GLOBAL @endif</td></tr>
                     @endif
-                    
+
                     <tr>
-                        <td>@if($cat)<i class="cat">{{ $cat }} >> </i>@endif {{ $code }}</td>
+                        <td>@if($cat)<i class="cat">{{ $cat }} >> </i>@endif {{ str_replace($base.'.','',$baseCode) }}</td>
                         @foreach (lang::codes() as $v)
                         <td>{!! lang::translate($baseCode, [], $v) !!}</td>
                         @endforeach

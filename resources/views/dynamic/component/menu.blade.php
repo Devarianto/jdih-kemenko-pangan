@@ -129,7 +129,7 @@
         console.log('test')
         submitBtn.disabled = true;
         submitBtn.style.background = "grey";
-        submitBtn.textContent = "{{ lang::translate('global.login.process') }}";
+        submitBtn.textContent = "{{ lang::translate('dashboard.form-login.process') }}";
       }
       try {
         const formData = new FormData(form);
@@ -151,7 +151,7 @@
           return;
         }
         // handle validation/auth errors
-        let msg = "{{ lang::translate('global.login.unknown-user') }}";
+        let msg = "{{ lang::translate('dashboard.form-login.unknown-user') }}";
         try {
           const data = await res.json();
           if (data && (data.message || (data.errors && data.errors.email && data.errors.email[0]))) {
@@ -166,10 +166,10 @@
         }
       } catch (err) {
         if (errorBox) {
-          errorBox.textContent = "{{ lang::translate('global.login.failed-network') }}";
+          errorBox.textContent = "{{ lang::translate('dashboard.form-login.failed-network') }}";
           errorBox.style.display = 'block';
         } else {
-          alert("{{ lang::translate('global.login.failed-network') }}");
+          alert("{{ lang::translate('dashboard.form-login.failed-network') }}");
         }
       } finally {
         if (submitBtn && successLogin == false) {

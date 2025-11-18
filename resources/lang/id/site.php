@@ -77,11 +77,6 @@ return [
 		'social-media' => 'SOCIAL MEDIA',
 	],
 	'global' => [
-		'login' => [
-			'process' => 'Memproses...',
-			'unknown-user' => 'Gagal login. Periksa kembali email dan password Anda.',
-			'failed-network' => 'Terjadi kesalahan jaringan. Coba lagi.'
-		],
 		'search' => 'Ketik kata pencarian',
 		'download-pdf' => 'Download PDF',
 		'sorting' => [
@@ -378,7 +373,10 @@ return [
 			'placeholder-email'=>'Masukan Email',
 			'label-password'=>'Masukan Password',
 			'placeholder-password'=>'Masukan Password',
-			'button-submit-login'=>'Masuk Sekarang'
+			'button-submit-login'=>'Masuk Sekarang',
+			'process' => 'Memproses...',
+			'unknown-user' => 'Gagal login. Periksa kembali email dan password Anda.',
+			'failed-network' => 'Terjadi kesalahan jaringan. Coba lagi.'
 		],
 		'form-filter'=>[
 			'label-name-project'=>'Nama Project',
