@@ -214,6 +214,8 @@ class MenuController extends Controller
         
 		if ($dataType == 'home') {
 			unset($fields['meta']);
+			unset($fields['parent_id']);
+            unset($fields['position']);
 			unset($fields['is_active']);
 			unset($fields['permalink']);
 			unset($fields['url']);
