@@ -129,7 +129,7 @@ class AccountController extends Controller
                     'type' => 'text',
                     'label' => 'Email',
                     'attributes' => [
-                        'class' => 'required email',
+                        'class' => 'required validEmail',
                     ],
                 ],
             ];

@@ -55,6 +55,12 @@ $.validator.addMethod("unique",
 
 $.validator.classRuleSettings.unique = { unique: true };
 
+$.validator.addMethod("validEmail", function(value, element) {
+    return this.optional(element) || /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/.test(value);
+}, "Please enter valid email.");
+
+$.validator.classRuleSettings.validEmail = {validEmail: true};
+
 $.validator.addMethod('uniqueAll',
 	function(value, element) {
 		var by = $(element).attr('data-unique-by');
