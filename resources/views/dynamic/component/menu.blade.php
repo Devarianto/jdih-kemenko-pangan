@@ -116,7 +116,7 @@
     const form = popup.querySelector('form');
     const errorBox = document.getElementById('login-error');
     if (!form) return;
-
+    let successLogin = false;
     form.addEventListener('submit', async function(e) {
       e.preventDefault();
       if (errorBox) {
@@ -126,8 +126,10 @@
       const submitBtn = form.querySelector('button[type="submit"]');
       const originalText = submitBtn ? submitBtn.textContent : '';
       if (submitBtn) {
+        console.log('test')
         submitBtn.disabled = true;
-        submitBtn.textContent = 'Memproses...';
+        submitBtn.style.background = "grey";
+        submitBtn.textContent = "{{ lang::translate('global.login.process') }}";
       }
       try {
         const formData = new FormData(form);
@@ -144,10 +146,12 @@
           } else {
             window.location.href = "{{ route('dashboard') }}";
           }
+
+          successLogin = true;
           return;
         }
         // handle validation/auth errors
-        let msg = 'Gagal login. Periksa kembali email dan password Anda.';
+        let msg = "{{ lang::translate('global.login.unknown-user') }}";
         try {
           const data = await res.json();
           if (data && (data.message || (data.errors && data.errors.email && data.errors.email[0]))) {
@@ -162,14 +166,15 @@
         }
       } catch (err) {
         if (errorBox) {
-          errorBox.textContent = 'Terjadi kesalahan jaringan. Coba lagi.';
+          errorBox.textContent = "{{ lang::translate('global.login.failed-network') }}";
           errorBox.style.display = 'block';
         } else {
-          alert('Terjadi kesalahan jaringan. Coba lagi.');
+          alert("{{ lang::translate('global.login.failed-network') }}");
         }
       } finally {
-        if (submitBtn) {
+        if (submitBtn && successLogin == false) {
           submitBtn.disabled = false;
+          submitBtn.style.background = "";
           submitBtn.textContent = originalText;
         }
       }
