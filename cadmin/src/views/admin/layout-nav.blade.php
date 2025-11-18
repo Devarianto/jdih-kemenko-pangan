@@ -8,7 +8,7 @@ foreach(config('cadmin.menu') as $k=>$v) {
 
 <nav id="sidebar" class="sidebar js-sidebar">
     <div class="sidebar-content js-simplebar">
-        <a class="sidebar-brand be-load-logo" href="{{ url(ADMIN) }}" data-logo="{{ media::url($website->logo) }}">
+        <a class="sidebar-brand be-load-logo" href="{{ url(ADMIN) }}" data-logo="{{ media::url($website->logo) }}" style="background-color: #076E95;">
             <span class="align-middle">&nbsp;</span>
         </a>
         
