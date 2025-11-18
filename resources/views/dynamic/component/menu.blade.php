@@ -54,8 +54,8 @@
       <img src="{{asset('images/material/IND.svg')}}" alt="">
       @endif
       <div class="drop-language">
-        <a href="{{ url()->lang('en') }}"><img src="{{ asset('images/material/US.svg') }}" alt=""></a>
         <a href="{{ url()->lang('id') }}"><img src="{{ asset('images/material/IND.svg') }}" alt=""></a>
+        <a href="{{ url()->lang('en') }}"><img src="{{ asset('images/material/US.svg') }}" alt=""></a>
       </div>
     </div>
     <div class="toggle-menu">
