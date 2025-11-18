@@ -14,6 +14,7 @@
         @stack('head')
     </head>
     <body>
+        {!! og::body() !!}
         <!-- header -->
         <header>
             @include('dynamic.component.menu')
@@ -26,6 +27,7 @@
         @include('dynamic.component.footer')
         <!--end of Footer -->
         @stack('footer')
+        {!! og::foot() !!}
         <script>
             document.addEventListener("DOMContentLoaded", function(event) { 
                 function updateVisitorCount() {
