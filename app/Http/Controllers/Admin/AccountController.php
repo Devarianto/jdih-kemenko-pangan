@@ -13,6 +13,8 @@ use Cactuar\Admin\Traits\Controllers\EditTrait;
 use Cactuar\Admin\Traits\Controllers\DeleteTrait;
 use Cactuar\Admin\Traits\Controllers\PublishTrait;
 
+use Validator;
+
 class AccountController extends Controller
 {
     use BaseTrait, ListingTrait, CreateTrait, EditTrait, DeleteTrait, PublishTrait;
@@ -61,6 +63,12 @@ class AccountController extends Controller
     public function formValidateCallback($post,$type,&$error)
     {
         $email = $post['main']['email'];
+
+        if (!preg_match("/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/", $email)) {
+            $error[] = 'Please insert valid email!';
+            return false;
+        }
+
         $cek = Account::where('email',$email)->first();
 
         if ($type == 'create'){
@@ -121,7 +129,7 @@ class AccountController extends Controller
                     'type' => 'text',
                     'label' => 'Email',
                     'attributes' => [
-                        'class' => 'required',
+                        'class' => 'required email',
                     ],
                 ],
             ];
