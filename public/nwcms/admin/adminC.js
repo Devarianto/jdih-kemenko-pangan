@@ -97,7 +97,7 @@ cfind.afterSet = function(obj, json) {
 
 	if (obj.val()) {
         obj.removeClass('empty');
-        obj.attr('ext',cfind.type);
+        obj.attr('ext',cfind.ext);
 		if (obj.attr('cfind-type') == 'image') {
 			this.setImage(obj, cfind.path);
 		}
