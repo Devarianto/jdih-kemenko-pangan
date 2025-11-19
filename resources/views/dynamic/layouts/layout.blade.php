@@ -33,7 +33,7 @@
                 function updateVisitorCount() {
                 fetch('{{ route('api.visitor') }}')
                     .then(response => {
-                    if (!response.ok) throw new Error('Gagal mengambil data');
+                    if (!response.ok) throw new Error('Gagal mengambil data visitor');
                         return response.json();
                     })
                     .then(data => {
