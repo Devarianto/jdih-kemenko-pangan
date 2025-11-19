@@ -12,7 +12,7 @@ return [
             'max' => 1,
             'widgets' => [
                 'title' => [
-                    'type' => 'text',
+                    'type' => 'textarea',
                     'label' => 'Title',
                     'multilang' => true,
                     'ai' => ['translate', 'meta-title','correction'],
