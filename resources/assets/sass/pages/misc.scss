@@ -57,9 +57,30 @@
     }
   }
 }
-
+footer.undermaintenance{
+  .wave{
+    svg{
+      height: 90px;
+    }
+  }
+ .top{
+  align-items: flex-end;
+  .box{
+    &:nth-child(1){
+      flex: 0 0 auto;
+      max-width: 100%;
+    }
+    &:nth-child(2){
+      flex: 0 0 auto;
+      max-width: 100%;
+      margin-bottom: 20px;
+    }
+  }
+ }
+}
 @media all and (max-width: 1023px) {
   .misc{
+    height: auto;
     .wrapper-content{
       flex-direction: column;
       justify-content: center;
@@ -93,6 +114,12 @@
       }
     }
   } 
+  footer.undermaintenance{
+    padding-top: 130px;
+    .wave{
+      top: -7px;
+    }
+  }
 }
 @media all and (max-width: 767px) {
   .misc{
@@ -104,9 +131,6 @@
       h2{
         font-size: 28px;
       }
-    }
-    &.under{
-      height: calc(100svh - 180px);
     }
   }
 }

@@ -9,18 +9,18 @@
         @php($childs = $main->childs()->fe()->get())
         @if($childs->count() > 0)
         <li class="have-child">
-          <a href="{{ $main->fullUrl }}">{{ $main->label }}</a>
+          <a href="{{ $main->fullUrl }}" @class(['active' => isset($menu) && in_array($main->id, $menu->activeIds)])>{{ $main->label }}</a>
           <div class="child">
             <ul>
               @foreach($childs as $child)
-              <li><a href="{{ $child->fullUrl }}">{{ $child->label }}</a></li>
+              <li><a href="{{ $child->fullUrl }}" @class(['active' => isset($menu) && in_array($child->id, $menu->activeIds)])>{{ $child->label }}</a></li>
               @endforeach
             </ul>
           </div>
         </li>
         @else
         <li>
-          <a href="{{ $main->fullUrl }}">{{ $main->label }}</a>
+          <a href="{{ $main->fullUrl }}" @class(['active' => isset($menu) && in_array($main->id, $menu->activeIds)])>{{ $main->label }}</a>
         </li>
         @endif
         @endforeach
@@ -190,17 +190,17 @@
       @php($childs = $main->childs()->fe()->get())
       @if($childs->count() > 0)
       <li>
-        <a href="{{ $main->fullUrl }}">{{ $main->label }}</a>
+        <a href="{{ $main->fullUrl }}" @class(['active' => isset($menu) && in_array($main->id, $menu->activeIds)])>{{ $main->label }}</a>
         <i class="wa-icon wa-ic-chevron-down-solid"></i>
         <div class="child">
           @foreach($childs as $child)
-          <a href="{{ $child->fullUrl }}">{{ $child->label }}</a>
+          <a href="{{ $child->fullUrl }}" @class(['active' => isset($menu) && in_array($child->id, $menu->activeIds)])>{{ $child->label }}</a>
           @endforeach
         </div>
       </li>
       @else
       <li>
-        <a href="{{ $main->fullUrl }}">{{ $main->label }}</a>
+        <a href="{{ $main->fullUrl }}" @class(['active' => isset($menu) && in_array($main->id, $menu->activeIds)])>{{ $main->label }}</a>
       </li>
       @endif
       @endforeach

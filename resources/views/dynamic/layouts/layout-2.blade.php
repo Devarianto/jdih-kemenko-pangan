@@ -24,8 +24,6 @@
 
         @yield('content')
 
-        <!--Footer -->
-        @include('dynamic.component.footer')
         <!--end of Footer -->
         @stack('footer')
     </body>

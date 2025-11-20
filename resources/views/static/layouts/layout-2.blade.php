@@ -26,8 +26,6 @@
 
         @yield('content')
 
-        <!--Footer -->
-        @include('static.component.footer')
         <!--end of Footer -->
         @stack('footer')
     </body>
