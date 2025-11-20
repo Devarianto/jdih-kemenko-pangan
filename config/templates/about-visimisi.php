@@ -46,13 +46,19 @@ return [
                     'type' => 'text',
                     'label' => 'Title',
                     'multilang' => true,
+                    'attributes' => [
+                        'maxlength' => 20
+                    ],
                     'ai' => ['translate', 'correction'],
                 ],
                 'title' => [
                     'type' => 'text',
                     'label' => 'Description',
                     'multilang' => true,
-                    'ai' => ['translate', 'correction']
+                    'ai' => ['translate', 'correction'],
+                    'attributes' => [
+                        'maxlength' => 250
+                    ]
                 ]
             ]
         ],
@@ -67,7 +73,8 @@ return [
                     'label' => 'Title',
                     'multilang' => true,
                     'attributes' => [
-                        'class' => 'required'
+                        'class' => 'required',
+                        'maxlength' => 20
                     ],
                     'ai' => ['translate','correction'],
                 ],
