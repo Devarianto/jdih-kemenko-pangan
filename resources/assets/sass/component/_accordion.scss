@@ -1,0 +1,85 @@
+.accordion {
+  &__list {
+    padding: 20px 32px;
+    box-sizing: border-box;
+    margin-bottom: 20px;
+    transition: 0.2s all ease-out;
+    background: var(--c-neutral-white);
+    border-radius: 8px;
+    transition: all 0.2s ease-out;
+    &--button {
+      font-size: 18px;
+      font-weight: 500;
+      line-height: 1.4;
+      padding: 0px 60px 0px 0;
+      position: relative;
+      cursor: pointer;
+      h5 {
+        font-size: 18px;
+        font-weight: 600;
+        margin-bottom: 0;
+      }
+      &::after {
+        position: absolute;
+        content: "\e930";
+        transition: all 0.2s ease-out;
+        font-size: 24px;
+        font-family: "Webarq-Icons" !important;
+        left: auto;
+        right: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        color: var(--c-primary-main);
+      }
+    }
+    &--content {
+      color: rgba(0, 0, 0, 0.7);
+      display: none;
+      padding: 24px 0px 0 0;
+      ul li,
+      ol li,
+      p {
+        font-size: 16px;
+      }
+      p {
+        margin-bottom: 16px;
+      }
+    }
+    &.active,
+    &:hover {
+      box-shadow: 0 3px 20px -18px #000;
+      transition: all 0.2s ease-out;
+    }
+    &.active {
+      .accordion__list--button {
+        color: var(--c-primary-main);
+        &::after {
+          content: "\e933";
+        }
+      }
+    }
+  }
+}
+
+@media all and (max-width: 767px) {
+  .accordion {
+    &__list {
+      padding: 16px 24px;
+      &--button {
+        font-size: 16px;
+        padding-right: 32px;
+        h5 {
+          font-size: 16px;
+        }
+      }
+      &--content {
+        padding: 20px 0px 0 0;
+        ul li,
+        ol li,
+        p {
+          font-size: 14px;
+        }
+      }
+    }
+  }
+}

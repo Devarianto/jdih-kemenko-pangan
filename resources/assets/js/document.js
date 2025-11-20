@@ -1,19 +1,20 @@
 import $ from 'jquery'; //import jquery module
-import Swiper  from 'swiper/bundle';
+import Swiper from 'swiper/bundle';
+import accordion from './libs/accordion-base-import.js';
 
 const doc = {};
 doc.tabbing = () => {
   const $links = $('.box-detail-page__pdf nav ul li a');
   const $tabs = $('.box-detail-page__pdf .content-tab');
 
-  $links.on('click', function(e){
+  $links.on('click', function (e) {
     e.preventDefault();
     const tab = $(this).data('tab'); // ambil dari data-tab, bukan href
     if (!tab) return;
     $links.removeClass('active');
     $(this).addClass('active');
     $tabs.stop(true, true).fadeOut();
-    $tabs.filter('[data-tab="'+tab+'"]').fadeIn();
+    $tabs.filter('[data-tab="' + tab + '"]').fadeIn();
   });
 
   // Tampilkan tab yang sudah punya class .active; kalau tidak ada, pakai yang pertama
@@ -23,11 +24,11 @@ doc.tabbing = () => {
 
   $tabs.hide();
   if (initTab) {
-    $tabs.filter('[data-tab="'+initTab+'"]').fadeIn();
+    $tabs.filter('[data-tab="' + initTab + '"]').fadeIn();
   }
 }
 doc.sliderDetail = () => {
-   const swiper = new Swiper('.slider-caption.swiper', {
+  const swiper = new Swiper('.slider-caption.swiper', {
     loop: true,
     slidesPerView: 1,
     navigation: {
@@ -38,7 +39,7 @@ doc.sliderDetail = () => {
       el: '.swiper-pagination',
       clickable: true,
       dynamicBullets: true, // Enable dynamic bullets
-      dynamicMainBullets:5,
+      dynamicMainBullets: 5,
     },
   });
   const totalSlides = $('.slider-caption.with-pagination .swiper-slide').length;
@@ -56,7 +57,7 @@ doc.sliderDetail = () => {
       el: '.swiper-pagination',
       clickable: true,
       dynamicBullets: true, // Enable dynamic bullets
-      dynamicMainBullets:5,
+      dynamicMainBullets: 5,
     },
     on: {
       init: function () {
@@ -69,7 +70,7 @@ doc.sliderDetail = () => {
   });
 }
 doc.playVideo = function () {
-  $(".listing-galeri__item .icon-play").on('click',function(){
+  $(".listing-galeri__item .icon-play").on('click', function () {
     openPopup('#popup-video')
     let container = $('#popup-video');
     let iframe = container.find(".wrap-video iframe");
@@ -83,15 +84,15 @@ doc.sliderPopup = (target) => {
   const sliderThumbnail = new Swiper(target + ' .photo-slider-thumbs.swiper', {
     slidesPerView: 3.5,
     freeMode: true,
-    spaceBetween:16,
+    spaceBetween: 16,
     watchSlidesVisibility: true,
     watchSlidesProgress: true,
     breakpoints: {
       767: {
-        slidesPerView:5,
+        slidesPerView: 5,
       },
       1023: {
-        slidesPerView:6,
+        slidesPerView: 6,
       }
     },
   });
@@ -104,21 +105,21 @@ doc.sliderPopup = (target) => {
   });
 }
 
-doc.popupSliderGaleri = function(){
-   $(document).on('click', '.listing-galeri__item.photo', function () {
-      let target = $(this).data('target'),
+doc.popupSliderGaleri = function () {
+  $(document).on('click', '.listing-galeri__item.photo', function () {
+    let target = $(this).data('target'),
       popupId = $('#popup-photo');
-      popupId.find('.wrap-slider').removeClass('active').hide()
-      $('.wrap-slider .swiper.photo-slider').each(function(){
-        if (this.swiper && typeof this.swiper.destroy === 'function') {
-          this.swiper.destroy(true, true);
-        }
-      });
-      popupId.find(target).addClass('active').show()
-      openPopup('#popup-photo')
-      setTimeout(() => {
-        doc.sliderPopup(target)
-      }, 80);
+    popupId.find('.wrap-slider').removeClass('active').hide()
+    $('.wrap-slider .swiper.photo-slider').each(function () {
+      if (this.swiper && typeof this.swiper.destroy === 'function') {
+        this.swiper.destroy(true, true);
+      }
+    });
+    popupId.find(target).addClass('active').show()
+    openPopup('#popup-photo')
+    setTimeout(() => {
+      doc.sliderPopup(target)
+    }, 80);
   });
 }
 doc.init = function () {
@@ -126,6 +127,7 @@ doc.init = function () {
   this.sliderDetail()
   this.playVideo()
   this.popupSliderGaleri()
+  accordion.accordion('.accordion')
 }
 
 doc.init();
