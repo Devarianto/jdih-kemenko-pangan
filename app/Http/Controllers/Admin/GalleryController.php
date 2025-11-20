@@ -58,6 +58,16 @@ class GalleryController extends Controller
         return e($value) ?? '-';
     }
 
+    public function listingSearchs()
+    {
+        return ['title'];
+    }
+
+    public function listingOrderDefault($res)
+    {
+        return $res->orderBy('date','desc');
+    }
+
     public function formRes()
     {
         return new Gallery;
