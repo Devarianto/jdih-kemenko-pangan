@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
   header($).init()
   animatingScroll().animating(".animating-scroll");
-  const elemBanner = $('.banner-middle img, .contact-highlight .bg img, .banner-homepage figure img , .tema .bg img, .visi figure img');
+  const elemBanner = $('.banner-middle img, .contact-highlight .bg img, .banner-homepage figure img , .tema .bg img, .visi figure img, .popup-login figure img ');
   responsive.init(elemBanner, {
     type: 'image'
   })

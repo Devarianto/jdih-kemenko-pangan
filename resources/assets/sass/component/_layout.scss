@@ -92,6 +92,9 @@ header{
       a{
         color: white;
         transition: .2s all ease-out;
+        &.active{
+           color: #C1CCFF !important;
+        }
       }
       &:hover{
         >a{

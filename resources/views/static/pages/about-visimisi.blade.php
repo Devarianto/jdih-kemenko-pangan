@@ -56,6 +56,13 @@
         <li>Memberikan pelayanan informasi hukum secara terbuka, transparan, dan dapat dipertanggungjawabkan</li>
         <li>Mendukung pelaksanaan tugas pokok dan fungsi Kemenko Pangan melalui ketersediaan dokumentasi dan informasi hukum yang berkualitas</li>
       </ul>
+      <ol>
+        <li>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi adipisci dolorum suscipit minus maiores praesentium quos repudiandae sunt consectetur nam a earum et, velit assumenda magni, nihil necessitatibus expedita debitis?</li>
+        <li>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi adipisci dolorum suscipit minus maiores praesentium quos repudiandae sunt consectetur nam a earum et, velit assumenda magni, nihil necessitatibus expedita debitis?</li>
+        <li>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi adipisci dolorum suscipit minus maiores praesentium quos repudiandae sunt consectetur nam a earum et, velit assumenda magni, nihil necessitatibus expedita debitis?</li>
+        <li>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi adipisci dolorum suscipit minus maiores praesentium quos repudiandae sunt consectetur nam a earum et, velit assumenda magni, nihil necessitatibus expedita debitis?</li>
+        <li>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi adipisci dolorum suscipit minus maiores praesentium quos repudiandae sunt consectetur nam a earum et, velit assumenda magni, nihil necessitatibus expedita debitis?</li>
+      </ol>
      </div>
     </div>
   </section>

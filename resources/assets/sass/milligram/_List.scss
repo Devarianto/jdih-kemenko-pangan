@@ -43,6 +43,14 @@ ul {
 
   ol {
     list-style: decimal;
+    li{
+      list-style: decimal;
+      padding-left: 0;
+      margin-left: 15px;
+      &::before {
+       display: none;
+      }
+    }
   }
   ul {
     list-style: unset;
