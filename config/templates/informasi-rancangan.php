@@ -64,19 +64,26 @@ return [
                 'title' => [
                     'label' => 'Title',
                     'type' => 'text',
-                    'multilang' => true
+                    'multilang' => true,
+                    'attributes' => [
+                        'maxlength' => 30
+                    ]
                 ],
                 'intro' => [
                     'label' => 'Intro',
                     'type' => 'text',
-                    'multilang' => true
+                    'multilang' => true,
+                    'attributes' => [
+                        'maxlength' => 120
+                    ]
                 ],
                 'button' => [
                     'label' => 'Button',
                     'type' => 'text',
                     'multilang' => true,
                     'attributes' => [
-                        'class' => 'required'
+                        'class' => 'required',
+                        'maxlength' => 30
                     ]
                 ]
             ]
