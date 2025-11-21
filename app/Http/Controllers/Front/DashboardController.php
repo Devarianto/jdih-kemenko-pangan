@@ -13,6 +13,7 @@ use Cactuar\Admin\Models\Permalink;
 use App\Models\Gallery;
 use App\Models\News;
 use App\Models\Project;
+use App\Models\ProjectApplicantDivision;
 use App\Models\CategoryProject;
 use App\Models\ApplicantDivision;
 use Carbon\Carbon;
@@ -128,7 +129,7 @@ class DashboardController extends Controller
             'applicant_divisions' => ['nullable', 'array'],
             'applicant_divisions.*' => ['integer'],
         ]);
-
+        
         // Generate unique no_project
         $noProject = $this->generateNoProject();
 
@@ -155,7 +156,7 @@ class DashboardController extends Controller
             'status_review' => 0,
         ]);
 
-        $project->applicantDivisions()->sync($request->input('applicant_divisions', []));
+        $project->applicantDivisionsStore()->sync($request->input('applicant_divisions', []));
 
         return redirect()->route('dashboard')->with('status', 'Usulan project berhasil disimpan.');
     }

@@ -63,7 +63,7 @@
                     <td>{{ $project->name_project }}</td>
                     <td>{{ optional($project->category)->label }}</td>
                     <td>{{ \Carbon\Carbon::parse($project->date)->translatedFormat('d F Y') }}</td>
-                    <td>-</td>
+                    <td>{{ \Carbon\Carbon::parse($project->end_date)->translatedFormat('d F Y') }}</td>
                     <td>
                       <span class="status {{ optional($project->getStatus)->color }}">{{ optional($project->getStatus)->label ?? '-' }}</span>
                     </td>

@@ -26,6 +26,11 @@ class Project extends Model
         return $this->belongsToMany(ApplicantDivision::class, 'project_applicant_division', 'project_id', 'applicant_division_id')->select('label')->translate();
     }
 
+    public function applicantDivisionsStore()
+    {
+        return $this->belongsToMany(ApplicantDivision::class, 'project_applicant_division', 'project_id', 'applicant_division_id');
+    }
+
     public function category()
     {
         return $this->belongsTo(CategoryProject::class, 'category_id', 'id')->translate();
