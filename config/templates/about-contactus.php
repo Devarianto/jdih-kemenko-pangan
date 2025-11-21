@@ -48,7 +48,7 @@ return [
                     'attributes' => [
                         'class' => 'cfind',
                         'cfind-type' => 'image',
-                        'cfind-thumb' => '1024x480',
+                        'cfind-thumb' => '688x373',
                         'cfind-convert' => 'webp'
                     ],
                 ],
@@ -67,6 +67,9 @@ return [
                     'label' => 'Title',
                     'multilang' => true,
                     'ai' => ['translate', 'meta-title','correction'],
+                    'attributes' => [
+                        'maxlength' => 15
+                    ]
                 ],
                 'address' => [
                     'type' => 'textarea',
@@ -101,16 +104,9 @@ return [
                             'multilang' => true,
                             'ai' => ['translate','correction'],
                             'attributes' => [
-                                'class' => 'required'
+                                'class' => 'required',
+                                'maxlength' => 15
                             ]
-                        ],
-                        'target' => [
-                            'type' => 'select',
-                            'label' => 'Target',
-                            'options' => [
-                                '_self' => 'Default',
-                                '_blank' => 'New Tab',
-                            ],
                         ],
                         'link' => [
                             'type' => 'text',

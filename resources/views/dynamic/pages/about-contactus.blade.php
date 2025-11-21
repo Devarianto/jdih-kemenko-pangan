@@ -24,7 +24,7 @@
             <div class="col">
               <p>{{ $contact->address }}</p>
               @if($cta = $contact->childs('google-map')->first())
-              <a href="{{ $cta->link }}" target="{{ $cta->target }}" class="external-link">
+              <a href="{{ $cta->link }}" target="__BLANK" class="external-link">
                 {{ $cta->translated('label') }}
               </a>
               @endif
