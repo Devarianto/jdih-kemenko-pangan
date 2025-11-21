@@ -17,6 +17,8 @@ use App\Models\ProjectApplicantDivision;
 use App\Models\CategoryProject;
 use App\Models\ApplicantDivision;
 use Carbon\Carbon;
+use lang;
+use DB;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
@@ -66,7 +68,28 @@ class DashboardController extends Controller
         }
 
         $project = Project::with(['category','applicantDivisions'])->findOrFail($realId);
-        return view('dynamic.pages.dashboard-usulan-detail', compact('project'));
+
+        $rejected = DB::table('project_update')
+            ->where('project_id', $project->id)
+            ->where('id_status_project', 0)
+            ->first();
+
+        $updates = [];
+
+        if ($rejected != null) {
+            $updates['rejected'] = [
+                'label' => lang::translate('dashboard.status.rejected'),
+                'date' => $project->created_at
+            ];
+        }
+            
+        $updates ['review'] = [
+            'label' => lang::translate('dashboard.status.review'),
+            'date' => $project->created_at
+        ];
+
+        
+        return view('dynamic.pages.dashboard-usulan-detail', compact('project', 'updates'));
 
     }
 

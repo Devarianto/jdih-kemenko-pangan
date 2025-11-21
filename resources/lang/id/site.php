@@ -366,6 +366,10 @@ return [
 		'login' => 'Login',
 		'daftar-usulan-project-nav'=>'Daftar Usulan Project',
 		'daftar-project-nav'=>'Daftar Project',
+		'status' => [
+			'review' => 'Review',
+			'rejected' => 'Ditolak'
+		],
 		'form-login'=>[
 			'title-form-login'=>'Masuk Akun',
 			'intro-form-login'=>'Silahkan masukkan username dan password anda untuk melanjutkan ke sistem JDIH Kemenko Pangan Internal',

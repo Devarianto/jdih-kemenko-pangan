@@ -62,8 +62,8 @@
                   @php
                   $rowNumber = ($projects->currentPage() - 1) * $projects->perPage() + $loop->iteration;
                   $statusMap = [
-                    0 => ['label' => 'Review', 'class' => 'review'],
-                    1 => ['label' => 'Ditolak', 'class' => 'rejected'],
+                    0 => ['label' => lang::translate('dashboard.status.review'), 'class' => 'review'],
+                    1 => ['label' => lang::translate('dashboard.status.rejected'), 'class' => 'rejected'],
                   ];
                   $status = $statusMap[$project->status_review] ?? $statusMap[0];
                   @endphp

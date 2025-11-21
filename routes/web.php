@@ -16,6 +16,10 @@ use App\Http\Controllers\APIController;
 
 Route::group(['middleware' => ['web','front', 'visitor-count']],function() {
 
+    Route::fallback(function () {
+       return view('errors.404');
+    });
+
     if ($permalink = Permalink::active()) {
         if ($permalink->module == 'menu'){
             Route::get($permalink->permalink, [PageController::class, 'getTemplate']);
