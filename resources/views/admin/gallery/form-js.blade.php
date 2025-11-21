@@ -13,7 +13,7 @@
             autoclose: true,
             endDate: new Date(),
             todayHighlight: true
-        }).datepicker("setDate", new Date());
+        });
     });
 
     function typeGallery(value)
