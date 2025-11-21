@@ -82,7 +82,7 @@ class GalleryController extends Controller
                 'multilang' => true,
                 'attributes' => [
                     'class' => 'required',
-                    'maxlength' => 255
+                    'maxlength' => 150
                 ],
                 'ai' => ['translate', 'meta-title','correction'],
             ],
@@ -101,7 +101,8 @@ class GalleryController extends Controller
                 'label' => 'Date',
                 'type' => 'text',
                 'attributes' => [
-                    'class' => 'required datepicker',
+                    'class' => 'required date',
+                    'style' => 'width: 200px'
                 ]
             ],
             'type' => [
@@ -113,7 +114,7 @@ class GalleryController extends Controller
                 ]
             ],
             'iframe' => [
-                'label' => 'Iframe',
+                'label' => 'URL Embed Youtube',
                 'type' => 'text',
                 'info' => 'eg: https://www.youtube.com/embed/ScMzIvxBSi4'
             ],
@@ -122,7 +123,7 @@ class GalleryController extends Controller
                 'min' => 1,
                 'widgets' => [
                     'thumbnail' => [
-                        'label' => 'Thumbnail',
+                        'label' => 'Thumbnail Popup',
                         'type' => 'text',
                         'attributes' => [
                             'class' => 'required cfind',
@@ -133,7 +134,7 @@ class GalleryController extends Controller
                         ]
                     ],
                     'image' => [
-                        'label' => 'Image',
+                        'label' => 'Image Popup',
                         'type' => 'text',
                         'attributes' => [
                             'class' => 'required cfind',
@@ -144,11 +145,12 @@ class GalleryController extends Controller
                         ]
                     ],
                     'title' => [
-                        'label' => 'Title',
+                        'label' => 'Title Popup',
                         'type' => 'text',
                         'multilang' => true,
                         'attributes' => [
-                            'class' => 'required'
+                            'class' => 'required',
+                            'maxlength' => 200
                         ]
                     ]
                 ]
