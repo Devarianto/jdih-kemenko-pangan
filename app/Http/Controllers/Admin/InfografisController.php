@@ -69,7 +69,7 @@ class InfografisController extends Controller
                 'multilang' => true,
                 'attributes' => [
                     'class' => 'required title',
-                    'maxlength' => 255
+                    'maxlength' => 150
                 ],
                 'ai' => ['translate', 'meta-title','correction'],
             ],
