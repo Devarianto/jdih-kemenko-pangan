@@ -367,7 +367,7 @@ class cfind
         }
 
         foreach($files as $file) {
-            $rules = 'required|file|max:2000|mimes:'.implode(',',$this->params['root']['ext']).'|fileext:'.implode(',',$this->params['root']['ext']).'|phpscan';
+            $rules = 'required|file|max:10000|mimes:'.implode(',',$this->params['root']['ext']).'|fileext:'.implode(',',$this->params['root']['ext']).'|phpscan';
             $valid = Validator::make(['file'=>$file],['file'=>$rules]);
             if ($valid->fails()) {
                 return redirect()->back()->with('cfind-error',$valid->errors()->all());
