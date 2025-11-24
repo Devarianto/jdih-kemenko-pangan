@@ -343,13 +343,13 @@ class PageController extends Controller
         $infografis->save();
         
         $menu = Menu::fe()->whereIsActive(1)->where('type', 'informasi-infografis')->first();
-        $others = Infografis::translate()->whereIsActive(1)->where('id', '!=', $news->id)
+        $others = Infografis::translate()->whereIsActive(1)->where('id', '!=', $infografis->id)
             ->inRandomOrder()
             ->limit(3)
             ->get()
             ->sortByDesc('date')
             ->values();
-            
+
         return view('dynamic.pages.documentlainnya-infografis-detail', compact('infografis', 'menu', 'others'));
     }
 
