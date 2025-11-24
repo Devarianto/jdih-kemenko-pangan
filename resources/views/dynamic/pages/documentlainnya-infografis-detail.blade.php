@@ -6,10 +6,11 @@
       <div class="detail-pages--title">
         <span class="date">{{ date2string($infografis->date) }}</span>
         <h3>{{ $infografis->translated('title') }}</h3>
-      </div>    
-       <div class="slider-caption with-pagination swiper">
+      </div>
+      @php($total_slide = widget($infografis->id, 'information-infografis', 'image')->count())
+      @if($total_slide > 0)
+      <div class="slider-caption with-pagination swiper">
         <div class="swiper-wrapper">
-          @php($total_slide = widget($infografis->id, 'information-infografis', 'image')->count())
           @foreach(widget($infografis->id, 'information-infografis', 'image') as $image)
             <div class="swiper-slide">
               <figure><img src="{{ media::initial($image->image)->url }}" alt="{{ media::initial($image->image)->alt }}"></figure>
@@ -26,6 +27,7 @@
           <div class="swiper-arrow swiper-next"></div>
         </div>
       </div>
+      @endif
       <div class="content-pages">
         {!! $infografis->translated('description') !!}
       </div>
@@ -42,6 +44,7 @@
         </div>
       </div>  
     </div>
+    @if (!$others->isEmpty())
     <div class="other-listing">
       <div class="wrapper">
         <h4>{{ lang::translate('infografis.other-infografis') }}</h4>
@@ -64,6 +67,7 @@
         </div>
       </div>
     </div>
+    @endif
   </section>
   @push('head')
     <link rel="stylesheet" type="text/css" href="{{ Vite::asset('resources/assets/sass/pages/document.scss')}}" preload>

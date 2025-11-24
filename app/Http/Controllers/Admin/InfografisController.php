@@ -50,6 +50,11 @@ class InfografisController extends Controller
         return ['title'];
     }
 
+    public function listingOrderDefault($res)
+    {
+        return $res->orderBy('date','desc');
+    }
+
     public function formRes()
     {
         return new Infografis;
@@ -77,7 +82,7 @@ class InfografisController extends Controller
                 'attributes' => [
                     'class' => 'required cfind',
                     'cfind-type' => 'image',
-                    'cfind-thumb' => '220x284',
+                    'cfind-thumb' => '283x365',
                     'cfind-convert' => 'webp',
                     'cfind-alt' => 1,
                 ]
@@ -103,7 +108,8 @@ class InfografisController extends Controller
                 'label' => 'Date',
                 'type' => 'text',
                 'attributes' => [
-                    'class' => 'required datepicker',
+                    'class' => 'required date',
+                    'style' => 'width: 200px'
                 ]
             ],
             'description' => [
@@ -119,5 +125,10 @@ class InfografisController extends Controller
                 'type' => 'meta'
             ]
         ];
+    }
+
+    public function formAppend()
+    {
+        return view('admin.infografis.form-js');
     }
 }
