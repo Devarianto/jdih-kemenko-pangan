@@ -360,7 +360,7 @@ class PageController extends Controller
             $news = $news->orderBy('date', 'desc');
         }
         
-        $news = $news->paginate(12);
+        $news = $news->paginate(9);
         
         return view('dynamic.pages.documentlainnya-berita', compact('menu', 'news'));
     }
