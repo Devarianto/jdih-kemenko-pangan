@@ -92,7 +92,7 @@ class InfografisController extends Controller
                 'type' => 'widget',
                 'widgets' => [
                     'image' => [
-                        'label' => 'Image',
+                        'label' => 'Image Detail',
                         'type' => 'text',
                         'attributes' => [
                             'class' => 'required cfind',
