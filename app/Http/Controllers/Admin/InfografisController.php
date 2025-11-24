@@ -45,6 +45,11 @@ class InfografisController extends Controller
         return e($value) ?? '-';
     }
 
+    public function listingSearchs()
+    {
+        return ['title'];
+    }
+
     public function formRes()
     {
         return new Infografis;

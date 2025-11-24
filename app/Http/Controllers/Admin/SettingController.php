@@ -15,7 +15,7 @@ class SettingController extends BaseController
             'logo' => [
                 'label' => 'Logo',
                 'type' => 'text',
-                'info' => 'Use svg only, Recomended size width : 308 x height : 58',
+                'info' => 'Use svg only, Recomended size width : 308px x height : 58px',
                 'attributes' => [
                     'class' => 'required cfind', 
                     'cfind-type' => 'image', 
@@ -26,7 +26,7 @@ class SettingController extends BaseController
 			'favicon' => [
 				'label' => 'Fav Icon',
 				'type' => 'text',
-                'info' => 'ICO file only, Recomended size width : 32 x height : 32',
+                'info' => 'ICO file only, Recomended size width : 32px x height : 32px',
 				'attributes' => ['class' => 'required cfind', 'cfind-type' => 'image', 'cfind-ext' => 'ico'],
 			],
             'copyright' => [
@@ -64,7 +64,7 @@ class SettingController extends BaseController
                     'logo' => [
                         'type' => 'text',
                         'label' => 'Logo',
-                        'info' => 'Use svg only, Recomended size width : 308 x height : 58',
+                        'info' => 'Use svg only, Recomended size width : 308px x height : 58px',
                         'attributes' => [
                             'class' => 'required cfind', 
                             'cfind-type' => 'image',
@@ -99,7 +99,7 @@ class SettingController extends BaseController
                     'icon' => [
                         'type' => 'text',
                         'label' => 'Icon',
-                        'info' => 'Use SVG only. Recomended size width : 32 x height : 32',
+                        'info' => 'Use SVG only. Recomended size width : 32px x height : 32px',
                         'attributes' => [
                             'class' => 'required cfind',
                             'cfind-type' => 'image',

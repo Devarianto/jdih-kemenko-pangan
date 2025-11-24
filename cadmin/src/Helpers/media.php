@@ -258,10 +258,10 @@ class media
             return '';
         $out = [];
         if (array_get($res, 'width'))
-            $out[] = 'width : '.$res['width'];
+            $out[] = 'width : '.$res['width'].'px';
         
         if (array_get($res, 'height'))
-            $out[] = 'height : '.$res['height'];
+            $out[] = 'height : '.$res['height'].'px';
         
         return implode(' x ', $out);
     }   
