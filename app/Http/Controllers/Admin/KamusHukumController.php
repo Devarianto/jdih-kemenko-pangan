@@ -32,6 +32,11 @@ class KamusHukumController extends Controller
         ];
     }
 
+    public function listingSearchs()
+    {
+        return ['title'];
+    }
+
     public function listingCallback($key, $value, $item, $type)
     {
         // if($key == 'date') {
