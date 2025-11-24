@@ -45,12 +45,11 @@
         function sort(){
           const sort = document.querySelector('select[name="sort"]').value;
 
-          const baseUrl = window.location.origin + window.location.pathname;
-          const params = new URLSearchParams();
+          const url = new URL(window.location.href);
 
-          if (sort) params.append('sort', sort);
+          if (sort) url.searchParams.set('sort', sort);
 
-          window.location.href = baseUrl + '?' + params.toString();
+          window.location.href = url.toString();
         }
 
         document.querySelector('select[name="sort"]').addEventListener('change', function() {

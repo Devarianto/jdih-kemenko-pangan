@@ -21,11 +21,13 @@
           <span class="current-slide">1</span>/
           <span class="total-slide">4</span>
         </div>
+        @if ($total_slide > 1)
         <div class="slider-caption__utils">
           <div class="swiper-arrow swiper-prev"></div>
           <div class="swiper-pagination"></div>
           <div class="swiper-arrow swiper-next"></div>
         </div>
+        @endif
       </div>
       @endif
       <div class="content-pages">

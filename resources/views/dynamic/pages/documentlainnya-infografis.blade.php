@@ -42,5 +42,23 @@
   @endpush
   @push('footer')
     {{-- <script type="module" async type="text/javascript" src="{{ Vite::asset('resources/assets/js/.js') }}"></script> --}}
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        function sort(){
+          const sort = document.querySelector('select[name="sort"]').value;
+
+          const url = new URL(window.location.href);
+
+          if (sort) url.searchParams.set('sort', sort);
+
+          window.location.href = url.toString();
+        }
+
+        document.querySelector('select[name="sort"]').addEventListener('change', function() {
+          sort();
+        });
+      });
+    </script>
   @endpush
 @endsection

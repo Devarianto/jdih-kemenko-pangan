@@ -31,6 +31,7 @@ class InfografisController extends Controller
             'title' => 'Title',
             'thumbnail' => 'Thumbnail',
             'date' => 'Date',
+            'view_count' => 'View Count'
         ];
     }
 
