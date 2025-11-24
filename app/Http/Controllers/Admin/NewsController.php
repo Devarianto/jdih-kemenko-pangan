@@ -44,6 +44,16 @@ class NewsController extends Controller
         return e($value) ?? '-';
     }
 
+    public function listingSearchs()
+    {
+        return ['title'];
+    }
+
+    public function listingOrderDefault($res)
+    {
+        return $res->orderBy('date','desc');
+    }
+
     public function formRes()
     {
         return new News;
@@ -58,7 +68,7 @@ class NewsController extends Controller
                 'multilang' => true,
                 'attributes' => [
                     'class' => 'required title',
-                    'maxlength' => 255
+                    'maxlength' => 150
                 ],
                 'ai' => ['translate', 'meta-title','correction'],
             ],
@@ -93,27 +103,28 @@ class NewsController extends Controller
                 'attributes' => [
                     'class' => 'required cfind',
                     'cfind-type' => 'image',
-                    'cfind-thumb' => '1080x720',
+                    'cfind-thumb' => '937x720',
                     'cfind-convert' => 'webp',
                     'cfind-alt' => 1,
                 ]
             ],
             'image' => [
-                'label' => 'Image',
+                'label' => 'Image Detail',
                 'type' => 'text',
                 'attributes' => [
                     'class' => 'required cfind',
                     'cfind-type' => 'image',
-                    'cfind-thumb' => '990x480',
+                    'cfind-thumb' => '996x483',
                     'cfind-convert' => 'webp',
                     'cfind-alt' => 1,
                 ]
             ],
-            'date' => [
+           'date' => [
                 'label' => 'Date',
                 'type' => 'text',
                 'attributes' => [
-                    'class' => 'required datepicker',
+                    'class' => 'required date',
+                    'style' => 'width: 200px'
                 ]
             ],
             'description' => [
@@ -129,5 +140,10 @@ class NewsController extends Controller
                 'type' => 'meta'
             ]
         ];
+    }
+
+    public function formAppend()
+    {
+        return view('admin.news.form-js');
     }
 }
