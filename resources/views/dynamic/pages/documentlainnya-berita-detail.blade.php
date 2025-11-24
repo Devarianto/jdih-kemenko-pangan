@@ -26,6 +26,7 @@
         </div>
       </div>  
     </div>
+    @if (!$others->isEmpty())
     <div class="other-listing">
       <div class="wrapper">
         <h4>{{ lang::translate('news.other-news') }}</h4>
@@ -43,6 +44,7 @@
         </div>
       </div>
     </div>
+    @endif
   </section>
   @push('head')
     <link rel="stylesheet" type="text/css" href="{{ Vite::asset('resources/assets/sass/pages/document.scss')}}" preload>

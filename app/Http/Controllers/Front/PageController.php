@@ -370,7 +370,13 @@ class PageController extends Controller
         $id = Permalink::active()->uniqid;
         $news = News::translate()->whereIsActive(1)->findOrFail($id);
         $menu = Menu::fe()->whereIsActive(1)->where('type', 'news')->first();
-        $others = News::translate()->whereIsActive(1)->where('id', '!=', $news->id)->inRandomOrder()->limit(3)->get();
+        $others = News::translate()->whereIsActive(1)->where('id', '!=', $news->id)
+            ->inRandomOrder()
+            ->limit(3)
+            ->get()
+            ->sortByDesc('date')
+            ->values();
+            
         return view('dynamic.pages.documentlainnya-berita-detail', compact('news', 'menu', 'others'));
     }
 
