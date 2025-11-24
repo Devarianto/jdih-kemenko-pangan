@@ -330,7 +330,7 @@ class PageController extends Controller
             $infografis = $infografis->orderBy('date', 'desc');
         }
         
-        $infografis = $infografis->paginate(12);
+        $infografis = $infografis->paginate(9);
         
         return view('dynamic.pages.documentlainnya-infografis', compact('menu', 'infografis'));
     }
