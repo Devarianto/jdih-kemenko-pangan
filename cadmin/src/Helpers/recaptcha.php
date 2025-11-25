@@ -22,7 +22,7 @@ class recaptcha
     {
 		$hl = \App::getLocale();
 
-        return '<script src="https://www.google.com/recaptcha/api.js?hl='.$hl.'"></script>
+        return '<script src="https://www.google.com/recaptcha/api.js?hl='.$hl.'" async defer></script>
         <div class="g-recaptcha" data-sitekey="'.config('cadmin.cadmin.recaptcha.key').'"></div>';
     }
 

@@ -45,7 +45,7 @@
             <div class="row">
               <div class="column column-35">
                 <label for="">{{ lang::translate('home.search-peraturan.specific-search.form-title.rule-type') }}</label>
-                <select name="rule_type" id="">
+                <select name="rule_type">
                   <option value="" selected disabled>{{ lang::translate('home.search-peraturan.specific-search.form-placeholder.rule-type') }}</option>
                   @foreach ($rule_types as $data)
                   <option value="{{ $data->id }}" @selected($data->id == request()->query('rule_type'))>{{ $data->label }}</option>
@@ -54,7 +54,7 @@
               </div>
               <div class="column column-30">
                 <label for="">{{ lang::translate('home.search-peraturan.specific-search.form-title.theme') }}</label>
-                <select name="theme" id="">
+                <select name="theme">
                   <option value="" selected disabled>{{ lang::translate('home.search-peraturan.specific-search.form-placeholder.theme') }}</option>
                   @foreach ($rule_themes as $data)
                   <option value="{{ $data->id }}" @selected($data->id == request()->query('theme'))>{{ $data->label }}</option>
@@ -63,7 +63,7 @@
               </div>
               <div class="column column-20">
                 <label for="">{{ lang::translate('home.search-peraturan.specific-search.form-title.year') }}</label>
-                <select name="year" id="">
+                <select name="year">
                   <option value="" selected disabled>{{ lang::translate('home.search-peraturan.specific-search.form-placeholder.year') }}</option>
                   @foreach ($year_peraturan as $data)
                   <option value="{{ $data->year }}" @selected($data->year == request()->query('year'))>{{ $data->year }}</option>
@@ -525,58 +525,63 @@
     <div class="popup__box popup__box--large">
       <div class="popup__content">
         <h6>{{ lang::translate('home.rating.popup.title') }}</h6>
-        <form action="{{ lang::url('rating/submit') }}" method="POST">
+        <form action="{{ lang::url('rating/submit') }}" id="form-rating" method="POST">
           @csrf
           <div class="row row-wrap">
             <div class="column column-100">
               <label for="">{{ lang::translate('home.rating.popup.form.title.rating') }}</label>
               <div class="rates">
-                <input type="radio" id="starR5" name="rating" value="5">
+                <input type="radio" id="starR5" name="rating" value="5" data-required-radio="rating">
                 <label for="starR5">
                 <svg xmlns="http://www.w3.org/2000/svg" width="26.522" height="24.864" viewBox="0 0 26.522 24.864">
                     <path id="star" d="M12.539,1.515a.8.8,0,0,1,1.444,0L17.05,7.951a.8.8,0,0,0,.624.45l7.138.884a.8.8,0,0,1,.445,1.381L20.025,15.5a.8.8,0,0,0-.242.74L21.133,23.2a.8.8,0,0,1-1.167.856l-6.324-3.432a.8.8,0,0,0-.763,0L6.555,24.055A.8.8,0,0,1,5.388,23.2l1.351-6.956A.8.8,0,0,0,6.5,15.5L1.265,10.667A.8.8,0,0,1,1.71,9.285L8.847,8.4a.8.8,0,0,0,.624-.45Z" fill="#e6e6e6"/>
                 </svg>
                 </label>
-                <input type="radio" id="starR4" name="rating" value="4">
+                <input type="radio" id="starR4" name="rating" value="4" data-required-radio="rating">
                 <label for="starR4">
                 <svg xmlns="http://www.w3.org/2000/svg" width="26.522" height="24.864" viewBox="0 0 26.522 24.864">
                     <path id="star" d="M12.539,1.515a.8.8,0,0,1,1.444,0L17.05,7.951a.8.8,0,0,0,.624.45l7.138.884a.8.8,0,0,1,.445,1.381L20.025,15.5a.8.8,0,0,0-.242.74L21.133,23.2a.8.8,0,0,1-1.167.856l-6.324-3.432a.8.8,0,0,0-.763,0L6.555,24.055A.8.8,0,0,1,5.388,23.2l1.351-6.956A.8.8,0,0,0,6.5,15.5L1.265,10.667A.8.8,0,0,1,1.71,9.285L8.847,8.4a.8.8,0,0,0,.624-.45Z" fill="#e6e6e6"/>
                 </svg>
                 </label>
-                <input type="radio" id="starR3" name="rating" value="3">
+                <input type="radio" id="starR3" name="rating" value="3" data-required-radio="rating">
                 <label for="starR3">
                 <svg xmlns="http://www.w3.org/2000/svg" width="26.522" height="24.864" viewBox="0 0 26.522 24.864">
                     <path id="star" d="M12.539,1.515a.8.8,0,0,1,1.444,0L17.05,7.951a.8.8,0,0,0,.624.45l7.138.884a.8.8,0,0,1,.445,1.381L20.025,15.5a.8.8,0,0,0-.242.74L21.133,23.2a.8.8,0,0,1-1.167.856l-6.324-3.432a.8.8,0,0,0-.763,0L6.555,24.055A.8.8,0,0,1,5.388,23.2l1.351-6.956A.8.8,0,0,0,6.5,15.5L1.265,10.667A.8.8,0,0,1,1.71,9.285L8.847,8.4a.8.8,0,0,0,.624-.45Z" fill="#e6e6e6"/>
                 </svg>
                 </label>
-                <input type="radio" id="starR2" name="rating" value="2">
+                <input type="radio" id="starR2" name="rating" value="2" data-required-radio="rating">
                 <label for="starR2">
                 <svg xmlns="http://www.w3.org/2000/svg" width="26.522" height="24.864" viewBox="0 0 26.522 24.864">
                     <path id="star" d="M12.539,1.515a.8.8,0,0,1,1.444,0L17.05,7.951a.8.8,0,0,0,.624.45l7.138.884a.8.8,0,0,1,.445,1.381L20.025,15.5a.8.8,0,0,0-.242.74L21.133,23.2a.8.8,0,0,1-1.167.856l-6.324-3.432a.8.8,0,0,0-.763,0L6.555,24.055A.8.8,0,0,1,5.388,23.2l1.351-6.956A.8.8,0,0,0,6.5,15.5L1.265,10.667A.8.8,0,0,1,1.71,9.285L8.847,8.4a.8.8,0,0,0,.624-.45Z" fill="#e6e6e6"/>
                 </svg>
                 </label>
-                <input type="radio" id="starR1" name="rating" value="1">
+                <input type="radio" id="starR1" name="rating" value="1" data-required-radio="rating">
                 <label for="starR1">
                 <svg xmlns="http://www.w3.org/2000/svg" width="26.522" height="24.864" viewBox="0 0 26.522 24.864">
                     <path id="star" d="M12.539,1.515a.8.8,0,0,1,1.444,0L17.05,7.951a.8.8,0,0,0,.624.45l7.138.884a.8.8,0,0,1,.445,1.381L20.025,15.5a.8.8,0,0,0-.242.74L21.133,23.2a.8.8,0,0,1-1.167.856l-6.324-3.432a.8.8,0,0,0-.763,0L6.555,24.055A.8.8,0,0,1,5.388,23.2l1.351-6.956A.8.8,0,0,0,6.5,15.5L1.265,10.667A.8.8,0,0,1,1.71,9.285L8.847,8.4a.8.8,0,0,0,.624-.45Z" fill="#e6e6e6"/>
                 </svg>
                 </label>
+                <div class="supporting-text">@error('name'){{ $message }}@enderror</div>
               </div>
             </div>
             <div class="column column-100">
               <label for="">{{ lang::translate('home.rating.popup.form.title.name') }}</label>
-              <input type="text" name="name" placeholder="{{ lang::translate('home.rating.popup.form.placeholder.name') }}">
+              <input type="text" name="name" class="required" maxlength="255" placeholder="{{ lang::translate('home.rating.popup.form.placeholder.name') }}">
+              <div class="supporting-text">@error('name'){{ $message }}@enderror</div>
             </div>
             <div class="column column-100">
               <label for="">{{ lang::translate('home.rating.popup.form.title.email') }}</label>
-              <input type="text" name="email" placeholder="{{ lang::translate('home.rating.popup.form.placeholder.email') }}">
+              <input type="text" name="email" class="required email" maxlength="255" placeholder="{{ lang::translate('home.rating.popup.form.placeholder.email') }}">
+              <div class="supporting-text">@error('email'){{ $message }}@enderror</div>
             </div>
             <div class="column column-100">
               <label for="">{{ lang::translate('home.rating.popup.form.title.comment') }}</label>
-              <textarea name="comment" id="" placeholder="{{ lang::translate('home.rating.popup.form.placeholder.comment') }}"></textarea>
+              <textarea name="comment" class="required" placeholder="{{ lang::translate('home.rating.popup.form.placeholder.comment') }}"></textarea>
+              <div class="supporting-text">@error('comment'){{ $message }}@enderror</div>
             </div>
-            <div class="column column-100">
+            <div class="column column-100 recaptcha-container">
             {!! recaptcha::draw() !!}
+            <div class="supporting-text">@error('g-recaptcha-response'){{ $message }}@enderror</div>
             </div>
             <div class="column column-100">
               <button type="submit" class="button button-gradient">{{ lang::translate('home.rating.popup.form.button') }}</button>
@@ -653,6 +658,12 @@
   <!-- end of middle -->
   @push('head')
     <link rel="stylesheet" type="text/css" href="{{ Vite::asset('resources/assets/sass/pages/home.scss')}}" preload>
+    <style>
+      button.is-disabled {
+        background: grey !important;
+        pointer-events: none;
+      }
+    </style>
   @endpush
   @push('footer')
     <script type="module" async type="text/javascript" src="{{ Vite::asset('resources/assets/js/document.js') }}"></script>
@@ -801,6 +812,117 @@
           }
           }
         });
+
+        document.getElementById("form-rating").addEventListener("submit", function (e) {
+          let valid = true;
+          const submitBtn = this.querySelector('button[type=submit]');
+          submitBtn.textContent = "{{ lang::translate('home.rating.popup.form.process') }}";
+          submitBtn.disabled = true;
+          submitBtn.classList.add("is-disabled");
+
+          // ambil semua input di dalam form
+          const inputs = this.querySelectorAll(".column input, .column textarea");
+          inputs.forEach(input => {
+            const parent = input.closest(".column");
+            const msgBox = parent.querySelector(".supporting-text");
+
+            // reset error terlebih dahulu
+            parent.classList.remove("error-field");
+            msgBox.textContent = "";
+
+            const value = input.value.trim();
+
+            // RULE: required
+            if (input.classList.contains("required") && value === "") {
+                parent.classList.add("error-field");
+                msgBox.textContent = "{{ lang::translate('global.form-error.required') }}";
+                valid = false;
+                // return;
+            }
+
+            // RULE: email
+            if (input.classList.contains("email") && value !== "" && !validateEmail(value)) {
+                parent.classList.add("error-field");
+                msgBox.textContent = "{{ lang::translate('global.form-error.email') }}";
+                valid = false;
+                // return;
+            }
+
+            // RULE: maxlength (baru)
+            const max = input.getAttribute("maxlength");
+            if (max && value.length > parseInt(max)) {
+                parent.classList.add("error-field");
+                msgBox.textContent = `{{ lang::translate('global.form-error.maxlength') }}`;
+                msgBox.textContent = msgBox.textContent.replace(':max', max);
+                valid = false;
+                // return;
+            }
+
+            // RULE: minlength (baru)
+            const min = input.getAttribute("minlength");
+            if (min && value.length < parseInt(min)) {
+              parent.classList.add("error-field");
+              msgBox.textContent = `{{ lang::translate('global.form-error.minlength') }}`;
+              msgBox.textContent = msgBox.textContent.replace(':min', min);
+              valid = false;
+              // return;
+            }
+
+            // --- VALIDASI REQUIRED RADIO (khusus rating) ---
+            let ratingRadios = parent.querySelectorAll("input[data-required-radio='rating']");
+            if (ratingRadios.length > 0) {
+              let checked = Array.from(ratingRadios).some(r => r.checked);
+              if (!checked) {
+                valid = false;
+
+                // Tambahkan error ke wrapper .rates
+                let errBox = parent.querySelector(".rates .supporting-text");
+                if (errBox) errBox.textContent = "Harap pilih rating.";
+
+                // Tandai radio dg class error (opsional)
+                parent.classList.add("error-field");
+              }
+            }
+          });
+
+          const recaptchaField = document.querySelector("textarea[name='g-recaptcha-response']");
+          if (recaptchaField) {
+              const recaptchaValue = recaptchaField.value.trim();
+
+              if (recaptchaValue === "") {
+                  // tampilkan error recaptcha di bagian custom
+                  const recaptchaContainer = document.querySelector(".recaptcha-container");
+                  if (recaptchaContainer) {
+                      recaptchaContainer.classList.add("error-field");
+
+                      let msg = recaptchaContainer.querySelector(".supporting-text");
+                      if (!msg) {
+                          msg = document.createElement("div");
+                          msg.classList.add("supporting-text");
+                          recaptchaContainer.appendChild(msg);
+                      }
+
+                      msg.textContent = "{{ lang::translate('global.form-error.recaptcha') }}";
+                  }
+
+                  valid = false;
+              }
+          }
+
+          // jika tidak valid, cegah submit
+          if (!valid) {
+            e.preventDefault();
+            submitBtn.textContent = "{{ lang::translate('home.rating.popup.form.button') }}";
+            submitBtn.disabled = false;
+            submitBtn.classList.remove("is-disabled");
+          }
+        });
+
+        // fungsi regex email
+        function validateEmail(email) {
+            const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return re.test(email);
+        }
       })
    
     </script>

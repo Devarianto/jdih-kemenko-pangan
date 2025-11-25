@@ -63,7 +63,8 @@ return [
 						'email' => 'Alamat Email',
 						'comment' => 'Tuliskan Komentar Anda'
 					],
-					'button' => 'Kirim'
+					'button' => 'Kirim',
+					'process' => 'Memproses...'
 				]
 			],
 			'popup-success' => [
