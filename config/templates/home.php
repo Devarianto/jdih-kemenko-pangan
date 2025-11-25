@@ -60,6 +60,84 @@ return [
                 ]
             ]
         ],
+        'statistik' => [
+            'subtitle' => 'Statistik Section',
+            'type' => 'widget',
+            'max' => 1,
+            'min' => 1,
+            'widgets' => [
+                'title' => [
+                    'label' => 'Title',
+                    'type' => 'text',
+                    'multilang' => true,
+                    'attributes' => [
+                        'class' => 'required'
+                    ]
+                ],
+                'button-cta' => [
+                    'child-subtitle' => 'Button CTA',
+                    'type' => 'widget',
+                    'max' => 1,
+                    'widgets' => [
+                        'label' => [
+                            'label' => 'Label',
+                            'type' => 'text',
+                            'ai' => ['translate','correction'],
+                            'multilang' => true,
+                            'attributes' => [
+                                'class' => 'required'
+                            ]
+                        ],
+                        'target' => [
+                            'type' => 'select',
+                            'label' => 'Target',
+                            'options' => [
+                                '_self' => 'Default',
+                                '_blank' => 'New Tab',
+                            ],
+                        ],
+                        'link' => [
+                            'label' => 'URL',
+                            'type' => 'text',
+                            'multilang' => true,
+                            'info' => 'Can use permalink or http/https.',
+                        ],
+                    ]
+                ],
+            ]
+        ],
+        'rating' => [
+            'subtitle' => 'Rating Section',
+            'type' => 'widget',
+            'max' => 1,
+            'min' => 1,
+            'widgets' => [
+                'title' => [
+                    'label' => 'Title',
+                    'type' => 'text',
+                    'multilang' => true,
+                    'attributes' => [
+                        'class' => 'required'
+                    ]
+                ],
+                'intro' => [
+                    'label' => 'Intro',
+                    'type' => 'textarea',
+                    'multilang' => true,
+                    'attributes' => [
+                        'class' => 'required'
+                    ]
+                ],
+                'button' => [
+                    'label' => 'Button',
+                    'type' => 'text',
+                    'multilang' => true,
+                    'attributes' => [
+                        'class' => 'required'
+                    ]
+                ],
+            ]
+        ],
         'institution' => [
             'subtitle' => 'Institution Section',
             'type' => 'widget',

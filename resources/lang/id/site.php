@@ -39,15 +39,10 @@ return [
 		'gallery-video' => 'Galeri Video', 
 		'read-more' => 'Lihat Selengkapnya',
 		'chart' => [
-			'title' => 'Grafik Statistik Hukum',
-			'read-more' => 'Lihat Selengkapnya',
 			'berlaku' => 'Berlaku',
 			'tidak-berlaku' => 'Tidak Berlaku',
 		],
 		'rating' => [
-			'title' => 'INDEKS KEPUASAN MASYARAKAT',
-			'intro' => 'Terima kasih atas penilaian yang telah anda berikan, masukan anda sangat bermanfaat agar terus memperbaiki dan meningkatkan kualitas pelayanan bagi masyarakat',
-			'popup-button' => 'Berikan Rating',
 			'total' => 'Penilaian',
 			'popup' => [
 				'title' => 'BERIKAN RATING',

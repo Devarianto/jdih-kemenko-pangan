@@ -475,18 +475,24 @@
   <section class="statistik animating-scroll" data-animate-trigger=".trigger-5">
     <div class="trigger trigger-5"></div>
     <div class="wrapper">
+      @foreach(widget($home->id, 'menu', 'statistik') as $statistik)
       <div class="statistik__left box">
-        <h5>{{ lang::translate('home.chart.title') }}</h5>
+        <h5>{{ $statistik->translated('title') }}</h5>
         <div class="wrap-chart">
           <canvas id="statusChart"></canvas>
         </div>
-        <a href="{{ $menu_statistic->permalink }}" class="button button-outline">
-          <span>{{ lang::translate('home.chart.read-more') }}</span>
+        @php($cta = $statistik->childs('button-cta')->first())
+        @if ($cta)
+        <a href="{{ $cta->translated('link') }}" target="{{ $cta->target }}" class="button button-outline">
+          <span>{{ $cta->translated('label') }}</span>
           <div class="wave"></div>
         </a>
+        @endif
       </div>
+      @endforeach
+      @foreach(widget($home->id, 'menu', 'rating') as $home_rating)
       <div class="statistik__right box">
-        <h5>{{ lang::translate('home.rating.title') }}</h5>
+        <h5>{{ $home_rating->translated('title') }}</h5>
         <div class="rating-box">
           <div class="rating-summary">
             <h2 id="average">0.0</h2>
@@ -495,12 +501,13 @@
           </div>
           <div class="rating-breakdown" id="ratingBreakdown"></div>
         </div>
-        <p>{{ lang::translate('home.rating.intro') }}</p>
+        <p>{{ $home_rating->translated('intro') }}</p>
         <a href="javascript:void(0)" class="button button-outline" onclick="openPopup('#popup-rating')">
-          <span>{{ lang::translate('home.rating.popup-button') }}</span>
+          <span>{{ $home_rating->translated('button') }}</span>
           <div class="wave"></div>
         </a>
       </div>
+      @endforeach
     </div>
   </section>
   @foreach (widget($home->id, 'menu', 'institution') as $data)
