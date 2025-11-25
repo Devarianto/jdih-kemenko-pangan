@@ -10,12 +10,13 @@ use Cactuar\Admin\Traits\Controllers\CreateTrait;
 use Cactuar\Admin\Traits\Controllers\EditTrait;
 use Cactuar\Admin\Traits\Controllers\DeleteTrait;
 use Cactuar\Admin\Traits\Controllers\DownloadTrait;
+use Cactuar\Admin\Traits\Controllers\PublishTrait;
 use Cactuar\Admin\Traits\Controllers\EmailTemplateTrait;
 use App\Models\Rating;
 
 class RatingController extends Controller
 {
-    use BaseTrait, ListingTrait, CreateTrait, EditTrait, DeleteTrait, DownloadTrait, EmailTemplateTrait;
+    use BaseTrait, ListingTrait, CreateTrait, EditTrait, DeleteTrait, PublishTrait, DownloadTrait, EmailTemplateTrait;
 
     public function emailTemplates()
     {

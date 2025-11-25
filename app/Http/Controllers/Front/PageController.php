@@ -126,8 +126,8 @@ class PageController extends Controller
         $menu_statistic = Menu::fe()->whereIsActive(1)->where('type', 'about-statistik')->first();
 
         // Rating
-        $total_rating = Rating::count();
-        $average = Rating::avg('rating');
+        $total_rating = Rating::whereIsActive(1)->count();
+        $average = Rating::whereIsActive(1)->avg('rating');
         $avg_rating = round($average, 1);
 
         $rating = [
@@ -138,14 +138,14 @@ class PageController extends Controller
             5 => 0
         ];
 
-        $get_rating = Rating::select('rating', DB::raw('count(rating) as count_rating'))->groupBy('rating')->pluck('count_rating', 'rating')->toArray();
-
+        $get_rating = Rating::select('rating', DB::raw('count(rating) as count_rating'))->whereIsActive(1)->groupBy('rating')->pluck('count_rating', 'rating')->toArray();
+        
         foreach ($rating as $key => $data) {
             if (isset($get_rating[$key])) {
                 $rating[$key] = $get_rating[$key];
             }
         }
-
+        
         $rating = json_encode($rating);
 
         return view('dynamic.home', compact(
