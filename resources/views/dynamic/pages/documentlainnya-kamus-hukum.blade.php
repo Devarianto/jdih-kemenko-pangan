@@ -6,6 +6,9 @@
     <div class="wrapper">
       <div class="middle__search">
         <form action="">
+          @if (request()->query('option'))
+          <input type="hidden" name="option" value="{{ request()->query('option') }}">
+          @endif
           <div class="row">
             <div class="column column-85">
               <label for="">{{ lang::translate('kamus-hukum.search.title') }}</label>
