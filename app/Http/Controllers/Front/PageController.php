@@ -345,7 +345,7 @@ class PageController extends Controller
         $menu = Menu::fe()->whereIsActive(1)->where('type', 'informasi-infografis')->first();
         $others = Infografis::translate()->whereIsActive(1)->where('id', '!=', $infografis->id)
             ->inRandomOrder()
-            ->limit(3)
+            ->limit(4)
             ->get()
             ->sortByDesc('date')
             ->values();

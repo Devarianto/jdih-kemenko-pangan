@@ -44,9 +44,9 @@
           </a>
         @empty
         @if (request()->query('option'))
-          <h3 style="text-align: center">{{ lang::translate('kamus-hukum.alphabet-not-found') }}</h3>
+          <h4 style="text-align: center; font-weight:300;">{{ lang::translate('kamus-hukum.alphabet-not-found') }}</h4>
         @else
-          <h3 style="text-align: center">{{ lang::translate('kamus-hukum.data-not-found') }}</h3>
+          <h4 style="text-align: center; font-weight:300;">{{ lang::translate('kamus-hukum.data-not-found') }}</h4>
         @endif
         @endforelse
       </div>

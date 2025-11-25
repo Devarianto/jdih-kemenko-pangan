@@ -46,42 +46,32 @@
       @endforeach
       <div class="box-form">
         <h5>{{ lang::translate('contact.title') }}</h5>
-        <form method="POST" action="{{ route('contact.submit') }}">
+        <form method="POST" id="form-contact" action="{{ route('contact.submit') }}">
           @csrf
           <div class="row row-wrap">
             <div class="column column-100 @error('name') error-field @enderror">
               <label for="">{{ lang::translate('contact.form-title.name') }}</label>
-              <input type="text" name="name" placeholder="{{ lang::translate('contact.form-placeholder.name') }}">
-              @error('name')
-              <div class="supporting-text">{{ $message }}</div>
-              @enderror
+              <input type="text" class="required" name="name" placeholder="{{ lang::translate('contact.form-placeholder.name') }}">
+              <div class="supporting-text">@error('name'){{ $message }}@enderror</div>
             </div>
             <div class="column column-50 @error('email') error-field @enderror">
               <label for="">{{ lang::translate('contact.form-title.email') }}</label>
-              <input type="email" name="email" placeholder="{{ lang::translate('contact.form-placeholder.email') }}">
-              @error('email')
-              <div class="supporting-text">{{ $message }}</div>
-              @enderror
+              <input type="email" class="required email" name="email" placeholder="{{ lang::translate('contact.form-placeholder.email') }}">
+              <div class="supporting-text">@error('email'){{ $message }}@enderror</div>
             </div>
             <div class="column column-50 @error('phone') error-field @enderror">
               <label for="">{{ lang::translate('contact.form-title.phone') }}</label>
-              <input type="number" name="phone" placeholder="{{ lang::translate('contact.form-placeholder.phone') }}">
-              @error('phone')
-              <div class="supporting-text">{{ $message }}</div>
-              @enderror
+              <input type="number" class="required" name="phone" placeholder="{{ lang::translate('contact.form-placeholder.phone') }}">
+              <div class="supporting-text">@error('phone'){{ $message }}@enderror</div>
             </div>
             <div class="column column-100 @error('message') error-field @enderror">
               <label for="">{{ lang::translate('contact.form-title.message') }}</label>
-              <textarea name="message" id="" placeholder="{{ lang::translate('contact.form-placeholder.message') }}"></textarea>
-              @error('message')
-              <div class="supporting-text">{{ $message }}</div>
-              @enderror
+              <textarea name="message" class="required" id="" placeholder="{{ lang::translate('contact.form-placeholder.message') }}"></textarea>
+              <div class="supporting-text">@error('message'){{ $message }}@enderror</div>
             </div>
-            <div class="column @error('g-recaptcha-response') error-field @enderror">
+            <div class="column recaptcha-container @error('g-recaptcha-response') error-field @enderror">
                 {!! recaptcha::draw() !!}
-                @error('g-recaptcha-response')
-                <div class="supporting-text">{{ $message }}</div>
-                @enderror
+                <div class="supporting-text">@error('g-recaptcha-response'){{ $message }}@enderror</div>
             </div>
             <div class="column column-100">
               <button type="submit" class="button button-gradient">{{ lang::translate('contact.form-button') }}</button>
@@ -109,6 +99,12 @@
   @endif
   @push('head')
     <link rel="stylesheet" type="text/css" href="{{ Vite::asset('resources/assets/sass/pages/about.scss')}}" preload>
+    <style>
+      button.is-disabled {
+        background: grey !important;
+        pointer-events: none;
+      }
+    </style>
   @endpush
   @push('footer')
     {{-- <script type="module" async type="text/javascript" src="{{ Vite::asset('resources/assets/js/.js') }}"></script> --}}
@@ -118,6 +114,81 @@
         @if (Session::has('success'))
         openPopup('#popup-center');
         @endif
+
+        document.getElementById("form-contact").addEventListener("submit", function (e) {
+          let valid = true;
+          const submitBtn = this.querySelector('button[type=submit]');
+          submitBtn.textContent = "{{ lang::translate('contact.form-process') }}";
+          submitBtn.disabled = true;
+          submitBtn.classList.add("is-disabled");
+
+          // ambil semua input di dalam form
+          const inputs = this.querySelectorAll(".column input, .column textarea");
+          inputs.forEach(input => {
+            const parent = input.closest(".column");
+            const msgBox = parent.querySelector(".supporting-text");
+
+            // reset error terlebih dahulu
+            parent.classList.remove("error-field");
+            msgBox.textContent = "";
+
+            const value = input.value.trim();
+
+            // RULE: required
+            if (input.classList.contains("required") && value === "") {
+                parent.classList.add("error-field");
+                msgBox.textContent = "{{ lang::translate('global.form-error.required') }}";
+                valid = false;
+                // return;
+            }
+
+            // RULE: email
+            if (input.classList.contains("email") && value !== "" && !validateEmail(value)) {
+                parent.classList.add("error-field");
+                msgBox.textContent = "{{ lang::translate('global.form-error.email') }}";
+                valid = false;
+                // return;
+            }
+          });
+
+          const recaptchaField = document.querySelector("textarea[name='g-recaptcha-response']");
+          if (recaptchaField) {
+              const recaptchaValue = recaptchaField.value.trim();
+
+              if (recaptchaValue === "") {
+                  // tampilkan error recaptcha di bagian custom
+                  const recaptchaContainer = document.querySelector(".recaptcha-container");
+                  if (recaptchaContainer) {
+                      recaptchaContainer.classList.add("error-field");
+
+                      let msg = recaptchaContainer.querySelector(".supporting-text");
+                      if (!msg) {
+                          msg = document.createElement("div");
+                          msg.classList.add("supporting-text");
+                          recaptchaContainer.appendChild(msg);
+                      }
+
+                      msg.textContent = "{{ lang::translate('global.form-error.recaptcha') }}";
+                  }
+
+                  valid = false;
+              }
+          }
+
+          // jika tidak valid, cegah submit
+          if (!valid) {
+            e.preventDefault();
+            submitBtn.textContent = "{{ lang::translate('contact.form-button') }}";
+            submitBtn.disabled = false;
+            submitBtn.classList.remove("is-disabled");
+          }
+        });
+
+        // fungsi regex email
+        function validateEmail(email) {
+            const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return re.test(email);
+        }
       });
     </script>
   @endpush

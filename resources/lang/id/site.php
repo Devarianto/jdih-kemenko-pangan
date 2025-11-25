@@ -92,6 +92,11 @@ return [
 			'yesterday' => 'Kemarin',
 			'month' => 'Bulan Ini',
 			'total' => 'Total'
+		],
+		'form-error' => [
+			'required' => 'Field harus diisi',
+			'email' => 'Field email tidak valid',
+			'recaptcha' => 'Mohon centang reCAPTCHA.'
 		]
 	],
 	'infografis' => [
@@ -355,6 +360,7 @@ return [
 			'message' => 'Message'
 		],
 		'form-button' => 'Kirim Pesan',
+		'form-process' => 'Memproses...',
 		'popup-success' => [
 			'title' => 'Terimakasih!',
 			'message' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam ',
