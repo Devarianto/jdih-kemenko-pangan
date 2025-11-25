@@ -115,7 +115,7 @@ class RatingController extends Controller
                     'type' => 'text',
                     'label' => 'Email',
                     'attributes' => [
-                        'class' => 'required email'
+                        'class' => 'required validEmail'
                     ]
                 ],
                 'comment' => [
@@ -129,6 +129,7 @@ class RatingController extends Controller
         $form['rating'] = [
                 'type' => 'number',
                 'label' => 'Rating',
+                'info' => 'Please input min 1 to max 5',
                 'attributes' => [
                     'class' => 'required',
                     'min' => 1,
