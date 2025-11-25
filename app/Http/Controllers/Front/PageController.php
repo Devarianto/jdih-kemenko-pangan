@@ -398,7 +398,7 @@ class PageController extends Controller
             $kamus = $kamus->where('title', 'like', '%'.request()->query('search').'%');
         }
         
-        $kamus = $kamus->paginate(6);
+        $kamus = $kamus->orderBy('title', 'asc')->paginate(6);
         
         return view('dynamic.pages.documentlainnya-kamus-hukum', compact('menu', 'kamus'));
     }

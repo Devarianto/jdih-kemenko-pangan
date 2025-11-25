@@ -111,6 +111,8 @@ return [
 		'back-to-kamus' => 'Kembali ke Kamus',
 		'share' => 'Share:',
 		'reference' => 'REFERENSI',
+		'alphabet-not-found' => 'Belum ada data',
+		'data-not-found' => 'Data tidak ditemukan'
 	],
 	'news' => [
 		'other-news' => 'Berita Lainnya',

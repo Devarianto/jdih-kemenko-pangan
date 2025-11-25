@@ -27,7 +27,7 @@
         @endforeach
       </div>
       <div class="listing-kamus">
-        @foreach ($kamus as $data)
+        @forelse ($kamus as $data)
           <a href="{{ $data->permalink }}" class="listing-kamus__item">
             <div class="listing-kamus__item--text">
               <h6>{{ $data->translated('title') }}</h6>
@@ -42,7 +42,13 @@
             </div>
             <span class="button button-outline">{{ lang::translate('kamus-hukum.read-more') }}</span>
           </a>
-        @endforeach
+        @empty
+        @if (request()->query('option'))
+          <h3 style="text-align: center">{{ lang::translate('kamus-hukum.alphabet-not-found') }}</h3>
+        @else
+          <h3 style="text-align: center">{{ lang::translate('kamus-hukum.data-not-found') }}</h3>
+        @endif
+        @endforelse
       </div>
       {{ $kamus->appends(request()->query())->links('dynamic.component.pagination') }}
     </div>
