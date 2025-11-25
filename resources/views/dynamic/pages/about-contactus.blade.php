@@ -61,7 +61,7 @@
             </div>
             <div class="column column-50 @error('phone') error-field @enderror">
               <label for="">{{ lang::translate('contact.form-title.phone') }}</label>
-              <input type="number" class="required" name="phone" placeholder="{{ lang::translate('contact.form-placeholder.phone') }}">
+              <input type="text" class="required number-only" name="phone" placeholder="{{ lang::translate('contact.form-placeholder.phone') }}" maxlength="13" minlength="10">
               <div class="supporting-text">@error('phone'){{ $message }}@enderror</div>
             </div>
             <div class="column column-100 @error('message') error-field @enderror">
@@ -117,6 +117,7 @@
 
         document.getElementById("form-contact").addEventListener("submit", function (e) {
           let valid = true;
+            e.preventDefault();
           const submitBtn = this.querySelector('button[type=submit]');
           submitBtn.textContent = "{{ lang::translate('contact.form-process') }}";
           submitBtn.disabled = true;
@@ -146,6 +147,24 @@
             if (input.classList.contains("email") && value !== "" && !validateEmail(value)) {
                 parent.classList.add("error-field");
                 msgBox.textContent = "{{ lang::translate('global.form-error.email') }}";
+                valid = false;
+                // return;
+            }
+
+            // RULE: maxlength (baru)
+            const max = input.getAttribute("maxlength");
+            if (max && value.length > parseInt(max)) {
+                parent.classList.add("error-field");
+                msgBox.textContent = `Maksimal ${max} karakter.`;
+                valid = false;
+                // return;
+            }
+
+            // RULE: minlength (baru)
+            const min = input.getAttribute("minlength");
+            if (min && value.length < parseInt(min)) {
+                parent.classList.add("error-field");
+                msgBox.textContent = `Minimal ${min} karakter.`;
                 valid = false;
                 // return;
             }
@@ -184,6 +203,15 @@
           }
         });
 
+        const numberInputs = document.querySelectorAll('.number-only');
+        numberInputs.forEach(input => {
+          input.addEventListener('input', function(e) {
+            let value = e.target.value;
+            value = value.replace(/[^0-9]/g, '');
+            e.target.value = value;
+          });
+        });
+        
         // fungsi regex email
         function validateEmail(email) {
             const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
