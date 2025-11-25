@@ -29,6 +29,7 @@ class KamusHukumController extends Controller
     {
         return [
             'title' => 'Title',
+            'view_count' => 'View Count'
         ];
     }
 
@@ -48,6 +49,11 @@ class KamusHukumController extends Controller
         return e($value) ?? '-';
     }
 
+    public function listingOrderDefault($res)
+    {
+        return $res->orderBy('title','asc');
+    }
+
     public function formRes()
     {
         return new KamusHukum;
@@ -62,7 +68,7 @@ class KamusHukumController extends Controller
                 'multilang' => true,
                 'attributes' => [
                     'class' => 'required title',
-                    'maxlength' => 255
+                    'maxlength' => 150
                 ],
                 'ai' => ['translate', 'meta-title','correction'],
             ],
