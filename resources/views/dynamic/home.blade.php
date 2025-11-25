@@ -576,7 +576,7 @@
             </div>
             <div class="column column-100">
               <label for="">{{ lang::translate('home.rating.popup.form.title.comment') }}</label>
-              <textarea name="comment" class="required" placeholder="{{ lang::translate('home.rating.popup.form.placeholder.comment') }}"></textarea>
+              <textarea name="comment" class="required" maxlength="500" placeholder="{{ lang::translate('home.rating.popup.form.placeholder.comment') }}"></textarea>
               <div class="supporting-text">@error('comment'){{ $message }}@enderror</div>
             </div>
             <div class="column column-100 recaptcha-container">
