@@ -79,7 +79,13 @@
   <div class="popup__overlay"></div>
   <div class="popup__box popup__box--large">
     <div class="popup__content">
-      <figure><img src="{{ media::initial(conf('site-setting')->value('login-image'))->url }}" alt="{{ media::initial(conf('site-setting')->value('login-image'))->alt }}"></figure>
+      <figure>
+        <img 
+        src="{{ media::initial(conf('site-setting')->value('login-image'))->url }}"
+        data-img-large="{{ media::initial(conf('site-setting')->value('login-image'))->url }}"
+        data-img-medium="{{ media::initial(conf('site-setting')->value('login-image-medium'))->url }}"
+        data-img-small="{{ media::initial(conf('site-setting')->value('login-image-small'))->url }}" alt="{{ media::initial(conf('site-setting')->value('login-image'))->alt }}">
+      </figure>
       <figcaption>
         <h5> {{ lang::translate('dashboard.form-login.title-form-login') }} </h5>
         <p>{{ lang::translate('dashboard.form-login.intro-form-login') }}</p>
@@ -126,7 +132,6 @@
       const submitBtn = form.querySelector('button[type="submit"]');
       const originalText = submitBtn ? submitBtn.textContent : '';
       if (submitBtn) {
-        console.log('test')
         submitBtn.disabled = true;
         submitBtn.style.background = "grey";
         submitBtn.textContent = "{{ lang::translate('dashboard.form-login.process') }}";

@@ -44,7 +44,8 @@ class SettingController extends BaseController
                 ]
             ],*/
             'login-image' => [
-                'label' => 'Login Image',
+                'subtitle' => 'Login Image',
+                'label' => 'Image Large',
                 'type' => 'text',
                 'attributes' => [
                     'class' => 'required cfind',
@@ -52,6 +53,26 @@ class SettingController extends BaseController
                     'cfind-thumb' => '337x539',
                     'cfind-convert' => 'webp',
                     'cfind-alt' => 1,
+                ]
+            ],
+            'login-image-medium' => [
+                'label' => 'Image Medium',
+                'type' => 'text',
+                'attributes' => [
+                    'class' => 'required cfind',
+                    'cfind-type' => 'image',
+                    'cfind-thumb' => '240x483',
+                    'cfind-convert' => 'webp'
+                ]
+            ],
+            'login-image-small' => [
+                'label' => 'Image Small',
+                'type' => 'text',
+                'attributes' => [
+                    'class' => 'required cfind',
+                    'cfind-type' => 'image',
+                    'cfind-thumb' => '327x160',
+                    'cfind-convert' => 'webp'
                 ]
             ],
             'footer' => [
