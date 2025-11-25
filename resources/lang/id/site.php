@@ -96,7 +96,9 @@ return [
 		'form-error' => [
 			'required' => 'Field harus diisi',
 			'email' => 'Field email tidak valid',
-			'recaptcha' => 'Mohon centang reCAPTCHA.'
+			'recaptcha' => 'Mohon centang reCAPTCHA.',
+			'maxlength' => 'Maksimal :max karakter.',
+			'minlength' => 'Minimal :min karakter.',
 		]
 	],
 	'infografis' => [

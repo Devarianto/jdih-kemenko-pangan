@@ -51,12 +51,12 @@
           <div class="row row-wrap">
             <div class="column column-100 @error('name') error-field @enderror">
               <label for="">{{ lang::translate('contact.form-title.name') }}</label>
-              <input type="text" class="required" name="name" placeholder="{{ lang::translate('contact.form-placeholder.name') }}">
+              <input type="text" class="required" name="name" maxlength="255" placeholder="{{ lang::translate('contact.form-placeholder.name') }}">
               <div class="supporting-text">@error('name'){{ $message }}@enderror</div>
             </div>
             <div class="column column-50 @error('email') error-field @enderror">
               <label for="">{{ lang::translate('contact.form-title.email') }}</label>
-              <input type="email" class="required email" name="email" placeholder="{{ lang::translate('contact.form-placeholder.email') }}">
+              <input type="email" class="required email" name="email" maxlength="255" placeholder="{{ lang::translate('contact.form-placeholder.email') }}">
               <div class="supporting-text">@error('email'){{ $message }}@enderror</div>
             </div>
             <div class="column column-50 @error('phone') error-field @enderror">
@@ -117,7 +117,6 @@
 
         document.getElementById("form-contact").addEventListener("submit", function (e) {
           let valid = true;
-            e.preventDefault();
           const submitBtn = this.querySelector('button[type=submit]');
           submitBtn.textContent = "{{ lang::translate('contact.form-process') }}";
           submitBtn.disabled = true;
@@ -155,7 +154,8 @@
             const max = input.getAttribute("maxlength");
             if (max && value.length > parseInt(max)) {
                 parent.classList.add("error-field");
-                msgBox.textContent = `Maksimal ${max} karakter.`;
+                msgBox.textContent = `{{ lang::translate('global.form-error.maxlength') }}`;
+                msgBox.textContent = msgBox.textContent.replace(':max', max);
                 valid = false;
                 // return;
             }
@@ -164,7 +164,8 @@
             const min = input.getAttribute("minlength");
             if (min && value.length < parseInt(min)) {
                 parent.classList.add("error-field");
-                msgBox.textContent = `Minimal ${min} karakter.`;
+                msgBox.textContent = `{{ lang::translate('global.form-error.minlength') }}`;
+                msgBox.textContent = msgBox.textContent.replace(':min', min);
                 valid = false;
                 // return;
             }
@@ -211,7 +212,7 @@
             e.target.value = value;
           });
         });
-        
+
         // fungsi regex email
         function validateEmail(email) {
             const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
