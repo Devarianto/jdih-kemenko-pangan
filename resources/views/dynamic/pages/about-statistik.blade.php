@@ -7,7 +7,7 @@
       @foreach(widget($menu->id, 'menu', 'content') as $content)
       <div class="middle__title">
         <h4>{{ $content->translated('title') }}</h4>
-        {!! $content->translated('description') !!}
+        <p> {{ $content->translated('description') }} <p>
       </div>
       @endforeach
       <div class="filter-right">

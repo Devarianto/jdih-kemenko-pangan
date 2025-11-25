@@ -23,7 +23,7 @@ return [
                     'type' => 'textarea',
                     'multilang' => true,
                     'attributes' => [
-                        'class' => 'required ckeditor'
+                        'class' => 'required'
                     ]
                 ]
             ]
