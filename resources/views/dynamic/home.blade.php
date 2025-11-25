@@ -579,7 +579,7 @@
             {!! recaptcha::draw() !!}
             </div>
             <div class="column column-100">
-              <button type="submit" class="button button-gradient">Kirim</button>
+              <button type="submit" class="button button-gradient">{{ lang::translate('home.rating.popup.form.button') }}</button>
             </div>
           </div>
         </form>
