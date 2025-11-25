@@ -386,7 +386,7 @@ return [
 			'button-submit-login'=>'Masuk Sekarang',
 			'process' => 'Memproses...',
 			'unknown-user' => 'Gagal login. Periksa kembali email dan password Anda.',
-			'failed-network' => 'Terjadi kesalahan jaringan. Coba lagi.'
+			'failed-network' => 'Terjadi kesalahan jaringan. Coba lagi.',
 		],
 		'form-filter'=>[
 			'label-name-project'=>'Nama Project',

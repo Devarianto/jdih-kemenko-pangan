@@ -159,12 +159,22 @@
         let msg = "{{ lang::translate('dashboard.form-login.unknown-user') }}";
         try {
           const data = await res.json();
-          if (data && (data.message || (data.errors && data.errors.email && data.errors.email[0]))) {
-            msg = data.message || data.errors.email[0];
+          if (data && (data.message || data.errors)) {
+            if (data.errors != undefined) {
+              msg = '';
+              for (const key in data.errors) {
+                if (data.errors.hasOwnProperty(key)) {
+                  const value = data.errors[key]
+                  msg += value[0]+'<br>';
+                }
+              }
+            } else {
+              msg = data.message;
+            }
           }
         } catch (_) {}
         if (errorBox) {
-          errorBox.textContent = msg;
+          errorBox.innerHTML = msg;
           errorBox.style.display = 'block';
         } else {
           alert(msg);

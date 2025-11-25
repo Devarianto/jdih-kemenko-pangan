@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Front;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+// use lang;
 
 class AuthController extends Controller
 {
@@ -14,7 +15,7 @@ class AuthController extends Controller
     public function login(Request $request)
     {
         $credentials = $request->validate([
-            'email' => ['required', 'email'],
+            'email' => ['required', 'email:dns'],
             'password' => ['required'],
         ]);
 
@@ -41,9 +42,9 @@ class AuthController extends Controller
         if ($request->expectsJson()) {
             return response()->json([
                 'success' => false,
-                'message' => 'Email atau password tidak sesuai, atau akun belum aktif.',
+                'message' => lang::translate('dashboard.form-login.unknown-user'),
                 'errors' => [
-                    'email' => ['Email atau password tidak sesuai, atau akun belum aktif.'],
+                    'email' => [lang::translate('dashboard.form-login.unknown-user')],
                 ],
             ], 422);
         }
@@ -51,7 +52,7 @@ class AuthController extends Controller
         return back()
             ->withInput($request->only('email'))
             ->withErrors([
-                'email' => 'Email atau password tidak sesuai, atau akun belum aktif.',
+                'email' => lang::translate('dashboard.form-login.unknown-user'),
             ]);
     }
 
