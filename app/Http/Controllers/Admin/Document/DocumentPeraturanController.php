@@ -50,6 +50,8 @@ class DocumentPeraturanController extends Controller
             'tanggal_penetapan' => 'Tanggal Penetapan',
             'tanggal_pengundangan' => 'Tanggal Pengundangan',
             'status_berlaku' => 'Status Berlaku',
+            'view_count' => 'View Count',
+            'download_pdf_count' => 'Download Count'
         ];
     }
 
