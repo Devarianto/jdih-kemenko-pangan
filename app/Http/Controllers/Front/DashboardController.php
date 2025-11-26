@@ -76,17 +76,17 @@ class DashboardController extends Controller
 
         $updates = [];
 
+        $updates ['review'] = [
+            'label' => lang::translate('dashboard.status.review'),
+            'date' => $project->created_at
+        ];
+
         if ($rejected != null) {
             $updates['rejected'] = [
                 'label' => lang::translate('dashboard.status.rejected'),
                 'date' => $project->created_at
             ];
         }
-            
-        $updates ['review'] = [
-            'label' => lang::translate('dashboard.status.review'),
-            'date' => $project->created_at
-        ];
 
         
         return view('dynamic.pages.dashboard-usulan-detail', compact('project', 'updates'));
