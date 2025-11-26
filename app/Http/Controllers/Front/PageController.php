@@ -541,7 +541,7 @@ class PageController extends Controller
             $documents = $documents->orderBy('id', 'desc');
         }
         
-        $documents = $documents->orderBy('id', 'desc')->paginate(9);
+        $documents = $documents->orderBy('id', 'desc')->paginate(8);
 
         $years = Document::selectRaw('YEAR(tanggal_dibacakan) as year')
             ->whereIsActive(1)
@@ -570,6 +570,7 @@ class PageController extends Controller
         $years = Document::select('tahun_terbit')
             ->whereIsActive(1)
             ->where('master_document_id', Document::MONOGRAFI)
+            ->orderBy('tahun_terbit', 'desc')
             ->groupBy('tahun_terbit')
             ->get();
         
@@ -588,7 +589,7 @@ class PageController extends Controller
             $documents = $documents->whereYear('tanggal_berlaku', request()->query('year'));
         }
         
-        $documents = $documents->orderBy('id', 'desc')->paginate(12);
+        $documents = $documents->orderBy('id', 'desc')->paginate(8);
 
         $years = Document::selectRaw('YEAR(tanggal_berlaku) as year')
             ->whereIsActive(1)
