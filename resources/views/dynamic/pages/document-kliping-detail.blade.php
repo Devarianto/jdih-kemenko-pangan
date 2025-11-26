@@ -19,7 +19,7 @@
         <small class="date">{{ date2string($document->created_at) }}</small>
         <h3>{{ $document->translated('title') }}</h3>
       </div>
-      <div class="slider-caption swiper">
+      <div class="slider-caption swiper with-pagination">
         @php($total_slide = widget($document->id, 'document-kliping', 'image')->count())
         <div class="swiper-wrapper">
           @foreach (widget($document->id, 'document-kliping', 'image') as $image)
