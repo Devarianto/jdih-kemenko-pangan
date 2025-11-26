@@ -8,6 +8,7 @@ use App\Models\DocumentType;
 use helper;
 
 use App\Helpers\DocumentPeraturan;
+use App\Models\Document as DocumentModel;
 
 class Document {
 
@@ -60,7 +61,7 @@ class Document {
     {
         $request = request()->all();
         if ($type == 'create') 
-            $post['main']['master_document_id'] = Document::getId($document);
+            $post['main']['master_document_id'] = DocumentModel::getId($document);
         
         if ($type == 'create' || $type == 'edit') {
             if (isset($request['pdf']) && $request['pdf'] != null) {
