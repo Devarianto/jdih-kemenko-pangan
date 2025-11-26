@@ -7,21 +7,13 @@ use App\Models\DocumentType;
 
 use helper;
 
+use App\Helpers\DocumentPeraturan;
+
 class Document {
 
     public static function listingFields($type)
     {
-        if ($type == 'peraturan') {
-            return [
-                'title' => 'Judul',
-                'no_peraturan' => 'No. Peraturan',
-                'rule_type_id' => 'Jenis Peraturan' ,
-                'rule_theme_id' => 'Tema',
-                'tanggal_penetapan' => 'Tanggal Penetapan',
-                'tanggal_pengundangan' => 'Tanggal Pengundangan',
-                'status_berlaku' => 'Status Berlaku',
-            ];
-        } else if ($type == 'jurnal') {
+        if ($type == 'jurnal') {
             return [
                 'title' => 'Judul',
                 'no_panggil' => 'No. Panggil',
@@ -72,6 +64,48 @@ class Document {
         }
     }
 
+    public static function formCallbackBefore($post,$item,$type)
+    {
+        $request = request()->all();
+        if ($type == 'create') 
+            $post['main']['master_document_id'] = Document::getId($this->document);
+        
+        if ($type == 'create' || $type == 'edit') {
+            if (isset($request['pdf']) && $request['pdf'] != null) {
+                if ($type == 'edit' && $item->pdf != null) {
+                    if (Storage::exists($item->pdf))
+                        Storage::delete($item->pdf);
+                }
+
+                $original = pathinfo($request['pdf']->getClientOriginalName(), PATHINFO_FILENAME);
+                $ext = $request['pdf']->getClientOriginalExtension();
+                $filename = $original . '_' . time() . '.' . $ext;
+                $path = $request['pdf']->storeAs('upload/pdf', $filename);
+                
+                $post['main']['pdf'] = $path;
+            } else if ($type == 'edit' && $item->pdf != null) {
+                $post['main']['pdf'] = $item->pdf;
+            }
+
+            if (isset($request['abstract']) && $request['abstract'] != null) {
+                if ($type == 'edit' && $item->abstract != null) {
+                    if (Storage::exists($item->abstract))
+                        Storage::delete($item->abstract);
+                }
+                $original = pathinfo($request['abstract']->getClientOriginalName(), PATHINFO_FILENAME);
+                $ext = $request['abstract']->getClientOriginalExtension();
+                $filename = $original . '_' . time() . '.' . $ext;
+
+                $path = $request['abstract']->storeAs('upload/abstract', $filename);
+                $post['main']['abstract'] = $path;
+            } else if ($type == 'edit' && $item->abstract != null) {
+                $post['main']['abstract'] = $item->abstract;
+            }
+        }
+        
+        return $post;
+    }
+
     public static function formFields($document, $type='create')
     {
         $function = helper::dash2camel('form-'.$document);
@@ -117,154 +151,6 @@ class Document {
         ];
 
         return self::$function($form, $type); // panggil fungsi statik dinamis
-    }
-
-    private static function formPeraturan($form, $type)
-    {
-        $form += [
-            'rule_type_id' => [
-                'label' => 'Jenis Peraturan',
-                'type' => 'select',
-                'options' => RuleType::pluck('label', 'id')->toArray(),
-                'attributes' => [
-                    'class' => 'required select2'
-                ]
-            ],
-            'year' => [
-                'label' => 'Tahun',
-                'type' => 'number',
-                'attributes' => [
-                    'class' => 'required',
-                    'minlength' => 1
-                ]
-            ],
-            'status_berlaku' => [
-                'label' => 'Status Peraturan (Berlaku/Tidak Berlaku)',
-                'type' => 'select',
-                'options' => [
-                    0 => 'Tidak',
-                    1 => 'Ya'
-                ],
-                'attributes' => [
-                    'class' => 'required'
-                ]
-            ],
-            'teu' => [
-                'subtitle' => 'Meta Data', 
-                'label' => 'T.E.U. Badan/Pengarang',
-                'type' => 'text',
-                'multilang' => true,
-            ],
-            'no_peraturan' => [
-                'label' => 'Nomor Peraturan',
-                'type' => 'text',
-            ],
-            'jenis_bentuk_peraturan' => [
-                'label' => 'Jenis/Bentuk Peraturan',
-                'type' => 'text',
-                'multilang' => true,
-            ],
-            'singkatan_bentuk_peraturan' => [
-                'label' => 'Singkatan Jenis/Bentuk Peraturan',
-                'type' => 'text',
-                'multilang' => true,
-            ],
-            'tempat_penetapan' => [
-                'label' => 'Tempat Penetapan',
-                'type' => 'text',
-            ],
-            'tanggal_penetapan' => [
-                'label' => 'Tanggal Penetapan',
-                'type' => 'text',
-                'attributes' => [
-                    'class' => 'datepicker'
-                ]
-            ],
-            'tanggal_pengundangan' => [
-                'label' => 'Tanggal Pengundangan',
-                'type' => 'text',
-                'attributes' => [
-                    'class' => 'datepicker'
-                ]
-            ],
-            'sumber' => [
-                'label' => 'Sumber',
-                'type' => 'text',
-                'multilang' => true
-            ],
-            'subjek' => [
-                'label' => 'Subjek',
-                'type' => 'text',
-                'multilang' => true
-            ],
-            'status_peraturan' => [
-                'label' => 'Status Peraturan',
-                'type' => 'textarea',
-                'multilang' => true,
-                'attributes' => [
-                    'class' => 'ckeditor'
-                ]
-            ],
-            'bahasa' => [
-                'label' => 'Bahasa',
-                'type' => 'text',
-                'multilang' => true
-            ],
-            'lokasi' => [
-                'label' => 'Lokasi',
-                'type' => 'text',
-            ],
-            'bidang_hukum' => [
-                'label' => 'Bidang Hukum',
-                'type' => 'text',
-                'multilang' => true
-            ],
-            'pdf_name' => [
-                'subtitle' => 'File',
-                'label' => 'File Name',
-                'type' => 'text',
-                'multilang' => true
-            ],
-            'pdf' => [
-                'label' => 'PDF',
-                'type' => 'file',
-                'attributes' => [
-                    'class' => 'required'
-                ]
-            ],
-            'abstract_name' => [
-                'label' => 'File Name',
-                'type' => 'text',
-                'multilang' => true
-            ],
-            'abstract' => [
-                'label' => 'Abstrak',
-                'type' => 'file',
-                'attributes' => [
-                    'class' => 'required'
-                ]
-            ]
-        ];
-
-
-        $form['thumbnail'] = [
-            'label' => 'Thumbnail',
-            'type' => 'text',
-            'attributes' => [
-                'class' => 'required cfind',
-                'cfind-type' => 'image',
-                'cfind-thumb' => '240x220',
-                'cfind-convert' => 'webp',
-                'cfind-alt' => 1,
-            ]
-        ];
-
-        if ($type == 'edit') {
-            unset($form['pdf']['attributes']);
-            unset($form['abstract']['attributes']);
-        }
-
-        return $form;
     }
 
     private static function formJurnal($form, $type)

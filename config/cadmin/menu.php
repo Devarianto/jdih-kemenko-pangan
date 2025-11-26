@@ -171,7 +171,7 @@ return [
     'document-peraturan' => [
         'label' => 'Peraturan Hukum',
         'parent' => 'document',
-        'controller' => 'App\Http\Controllers\Admin\Document\DocumentController',
+        'controller' => 'App\Http\Controllers\Admin\Document\DocumentPeraturanController',
         'routes' => admin::moduleRoutes(['index', 'create', 'edit', 'delete', 'publish'])
     ],
     'document-jurnal' => [
