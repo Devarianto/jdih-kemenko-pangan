@@ -71,7 +71,7 @@
           <h5>{{lang::translate('dashboard.daftar-project.detail.status-project')}}</h5>
           <div class="status-project">
             @forelse(($updates ?? []) as $u)
-            <div class="status-project__step {{ $loop->last ? '' : 'done' }}">
+            <div class="status-project__step {{ !$loop->last ? '' : 'done' }}">
               <div class="icon">
                 <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48" fill="none">
                   <rect x="2" y="2" width="44" height="44" rx="22" fill="white" stroke="#999999" stroke-width="4"/>

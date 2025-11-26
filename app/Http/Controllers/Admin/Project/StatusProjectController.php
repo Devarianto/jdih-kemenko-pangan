@@ -51,9 +51,9 @@ class StatusProjectController extends Controller
                     'class' => 'required',
                 ],
                 'options'=>[
-                	'plan-1'=>'Plan 1',
-                	'plan-2'=>'Plan 2',
-                	'done'=>'Done',
+                	'plan-1'=>'Blue',
+                	'plan-2'=>'Tosca',
+                	'done'=>'Green',
 
                 ]
             ]
