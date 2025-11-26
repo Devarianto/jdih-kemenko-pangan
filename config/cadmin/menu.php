@@ -202,7 +202,7 @@ return [
     'document-putusan' => [
         'label' => 'Putusan Hukum',
         'parent' => 'document',
-        'controller' => 'App\Http\Controllers\Admin\Document\DocumentController',
+        'controller' => 'App\Http\Controllers\Admin\Document\DocumentPutusanController',
         'routes' => admin::moduleRoutes(['index', 'create', 'edit', 'delete', 'publish'])
     ],
     'document-monografi' => [
