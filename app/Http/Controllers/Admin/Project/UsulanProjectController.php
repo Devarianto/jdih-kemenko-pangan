@@ -61,6 +61,29 @@ class UsulanProjectController extends Controller
         return e($value) ?? '-';
     }
 
+    public function listingSearchs()
+    {
+        return ['no_project', 'name_project', 'applicant_name'];
+    }
+
+    public function listingFilters()
+    {
+        return [
+            'status_project' => [
+                'label' => 'Status Project',
+                'options' => [0 => 'Belum Diproses']+StatusProject::translate()->pluck('label', 'id')->all()
+            ],
+            'status_review' => [
+                'label' => 'Status Review',
+                'options' => [
+                    0 => 'Menunggu Review',
+                    1 => 'Reject',
+                    2 => 'Approve'
+                ]
+            ]
+        ];
+    }
+
     public function listingTimes()
     {
         return ['created_at' => 'Created'];
