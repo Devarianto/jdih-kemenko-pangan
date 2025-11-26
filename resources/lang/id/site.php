@@ -370,6 +370,7 @@ return [
 		'kembali'=> 'Kembali',
 		'logout'=> 'Logout',
 		'login' => 'Login',
+		'user' => 'User',
 		'daftar-usulan-project-nav'=>'Daftar Usulan Project',
 		'daftar-project-nav'=>'Daftar Project',
 		'status' => [

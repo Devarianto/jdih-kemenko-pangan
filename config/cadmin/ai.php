@@ -6,7 +6,7 @@ return [
 		'meta'=>true,
 		'content'=>true,
 		'spam-checker'=>false, //masih pengujian, belum disarankan dipakai
-		'moderation'=>true,
+		'moderation'=>false,
 		'correction'=>true
 	],	
 	'webarq-ai'=>[
