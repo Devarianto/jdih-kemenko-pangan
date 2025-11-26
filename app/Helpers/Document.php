@@ -56,11 +56,11 @@ class Document {
         }
     }
 
-    public static function formCallbackBefore($post,$item,$type)
+    public static function formCallbackBefore($post,$item,$type,$document)
     {
         $request = request()->all();
         if ($type == 'create') 
-            $post['main']['master_document_id'] = Document::getId($this->document);
+            $post['main']['master_document_id'] = Document::getId($document);
         
         if ($type == 'create' || $type == 'edit') {
             if (isset($request['pdf']) && $request['pdf'] != null) {

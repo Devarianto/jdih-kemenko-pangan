@@ -112,7 +112,7 @@ class DocumentPeraturanController extends Controller
 
     public function formCallbackBefore($post,$item,$type)
     {
-        return Helper::formCallbackBefore($post,$item,$type);
+        return Helper::formCallbackBefore($post,$item,$type,$this->document);
     }
 
     public function formFields($type)
