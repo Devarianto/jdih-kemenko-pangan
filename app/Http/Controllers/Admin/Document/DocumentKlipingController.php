@@ -47,8 +47,7 @@ class DocumentKlipingController extends Controller
             'teu' => 'T.E.U Orang/Badan',
             'tempat_terbit' => 'Tempat Terbit',
             'tahun_terbit' => 'Tahun Terbit',
-            'view_count' => 'View Count',
-            'download_pdf_count' => 'Download Count'
+            'view_count' => 'View Count'
         ];
     }
 
@@ -153,21 +152,8 @@ class DocumentKlipingController extends Controller
                 'type' => 'text',
                 'multilang' => true,
             ],
-            'no_panggil' => [
-                'label' => 'No. Panggil',
-                'type' => 'text',
-            ],
-            'edisi' => [
-                'label' => 'Edisi',
-                'type' => 'text',
-                'multilang' => true,
-            ],
             'tempat_terbit' => [
                 'label' => 'Tempat Terbit',
-                'type' => 'text',
-            ],
-            'penerbit' => [
-                'label' => 'Penerbit',
                 'type' => 'text',
             ],
             'tahun_terbit' => [
@@ -178,14 +164,15 @@ class DocumentKlipingController extends Controller
                     'minlength' => 1
                 ]
             ],
+            'sumber' => [
+                'label' => 'Sumber',
+                'type' => 'textarea',
+                'multilang' => true
+            ],
             'subjek' => [
                 'label' => 'Subjek',
                 'type' => 'text',
                 'multilang' => true
-            ],
-            'isbn' => [
-                'label' => 'ISBN',
-                'type' => 'text'
             ],
             'bahasa' => [
                 'label' => 'Bahasa',
@@ -197,53 +184,24 @@ class DocumentKlipingController extends Controller
                 'type' => 'text',
                 'multilang' => true
             ],
-            'nomor_induk_buku' => [
-                'label' => 'Nomor Induk Buku',
-                'type' => 'text'
-            ],
             'lokasi' => [
                 'label' => 'Lokasi',
-                'type' => 'text',
+                'type' => 'text'
             ],
-            'status_tersedia' => [
-                'label' => 'Status Tersedia',
-                'type' => 'select',
-                'options' => [
-                    0 => 'Tidak',
-                    1 => 'Ya'
-                ]
-            ],
-            'pdf_name' => [
-                'subtitle' => 'File',
-                'label' => 'File Name',
-                'type' => 'text',
+            'lampiran' => [
+                'label' => 'Lampiran',
+                'type' => 'textarea',
                 'multilang' => true
             ],
-            'pdf' => [
-                'label' => 'PDF',
-                'type' => 'file',
-                'attributes' => [
-                    'class' => 'required',
-                    'accept' => 'pdf'
-                ]
-            ],
-            'abstract' => [
-                'label' => 'Abstrak',
-                'type' => 'file',
-                'attributes' => [
-                    'class' => 'required',
-                    'accept' => 'pdf'
-                ]
-            ]
         ];
-        
+
         $form['thumbnail'] = [
             'label' => 'Thumbnail',
             'type' => 'text',
             'attributes' => [
                 'class' => 'required cfind',
                 'cfind-type' => 'image',
-                'cfind-thumb' => '283x365',
+                'cfind-thumb' => '385x250',
                 'cfind-convert' => 'webp',
                 'cfind-alt' => 1,
             ]
@@ -251,20 +209,55 @@ class DocumentKlipingController extends Controller
 
         $form['image'] = [
             'label' => 'Image',
-            'type' => 'text',
-            'attributes' => [
-                'class' => 'required cfind',
-                'cfind-type' => 'image',
-                'cfind-thumb' => '317x410',
-                'cfind-convert' => 'webp',
-                'cfind-alt' => 1,
+            'type' => 'widget',
+            'min' => 1,
+            'widgets' => [
+                'image' => [
+                    'label' => 'Image Detail',
+                    'type' => 'text',
+                    'attributes' => [
+                        'class' => 'required cfind',
+                        'cfind-type' => 'image',
+                        'cfind-thumb' => '996x483',
+                        'cfind-convert' => 'webp',
+                        'cfind-alt' => 1,
+                    ]
+                ],
+                'link-cta' => [
+                    'child-subtitle' => 'Link CTA',
+                    'type' => 'widget',
+                    'max' => 1,
+                    'widgets' => [
+                        'label' => [
+                            'label' => 'Label',
+                            'type' => 'text',
+                            'multilang' => true,
+                            'attributes' => [
+                                'class' => 'link'
+                            ]
+                        ],
+                        'target' => [
+                            'type' => 'select',
+                            'label' => 'Target',
+                            'options' => [
+                                '_self' => 'Default',
+                                '_blank' => 'New Tab',
+                            ],
+                        ],
+                        'link' => [
+                            'label' => 'Link',
+                            'type' => 'text',
+                            'multilang' => true,
+                            'attributes' => [
+                                'class' => 'url'
+                            ]
+                        ],
+                    ]
+                ],
             ]
         ];
 
-        if ($type == 'edit') {
-            unset($form['pdf']['attributes']['class']);
-            unset($form['abstract']['attributes']['class']);
-        }
+        unset($form['intro']);
         
         $form += [
             'meta' => [
