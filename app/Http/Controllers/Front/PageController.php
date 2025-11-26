@@ -484,11 +484,12 @@ class PageController extends Controller
             $documents = $documents->where('tahun_terbit', request()->query('year'));
         }
         
-        $documents = $documents->orderBy('id', 'desc')->paginate(9);
+        $documents = $documents->orderBy('id', 'desc')->paginate(12);
 
         $years = Document::select('tahun_terbit')
             ->whereIsActive(1)
             ->where('master_document_id', Document::KLIPING)
+            ->orderBy('tahun_terbit', 'desc')
             ->groupBy('tahun_terbit')
             ->get();
         
