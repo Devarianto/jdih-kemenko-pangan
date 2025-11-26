@@ -76,7 +76,7 @@ class DocumentPeraturanController extends Controller
 
     public function listingSearchs()
     {
-        return ['no_peraturan'];
+        return ['title', 'no_peraturan'];
     }
 
     public function listingOrderDefault($res)
