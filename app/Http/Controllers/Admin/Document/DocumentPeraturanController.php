@@ -267,11 +267,6 @@ class DocumentPeraturanController extends Controller
                     'class' => 'required'
                 ]
             ],
-            'abstract_name' => [
-                'label' => 'File Name',
-                'type' => 'text',
-                'multilang' => true
-            ],
             'abstract' => [
                 'label' => 'Abstrak',
                 'type' => 'file',
