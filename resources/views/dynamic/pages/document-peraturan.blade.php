@@ -97,7 +97,7 @@
                   </small>
                 </div>
                 <div class="bottom__right">
-                  <a href="{{ route('document.download', ['type' => 'abstract', 'id' => $document->id]) }}" target="__BLANK" class="button button-outline button-icon">
+                  <a href="{{ route('document.download', ['type' => 'abstract', 'id' => $document->id]) }}?token={{ Str::random(15) }}" target="__BLANK" class="button button-outline button-icon">
                     {{ lang::translate('document.download.abstract') }}
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
                       <path d="M9.33366 1.33301H4.00033C3.6467 1.33301 3.30756 1.47348 3.05752 1.72353C2.80747 1.97358 2.66699 2.31272 2.66699 2.66634V13.333C2.66699 13.6866 2.80747 14.0258 3.05752 14.2758C3.30756 14.5259 3.6467 14.6663 4.00033 14.6663H12.0003C12.3539 14.6663 12.6931 14.5259 12.9431 14.2758C13.1932 14.0258 13.3337 13.6866 13.3337 13.333V5.33301L9.33366 1.33301Z" stroke="#2063D2" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>

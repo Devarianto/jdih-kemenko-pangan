@@ -139,7 +139,7 @@
                     <img src="{{asset('images/material/pdf-icon.svg')}}" alt="pdf icon">
                   </figure>
                   <h6>{{ $document->translated('pdf_name') }}</h6>
-                  <a href="{{ route('document.download', ['type' => 'pdf', 'id' => $document->id]) }}" target="__BLANK" class="button button-outline button-icon">
+                  <a href="{{ route('document.download', ['type' => 'pdf', 'id' => $document->id]) }}?token={{ Str::random(15) }}" target="__BLANK" class="button button-outline button-icon">
                     {{ lang::translate('document.file.button.download-pdf') }}
                     <i class="wa-icon wa-ic-download-outline"></i>
                   </a>
