@@ -3,6 +3,7 @@
 return [
     'label' => 'About - Statistik',
     'preview' => '/templates/about-statistik.png',
+    'max' => 1,
     'widgets' => [
         'banner' => [],
         'content' => [

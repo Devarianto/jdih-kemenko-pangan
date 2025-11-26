@@ -3,6 +3,7 @@
 return [
     'label' => 'About - Contact Us',
     'preview' => '/templates/about-contactus.png',
+    'max' => 1,
     'widgets' => [
         'banner' => [],
         'content' => [
