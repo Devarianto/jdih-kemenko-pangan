@@ -513,7 +513,7 @@ class PageController extends Controller
             $documents = $documents->where('tahun_terbit', request()->query('year'));
         }
         
-        $documents = $documents->orderBy('tahun_terbit', 'desc')->paginate(12);
+        $documents = $documents->orderBy('tahun_terbit', 'desc')->orderBy('created_at', 'desc')->paginate(12);
 
         $years = Document::select('tahun_terbit')
             ->whereIsActive(1)
