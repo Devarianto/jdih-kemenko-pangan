@@ -134,7 +134,7 @@ class DocumentPeraturanController extends Controller
                 'multilang' => true,
                 'attributes' => [
                     'class' => 'required',
-                    'maxlength' => 150,
+                    'maxlength' => 250,
                 ]
             ],
             'thumbnail' => [],
