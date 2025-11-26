@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
 
 class Project extends Model
 {
@@ -20,6 +21,11 @@ class Project extends Model
         'status_project',
         'end_date',
     ];
+
+    public function scopeAuthUser(Builder $query): void
+    {
+        $query->where('user_id', \Auth::guard('account')->user()->id);
+    }
 
     public function applicantDivisions()
     {

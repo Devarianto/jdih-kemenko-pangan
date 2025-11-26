@@ -28,8 +28,7 @@ class DashboardController extends Controller
 {
     public function index(Request $request)
     {
-        $user = Auth::guard('account')->user()->id;
-        $query = Project::with('category')->where('user_id', $user)->whereIn('status_review', [0,1]);
+        $query = Project::with('category')->authUser()->whereIn('status_review', [0,1]);
 
         if ($request->filled('q')) {
             $query->where('name_project', 'like', '%' . $request->input('q') . '%');
@@ -41,6 +40,7 @@ class DashboardController extends Controller
 
         $projects = $query->orderBy('created_at','desc')->paginate(10);
         $years = Project::selectRaw('LEFT(`date`, 4) as year')
+            ->authUser()
             ->whereNotNull('date')
             ->where('date', '!=', '')
             ->distinct()
@@ -67,7 +67,7 @@ class DashboardController extends Controller
             abort(404);
         }
 
-        $project = Project::with(['category','applicantDivisions'])->findOrFail($realId);
+        $project = Project::with(['category','applicantDivisions'])->authUser()->findOrFail($realId);
 
         $rejected = DB::table('project_update')
             ->where('project_id', $project->id)
@@ -96,7 +96,7 @@ class DashboardController extends Controller
 
     public function listProject(Request $request)
     {
-        $query = Project::with(['category','getStatus'])->where('status_review', 2);
+        $query = Project::with(['category','getStatus'])->authUser()->where('status_review', 2);
 
         if ($request->filled('q')) {
             $query->where('name_project', 'like', '%' . $request->input('q') . '%');
@@ -109,6 +109,7 @@ class DashboardController extends Controller
         $projects = $query->orderBy('created_at','desc')->paginate(10);
 
         $years = Project::selectRaw('LEFT(`date`, 4) as year')
+            ->authUser()
             ->where('status_review', 2)
             ->whereNotNull('date')
             ->where('date', '!=', '')
@@ -128,7 +129,7 @@ class DashboardController extends Controller
             abort(404);
         }
 
-        $project = Project::with(['category','applicantDivisions'])->findOrFail($realId);
+        $project = Project::with(['category','applicantDivisions'])->authUser()->findOrFail($realId);
         $updates = \DB::table('project_update')
             ->where('project_id', $project->id)
             ->orderBy('created_at', 'asc')
