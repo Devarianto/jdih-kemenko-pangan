@@ -435,7 +435,7 @@ class PageController extends Controller
             $documents = $documents->where('year', request()->query('year'));
         }
         
-        $documents = $documents->orderBy('id', 'desc')->paginate(9);
+        $documents = $documents->orderBy('id', 'desc')->paginate(8);
 
         $rule_types = RuleType::whereIsActive(1)->get();
         $rule_themes = RuleTheme::whereIsActive(1)->get();
