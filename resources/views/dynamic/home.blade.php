@@ -646,6 +646,35 @@
       </div>
     </div>
   </div>
+  @foreach(widget($home->id, 'menu', 'popup') as $popup)
+  @if ($popup->toggle)
+  <div class="popup scroll-out" id="popup-home">
+    <div class="wrap-popup">
+      <div class="wrap-popup__main">
+        <div class="popup__overlay"></div>
+        <div class="popup__box">
+          <div class="popup__content home-popup">
+            <figure>
+              <img src="{{media::url($popup->image)}}" alt="{{media::initial($popup->image)->alt}}">
+            </figure>
+            <figcaption class="content-pages">
+              <h4>{{ $popup->translated('title') }}</h4>
+              <p>{{ $popup->translated('description') }}</p>
+              @php($cta = $popup->childs('button-cta')->first())
+              @if ($cta)
+              <a href="{{ $cta->translated('link') }}" target="{{ $cta->target }}" class="button button-outline">
+                <span>{{ $cta->translated('label') }}</span>
+                <div class="wave"></div>
+              </a>
+              @endif
+            </figcaption>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  @endif
+  @endforeach
   @if (Session::has('success'))
   <div class="popup" id="popup-center">
     <div class="popup__overlay"></div>
@@ -687,6 +716,12 @@
       document.addEventListener("DOMContentLoaded", function(event) { 
         @if (Session::has('success'))
         openPopup('#popup-center');
+        @else
+        @foreach(widget($home->id, 'menu', 'popup') as $popup)
+        @if ($popup->toggle)
+        openPopup('#popup-home')
+        @endif
+        @endforeach
         @endif
 
         document.querySelector('#frm-specific-search').addEventListener('submit', function(e) {

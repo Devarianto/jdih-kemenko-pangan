@@ -6,6 +6,76 @@ return [
     'max' => 1,
     'widgets' => [
         'banner-home' => [],
+        'popup' => [
+            'type' => 'widget',
+            'subtitle' => 'Popup Section',
+            'more-label' => 'Add Section',
+            'max' => 1,
+            'min' => 1,
+            'widgets' => [
+                'toggle' => [
+                    'type' => 'select',
+                    'label' => 'Toggle',
+                    'options' => [
+                        0 => 'Off',
+                        1 => 'On'
+                    ]
+                ],
+                'image' => [
+                    'type' => 'text',
+                    'label' => 'Image',
+                    'attributes' => [
+                        'class' => 'cfind required',
+                        'cfind-type' => 'image',
+                        'cfind-convert' => 'webp',
+                        'cfind-thumb' => '1080x720',
+                        'cfind-alt' => 1,
+                    ],
+                ],
+                'title' => [
+                    'type' => 'text',
+                    'label' => 'Title',
+                    'multilang' => true,
+                    'ai' => ['translate', 'meta-title','correction'],
+                ],
+                'description' => [
+                    'type' => 'textarea',
+                    'label' => 'Description',
+                    'multilang' => true,
+                    'ai' => ['translate','correction'],
+                ],
+                'button-cta' => [
+                    'child-subtitle' => 'Button CTA',
+                    'type' => 'widget',
+                    'max' => 1,
+                    'widgets' => [
+                        'label' => [
+                            'label' => 'Label',
+                            'type' => 'text',
+                            'ai' => ['translate','correction'],
+                            'multilang' => true,
+                            'attributes' => [
+                                'class' => 'required'
+                            ]
+                        ],
+                        'target' => [
+                            'type' => 'select',
+                            'label' => 'Target',
+                            'options' => [
+                                '_self' => 'Default',
+                                '_blank' => 'New Tab',
+                            ],
+                        ],
+                        'link' => [
+                            'label' => 'URL',
+                            'type' => 'text',
+                            'multilang' => true,
+                            'info' => 'Can use permalink or http/https.',
+                        ],
+                    ]
+                ],
+            ],
+        ],
         'rule-theme' => [
             'subtitle' => 'Tema Peraturan',
             'type' => 'widget',
