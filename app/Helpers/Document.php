@@ -14,14 +14,7 @@ class Document {
 
     public static function listingFields($type)
     {
-        if ($type == 'kliping') {
-            return [
-                'title' => 'Judul',
-                'teu' => 'T.E.U Orang/Badan',
-                'tempat_terbit' => 'Tempat Terbit',
-                'tahun_terbit' => 'Tahun Terbit'
-            ];
-        } else if ($type == 'majalah') {
+        if ($type == 'majalah') {
             return [
                 'title' => 'Judul',
                 'teu' => 'T.E.U Orang/Badan',

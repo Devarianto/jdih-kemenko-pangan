@@ -647,35 +647,9 @@
       </div>
     </div>
   </div>
-  @foreach(widget($home->id, 'menu', 'popup') as $popup)
-  @if ($popup->toggle)
-  <div class="popup scroll-out" id="popup-home">
-    <div class="wrap-popup">
-      <div class="wrap-popup__main">
-        <div class="popup__overlay"></div>
-        <div class="popup__box">
-          <div class="popup__content home-popup">
-            <figure>
-              <img src="{{media::url($popup->image)}}" alt="{{media::initial($popup->image)->alt}}">
-            </figure>
-            <figcaption class="content-pages">
-              <h4>{{ $popup->translated('title') }}</h4>
-              <p>{{ $popup->translated('description') }}</p>
-              @php($cta = $popup->childs('button-cta')->first())
-              @if ($cta)
-              <a href="{{ $cta->translated('link') }}" target="{{ $cta->target }}" class="button button-outline">
-                <span>{{ $cta->translated('label') }}</span>
-                <div class="wave"></div>
-              </a>
-              @endif
-            </figcaption>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+  @if($popup->active == 'yes')
+    @include('dynamic.component.popup-information')
   @endif
-  @endforeach
   @if (Session::has('success'))
   <div class="popup" id="popup-center">
     <div class="popup__overlay"></div>
@@ -719,11 +693,46 @@
         @if (Session::has('success'))
         openPopup('#popup-center');
         @else
-        @foreach(widget($home->id, 'menu', 'popup') as $popup)
-        @if ($popup->toggle)
-        openPopup('#popup-home')
+        @if($popup->active == 'yes')
+          @if($popup->sessionDisplay == 'yes')
+            function checkCookie() {
+                    var username = getCookie("popupinfo");
+                    if (username == "") {
+                        setCookie("popupinfo", "ok", {{ is_null($popup->sessionTime) ? 2 : $popup->sessionTime }});
+                        openPopup('#popup-home');
+                    }
+                }
+
+                function setCookie(cname, cvalue, exdays) {
+                    var d = new Date();
+                    // let intervalExp = 60*1000; // in minutes
+                    let intervalExp = 60*60*1000; // in hour
+                    d.setTime(d.getTime() + (exdays*intervalExp));
+                    var expires = "expires="+ d.toUTCString();
+                    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+                }
+
+                function getCookie(cname) {
+                    var name = cname + "=";
+                    var decodedCookie = decodeURIComponent(document.cookie);
+                    var ca = decodedCookie.split(';');
+                    for(var i = 0; i < ca.length; i++) {
+                        var c = ca[i];
+                        while (c.charAt(0) == ' ') {
+                            c = c.substring(1);
+                        }
+                        if (c.indexOf(name) == 0) {
+                            return c.substring(name.length, c.length);
+                        }
+                    }
+                  return "";
+                }
+
+                checkCookie();
+          @else
+            openPopup('#popup-home');
+          @endif
         @endif
-        @endforeach
         @endif
 
         let recaptchaWidget = null;

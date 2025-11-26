@@ -43,6 +43,13 @@ return [
         'default-action'=>'config',
         'routes'=> admin::moduleRoutes(['config']),
     ],
+    'popup-page'=>[
+        'label'=>'Popup page',
+        'parent'=>'setting',
+        'controller'=>'App\Http\Controllers\Admin\Misc\PopupController',
+        'default-action'=>'config',
+        'routes'=> admin::moduleRoutes(['config']),
+    ],
     /*
     '404-aside'=>[
         'label'=>'404 page',
@@ -183,7 +190,7 @@ return [
     'document-kliping' => [
         'label' => 'Kliping Hukum',
         'parent' => 'document',
-        'controller' => 'App\Http\Controllers\Admin\Document\DocumentController',
+        'controller' => 'App\Http\Controllers\Admin\Document\DocumentKlipingController',
         'routes' => admin::moduleRoutes(['index', 'create', 'edit', 'delete', 'publish'])
     ],
     'document-majalah' => [

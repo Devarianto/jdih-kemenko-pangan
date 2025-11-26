@@ -8,6 +8,7 @@ use Cactuar\Admin\Helpers\helper;
 
 use Cactuar\Admin\Models\Menu;
 use Cactuar\Admin\Models\Permalink;
+use Cactuar\Admin\Models\Conf;
 
 use App\Models\Gallery;
 use App\Models\News;
@@ -148,6 +149,8 @@ class PageController extends Controller
         
         $rating = json_encode($rating);
 
+        $popup = Conf::initial('popup-page');
+        
         return view('dynamic.home', compact(
             'news_first', 'news_others', 'newest_documents', 
             'document_monografi', 'monografi_count', 
@@ -160,7 +163,7 @@ class PageController extends Controller
             'menus', 'popular_documents', 
             'gallery_image', 'gallery_video', 
             'get_chart', 'menu_statistic',
-            'total_rating', 'avg_rating', 'rating', 'home', 'rule_types', 'rule_themes', 'year_peraturan'));
+            'total_rating', 'avg_rating', 'rating', 'home', 'rule_types', 'rule_themes', 'year_peraturan', 'popup'));
     }
 
     private function find($id=null)
