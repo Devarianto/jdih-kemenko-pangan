@@ -177,7 +177,7 @@ return [
     'document-jurnal' => [
         'label' => 'Jurnal Hukum',
         'parent' => 'document',
-        'controller' => 'App\Http\Controllers\Admin\Document\DocumentController',
+        'controller' => 'App\Http\Controllers\Admin\Document\DocumentJurnalController',
         'routes' => admin::moduleRoutes(['index', 'create', 'edit', 'delete', 'publish'])
     ],
     'document-kliping' => [

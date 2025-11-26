@@ -13,15 +13,7 @@ class Document {
 
     public static function listingFields($type)
     {
-        if ($type == 'jurnal') {
-            return [
-                'title' => 'Judul',
-                'no_panggil' => 'No. Panggil',
-                'edisi' => 'Cetakan/Edisi',
-                'tempat_terbit' => 'Tempat Terbit',
-                'tahun_terbit' => 'Tahun Terbit'
-            ];
-        } else if ($type == 'kliping') {
+        if ($type == 'kliping') {
             return [
                 'title' => 'Judul',
                 'teu' => 'T.E.U Orang/Badan',
