@@ -50,22 +50,22 @@
           @csrf
           <div class="row row-wrap">
             <div class="column column-100 @error('name') error-field @enderror">
-              <label for="">{{ lang::translate('contact.form-title.name') }}</label>
+              <label for="">{{ lang::translate('contact.form-title.name') }}<i>*</i></label>
               <input type="text" class="required" name="name" maxlength="255" placeholder="{{ lang::translate('contact.form-placeholder.name') }}">
               <div class="supporting-text">@error('name'){{ $message }}@enderror</div>
             </div>
             <div class="column column-50 @error('email') error-field @enderror">
-              <label for="">{{ lang::translate('contact.form-title.email') }}</label>
+              <label for="">{{ lang::translate('contact.form-title.email') }}<i>*</i></label>
               <input type="email" class="required email" name="email" maxlength="255" placeholder="{{ lang::translate('contact.form-placeholder.email') }}">
               <div class="supporting-text">@error('email'){{ $message }}@enderror</div>
             </div>
             <div class="column column-50 @error('phone') error-field @enderror">
-              <label for="">{{ lang::translate('contact.form-title.phone') }}</label>
+              <label for="">{{ lang::translate('contact.form-title.phone') }}<i>*</i></label>
               <input type="text" class="required number-only" name="phone" placeholder="{{ lang::translate('contact.form-placeholder.phone') }}" maxlength="13" minlength="10">
               <div class="supporting-text">@error('phone'){{ $message }}@enderror</div>
             </div>
             <div class="column column-100 @error('message') error-field @enderror">
-              <label for="">{{ lang::translate('contact.form-title.message') }}</label>
+              <label for="">{{ lang::translate('contact.form-title.message') }}<i>*</i></label>
               <textarea name="message" class="required" id="" placeholder="{{ lang::translate('contact.form-placeholder.message') }}"></textarea>
               <div class="supporting-text">@error('message'){{ $message }}@enderror</div>
             </div>

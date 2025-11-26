@@ -502,7 +502,7 @@
           <div class="rating-breakdown" id="ratingBreakdown"></div>
         </div>
         <p>{{ $home_rating->translated('intro') }}</p>
-        <a href="javascript:void(0)" class="button button-outline" onclick="openPopup('#popup-rating')">
+        <a href="javascript:void(0)" class="button button-outline" id="button-open-rating">
           <span>{{ $home_rating->translated('button') }}</span>
           <div class="wave"></div>
         </a>
@@ -530,13 +530,13 @@
   <div class="popup popup-rating" id="popup-rating">
     <div class="popup__overlay"></div>
     <div class="popup__box popup__box--large">
-      <div class="popup__content">
+      <div class="popup__content box-form">
         <h6>{{ lang::translate('home.rating.popup.title') }}</h6>
         <form action="{{ lang::url('rating/submit') }}" id="form-rating" method="POST">
           @csrf
           <div class="row row-wrap">
             <div class="column column-100">
-              <label for="">{{ lang::translate('home.rating.popup.form.title.rating') }}</label>
+              <label for="">{{ lang::translate('home.rating.popup.form.title.rating') }}<i>*</i></label>
               <div class="rates">
                 <input type="radio" id="starR5" name="rating" value="5" data-required-radio="rating">
                 <label for="starR5">
@@ -572,23 +572,24 @@
               </div>
             </div>
             <div class="column column-100">
-              <label for="">{{ lang::translate('home.rating.popup.form.title.name') }}</label>
+              <label for="">{{ lang::translate('home.rating.popup.form.title.name') }}<i>*</i></label>
               <input type="text" name="name" class="required" maxlength="255" placeholder="{{ lang::translate('home.rating.popup.form.placeholder.name') }}">
               <div class="supporting-text">@error('name'){{ $message }}@enderror</div>
             </div>
             <div class="column column-100">
-              <label for="">{{ lang::translate('home.rating.popup.form.title.email') }}</label>
+              <label for="">{{ lang::translate('home.rating.popup.form.title.email') }}<i>*</i></label>
               <input type="text" name="email" class="required email" maxlength="255" placeholder="{{ lang::translate('home.rating.popup.form.placeholder.email') }}">
               <div class="supporting-text">@error('email'){{ $message }}@enderror</div>
             </div>
             <div class="column column-100">
-              <label for="">{{ lang::translate('home.rating.popup.form.title.comment') }}</label>
+              <label for="">{{ lang::translate('home.rating.popup.form.title.comment') }}<i>*</i></label>
               <textarea name="comment" class="required" maxlength="500" placeholder="{{ lang::translate('home.rating.popup.form.placeholder.comment') }}"></textarea>
               <div class="supporting-text">@error('comment'){{ $message }}@enderror</div>
             </div>
             <div class="column column-100 recaptcha-container">
-            {!! recaptcha::draw() !!}
-            <div class="supporting-text">@error('g-recaptcha-response'){{ $message }}@enderror</div>
+              <div id="recaptcha-container">
+              </div>
+              <div class="supporting-text">@error('g-recaptcha-response'){{ $message }}@enderror</div>
             </div>
             <div class="column column-100">
               <button type="submit" class="button button-gradient">{{ lang::translate('home.rating.popup.form.button') }}</button>
@@ -603,7 +604,7 @@
     <div class="popup__box popup__box--large">
       <div class="popup__content">
         <div class="wrap-video">
-          <iframe src="" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+          <iframe src="" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
         </div>
       </div>
     </div>
@@ -703,6 +704,7 @@
   @endpush
   @push('footer')
     <script type="module" async type="text/javascript" src="{{ Vite::asset('resources/assets/js/document.js') }}"></script>
+    <script src="https://www.google.com/recaptcha/api.js?hl={{\App::getLocale()}}" async defer></script>
     <script>
       const ratingData = {
         average: {{ $avg_rating }},
@@ -723,6 +725,26 @@
         @endif
         @endforeach
         @endif
+
+        let recaptchaWidget = null;
+        document.getElementById('button-open-rating').addEventListener('click', function (e) {
+          if (recaptchaWidget != null) {
+            recaptchaWidget = grecaptcha.reset(recaptchaWidget);
+          }
+
+          const old = document.getElementById('recaptcha-container');
+          if (old) old.remove();
+
+          const newBox = document.createElement('div');
+          newBox.id = 'recaptcha-container';
+          document.querySelector('.recaptcha-container').prepend(newBox);
+
+          openPopup('#popup-rating');
+          // Render ulang
+          recaptchaWidget = grecaptcha.render('recaptcha-container', {
+              sitekey: "{{ config('cadmin.cadmin.recaptcha.key') }}"
+          });
+        })
 
         document.querySelector('#frm-specific-search').addEventListener('submit', function(e) {
           e.preventDefault();
