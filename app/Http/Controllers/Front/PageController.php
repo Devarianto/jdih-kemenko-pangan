@@ -465,6 +465,7 @@ class PageController extends Controller
         $years = Document::select('tahun_terbit')
             ->whereIsActive(1)
             ->where('master_document_id', Document::JURNAL)
+            ->orderBy('tahun_terbit', 'desc')
             ->groupBy('tahun_terbit')
             ->get();
         
