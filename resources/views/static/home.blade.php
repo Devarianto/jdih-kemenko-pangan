@@ -676,79 +676,116 @@
   </div>
   <div class="logo-slider swiper">
     <div class="swiper-wrapper">
-      @for ($i = 1; $i <= 5; $i++)
+      <!-- @for ($i = 1; $i <= 5; $i++)
         <a href="" class="swiper-slide">
         <img src="{{ asset('images/content/partner-'.$i.'.png') }}" alt="">
         </a>
-        @endfor
-        <a href="" class="swiper-slide">
-          <img src="{{ asset('images/content/partner-1.png') }}" alt="">
-        </a>
-        <a href="" class="swiper-slide">
-          <img src="{{ asset('images/content/partner-2.png') }}" alt="">
-        </a>
+        @endfor -->
+      <a href="" class="swiper-slide">
+        <img src="{{ asset('images/content/partner-2.png') }}" alt="">
+      </a>
+      <a href="" class="swiper-slide">
+        <img src="{{ asset('images/content/partner-1.png') }}" alt="">
+      </a>
+      <a href="" class="swiper-slide">
+        <img src="{{ asset('images/content/partner-2.png') }}" alt="">
+      </a>
     </div>
   </div>
 </section>
-<div class="popup popup-rating" id="popup-rating">
-  <div class="popup__overlay"></div>
-  <div class="popup__box popup__box--large">
-    <div class="popup__content">
-      <h6>BERIKAN RATING</h6>
-      <form action="">
-        <div class="row row-wrap">
-          <div class="column column-100">
-            <label for="">Rating</label>
-            <div class="rates">
-              <input type="radio" id="starR5" name="rateR" value="5">
-              <label for="starR5">
-                <svg xmlns="http://www.w3.org/2000/svg" width="26.522" height="24.864" viewBox="0 0 26.522 24.864">
-                  <path id="star" d="M12.539,1.515a.8.8,0,0,1,1.444,0L17.05,7.951a.8.8,0,0,0,.624.45l7.138.884a.8.8,0,0,1,.445,1.381L20.025,15.5a.8.8,0,0,0-.242.74L21.133,23.2a.8.8,0,0,1-1.167.856l-6.324-3.432a.8.8,0,0,0-.763,0L6.555,24.055A.8.8,0,0,1,5.388,23.2l1.351-6.956A.8.8,0,0,0,6.5,15.5L1.265,10.667A.8.8,0,0,1,1.71,9.285L8.847,8.4a.8.8,0,0,0,.624-.45Z" fill="#e6e6e6" />
-                </svg>
-              </label>
-              <input type="radio" id="starR4" name="rateR" value="4">
-              <label for="starR4">
-                <svg xmlns="http://www.w3.org/2000/svg" width="26.522" height="24.864" viewBox="0 0 26.522 24.864">
-                  <path id="star" d="M12.539,1.515a.8.8,0,0,1,1.444,0L17.05,7.951a.8.8,0,0,0,.624.45l7.138.884a.8.8,0,0,1,.445,1.381L20.025,15.5a.8.8,0,0,0-.242.74L21.133,23.2a.8.8,0,0,1-1.167.856l-6.324-3.432a.8.8,0,0,0-.763,0L6.555,24.055A.8.8,0,0,1,5.388,23.2l1.351-6.956A.8.8,0,0,0,6.5,15.5L1.265,10.667A.8.8,0,0,1,1.71,9.285L8.847,8.4a.8.8,0,0,0,.624-.45Z" fill="#e6e6e6" />
-                </svg>
-              </label>
-              <input type="radio" id="starR3" name="rateR" value="3">
-              <label for="starR3">
-                <svg xmlns="http://www.w3.org/2000/svg" width="26.522" height="24.864" viewBox="0 0 26.522 24.864">
-                  <path id="star" d="M12.539,1.515a.8.8,0,0,1,1.444,0L17.05,7.951a.8.8,0,0,0,.624.45l7.138.884a.8.8,0,0,1,.445,1.381L20.025,15.5a.8.8,0,0,0-.242.74L21.133,23.2a.8.8,0,0,1-1.167.856l-6.324-3.432a.8.8,0,0,0-.763,0L6.555,24.055A.8.8,0,0,1,5.388,23.2l1.351-6.956A.8.8,0,0,0,6.5,15.5L1.265,10.667A.8.8,0,0,1,1.71,9.285L8.847,8.4a.8.8,0,0,0,.624-.45Z" fill="#e6e6e6" />
-                </svg>
-              </label>
-              <input type="radio" id="starR2" name="rateR" value="2">
-              <label for="starR2">
-                <svg xmlns="http://www.w3.org/2000/svg" width="26.522" height="24.864" viewBox="0 0 26.522 24.864">
-                  <path id="star" d="M12.539,1.515a.8.8,0,0,1,1.444,0L17.05,7.951a.8.8,0,0,0,.624.45l7.138.884a.8.8,0,0,1,.445,1.381L20.025,15.5a.8.8,0,0,0-.242.74L21.133,23.2a.8.8,0,0,1-1.167.856l-6.324-3.432a.8.8,0,0,0-.763,0L6.555,24.055A.8.8,0,0,1,5.388,23.2l1.351-6.956A.8.8,0,0,0,6.5,15.5L1.265,10.667A.8.8,0,0,1,1.71,9.285L8.847,8.4a.8.8,0,0,0,.624-.45Z" fill="#e6e6e6" />
-                </svg>
-              </label>
-              <input type="radio" id="starR1" name="rateR" value="1">
-              <label for="starR1">
-                <svg xmlns="http://www.w3.org/2000/svg" width="26.522" height="24.864" viewBox="0 0 26.522 24.864">
-                  <path id="star" d="M12.539,1.515a.8.8,0,0,1,1.444,0L17.05,7.951a.8.8,0,0,0,.624.45l7.138.884a.8.8,0,0,1,.445,1.381L20.025,15.5a.8.8,0,0,0-.242.74L21.133,23.2a.8.8,0,0,1-1.167.856l-6.324-3.432a.8.8,0,0,0-.763,0L6.555,24.055A.8.8,0,0,1,5.388,23.2l1.351-6.956A.8.8,0,0,0,6.5,15.5L1.265,10.667A.8.8,0,0,1,1.71,9.285L8.847,8.4a.8.8,0,0,0,.624-.45Z" fill="#e6e6e6" />
-                </svg>
-              </label>
-            </div>
-          </div>
-          <div class="column column-100">
-            <label for="">Nama</label>
-            <input type="text" placeholder="Nama Lengkap">
-          </div>
-          <div class="column column-100">
-            <label for="">Email</label>
-            <input type="text" placeholder="Alamat Email">
-          </div>
-          <div class="column column-100">
-            <label for="">Komentar</label>
-            <textarea name="" id="" placeholder="Tuliskan Komentar Anda"></textarea>
-          </div>
-          <div class="column column-100">
-            <button type="submit" class="button button-gradient">Kirim</button>
-          </div>
+
+<div class="popup scroll-out" id="popup-home">
+  <div class="wrap-popup">
+    <div class="wrap-popup__main">
+      <div class="popup__overlay"></div>
+      <div class="popup__box">
+        <div class="popup__content home-popup">
+          <figure>
+            <img src="{{ asset('images/content/large-news.jpg') }}" alt="">
+          </figure>
+          <figcaption class="content-pages">
+            <h4>Lorem Ipsum Dolor Sit Amet</h4>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa consectetur perspiciatis officia doloremque ullam unde similique temporibus sint, vero, autem incidunt, eveniet laboriosam fuga cum vel tenetur soluta magni animi!</p>
+            <a href="javascript:void(0)" class="button button-outline">
+              <span>Lihat Selengkapnya</span>
+              <div class="wave"></div>
+            </a>
+          </figcaption>
         </div>
-      </form>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="popup scroll-out popup-rating" id="popup-rating">
+  <div class="wrap-popup">
+    <div class="wrap-popup__main">
+      <div class="popup__overlay"></div>
+      <div class="popup__box popup__box--large">
+        <div class="popup__close">
+          <i class="wa-icon wa-ic-close-solid"></i>
+        </div>
+        <div class="popup__content box-form">
+          <h6>BERIKAN RATING</h6>
+          <form action="">
+            <div class="row row-wrap">
+              <div class="column column-100">
+                <label for="">Rating<i>*</i></label>
+                <div class="rates">
+                  <input type="radio" id="starR5" name="rateR" value="5">
+                  <label for="starR5">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="26.522" height="24.864" viewBox="0 0 26.522 24.864">
+                      <path id="star" d="M12.539,1.515a.8.8,0,0,1,1.444,0L17.05,7.951a.8.8,0,0,0,.624.45l7.138.884a.8.8,0,0,1,.445,1.381L20.025,15.5a.8.8,0,0,0-.242.74L21.133,23.2a.8.8,0,0,1-1.167.856l-6.324-3.432a.8.8,0,0,0-.763,0L6.555,24.055A.8.8,0,0,1,5.388,23.2l1.351-6.956A.8.8,0,0,0,6.5,15.5L1.265,10.667A.8.8,0,0,1,1.71,9.285L8.847,8.4a.8.8,0,0,0,.624-.45Z" fill="#e6e6e6" />
+                    </svg>
+                  </label>
+                  <input type="radio" id="starR4" name="rateR" value="4">
+                  <label for="starR4">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="26.522" height="24.864" viewBox="0 0 26.522 24.864">
+                      <path id="star" d="M12.539,1.515a.8.8,0,0,1,1.444,0L17.05,7.951a.8.8,0,0,0,.624.45l7.138.884a.8.8,0,0,1,.445,1.381L20.025,15.5a.8.8,0,0,0-.242.74L21.133,23.2a.8.8,0,0,1-1.167.856l-6.324-3.432a.8.8,0,0,0-.763,0L6.555,24.055A.8.8,0,0,1,5.388,23.2l1.351-6.956A.8.8,0,0,0,6.5,15.5L1.265,10.667A.8.8,0,0,1,1.71,9.285L8.847,8.4a.8.8,0,0,0,.624-.45Z" fill="#e6e6e6" />
+                    </svg>
+                  </label>
+                  <input type="radio" id="starR3" name="rateR" value="3">
+                  <label for="starR3">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="26.522" height="24.864" viewBox="0 0 26.522 24.864">
+                      <path id="star" d="M12.539,1.515a.8.8,0,0,1,1.444,0L17.05,7.951a.8.8,0,0,0,.624.45l7.138.884a.8.8,0,0,1,.445,1.381L20.025,15.5a.8.8,0,0,0-.242.74L21.133,23.2a.8.8,0,0,1-1.167.856l-6.324-3.432a.8.8,0,0,0-.763,0L6.555,24.055A.8.8,0,0,1,5.388,23.2l1.351-6.956A.8.8,0,0,0,6.5,15.5L1.265,10.667A.8.8,0,0,1,1.71,9.285L8.847,8.4a.8.8,0,0,0,.624-.45Z" fill="#e6e6e6" />
+                    </svg>
+                  </label>
+                  <input type="radio" id="starR2" name="rateR" value="2">
+                  <label for="starR2">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="26.522" height="24.864" viewBox="0 0 26.522 24.864">
+                      <path id="star" d="M12.539,1.515a.8.8,0,0,1,1.444,0L17.05,7.951a.8.8,0,0,0,.624.45l7.138.884a.8.8,0,0,1,.445,1.381L20.025,15.5a.8.8,0,0,0-.242.74L21.133,23.2a.8.8,0,0,1-1.167.856l-6.324-3.432a.8.8,0,0,0-.763,0L6.555,24.055A.8.8,0,0,1,5.388,23.2l1.351-6.956A.8.8,0,0,0,6.5,15.5L1.265,10.667A.8.8,0,0,1,1.71,9.285L8.847,8.4a.8.8,0,0,0,.624-.45Z" fill="#e6e6e6" />
+                    </svg>
+                  </label>
+                  <input type="radio" id="starR1" name="rateR" value="1">
+                  <label for="starR1">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="26.522" height="24.864" viewBox="0 0 26.522 24.864">
+                      <path id="star" d="M12.539,1.515a.8.8,0,0,1,1.444,0L17.05,7.951a.8.8,0,0,0,.624.45l7.138.884a.8.8,0,0,1,.445,1.381L20.025,15.5a.8.8,0,0,0-.242.74L21.133,23.2a.8.8,0,0,1-1.167.856l-6.324-3.432a.8.8,0,0,0-.763,0L6.555,24.055A.8.8,0,0,1,5.388,23.2l1.351-6.956A.8.8,0,0,0,6.5,15.5L1.265,10.667A.8.8,0,0,1,1.71,9.285L8.847,8.4a.8.8,0,0,0,.624-.45Z" fill="#e6e6e6" />
+                    </svg>
+                  </label>
+                </div>
+              </div>
+              <div class="column column-100">
+                <label for="">Nama<i>*</i></label>
+                <input type="text" placeholder="Nama Lengkap">
+              </div>
+              <div class="column column-100">
+                <label for="">Email<i>*</i></label>
+                <input type="text" placeholder="Alamat Email">
+              </div>
+              <div class="column column-100">
+                <label for="">Komentar<i>*</i></label>
+                <textarea name="" id="" placeholder="Tuliskan Komentar Anda"></textarea>
+              </div>
+              <div class="column column-100">
+                <div class="g-recaptcha" data-sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"></div>
+                <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+              </div>
+              <div class="column column-100">
+                <button type="submit" class="button button-gradient">Kirim</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
     </div>
   </div>
 </div>
@@ -824,6 +861,7 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
   document.addEventListener("DOMContentLoaded", function(event) {
+    openPopup('#popup-home')
     const ctx = $("#statusChart");
     new Chart(ctx, {
       type: "bar",

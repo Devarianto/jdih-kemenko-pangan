@@ -709,8 +709,17 @@
   .listing-galeri {
     &__item {
       flex: unset;
+      width: calc((100% - 20px) / 2);
       max-width: 100%;
       min-height: 320px;
+    }
+  }
+}
+
+@media all and (max-width: 530px) {
+  .listing-galeri {
+    &__item {
+      width: 100%;
     }
   }
 }

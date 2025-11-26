@@ -103,7 +103,7 @@ home.ratingHome = () => {
 home.sliderLogo = () => {
   const swiper = new Swiper('.logo-slider.swiper', {
     loop: true,
-    slidesPerView: 3,
+    slidesPerView: 5,
     spaceBetween: 45,
     slidesOffsetBefore: 0, // offset kiri agar tampak terpotong
     slidesOffsetAfter: 0,  // offset kanan agar tampak terpotong

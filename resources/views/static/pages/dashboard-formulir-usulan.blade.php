@@ -37,26 +37,27 @@
           <div class="box-form">
             <h5>Formulir USULAN PROJECT</h5>
             <div class="row row-wrap">
-              <div class="column column-100">
-                <label for="">Nomor Project</label>
+              <div class="column column-100 error">
+                <label for="">Nomor Project<i>*</i></label>
                 <input type="text" placeholder="Ketik Kata Kunci Pencarian">
+                <div class="supporting-text">Supporting Text (Optional)</div>
               </div>
               <div class="column column-100">
-                <label for="">Nama Project</label>
+                <label for="">Nama Project<i>*</i></label>
                 <input type="text" placeholder="Ketik Kata Kunci Pencarian">
               </div>
               <div class="column column-50">
-                <label for="">Kategori</label>
+                <label for="">Kategori<i>*</i></label>
                 <select name="" id="">
                   <option value="">Pilih Kategori</option>
                 </select>
               </div>
               <div class="column column-50">
-                <label for="">Tanggal Usulan</label>
+                <label for="">Tanggal Usulan<i>*</i></label>
                 <input type="text" class="datepicker">
               </div>
               <div class="column column-100">
-                <label for="">Dokumen Terlampir</label>
+                <label for="">Dokumen Terlampir<i>*</i></label>
                 <div class="file-upload">
                   <input type="file" id="fileUpload" @change="handleFileUpload" accept=".jpg,.png,.webp,.pdf,.doc,.docx" class="textfield-large">
                   <div class="text">

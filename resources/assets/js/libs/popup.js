@@ -5,7 +5,7 @@ export default ($) => ({
     if (!elementPopup.hasClass('scroll')) {
       $('body').css({ 'overflow': 'hidden' })
     }
-    
+
   },
   closePopup(element) {
     const elementPopup = $(element);
@@ -14,12 +14,12 @@ export default ($) => ({
   },
   closeGeneral() {
     $('.popup__overlay').on('click', function (e) {
-      $(this).parent().removeClass('popup__show')
+      $(this).parents('.popup').removeClass('popup__show')
       $('body').css({ 'overflow': 'auto' })
-       $('.popup__content').each(function () {
+      $('.popup__content').each(function () {
         let iframe = $(this).find('iframe');
         iframe.each(function () {
-          $(this).attr('src','');
+          $(this).attr('src', '');
           return false;
         });
       });
@@ -30,7 +30,7 @@ export default ($) => ({
       $('.popup__content').each(function () {
         let iframe = $(this).find('iframe');
         iframe.each(function () {
-          $(this).attr('src','');
+          $(this).attr('src', '');
           return false;
         });
       });
