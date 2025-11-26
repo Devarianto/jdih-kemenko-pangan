@@ -20,6 +20,7 @@
         <h3>{{ $document->translated('title') }}</h3>
       </div>
       <div class="slider-caption swiper">
+        @php($total_slide = widget($document->id, 'document-kliping', 'image')->count())
         <div class="swiper-wrapper">
           @foreach (widget($document->id, 'document-kliping', 'image') as $image)
           @php($cta = $image->childs('link-cta')->first())
@@ -33,11 +34,13 @@
             </div>
           @endforeach
         </div>
+        @if ($total_slide > 1)
         <div class="slider-caption__utils">
           <div class="swiper-arrow swiper-prev"></div>
           <div class="swiper-pagination"></div>
           <div class="swiper-arrow swiper-next"></div>
         </div>
+        @endif
       </div>
     </div>
     <section class="box-detail-page no-minus">
