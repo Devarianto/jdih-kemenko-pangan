@@ -19,7 +19,7 @@ class RatingController extends Controller
             'rating' => 'required|integer|min:1|max:5',
             'name' => 'required|string|max:255|rejectxss',
             'email' => 'required|custom_email|max:225',
-            'comment' => 'required|string|rejectxss|max:255',
+            'comment' => 'required|string|rejectxss|max:500',
             'g-recaptcha-response' => 'required|recaptcha'
         ], [], [
             'rating' => lang::translate('home.rating.popup.form.title.rating'),
