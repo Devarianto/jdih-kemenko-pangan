@@ -32,6 +32,7 @@ class PageController extends Controller
         $year_peraturan = Document::select('year')
             ->whereIsActive(1)
             ->where('master_document_id', Document::PERATURAN)
+            ->orderBy('year', 'desc')
             ->groupBy('year')
             ->get();
 
@@ -445,6 +446,7 @@ class PageController extends Controller
         $years = Document::select('year')
             ->whereIsActive(1)
             ->where('master_document_id', Document::PERATURAN)
+            ->orderBy('year', 'desc')
             ->groupBy('year')
             ->get();
         
