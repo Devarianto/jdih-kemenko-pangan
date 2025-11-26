@@ -69,14 +69,11 @@
     </div>
 </div>
 
-<script type="text/javascript" src="{{ asset('nwcms/base/plugins/fancybox/fancybox.umd.js') }}"></script>
-<link rel="stylesheet" type="text/css" href="{{ asset('nwcms/base/plugins/fancybox/fancybox.css') }}" media="screen" />
+<script type="text/javascript" src="{{ asset('nwcms/base/plugins/fancybox/jquery.mousewheel-3.0.4.pack.js') }}"></script>
+<script type="text/javascript" src="{{ asset('nwcms/base/plugins/fancybox/jquery.fancybox-1.3.4.js') }}"></script>
+<link rel="stylesheet" type="text/css" href="{{ asset('nwcms/base/plugins/fancybox/jquery.fancybox-1.3.4.css') }}" media="screen" />
 <script>
-    $(document).ready(function() {
-        Fancybox.bind("[data-fancybox]", {
-
-        });
-    });
+    $(document).ready(function() { $('.fancybox').fancybox(); });
 </script>
 
 @endsection
