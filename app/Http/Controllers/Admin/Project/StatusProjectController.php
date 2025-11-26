@@ -7,7 +7,6 @@ use App\Models\StatusProject;
 use Cactuar\Admin\Traits\Controllers\BaseTrait;
 use Cactuar\Admin\Traits\Controllers\ListingTrait;
 use Cactuar\Admin\Traits\Controllers\EditTrait;
-use Cactuar\Admin\Traits\Controllers\DeleteTrait;
 use Cactuar\Admin\Traits\Controllers\PublishTrait;
 
 class StatusProjectController extends Controller

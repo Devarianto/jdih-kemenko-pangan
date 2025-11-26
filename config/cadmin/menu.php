@@ -113,7 +113,7 @@ return [
         'fa' => 'tags',
         'parent' => 'project',
         'controller' => 'App\Http\Controllers\Admin\Project\StatusProjectController',
-        'routes' => admin::moduleRoutes(['index','edit','delete','publish']),
+        'routes' => admin::moduleRoutes(['index','edit','publish']),
     ],
 
     'usulan-project' => [
