@@ -258,7 +258,7 @@ class DocumentJurnalController extends Controller
         ];
 
         $form['image'] = [
-            'label' => 'Image',
+            'label' => 'Image Detail',
             'type' => 'text',
             'attributes' => [
                 'class' => 'required cfind',
