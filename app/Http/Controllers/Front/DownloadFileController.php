@@ -19,7 +19,10 @@ class DownloadFileController extends Controller
         if (in_array($type, ['pdf', 'abstract', 'attachment'])) {
             if ($document->{$type} != null && Storage::exists($document->{$type})) {
                 return response()->file(storage_path('app/'. $document->{$type}), [
-                    'Content-Type' => 'application/pdf'
+                    'Content-Type' => 'application/pdf',
+                    'Cache-Control' => 'no-cache, no-store, must-revalidate',
+                    'Pragma'        => 'no-cache',
+                    'Expires'       => '0',
                 ]);
             }
         }
@@ -32,12 +35,13 @@ class DownloadFileController extends Controller
         if (!request()->query('token')) {
             abort(404);
         }
+        
         $document = Document::whereIsActive(1)->where('id', $id)->firstOrFail();
         if ($document->{$type} != null && Storage::exists($document->{$type})) {
             $document->{'download_'.$type.'_count'} += 1;
             $document->save();
 
-            return response()->download(storage_path('app/'. $document->{$type}));
+            return response()->download(storage_path('app/'. $document->{$type}))->setCache(['no_cache' => true]);
         }
 
         abort(404);
