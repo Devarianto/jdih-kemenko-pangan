@@ -113,7 +113,7 @@ return [
         'fa' => 'tags',
         'parent' => 'project',
         'controller' => 'App\Http\Controllers\Admin\Project\StatusProjectController',
-        'routes' => admin::moduleRoutes(['index','edit','delete','create','publish']),
+        'routes' => admin::moduleRoutes(['index','edit','delete','publish']),
     ],
 
     'usulan-project' => [
@@ -121,7 +121,7 @@ return [
         'fa' => 'file',
         'parent' => 'project',
         'controller' => 'App\Http\Controllers\Admin\Project\UsulanProjectController',
-        'routes' => admin::moduleRoutes(['index','edit','delete','create','publish','download'], ['detail'], ['approve','reject','update-status']),
+        'routes' => admin::moduleRoutes(['index','delete','download'], ['detail'], ['approve','reject','update-status']),
     ],
 
     'menu' => [

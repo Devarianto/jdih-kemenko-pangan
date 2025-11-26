@@ -28,7 +28,7 @@ class DashboardController extends Controller
 {
     public function index(Request $request)
     {
-
+        $user = Auth::guard('account')->user()->id;
         $query = Project::with('category')->whereIn('status_review', [0,1]);
 
         if ($request->filled('q')) {
