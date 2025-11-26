@@ -38,6 +38,43 @@ header {
         align-items: center;
         gap: 0 8px;
       }
+      .after-login {
+        position: relative;
+        &__drop {
+          position: absolute;
+          padding: 16px 20px;
+          background: #fff;
+          border-radius: 8px;
+          width: 220px;
+          box-shadow: 0 0 20px -15px #000;
+          left: 50%;
+          transform: translateX(-50%);
+          top: calc(100% + 12px);
+          display: none;
+          z-index: 5;
+          ul {
+            display: block;
+            margin: 0;
+            li {
+              padding: 8px 0;
+            }
+          }
+          a {
+            color: var(--c-neutral-black) !important;
+            background: transparent !important;
+            padding: 0;
+            font-size: 14px;
+            font-weight: 500;
+            svg {
+              width: 20px;
+              height: 20px;
+            }
+            &.active {
+              color: var(--c-primary-main);
+            }
+          }
+        }
+      }
     }
     &__lang {
       position: relative;
@@ -91,9 +128,9 @@ header {
       padding: 32px 0;
       a {
         color: white;
-        transition: .2s all ease-out; 
-        &.active{
-           color: #C1CCFF !important;
+        transition: 0.2s all ease-out;
+        &.active {
+          color: #c1ccff !important;
         }
       }
       &:hover {
@@ -492,6 +529,10 @@ footer {
               font-size: 16px;
               font-weight: 500;
               color: #373737;
+              &.active,
+              &:hover {
+                color: #c1ccff;
+              }
             }
             i {
               margin-left: auto;
@@ -532,6 +573,9 @@ footer {
         padding: 40px 96px;
         background-color: white;
         .login {
+          display: none;
+        }
+        .after-login {
           display: none;
         }
         .lang {
@@ -685,6 +729,56 @@ footer {
         border-radius: 50px;
         background: linear-gradient(94deg, #1840aa 3.44%, #091d77 100.03%),
           linear-gradient(124deg, #3272dd 29.99%, #091d77 117.93%);
+      }
+      .after-login {
+        width: 100%;
+        display: block;
+        > a {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 8px;
+          height: 40px;
+          color: white;
+          width: 100%;
+          border-radius: 50px;
+          background: linear-gradient(94deg, #1840aa 3.44%, #091d77 100.03%),
+            linear-gradient(124deg, #3272dd 29.99%, #091d77 117.93%);
+        }
+        &__drop {
+          position: absolute;
+          padding: 16px 20px;
+          background: #fff;
+          border-radius: 8px;
+          width: calc(100% - 40px);
+          box-shadow: 0 0 20px -15px #000;
+          left: 50%;
+          transform: translateX(-50%);
+          bottom: 100%;
+          display: none;
+          z-index: 5;
+          ul {
+            display: block;
+            margin: 0;
+            li {
+              padding: 8px 0;
+            }
+          }
+          a {
+            color: var(--c-neutral-black) !important;
+            background: transparent !important;
+            padding: 0;
+            font-size: 14px;
+            font-weight: 500;
+            svg {
+              width: 20px;
+              height: 20px;
+            }
+            &.active {
+              color: var(--c-primary-main);
+            }
+          }
+        }
       }
       &__bottom {
         flex-direction: column;

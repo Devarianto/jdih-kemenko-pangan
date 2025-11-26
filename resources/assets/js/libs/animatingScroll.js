@@ -19,7 +19,7 @@ export default () => ({
           // this code if for counting numbers on Homepages section about
           setTimeout(() => {
             const lottie = document.querySelector('.animation-lottie');
-            if(lottie) {
+            if (lottie) {
               lottie.play();
             }
 
@@ -34,6 +34,7 @@ export default () => ({
 
       }
       window.addEventListener('scroll', f)
+      window.addEventListener('load', f)
     }
     setTimeout(() => {
       $('.banner-homepage').addClass('after-animate')
