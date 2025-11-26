@@ -196,7 +196,7 @@ return [
     'document-majalah' => [
         'label' => 'Majalah Hukum',
         'parent' => 'document',
-        'controller' => 'App\Http\Controllers\Admin\Document\DocumentController',
+        'controller' => 'App\Http\Controllers\Admin\Document\DocumentMajalahController',
         'routes' => admin::moduleRoutes(['index', 'create', 'edit', 'delete', 'publish'])
     ],
     'document-putusan' => [

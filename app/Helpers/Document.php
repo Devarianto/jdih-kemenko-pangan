@@ -14,14 +14,7 @@ class Document {
 
     public static function listingFields($type)
     {
-        if ($type == 'majalah') {
-            return [
-                'title' => 'Judul',
-                'teu' => 'T.E.U Orang/Badan',
-                'tempat_terbit' => 'Tempat Terbit',
-                'tahun_terbit' => 'Tahun Terbit'
-            ];
-        } else if ($type == 'putusan') {
+        if ($type == 'putusan') {
             return [
                 'title' => 'Judul',
                 'no_putusan' => 'No. Putusan',
