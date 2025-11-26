@@ -74,6 +74,7 @@ return [
 	],
 	'global' => [
 		'search' => 'Ketik kata pencarian',
+		'search-not-found' => 'Data tidak ditemukan',
 		'download-pdf' => 'Download PDF',
 		'sorting' => [
 			'title' => 'Urutkan',
