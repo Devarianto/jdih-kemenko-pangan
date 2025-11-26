@@ -77,6 +77,32 @@ class DocumentJurnalController extends Controller
         return ['title', 'no_panggil'];
     }
 
+    public function listingFilters()
+    {
+        return [
+            'rule_theme_id' => [
+                'label' => 'Tema',
+                'options' => RuleTheme::pluck('label','id')->all(),
+            ],
+            'document_type_id' => [
+                'label' => 'Tipe',
+                'options' => DocumentType::pluck('label','id')->all(),
+            ],
+            'status_tersedia' => [
+                'label' => 'Status Tersedia',
+                'options' => [
+                    0 => 'Tidak',
+                    1 => 'Ya'
+                ]
+            ],
+        ];
+    }
+
+    public function listingOrderDefault($res)
+    {
+        return $res->orderBy('tahun_terbit', 'desc')->orderBy('created_at','desc');
+    }
+
     public function formRes()
     {
         return new Document;
@@ -156,6 +182,7 @@ class DocumentJurnalController extends Controller
                 'label' => 'Tahun Terbit',
                 'type' => 'number',
                 'attributes' => [
+                    'class' => 'required',
                     'minlength' => 1
                 ]
             ],
@@ -208,11 +235,6 @@ class DocumentJurnalController extends Controller
                     'accept' => 'pdf'
                 ]
             ],
-            'abstract_name' => [
-                'label' => 'File Name',
-                'type' => 'text',
-                'multilang' => true
-            ],
             'abstract' => [
                 'label' => 'Abstrak',
                 'type' => 'file',
@@ -229,7 +251,7 @@ class DocumentJurnalController extends Controller
             'attributes' => [
                 'class' => 'required cfind',
                 'cfind-type' => 'image',
-                'cfind-thumb' => '220x284',
+                'cfind-thumb' => '283x365',
                 'cfind-convert' => 'webp',
                 'cfind-alt' => 1,
             ]
