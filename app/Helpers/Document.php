@@ -14,16 +14,7 @@ class Document {
 
     public static function listingFields($type)
     {
-        if ($type == 'monografi') {
-            return [
-                'title' => 'Judul',
-                'no_panggil' => 'No. Panggil',
-                'edisi' => 'Cetakan/Edisi',
-                'tempat_terbit' => 'Tempat Terbit',
-                'tahun_terbit' => 'Tahun Terbit',
-                'status_tersedia' => 'Status Tersedia',
-            ];
-        } else if ($type == 'naskah') {
+        if ($type == 'naskah') {
             return [
                 'title' => 'Judul',
                 'nomor_perjanjian' => 'No. Perjanjian',
@@ -121,126 +112,6 @@ class Document {
         ];
 
         return self::$function($form, $type); // panggil fungsi statik dinamis
-    }
-
-    private static function formMonografi($form, $type)
-    {
-        $form += [
-            'teu' => [
-                'subtitle' => 'Meta Data', 
-                'label' => 'T.E.U. Orang/Badan',
-                'type' => 'text',
-                'multilang' => true,
-            ],
-            'no_panggil' => [
-                'label' => 'No. Panggil',
-                'type' => 'text',
-            ],
-            'edisi' => [
-                'label' => 'Edisi',
-                'type' => 'text',
-                'multilang' => true,
-            ],
-            'tempat_terbit' => [
-                'label' => 'Tempat Terbit',
-                'type' => 'text',
-            ],
-            'penerbit' => [
-                'label' => 'Penerbit',
-                'type' => 'text',
-            ],
-            'tahun_terbit' => [
-                'label' => 'Tahun Terbit',
-                'type' => 'number',
-                'attributes' => [
-                    'minlength' => 1
-                ]
-            ],
-            'deskripsi_fisik' => [
-                'label' => 'Deskripsi Fisik',
-                'type' => 'text',
-                'multilang' => true
-            ],
-            'subjek' => [
-                'label' => 'Subjek',
-                'type' => 'text',
-                'multilang' => true
-            ],
-            'isbn' => [
-                'label' => 'ISBN',
-                'type' => 'text'
-            ],
-            'bahasa' => [
-                'label' => 'Bahasa',
-                'type' => 'text',
-                'multilang' => true
-            ],
-            'bidang_hukum' => [
-                'label' => 'Bidang Hukum',
-                'type' => 'text',
-                'multilang' => true
-            ],
-            'nomor_induk_buku' => [
-                'label' => 'Nomor Induk Buku',
-                'type' => 'text'
-            ],
-            'lokasi' => [
-                'label' => 'Lokasi',
-                'type' => 'text',
-            ],
-            'status_tersedia' => [
-                'label' => 'Status Tersedia',
-                'type' => 'select',
-                'options' => [
-                    0 => 'Tidak',
-                    1 => 'Ya'
-                ]
-            ],
-            'pdf_name' => [
-                'subtitle' => 'File',
-                'label' => 'File Name',
-                'type' => 'text',
-                'multilang' => true
-            ],
-            'pdf' => [
-                'label' => 'PDF',
-                'type' => 'file',
-                'attributes' => [
-                    'class' => 'required',
-                    'accept' => 'pdf'
-                ]
-            ]
-        ];
-        
-        $form['thumbnail'] = [
-            'label' => 'Thumbnail',
-            'type' => 'text',
-            'attributes' => [
-                'class' => 'required cfind',
-                'cfind-type' => 'image',
-                'cfind-thumb' => '220x284',
-                'cfind-convert' => 'webp',
-                'cfind-alt' => 1,
-            ]
-        ];
-
-        $form['image'] = [
-            'label' => 'Image',
-            'type' => 'text',
-            'attributes' => [
-                'class' => 'required cfind',
-                'cfind-type' => 'image',
-                'cfind-thumb' => '317x410',
-                'cfind-convert' => 'webp',
-                'cfind-alt' => 1,
-            ]
-        ];
-
-        if ($type == 'edit') {
-            unset($form['pdf']['attributes']['class']);
-        }
-
-        return $form;
     }
 
     private static function formNaskah($form, $type)

@@ -214,7 +214,7 @@ return [
     'document-naskah' => [
         'label' => 'Naskah Kerja Sama',
         'parent' => 'document',
-        'controller' => 'App\Http\Controllers\Admin\Document\DocumentController',
+        'controller' => 'App\Http\Controllers\Admin\Document\DocumentNaskahController',
         'routes' => admin::moduleRoutes(['index', 'create', 'edit', 'delete', 'publish'])
     ],
     'information' => [
