@@ -29,6 +29,9 @@ class DownloadFileController extends Controller
 
     public function getDocumentDownload($type, $id)
     {
+        if (!request()->query('token')) {
+            abort(404);
+        }
         $document = Document::whereIsActive(1)->where('id', $id)->firstOrFail();
         if ($document->{$type} != null && Storage::exists($document->{$type})) {
             $document->{'download_'.$type.'_count'} += 1;
