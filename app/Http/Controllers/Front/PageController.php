@@ -591,7 +591,7 @@ class PageController extends Controller
             $documents = $documents->whereYear('tanggal_berlaku', request()->query('year'));
         }
         
-        $documents = $documents->orderBy('id', 'desc')->paginate(8);
+        $documents = $documents->orderBy('tanggal_berlaku', 'desc')->paginate(8);
 
         $years = Document::selectRaw('YEAR(tanggal_berlaku) as year')
             ->whereIsActive(1)
