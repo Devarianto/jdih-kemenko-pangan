@@ -44,9 +44,6 @@ Route::group(['middleware' => ['web', 'root']], function() use($prefered) {
         
             return response()->download(config('cadmin.cadmin.documentation-file'));
         });
-
-        Route::get(ADMIN.'/file/download/{type}/{id}', ['App\Http\Controllers\Front\DownloadFileController', 'getAdminDownloadFile'])->name('admin.download.file');
-        Route::get(ADMIN.'/project/download/{type}/{id}/{loop}', ['App\Http\Controllers\Front\DownloadFileController', 'getProjectDownload'])->name('admin.download.project');
     });
     
     $routing = function($key, $module)

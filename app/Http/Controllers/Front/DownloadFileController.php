@@ -85,19 +85,22 @@ class DownloadFileController extends Controller
                 $decoded = json_decode($project->file, true);
                 $files = is_array($decoded) ? $decoded : (empty($project->file) ? [] : [$project->file]);
             }
-
             $no = 1;
             foreach ($files as $file) {
                 if ($no == $loop) {
-                    return response()->download(storage_path('app/'. $file))->setCache(['no_cache' => true]);
+                    if (Storage::exists($file)) {
+                        return response()->download(storage_path('app/'. $file))->setCache(['no_cache' => true]);
+                    } else {
+                        abort(404);
+                    }
                 }
 
                 $no++;
             }
         } else if ($type == 'document') {
             $update = DB::table('project_update')->where('id', $loop)->where('project_id', $project->id)->firstOrFail();
-            
-            return response()->download(storage_path('app/'. $update->dokumen))->setCache(['no_cache' => true]);
+            if (Storage::exists($update->dokumen))
+                return response()->download(storage_path('app/'. $update->dokumen))->setCache(['no_cache' => true]);
         }
         
 
