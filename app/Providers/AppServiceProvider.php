@@ -19,6 +19,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        if ($this->app->environment('fe') != true) {
+            $this->app->register(\Intervention\Image\ImageServiceProvider::class);
+            $this->app->register(\Cactuar\Admin\CactuarAdminServiceProvider::class);
+        }
     }
 }

@@ -20,12 +20,12 @@ input[type="submit"] {
   color: var(--c-neutral-white);
   cursor: pointer;
   display: inline-block;
-  font-size: 1rem;
+  font-size: 14px;
   font-weight: 700;
   height: 42px;
   letter-spacing: 0;
   line-height: 36px;
-  padding: 0 36px;
+  padding: 0 24px;
   text-align: center;
   text-decoration: none;
   text-transform: none;
@@ -52,9 +52,9 @@ input[type="submit"] {
   }
 
   &.button-secondary {
-    background-color: var(--c-secondary-main);
-    border-color: var(--c-secondary-main);
-
+    background-color:#DFDFDF;
+    border-color:#DFDFDF;
+    color: #373737;
     &:focus,
     &:hover {
       background-color: var(--c-secondary-hover);
@@ -78,11 +78,40 @@ input[type="submit"] {
   &.button-outline {
     background-color: transparent;
     color: var(--c-primary-main);
-
+    transition: .2s all ease-out;
+    overflow: hidden;
+    position: relative;
+    span{
+      position: relative;
+      z-index: 2;
+    }
+    .wave {
+      position: absolute;
+      width: 100%;
+      height: 50%;
+      background: url('@images/wave.svg');
+      background-size: 200% 100%;
+      top: 100%;
+      left: 0;
+      animation: wave 2s linear infinite;
+      transition: 0.5s;
+      z-index: 1;
+    }
+     @keyframes wave {
+      from {
+        background-position-x: 0;
+      }
+      to {
+        background-position-x: 200%;
+      }
+    }
     &:hover {
-      background-color: var(--c-primary-surface);
-      border-color: var(--c-primary-surface);
-      color: var(--c-primary-main);
+      border-color: transparent;
+      color:white;
+      background-color: var(--c-primary-main);
+      .wave{
+        top: 70%;
+      }
     }
 
     &:active {
@@ -101,8 +130,8 @@ input[type="submit"] {
 
   &.button-outline-secondary {
     background-color: transparent;
-    color: var(--c-secondary-main);
-    border: 2px solid var(--c-secondary-main);
+    color: white;
+    border: 1px solid white;
 
     &:hover {
       background-color: var(--c-secondary-surface);
@@ -145,7 +174,15 @@ input[type="submit"] {
       color: var(--c-neutral-gray-2);
     }
   }
-
+  &.button-gradient{
+    border-radius: 50px;
+    background: linear-gradient(94deg, #1840AA 3.44%, #091D77 100.03%);
+    border: none; 
+    padding: 0 32px;
+  }
+  &.button-full{
+    width: 100%;
+  }
   &.button-large {
     height: 48px;
     line-height: 46px;
@@ -171,6 +208,7 @@ input[type="submit"] {
   align-items: center;
   justify-content: center;
   padding: 0 20px;
+  gap:0 10px;
   i {
     font-size: 1.125rem;
     align-self:center;

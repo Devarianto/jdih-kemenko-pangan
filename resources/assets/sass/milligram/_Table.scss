@@ -42,14 +42,15 @@ th {
 .content-pages {
   table {
     font-size: 0.875rem;
-    color: var(--c-neutral-black);
     th,
     td {
       padding: 12px;
     }
     thead {
-      background: var(--c-primary-main);
-      color: var(--c-neutral-white);
+      background: #EEE;
+      th{
+        font-weight: 600;
+      }
     }
   }
   .table-content {

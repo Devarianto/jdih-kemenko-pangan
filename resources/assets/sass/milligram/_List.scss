@@ -20,17 +20,37 @@ ul {
 .content-pages {
   ol,
   ul {
-    margin-left: 20px;
+    margin-left: 0;
     margin-bottom: 20px;
     li {
       line-height: 1.8;
       font-size: 1rem;
-      padding-left: 8px;
+      padding-left: 15px;
+      list-style: none;
+      position: relative;
+      &::before {
+        content: '';
+        background-color: #2063D2;
+        position: absolute;
+        left: 0;
+        top: 9px;
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+      }
     }
   }
 
   ol {
     list-style: decimal;
+    li{
+      list-style: decimal;
+      padding-left: 0;
+      margin-left: 15px;
+      &::before {
+       display: none;
+      }
+    }
   }
   ul {
     list-style: unset;

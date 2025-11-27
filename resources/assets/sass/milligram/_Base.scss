@@ -28,13 +28,13 @@ html {
 
 // Default body styles
 body {
-  color: var(--c-neutral-black);
+  color:#373737;
   font-family: var(--font-primary);
   font-size: 1rem; // Currently ems cause chrome bug misinterpreting rems on body element
   font-weight: 400;
   letter-spacing: 0;
   line-height: 1.6;
-  background: var(--c-neutral-white);
+  background:#F8F8F8;
 }
 
 [data-theme="dark"] {

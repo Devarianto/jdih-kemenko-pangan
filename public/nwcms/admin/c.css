@@ -1,0 +1,16 @@
+label.error {
+	/* position:relative; */
+	font-weight:200;
+}
+
+.ckeditor~label.error{
+	position: absolute;
+	bottom: 0px;
+}
+.ckeditor~label.error~.ck-editor{
+	margin-bottom: 20px;
+}
+
+input.error, select.error, textarea.error {
+	border-color:#f00 !important;
+}
