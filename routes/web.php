@@ -79,6 +79,9 @@ Route::group(['middleware' => ['web','front', 'visitor-count']],function() {
             Route::get('/dashboard/detail-usulan/{id}', [DashboardController::class, 'detailUsulan'])->name('detail.usulan');
             Route::get('/dashboard/project', [DashboardController::class, 'listProject'])->name('project');
             Route::get('/dashboard/detail-project/{id}', [DashboardController::class, 'detailProject'])->name('detail.project');
+
+            Route::get('project/download/{type}/{id}/{loop}', [DownloadFileController::class, 'getProjectDownload'])->name('project.download');
+
         });
         Route::post('/rating/submit', [RatingController::class, 'postSubmit'])->name('rating.submit');
     });

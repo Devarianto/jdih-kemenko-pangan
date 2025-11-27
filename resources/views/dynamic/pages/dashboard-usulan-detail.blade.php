@@ -43,7 +43,7 @@
                 -
                 @else
                   @foreach($files as $path)
-                    <div><a href="{{ asset($path) }}" target="_blank">{{ basename($path) }}</a></div>
+                    <div><a href="{{ route('project.download', ['id' => Crypt::encryptString($project->id), 'loop' => $loop->iteration, 'type' => 'detail']) }}" target="_blank">{{ basename($path) }}</a></div>
                   @endforeach
                 @endif
               </td>

@@ -158,17 +158,24 @@ class DashboardController extends Controller
         $noProject = $this->generateNoProject();
 
         $storedPaths = [];
-        $folder = Str::slug($noProject);
-        $destinationPath = public_path('uploads/projects/' . $folder);
-        File::ensureDirectoryExists($destinationPath);
+        $storagePath = 'upload/projects';
+
         foreach ($request->file('files', []) as $uploadedFile) {
             if ($uploadedFile) {
+                // Buat nama unik
                 $uniqueName = Str::uuid()->toString() . '.' . $uploadedFile->getClientOriginalExtension();
-                $uploadedFile->move($destinationPath, $uniqueName);
-                $storedPaths[] = 'uploads/projects/' . $folder . '/' . $uniqueName;
+
+                // Simpan ke storage
+                Storage::disk('local')->putFileAs(
+                    $storagePath,
+                    $uploadedFile,
+                    $uniqueName
+                );
+
+                // Simpan path untuk database
+                $storedPaths[] = $storagePath . '/' . $uniqueName;
             }
         }
-
         $project = Project::create([
             'user_id' => Auth::guard('account')->id(),
             'no_project' => $noProject,

@@ -13,6 +13,7 @@ use App\Models\StatusProject;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
+use Storage;
 
 class UsulanProjectController extends Controller
 {
@@ -226,16 +227,21 @@ class UsulanProjectController extends Controller
 
         // optional file upload
         $dokumenPath = null;
+
         if ($request->hasFile('file')) {
             $file = $request->file('file');
-            $filename = time().'_'.preg_replace('/\s+/', '_', $file->getClientOriginalName());
-            $folder = Str::slug($project->no_project);
-            $targetDir = public_path('uploads/projects/'.$folder);
-            if (!is_dir($targetDir)) {
-                @mkdir($targetDir, 0775, true);
-            }
-            $file->move($targetDir, $filename);
-            $dokumenPath = 'uploads/projects/'.$folder.'/'.$filename;
+
+            // buat nama file
+            $filename = time() . '_' . preg_replace('/\s+/', '_', $file->getClientOriginalName());
+
+            // folder berdasarkan project
+            $folder = 'upload/projects/' . Str::slug($project->no_project);
+
+            // simpan ke storage/app/uploads/projects/{folder}
+            Storage::disk('local')->putFileAs($folder, $file, $filename);
+
+            // path yang disimpan di database
+            $dokumenPath = $folder . '/' . $filename;
         }
 
         // get translated labels for selected status

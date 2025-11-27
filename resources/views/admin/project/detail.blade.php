@@ -84,7 +84,7 @@
 		                -
 		                @else
 		                  @foreach($files as $path)
-		                    <a href="{{ asset($path) }}" target="_blank">{{ basename($path) }}</a> <br>&nbsp;
+                    <a href="{{ route('admin.download.project', ['id' => Crypt::encryptString($data->id), 'loop' => $loop->iteration, 'type' => 'detail']) }}" target="_blank">{{ basename($path) }}</a><br>&nbsp;
 		                  @endforeach
 		                @endif
                         </div>
@@ -145,7 +145,7 @@
                                 <p class="text-muted mb-1">{{ $u->note }}</p>
                             @endif
                             @if(!empty($u->dokumen))
-                                <a href="{{ asset($u->dokumen) }}" target="_blank" class="text-primary text-decoration-none">{{ basename($u->dokumen) }}</a>
+                                <a href="{{ route('admin.download.project', ['id' => Crypt::encryptString($data->id), 'loop' => $u->id, 'type' => 'document']) }}" target="_blank" class="text-primary text-decoration-none">{{ basename($u->dokumen) }}</a>
                             @endif
                         </li>
                         @empty

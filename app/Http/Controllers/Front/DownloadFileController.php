@@ -7,8 +7,11 @@ use Illuminate\Http\Request;
 
 use Cactuar\Admin\Models\Permalink;
 use App\Models\Document;
+use App\Models\Project;
 
 use Storage;
+use Auth;
+use DB;
 
 class DownloadFileController extends Controller
 {
@@ -55,6 +58,48 @@ class DownloadFileController extends Controller
                 'Content-Type' => 'application/pdf'
             ]);
         }
+
+        abort(404);
+    }
+
+    public function getProjectDownload($type, $id, $loop)
+    {
+        try {
+            $realId = \Illuminate\Support\Facades\Crypt::decryptString($id);
+        } catch (\Throwable $e) {
+            abort(404);
+        }
+        
+        $project = null;
+        if (Auth::check()) {
+            $project = Project::with(['category','applicantDivisions'])->findOrFail($realId);
+        } else if (Auth::guard('account')->check()) {
+            $project = Project::with(['category','applicantDivisions'])->authUser()->findOrFail($realId);
+        } else {
+            abort(404);
+        }
+
+        if ($type == 'detail') {
+            $files = [];
+            if (is_string($project->file)) {
+                $decoded = json_decode($project->file, true);
+                $files = is_array($decoded) ? $decoded : (empty($project->file) ? [] : [$project->file]);
+            }
+
+            $no = 1;
+            foreach ($files as $file) {
+                if ($no == $loop) {
+                    return response()->download(storage_path('app/'. $file))->setCache(['no_cache' => true]);
+                }
+
+                $no++;
+            }
+        } else if ($type == 'document') {
+            $update = DB::table('project_update')->where('id', $loop)->where('project_id', $project->id)->firstOrFail();
+            
+            return response()->download(storage_path('app/'. $update->dokumen))->setCache(['no_cache' => true]);
+        }
+        
 
         abort(404);
     }
