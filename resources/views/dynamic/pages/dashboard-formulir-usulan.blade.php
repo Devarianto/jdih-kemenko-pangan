@@ -11,16 +11,7 @@
           </a>
         </div>
         <div class="box-white form">
-          @if ($errors->any())
-          <div class="alert alert-danger" style="margin-bottom:16px;">
-            <ul style="margin:0; padding-left:18px;">
-              @foreach ($errors->all() as $error)
-              <li>{{ $error }}</li>
-              @endforeach
-            </ul>
-          </div>
-          @endif
-          <form method="POST" action="{{ route('projects.store') }}" enctype="multipart/form-data">
+          <form method="POST" action="{{ route('projects.store') }}" id="form-project" enctype="multipart/form-data">
             @csrf
             <div class="box-form">
               <h5>{{lang::translate('dashboard.usulan-project.formulir.title-form')}}</h5>
@@ -28,14 +19,16 @@
                 <div class="column column-100">
                   <label for="">{{lang::translate('dashboard.usulan-project.formulir.label-nomor-project')}}</label>
                   <input type="text" placeholder="{{lang::translate('dashboard.usulan-project.formulir.placeholder-nomor-project')}}" value="{{ old('no_project', 'Auto') }}" disabled>
+                  <div class="supporting-text"></div>
                 </div>
-                <div class="column column-100">
-                  <label for="">{{lang::translate('dashboard.usulan-project.formulir.label-nama-project')}}</label>
-                  <input type="text" name="name_project" placeholder="{{lang::translate('dashboard.usulan-project.formulir.placeholder-nama-project')}}" value="{{ old('name_project') }}">
+                <div class="column column-100 @error('name_project') error @enderror">
+                  <label for="">{{lang::translate('dashboard.usulan-project.formulir.label-nama-project')}}<i>*</i></label>
+                  <input type="text" class="required" maxlength="255" name="name_project" placeholder="{{lang::translate('dashboard.usulan-project.formulir.placeholder-nama-project')}}" value="{{ old('name_project') }}">
+                  <div class="supporting-text"></div>
                 </div>
-                <div class="column column-50">
-                  <label for="">{{lang::translate('dashboard.usulan-project.formulir.label-kategori-project')}}</label>
-                  <select name="category_id" id="">
+                <div class="column column-50 @error('category_id') error @enderror">
+                  <label for="">{{lang::translate('dashboard.usulan-project.formulir.label-kategori-project')}}<i>*</i></label>
+                  <select name="category_id" id="" class="required" maxlength="255">
                     <option value="">{{lang::translate('dashboard.usulan-project.formulir.placeholder-kategori-project')}}</option>
                     @if(isset($categories))
                     @foreach($categories as $id => $label)
@@ -43,15 +36,17 @@
                     @endforeach
                     @endif
                   </select>
+                  <div class="supporting-text"></div>
                 </div>
-                <div class="column column-50">
-                  <label for="">{{lang::translate('dashboard.usulan-project.formulir.label-tanggal-usulan')}}</label>
-                  <input type="text" name="date" class="datepicker" value="{{ old('date') }}" placeholder="{{lang::translate('dashboard.usulan-project.formulir.placeholder-tanggal-usulan')}}">
+                <div class="column column-50 @error('date') error @enderror">
+                  <label for="">{{lang::translate('dashboard.usulan-project.formulir.label-tanggal-usulan')}}<i>*</i></label>
+                  <input type="text" name="date" class="datepicker required" value="{{ old('date') }}" placeholder="{{lang::translate('dashboard.usulan-project.formulir.placeholder-tanggal-usulan')}}">
+                  <div class="supporting-text"></div>
                 </div>
-               <div class="column column-100">
-                 <label for="">{{lang::translate('dashboard.usulan-project.formulir.label-dokumen-terlampir')}}</label>
+                <div class="column column-100 @error('files.*') error @enderror">
+                  <label for="">{{lang::translate('dashboard.usulan-project.formulir.label-dokumen-terlampir')}}<i>*</i></label>
                   <div class="file-upload">
-                    <input type="file" name="files[]" id="fileUpload" @change="handleFileUpload" accept=".jpg,.png,.webp,.pdf,.doc,.docx" class="textfield-large" multiple>
+                    <input type="file" name="files[]" class="required" id="fileUpload" @change="handleFileUpload" accept=".jpg,.png,.webp,.pdf,.doc,.docx" class="textfield-large" multiple>
                     <div class="text">
                       <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40" fill="none">
                         <path d="M35 25V31.6667C35 32.5507 34.6488 33.3986 34.0237 34.0237C33.3986 34.6488 32.5507 35 31.6667 35H8.33333C7.44928 35 6.60143 34.6488 5.97631 34.0237C5.35119 33.3986 5 32.5507 5 31.6667V25" stroke="#2063D2" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
@@ -65,12 +60,13 @@
                   </div>
                   <div id="fileList" class="file-list"></div>
                   <p id="fileError" style="color: red; margin-top: 8px;"></p>
+                  <div class="supporting-text"></div>
                 </div>
               </div>
               <hr>
               <h5>{{lang::translate('dashboard.usulan-project.formulir.title-pemohon')}}</h5>
               <div class="row row-wrap">
-                <div class="column column-100">
+                <div class="column column-100 @error('applicant_divisions.*') error @enderror">
                   <label for="">{{lang::translate('dashboard.usulan-project.formulir.label-divisi-pemohon')}}</label>
                   <select class="select2" multiple="multiple" name="applicant_divisions[]">
                     @if(isset($applicantDivisions))
@@ -79,10 +75,12 @@
                     @endforeach
                     @endif
                   </select>
+                  <div class="supporting-text"></div>
                 </div>
-                <div class="column column-100">
-                  <label for="">{{lang::translate('dashboard.usulan-project.formulir.label-nama-pemohon')}}</label>
-                  <input type="text" name="applicant_name" placeholder="{{lang::translate('dashboard.usulan-project.formulir.placeholder-nama-pemohon')}}" value="{{ old('applicant_name') }}">
+                <div class="column column-100 @error('applicant_name') error @enderror">
+                  <label for="">{{lang::translate('dashboard.usulan-project.formulir.label-nama-pemohon')}}<i>*</i></label>
+                  <input type="text" name="applicant_name" class="required" maxlength="255" placeholder="{{lang::translate('dashboard.usulan-project.formulir.placeholder-nama-pemohon')}}" value="{{ old('applicant_name') }}">
+                  <div class="supporting-text"></div>
                 </div>
               </div>
             </div>
@@ -97,6 +95,12 @@
   </section>
   @push('head')
     <link rel="stylesheet" type="text/css" href="{{ Vite::asset('resources/assets/sass/pages/dashboard.scss')}}" preload>
+    <style>
+      button.is-disabled {
+        background: grey !important;
+        pointer-events: none;
+      }
+    </style>
   @endpush
   @push('footer')
     <!-- <script type="module" async type="text/javascript" src="{{ Vite::asset('resources/assets/js/document.js') }}"></script> -->
@@ -174,9 +178,98 @@
       });
       
       window.addEventListener('load', function() {
-    $('.datepicker').datepicker({
+        $('.datepicker').datepicker({
           autoclose: true,
           format: 'dd/mm/yyyy'
+        });
+
+        document.getElementById("form-project").addEventListener("submit", function (e) {
+          let valid = true;
+          const submitBtn = this.querySelector('button[type=submit]');
+          submitBtn.textContent = "{{ lang::translate('dashboard.usulan-project.formulir.button-process') }}";
+          submitBtn.disabled = true;
+          submitBtn.classList.add("is-disabled");
+
+          // ambil semua input di dalam form
+          const inputs = this.querySelectorAll(".column input, .column select, .column textarea");
+          inputs.forEach(input => {
+            const parent = input.closest(".column");
+            const msgBox = parent.querySelector(".supporting-text");
+
+            // reset error terlebih dahulu
+            parent.classList.remove("error-field");
+            msgBox.textContent = "";
+
+            const value = input.value.trim();
+
+            // RULE: required
+            if (input.classList.contains("required") && value === "") {
+                parent.classList.add("error-field");
+                msgBox.textContent = "{{ lang::translate('global.form-error.required') }}";
+                valid = false;
+                // return;
+            }
+
+            // RULE: email
+            if (input.classList.contains("email") && value !== "" && !validateEmail(value)) {
+                parent.classList.add("error-field");
+                msgBox.textContent = "{{ lang::translate('global.form-error.email') }}";
+                valid = false;
+                // return;
+            }
+
+            // RULE: maxlength (baru)
+            const max = input.getAttribute("maxlength");
+            if (max && value.length > parseInt(max)) {
+                parent.classList.add("error-field");
+                msgBox.textContent = `{{ lang::translate('global.form-error.maxlength') }}`;
+                msgBox.textContent = msgBox.textContent.replace(':max', max);
+                valid = false;
+                // return;
+            }
+
+            // RULE: minlength (baru)
+            const min = input.getAttribute("minlength");
+            if (min && value.length < parseInt(min)) {
+                parent.classList.add("error-field");
+                msgBox.textContent = `{{ lang::translate('global.form-error.minlength') }}`;
+                msgBox.textContent = msgBox.textContent.replace(':min', min);
+                valid = false;
+                // return;
+            }
+          });
+
+          const recaptchaField = document.querySelector("textarea[name='g-recaptcha-response']");
+          if (recaptchaField) {
+              const recaptchaValue = recaptchaField.value.trim();
+
+              if (recaptchaValue === "") {
+                  // tampilkan error recaptcha di bagian custom
+                  const recaptchaContainer = document.querySelector(".recaptcha-container");
+                  if (recaptchaContainer) {
+                      recaptchaContainer.classList.add("error-field");
+
+                      let msg = recaptchaContainer.querySelector(".supporting-text");
+                      if (!msg) {
+                          msg = document.createElement("div");
+                          msg.classList.add("supporting-text");
+                          recaptchaContainer.appendChild(msg);
+                      }
+
+                      msg.textContent = "{{ lang::translate('global.form-error.recaptcha') }}";
+                  }
+
+                  valid = false;
+              }
+          }
+
+          // jika tidak valid, cegah submit
+          if (!valid) {
+            e.preventDefault();
+            submitBtn.textContent = "{{ lang::translate('dashboard.usulan-project.formulir.button-kirim') }}";
+            submitBtn.disabled = false;
+            submitBtn.classList.remove("is-disabled");
+          }
         });
       })
     </script>

@@ -432,7 +432,8 @@ return [
 				'label-nama-pemohon'=>'label nama pemohon',
 				'placeholder-nama-pemohon'=>'nama pemohon',
 				'button-cancel'=>'Batalkan',
-				'button-save'=>'Simpan'
+				'button-save'=>'Simpan',
+				'button-process' => 'Memproses...'
 			],
 			'detail'=>[
 				'title-page'=>'DETAIL USULAN PROJECT',
