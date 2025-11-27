@@ -543,7 +543,7 @@ class PageController extends Controller
             $documents = $documents->orderBy('id', 'desc');
         }
         
-        $documents = $documents->orderBy('id', 'desc')->paginate(8);
+        $documents = $documents->orderBy('tanggal_dibacakan', 'desc')->paginate(8);
 
         $years = Document::selectRaw('YEAR(tanggal_dibacakan) as year')
             ->whereIsActive(1)

@@ -41,7 +41,7 @@
         </form>
       </div>
       <div class="listing-rules without-bottom">
-        @foreach($documents as $document)
+        @forelse($documents as $document)
           <a href="{{ $document->customPermalink('document-putusan') }}" class="listing-rules__item">
             <figure><img src="{{ media::initial($document->thumbnail)->url }}" alt="{{ media::initial($document->thumbnail)->alt }}"></figure>
             <figcaption>
@@ -66,7 +66,9 @@
               </div>
             </figcaption>
           </a>
-        @endforeach
+        @empty
+          <h4 style="text-align: center; margin: 0 auto; font-weight:300;">{{ lang::translate('global.search-not-found') }}</h4>
+        @endforelse
       </div>
       {{ $documents->appends(request()->query())->links('dynamic.component.pagination') }}
     </div>
