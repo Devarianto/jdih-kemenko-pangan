@@ -78,13 +78,15 @@ class DashboardController extends Controller
 
         $updates ['review'] = [
             'label' => lang::translate('dashboard.status.review'),
-            'date' => $project->created_at
+            'date' => $project->created_at,
+            'note' => null,
         ];
 
         if ($rejected != null) {
             $updates['rejected'] = [
                 'label' => lang::translate('dashboard.status.rejected'),
-                'date' => $project->created_at
+                'date' => $project->created_at,
+                'note' => $rejected->note,
             ];
         }
 

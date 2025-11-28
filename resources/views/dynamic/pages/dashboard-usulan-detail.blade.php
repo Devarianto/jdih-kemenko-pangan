@@ -81,6 +81,9 @@
               <span class="date">{{ \Carbon\Carbon::parse($u['date'])->translatedFormat('d F Y') }}</span>
               <div class="text">
                 <p><b>{{ $u['label'] }}</b></p>
+                @if(!empty($u['note']))
+                  <p>{{ $u['note'] }}</p>
+                @endif
               </div>
             </div>
             @empty

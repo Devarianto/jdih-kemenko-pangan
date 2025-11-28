@@ -190,10 +190,11 @@ class UsulanProjectController extends Controller
     public function postReject(Request $request)
     {
         $validated = $request->validate([
-            'unique' => 'required|numeric',
+            'project_id' => 'required|numeric',
+            'alasan' => 'required|string'
         ]);
 
-        $project = Project::findOrFail($validated['unique']);
+        $project = Project::findOrFail($validated['project_id']);
         if ((int) $project->status_review !== 0) {
             return back()->with('error', 'Aksi tidak diizinkan. Usulan sudah direview.');
         }
@@ -204,6 +205,7 @@ class UsulanProjectController extends Controller
             'user_id' => Auth::id(),
             'project_id' => $project->id,
             'project_name' => $project->name_project,
+            'note' => strip_tags($request->alasan),
             'id_status_project' => 0,
             'label_status_project_id' => 'Tolak',
             'label_status_project_en' => 'Reject',
