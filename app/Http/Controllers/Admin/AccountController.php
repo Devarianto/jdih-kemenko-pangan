@@ -14,6 +14,7 @@ use Cactuar\Admin\Traits\Controllers\DeleteTrait;
 use Cactuar\Admin\Traits\Controllers\PublishTrait;
 
 use Validator;
+use Illuminate\Validation\Rules\Password;
 
 class AccountController extends Controller
 {
@@ -48,8 +49,9 @@ class AccountController extends Controller
 
     public function formCallbackBefore($post,$item,$type)
     {
-        if ($type == 'create')
-            $post['main']['password'] = bcrypt($post['main']['password']);
+        if ($type == 'create') {
+            $post['main']['password'] = bcrypt(request()->password);
+        }
             
         return $post;
     }
@@ -70,6 +72,26 @@ class AccountController extends Controller
         }
 
         $cek = Account::where('email',$email)->first();
+
+        $validator = Validator::make(['password' => request()->password], [
+            'password' => [
+                'required',
+                'string',
+                Password::min(8)->mixedCase()->numbers()->symbols()
+            ],
+        ], [
+            'password.required' => 'Password harus diisi.',
+            'password.min'      => 'Password minimal 8 karakter.',
+            'password.mixed'    => 'Password harus mengandung huruf besar.',
+            'password.numbers'  => 'Password harus mengandung angka.',
+            'password.symbols'  => 'Password harus mengandung karakter spesial.',
+        ]);
+
+        if ($validator->fails()) {
+            $error[] = $validator->errors()->first('password');
+            return false;
+        }
+
 
         if ($type == 'create'){
             if(!empty($cek)){
@@ -104,7 +126,7 @@ class AccountController extends Controller
     {
         $validated = $request->validate([
             'unique' => 'required|numeric|exists:accounts,id',
-            'password' => 'required|string|min:6',
+            'password' => ['required','string', Password::min(8)->mixedCase()->numbers()->symbols()],
         ]);
 
         $account = Account::findOrFail($validated['unique']);
@@ -118,35 +140,37 @@ class AccountController extends Controller
     {
 
         $form = [
-                'name' => [
-                    'type' => 'text',
-                    'label' => 'Name',
-                    'attributes' => [
-                        'class' => 'required',
-                    ],
+            'name' => [
+                'type' => 'text',
+                'label' => 'Name',
+                'attributes' => [
+                    'class' => 'required',
                 ],
-                'email' => [
-                    'type' => 'text',
-                    'label' => 'Email',
-                    'attributes' => [
-                        'class' => 'required validEmail',
-                    ],
+            ],
+            'email' => [
+                'type' => 'text',
+                'label' => 'Email',
+                'attributes' => [
+                    'class' => 'required validEmail',
                 ],
-            ];
+            ],
+        ];
 
         if ($type == 'create')
         {
             $form['password'] =[
-                    'type' => 'text',
-                    'label' => 'Password',
-                    'attributes' => [
-                        'class' => 'required',
-                    ],
+                    'type' => 'free',
+                    'html' => view('admin.account.form')->render()
                 ];
             
         }
 
         return $form;
         
+    }
+
+    public function formAppend()
+    {
+        return view('admin.account.form-js');
     }
 }
