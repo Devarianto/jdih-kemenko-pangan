@@ -218,7 +218,6 @@ class DocumentNaskahController extends Controller
                 'label' => 'PDF',
                 'type' => 'file',
                 'attributes' => [
-                    'class' => 'required',
                     'accept' => 'pdf'
                 ]
             ],

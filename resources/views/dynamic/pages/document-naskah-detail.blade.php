@@ -89,15 +89,18 @@
             <th>{{ lang::translate('document.content.lampiran') }}</th>
             <td>{!! nl2br($document->translated('lampiran')) !!}</td>
           </tr>
+          @if (!is_null($document->pdf))
           <tr>
             <th>{{ lang::translate('document.content.jumlah-unduh') }}</th>
             <td>{{ lang::translate('document.content.count.download', ['count' => num2string($document->download_pdf_count)]) }}</td>
           </tr>
+          @endif
           <tr>
             <th>{{ lang::translate('document.content.jumlah-tayang') }}</th>
             <td>{{ lang::translate('document.content.count.view', ['count' => num2string($document->view_count)]) }}</td>
           </tr>
         </table>
+        @if (!is_null($document->pdf))
         <div class="box-detail-page__pdf">
           <div class="box-detail-page__pdf--title">
             <h5>{{ lang::translate('document.file.title') }}</h5>
@@ -128,6 +131,7 @@
             </section>
           </div>
         </div>
+        @endif
       </div>
     </section>
   </section>
