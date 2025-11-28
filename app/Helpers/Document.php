@@ -9,6 +9,7 @@ use helper;
 
 use App\Helpers\DocumentPeraturan;
 use App\Models\Document as DocumentModel;
+use Illuminate\Support\Facades\Storage;
 
 class Document {
 
