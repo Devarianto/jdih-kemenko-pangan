@@ -389,6 +389,7 @@ return [
 			'process' => 'Memproses...',
 			'unknown-user' => 'Gagal login. Periksa kembali email dan password Anda.',
 			'failed-network' => 'Terjadi kesalahan jaringan. Coba lagi.',
+			'inactive-user' => 'Gagal login. akun tidak aktif'
 		],
 		'form-filter'=>[
 			'label-name-project'=>'Nama Project',
