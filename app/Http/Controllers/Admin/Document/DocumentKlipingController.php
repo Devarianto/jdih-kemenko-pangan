@@ -47,6 +47,7 @@ class DocumentKlipingController extends Controller
             'teu' => 'T.E.U Orang/Badan',
             'tempat_terbit' => 'Tempat Terbit',
             'tahun_terbit' => 'Tahun Terbit',
+            'date' => 'Tanggal Kliping',
             'view_count' => 'View Count'
         ];
     }
@@ -65,6 +66,8 @@ class DocumentKlipingController extends Controller
             return $item->display_status_berlaku;
         } else if ($key == 'status_tersedia') {
             return $item->front_status_tersedia;
+        } else if($key == 'date') {
+            return date2string($value);
         }
 
         return e($value);
@@ -91,7 +94,7 @@ class DocumentKlipingController extends Controller
 
     public function listingOrderDefault($res)
     {
-        return $res->orderBy('tahun_terbit', 'desc')->orderBy('created_at','desc');
+        return $res->orderBy('date', 'desc');
     }
 
     public function formRes()
@@ -141,6 +144,15 @@ class DocumentKlipingController extends Controller
                 'options' => DocumentType::pluck('label', 'id')->toArray(),
                 'attributes' => [
                     'class' => 'required select2'
+                ]
+            ],
+            'date' => [
+                'label' => 'Tanggal Kliping',
+                'type' => 'text',
+                'attributes' => [
+                    'class' => 'required date',
+                    'style' => 'width: 200px',
+                    'autocomplete' => 'off'
                 ]
             ],
         ];
@@ -276,5 +288,10 @@ class DocumentKlipingController extends Controller
     public function editFile()
     {
         return true;
+    }
+
+    public function formAppend()
+    {
+        return view('admin.news.form-js');
     }
 }
