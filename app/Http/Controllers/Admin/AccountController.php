@@ -127,6 +127,12 @@ class AccountController extends Controller
         $validated = $request->validate([
             'unique' => 'required|numeric|exists:accounts,id',
             'password' => ['required','string', Password::min(8)->mixedCase()->numbers()->symbols()],
+        ], [
+            'password.required' => 'Password harus diisi.',
+            'password.min'      => 'Password minimal 8 karakter.',
+            'password.mixed'    => 'Password harus mengandung huruf besar.',
+            'password.numbers'  => 'Password harus mengandung angka.',
+            'password.symbols'  => 'Password harus mengandung karakter spesial.',
         ]);
 
         $account = Account::findOrFail($validated['unique']);
