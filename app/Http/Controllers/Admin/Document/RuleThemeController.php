@@ -38,6 +38,11 @@ class RuleThemeController extends Controller
         return e($value) ?? '-';
     }
 
+    public function listingOrderDefault($res)
+    {
+        return $res->orderBy('sort_id');
+    }
+
     public function formRes()
     {
         return new RuleTheme;

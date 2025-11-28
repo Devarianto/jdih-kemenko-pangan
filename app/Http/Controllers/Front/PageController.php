@@ -28,7 +28,7 @@ class PageController extends Controller
         $home = Menu::translate()->firstOrFail();
 
         $rule_types = RuleType::whereIsActive(1)->get();
-        $rule_themes = RuleTheme::whereIsActive(1)->get();
+        $rule_themes = RuleTheme::whereIsActive(1)->orderBy('sort_id')->get();
         $year_peraturan = Document::select('year')
             ->whereIsActive(1)
             ->where('master_document_id', Document::PERATURAN)
