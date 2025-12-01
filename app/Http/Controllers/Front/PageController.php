@@ -50,7 +50,7 @@ class PageController extends Controller
         $document_monografi = Document::translate()
             ->whereIsActive(1)
             ->where('master_document_id', Document::MONOGRAFI)
-            ->orderBy('created_at', 'desc');
+            ->orderBy('tahun_terbit', 'desc')->orderBy('created_at','desc');
         $monografi_count = $document_monografi->count();
         $document_monografi = $document_monografi->limit(4)
             ->get();
@@ -60,7 +60,7 @@ class PageController extends Controller
         $document_peraturan = Document::translate()
             ->whereIsActive(1)
             ->where('master_document_id', Document::PERATURAN)
-            ->orderBy('created_at', 'desc');
+            ->orderBy('tanggal_penetapan', 'desc');
         $peraturan_count = $document_peraturan->count();
         $document_peraturan = $document_peraturan->limit(4)
             ->get();
@@ -70,7 +70,7 @@ class PageController extends Controller
         $document_putusan = Document::translate()
             ->whereIsActive(1)
             ->where('master_document_id', Document::PUTUSAN)
-            ->orderBy('created_at', 'desc');
+            ->orderBy('tanggal_dibacakan', 'desc');
         $putusan_count = $document_putusan->count();
         $document_putusan = $document_putusan->limit(4)
             ->get();
@@ -80,7 +80,7 @@ class PageController extends Controller
         $document_jurnal = Document::translate()
             ->whereIsActive(1)
             ->where('master_document_id', Document::JURNAL)
-            ->orderBy('created_at', 'desc');
+            ->orderBy('tahun_terbit', 'desc')->orderBy('created_at','desc');
         $jurnal_count = $document_jurnal->count();
         $document_jurnal = $document_jurnal->limit(4)
             ->get();
@@ -90,7 +90,7 @@ class PageController extends Controller
         $document_kliping = Document::translate()
             ->whereIsActive(1)
             ->where('master_document_id', Document::KLIPING)
-            ->orderBy('created_at', 'desc');
+            ->orderBy('date', 'desc');
         $kliping_count = $document_kliping->count();
         $document_kliping = $document_kliping->limit(4)
             ->get();
@@ -100,7 +100,7 @@ class PageController extends Controller
         $document_majalah = Document::translate()
             ->whereIsActive(1)
             ->where('master_document_id', Document::MAJALAH)
-            ->orderBy('created_at', 'desc');
+            ->orderBy('tahun_terbit', 'desc')->orderBy('created_at', 'desc');
         $majalah_count = $document_majalah->count();
         $document_majalah = $document_majalah->limit(4)
             ->get();
@@ -110,7 +110,7 @@ class PageController extends Controller
         $document_naskah = Document::translate()
             ->whereIsActive(1)
             ->where('master_document_id', Document::NASKAH)
-            ->orderBy('created_at', 'desc');
+            ->orderBy('tanggal_berlaku', 'desc');
         $naskah_count = $document_naskah->count();
         $document_naskah = $document_naskah->limit(4)
             ->get();
