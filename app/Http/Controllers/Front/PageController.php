@@ -20,6 +20,7 @@ use App\Models\KamusHukum;
 use App\Models\Rating;
 
 use DB;
+use Carbon\Carbon;
 
 class PageController extends Controller
 {
@@ -117,16 +118,21 @@ class PageController extends Controller
         $menus['naskah'] = Menu::fe()->whereIsActive(1)->where('type', 'naskah-hukum')->first();
 
 
+        $now_year = (int) Carbon::now()->format('Y');
+        $back_year = (int) Carbon::now()->subYear(4)->format('Y');
         $years = Document::select('year')
             ->whereIsActive(1)
             ->where('master_document_id', Document::PERATURAN)
+            ->where('year', '<=', $now_year)
+            ->where('year', '>=', $back_year)
             ->groupBy('year')
             ->orderBy("year", 'desc')
             ->get();
 
         $arr_years = [];
-        foreach ($years as $data) {
-            $arr_years[] = $data->year;
+        for ($i=0; $i < 5; $i++) { 
+            $arr_years[] = $now_year;
+            $now_year -= 1;
         }
 
         sort($arr_years);
@@ -255,9 +261,11 @@ class PageController extends Controller
             ->groupBy('year')
             ->get();
 
+        $now_year = (int) Carbon::now()->format('Y');
         $arr_years = [];
-        foreach ($years as $data) {
-            $arr_years[] = $data->year;
+        for ($i=0; $i < 5; $i++) { 
+            $arr_years[] = $now_year;
+            $now_year -= 1;
         }
 
         sort($arr_years);
@@ -279,10 +287,15 @@ class PageController extends Controller
 
     public function getChartStatistic($years)
     {
+        $now_year = (int) Carbon::now()->format('Y');
+        $back_year = (int) Carbon::now()->subYear(4)->format('Y');
+        
         $year_berlaku = Document::select('year', DB::raw('count(year) as count_year'))
             ->whereIsActive(1)
             ->where('master_document_id', Document::PERATURAN)
             ->where('status_berlaku', 1)
+            ->where('year', '<=', $now_year)
+            ->where('year', '>=', $back_year)
             ->groupBy('year')
             ->pluck('count_year', 'year')
             ->toArray();
@@ -291,6 +304,8 @@ class PageController extends Controller
             ->whereIsActive(1)
             ->where('master_document_id', Document::PERATURAN)
             ->where('status_berlaku', 0)
+            ->where('year', '<=', $now_year)
+            ->where('year', '>=', $back_year)
             ->groupBy('year')
             ->pluck('count_year', 'year')
             ->toArray();
