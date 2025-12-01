@@ -174,6 +174,8 @@ class AccountController extends Controller
                     'html' => view('admin.account.form')->render()
                 ];
             
+        } else if ($type == 'edit') {
+            $form['email']['attributes'] += ['readonly' => true];
         }
 
         return $form;
