@@ -91,6 +91,7 @@ Route::group(['middleware' => ['web','front', 'visitor-count']],function() {
 
     Route::get(ADMIN.'/file/download/{type}/{id}', ['App\Http\Controllers\Front\DownloadFileController', 'getAdminDownloadFile'])->name('admin.download.file');
     Route::get(ADMIN.'/project/download/{type}/{id}/{loop}', ['App\Http\Controllers\Front\DownloadFileController', 'getProjectDownload'])->name('admin.download.project');
+    Route::post(ADMIN.'/project/download/{type}/{id}/{loop}', ['App\Http\Controllers\Front\DownloadFileController', 'deleteAdminFile'])->name('admin.download.project');
 });
 
 Route::get('/api/visitor/get', [VisitorController::class, 'getVisitor'])->name('api.visitor');

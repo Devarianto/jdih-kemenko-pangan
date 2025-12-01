@@ -110,7 +110,7 @@ class DocumentNaskahController extends Controller
 
     public function formCallbackBefore($post,$item,$type)
     {
-        return Helper::formCallbackBefore($post,$item,$type,$this->document);
+        return Helper::formCallbackBefore($post,$item,$type,$this->document,$this->formFields($type));
     }
 
     public function formFields($type)
@@ -217,6 +217,7 @@ class DocumentNaskahController extends Controller
             'pdf' => [
                 'label' => 'PDF',
                 'type' => 'file',
+                'is_delete' => true,
                 'attributes' => [
                     'accept' => 'pdf'
                 ]
