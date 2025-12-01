@@ -124,7 +124,14 @@ class PageController extends Controller
             ->orderBy("year", 'desc')
             ->get();
 
-        $get_chart = $this->getChartStatistic($years);
+        $arr_years = [];
+        foreach ($years as $data) {
+            $arr_years[] = $data->year;
+        }
+
+        sort($arr_years);
+
+        $get_chart = $this->getChartStatistic($arr_years);
 
         $menu_statistic = Menu::fe()->whereIsActive(1)->where('type', 'about-statistik')->first();
 

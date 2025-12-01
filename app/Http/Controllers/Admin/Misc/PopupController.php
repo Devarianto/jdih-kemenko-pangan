@@ -30,8 +30,7 @@ class PopupController extends Controller
                 'label' => 'Session Time',
                 'info' => 'In Minute',
                 'attributes' => [
-                    'class' => 'required numeric',
-                    'maxlength'=>6,
+                    'class' => 'required numeric'
                 ],
             ],
             'image' => [
