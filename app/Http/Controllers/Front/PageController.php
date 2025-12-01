@@ -269,6 +269,7 @@ class PageController extends Controller
             ->where('master_document_id', Document::PERATURAN)
             ->where('status_berlaku', 1)
             ->groupBy('year')
+            ->orderBy("year", 'desc')
             ->pluck('count_year', 'year')
             ->toArray();
 
@@ -277,6 +278,7 @@ class PageController extends Controller
             ->where('master_document_id', Document::PERATURAN)
             ->where('status_berlaku', 0)
             ->groupBy('year')
+            ->orderBy("year", 'desc')
             ->pluck('count_year', 'year')
             ->toArray();
 
@@ -539,12 +541,12 @@ class PageController extends Controller
         }
 
         if (request()->query('sort') == 'oldest') {
-            $documents = $documents->orderBy('id', 'asc');
+            $documents = $documents->orderBy('tanggal_dibacakan', 'asc');
         } else {
-            $documents = $documents->orderBy('id', 'desc');
+            $documents = $documents->orderBy('tanggal_dibacakan', 'desc');
         }
         
-        $documents = $documents->orderBy('tanggal_dibacakan', 'desc')->paginate(8);
+        $documents = $documents->paginate(8);
 
         $years = Document::selectRaw('YEAR(tanggal_dibacakan) as year')
             ->whereIsActive(1)
