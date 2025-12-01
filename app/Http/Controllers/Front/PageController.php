@@ -121,6 +121,7 @@ class PageController extends Controller
             ->whereIsActive(1)
             ->where('master_document_id', Document::PERATURAN)
             ->groupBy('year')
+            ->orderBy("year", 'desc')
             ->get();
 
         $get_chart = $this->getChartStatistic($years);
