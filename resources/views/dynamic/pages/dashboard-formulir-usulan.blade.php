@@ -266,7 +266,7 @@
           // jika tidak valid, cegah submit
           if (!valid) {
             e.preventDefault();
-            submitBtn.textContent = "{{ lang::translate('dashboard.usulan-project.formulir.button-kirim') }}";
+            submitBtn.textContent = "{{ lang::translate('dashboard.usulan-project.formulir.button-save') }}";
             submitBtn.disabled = false;
             submitBtn.classList.remove("is-disabled");
           }

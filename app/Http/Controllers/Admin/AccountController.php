@@ -71,9 +71,9 @@ class AccountController extends Controller
             return false;
         }
 
-        $cek = Account::where('email',$email)->first();
 
         if ($type == 'create'){
+            $cek = Account::where('email',$email)->first();
             $validator = Validator::make(['password' => request()->password], [
                 'password' => [
                     'required',
@@ -96,7 +96,13 @@ class AccountController extends Controller
             if(!empty($cek)){
                 $error[] = 'Email already exist';
                 return false;
-              }
+            }
+        } else if ($type == 'edit') {
+            $cek = Account::where('email',$email)->where('id', '!=', request()->query('unique'))->first();
+            if(!empty($cek)){
+                $error[] = 'Email already exist';
+                return false;
+            }
         }
         return true;
     }
