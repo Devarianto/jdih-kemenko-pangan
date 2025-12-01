@@ -244,9 +244,17 @@ class PageController extends Controller
         $years = Document::select('year')
             ->whereIsActive(1)
             ->where('master_document_id', Document::PERATURAN)
+            ->orderBy("year", 'desc')
             ->groupBy('year')
             ->get();
-        
+
+        $arr_years = [];
+        foreach ($years as $data) {
+            $arr_years[] = $data->year;
+        }
+
+        sort($arr_years);
+
         $colors = [];
         $arr_rule_label = [];
         $arr_rule_count = [];
@@ -257,7 +265,7 @@ class PageController extends Controller
             $arr_rule_count[] = $data->documents_count;
         }
 
-        $get_chart = $this->getChartStatistic($years);
+        $get_chart = $this->getChartStatistic($arr_years);
 
         return view('dynamic.pages.about-statistik', compact('menu', 'rule_types', 'years', 'colors', 'arr_rule_label', 'arr_rule_count', 'get_chart'));
     }
@@ -269,7 +277,6 @@ class PageController extends Controller
             ->where('master_document_id', Document::PERATURAN)
             ->where('status_berlaku', 1)
             ->groupBy('year')
-            ->orderBy("year", 'desc')
             ->pluck('count_year', 'year')
             ->toArray();
 
@@ -278,7 +285,6 @@ class PageController extends Controller
             ->where('master_document_id', Document::PERATURAN)
             ->where('status_berlaku', 0)
             ->groupBy('year')
-            ->orderBy("year", 'desc')
             ->pluck('count_year', 'year')
             ->toArray();
 
@@ -292,13 +298,13 @@ class PageController extends Controller
         ];
 
         foreach ($years as $data) {
-            $arr_year_berlaku['year'][] = $data->year;
-            $arr_year_berlaku['data'][] = isset($year_berlaku[$data->year]) ? $year_berlaku[$data->year] : 0;
+            $arr_year_berlaku['year'][] = $data;
+            $arr_year_berlaku['data'][] = isset($year_berlaku[$data]) ? $year_berlaku[$data] : 0;
         }
 
         foreach ($years as $data) {
-            $arr_year_tidak_berlaku['year'][] = $data->year;
-            $arr_year_tidak_berlaku['data'][] = isset($year_tidak_berlaku[$data->year]) ? $year_tidak_berlaku[$data->year] : 0;
+            $arr_year_tidak_berlaku['year'][] = $data;
+            $arr_year_tidak_berlaku['data'][] = isset($year_tidak_berlaku[$data]) ? $year_tidak_berlaku[$data] : 0;
         }
 
         return ['berlaku' => $arr_year_berlaku, 'tidak-berlaku' => $arr_year_tidak_berlaku];
