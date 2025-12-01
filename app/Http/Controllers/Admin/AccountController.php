@@ -51,6 +51,8 @@ class AccountController extends Controller
     {
         if ($type == 'create') {
             $post['main']['password'] = bcrypt(request()->password);
+        } else if ($type == 'edit') {
+            $post['main']['email'] = $item->email;
         }
             
         return $post;
@@ -66,13 +68,12 @@ class AccountController extends Controller
     {
         $email = $post['main']['email'];
 
-        if (!preg_match("/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/", $email)) {
-            $error[] = 'Please insert valid email!';
-            return false;
-        }
-
 
         if ($type == 'create'){
+            if (!preg_match("/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/", $email)) {
+                $error[] = 'Please insert valid email!';
+                return false;
+            }
             $cek = Account::where('email',$email)->first();
             $validator = Validator::make(['password' => request()->password], [
                 'password' => [
@@ -175,7 +176,7 @@ class AccountController extends Controller
                 ];
             
         } else if ($type == 'edit') {
-            $form['email']['attributes'] += ['readonly' => true];
+            $form['email']['attributes'] += ['disabled' => true];
         }
 
         return $form;
