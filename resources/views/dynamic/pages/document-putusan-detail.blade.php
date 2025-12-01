@@ -27,7 +27,7 @@
           </div>
           <h3>{{ $document->translated('title') }}</h3>
           <p>{{ $document->translated('intro') }}</p>
-          <a href="" class="button button-outline-secondary button-icon">
+          <a href="javascript:;" id="scrollBtn" class="button button-outline-secondary button-icon">
             {{ lang::translate('document.read-decision') }}
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
               <path d="M10.2362 18.1466C10.1879 18.1466 10.1395 18.1361 10.0948 18.1147L3.18748 14.8255C3.07302 14.7709 3 14.6555 3 14.5285V4.33201C3 4.21919 3.05789 4.11426 3.15328 4.05374C3.24833 3.99355 3.36839 3.98664 3.47035 4.03499L10.2362 7.25675L17.0021 4.03466C17.104 3.98664 17.2234 3.99322 17.3188 4.05374C17.4145 4.11426 17.4724 4.21919 17.4724 4.33201V14.5285C17.4724 14.6555 17.3994 14.7709 17.2849 14.8255L10.3777 18.1147C10.3329 18.1361 10.2846 18.1466 10.2362 18.1466ZM3.65784 14.3206L10.2362 17.4532L16.8146 14.3206V4.85301L10.3777 7.91821C10.2885 7.96064 10.1842 7.96064 10.0951 7.91821L3.65784 4.85301V14.3206Z" fill="white" stroke="white" stroke-width="0.5"/>
@@ -166,5 +166,20 @@
   @endpush
   @push('footer')
     <script type="module" async type="text/javascript" src="{{ Vite::asset('resources/assets/js/document.js') }}"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const button = document.getElementById('scrollBtn');
+        const target = document.querySelector('.box-detail-page__pdf');
+
+        if (button && target) {
+          button.addEventListener('click', function() {
+            target.scrollIntoView({
+              behavior: 'smooth', // efek scroll halus
+              block: 'start'      // posisi elemen di atas layar
+            });
+          });
+        }
+      });
+    </script>
   @endpush
 @endsection
