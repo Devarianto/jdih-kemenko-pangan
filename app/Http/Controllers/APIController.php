@@ -15,7 +15,7 @@ class APIController extends Controller
         $dokumen = Document::translate()->whereIsActive(1)->get();
         foreach($dokumen as $k => $v){
             $row_array = (object) [];
-            $row_array->masterDocument          = $v->master_document->label ?? '-';
+            $row_array->masterDocument          = $v->master_document->label ?? '-'; // berisi jenis dokumen
             $row_array->idData                  = $v->id; //berisi id dokumen
             $row_array->tahun_pengundangan      = $v->api_tahun_pengundangan; //berisi tahun penetapan atau tahun terbit ex. 2019
             $row_array->tanggal_pengundangan    = $v->api_tanggal_pengundangan; //berisi tahun bulan tanggal (YYYY-MM-DD) ex. 2019-04-22

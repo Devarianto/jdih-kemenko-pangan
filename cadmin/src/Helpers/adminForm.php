@@ -580,12 +580,17 @@ class adminForm
             }
         }
         
-        if ($type == 'text' || $type == 'permalink') {
-            if ($type == 'text' && $readonly == 'true' && strpos(' '.array_get($attributes,'class'),'cfind') !== false && $value) {
+        if ($type == 'text' || $type == 'color' || $type == 'permalink') {
+            $attribute_text = '';
+            foreach ($attributes as $k => $attb) {
+                $attribute_text .= $k.'="'.$attb.'"';
+            }
+            if (($type == 'text' || $type == 'color') && $readonly == 'true' && strpos(' '.array_get($attributes,'class'),'cfind') !== false && $value) {
                 $attributes['cfind-disable'] = '1';
-                $html .= Form::text('',$value,$attributes);
+                // $html .= Form::text('',$value,$attributes);
+                $html .= '<input type="'.$type.'" value="'.$value.'" '.$attribute_text.'>';
             } else
-                $html .= $readonly ? $readonlyValue() : Form::text($key, $value, $attributes);
+                $html .= $readonly ? $readonlyValue() : '<input type="'.$type.'" name="'.$key.'" value="'.$value.'" '.$attribute_text.'>';
         }
         
         if ($type == 'number') {
