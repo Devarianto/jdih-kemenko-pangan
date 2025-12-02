@@ -764,18 +764,44 @@
           this.submit();
         });
 
-        if (!window.SpeechRecognition) {
-          alert('Browser Anda tidak mendukung Speech Recognition.');
+        // Normalisasi SpeechRecognition
+        const SpeechRecognition =
+          window.SpeechRecognition ||
+          window.webkitSpeechRecognition ||
+          window.mozSpeechRecognition ||
+          window.msSpeechRecognition;
+
+        const btn = document.getElementById('btnToggle');
+        const input = document.getElementById('searchPeraturan');
+
+        if (!SpeechRecognition) {
+          // alert hanya saat klik tombol
+          btn.addEventListener('click', () => {
+            alert('Browser Anda tidak mendukung Speech Recognition.');
+          });
         } else {
-          const rec = new window.SpeechRecognition();
+          // --- BUAT INSTANCE SEKALI ---
+          const rec = new SpeechRecognition();
           rec.lang = 'id-ID';
           rec.continuous = true;
           rec.interimResults = true;
 
-          const btn = document.getElementById('btnToggle');
-          const input = document.getElementById('searchPeraturan');
           let recognizing = false;
           let finalTranscript = '';
+
+          // --- EVENT HANDLERS ---
+
+          rec.onstart = () => {
+            recognizing = true;
+          };
+
+          rec.onend = () => {
+            recognizing = false;
+          };
+
+          rec.onerror = (e) => {
+            console.error('SpeechRecognition Error:', e);
+          };
 
           rec.onresult = (event) => {
             let interim = '';
@@ -787,18 +813,14 @@
             input.value = finalTranscript + interim;
           };
 
-          rec.onerror = (e) => console.error(e);
-          rec.onstart = () => recognizing = true;
-          rec.onend = () => recognizing = false;
+          // --- BUTTON CLICK ---
 
           btn.addEventListener('click', () => {
             if (!recognizing) {
               finalTranscript = input.value || '';
               rec.start();
-              // btn.textContent = 'Berhenti';
             } else {
               rec.stop();
-              // btn.textContent = 'Mulai Bicara';
             }
           });
         }

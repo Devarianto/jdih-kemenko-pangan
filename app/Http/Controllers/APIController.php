@@ -41,7 +41,7 @@ class APIController extends Controller
                 $row_array->urlDownload         = route('document.download', ['type' => 'pdf', 'id' => $v->id]); //berisi url dan nama file ex. domain.com/peraturan.pdf
                 //$row_array->urlDownload='http://jdih.instansi.go.id/ildis/www/storage/document/'.$file; //
             }
-            $row_array->urlDetailPeraturan      = url($v->permalink_document); //berisi link peraturan
+            $row_array->urlDetailPeraturan      = url($v->permalink_document); //berisi link document
             $row_array->operasi="4";
             $row_array->display="1";
 
