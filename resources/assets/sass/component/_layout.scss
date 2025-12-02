@@ -21,6 +21,11 @@ header {
     display: flex;
     align-items: center;
   }
+  .logo{
+    .black{
+      display: none;
+    }
+  }
   .right-header {
     margin-left: auto;
     display: flex;
@@ -227,9 +232,12 @@ header {
     &::before {
       height: 100%;
     }
-    .logo {
-      img {
-        content: url("@images/logo-black.png");
+    .logo{
+      .white{
+        display: none;
+      }
+      .black{
+        display: block;
       }
     }
     .right-header {
@@ -353,8 +361,9 @@ footer {
       }
       .info {
         display: flex;
-        align-items: center;
+        align-items: flex-start;
         margin-bottom: 12px;
+        gap: 2px;
         &:last-child {
           margin-bottom: 0;
         }
@@ -369,7 +378,13 @@ footer {
             content: ":";
             position: absolute;
             inset: 0;
-            left: auto;
+            right: auto;
+            left: 100%;
+            margin: auto 0;
+            line-height: 1;
+            display: flex;
+            align-items: flex-start;
+            padding-top: 2px;
           }
         }
         span {
