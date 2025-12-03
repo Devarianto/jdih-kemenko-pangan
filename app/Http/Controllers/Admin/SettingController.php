@@ -24,7 +24,7 @@ class SettingController extends BaseController
                 ],
             ],
             'logo-floating' => [
-                'label' => 'Logo',
+                'label' => 'Logo Floating',
                 'type' => 'text',
                 'info' => 'Use svg only, Recomended size width : 308px x height : 58px',
                 'attributes' => [

@@ -152,6 +152,11 @@ return [
 			'title' => 'Jumlah Produk Hukum Berlaku/ Tidak Berlaku',
 			'berlaku' => 'Berlaku',
 			'tidak-berlaku' => 'Tidak Berlaku'
+		],
+		'download' => [
+			'table' => 'Download',
+			'chart-peraturan' => 'Download',
+			'chart-produk-hukum' => 'Download',
 		]
 	],
 	'validate' => [

@@ -24,8 +24,8 @@
         </form>
       </div>
       <div class="statistik">
-        <div class="statistik__left content-pages">
-          <table>
+        <div class="statistik__left content-pages" >
+          <table id="table">
             <thead>
               <tr>
                 <th>{{ lang::translate('about-statistik.table-header.no') }}</th>
@@ -43,18 +43,33 @@
               @endforeach
             </tbody>
           </table>
+          <button 
+            class="button-outline button-icon"
+            onclick="downloadChartHTML('table', 'table.png')"
+            >
+            {{ lang::translate('about-statistik.download.table') }} <i class="wa-icon wa-ic-download-solid"></i>
+          </button>
         </div>
         <div class="statistik__right">
-          <div class="chart">
+          <div id="chartPeraturanWrapper" class="chart">
             <canvas id="chartPeraturan"></canvas>
           </div>
+          <button 
+          class="button-outline button-icon"
+          onclick="downloadChartHTML('chartPeraturanWrapper', 'chart-peraturan.png')"
+          >
+          {{ lang::translate('about-statistik.download.chart-peraturan') }} <i class="wa-icon wa-ic-download-solid"></i>
+          </button>
         </div>
       </div>
       <div class="chart-year">
         <p>{{ lang::translate('about-statistik.chart.title') }}</p>
-        <div class="chart">
+        <div id="statusChartWrapper" class="chart">
           <canvas id="statusChart"></canvas>
         </div>
+        <button
+        onclick="downloadChartHTML('statusChartWrapper', 'status-chart.png')" 
+        class="button-outline button-icon">{{ lang::translate('about-statistik.download.chart-produk-hukum') }} <i class="wa-icon wa-ic-download-solid"></i></button>
       </div>
     </div>
   </section>
@@ -64,6 +79,7 @@
   @push('footer')
     {{-- <script type="module" async type="text/javascript" src="{{ Vite::asset('resources/assets/js/.js') }}"></script> --}}
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script>
       document.addEventListener("DOMContentLoaded", function(event) { 
         const ctx = document.getElementById('chartPeraturan').getContext('2d');
@@ -219,6 +235,21 @@
           }
         });
       });
+      function downloadChartHTML(elementId, filename = "chart.png") {
+        const target = document.getElementById(elementId);
+
+        html2canvas(target, {
+          backgroundColor: '#fff',
+          scale: 2
+        }).then(canvas => {
+          canvas.toBlob((blob) => {
+            const link = document.createElement("a");
+            link.href = URL.createObjectURL(blob);
+            link.download = filename;
+            link.click();
+          });
+        });
+      }
     </script>
   @endpush
 @endsection

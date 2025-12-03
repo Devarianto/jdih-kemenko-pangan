@@ -587,10 +587,18 @@ class adminForm
             }
             if (($type == 'text' || $type == 'color') && $readonly == 'true' && strpos(' '.array_get($attributes,'class'),'cfind') !== false && $value) {
                 $attributes['cfind-disable'] = '1';
-                // $html .= Form::text('',$value,$attributes);
-                $html .= '<input type="'.$type.'" value="'.$value.'" '.$attribute_text.'>';
-            } else
-                $html .= $readonly ? $readonlyValue() : '<input type="'.$type.'" name="'.$key.'" value="'.$value.'" '.$attribute_text.'>';
+                if ($type == 'color') {
+                    $html .= '<input type="'.$type.'" value="'.$value.'" '.$attribute_text.'>';
+                } else {
+                    $html .= Form::text('',$value,$attributes);
+                }
+            } else {
+                if ($type == 'color') {
+                    $html .= $readonly ? $readonlyValue() : '<input type="'.$type.'" name="'.$key.'" value="'.$value.'" '.$attribute_text.'>';
+                } else {
+                    $html .= $readonly ? $readonlyValue() : Form::text($key, $value, $attributes);
+                }
+            }
         }
         
         if ($type == 'number') {
