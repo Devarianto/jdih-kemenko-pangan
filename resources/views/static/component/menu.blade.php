@@ -87,7 +87,9 @@
 </div>
 <div class="header-bot">
   <div class="wrapper">
-    <input type="text" placeholder="Ketik Kata Kunci Pencarian">
+    <form action="">
+      <input type="text" placeholder="Ketik Kata Kunci Pencarian">
+    </form>
   </div>
 </div>
 
