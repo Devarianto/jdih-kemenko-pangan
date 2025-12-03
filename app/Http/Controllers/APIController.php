@@ -15,7 +15,7 @@ class APIController extends Controller
         $dokumen = Document::translate()->whereIsActive(1)->get();
         foreach($dokumen as $k => $v){
             $row_array = (object) [];
-            $row_array->masterDocument          = $v->master_document->label ?? '-';
+            $row_array->masterDocument          = $v->master_document->label ?? '-'; // berisi jenis dokumen
             $row_array->idData                  = $v->id; //berisi id dokumen
             $row_array->tahun_pengundangan      = $v->api_tahun_pengundangan; //berisi tahun penetapan atau tahun terbit ex. 2019
             $row_array->tanggal_pengundangan    = $v->api_tanggal_pengundangan; //berisi tahun bulan tanggal (YYYY-MM-DD) ex. 2019-04-22
@@ -41,7 +41,7 @@ class APIController extends Controller
                 $row_array->urlDownload         = route('document.download', ['type' => 'pdf', 'id' => $v->id]); //berisi url dan nama file ex. domain.com/peraturan.pdf
                 //$row_array->urlDownload='http://jdih.instansi.go.id/ildis/www/storage/document/'.$file; //
             }
-            $row_array->urlDetailPeraturan      = url($v->permalink_document); //berisi link peraturan
+            $row_array->urlDetailPeraturan      = url($v->permalink_document); //berisi link document
             $row_array->operasi="4";
             $row_array->display="1";
 

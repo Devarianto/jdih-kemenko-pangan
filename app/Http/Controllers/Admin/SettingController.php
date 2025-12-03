@@ -23,6 +23,17 @@ class SettingController extends BaseController
                     'cfind-alt' => 1,
                 ],
             ],
+            'logo-floating' => [
+                'label' => 'Logo Floating',
+                'type' => 'text',
+                'info' => 'Use svg only, Recomended size width : 308px x height : 58px',
+                'attributes' => [
+                    'class' => 'required cfind', 
+                    'cfind-type' => 'image', 
+                    'cfind-ext' => 'svg',
+                    'cfind-alt' => 1,
+                ],
+            ],
 			'favicon' => [
 				'label' => 'Fav Icon',
 				'type' => 'text',

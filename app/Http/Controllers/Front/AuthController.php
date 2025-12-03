@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use lang;
 
+use App\Models\Account;
+use Illuminate\Support\Facades\Hash;
+
 class AuthController extends Controller
 {
     /**
@@ -28,16 +31,34 @@ class AuthController extends Controller
             'is_active' => 1,
         ];
 
-        if (Auth::guard('account')->attempt($attemptCredentials, $remember)) {
-            $request->session()->regenerate();
-            if ($request->expectsJson()) {
-                return response()->json([
-                    'success' => true,
-                    'redirect' => route('dashboard'),
-                ]);
+
+        $account = Account::where('email', $credentials['email'])->first();
+        if ($account != null) {
+            if (Hash::check($credentials['password'], $account->password)) {
+                if ($account->is_active) {
+                    if (Auth::guard('account')->attempt($attemptCredentials, $remember)) {
+                        $request->session()->regenerate();
+                        if ($request->expectsJson()) {
+                            return response()->json([
+                                'success' => true,
+                                'redirect' => route('dashboard'),
+                            ]);
+                        }
+                        return redirect()->route('dashboard');
+                    }
+                } else {
+                    return response()->json([
+                        'success' => false,
+                        'message' => lang::translate('dashboard.form-login.inactive-user'),
+                        'errors' => [
+                            'email' => [lang::translate('dashboard.form-login.inactive-user')],
+                        ],
+                    ], 422);
+                }
             }
-            return redirect()->route('dashboard');
         }
+        
+        
 
         if ($request->expectsJson()) {
             return response()->json([

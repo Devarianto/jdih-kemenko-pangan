@@ -676,16 +676,25 @@
   </div>
   <div class="logo-slider swiper">
     <div class="swiper-wrapper">
-      <!-- @for ($i = 1; $i <= 5; $i++)
+      @for ($i = 1; $i <= 5; $i++)
         <a href="" class="swiper-slide">
         <img src="{{ asset('images/content/partner-'.$i.'.png') }}" alt="">
         </a>
-        @endfor -->
+      @endfor
       <a href="" class="swiper-slide">
         <img src="{{ asset('images/content/partner-2.png') }}" alt="">
       </a>
       <a href="" class="swiper-slide">
         <img src="{{ asset('images/content/partner-1.png') }}" alt="">
+      </a>
+      <a href="" class="swiper-slide">
+        <img src="{{ asset('images/content/partner-2.png') }}" alt="">
+      </a>
+      <a href="" class="swiper-slide">
+        <img src="{{ asset('images/content/partner-2.png') }}" alt="">
+      </a>
+      <a href="" class="swiper-slide">
+        <img src="{{ asset('images/content/partner-2.png') }}" alt="">
       </a>
       <a href="" class="swiper-slide">
         <img src="{{ asset('images/content/partner-2.png') }}" alt="">
@@ -861,7 +870,7 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
   document.addEventListener("DOMContentLoaded", function(event) {
-    openPopup('#popup-home')
+    // openPopup('#popup-home')
     const ctx = $("#statusChart");
     new Chart(ctx, {
       type: "bar",

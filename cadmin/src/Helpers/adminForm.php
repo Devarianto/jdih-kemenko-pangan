@@ -580,12 +580,25 @@ class adminForm
             }
         }
         
-        if ($type == 'text' || $type == 'permalink') {
-            if ($type == 'text' && $readonly == 'true' && strpos(' '.array_get($attributes,'class'),'cfind') !== false && $value) {
+        if ($type == 'text' || $type == 'color' || $type == 'permalink') {
+            $attribute_text = '';
+            foreach ($attributes as $k => $attb) {
+                $attribute_text .= $k.'="'.$attb.'"';
+            }
+            if (($type == 'text' || $type == 'color') && $readonly == 'true' && strpos(' '.array_get($attributes,'class'),'cfind') !== false && $value) {
                 $attributes['cfind-disable'] = '1';
-                $html .= Form::text('',$value,$attributes);
-            } else
-                $html .= $readonly ? $readonlyValue() : Form::text($key, $value, $attributes);
+                if ($type == 'color') {
+                    $html .= '<input type="'.$type.'" value="'.$value.'" '.$attribute_text.'>';
+                } else {
+                    $html .= Form::text('',$value,$attributes);
+                }
+            } else {
+                if ($type == 'color') {
+                    $html .= $readonly ? $readonlyValue() : '<input type="'.$type.'" name="'.$key.'" value="'.$value.'" '.$attribute_text.'>';
+                } else {
+                    $html .= $readonly ? $readonlyValue() : Form::text($key, $value, $attributes);
+                }
+            }
         }
         
         if ($type == 'number') {
@@ -612,15 +625,22 @@ class adminForm
             }
             $html .= $readonly ? $readonlyValue() : '<input type="file" name="'.$key.'" '.$attribute_text.'>';
             if ($value != null && $value != "") {
-            $html .= '
+                $html .= '
                 <div class="old-file mt-2" style="margin-top:8px;">
                     <small>
                         File existing: 
                         <a href="'.route('admin.download.file', ['type' => $key, 'id' => request()->query('unique')]).'" target="_blank">'.basename($value).'</a>
-                    </small>
-                </div>';
+                    </small>';
+
+                if (array_get($params, 'is_delete', null)) {
+                    $html .= '
+                    <input type="hidden" name="delete_'.$key.'" value="true">
+                    <button type="button" class="btn btn-danger delete-file" style="padding:2px 6px; font-size:11px;">
+                        <i class="fa fa-times"></i>
+                    </button>';
+                }
+                $html .= '</div>';
             }
-            
         }
 			
 		if ($type == 'multicheck' || $type == 'multicheck-table') {

@@ -65,7 +65,7 @@
                     <td>{{ \Carbon\Carbon::parse($project->date)->translatedFormat('d F Y') }}</td>
                     <td>{{ \Carbon\Carbon::parse($project->end_date)->translatedFormat('d F Y') }}</td>
                     <td>
-                      <span class="status {{ optional($project->getStatus)->color }}">{{ optional($project->getStatus)->label ?? '-' }}</span>
+                      <span class="status" style="background-color: {{ optional($project->getStatus)->color ?? 'grey' }}; color: {{ optional($project->getStatus)->color_label ?? 'white' }};">{{ optional($project->getStatus)->label ?? '-' }}</span>
                     </td>
                     <td><a href="{{ route('detail.project', ['id' => Crypt::encryptString($project->id)]) }}" class="button button-outline">{{lang::translate('dashboard.daftar-project.list-table.detail')}}</a></td>
                   </tr>

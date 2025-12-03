@@ -185,7 +185,7 @@ class DocumentPeraturanController extends Controller
                 ]
             ],
             'teu' => [
-                'subtitle' => 'Meta Data', 
+                'subtitle' => 'Deskripsi', 
                 'label' => 'T.E.U. Badan/Pengarang',
                 'type' => 'text',
                 'multilang' => true,

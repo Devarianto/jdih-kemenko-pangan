@@ -156,7 +156,7 @@ class DocumentJurnalController extends Controller
 
         $form += [
             'teu' => [
-                'subtitle' => 'Meta Data', 
+                'subtitle' => 'Deskripsi', 
                 'label' => 'T.E.U. Orang/Badan',
                 'type' => 'text',
                 'multilang' => true,

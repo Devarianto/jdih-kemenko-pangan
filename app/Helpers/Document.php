@@ -9,6 +9,7 @@ use helper;
 
 use App\Helpers\DocumentPeraturan;
 use App\Models\Document as DocumentModel;
+use Illuminate\Support\Facades\Storage;
 
 class Document {
 
@@ -25,7 +26,7 @@ class Document {
         }
     }
 
-    public static function formCallbackBefore($post,$item,$type,$document)
+    public static function formCallbackBefore($post,$item,$type,$document,$fields = [])
     {
         $request = request()->all();
         if ($type == 'create') 
@@ -46,6 +47,19 @@ class Document {
                 $post['main']['pdf'] = $path;
             } else if ($type == 'edit' && $item->pdf != null) {
                 $post['main']['pdf'] = $item->pdf;
+            }
+
+            if ($type == 'edit' && 
+            !isset($request['delete_pdf']) && 
+            $item->pdf != null) {
+                $pdf_field = array_get($fields, 'pdf', []);
+                if (isset($pdf_field['is_delete']) && $pdf_field['is_delete']) {
+                    if (Storage::exists($item->pdf))
+                        Storage::delete($item->pdf);
+
+                    $post['main']['pdf'] = null;
+                }
+                
             }
 
             if (isset($request['abstract']) && $request['abstract'] != null) {

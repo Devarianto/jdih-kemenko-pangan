@@ -23,12 +23,14 @@
           </div>
         </div>    
       </div>
+      @if (!widget($kamus->id, 'information-kamus-hukum', 'reference')->isEmpty())
       <div class="referensi">
         <h6>{{ lang::translate('kamus-hukum.reference') }}</h6>
         @foreach (widget($kamus->id, 'information-kamus-hukum', 'reference') as $data)
         <a href="{{ $data->translated('link') }}" target="{{ $data->target }}">{{ $data->translated('title') }}</a>
         @endforeach
       </div>
+      @endif
     </div>
 
   </section>

@@ -34,7 +34,7 @@
           <a href="{{ $document->customPermalink('document-kliping') }}" class="listing-card__item">
             <figure><img src="{{ media::initial($document->thumbnail)->url }}" alt="{{ media::initial($document->thumbnail)->alt }}"></figure>
             <figcaption>
-              <span class="date">{{ date2string($document->created_at) }}</span>
+              <span class="date">{{ date2string($document->date) }}</span>
               <p>{{ $document->translated('title') }}</p>
               <small class="visited">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">

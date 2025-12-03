@@ -152,6 +152,11 @@ return [
 			'title' => 'Jumlah Produk Hukum Berlaku/ Tidak Berlaku',
 			'berlaku' => 'Berlaku',
 			'tidak-berlaku' => 'Tidak Berlaku'
+		],
+		'download' => [
+			'table' => 'Download',
+			'chart-peraturan' => 'Download',
+			'chart-produk-hukum' => 'Download',
 		]
 	],
 	'validate' => [
@@ -389,6 +394,7 @@ return [
 			'process' => 'Memproses...',
 			'unknown-user' => 'Gagal login. Periksa kembali email dan password Anda.',
 			'failed-network' => 'Terjadi kesalahan jaringan. Coba lagi.',
+			'inactive-user' => 'Gagal login. akun tidak aktif'
 		],
 		'form-filter'=>[
 			'label-name-project'=>'Nama Project',
@@ -432,7 +438,8 @@ return [
 				'label-nama-pemohon'=>'label nama pemohon',
 				'placeholder-nama-pemohon'=>'nama pemohon',
 				'button-cancel'=>'Batalkan',
-				'button-save'=>'Simpan'
+				'button-save'=>'Simpan',
+				'button-process' => 'Memproses...'
 			],
 			'detail'=>[
 				'title-page'=>'DETAIL USULAN PROJECT',

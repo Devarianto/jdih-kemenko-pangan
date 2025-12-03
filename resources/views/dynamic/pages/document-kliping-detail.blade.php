@@ -16,7 +16,7 @@
         </div>
       </div>      
       <div class="detail-pages--title">
-        <small class="date">{{ date2string($document->created_at) }}</small>
+        <small class="date">{{ date2string($document->date) }}</small>
         <h3>{{ $document->translated('title') }}</h3>
       </div>
       <div class="slider-caption swiper with-pagination">

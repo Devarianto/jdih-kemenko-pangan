@@ -79,12 +79,19 @@ Route::group(['middleware' => ['web','front', 'visitor-count']],function() {
             Route::get('/dashboard/detail-usulan/{id}', [DashboardController::class, 'detailUsulan'])->name('detail.usulan');
             Route::get('/dashboard/project', [DashboardController::class, 'listProject'])->name('project');
             Route::get('/dashboard/detail-project/{id}', [DashboardController::class, 'detailProject'])->name('detail.project');
+
+            Route::get('project/download/{type}/{id}/{loop}', [DownloadFileController::class, 'getProjectDownload'])->name('project.download');
+
         });
         Route::post('/rating/submit', [RatingController::class, 'postSubmit'])->name('rating.submit');
     });
 
     Route::get('document/download/{type}/{id}', [DownloadFileController::class, 'getDocumentDownload'])->name('document.download');
     Route::get('document/stream/{type}/{id}', [DownloadFileController::class, 'getDocumentStream'])->name('document.stream');
+
+    Route::get(ADMIN.'/file/download/{type}/{id}', ['App\Http\Controllers\Front\DownloadFileController', 'getAdminDownloadFile'])->name('admin.download.file');
+    Route::get(ADMIN.'/project/download/{type}/{id}/{loop}', ['App\Http\Controllers\Front\DownloadFileController', 'getProjectDownload'])->name('admin.download.project');
+    Route::post(ADMIN.'/project/download/{type}/{id}/{loop}', ['App\Http\Controllers\Front\DownloadFileController', 'deleteAdminFile'])->name('admin.download.project');
 });
 
 Route::get('/api/visitor/get', [VisitorController::class, 'getVisitor'])->name('api.visitor');

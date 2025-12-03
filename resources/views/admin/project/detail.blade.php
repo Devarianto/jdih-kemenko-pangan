@@ -84,7 +84,7 @@
 		                -
 		                @else
 		                  @foreach($files as $path)
-		                    <a href="{{ asset($path) }}" target="_blank">{{ basename($path) }}</a> <br>&nbsp;
+                    <a href="{{ route('admin.download.project', ['id' => Crypt::encryptString($data->id), 'loop' => $loop->iteration, 'type' => 'detail']) }}" target="_blank">{{ basename($path) }}</a><br>&nbsp;
 		                  @endforeach
 		                @endif
                         </div>
@@ -118,13 +118,9 @@
                         <button type="button" class="btn btn-success px-4" data-bs-toggle="modal" data-bs-target="#approveModal">
                             <i class="align-middle me-1" data-feather="check-circle"></i> Approve
                         </button>
-                        <form action="{{ url()->admin('usulan-project/reject') }}" method="POST" class="d-inline">
-                            @csrf
-                            <input type="hidden" name="unique" value="{{ $data->id }}">
-                            <button type="submit" class="btn btn-danger px-4" onclick="return confirm('Reject usulan ini?')">
-                                <i class="align-middle me-1" data-feather="x-circle"></i> Reject
-                            </button>
-                        </form>
+                          <button type="submit" class="btn btn-danger px-4" data-bs-toggle="modal" data-bs-target="#rejectModal">
+                              <i class="align-middle me-1" data-feather="x-circle"></i> Reject
+                          </button>
                     </div>
                     @endif
                 </div>
@@ -145,7 +141,7 @@
                                 <p class="text-muted mb-1">{{ $u->note }}</p>
                             @endif
                             @if(!empty($u->dokumen))
-                                <a href="{{ asset($u->dokumen) }}" target="_blank" class="text-primary text-decoration-none">{{ basename($u->dokumen) }}</a>
+                                <a href="{{ route('admin.download.project', ['id' => Crypt::encryptString($data->id), 'loop' => $u->id, 'type' => 'document']) }}" target="_blank" class="text-primary text-decoration-none">{{ basename($u->dokumen) }}</a>
                             @endif
                         </li>
                         @empty
@@ -196,7 +192,37 @@
       </form>
     </div>
   </div>
+</div>
+
+<!-- MODAL UPDATE STATUS -->
+<div class="modal fade" id="rejectModal" tabindex="-1" aria-labelledby="rejectModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <form action="{{ url()->admin('usulan-project/reject') }}" method="POST" enctype="multipart/form-data">
+        @csrf
+        <div class="modal-header">
+          <h5 class="modal-title" id="rejectModalLabel">Reject Usulan</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+
+        <div class="modal-body">
+          <input type="hidden" name="project_id" value="{{ $data->id }}">
+          <div class="mb-3">
+            <label for="alasan" class="form-label fw-semibold">Alasan</label>
+            <textarea class="form-control" id="alasan" name="alasan" rows="3" placeholder="Tuliskan alasan"></textarea>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+          <button type="submit" class="btn btn-primary">
+            <i class="align-middle me-1" data-feather="save"></i> Simpan
+          </button>
+        </div>
+      </form>
+    </div>
   </div>
+</div>
 
 <!-- MODAL UPDATE STATUS -->
 <div class="modal fade" id="updateStatusModal" tabindex="-1" aria-labelledby="updateStatusModalLabel" aria-hidden="true">

@@ -21,7 +21,7 @@
           <span class="categ-grey" @if (!$document->status_tersedia) style="background-color: #C25A5A; color: #FFF3F3;" @endif>{{ $document->front_status_tersedia }}</span>
           <h3>{{ $document->translated('title') }}</h3>
           <p>{{ $document->translated('intro') }}</p>
-          <a href="" class="button button-icon">
+          <a href="javascript:;" id="scrollBtn" class="button button-icon">
             {{ lang::translate('document.read-more') }}
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
               <path d="M10.2352 18.1456C10.1869 18.1456 10.1385 18.1351 10.0938 18.1137L3.18651 14.8245C3.07204 14.7699 2.99902 14.6545 2.99902 14.5275V4.33103C2.99902 4.21821 3.05691 4.11328 3.1523 4.05276C3.24736 3.99257 3.36741 3.98566 3.46938 4.03402L10.2352 7.25578L17.0011 4.03369C17.1031 3.98566 17.2225 3.99224 17.3178 4.05276C17.4136 4.11328 17.4715 4.21821 17.4715 4.33103V14.5275C17.4715 14.6545 17.3984 14.7699 17.284 14.8245L10.3767 18.1137C10.3319 18.1351 10.2836 18.1456 10.2352 18.1456ZM3.65686 14.3196L10.2352 17.4523L16.8136 14.3196V4.85204L10.3767 7.91723C10.2875 7.95966 10.1833 7.95966 10.0941 7.91723L3.65686 4.85204V14.3196Z" fill="white" stroke="white" stroke-width="0.5"/>
@@ -142,5 +142,20 @@
   @endpush
   @push('footer')
     <script type="module" async type="text/javascript" src="{{ Vite::asset('resources/assets/js/document.js') }}"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const button = document.getElementById('scrollBtn');
+        const target = document.querySelector('.box-detail-page__pdf');
+
+        if (button && target) {
+          button.addEventListener('click', function() {
+            target.scrollIntoView({
+              behavior: 'smooth', // efek scroll halus
+              block: 'start'      // posisi elemen di atas layar
+            });
+          });
+        }
+      });
+    </script>
   @endpush
 @endsection

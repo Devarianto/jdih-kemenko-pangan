@@ -14,6 +14,7 @@ use Cactuar\Admin\Traits\Controllers\DeleteTrait;
 use Cactuar\Admin\Traits\Controllers\PublishTrait;
 
 use Validator;
+use Illuminate\Validation\Rules\Password;
 
 class AccountController extends Controller
 {
@@ -48,8 +49,11 @@ class AccountController extends Controller
 
     public function formCallbackBefore($post,$item,$type)
     {
-        if ($type == 'create')
-            $post['main']['password'] = bcrypt($post['main']['password']);
+        if ($type == 'create') {
+            $post['main']['password'] = bcrypt(request()->password);
+        } else if ($type == 'edit') {
+            $post['main']['email'] = $item->email;
+        }
             
         return $post;
     }
@@ -64,18 +68,42 @@ class AccountController extends Controller
     {
         $email = $post['main']['email'];
 
-        if (!preg_match("/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/", $email)) {
-            $error[] = 'Please insert valid email!';
-            return false;
-        }
-
-        $cek = Account::where('email',$email)->first();
 
         if ($type == 'create'){
+            if (!preg_match("/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/", $email)) {
+                $error[] = 'Please insert valid email!';
+                return false;
+            }
+            $cek = Account::where('email',$email)->first();
+            $validator = Validator::make(['password' => request()->password], [
+                'password' => [
+                    'required',
+                    'string',
+                    Password::min(8)->mixedCase()->numbers()->symbols()
+                ],
+            ], [
+                'password.required' => 'Password harus diisi.',
+                'password.min'      => 'Password minimal 8 karakter.',
+                'password.mixed'    => 'Password harus mengandung huruf besar.',
+                'password.numbers'  => 'Password harus mengandung angka.',
+                'password.symbols'  => 'Password harus mengandung karakter spesial.',
+            ]);
+
+            if ($validator->fails()) {
+                $error[] = $validator->errors()->first('password');
+                return false;
+            }
+
             if(!empty($cek)){
                 $error[] = 'Email already exist';
                 return false;
-              }
+            }
+        } else if ($type == 'edit') {
+            $cek = Account::where('email',$email)->where('id', '!=', request()->query('unique'))->first();
+            if(!empty($cek)){
+                $error[] = 'Email already exist';
+                return false;
+            }
         }
         return true;
     }
@@ -104,7 +132,13 @@ class AccountController extends Controller
     {
         $validated = $request->validate([
             'unique' => 'required|numeric|exists:accounts,id',
-            'password' => 'required|string|min:6',
+            'password' => ['required','string', Password::min(8)->mixedCase()->numbers()->symbols()],
+        ], [
+            'password.required' => 'Password harus diisi.',
+            'password.min'      => 'Password minimal 8 karakter.',
+            'password.mixed'    => 'Password harus mengandung huruf besar.',
+            'password.numbers'  => 'Password harus mengandung angka.',
+            'password.symbols'  => 'Password harus mengandung karakter spesial.',
         ]);
 
         $account = Account::findOrFail($validated['unique']);
@@ -118,35 +152,39 @@ class AccountController extends Controller
     {
 
         $form = [
-                'name' => [
-                    'type' => 'text',
-                    'label' => 'Name',
-                    'attributes' => [
-                        'class' => 'required',
-                    ],
+            'name' => [
+                'type' => 'text',
+                'label' => 'Name',
+                'attributes' => [
+                    'class' => 'required',
                 ],
-                'email' => [
-                    'type' => 'text',
-                    'label' => 'Email',
-                    'attributes' => [
-                        'class' => 'required validEmail',
-                    ],
+            ],
+            'email' => [
+                'type' => 'text',
+                'label' => 'Email',
+                'attributes' => [
+                    'class' => 'required validEmail',
                 ],
-            ];
+            ],
+        ];
 
         if ($type == 'create')
         {
             $form['password'] =[
-                    'type' => 'text',
-                    'label' => 'Password',
-                    'attributes' => [
-                        'class' => 'required',
-                    ],
+                    'type' => 'free',
+                    'html' => view('admin.account.form')->render()
                 ];
             
+        } else if ($type == 'edit') {
+            $form['email']['attributes'] += ['disabled' => true];
         }
 
         return $form;
         
+    }
+
+    public function formAppend()
+    {
+        return view('admin.account.form-js');
     }
 }

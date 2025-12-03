@@ -1250,6 +1250,10 @@ $(document).ready(function() {
 	});
 });
 
+$(document).on('click', '.delete-file', function () {
+    $(this).closest('.old-file').remove();
+});
+
 $(document).on('change','.title',function() {
 	if ($(this).attr('lang')) { console.log('permalink');
 		$('input.permalink[lang=' + $(this).attr('lang') + ']').val(slug($(this).val()));

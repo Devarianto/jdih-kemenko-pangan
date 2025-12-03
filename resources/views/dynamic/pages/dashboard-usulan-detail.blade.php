@@ -43,7 +43,7 @@
                 -
                 @else
                   @foreach($files as $path)
-                    <div><a href="{{ asset($path) }}" target="_blank">{{ basename($path) }}</a></div>
+                    <div><a href="{{ route('project.download', ['id' => Crypt::encryptString($project->id), 'loop' => $loop->iteration, 'type' => 'detail']) }}" target="_blank">{{ basename($path) }}</a></div>
                   @endforeach
                 @endif
               </td>
@@ -81,6 +81,9 @@
               <span class="date">{{ \Carbon\Carbon::parse($u['date'])->translatedFormat('d F Y') }}</span>
               <div class="text">
                 <p><b>{{ $u['label'] }}</b></p>
+                @if(!empty($u['note']))
+                  <p>{{ $u['note'] }}</p>
+                @endif
               </div>
             </div>
             @empty

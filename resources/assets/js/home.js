@@ -101,24 +101,39 @@ home.ratingHome = () => {
 };
 
 home.sliderLogo = () => {
+   if ($(window).width() > 1024) {
+    if ($('.logo-slider .swiper-slide').length <= 8) {
+      $('.logo-slider .swiper-wrapper').addClass('disable')
+      return
+    }
+  }else if ($(window).width() <= 1024) {
+    if ($('.logo-slider .swiper-slide').length <= 4) {
+      $('.logo-slider .swiper-wrapper').addClass('disable')
+      return
+    }
+  }else{
+    if ($('.logo-slider .swiper-slide').length <= 2) {
+      $('.logo-slider .swiper-wrapper').addClass('disable')
+      return
+    }
+  }
   const swiper = new Swiper('.logo-slider.swiper', {
     loop: true,
-    slidesPerView: 5,
-    spaceBetween: 45,
-    slidesOffsetBefore: 0, // offset kiri agar tampak terpotong
-    slidesOffsetAfter: 0,  // offset kanan agar tampak terpotong
-    centeredSlides: true,
+    slidesPerView: 2,
+    spaceBetween: 24,
     autoplay: {
       delay: 6000,
       disableOnInteraction: false,
     },
     breakpoints: {
-      1023: {
-        slidesPerView: 6,
-        slidesOffsetBefore: -80,
-        slidesOffsetAfter: -80,
-        centeredSlides: false,
-        spaceBetween: 24
+      767: {
+        slidesPerView: 4,
+        spaceBetween: 24,
+        centeredSlides:false,
+      },
+      1200: {
+        slidesPerView: "auto",
+        spaceBetween: 0,
       }
     },
   });

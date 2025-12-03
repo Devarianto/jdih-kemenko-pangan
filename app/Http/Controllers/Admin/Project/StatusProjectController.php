@@ -45,16 +45,17 @@ class StatusProjectController extends Controller
                 ]
             ],
 			'color' => [
-                'type' => 'select',
-                'label' => 'Color',
+                'type' => 'color',
+                'label' => 'Color Background',
                 'attributes' => [
-                    'class' => 'required',
-                ],
-                'options'=>[
-                	'plan-1'=>'Blue',
-                	'plan-2'=>'Tosca',
-                	'done'=>'Green',
-
+                    'class' => 'required form-control-color',
+                ]
+			],
+			'color_label' => [
+                'type' => 'color',
+                'label' => 'Color Label',
+                'attributes' => [
+                    'class' => 'required form-control-color',
                 ]
             ]
         ];

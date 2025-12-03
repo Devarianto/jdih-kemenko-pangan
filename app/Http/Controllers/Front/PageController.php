@@ -20,6 +20,7 @@ use App\Models\KamusHukum;
 use App\Models\Rating;
 
 use DB;
+use Carbon\Carbon;
 
 class PageController extends Controller
 {
@@ -28,7 +29,7 @@ class PageController extends Controller
         $home = Menu::translate()->firstOrFail();
 
         $rule_types = RuleType::whereIsActive(1)->get();
-        $rule_themes = RuleTheme::whereIsActive(1)->get();
+        $rule_themes = RuleTheme::whereIsActive(1)->orderBy('sort_id')->get();
         $year_peraturan = Document::select('year')
             ->whereIsActive(1)
             ->where('master_document_id', Document::PERATURAN)
@@ -50,7 +51,7 @@ class PageController extends Controller
         $document_monografi = Document::translate()
             ->whereIsActive(1)
             ->where('master_document_id', Document::MONOGRAFI)
-            ->orderBy('created_at', 'desc');
+            ->orderBy('tahun_terbit', 'desc')->orderBy('created_at','desc');
         $monografi_count = $document_monografi->count();
         $document_monografi = $document_monografi->limit(4)
             ->get();
@@ -60,7 +61,7 @@ class PageController extends Controller
         $document_peraturan = Document::translate()
             ->whereIsActive(1)
             ->where('master_document_id', Document::PERATURAN)
-            ->orderBy('created_at', 'desc');
+            ->orderBy('tanggal_penetapan', 'desc');
         $peraturan_count = $document_peraturan->count();
         $document_peraturan = $document_peraturan->limit(4)
             ->get();
@@ -70,7 +71,7 @@ class PageController extends Controller
         $document_putusan = Document::translate()
             ->whereIsActive(1)
             ->where('master_document_id', Document::PUTUSAN)
-            ->orderBy('created_at', 'desc');
+            ->orderBy('tanggal_dibacakan', 'desc');
         $putusan_count = $document_putusan->count();
         $document_putusan = $document_putusan->limit(4)
             ->get();
@@ -80,7 +81,7 @@ class PageController extends Controller
         $document_jurnal = Document::translate()
             ->whereIsActive(1)
             ->where('master_document_id', Document::JURNAL)
-            ->orderBy('created_at', 'desc');
+            ->orderBy('tahun_terbit', 'desc')->orderBy('created_at','desc');
         $jurnal_count = $document_jurnal->count();
         $document_jurnal = $document_jurnal->limit(4)
             ->get();
@@ -90,7 +91,7 @@ class PageController extends Controller
         $document_kliping = Document::translate()
             ->whereIsActive(1)
             ->where('master_document_id', Document::KLIPING)
-            ->orderBy('created_at', 'desc');
+            ->orderBy('date', 'desc');
         $kliping_count = $document_kliping->count();
         $document_kliping = $document_kliping->limit(4)
             ->get();
@@ -100,7 +101,7 @@ class PageController extends Controller
         $document_majalah = Document::translate()
             ->whereIsActive(1)
             ->where('master_document_id', Document::MAJALAH)
-            ->orderBy('created_at', 'desc');
+            ->orderBy('tahun_terbit', 'desc')->orderBy('created_at', 'desc');
         $majalah_count = $document_majalah->count();
         $document_majalah = $document_majalah->limit(4)
             ->get();
@@ -110,20 +111,33 @@ class PageController extends Controller
         $document_naskah = Document::translate()
             ->whereIsActive(1)
             ->where('master_document_id', Document::NASKAH)
-            ->orderBy('created_at', 'desc');
+            ->orderBy('tanggal_berlaku', 'desc');
         $naskah_count = $document_naskah->count();
         $document_naskah = $document_naskah->limit(4)
             ->get();
         $menus['naskah'] = Menu::fe()->whereIsActive(1)->where('type', 'naskah-hukum')->first();
 
 
+        $now_year = (int) Carbon::now()->format('Y');
+        $back_year = (int) Carbon::now()->subYear(4)->format('Y');
         $years = Document::select('year')
             ->whereIsActive(1)
             ->where('master_document_id', Document::PERATURAN)
+            ->where('year', '<=', $now_year)
+            ->where('year', '>=', $back_year)
             ->groupBy('year')
+            ->orderBy("year", 'desc')
             ->get();
 
-        $get_chart = $this->getChartStatistic($years);
+        $arr_years = [];
+        for ($i=0; $i < 5; $i++) { 
+            $arr_years[] = $now_year;
+            $now_year -= 1;
+        }
+
+        sort($arr_years);
+
+        $get_chart = $this->getChartStatistic($arr_years);
 
         $menu_statistic = Menu::fe()->whereIsActive(1)->where('type', 'about-statistik')->first();
 
@@ -243,9 +257,19 @@ class PageController extends Controller
         $years = Document::select('year')
             ->whereIsActive(1)
             ->where('master_document_id', Document::PERATURAN)
+            ->orderBy("year", 'desc')
             ->groupBy('year')
             ->get();
-        
+
+        $now_year = (int) Carbon::now()->format('Y');
+        $arr_years = [];
+        for ($i=0; $i < 5; $i++) { 
+            $arr_years[] = $now_year;
+            $now_year -= 1;
+        }
+
+        sort($arr_years);
+
         $colors = [];
         $arr_rule_label = [];
         $arr_rule_count = [];
@@ -256,17 +280,22 @@ class PageController extends Controller
             $arr_rule_count[] = $data->documents_count;
         }
 
-        $get_chart = $this->getChartStatistic($years);
+        $get_chart = $this->getChartStatistic($arr_years);
 
         return view('dynamic.pages.about-statistik', compact('menu', 'rule_types', 'years', 'colors', 'arr_rule_label', 'arr_rule_count', 'get_chart'));
     }
 
     public function getChartStatistic($years)
     {
+        $now_year = (int) Carbon::now()->format('Y');
+        $back_year = (int) Carbon::now()->subYear(4)->format('Y');
+        
         $year_berlaku = Document::select('year', DB::raw('count(year) as count_year'))
             ->whereIsActive(1)
             ->where('master_document_id', Document::PERATURAN)
             ->where('status_berlaku', 1)
+            ->where('year', '<=', $now_year)
+            ->where('year', '>=', $back_year)
             ->groupBy('year')
             ->pluck('count_year', 'year')
             ->toArray();
@@ -275,6 +304,8 @@ class PageController extends Controller
             ->whereIsActive(1)
             ->where('master_document_id', Document::PERATURAN)
             ->where('status_berlaku', 0)
+            ->where('year', '<=', $now_year)
+            ->where('year', '>=', $back_year)
             ->groupBy('year')
             ->pluck('count_year', 'year')
             ->toArray();
@@ -289,13 +320,13 @@ class PageController extends Controller
         ];
 
         foreach ($years as $data) {
-            $arr_year_berlaku['year'][] = $data->year;
-            $arr_year_berlaku['data'][] = isset($year_berlaku[$data->year]) ? $year_berlaku[$data->year] : 0;
+            $arr_year_berlaku['year'][] = $data;
+            $arr_year_berlaku['data'][] = isset($year_berlaku[$data]) ? $year_berlaku[$data] : 0;
         }
 
         foreach ($years as $data) {
-            $arr_year_tidak_berlaku['year'][] = $data->year;
-            $arr_year_tidak_berlaku['data'][] = isset($year_tidak_berlaku[$data->year]) ? $year_tidak_berlaku[$data->year] : 0;
+            $arr_year_tidak_berlaku['year'][] = $data;
+            $arr_year_tidak_berlaku['data'][] = isset($year_tidak_berlaku[$data]) ? $year_tidak_berlaku[$data] : 0;
         }
 
         return ['berlaku' => $arr_year_berlaku, 'tidak-berlaku' => $arr_year_tidak_berlaku];
@@ -489,7 +520,7 @@ class PageController extends Controller
             $documents = $documents->where('tahun_terbit', request()->query('year'));
         }
         
-        $documents = $documents->orderBy('id', 'desc')->paginate(12);
+        $documents = $documents->orderBy('date', 'desc')->paginate(12);
 
         $years = Document::select('tahun_terbit')
             ->whereIsActive(1)
@@ -538,12 +569,12 @@ class PageController extends Controller
         }
 
         if (request()->query('sort') == 'oldest') {
-            $documents = $documents->orderBy('id', 'asc');
+            $documents = $documents->orderBy('tanggal_dibacakan', 'asc');
         } else {
-            $documents = $documents->orderBy('id', 'desc');
+            $documents = $documents->orderBy('tanggal_dibacakan', 'desc');
         }
         
-        $documents = $documents->orderBy('tanggal_dibacakan', 'desc')->paginate(8);
+        $documents = $documents->paginate(8);
 
         $years = Document::selectRaw('YEAR(tanggal_dibacakan) as year')
             ->whereIsActive(1)

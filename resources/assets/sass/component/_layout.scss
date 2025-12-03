@@ -21,6 +21,11 @@ header {
     display: flex;
     align-items: center;
   }
+  .logo{
+    .black{
+      display: none;
+    }
+  }
   .right-header {
     margin-left: auto;
     display: flex;
@@ -213,6 +218,9 @@ header {
       height: 1px;
       background-color: #dedede;
     }
+    form{
+      width: 100%;
+    }
     input {
       margin: 0;
       border: none !important;
@@ -227,9 +235,12 @@ header {
     &::before {
       height: 100%;
     }
-    .logo {
-      img {
-        content: url("@images/logo-black.png");
+    .logo{
+      .white{
+        display: none;
+      }
+      .black{
+        display: block;
       }
     }
     .right-header {
@@ -353,8 +364,9 @@ footer {
       }
       .info {
         display: flex;
-        align-items: center;
+        align-items: flex-start;
         margin-bottom: 12px;
+        gap: 2px;
         &:last-child {
           margin-bottom: 0;
         }
@@ -365,11 +377,19 @@ footer {
           min-width: 66px;
           margin-right: 8px;
           position: relative;
+          width: 45%;
+          padding-right: 4px;
           &::after {
             content: ":";
             position: absolute;
             inset: 0;
-            left: auto;
+            right: auto;
+            left: 100%;
+            margin: auto 0;
+            line-height: 1;
+            display: flex;
+            align-items: flex-start;
+            padding-top: 2px;
           }
         }
         span {
@@ -816,6 +836,9 @@ footer {
           &:last-child {
             margin-bottom: 0;
           }
+        }
+        .info label{
+          width: 25%;
         }
       }
     }
