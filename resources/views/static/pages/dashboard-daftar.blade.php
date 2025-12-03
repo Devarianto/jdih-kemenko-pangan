@@ -78,7 +78,7 @@
                     <td>RUU</td>
                     <td>15 Juli 2025</td>
                     <td>24 Juli 2025</td>
-                    <td><span class="status done">Selesai</span></td>
+                    <td><span class="status" style="background-color: rgba(0, 169, 4, 0.2); color: #00A904; ">Selesai</span></td>
                     <td><a href="{{ route('front.dashboard-daftar-detail') }}" class="button button-outline">Detail</a></td>
                   </tr>
                   <tr>
@@ -88,7 +88,7 @@
                     <td>Edaran</td>
                     <td>15 Juli 2025</td>
                     <td>24 Juli 2025</td>
-                    <td><span class="status plan-1">Perencanaan</span></td>
+                    <td><span class="status" style="background-color: rgba(51, 115, 221, 0.2); color:#3373DD;">Perencanaan</span></td>
                     <td><a href="{{ route('front.dashboard-daftar-detail') }}" class="button button-outline">Detail</a></td>
                   </tr>
                   <tr>
@@ -98,7 +98,7 @@
                     <td>RUU</td>
                     <td>15 Juli 2025</td>
                     <td>24 Juli 2025</td>
-                    <td><span class="status plan-2">Perencanaan</span></td>
+                    <td><span class="status" style="background-color:rgba(21, 196, 199, 0.2); color:#188E90; ">Perencanaan</span></td>
                     <td><a href="{{ route('front.dashboard-daftar-detail') }}" class="button button-outline">Detail</a></td>
                   </tr>
                   <tr>
@@ -108,7 +108,7 @@
                     <td>Edaran</td>
                     <td>15 Juli 2025</td>
                     <td>24 Juli 2025</td>
-                    <td><span class="status done">Selesai</span></td>
+                    <td><span class="status" style="background-color: rgba(0, 169, 4, 0.2); color: #00A904;">Selesai</span></td>
                     <td><a href="{{ route('front.dashboard-daftar-detail') }}" class="button button-outline">Detail</a></td>
                   </tr>
                   <tr>
@@ -118,7 +118,7 @@
                     <td>RUU</td>
                     <td>15 Juli 2025</td>
                     <td>24 Juli 2025</td>
-                    <td><span class="status plan-1">Perencanaan</span></td>
+                    <td><span class="status" style="background-color: rgba(51, 115, 221, 0.2); color:#3373DD;">Perencanaan</span></td>
                     <td><a href="{{ route('front.dashboard-daftar-detail') }}" class="button button-outline">Detail</a></td>
                   </tr>
                 </tbody>

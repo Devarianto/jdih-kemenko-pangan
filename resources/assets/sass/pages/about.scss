@@ -98,6 +98,9 @@
   &:last-child{
     margin-bottom: 0;
   }
+  p{
+    text-align: justify;
+  }
 }
 
 .box-shadow{
@@ -154,6 +157,7 @@
   }
   .chart{
     height: 440px;
+    margin-bottom: 24px;
   }
 }
 
