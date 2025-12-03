@@ -374,6 +374,8 @@ footer {
           min-width: 66px;
           margin-right: 8px;
           position: relative;
+          width: 45%;
+          padding-right: 4px;
           &::after {
             content: ":";
             position: absolute;
@@ -831,6 +833,9 @@ footer {
           &:last-child {
             margin-bottom: 0;
           }
+        }
+        .info label{
+          width: 25%;
         }
       }
     }
