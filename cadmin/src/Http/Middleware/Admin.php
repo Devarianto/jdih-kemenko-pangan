@@ -16,7 +16,7 @@ class Admin
         $passwordInfo = [];
         
         if (config('cadmin.password.weak-password') != true)
-            $passwordInfo['weak-password'] = 'password must at least 8 character and contain uppercase, lowercase, numeric & special character';
+            $passwordInfo['weak-password'] = 'password must at least 6 character and contain uppercase, lowercase, numeric & special character';
         if (config('cadmin.password.unique-password-history') > 0)
             $passwordInfo['unique-password-history'] = 'password must different from last '.config('cadmin.password.unique-password-history').' history';
         if (config('cadmin.password.password-expiry') > 0)
@@ -28,7 +28,7 @@ class Admin
             if (config('cadmin.password.weak-password') == true)
                 return true;
             
-            if (!$password || strlen($password) < 8)
+            if (!$password || strlen($password) < 6)
                 return false;
             $uppercase = preg_match('@[A-Z]@', $password);
             $lowercase = preg_match('@[a-z]@', $password);
