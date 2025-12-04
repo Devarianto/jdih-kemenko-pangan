@@ -18,8 +18,9 @@ return Application::configure(basePath: dirname(__DIR__))
         },
     )
     ->withMiddleware(function (Middleware $middleware) {
+        $middleware->append(\App\Http\Middleware\HSTS::class);
         $middleware->web(append: [
-            \App\Http\Middleware\Frontend::class,
+            \App\Http\Middleware\Frontend::class
         ]);
 
         $middleware->alias([
