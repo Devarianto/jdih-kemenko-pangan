@@ -18,10 +18,10 @@
         <div class="medsos">
           <label for="">{{ lang::translate("news.share") }}</label>
           <div class="wrap">
-            <a href="{{ $news->share('link') }}" target="__BLANK"><img src="{{ asset('images/material/ic-link.svg') }}" alt=""></a>
+            <a href="javascript:;" data-url="{{ url()->current() }}" onclick="navigator.clipboard.writeText(this.dataset.url).then(()=>{ alert('{{ lang::translate('global.url-copy') }}'); });"><img src="{{ asset('images/material/ic-link.svg') }}" alt=""></a>
             <a href="{{ $news->share('wa') }}" target="__BLANK"><img src="{{ asset('images/material/ic-wa.svg') }}" alt=""></a>
-            <a href="{{ $news->share('twitter') }}" target="__BLANK"><img src="{{ asset('images/material/ic-x.svg') }}" alt=""></a>
-            <a href="{{ $news->share('tw') }}" target="__BLANK"><img src="{{ asset('images/material/ic-fb.svg') }}" alt=""></a>
+            <a href="{{ $news->share('tw') }}" target="__BLANK"><img src="{{ asset('images/material/ic-x.svg') }}" alt=""></a>
+            <a href="{{ $news->share('fb') }}" target="__BLANK"><img src="{{ asset('images/material/ic-fb.svg') }}" alt=""></a>
           </div>
         </div>
       </div>  

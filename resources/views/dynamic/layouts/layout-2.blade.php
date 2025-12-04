@@ -17,7 +17,7 @@
         <!-- header -->
         <header class="undermaintenance">
           <a href="{{ lang::url('/') }}" class="logo">
-            <img src="{{asset('images/material/logo.svg')}}" alt="">
+            <img class="black" src="{{ media::initial(conf('site-setting')->value('logo-floating'))->url }}" alt="{{ media::initial(conf('site-setting')->value('logo-floating'))->alt }}">
           </a>
         </header>
         <!-- end of header -->

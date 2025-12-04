@@ -8,10 +8,7 @@
         <div class="medsos">
           <label for="">{{ lang::translate('document.share') }}</label>
           <div class="wrap">
-            <a href="{{ $document->share('link') }}" target="__BLANK"><img src="{{ asset('images/material/ic-link.svg') }}" alt=""></a>
-            <a href="{{ $document->share('wa') }}" target="__BLANK"><img src="{{ asset('images/material/ic-wa.svg') }}" alt=""></a>
-            <a href="{{ $document->share('twitter') }}" target="__BLANK"><img src="{{ asset('images/material/ic-x.svg') }}" alt=""></a>
-            <a href="{{ $document->share('tw') }}" target="__BLANK"><img src="{{ asset('images/material/ic-fb.svg') }}" alt=""></a>
+            @include('dynamic.component.share-social', ['model' => $document])
           </div>
         </div>
       </div>      

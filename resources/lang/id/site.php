@@ -73,6 +73,7 @@ return [
 		'social-media' => 'SOCIAL MEDIA',
 	],
 	'global' => [
+		'url-copy' => 'URL berhasil disalin',
 		'search' => 'Ketik kata pencarian',
 		'search-not-found' => 'Data tidak ditemukan',
 		'download-pdf' => 'Download PDF',
