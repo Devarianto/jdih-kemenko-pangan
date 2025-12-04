@@ -6,6 +6,10 @@ import { resolve } from 'path';
 import inject from "@rollup/plugin-inject";
 
 export default defineConfig({
+  build: {
+    cssCodeSplit: true,
+    minify: 'esbuild',
+  },
   plugins: [
     inject({   // => that should be first under plugins array
       $: 'jquery',
@@ -28,6 +32,7 @@ export default defineConfig({
       ...fg.sync('resources/views/**/*.blade.php')
       // 'resources/views/welcome.blade.php',
     ]),
+   
   ],
   resolve: {
     alias: {

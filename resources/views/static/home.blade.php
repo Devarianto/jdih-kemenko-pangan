@@ -5,15 +5,15 @@
 <div class="banner-homepage">
   <figure>
     <img
-      src="{{asset('images/content/banner-homepage.jpg')}}"
-      data-img-large="{{ asset('images/content/banner-homepage.jpg') }}"
-      data-img-medium="{{ asset('images/content/banner-homepage-m.jpg') }}"
-      data-img-small="{{ asset('images/content/banner-homepage-s.jpg') }}"
-      width="1380" height="620" alt="img">
+      src="{{asset('images/content/banner-homepage.webp')}}"
+      data-img-large="{{ asset('images/content/banner-homepage.webp') }}"
+      data-img-medium="{{ asset('images/content/banner-homepage-m.webp') }}"
+      data-img-small="{{ asset('images/content/banner-homepage-s.webp') }}"
+      width="1380" height="620" loading="lazy" alt="img">
   </figure>
   <div class="banner-homepage__caption">
     <h3>Selamat Datang di JDIH</h3>
-    <h6>Kementerian Kordinator Bidang Pangan</h6>
+    <h1>Kementerian Kordinator Bidang Pangan</h1>
     <div class="wrap-input">
       <input type="text" placeholder="Ketik Kata Kunci Pencarian">
       <button class="voice">
@@ -99,7 +99,7 @@
     <div class="document__listing swiper">
       <div class="swiper-wrapper">
         <a href="" class="document__listing--item swiper-slide">
-          <figure><img src="{{asset('images/cover_370_240_news-xlarge.jpg.webp')}}" alt=""></figure>
+          <figure><img src="{{asset('images/cover_370_240_news-xlarge.jpg.webp')}}" loading="lazy" alt=""></figure>
           <figcaption>
             <span class="tag" style="background-color: #D2E3FF; color:#2063D2;">PUTUSAN HUKUM</span>
             <p>Keputusan Menteri Nomor 1841 Tahun 2026 Nomor 1841 Tahun 2026</p>
@@ -113,7 +113,7 @@
           </figcaption>
         </a>
         <a href="" class="document__listing--item swiper-slide">
-          <figure><img src="{{asset('images/content/dok-2.jpg')}}" alt=""></figure>
+          <figure><img src="{{asset('images/cover_370_240_news-xlarge.jpg.webp')}}" loading="lazy" alt=""></figure>
           <figcaption>
             <span class="tag" style="background-color: #C1CCFF; color:#091D77;">PERATURAN HUKUM</span>
             <p>Putusan Komisi Informasi Pusat Republik Indonesia Nomor 023/023</p>
@@ -127,7 +127,7 @@
           </figcaption>
         </a>
         <a href="" class="document__listing--item swiper-slide">
-          <figure><img src="{{asset('images/content/dok-3.jpg')}}" alt=""></figure>
+          <figure><img src="{{asset('images/cover_370_240_news-xlarge.jpg.webp')}}" loading="lazy" alt=""></figure>
           <figcaption>
             <span class="tag" style="background-color: #D2E8ED; color:#0086A7;">ARTIKEL HUKUM</span>
             <p>Perlindungan hukum dan partisipasi masyrakat untuk mengetahui</p>
@@ -141,7 +141,7 @@
           </figcaption>
         </a>
         <a href="" class="document__listing--item swiper-slide">
-          <figure><img src="{{asset('images/content/dok-4.jpg')}}" alt=""></figure>
+          <figure><img src="{{asset('images/cover_370_240_news-xlarge.jpg.webp')}}" loading="lazy" alt=""></figure>
           <figcaption>
             <span class="tag" style="background-color: #C1CCFF; color:#091D77;">PERATURAN HUKUM</span>
             <p>Perlindungan hukum dan partisipasi masyrakat untuk mengetahui</p>
@@ -155,7 +155,7 @@
           </figcaption>
         </a>
         <a href="" class="document__listing--item swiper-slide">
-          <figure><img src="{{asset('images/content/dok-4.jpg')}}" alt=""></figure>
+          <figure><img src="{{asset('images/cover_370_240_news-xlarge.jpg.webp')}}" loading="lazy" alt=""></figure>
           <figcaption>
             <span class="tag" style="background-color: #C1CCFF; color:#091D77;">PERATURAN HUKUM</span>
             <p>Perlindungan hukum dan partisipasi masyrakat untuk mengetahui</p>
@@ -176,11 +176,11 @@
   <div class="trigger trigger-2"></div>
   <div class="bg">
     <img
-      src="{{asset('images/content/bg-tema.jpg')}}"
-      data-img-large="{{ asset('images/content/bg-tema.jpg') }}"
-      data-img-medium="{{ asset('images/content/bg-tema-m.jpg') }}"
-      data-img-small="{{ asset('images/content/bg-tema-s.jpg') }}"
-      width="1380" height="620" alt="img">
+      src="{{asset('images/content/bg-tema.webp')}}"
+      data-img-large="{{ asset('images/content/bg-tema.webp') }}"
+      data-img-medium="{{ asset('images/content/bg-tema-m.webp') }}"
+      data-img-small="{{ asset('images/content/bg-tema-s.webp') }}"
+      width="1380" height="620" loading="lazy" alt="img">
   </div>
   <div class="wave">
     <svg xmlns="http://www.w3.org/2000/svg" widht="5000" height="200" viewBox="0 180 2500 200" fill="#F8F8F8">
@@ -201,28 +201,28 @@
     </div>
     <div class="tema__listing">
       <a href="" class="tema__listing--item">
-        <figure><img src="{{asset('images/content/tem-1.jpg')}}" alt=""></figure>
+        <figure><img src="{{asset('images/content/tem-1.webp')}}" loading="lazy" alt=""></figure>
         <figcaption>
           <span class="ico"><img src="{{ asset('images/content/ic-tema-1.svg') }}" alt=""></span>
           <h6>Tata Niaga dan Distribusi Pangan</h6>
         </figcaption>
       </a>
       <a href="" class="tema__listing--item">
-        <figure><img src="{{asset('images/content/tem-2.jpg')}}" alt=""></figure>
+        <figure><img src="{{asset('images/content/tem-2.webp')}}" loading="lazy" alt=""></figure>
         <figcaption>
           <span class="ico"><img src="{{ asset('images/content/ic-tema-2.svg') }}" alt=""></span>
           <h6>Usaha Pangan dan Pertanian</h6>
         </figcaption>
       </a>
       <a href="" class="tema__listing--item">
-        <figure><img src="{{asset('images/content/tem-3.jpg')}}" alt=""></figure>
+        <figure><img src="{{asset('images/content/tem-3.webp')}}" loading="lazy" alt=""></figure>
         <figcaption>
           <span class="ico"><img src="{{ asset('images/content/ic-tema-3.svg') }}" alt=""></span>
           <h6>Keterjangkauan dan Keamanan Pangan</h6>
         </figcaption>
       </a>
       <a href="" class="tema__listing--item">
-        <figure><img src="{{asset('images/content/tem-4.jpg')}}" alt=""></figure>
+        <figure><img src="{{asset('images/content/tem-4.webp')}}" loading="lazy" alt=""></figure>
         <figcaption>
           <span class="ico"><img src="{{ asset('images/content/ic-tema-4.svg') }}" alt=""></span>
           <h6>Sumber Daya Maritim</h6>
@@ -243,7 +243,7 @@
           </div>
           <div class="listing-card without-box">
             <a href="" class="listing-card__item">
-              <figure><img src="{{asset('images/content/mon-1.jpg')}}" alt=""></figure>
+              <figure><img src="{{asset('images/content/mon-1.jpg')}}" loading="lazy" alt=""></figure>
               <figcaption>
                 <p>Peran Strategis Kordinasi Swasembada Pangan</p>
                 <small class="visited">
@@ -256,7 +256,7 @@
               </figcaption>
             </a>
             <a href="" class="listing-card__item">
-              <figure><img src="{{asset('images/content/mon-2.jpg')}}" alt=""></figure>
+              <figure><img src="{{asset('images/content/mon-2.jpg')}}" loading="lazy" alt=""></figure>
               <figcaption>
                 <p>Peran Strategis Kordinasi Swasembada Pangan</p>
                 <small class="visited">
@@ -269,7 +269,7 @@
               </figcaption>
             </a>
             <a href="" class="listing-card__item">
-              <figure><img src="{{asset('images/content/mon-3.jpg')}}" alt=""></figure>
+              <figure><img src="{{asset('images/content/mon-3.jpg')}}" loading="lazy" alt=""></figure>
               <figcaption>
                 <p>Peran Strategis Kordinasi Swasembada Pangan</p>
                 <small class="visited">
@@ -282,7 +282,7 @@
               </figcaption>
             </a>
             <a href="" class="listing-card__item">
-              <figure><img src="{{asset('images/content/mon-4.jpg')}}" alt=""></figure>
+              <figure><img src="{{asset('images/content/mon-4.jpg')}}" loading="lazy" alt=""></figure>
               <figcaption>
                 <p>Peran Strategis Kordinasi Swasembada Pangan</p>
                 <small class="visited">
@@ -303,7 +303,7 @@
           </div>
           <div class="listing-card">
             <a href="" class="listing-card__item">
-              <figure><img src="{{asset('images/content/mon-1.jpg')}}" alt=""></figure>
+              <figure><img src="{{asset('images/content/mon-1.jpg')}}" loading="lazy" alt=""></figure>
               <figcaption>
                 <p>Undang-Undang Nomor 31 Tahun 2025</p>
                 <span>Tentang Perubahan Keempat Atas Undang-Undang Nomor 4 Tahun 2009 Tentang</span>
@@ -317,7 +317,7 @@
               </figcaption>
             </a>
             <a href="" class="listing-card__item">
-              <figure><img src="{{asset('images/content/mon-2.jpg')}}" alt=""></figure>
+              <figure><img src="{{asset('images/content/mon-2.jpg')}}" loading="lazy" alt=""></figure>
               <figcaption>
                 <p>Undang-Undang Nomor 45 1Tahun 2025</p>
                 <span>Tentang Perubahan Keempat Atas Undang-Undang Nomor 4 Tahun 2009 Tentang</span>
@@ -331,7 +331,7 @@
               </figcaption>
             </a>
             <a href="" class="listing-card__item">
-              <figure><img src="{{asset('images/content/mon-3.jpg')}}" alt=""></figure>
+              <figure><img src="{{asset('images/content/mon-3.jpg')}}" loading="lazy" alt=""></figure>
               <figcaption>
                 <p>Undang-Undang Nomor 200 Tahun 2025</p>
                 <span>Tentang Perubahan Keempat Atas Undang-Undang Nomor 4 Tahun 2009 Tentang</span>
@@ -345,7 +345,7 @@
               </figcaption>
             </a>
             <a href="" class="listing-card__item">
-              <figure><img src="{{asset('images/content/mon-4.jpg')}}" alt=""></figure>
+              <figure><img src="{{asset('images/content/mon-4.jpg')}}" loading="lazy" alt=""></figure>
               <figcaption>
                 <p>Undang-Undang Nomor 18 Tahun 2025</p>
                 <span>Tentang Perubahan Keempat Atas Undang-Undang Nomor 4 Tahun 2009 Tentang</span>
@@ -367,7 +367,7 @@
           </div>
           <div class="listing-card">
             <a href="" class="listing-card__item">
-              <figure><img src="{{asset('images/content/mon-1.jpg')}}" alt=""></figure>
+              <figure><img src="{{asset('images/content/mon-1.jpg')}}" loading="lazy" alt=""></figure>
               <figcaption>
                 <small class="tag"># Putusan Komisi</small>
                 <p>Putusan Komisi Informasi Pusat Republik Indonesia Nomor 023/IV/KIP-PS-A/2022</p>
@@ -381,7 +381,7 @@
               </figcaption>
             </a>
             <a href="" class="listing-card__item">
-              <figure><img src="{{asset('images/content/mon-2.jpg')}}" alt=""></figure>
+              <figure><img src="{{asset('images/content/mon-2.jpg')}}" loading="lazy" alt=""></figure>
               <figcaption>
                 <small class="tag"># Putusan Komisi</small>
                 <p>Putusan Komisi Informasi Pusat Republik Indonesia Nomor 023/IV/KIP-PS-A/2022</p>
@@ -395,7 +395,7 @@
               </figcaption>
             </a>
             <a href="" class="listing-card__item">
-              <figure><img src="{{asset('images/content/mon-3.jpg')}}" alt=""></figure>
+              <figure><img src="{{asset('images/content/mon-3.jpg')}}" loading="lazy" alt=""></figure>
               <figcaption>
                 <small class="tag"># Putusan Komisi</small>
                 <p>Putusan Komisi Informasi Pusat Republik Indonesia Nomor 023/IV/KIP-PS-A/2022</p>
@@ -409,7 +409,7 @@
               </figcaption>
             </a>
             <a href="" class="listing-card__item">
-              <figure><img src="{{asset('images/content/mon-4.jpg')}}" alt=""></figure>
+              <figure><img src="{{asset('images/content/mon-4.jpg')}}" loading="lazy" alt=""></figure>
               <figcaption>
                 <small class="tag"># Putusan Komisi</small>
                 <p>Putusan Komisi Informasi Pusat Republik Indonesia Nomor 023/IV/KIP-PS-A/2022</p>
@@ -431,7 +431,7 @@
           </div>
           <div class="listing-card">
             <a href="" class="listing-card__item">
-              <figure><img src="{{asset('images/content/mon-1.jpg')}}" alt=""></figure>
+              <figure><img src="{{asset('images/content/mon-1.jpg')}}" loading="lazy" alt=""></figure>
               <figcaption>
                 <small class="date">Edisi Desember 2025</small>
                 <p>Kedaulatan pangan dalam perspektif hukum dan keamanan manusia</p>
@@ -445,7 +445,7 @@
               </figcaption>
             </a>
             <a href="" class="listing-card__item">
-              <figure><img src="{{asset('images/content/mon-2.jpg')}}" alt=""></figure>
+              <figure><img src="{{asset('images/content/mon-2.jpg')}}" loading="lazy" alt=""></figure>
               <figcaption>
                 <small class="date">Edisi Desember 2025</small>
                 <p>Perlindungan hukum dan partisipasi masyrakat untuk menjaga</p>
@@ -459,7 +459,7 @@
               </figcaption>
             </a>
             <a href="" class="listing-card__item">
-              <figure><img src="{{asset('images/content/mon-3.jpg')}}" alt=""></figure>
+              <figure><img src="{{asset('images/content/mon-3.jpg')}}" loading="lazy" alt=""></figure>
               <figcaption>
                 <small class="date">Edisi Desember 2025</small>
                 <p>Perlindungan hukum dan partisipasi masyrakat untuk menjaga</p>
@@ -473,7 +473,7 @@
               </figcaption>
             </a>
             <a href="" class="listing-card__item">
-              <figure><img src="{{asset('images/content/mon-4.jpg')}}" alt=""></figure>
+              <figure><img src="{{asset('images/content/mon-4.jpg')}}" loading="lazy" alt=""></figure>
               <figcaption>
                 <small class="date">Edisi Desember 2025</small>
                 <p>Perlindungan hukum dan partisipasi masyrakat untuk menjaga</p>
@@ -509,7 +509,7 @@
       </div>
       <div class="document__listing">
         <a href="" class="document__listing--item ">
-          <figure><img src="{{asset('images/cover_370_240_news-xlarge.jpg.webp')}}" alt=""></figure>
+          <figure><img src="{{asset('images/cover_370_240_news-xlarge.jpg.webp')}}" loading="lazy" alt=""></figure>
           <figcaption>
             <span class="tag" style="background-color: #D2E3FF; color:#2063D2;">PUTUSAN HUKUM</span>
             <p>Keputusan Menteri Nomor 1841 Tahun 2026 Nomor 1841 Tahun 2026</p>
@@ -523,7 +523,7 @@
           </figcaption>
         </a>
         <a href="" class="document__listing--item ">
-          <figure><img src="{{asset('images/content/mon-1.jpg')}}" alt=""></figure>
+          <figure><img src="{{asset('images/cover_370_240_news-xlarge.jpg.webp')}}" loading="lazy" alt=""></figure>
           <figcaption>
             <span class="tag" style="background-color: #C1CCFF; color:#091D77;">PERATURAN HUKUM</span>
             <p>Putusan Komisi Informasi Pusat Republik Indonesia Nomor 023/023</p>
@@ -537,7 +537,7 @@
           </figcaption>
         </a>
         <a href="" class="document__listing--item ">
-          <figure><img src="{{asset('images/content/dok-3.jpg')}}" alt=""></figure>
+          <figure><img src="{{asset('images/cover_370_240_news-xlarge.jpg.webp')}}" alt=""></figure>
           <figcaption>
             <span class="tag" style="background-color: #D2E8ED; color:#0086A7;">ARTIKEL HUKUM</span>
             <p>Perlindungan hukum dan partisipasi masyrakat untuk mengetahui</p>
@@ -551,7 +551,7 @@
           </figcaption>
         </a>
         <a href="" class="document__listing--item ">
-          <figure><img src="{{asset('images/content/dok-4.jpg')}}" alt=""></figure>
+          <figure><img src="{{asset('images/cover_370_240_news-xlarge.jpg.webp')}}" alt=""></figure>
           <figcaption>
             <span class="tag" style="background-color: #C1CCFF; color:#091D77;">PERATURAN HUKUM</span>
             <p>Perlindungan hukum dan partisipasi masyrakat untuk mengetahui</p>
@@ -580,7 +580,7 @@
         Berita
       </div>
       <figure>
-        <img src="{{ asset('images/content/large-news.jpg') }}" alt="">
+        <img src="{{ asset('images/content/large-news.webp') }}" loading="lazy" alt="">
       </figure>
       <div class="grid__item--caption">
         <span class="date">30 Juli 2025</span>
@@ -590,7 +590,7 @@
       <div class="highlight">
         @for ($i = 1; $i <= 3; $i++)
           <a href="" class="highlight-item">
-          <figure><img src="{{ asset('images/content/news-small-'.$i.'.jpg') }}" alt=""></figure>
+          <figure><img src="{{ asset('images/content/news-small-'.$i.'.jpg') }}" loading="lazy" alt=""></figure>
           <figcaption>
             <p>Rapat Pembahasan Tentang Perkembangan Situasi Terkini di Rangkaian dengan Rakor Pengendalian Inflasi Tahun 2025</p>
             <small class="date">30 Juli 2025</small>
@@ -607,7 +607,7 @@
         </svg>
         Galeri Foto
       </div>
-      <figure><img src="{{ asset('images/content/news-1.jpg') }}" alt=""></figure>
+      <figure><img src="{{ asset('images/content/news-1.jpg') }}" loading="lazy" alt=""></figure>
       <figcaption>
         <span class="date">30 Juli 2025</span>
         <p>Rapat Koordinasi JDIH untuk kordinasi Nasional tentang Pangan</p>
@@ -622,8 +622,7 @@
         Galeri Video
       </div>
       <figure>
-        <img src="{{ asset('images/content/news-2.jpg') }}" alt="">
-
+        <img src="{{ asset('images/content/news-2.webp') }}" loading="lazy" alt="">
       </figure>
       <figcaption>
         <span class="date">30 Juli 2025</span>
@@ -678,26 +677,26 @@
     <div class="swiper-wrapper">
       @for ($i = 1; $i <= 5; $i++)
         <a href="" class="swiper-slide">
-        <img src="{{ asset('images/content/partner-'.$i.'.png') }}" alt="">
+        <img src="{{ asset('images/content/partner-'.$i.'.webp') }}" loading="lazy" alt="">
         </a>
       @endfor
       <a href="" class="swiper-slide">
-        <img src="{{ asset('images/content/partner-2.png') }}" alt="">
+        <img src="{{ asset('images/content/partner-2.webp') }}" loading="lazy" alt="">
       </a>
       <a href="" class="swiper-slide">
-        <img src="{{ asset('images/content/partner-1.png') }}" alt="">
+        <img src="{{ asset('images/content/partner-1.webp') }}" loading="lazy" alt="">
       </a>
       <a href="" class="swiper-slide">
-        <img src="{{ asset('images/content/partner-2.png') }}" alt="">
+        <img src="{{ asset('images/content/partner-2.webp') }}" loading="lazy" alt="">
       </a>
       <a href="" class="swiper-slide">
-        <img src="{{ asset('images/content/partner-2.png') }}" alt="">
+        <img src="{{ asset('images/content/partner-2.webp') }}" loading="lazy" alt="">
       </a>
       <a href="" class="swiper-slide">
-        <img src="{{ asset('images/content/partner-2.png') }}" alt="">
+        <img src="{{ asset('images/content/partner-2.webp') }}" loading="lazy" alt="">
       </a>
       <a href="" class="swiper-slide">
-        <img src="{{ asset('images/content/partner-2.png') }}" alt="">
+        <img src="{{ asset('images/content/partner-2.webp') }}" loading="lazy" alt="">
       </a>
     </div>
   </div>
@@ -710,7 +709,7 @@
       <div class="popup__box">
         <div class="popup__content home-popup">
           <figure>
-            <img src="{{ asset('images/content/large-news.jpg') }}" alt="">
+            <img src="{{ asset('images/content/large-news.webp') }}" loading="lazy" alt="">
           </figure>
           <figcaption class="content-pages">
             <h4>Lorem Ipsum Dolor Sit Amet</h4>
@@ -850,7 +849,10 @@
 </div>
 <!-- end of middle -->
 @push('head')
-<link rel="stylesheet" type="text/css" href="{{ Vite::asset('resources/assets/sass/pages/home.scss')}}" preload>
+<link rel="preload" href="{{ Vite::asset('resources/assets/sass/pages/home.scss') }}"
+  as="style"
+  onload="this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="{{ Vite::asset('resources/assets/sass/pages/home.scss') }}"></noscript>
 @endpush
 @push('footer')
 <script>
