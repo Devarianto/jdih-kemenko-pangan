@@ -14,6 +14,17 @@ use App\Http\Controllers\Front\VisitorController;
 
 use App\Http\Controllers\APIController;
 
+if (\Str::contains(request()->getRequestUri(), 'index.php') || \Str::contains(request()->getRequestUri(), '//')) {
+    $replace = \Str::contains(request()->getRequestUri(), 'index.php') ? 'index.php' : '//';
+    $url = str_replace($replace, '', request()->getRequestUri());
+    $base = $replace == 'index.php' ? substr(url()->to('/'),0,-10).$url : url()->to('/');
+
+    if (strlen($base) > 0) {
+        header("Location: $base", true, 301);
+        exit;
+    }
+}
+
 Route::group(['middleware' => ['web','front', 'visitor-count']],function() {
 
     Route::fallback(function () {
