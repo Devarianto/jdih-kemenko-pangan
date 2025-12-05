@@ -1,16 +1,13 @@
 import jQuery from "jquery";
 import popup from './libs/popup.js'
-import '/node_modules/select2/dist/css/select2.css';
 import select2 from 'select2';
 import 'bootstrap-datepicker';
 import header from "./libs/header.js";
 import responsiveImage from './libs/responsive-images.js';
 import animatingScroll from './libs/animatingScroll.js';
-import html2canvas from "html2canvas";
 
 // window.$ = $
 window.$ = window.jQuery = jQuery;
-window.html2canvas = html2canvas;
 
 const responsive = responsiveImage($)
 

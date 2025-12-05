@@ -25,6 +25,9 @@ header {
     .black{
       display: none;
     }
+    img{
+      height: auto;
+    }
   }
   .right-header {
     margin-left: auto;
@@ -686,8 +689,8 @@ footer {
       width: 235px;
     }
     .menu-mobile {
-      top: 61px;
-      height: calc(100svh - 61px);
+      top: 44px;
+      height: calc(100svh - 44px);
       padding: 32px 45px 100px;
       &__bottom {
         padding: 40px 45px;
@@ -813,6 +816,13 @@ footer {
         ul {
           height: calc(100svh - 200px);
         }
+      }
+    }
+    .logo{
+      width: 175px;
+      padding: 5px 0;
+      img{
+        width: 100%;
       }
     }
   }
