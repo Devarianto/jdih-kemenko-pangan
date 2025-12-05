@@ -29,7 +29,8 @@ return Application::configure(basePath: dirname(__DIR__))
             'admin' => \Cactuar\Admin\Http\Middleware\Admin::class,
             'minify' => \Cactuar\Admin\Http\Middleware\Minify::class,
             'front' => \App\Http\Middleware\Front::class,
-            'visitor-count' => \App\Http\Middleware\VisitorCount::class
+            'visitor-count' => \App\Http\Middleware\VisitorCount::class,
+            'csp' => \App\Http\Middleware\ContentSecurityPolicy::class
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {

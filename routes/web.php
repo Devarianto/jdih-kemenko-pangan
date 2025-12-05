@@ -25,7 +25,7 @@ if (\Str::contains(request()->getRequestUri(), 'index.php') || \Str::contains(re
     }
 }
 
-Route::group(['middleware' => ['web','front', 'visitor-count']],function() {
+Route::group(['middleware' => ['web','front', 'visitor-count', 'csp']],function() {
 
     Route::fallback(function () {
        return view('errors.404');
