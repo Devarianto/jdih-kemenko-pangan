@@ -99,7 +99,7 @@
     <div class="document__listing swiper">
       <div class="swiper-wrapper">
         <a href="" class="document__listing--item swiper-slide">
-          <figure><img src="{{asset('images/cover_370_240_news-xlarge.jpg.webp')}}" loading="lazy" alt=""></figure>
+          <figure><img src="{{asset('images/cover_370_240_news-xlarge.jpg.webp')}}" loading="lazy" width="80" height="105" alt="document"></figure>
           <figcaption>
             <span class="tag" style="background-color: #D2E3FF; color:#2063D2;">PUTUSAN HUKUM</span>
             <p>Keputusan Menteri Nomor 1841 Tahun 2026 Nomor 1841 Tahun 2026</p>
@@ -113,7 +113,9 @@
           </figcaption>
         </a>
         <a href="" class="document__listing--item swiper-slide">
-          <figure><img src="{{asset('images/cover_370_240_news-xlarge.jpg.webp')}}" loading="lazy" alt=""></figure>
+          <figure>
+            <img src="{{asset('images/cover_370_240_news-xlarge.jpg.webp')}}" loading="lazy" width="80" height="105" alt="document">
+          </figure>
           <figcaption>
             <span class="tag" style="background-color: #C1CCFF; color:#091D77;">PERATURAN HUKUM</span>
             <p>Putusan Komisi Informasi Pusat Republik Indonesia Nomor 023/023</p>
@@ -127,7 +129,7 @@
           </figcaption>
         </a>
         <a href="" class="document__listing--item swiper-slide">
-          <figure><img src="{{asset('images/cover_370_240_news-xlarge.jpg.webp')}}" loading="lazy" alt=""></figure>
+          <figure><img src="{{asset('images/cover_370_240_news-xlarge.jpg.webp')}}" loading="lazy" width="80" height="105" alt="document"></figure>
           <figcaption>
             <span class="tag" style="background-color: #D2E8ED; color:#0086A7;">ARTIKEL HUKUM</span>
             <p>Perlindungan hukum dan partisipasi masyrakat untuk mengetahui</p>
@@ -141,7 +143,7 @@
           </figcaption>
         </a>
         <a href="" class="document__listing--item swiper-slide">
-          <figure><img src="{{asset('images/cover_370_240_news-xlarge.jpg.webp')}}" loading="lazy" alt=""></figure>
+          <figure><img src="{{asset('images/cover_370_240_news-xlarge.jpg.webp')}}" loading="lazy" width="80" height="105" alt="document"></figure>
           <figcaption>
             <span class="tag" style="background-color: #C1CCFF; color:#091D77;">PERATURAN HUKUM</span>
             <p>Perlindungan hukum dan partisipasi masyrakat untuk mengetahui</p>
@@ -155,7 +157,7 @@
           </figcaption>
         </a>
         <a href="" class="document__listing--item swiper-slide">
-          <figure><img src="{{asset('images/cover_370_240_news-xlarge.jpg.webp')}}" loading="lazy" alt=""></figure>
+          <figure><img src="{{asset('images/cover_370_240_news-xlarge.jpg.webp')}}" loading="lazy" width="80" height="105" alt="document"></figure>
           <figcaption>
             <span class="tag" style="background-color: #C1CCFF; color:#091D77;">PERATURAN HUKUM</span>
             <p>Perlindungan hukum dan partisipasi masyrakat untuk mengetahui</p>
@@ -201,30 +203,48 @@
     </div>
     <div class="tema__listing">
       <a href="" class="tema__listing--item">
-        <figure><img src="{{asset('images/content/tem-1.webp')}}" loading="lazy" alt=""></figure>
+        <figure>
+          <img src="{{asset('images/content/tem-1.webp')}}" loading="lazy"
+           width="280" height="220"
+           alt="">
+        </figure>
         <figcaption>
-          <span class="ico"><img src="{{ asset('images/content/ic-tema-1.svg') }}" alt=""></span>
+          <span class="ico">
+            <img src="{{ asset('images/content/ic-tema-1.svg') }}"
+             width="48" height="48"
+            alt="">
+          </span>
           <h6>Tata Niaga dan Distribusi Pangan</h6>
         </figcaption>
       </a>
       <a href="" class="tema__listing--item">
-        <figure><img src="{{asset('images/content/tem-2.webp')}}" loading="lazy" alt=""></figure>
+        <figure>
+          <img src="{{asset('images/content/tem-2.webp')}}" loading="lazy" 
+           width="280" height="220"
+          alt="">
+        </figure>
         <figcaption>
-          <span class="ico"><img src="{{ asset('images/content/ic-tema-2.svg') }}" alt=""></span>
+          <span class="ico"><img src="{{ asset('images/content/ic-tema-2.svg') }}" 
+            width="48" height="48"
+            alt=""></span>
           <h6>Usaha Pangan dan Pertanian</h6>
         </figcaption>
       </a>
       <a href="" class="tema__listing--item">
-        <figure><img src="{{asset('images/content/tem-3.webp')}}" loading="lazy" alt=""></figure>
+        <figure><img src="{{asset('images/content/tem-3.webp')}}" loading="lazy" 
+          width="280" height="220"
+          alt=""></figure>
         <figcaption>
-          <span class="ico"><img src="{{ asset('images/content/ic-tema-3.svg') }}" alt=""></span>
+          <span class="ico"><img src="{{ asset('images/content/ic-tema-3.svg') }}" width="48" height="48" alt=""></span>
           <h6>Keterjangkauan dan Keamanan Pangan</h6>
         </figcaption>
       </a>
       <a href="" class="tema__listing--item">
-        <figure><img src="{{asset('images/content/tem-4.webp')}}" loading="lazy" alt=""></figure>
+        <figure><img src="{{asset('images/content/tem-4.webp')}}" loading="lazy"
+          width="280" height="220" 
+          alt=""></figure>
         <figcaption>
-          <span class="ico"><img src="{{ asset('images/content/ic-tema-4.svg') }}" alt=""></span>
+          <span class="ico"><img src="{{ asset('images/content/ic-tema-4.svg') }}" width="48" height="48" alt=""></span>
           <h6>Sumber Daya Maritim</h6>
         </figcaption>
       </a>
@@ -243,7 +263,10 @@
           </div>
           <div class="listing-card without-box">
             <a href="" class="listing-card__item">
-              <figure><img src="{{asset('images/content/mon-1.jpg')}}" loading="lazy" alt=""></figure>
+              <figure><img src="{{asset('images/content/mon-1.jpg')}}" 
+                width="218" height="281"
+                loading="lazy" alt="">
+              </figure>
               <figcaption>
                 <p>Peran Strategis Kordinasi Swasembada Pangan</p>
                 <small class="visited">
@@ -256,7 +279,9 @@
               </figcaption>
             </a>
             <a href="" class="listing-card__item">
-              <figure><img src="{{asset('images/content/mon-2.jpg')}}" loading="lazy" alt=""></figure>
+              <figure><img src="{{asset('images/content/mon-2.jpg')}}" 
+                width="218" height="281"
+                loading="lazy" alt=""></figure>
               <figcaption>
                 <p>Peran Strategis Kordinasi Swasembada Pangan</p>
                 <small class="visited">
@@ -269,7 +294,9 @@
               </figcaption>
             </a>
             <a href="" class="listing-card__item">
-              <figure><img src="{{asset('images/content/mon-3.jpg')}}" loading="lazy" alt=""></figure>
+              <figure><img src="{{asset('images/content/mon-3.jpg')}}" 
+                width="218" height="281"
+                loading="lazy" alt=""></figure>
               <figcaption>
                 <p>Peran Strategis Kordinasi Swasembada Pangan</p>
                 <small class="visited">
@@ -282,7 +309,9 @@
               </figcaption>
             </a>
             <a href="" class="listing-card__item">
-              <figure><img src="{{asset('images/content/mon-4.jpg')}}" loading="lazy" alt=""></figure>
+              <figure><img src="{{asset('images/content/mon-4.jpg')}}" 
+                width="218" height="281"
+                loading="lazy" alt=""></figure>
               <figcaption>
                 <p>Peran Strategis Kordinasi Swasembada Pangan</p>
                 <small class="visited">
@@ -303,7 +332,9 @@
           </div>
           <div class="listing-card">
             <a href="" class="listing-card__item">
-              <figure><img src="{{asset('images/content/mon-1.jpg')}}" loading="lazy" alt=""></figure>
+              <figure><img src="{{asset('images/content/mon-1.jpg')}}" 
+                width="218" height="120"
+                loading="lazy" alt=""></figure>
               <figcaption>
                 <p>Undang-Undang Nomor 31 Tahun 2025</p>
                 <span>Tentang Perubahan Keempat Atas Undang-Undang Nomor 4 Tahun 2009 Tentang</span>
@@ -317,7 +348,9 @@
               </figcaption>
             </a>
             <a href="" class="listing-card__item">
-              <figure><img src="{{asset('images/content/mon-2.jpg')}}" loading="lazy" alt=""></figure>
+              <figure><img src="{{asset('images/content/mon-2.jpg')}}" 
+                width="218" height="120"
+                loading="lazy" alt=""></figure>
               <figcaption>
                 <p>Undang-Undang Nomor 45 1Tahun 2025</p>
                 <span>Tentang Perubahan Keempat Atas Undang-Undang Nomor 4 Tahun 2009 Tentang</span>
@@ -331,7 +364,9 @@
               </figcaption>
             </a>
             <a href="" class="listing-card__item">
-              <figure><img src="{{asset('images/content/mon-3.jpg')}}" loading="lazy" alt=""></figure>
+              <figure><img src="{{asset('images/content/mon-3.jpg')}}" 
+                width="218" height="120"
+                loading="lazy" alt=""></figure>
               <figcaption>
                 <p>Undang-Undang Nomor 200 Tahun 2025</p>
                 <span>Tentang Perubahan Keempat Atas Undang-Undang Nomor 4 Tahun 2009 Tentang</span>
@@ -345,7 +380,9 @@
               </figcaption>
             </a>
             <a href="" class="listing-card__item">
-              <figure><img src="{{asset('images/content/mon-4.jpg')}}" loading="lazy" alt=""></figure>
+              <figure><img src="{{asset('images/content/mon-4.jpg')}}" 
+                width="218" height="120"
+                loading="lazy" alt=""></figure>
               <figcaption>
                 <p>Undang-Undang Nomor 18 Tahun 2025</p>
                 <span>Tentang Perubahan Keempat Atas Undang-Undang Nomor 4 Tahun 2009 Tentang</span>
@@ -367,7 +404,9 @@
           </div>
           <div class="listing-card">
             <a href="" class="listing-card__item">
-              <figure><img src="{{asset('images/content/mon-1.jpg')}}" loading="lazy" alt=""></figure>
+              <figure><img src="{{asset('images/content/mon-1.jpg')}}"
+                width="218" height="120"
+                loading="lazy" alt=""></figure>
               <figcaption>
                 <small class="tag"># Putusan Komisi</small>
                 <p>Putusan Komisi Informasi Pusat Republik Indonesia Nomor 023/IV/KIP-PS-A/2022</p>
@@ -381,7 +420,9 @@
               </figcaption>
             </a>
             <a href="" class="listing-card__item">
-              <figure><img src="{{asset('images/content/mon-2.jpg')}}" loading="lazy" alt=""></figure>
+              <figure><img src="{{asset('images/content/mon-2.jpg')}}" 
+                width="218" height="120"
+                loading="lazy" alt=""></figure>
               <figcaption>
                 <small class="tag"># Putusan Komisi</small>
                 <p>Putusan Komisi Informasi Pusat Republik Indonesia Nomor 023/IV/KIP-PS-A/2022</p>
@@ -395,7 +436,9 @@
               </figcaption>
             </a>
             <a href="" class="listing-card__item">
-              <figure><img src="{{asset('images/content/mon-3.jpg')}}" loading="lazy" alt=""></figure>
+              <figure><img src="{{asset('images/content/mon-3.jpg')}}" 
+                width="218" height="120"
+                loading="lazy" alt=""></figure>
               <figcaption>
                 <small class="tag"># Putusan Komisi</small>
                 <p>Putusan Komisi Informasi Pusat Republik Indonesia Nomor 023/IV/KIP-PS-A/2022</p>
@@ -409,7 +452,9 @@
               </figcaption>
             </a>
             <a href="" class="listing-card__item">
-              <figure><img src="{{asset('images/content/mon-4.jpg')}}" loading="lazy" alt=""></figure>
+              <figure><img src="{{asset('images/content/mon-4.jpg')}}" 
+                width="218" height="120"
+                loading="lazy" alt=""></figure>
               <figcaption>
                 <small class="tag"># Putusan Komisi</small>
                 <p>Putusan Komisi Informasi Pusat Republik Indonesia Nomor 023/IV/KIP-PS-A/2022</p>
@@ -431,7 +476,9 @@
           </div>
           <div class="listing-card">
             <a href="" class="listing-card__item">
-              <figure><img src="{{asset('images/content/mon-1.jpg')}}" loading="lazy" alt=""></figure>
+              <figure><img src="{{asset('images/content/mon-1.jpg')}}"
+                width="218" height="120"
+                loading="lazy" alt=""></figure>
               <figcaption>
                 <small class="date">Edisi Desember 2025</small>
                 <p>Kedaulatan pangan dalam perspektif hukum dan keamanan manusia</p>
@@ -445,7 +492,9 @@
               </figcaption>
             </a>
             <a href="" class="listing-card__item">
-              <figure><img src="{{asset('images/content/mon-2.jpg')}}" loading="lazy" alt=""></figure>
+              <figure><img src="{{asset('images/content/mon-2.jpg')}}"
+                width="218" height="120"
+                loading="lazy" alt=""></figure>
               <figcaption>
                 <small class="date">Edisi Desember 2025</small>
                 <p>Perlindungan hukum dan partisipasi masyrakat untuk menjaga</p>
@@ -459,7 +508,9 @@
               </figcaption>
             </a>
             <a href="" class="listing-card__item">
-              <figure><img src="{{asset('images/content/mon-3.jpg')}}" loading="lazy" alt=""></figure>
+              <figure><img src="{{asset('images/content/mon-3.jpg')}}"
+                width="218" height="120"
+                loading="lazy" alt=""></figure>
               <figcaption>
                 <small class="date">Edisi Desember 2025</small>
                 <p>Perlindungan hukum dan partisipasi masyrakat untuk menjaga</p>
@@ -473,7 +524,9 @@
               </figcaption>
             </a>
             <a href="" class="listing-card__item">
-              <figure><img src="{{asset('images/content/mon-4.jpg')}}" loading="lazy" alt=""></figure>
+              <figure><img src="{{asset('images/content/mon-4.jpg')}}" 
+                width="218" height="120"
+                loading="lazy" alt=""></figure>
               <figcaption>
                 <small class="date">Edisi Desember 2025</small>
                 <p>Perlindungan hukum dan partisipasi masyrakat untuk menjaga</p>
@@ -509,7 +562,7 @@
       </div>
       <div class="document__listing">
         <a href="" class="document__listing--item ">
-          <figure><img src="{{asset('images/cover_370_240_news-xlarge.jpg.webp')}}" loading="lazy" alt=""></figure>
+          <figure><img src="{{asset('images/cover_370_240_news-xlarge.jpg.webp')}}" loading="lazy" width="80" height="105" alt="document"></figure>
           <figcaption>
             <span class="tag" style="background-color: #D2E3FF; color:#2063D2;">PUTUSAN HUKUM</span>
             <p>Keputusan Menteri Nomor 1841 Tahun 2026 Nomor 1841 Tahun 2026</p>
@@ -523,7 +576,7 @@
           </figcaption>
         </a>
         <a href="" class="document__listing--item ">
-          <figure><img src="{{asset('images/cover_370_240_news-xlarge.jpg.webp')}}" loading="lazy" alt=""></figure>
+          <figure><img src="{{asset('images/cover_370_240_news-xlarge.jpg.webp')}}" loading="lazy" width="80" height="105" alt="document"></figure>
           <figcaption>
             <span class="tag" style="background-color: #C1CCFF; color:#091D77;">PERATURAN HUKUM</span>
             <p>Putusan Komisi Informasi Pusat Republik Indonesia Nomor 023/023</p>
@@ -537,7 +590,8 @@
           </figcaption>
         </a>
         <a href="" class="document__listing--item ">
-          <figure><img src="{{asset('images/cover_370_240_news-xlarge.jpg.webp')}}" alt=""></figure>
+          <figure><img src="{{asset('images/cover_370_240_news-xlarge.jpg.webp')}}" 
+            width="80" height="105" alt=""></figure>
           <figcaption>
             <span class="tag" style="background-color: #D2E8ED; color:#0086A7;">ARTIKEL HUKUM</span>
             <p>Perlindungan hukum dan partisipasi masyrakat untuk mengetahui</p>
@@ -551,7 +605,8 @@
           </figcaption>
         </a>
         <a href="" class="document__listing--item ">
-          <figure><img src="{{asset('images/cover_370_240_news-xlarge.jpg.webp')}}" alt=""></figure>
+          <figure><img src="{{asset('images/cover_370_240_news-xlarge.jpg.webp')}}" 
+            width="80" height="105" alt=""></figure>
           <figcaption>
             <span class="tag" style="background-color: #C1CCFF; color:#091D77;">PERATURAN HUKUM</span>
             <p>Perlindungan hukum dan partisipasi masyrakat untuk mengetahui</p>
@@ -580,7 +635,9 @@
         Berita
       </div>
       <figure>
-        <img src="{{ asset('images/content/large-news.webp') }}" loading="lazy" alt="">
+        <img src="{{ asset('images/content/large-news.webp') }}"
+        width="1270" height="720"
+        loading="lazy" alt="">
       </figure>
       <div class="grid__item--caption">
         <span class="date">30 Juli 2025</span>
@@ -590,7 +647,9 @@
       <div class="highlight">
         @for ($i = 1; $i <= 3; $i++)
           <a href="" class="highlight-item">
-          <figure><img src="{{ asset('images/content/news-small-'.$i.'.jpg') }}" loading="lazy" alt=""></figure>
+          <figure><img src="{{ asset('images/content/news-small-'.$i.'.jpg') }}"
+            width="84" height="84"
+             loading="lazy" alt=""></figure>
           <figcaption>
             <p>Rapat Pembahasan Tentang Perkembangan Situasi Terkini di Rangkaian dengan Rakor Pengendalian Inflasi Tahun 2025</p>
             <small class="date">30 Juli 2025</small>
@@ -607,7 +666,10 @@
         </svg>
         Galeri Foto
       </div>
-      <figure><img src="{{ asset('images/content/news-1.jpg') }}" loading="lazy" alt=""></figure>
+      <figure>
+        <img src="{{ asset('images/content/news-1.jpg') }}" 
+        width="635" height="360"
+        loading="lazy" alt=""></figure>
       <figcaption>
         <span class="date">30 Juli 2025</span>
         <p>Rapat Koordinasi JDIH untuk kordinasi Nasional tentang Pangan</p>
@@ -622,7 +684,9 @@
         Galeri Video
       </div>
       <figure>
-        <img src="{{ asset('images/content/news-2.webp') }}" loading="lazy" alt="">
+        <img src="{{ asset('images/content/news-2.webp') }}"
+        width="635" height="360"
+        loading="lazy" alt="">
       </figure>
       <figcaption>
         <span class="date">30 Juli 2025</span>

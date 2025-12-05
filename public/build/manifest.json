@@ -1,6 +1,6 @@
 {
-  "_slick-CT93NgMn.js": {
-    "file": "assets/slick-CT93NgMn.js",
+  "_slick-DitzhEz7.js": {
+    "file": "assets/slick-DitzhEz7.js",
     "name": "slick",
     "imports": [
       "resources/assets/js/libs/htmlclone.js"
@@ -92,7 +92,7 @@
     "src": "resources/assets/images/wave2.svg"
   },
   "resources/assets/js/app.js": {
-    "file": "assets/app-DfUiH8pZ.js",
+    "file": "assets/app-pte-XITe.js",
     "name": "app",
     "src": "resources/assets/js/app.js",
     "isEntry": true,
@@ -108,7 +108,7 @@
     ]
   },
   "resources/assets/js/document.js": {
-    "file": "assets/document-4dGUIYYy.js",
+    "file": "assets/document-B6ksAa1-.js",
     "name": "document",
     "src": "resources/assets/js/document.js",
     "isEntry": true,
@@ -119,18 +119,18 @@
     ]
   },
   "resources/assets/js/home.js": {
-    "file": "assets/home-DLMvfJtg.js",
+    "file": "assets/home-BbZy1TJj.js",
     "name": "home",
     "src": "resources/assets/js/home.js",
     "isEntry": true,
     "imports": [
       "resources/assets/js/libs/htmlclone.js",
       "_swiper-bundle-Ds0aB7gj.js",
-      "_slick-CT93NgMn.js"
+      "_slick-DitzhEz7.js"
     ]
   },
   "resources/assets/js/libs/accordion-base-import.js": {
-    "file": "assets/accordion-base-import-D8vstdK_.js",
+    "file": "assets/accordion-base-import-cculPIpV.js",
     "name": "accordion-base-import",
     "src": "resources/assets/js/libs/accordion-base-import.js",
     "isEntry": true,
@@ -151,7 +151,7 @@
     "isEntry": true
   },
   "resources/assets/js/libs/animatingScroll.js": {
-    "file": "assets/animatingScroll-2w3nu6o1.js",
+    "file": "assets/animatingScroll-DIepcjAi.js",
     "name": "animatingScroll",
     "src": "resources/assets/js/libs/animatingScroll.js",
     "isEntry": true,
@@ -166,7 +166,7 @@
     "isEntry": true
   },
   "resources/assets/js/libs/htmlclone.js": {
-    "file": "assets/htmlclone-BNynzUCE.js",
+    "file": "assets/htmlclone-CaEyqlYZ.js",
     "name": "htmlclone",
     "src": "resources/assets/js/libs/htmlclone.js",
     "isEntry": true
@@ -190,14 +190,14 @@
     "isEntry": true
   },
   "resources/assets/js/sample.js": {
-    "file": "assets/sample-D0YSPo-i.js",
+    "file": "assets/sample-BDLhweBO.js",
     "name": "sample",
     "src": "resources/assets/js/sample.js",
     "isEntry": true,
     "imports": [
       "resources/assets/js/libs/htmlclone.js",
       "_swiper-bundle-Ds0aB7gj.js",
-      "_slick-CT93NgMn.js"
+      "_slick-DitzhEz7.js"
     ],
     "css": [
       "assets/sample-DR_9-HJD.css"
@@ -343,7 +343,7 @@
     "isEntry": true
   },
   "resources/assets/sass/pages/home.scss": {
-    "file": "assets/home-Ca_7eMEv.css",
+    "file": "assets/home-CNSDc3SB.css",
     "src": "resources/assets/sass/pages/home.scss",
     "isEntry": true
   },
