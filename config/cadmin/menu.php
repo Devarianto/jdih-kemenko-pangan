@@ -8,7 +8,7 @@ use Cactuar\Admin\Helpers\admin;
 keterangan akan ditambahkan
 */
 
-return [
+$menu = [
     'setting' => [
         'label' => 'Setting',
         'parent' => null,
@@ -314,3 +314,9 @@ return [
     ]
     */
 ];
+
+if (in_array(env('APP_ENV'), ['live', 'production'])) {
+    unset($menu['ai-billing-log']);
+}
+
+return $menu;
