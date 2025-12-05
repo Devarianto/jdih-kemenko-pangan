@@ -8,11 +8,11 @@
       <img src="{{ media::initial($banner->image)->url }}" 
           data-img-large="{{ media::initial($banner->image)->url }}" 
           data-img-medium="{{ media::initial($banner->value('image-medium'))->url }}" 
-          data-img-small="{{ media::initial($banner->value('image-small'))->url }}" alt="{{ media::initial($banner->image)->alt }}">
+          data-img-small="{{ media::initial($banner->value('image-small'))->url }}" alt="{{ media::initial($banner->image)->alt }}" loading="lazy">
     </figure>
     <div class="banner-homepage__caption">
       <h3>{{ $banner->translated('subtitle') }}</h3>
-      <h6>{{ $banner->translated('title') }}</h6>
+      <h1>{{ $banner->translated('title') }}</h1>
       @if ($menus['peraturan'] != null)
       <form action="{{ $menus['peraturan']->permalink }}" id="frm-search">
         <div class="wrap-input">
@@ -111,7 +111,7 @@
         <div class="swiper-wrapper">
           @foreach ($newest_documents as $document)
           <a href="{{ $document->permalink_document }}" class="document__listing--item swiper-slide">
-            <figure><img src="{{ media::initial($document->thumbnail)->url }}" alt="{{ media::initial($document->thumbnail)->alt }}"></figure>
+            <figure><img src="{{ media::initial($document->thumbnail)->url }}" alt="{{ media::initial($document->thumbnail)->alt }}" loading="lazy"></figure>
             <figcaption>
               <span class="tag" style="background-color: #D2E3FF; color: {{ $document->tag_color_home }};">{{ $document->master_document->label }}</span>
               <p>{{ $document->translated('title') }}</p>
@@ -138,7 +138,7 @@
       data-img-large="{{ media::initial($data->image)->url }}"
       data-img-medium="{{ media::initial($data->value('image-medium'))->url }}"
       data-img-small="{{ media::initial($data->value('image-small'))->url }}"
-      alt="{{ media::initial($data->image)->alt }}">
+      loading="lazy" alt="{{ media::initial($data->image)->alt }}">
     </div>
     <div class="wave">
       <svg xmlns="http://www.w3.org/2000/svg" widht="5000" height="200" viewBox="0 180 2500 200" fill="#F8F8F8">
@@ -161,7 +161,7 @@
       <div class="tema__listing">
         @foreach ($rule_themes as $data)
         <a href="{{ $menus['peraturan']->permalink.'?theme='.$data->id }}" class="tema__listing--item">
-          <figure><img src="{{ media::initial($data->image)->url }}" alt="{{ media::initial($data->image)->alt }}"></figure>
+          <figure><img src="{{ media::initial($data->image)->url }}" loading="lazy" alt="{{ media::initial($data->image)->alt }}"></figure>
           <figcaption>
             <span class="ico"><img src="{{ media::initial($data->icon)->url }}" alt="{{ media::initial($data->icon)->alt }}"></span>
             <h6>{{ $data->label }}</h6>
@@ -187,7 +187,7 @@
             <div class="listing-card without-box">
               @foreach ($document_monografi as $document)
               <a href="{{ $document->permalink_document }}" class="listing-card__item">
-                <figure><img src="{{ media::initial($document->thumbnail)->url }}" alt="{{ media::initial($document->thumbnail)->alt }}"></figure>
+                <figure><img src="{{ media::initial($document->thumbnail)->url }}" loading="lazy" alt="{{ media::initial($document->thumbnail)->alt }}"></figure>
                 <figcaption>
                   <p>{{ $document->translated('title') }}</p>
                   <small class="visited">
@@ -238,7 +238,7 @@
             <div class="listing-card">
               @foreach ($document_putusan as $document)
               <a href="{{ $document->permalink_document }}" class="listing-card__item">
-                <figure><img src="{{ media::initial($document->thumbnail)->url }}" alt="{{ media::initial($document->thumbnail)->alt }}"></figure>
+                <figure><img src="{{ media::initial($document->thumbnail)->url }}" loading="lazy" alt="{{ media::initial($document->thumbnail)->alt }}"></figure>
                 <figcaption>
                   <small class="tag">{{ $document->translated('jenis_peradilan') }}</small>
                   <p>{{ $document->translated('title') }}</p>
@@ -264,7 +264,7 @@
             <div class="listing-card">
               @foreach ($document_majalah as $document)
               <a href="{{ $document->permalink_document }}" class="listing-card__item">
-                <figure><img src="{{ media::initial($document->thumbnail)->url }}" alt="{{ media::initial($document->thumbnail)->alt }}"></figure>
+                <figure><img src="{{ media::initial($document->thumbnail)->url }}" loading="lazy" alt="{{ media::initial($document->thumbnail)->alt }}"></figure>
                 <figcaption>
                   <small class="date">{{ $document->translated('edisi') }}</small>
                   <p>{{ $document->translated('title') }}</p>
@@ -290,7 +290,7 @@
             <div class="listing-card">
               @foreach ($document_kliping as $document)
               <a href="{{ $document->permalink_document }}" class="listing-card__item">
-                <figure><img src="{{ media::initial($document->thumbnail)->url }}" alt="{{ media::initial($document->thumbnail)->alt }}"></figure>
+                <figure><img src="{{ media::initial($document->thumbnail)->url }}" loading="lazy" alt="{{ media::initial($document->thumbnail)->alt }}"></figure>
                 <figcaption>
                   <span class="date">{{ date2string($document->created_at) }}</span>
                   <p>{{ $document->translated('title') }}</p>
@@ -316,7 +316,7 @@
             <div class="listing-card">
               @foreach ($document_jurnal as $document)
               <a href="{{ $document->permalink_document }}" class="listing-card__item">
-                <figure><img src="{{ media::initial($document->thumbnail)->url }}" alt="{{ media::initial($document->thumbnail)->alt }}"></figure>
+                <figure><img src="{{ media::initial($document->thumbnail)->url }}" loading="lazy" alt="{{ media::initial($document->thumbnail)->alt }}"></figure>
                 <figcaption>
                   <small class="date">{{ $document->translated('edisi') }}</small>
                   <p>{{ $document->translated('title') }}</p>
@@ -342,7 +342,7 @@
             <div class="listing-card">
               @foreach ($document_naskah as $document)
               <a href="{{ $document->permalink_document }}" class="listing-card__item">
-                <figure><img src="{{ media::initial($document->thumbnail)->url }}" alt="{{ media::initial($document->thumbnail)->alt }}"></figure>
+                <figure><img src="{{ media::initial($document->thumbnail)->url }}" loading="lazy" alt="{{ media::initial($document->thumbnail)->alt }}"></figure>
                 <figcaption>
                   <p>{{ $document->translated('title') }}</p>
                   <span>{{ $document->translated('intro') }}</span>
@@ -381,7 +381,7 @@
         <div class="document__listing">
           @foreach ($popular_documents as $document)
           <a href="{{ $document->permalink_document }}" class="document__listing--item ">
-            <figure><img src="{{ media::initial($document->thumbnail)->url }}" alt="{{ media::initial($document->thumbnail)->alt }}"></figure>
+            <figure><img src="{{ media::initial($document->thumbnail)->url }}" loading="lazy" alt="{{ media::initial($document->thumbnail)->alt }}"></figure>
             <figcaption>
               <span class="tag" style="background-color: #D2E3FF; color:{{ $document->tag_color_home }};">{{ $document->master_document->label ?? '' }}</span>
               <p>{{ $document->translated('title') }}</p>
@@ -411,7 +411,7 @@
           {{ lang::translate('home.news') }}
         </div>
         <figure>
-          <img src="{{ media::initial($news_first->thumbnail_home_large)->url }}" alt="{{ media::initial($news_first->thumbnail_home_large)->alt }}">
+          <img src="{{ media::initial($news_first->thumbnail_home_large)->url }}" loading="lazy" alt="{{ media::initial($news_first->thumbnail_home_large)->alt }}">
         </figure>
         <div class="grid__item--caption">
           <span class="date">{{ date2string($news_first->date) }}</span>
@@ -421,7 +421,7 @@
         <div class="highlight">
           @foreach ($news_others as $news)
           <a href="{{ $news->permalink }}" class="highlight-item">
-            <figure><img src="{{ media::initial($news->thumbnail_home_small)->url }}" alt="{{ media::initial($news->thumbnail_home_small)->alt }}"></figure>
+            <figure><img src="{{ media::initial($news->thumbnail_home_small)->url }}" loading="lazy" alt="{{ media::initial($news->thumbnail_home_small)->alt }}"></figure>
             <figcaption>
               <p>{{ $news->translated('title') }}</p>
               <small class="date">{{ date2string($news->date) }}</small>
@@ -439,7 +439,7 @@
           </svg>
           {{ lang::translate('home.gallery-image') }}
         </div>
-        <figure><img src="{{ media::initial($gallery_image->thumbnail)->url }}" alt="{{ media::initial($gallery_image->thumbnail)->alt }}"></figure>
+        <figure><img src="{{ media::initial($gallery_image->thumbnail)->url }}" loading="lazy" alt="{{ media::initial($gallery_image->thumbnail)->alt }}"></figure>
         <figcaption>
           <span class="date">{{ date2string($gallery_image->date) }}</span>
           <p>{{ $gallery_image->translated('title') }}</p>
@@ -456,7 +456,7 @@
           {{ lang::translate('home.gallery-video') }}
         </div>
         <figure>
-          <img src="{{ media::initial($gallery_video->thumbnail)->url }}" alt="{{ media::initial($gallery_video->thumbnail)->alt }}">
+          <img src="{{ media::initial($gallery_video->thumbnail)->url }}" loading="lazy" alt="{{ media::initial($gallery_video->thumbnail)->alt }}">
         </figure>
         <figcaption>
           <span class="date">{{ date2string($gallery_video->date) }}</span>
@@ -520,7 +520,7 @@
       <div class="swiper-wrapper">
         @foreach ($data->childs('institution-images') as $image)
         <a href="{{ $image->link }}" target="__BLANK" class="swiper-slide">
-          <img src="{{ media::initial($image->image)->url }}" alt="{{ media::initial($image->image)->alt }}">
+          <img src="{{ media::initial($image->image)->url }}" loading="lazy" alt="{{ media::initial($image->image)->alt }}">
         </a>
         @endforeach
       </div>
@@ -668,7 +668,10 @@
   @endif
   <!-- end of middle -->
   @push('head')
-    <link rel="stylesheet" type="text/css" href="{{ Vite::asset('resources/assets/sass/pages/home.scss')}}" preload>
+    <link rel="preload" href="{{ Vite::asset('resources/assets/sass/pages/home.scss') }}"
+      as="style"
+      onload="this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="{{ Vite::asset('resources/assets/sass/pages/home.scss') }}"></noscript>
     <style>
       button.is-disabled {
         background: grey !important;
