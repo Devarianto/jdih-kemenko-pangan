@@ -12,7 +12,7 @@
         <link rel="icon" href="{{ asset('favicon.ico') }}">
         <meta name="description" content="">
 
-        @vite(['resources/assets/js/app.js'])
+        @vite(['resources/assets/js/app.js'], 'defer')
         <link rel="preload" href="{{ Vite::asset('resources/assets/sass/app.scss') }}" as="style">
         <link rel="stylesheet" href="{{ Vite::asset('resources/assets/sass/app.scss') }}">
         @stack('head')
