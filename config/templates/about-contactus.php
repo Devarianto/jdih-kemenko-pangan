@@ -69,7 +69,7 @@ return [
                     'multilang' => true,
                     'ai' => ['translate', 'meta-title','correction'],
                     'attributes' => [
-                        'maxlength' => 15
+                        'maxlength' => 50
                     ]
                 ],
                 'address' => [
