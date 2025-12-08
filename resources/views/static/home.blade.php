@@ -913,6 +913,7 @@
 @endpush
 @push('footer')
 <script type="module" async type="text/javascript" src="{{ Vite::asset('resources/assets/js/home.js') }}"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
   window.ratingData = {
     average: 4.7,
@@ -926,55 +927,93 @@
     }
   };
 </script>
-<script type="module">
-  // Lazy load Chart.js ketika elemen terlihat
-  const target = document.querySelector("#statusChart");
-
-  if (target) {
-    const observer = new IntersectionObserver(async (entries, obs) => {
-      if (entries[0].isIntersecting) {
-
-        // 1️⃣ Load Chart.js hanya saat diperlukan
-        const ChartLib = await import("https://cdn.jsdelivr.net/npm/chart.js");
-
-        const Chart = ChartLib.Chart;
-
-        // 2️⃣ Render chart
-        const ctx = document.getElementById("statusChart");
-
-        new Chart(ctx, {
-          type: "bar",
-          data: {
-            labels: ["2022", "2023", "2024", "2025", "2026"],
-            datasets: [
-              {
-                label: "Berlaku",
-                data: [88, 68, 72, 83, 82],
-                backgroundColor: "#2063D2",
-                borderRadius: 8
-              },
-              {
-                label: "Tidak Berlaku",
-                data: [76, 72, 45, 40, 38],
-                backgroundColor: "#8DB7FF",
-                borderRadius: 8
-              }
-            ]
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    // openPopup('#popup-home')
+    const ctx = $("#statusChart");
+    new Chart(ctx, {
+      type: "bar",
+      data: {
+        labels: ["2022", "2023", "2024", "2025", "2026"],
+        datasets: [{
+            label: "Berlaku",
+            data: [88, 68, 72, 83, 82],
+            backgroundColor: "#2063D2",
+            borderRadius: 8,
+            barPercentage: 0.8,
+            categoryPercentage: 0.8
           },
-          options: {
-            maintainAspectRatio: false,
-            responsive: true,
+          {
+            label: "Tidak Berlaku",
+            data: [76, 72, 45, 40, 38],
+            backgroundColor: "#8DB7FF",
+            borderRadius: 8,
+            barPercentage: 0.8,
+            categoryPercentage: 0.8
           }
-        });
-
-        // Stop observing agar tidak load berulang
-        obs.unobserve(target);
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+          x: {
+            grid: {
+              color: "#E5E7EB", // Warna garis halus
+              drawBorder: false,
+              offset: false
+            },
+            ticks: {
+              font: {
+                size: 14
+              },
+              color: "#333"
+            },
+            border: {
+              display: true,
+              color: "#000"
+            }
+          },
+          y: {
+            beginAtZero: true,
+            max: 100,
+            grid: {
+              color: "#E5E7EB"
+            },
+            ticks: {
+              stepSize: 20,
+              font: {
+                size: 13
+              },
+              color: "#333"
+            },
+            border: {
+              display: false
+            }
+          }
+        },
+        plugins: {
+          legend: {
+            position: "bottom",
+            align: "start",
+            labels: {
+              usePointStyle: true,
+              pointStyle: "circle",
+              boxWidth: 11,
+              boxHeight: 11,
+              textAlign: "left",
+              padding: 20,
+              font: {
+                size: 11
+              },
+              color: "#373737",
+              boxPadding: 6
+            }
+          }
+        }
       }
     });
-
-    observer.observe(target);
-  }
+  })
 </script>
-
 @endpush
 @endsection
