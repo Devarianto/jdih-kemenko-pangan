@@ -194,53 +194,70 @@
       <h3>TEMA PERATURAN</h3>
       <p>Kumpulan peraturan yang saling berkaitan dari setiap deputi bidang</p>
     </div>
-    <div class="tema__listing">
-      <a href="" class="tema__listing--item">
-        <figure>
-          <img src="{{asset('images/content/tem-1.webp')}}" loading="lazy" decoding="async"
-           width="280" height="220"
-           alt="">
-        </figure>
-        <figcaption>
-          <span class="ico">
-            <img src="{{ asset('images/content/ic-tema-1.svg') }}"
-             width="48" height="48"
-            alt="">
-          </span>
-          <h6>Tata Niaga dan Distribusi Pangan</h6>
-        </figcaption>
-      </a>
-      <a href="" class="tema__listing--item">
-        <figure>
-          <img src="{{asset('images/content/tem-2.webp')}}" loading="lazy" decoding="async" 
-           width="280" height="220"
-          alt="">
-        </figure>
-        <figcaption>
-          <span class="ico"><img src="{{ asset('images/content/ic-tema-2.svg') }}" 
-            width="48" height="48"
-            alt=""></span>
-          <h6>Usaha Pangan dan Pertanian</h6>
-        </figcaption>
-      </a>
-      <a href="" class="tema__listing--item">
-        <figure><img src="{{asset('images/content/tem-3.webp')}}" loading="lazy" decoding="async" 
-          width="280" height="220"
-          alt=""></figure>
-        <figcaption>
-          <span class="ico"><img src="{{ asset('images/content/ic-tema-3.svg') }}" width="48" height="48" alt=""></span>
-          <h6>Keterjangkauan dan Keamanan Pangan</h6>
-        </figcaption>
-      </a>
-      <a href="" class="tema__listing--item">
-        <figure><img src="{{asset('images/content/tem-4.webp')}}" loading="lazy" decoding="async"
-          width="280" height="220" 
-          alt=""></figure>
-        <figcaption>
-          <span class="ico"><img src="{{ asset('images/content/ic-tema-4.svg') }}" width="48" height="48" alt=""></span>
-          <h6>Sumber Daya Maritim</h6>
-        </figcaption>
-      </a>
+    <div class="tema-slider">
+      <div class="navigation">
+        <div class="swiper-arrow swiper-button-prev"></div>
+        <div class="swiper-arrow swiper-button-next"></div>
+      </div>
+      <div class="swiper">
+        <div class="tema__listing swiper-wrapper">
+          <a href="" class="tema__listing--item swiper-slide">
+            <figure>
+              <img src="{{asset('images/content/tem-1.webp')}}" loading="lazy" decoding="async"
+              width="280" height="220"
+              alt="">
+            </figure>
+            <figcaption>
+              <span class="ico">
+                <img src="{{ asset('images/content/ic-tema-1.svg') }}"
+                width="48" height="48"
+                alt="">
+              </span>
+              <h6>Tata Niaga dan Distribusi Pangan</h6>
+            </figcaption>
+          </a>
+          <a href="" class="tema__listing--item swiper-slide">
+            <figure>
+              <img src="{{asset('images/content/tem-2.webp')}}" loading="lazy" decoding="async" 
+              width="280" height="220"
+              alt="">
+            </figure>
+            <figcaption>
+              <span class="ico"><img src="{{ asset('images/content/ic-tema-2.svg') }}" 
+                width="48" height="48"
+                alt=""></span>
+              <h6>Usaha Pangan dan Pertanian</h6>
+            </figcaption>
+          </a>
+          <a href="" class="tema__listing--item swiper-slide">
+            <figure><img src="{{asset('images/content/tem-3.webp')}}" loading="lazy" decoding="async" 
+              width="280" height="220"
+              alt=""></figure>
+            <figcaption>
+              <span class="ico"><img src="{{ asset('images/content/ic-tema-3.svg') }}" width="48" height="48" alt=""></span>
+              <h6>Keterjangkauan dan Keamanan Pangan</h6>
+            </figcaption>
+          </a>
+          <a href="" class="tema__listing--item swiper-slide">
+            <figure><img src="{{asset('images/content/tem-4.webp')}}" loading="lazy" decoding="async"
+              width="280" height="220" 
+              alt=""></figure>
+            <figcaption>
+              <span class="ico"><img src="{{ asset('images/content/ic-tema-4.svg') }}" width="48" height="48" alt=""></span>
+              <h6>Sumber Daya Maritim</h6>
+            </figcaption>
+          </a>
+          <a href="" class="tema__listing--item swiper-slide">
+            <figure><img src="{{asset('images/content/tem-3.webp')}}" loading="lazy" decoding="async" 
+              width="280" height="220"
+              alt=""></figure>
+            <figcaption>
+              <span class="ico"><img src="{{ asset('images/content/ic-tema-3.svg') }}" width="48" height="48" alt=""></span>
+              <h6>Keterjangkauan dan Keamanan Pangan</h6>
+            </figcaption>
+          </a>
+        </div>
+      </div>
     </div>
   </div>
 </section>
