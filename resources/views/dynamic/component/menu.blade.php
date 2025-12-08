@@ -78,13 +78,13 @@
     </div>
     <div class="right-header__lang">
       @if (lang::active() == 'en')
-      <img src="{{asset('images/material/US.svg')}}" alt="">
+      <img src="{{asset('images/material/US.svg')}}" alt="" width="40" height="40">
       @else
-      <img src="{{asset('images/material/IND.svg')}}" alt="">
+      <img src="{{asset('images/material/IND.svg')}}" alt="" width="40" height="40">
       @endif
       <div class="drop-language">
-        <a href="{{ url()->lang('id') }}"><img src="{{ asset('images/material/IND.svg') }}" alt=""></a>
-        <a href="{{ url()->lang('en') }}"><img src="{{ asset('images/material/US.svg') }}" alt=""></a>
+        <a href="{{ url()->lang('id') }}"><img src="{{ asset('images/material/IND.svg') }}" width="22" height="20" alt=""></a>
+        <a href="{{ url()->lang('en') }}"><img src="{{ asset('images/material/US.svg') }}" width="22" height="20" alt=""></a>
       </div>
     </div>
     <div class="toggle-menu">
