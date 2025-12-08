@@ -157,9 +157,12 @@
   }
   &__listing {
     margin-right: calc(((100vw - 900px) / 2) * -1);
-
     .swiper-slide {
       width: 350px;
+      height: auto;
+    }
+    .swiper-wrapper{
+      align-items: stretch;
     }
     &--item {
       display: flex;
