@@ -612,6 +612,7 @@
       </div>
     </div>
   </div>
+  @if($gallery_image != null)
   <div class="popup popup-photo" id="popup-photo">
     <div class="popup__overlay"></div>
     <div class="popup__box popup__box--large">
@@ -650,6 +651,7 @@
       </div>
     </div>
   </div>
+  @endif
   @if($popup->active == 'yes')
     @include('dynamic.component.popup-information')
   @endif
