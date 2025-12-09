@@ -151,17 +151,25 @@
         <p>{{ $data->translated('subtitle') }}</p>
       </div>
       @if ($menus['peraturan'] != null)
-      <div class="tema__listing">
-        @foreach ($rule_themes as $data)
-        <a href="{{ $menus['peraturan']->permalink.'?theme='.$data->id }}" class="tema__listing--item">
-          <figure><img src="{{ media::initial($data->image)->url }}" loading="lazy" alt="{{ media::initial($data->image)->alt }}" decoding="async"
-           width="280" height="220"></figure>
-          <figcaption>
-            <span class="ico"><img src="{{ media::initial($data->icon)->url }}" alt="{{ media::initial($data->icon)->alt }}" width="48" height="48"></span>
-            <h6>{{ $data->label }}</h6>
-          </figcaption>
-        </a>
-        @endforeach
+      <div class="tema-slider">
+        <div class="navigation">
+          <div class="swiper-arrow swiper-button-prev"></div>
+          <div class="swiper-arrow swiper-button-next"></div>
+        </div>
+        <div class="swiper">
+          <div class="tema__listing swiper-wrapper">
+            @foreach ($rule_themes as $data)
+            <a href="{{ $menus['peraturan']->permalink.'?theme='.$data->id }}" class="tema__listing--item swiper-slide">
+              <figure><img src="{{ media::initial($data->image)->url }}" loading="lazy" alt="{{ media::initial($data->image)->alt }}" decoding="async"
+              width="280" height="220"></figure>
+              <figcaption>
+                <span class="ico"><img src="{{ media::initial($data->icon)->url }}" alt="{{ media::initial($data->icon)->alt }}" width="48" height="48"></span>
+                <h6>{{ $data->label }}</h6>
+              </figcaption>
+            </a>
+            @endforeach
+          </div>
+        </div>
       </div>
       @endif
     </div>

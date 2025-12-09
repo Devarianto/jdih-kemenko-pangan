@@ -154,7 +154,7 @@ $menu = [
         'parent' => 'master-document',
         'fa' => 'list',
         'controller' => 'App\Http\Controllers\Admin\Document\RuleThemeController',
-        'routes' => admin::moduleRoutes(['index', 'edit', 'publish'])
+        'routes' => admin::moduleRoutes(['index', 'create', 'edit', 'delete', 'publish'])
     ],
     'master-document-rule-type' => [
         'label' => 'Jenis Peraturan',
