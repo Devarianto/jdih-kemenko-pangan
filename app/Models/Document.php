@@ -35,22 +35,22 @@ class Document extends Model
 		$text = '';
 		switch (strtolower($type)) {
 			case self::SHARE_FACEBOOK:
-				$text = 'https://www.facebook.com/sharer/sharer.php?u=' . url($this->permalink);
+				$text = 'https://www.facebook.com/sharer/sharer.php?u=' . url($this->permalink_document);
 				break;
 			case self::SHARE_LINKEDIN:
-				$text = 'https://www.linkedin.com/sharing/share-offsite/?url=' . url($this->permalink);
+				$text = 'https://www.linkedin.com/sharing/share-offsite/?url=' . url($this->permalink_document);
 				break;
 			case self::SHARE_TWITTER:
-				$text = 'https://twitter.com/intent/tweet?text=' . url($this->permalink);
+				$text = 'https://twitter.com/intent/tweet?text=' . url($this->permalink_document);
 				break;
 			case self::SHARE_WHATSAPP:
-				$text = 'https://api.whatsapp.com/send?text=' . url($this->permalink);
+				$text = 'https://api.whatsapp.com/send?text=' . url($this->permalink_document);
 				break;
 			case self::SHARE_INSTAGRAM:
-				$text = 'https://www.instagram.com/share?text=' . url($this->permalink);
+				$text = 'https://www.instagram.com/share?text=' . url($this->permalink_document);
 				break;
             case self::SHARE_EMAIL:
-                $text = 'mailto:?subject=I wanted you to see this site&body=Check out this ' . url($this->permalink);
+                $text = 'mailto:?subject=I wanted you to see this site&body=Check out this ' . url($this->permalink_document);
                 break;
 		}
 

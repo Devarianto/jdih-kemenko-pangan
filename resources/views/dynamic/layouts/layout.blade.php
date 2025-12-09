@@ -10,7 +10,9 @@
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap" rel="stylesheet">
 
-        @vite(['resources/assets/sass/app.scss', 'resources/assets/js/app.js'])
+        @vite(['resources/assets/js/app.js'])
+        <link rel="preload" href="{{ Vite::asset('resources/assets/sass/app.scss') }}" as="style">
+        <link rel="stylesheet" href="{{ Vite::asset('resources/assets/sass/app.scss') }}">
         @stack('head')
     </head>
     <body>

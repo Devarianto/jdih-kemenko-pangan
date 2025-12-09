@@ -12,24 +12,17 @@
     </figure>
     <div class="banner-homepage__caption">
       <h3>{{ $banner->translated('subtitle') }}</h3>
-      <h6>{{ $banner->translated('title') }}</h6>
+      <h1>{{ $banner->translated('title') }}</h1>
       @if ($menus['peraturan'] != null)
       <form action="{{ $menus['peraturan']->permalink }}" id="frm-search">
         <div class="wrap-input">
           <input type="text" id="searchPeraturan" name="search" value="{{ request()->query('search') }}" class="search-top" placeholder="{{ lang::translate('home.search-peraturan.placeholder') }}">
           <button type="button" class="voice" id="btnToggle">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="21" viewBox="0 0 20 21" fill="none">
-              <path d="M10 17.375C8.3424 17.375 6.75269 16.7165 5.58058 15.5444C4.40848 14.3723 3.75 12.7826 3.75 11.125C3.75 10.9592 3.81585 10.8003 3.93306 10.6831C4.05027 10.5658 4.20924 10.5 4.375 10.5C4.54076 10.5 4.69973 10.5658 4.81694 10.6831C4.93415 10.8003 5 10.9592 5 11.125C5 12.4511 5.52678 13.7229 6.46447 14.6605C7.40215 15.5982 8.67392 16.125 10 16.125C11.3261 16.125 12.5979 15.5982 13.5355 14.6605C14.4732 13.7229 15 12.4511 15 11.125C15 10.9592 15.0658 10.8003 15.1831 10.6831C15.3003 10.5658 15.4592 10.5 15.625 10.5C15.7908 10.5 15.9497 10.5658 16.0669 10.6831C16.1842 10.8003 16.25 10.9592 16.25 11.125C16.25 12.7826 15.5915 14.3723 14.4194 15.5444C13.2473 16.7165 11.6576 17.375 10 17.375Z" fill="#2063D2" stroke="#2063D2" stroke-width="0.2"/>
-              <path d="M10 19.875C9.83424 19.875 9.67527 19.8092 9.55806 19.6919C9.44085 19.5747 9.375 19.4158 9.375 19.25V16.75C9.375 16.5842 9.44085 16.4253 9.55806 16.3081C9.67527 16.1908 9.83424 16.125 10 16.125C10.1658 16.125 10.3247 16.1908 10.4419 16.3081C10.5592 16.4253 10.625 16.5842 10.625 16.75V19.25C10.625 19.4158 10.5592 19.5747 10.4419 19.6919C10.3247 19.8092 10.1658 19.875 10 19.875Z" fill="#2063D2" stroke="#2063D2" stroke-width="0.2"/>
-              <path d="M10 14.875C9.00544 14.875 8.05161 14.4799 7.34835 13.7767C6.64509 13.0734 6.25 12.1196 6.25 11.125V4.875C6.25 3.88044 6.64509 2.92661 7.34835 2.22335C8.05161 1.52009 9.00544 1.125 10 1.125C10.9946 1.125 11.9484 1.52009 12.6517 2.22335C13.3549 2.92661 13.75 3.88044 13.75 4.875V11.125C13.75 12.1196 13.3549 13.0734 12.6517 13.7767C11.9484 14.4799 10.9946 14.875 10 14.875ZM10 2.375C9.33696 2.375 8.70107 2.63839 8.23223 3.10723C7.76339 3.57607 7.5 4.21196 7.5 4.875V11.125C7.5 11.788 7.76339 12.4239 8.23223 12.8928C8.70107 13.3616 9.33696 13.625 10 13.625C10.663 13.625 11.2989 13.3616 11.7678 12.8928C12.2366 12.4239 12.5 11.788 12.5 11.125V4.875C12.5 4.21196 12.2366 3.57607 11.7678 3.10723C11.2989 2.63839 10.663 2.375 10 2.375Z" fill="#2063D2" stroke="#2063D2" stroke-width="0.2"/>
-            </svg>
+            <img src="{{ asset('images/material/voice.svg') }}" width="20" height="20" decoding="async" alt="">
           </button>
-          <button type="submit" class="search">
+          <button type="submit" class="search button-icon">
             {{ lang::translate('home.search-peraturan.button') }}
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="21" viewBox="0 0 20 21" fill="none">
-              <path d="M9.16667 16.3333C12.8486 16.3333 15.8333 13.3486 15.8333 9.66667C15.8333 5.98477 12.8486 3 9.16667 3C5.48477 3 2.5 5.98477 2.5 9.66667C2.5 13.3486 5.48477 16.3333 9.16667 16.3333Z" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-              <path d="M17.625 17.625L14 14" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
+            <i class="wa-icon wa-ic-search-outline"></i>
           </button>
         </div>
       </form>
@@ -111,7 +104,7 @@
         <div class="swiper-wrapper">
           @foreach ($newest_documents as $document)
           <a href="{{ $document->permalink_document }}" class="document__listing--item swiper-slide">
-            <figure><img src="{{ media::initial($document->thumbnail)->url }}" alt="{{ media::initial($document->thumbnail)->alt }}"></figure>
+            <figure><img src="{{ media::initial($document->thumbnail)->url }}" alt="{{ media::initial($document->thumbnail)->alt }}" loading="lazy" decoding="async" width="80" height="105"></figure>
             <figcaption>
               <span class="tag" style="background-color: #D2E3FF; color: {{ $document->tag_color_home }};">{{ $document->master_document->label }}</span>
               <p>{{ $document->translated('title') }}</p>
@@ -138,7 +131,7 @@
       data-img-large="{{ media::initial($data->image)->url }}"
       data-img-medium="{{ media::initial($data->value('image-medium'))->url }}"
       data-img-small="{{ media::initial($data->value('image-small'))->url }}"
-      alt="{{ media::initial($data->image)->alt }}">
+      loading="lazy" decoding="async" alt="{{ media::initial($data->image)->alt }}">
     </div>
     <div class="wave">
       <svg xmlns="http://www.w3.org/2000/svg" widht="5000" height="200" viewBox="0 180 2500 200" fill="#F8F8F8">
@@ -158,16 +151,25 @@
         <p>{{ $data->translated('subtitle') }}</p>
       </div>
       @if ($menus['peraturan'] != null)
-      <div class="tema__listing">
-        @foreach ($rule_themes as $data)
-        <a href="{{ $menus['peraturan']->permalink.'?theme='.$data->id }}" class="tema__listing--item">
-          <figure><img src="{{ media::initial($data->image)->url }}" alt="{{ media::initial($data->image)->alt }}"></figure>
-          <figcaption>
-            <span class="ico"><img src="{{ media::initial($data->icon)->url }}" alt="{{ media::initial($data->icon)->alt }}"></span>
-            <h6>{{ $data->label }}</h6>
-          </figcaption>
-        </a>
-        @endforeach
+      <div class="tema-slider">
+        <div class="navigation">
+          <div class="swiper-arrow swiper-button-prev"></div>
+          <div class="swiper-arrow swiper-button-next"></div>
+        </div>
+        <div class="swiper">
+          <div class="tema__listing swiper-wrapper">
+            @foreach ($rule_themes as $data)
+            <a href="{{ $menus['peraturan']->permalink.'?theme='.$data->id }}" class="tema__listing--item swiper-slide">
+              <figure><img src="{{ media::initial($data->image)->url }}" loading="lazy" alt="{{ media::initial($data->image)->alt }}" decoding="async"
+              width="280" height="220"></figure>
+              <figcaption>
+                <span class="ico"><img src="{{ media::initial($data->icon)->url }}" alt="{{ media::initial($data->icon)->alt }}" width="48" height="48"></span>
+                <h6>{{ $data->label }}</h6>
+              </figcaption>
+            </a>
+            @endforeach
+          </div>
+        </div>
       </div>
       @endif
     </div>
@@ -187,7 +189,7 @@
             <div class="listing-card without-box">
               @foreach ($document_monografi as $document)
               <a href="{{ $document->permalink_document }}" class="listing-card__item">
-                <figure><img src="{{ media::initial($document->thumbnail)->url }}" alt="{{ media::initial($document->thumbnail)->alt }}"></figure>
+                <figure><img src="{{ media::initial($document->thumbnail)->url }}" width="218" height="281" decoding="async" loading="lazy" alt="{{ media::initial($document->thumbnail)->alt }}"></figure>
                 <figcaption>
                   <p>{{ $document->translated('title') }}</p>
                   <small class="visited">
@@ -212,7 +214,8 @@
             <div class="listing-card">
               @foreach ($document_peraturan as $document)
               <a href="{{ $document->permalink_document }}" class="listing-card__item">
-                <figure><img src="{{ media::initial($document->thumbnail)->url }}" alt="{{ media::initial($document->thumbnail)->alt }}"></figure>
+                <figure><img src="{{ media::initial($document->thumbnail)->url }}" width="218" height="120"
+                loading="lazy" decoding="async" alt="{{ media::initial($document->thumbnail)->alt }}"></figure>
                 <figcaption>
                   <p>{{ $document->translated('title') }}</p>
                   <span>{{ $document->translated('intro') }}</span>
@@ -238,7 +241,7 @@
             <div class="listing-card">
               @foreach ($document_putusan as $document)
               <a href="{{ $document->permalink_document }}" class="listing-card__item">
-                <figure><img src="{{ media::initial($document->thumbnail)->url }}" alt="{{ media::initial($document->thumbnail)->alt }}"></figure>
+                <figure><img src="{{ media::initial($document->thumbnail)->url }}" width="218" height="120" loading="lazy" decoding="async" alt="{{ media::initial($document->thumbnail)->alt }}"></figure>
                 <figcaption>
                   <small class="tag">{{ $document->translated('jenis_peradilan') }}</small>
                   <p>{{ $document->translated('title') }}</p>
@@ -264,7 +267,7 @@
             <div class="listing-card">
               @foreach ($document_majalah as $document)
               <a href="{{ $document->permalink_document }}" class="listing-card__item">
-                <figure><img src="{{ media::initial($document->thumbnail)->url }}" alt="{{ media::initial($document->thumbnail)->alt }}"></figure>
+                <figure><img src="{{ media::initial($document->thumbnail)->url }}" width="218" height="120" loading="lazy" decoding="async" alt="{{ media::initial($document->thumbnail)->alt }}"></figure>
                 <figcaption>
                   <small class="date">{{ $document->translated('edisi') }}</small>
                   <p>{{ $document->translated('title') }}</p>
@@ -290,7 +293,7 @@
             <div class="listing-card">
               @foreach ($document_kliping as $document)
               <a href="{{ $document->permalink_document }}" class="listing-card__item">
-                <figure><img src="{{ media::initial($document->thumbnail)->url }}" alt="{{ media::initial($document->thumbnail)->alt }}"></figure>
+                <figure><img src="{{ media::initial($document->thumbnail)->url }}" width="218" height="120" loading="lazy" decoding="async" alt="{{ media::initial($document->thumbnail)->alt }}"></figure>
                 <figcaption>
                   <span class="date">{{ date2string($document->created_at) }}</span>
                   <p>{{ $document->translated('title') }}</p>
@@ -316,7 +319,7 @@
             <div class="listing-card">
               @foreach ($document_jurnal as $document)
               <a href="{{ $document->permalink_document }}" class="listing-card__item">
-                <figure><img src="{{ media::initial($document->thumbnail)->url }}" alt="{{ media::initial($document->thumbnail)->alt }}"></figure>
+                <figure><img src="{{ media::initial($document->thumbnail)->url }}" width="218" height="120" loading="lazy" decoding="async" alt="{{ media::initial($document->thumbnail)->alt }}"></figure>
                 <figcaption>
                   <small class="date">{{ $document->translated('edisi') }}</small>
                   <p>{{ $document->translated('title') }}</p>
@@ -342,7 +345,7 @@
             <div class="listing-card">
               @foreach ($document_naskah as $document)
               <a href="{{ $document->permalink_document }}" class="listing-card__item">
-                <figure><img src="{{ media::initial($document->thumbnail)->url }}" alt="{{ media::initial($document->thumbnail)->alt }}"></figure>
+                <figure><img src="{{ media::initial($document->thumbnail)->url }}" width="218" height="120" loading="lazy" decoding="async" alt="{{ media::initial($document->thumbnail)->alt }}"></figure>
                 <figcaption>
                   <p>{{ $document->translated('title') }}</p>
                   <span>{{ $document->translated('intro') }}</span>
@@ -381,7 +384,7 @@
         <div class="document__listing">
           @foreach ($popular_documents as $document)
           <a href="{{ $document->permalink_document }}" class="document__listing--item ">
-            <figure><img src="{{ media::initial($document->thumbnail)->url }}" alt="{{ media::initial($document->thumbnail)->alt }}"></figure>
+            <figure><img src="{{ media::initial($document->thumbnail)->url }}" loading="lazy" alt="{{ media::initial($document->thumbnail)->alt }}" decoding="async" width="80" height="105"></figure>
             <figcaption>
               <span class="tag" style="background-color: #D2E3FF; color:{{ $document->tag_color_home }};">{{ $document->master_document->label ?? '' }}</span>
               <p>{{ $document->translated('title') }}</p>
@@ -411,7 +414,7 @@
           {{ lang::translate('home.news') }}
         </div>
         <figure>
-          <img src="{{ media::initial($news_first->thumbnail_home_large)->url }}" alt="{{ media::initial($news_first->thumbnail_home_large)->alt }}">
+          <img src="{{ media::initial($news_first->thumbnail_home_large)->url }} "width="1270" height="720" loading="lazy" decoding="async" alt="{{ media::initial($news_first->thumbnail_home_large)->alt }}">
         </figure>
         <div class="grid__item--caption">
           <span class="date">{{ date2string($news_first->date) }}</span>
@@ -421,7 +424,7 @@
         <div class="highlight">
           @foreach ($news_others as $news)
           <a href="{{ $news->permalink }}" class="highlight-item">
-            <figure><img src="{{ media::initial($news->thumbnail_home_small)->url }}" alt="{{ media::initial($news->thumbnail_home_small)->alt }}"></figure>
+            <figure><img src="{{ media::initial($news->thumbnail_home_small)->url }}" width="84" height="84" loading="lazy" decoding="async" alt="{{ media::initial($news->thumbnail_home_small)->alt }}"></figure>
             <figcaption>
               <p>{{ $news->translated('title') }}</p>
               <small class="date">{{ date2string($news->date) }}</small>
@@ -439,7 +442,7 @@
           </svg>
           {{ lang::translate('home.gallery-image') }}
         </div>
-        <figure><img src="{{ media::initial($gallery_image->thumbnail)->url }}" alt="{{ media::initial($gallery_image->thumbnail)->alt }}"></figure>
+        <figure><img src="{{ media::initial($gallery_image->thumbnail)->url }}" width="635" height="360" loading="lazy" decoding="async" alt="{{ media::initial($gallery_image->thumbnail)->alt }}"></figure>
         <figcaption>
           <span class="date">{{ date2string($gallery_image->date) }}</span>
           <p>{{ $gallery_image->translated('title') }}</p>
@@ -456,7 +459,7 @@
           {{ lang::translate('home.gallery-video') }}
         </div>
         <figure>
-          <img src="{{ media::initial($gallery_video->thumbnail)->url }}" alt="{{ media::initial($gallery_video->thumbnail)->alt }}">
+          <img src="{{ media::initial($gallery_video->thumbnail)->url }}" width="635" height="360" loading="lazy" decoding="async" loading="lazy" alt="{{ media::initial($gallery_video->thumbnail)->alt }}">
         </figure>
         <figcaption>
           <span class="date">{{ date2string($gallery_video->date) }}</span>
@@ -520,7 +523,7 @@
       <div class="swiper-wrapper">
         @foreach ($data->childs('institution-images') as $image)
         <a href="{{ $image->link }}" target="__BLANK" class="swiper-slide">
-          <img src="{{ media::initial($image->image)->url }}" alt="{{ media::initial($image->image)->alt }}">
+          <img src="{{ media::initial($image->image)->url }}" loading="lazy" decoding="async" alt="{{ media::initial($image->image)->alt }}">
         </a>
         @endforeach
       </div>
@@ -668,7 +671,10 @@
   @endif
   <!-- end of middle -->
   @push('head')
-    <link rel="stylesheet" type="text/css" href="{{ Vite::asset('resources/assets/sass/pages/home.scss')}}" preload>
+    <link rel="preload" href="{{ Vite::asset('resources/assets/sass/pages/home.scss') }}"
+      as="style"
+      onload="this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="{{ Vite::asset('resources/assets/sass/pages/home.scss') }}"></noscript>
     <style>
       button.is-disabled {
         background: grey !important;
@@ -677,7 +683,7 @@
     </style>
   @endpush
   @push('footer')
-    <script type="module" async type="text/javascript" src="{{ Vite::asset('resources/assets/js/document.js') }}"></script>
+    <script type="module" async type="text/javascript" src="{{ Vite::asset('resources/assets/js/home.js') }}"></script>
     <script src="https://www.google.com/recaptcha/api.js?hl={{\App::getLocale()}}" async defer></script>
     <script>
       const ratingData = {
@@ -686,7 +692,6 @@
         breakdown: {!! $rating !!}
       };
     </script>
-    <script type="module" async type="text/javascript" src="{{ Vite::asset('resources/assets/js/home.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
       document.addEventListener("DOMContentLoaded", function(event) { 

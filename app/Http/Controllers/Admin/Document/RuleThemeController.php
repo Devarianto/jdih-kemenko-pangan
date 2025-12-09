@@ -6,8 +6,10 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 use Cactuar\Admin\Traits\Controllers\BaseTrait;
+use Cactuar\Admin\Traits\Controllers\CreateTrait;
 use Cactuar\Admin\Traits\Controllers\ListingTrait;
 use Cactuar\Admin\Traits\Controllers\EditTrait;
+use Cactuar\Admin\Traits\Controllers\DeleteTrait;
 use Cactuar\Admin\Traits\Controllers\PublishTrait;
 
 use App\Models\RuleTheme;
@@ -15,7 +17,7 @@ use media;
 
 class RuleThemeController extends Controller
 {
-    use BaseTrait, ListingTrait, EditTrait, PublishTrait;
+    use BaseTrait, CreateTrait, ListingTrait, EditTrait, DeleteTrait, PublishTrait;
 
     public function listingRes()
     {
@@ -41,6 +43,15 @@ class RuleThemeController extends Controller
     public function listingOrderDefault($res)
     {
         return $res->orderBy('sort_id');
+    }
+
+    public function deleteAble($item)
+    {
+        if ($item->id <= 4) {
+            return false;
+        }
+
+        return true;
     }
 
     public function formRes()

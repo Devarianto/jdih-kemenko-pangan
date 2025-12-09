@@ -5,7 +5,7 @@
       <div class="popup__box">
         <div class="popup__content home-popup">
           <figure>
-            <img src="{{media::url($popup->image)}}" alt="{{media::initial($popup->image)->alt}}">
+            <img src="{{media::url($popup->image)}}" loading="lazy" decoding="async" alt="{{media::initial($popup->image)->alt}}">
           </figure>
           <figcaption class="content-pages">
             <h4>{{ $popup->translated('title') }}</h4>

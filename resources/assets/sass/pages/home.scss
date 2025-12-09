@@ -61,8 +61,10 @@
     h3 {
       margin-bottom: 8px;
     }
-    h6 {
+    h6,
+    h1 {
       margin-bottom: 36px;
+      font-size: 19px;
     }
     .wrap-input {
       display: flex;
@@ -156,9 +158,12 @@
   }
   &__listing {
     margin-right: calc(((100vw - 900px) / 2) * -1);
-
     .swiper-slide {
       width: 350px;
+      height: auto;
+    }
+    .swiper-wrapper {
+      align-items: stretch;
     }
     &--item {
       display: flex;
@@ -263,8 +268,7 @@
   &__listing {
     display: flex;
     align-items: center;
-    gap: 26px;
-    padding-bottom: 150px;
+    gap: 0;
     &--item {
       position: relative;
       width: calc(25% - 13px);
@@ -322,6 +326,7 @@
       padding: 23px 24px;
       position: relative;
       z-index: 2;
+      box-sizing: border-box;
       h6 {
         margin-top: auto;
         margin-bottom: 0;
@@ -349,6 +354,31 @@
     top: auto;
     z-index: 2;
     bottom: -100px;
+  }
+  .swiper-arrow {
+    background: #fff url("@images/arrow-right.svg") no-repeat center;
+    width: 40px;
+    height: 40px;
+    display: block;
+    cursor: pointer;
+    border-radius: 100px;
+    z-index: 5;
+    right: -20px;
+    &::after {
+      display: none;
+    }
+    &.swiper-button-prev {
+      transform: rotate(-180deg);
+      left: -20px;
+      right: unset;
+    }
+    &.swiper-button-lock {
+      display: none;
+    }
+  }
+  .tema-slider {
+    position: relative;
+    margin-bottom: 150px;
   }
 }
 .artikel {
@@ -541,6 +571,8 @@
         max-width: 84px;
         img {
           width: 100%;
+          height: 100%;
+          object-fit: cover;
           border-radius: 4px;
         }
       }
@@ -695,16 +727,16 @@
     font-weight: 500;
   }
   .logo-slider {
-    .swiper-wrapper{
+    .swiper-wrapper {
       align-items: center;
-      &.disable{
+      &.disable {
         display: flex;
         justify-content: center;
-        gap:56px;
-        .swiper-slide{
+        gap: 56px;
+        .swiper-slide {
           width: max-content;
         }
-        .swiper-slide{
+        .swiper-slide {
           width: max-content;
         }
       }
@@ -741,7 +773,7 @@
       align-items: center;
       justify-content: center;
     }
-    .swiper-slide{
+    .swiper-slide {
       width: 260px;
     }
   }
@@ -757,6 +789,7 @@
       0,
       "h3",
       "h6",
+      "h1",
       ".wrap-input",
       ".wrap-filter"
     );
@@ -772,6 +805,7 @@
           0.6,
           "h3",
           "h6",
+          "h1",
           ".wrap-input",
           ".wrap-filter"
         );
@@ -924,10 +958,18 @@
   }
   .tema {
     min-height: 600px;
+    &__title {
+      margin-right: 80px;
+    }
     &__listing {
-      padding-bottom: 120px;
       &--item {
         height: 211px;
+      }
+    }
+    .tema-slider {
+      margin-right: 80px;
+      margin-bottom: 120px;
+      .swiper {
       }
     }
   }
@@ -1018,12 +1060,6 @@
   .tema {
     min-height: 800px;
     &__listing {
-      flex-flow: row wrap;
-      gap: 24px;
-      &--item {
-        width: calc(50% - 12px);
-        height: 170px;
-      }
     }
     .wave {
       height: 140px;
@@ -1193,8 +1229,23 @@
       );
       height: 157px;
     }
+    .tema-slider {
+      margin-bottom: 85px;
+      margin-right: 32px;
+    }
+    .swiper-arrow {
+      width: 32px;
+      height: 32px;
+      background-size: 24px 24px;
+      right: -10px;
+      &.swiper-button-prev {
+        left: -10px;
+      }
+    }
+    &__title {
+      margin-right: 32px;
+    }
     &__listing {
-      padding-bottom: 85px;
       &--item {
         width: 100%;
       }

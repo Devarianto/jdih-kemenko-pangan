@@ -8,7 +8,7 @@ use Cactuar\Admin\Helpers\admin;
 keterangan akan ditambahkan
 */
 
-return [
+$menu = [
     'setting' => [
         'label' => 'Setting',
         'parent' => null,
@@ -154,7 +154,7 @@ return [
         'parent' => 'master-document',
         'fa' => 'list',
         'controller' => 'App\Http\Controllers\Admin\Document\RuleThemeController',
-        'routes' => admin::moduleRoutes(['index', 'edit', 'publish'])
+        'routes' => admin::moduleRoutes(['index', 'create', 'edit', 'delete', 'publish'])
     ],
     'master-document-rule-type' => [
         'label' => 'Jenis Peraturan',
@@ -314,3 +314,9 @@ return [
     ]
     */
 ];
+
+if (in_array(env('APP_ENV'), ['live', 'production'])) {
+    unset($menu['ai-billing-log']);
+}
+
+return $menu;

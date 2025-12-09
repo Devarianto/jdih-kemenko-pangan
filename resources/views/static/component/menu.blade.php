@@ -1,7 +1,7 @@
 <div class="wrapper">
   <a href="{{ route('front.index') }}" class="logo">
-    <img class="white" src="{{asset('images/material/logo.svg')}}" alt="">
-    <img class="black" src="{{asset('images/material/logo-black.svg')}}" alt="">
+    <img class="white" src="{{asset('images/material/logo.png')}}" width="308" height="58" alt="">
+    <img class="black" src="{{asset('images/material/logo-black.png')}}" width="308" height="58" alt="">
   </a>
   <div class="right-header">
     <nav>
@@ -72,10 +72,10 @@
       </a> --}}
     </div>
     <div class="right-header__lang">
-      <img src="{{asset('images/material/flag-idn.svg')}}" alt="">
+      <img src="{{asset('images/material/flag-idn.svg')}}" width="40" height="40" alt="">
       <div class="drop-language">
-        <a href="" class="active"><img src="{{ asset('images/material/US.svg') }}" alt=""></a>
-        <a href=""><img src="{{ asset('images/material/IND.svg') }}" alt=""></a>
+        <a href="" class="active"><img src="{{ asset('images/material/US.webp') }}" width="22" height="20" alt=""></a>
+        <a href=""><img src="{{ asset('images/material/IND.webp') }}" width="22" height="20" alt=""></a>
       </div>
     </div>
     <div class="toggle-menu">

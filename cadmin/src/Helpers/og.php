@@ -112,7 +112,10 @@ class og {
             $og .= self::$og['conversion-script'].PHP_EOL;
         
         if (!in_array(config('app.env'),['production','live']))
-            $og .= '<meta name="robots" content="noindex">';
+            $og .= '<meta name="robots" content="noindex,nofollow">';
+        
+        if (in_array(config('app.env'), ['production', 'link']))
+            $og .= '<meta name="robots" content="index,follow">';
         
         return $og;
     }
