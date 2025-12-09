@@ -114,7 +114,7 @@ class DocumentMajalahController extends Controller
                 'multilang' => true,
                 'attributes' => [
                     'class' => 'required title',
-                    'maxlength' => 150,
+                    'maxlength' => 200,
                 ]
             ],
             'permalink' => [
