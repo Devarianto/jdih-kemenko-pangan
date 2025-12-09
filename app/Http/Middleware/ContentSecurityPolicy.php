@@ -24,8 +24,8 @@ class ContentSecurityPolicy
             "style-src-elem 'self' 'unsafe-inline' https://www.google.com https://www.gstatic.com https://fonts.googleapis.com",
             "font-src 'self' https://fonts.gstatic.com data:",
             "frame-src 'self' https://www.google.com https://www.gstatic.com",
-            "connect-src 'self' https://www.google.com https://www.gstatic.com https://cdn.jsdelivr.net",
-            "img-src 'self' data: https://www.google.com https://www.gstatic.com",
+            "connect-src 'self' https://www.google.com https://www.gstatic.com https://cdn.jsdelivr.net https://www.google-analytics.com",
+            "img-src 'self' data: https://www.google.com https://www.gstatic.com https://www.google-analytics.com",
         ];
 
         $response->headers->set(
