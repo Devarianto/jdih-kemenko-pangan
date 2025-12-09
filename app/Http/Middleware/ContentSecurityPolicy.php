@@ -19,7 +19,7 @@ class ContentSecurityPolicy
 
         $csp = [
             "default-src 'self'",
-            "script-src 'self' 'unsafe-inline' https://www.google.com https://www.gstatic.com https://cdn.jsdelivr.net https://cdnjs.cloudflare.com",
+            "script-src 'self' 'unsafe-inline' https://www.google.com https://www.gstatic.com https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://static.cloudflareinsights.com https://www.googletagmanager.com",
             "style-src 'self' 'unsafe-inline' https://www.google.com https://www.gstatic.com",
             "style-src-elem 'self' 'unsafe-inline' https://www.google.com https://www.gstatic.com https://fonts.googleapis.com",
             "font-src 'self' https://fonts.gstatic.com data:",
