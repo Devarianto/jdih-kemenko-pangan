@@ -98,6 +98,7 @@ Route::group(['middleware' => ['web','front', 'visitor-count', 'csp']],function(
     });
 
     Route::get('document/download/{type}/{id}', [DownloadFileController::class, 'getDocumentDownload'])->name('document.download');
+    Route::get('api/document/download/{type}/{id}', [DownloadFileController::class, 'getAPIDocumentDownload'])->name('document-api.download');
     Route::get('document/stream/{type}/{id}', [DownloadFileController::class, 'getDocumentStream'])->name('document.stream');
 
     Route::get(ADMIN.'/file/download/{type}/{id}', ['App\Http\Controllers\Front\DownloadFileController', 'getAdminDownloadFile'])->name('admin.download.file');
