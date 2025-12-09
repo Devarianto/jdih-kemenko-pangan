@@ -207,7 +207,7 @@
           <div class="list-rules">
             <div class="list-title">
               <h5>{{ lang::translate('home.document.peraturan') }} ({{ $peraturan_count }})</h5>
-              <a href="{{ $menus['monografi']->permalink }}" class="readmore">{{ lang::translate('home.read-more') }}</a>
+              <a href="{{ $menus['peraturan']->permalink }}" class="readmore">{{ lang::translate('home.read-more') }}</a>
             </div>
             <div class="listing-card">
               @foreach ($document_peraturan as $document)
@@ -337,7 +337,7 @@
           <div class="list-rules">
             <div class="list-title">
               <h5>{{ lang::translate('home.document.naskah') }} ({{ $naskah_count }})</h5>
-              <a href="{{ $menus['monografi']->permalink }}" class="readmore">{{ lang::translate('home.read-more') }}</a>
+              <a href="{{ $menus['naskah']->permalink }}" class="readmore">{{ lang::translate('home.read-more') }}</a>
             </div>
             <div class="listing-card">
               @foreach ($document_naskah as $document)
