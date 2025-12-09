@@ -50,6 +50,16 @@ class DownloadFileController extends Controller
         abort(404);
     }
 
+    public function getAPIDocumentDownload($type, $id)
+    {
+        $document = Document::whereIsActive(1)->where('id', $id)->firstOrFail();
+        if ($document->{$type} != null && Storage::exists($document->{$type})) {
+            return response()->download(storage_path('app/'. $document->{$type}))->setCache(['no_cache' => true]);
+        }
+
+        abort(404);
+    }
+
     public function getDocumentStream($type, $id)
     {
         $document = Document::whereIsActive(1)->where('id', $id)->firstOrFail();
