@@ -23,7 +23,7 @@ class ContentSecurityPolicy
             "style-src 'self' 'unsafe-inline' https://www.google.com https://www.gstatic.com",
             "style-src-elem 'self' 'unsafe-inline' https://www.google.com https://www.gstatic.com https://fonts.googleapis.com",
             "font-src 'self' https://fonts.gstatic.com data:",
-            "frame-src 'self' https://www.google.com https://www.gstatic.com",
+            "frame-src 'self' https://www.google.com https://www.gstatic.com https://www.youtube.com",
             "connect-src 'self' https://www.google.com https://www.gstatic.com https://cdn.jsdelivr.net https://www.google-analytics.com",
             "img-src 'self' data: https://www.google.com https://www.gstatic.com https://www.google-analytics.com",
         ];
