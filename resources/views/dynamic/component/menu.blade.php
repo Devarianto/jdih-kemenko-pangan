@@ -78,9 +78,9 @@
     </div>
     <div class="right-header__lang">
       @if (lang::active() == 'en')
-      <img src="{{asset('images/material/US.svg')}}" alt="" width="40" height="40">
+      <img src="{{asset('images/material/US.svg')}}" alt="" width="30" height="30" style="border: 0px solid transparent; border-radius: 30px">
       @else
-      <img src="{{asset('images/material/IND.svg')}}" alt="" width="40" height="40">
+      <img src="{{asset('images/material/IND.svg')}}" alt="" width="30" height="30" style="border: 0px solid transparent; border-radius: 30px">
       @endif
       <div class="drop-language">
         <a href="{{ url()->lang('id') }}"><img src="{{ asset('images/material/IND.svg') }}" width="22" height="20" alt=""></a>
