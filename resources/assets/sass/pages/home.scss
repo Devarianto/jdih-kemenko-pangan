@@ -727,12 +727,35 @@
     font-weight: 500;
   }
   .logo-slider {
-    .swiper-wrapper {
-      align-items: center;
-      &.disable {
+    position: relative;
+    .swiper-arrow {
+      background: url("@images/arrow-right.svg") no-repeat center;
+      width: 40px;
+      height: 40px;
+      display: block;
+      gap: 8px;
+      cursor: pointer;
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      top:0;
+      margin: auto 0;
+      z-index: 4;
+      &.swiper-prev {
+        transform: rotate(180deg);
+        right: auto;
+        left: 0;
+      }
+    }
+    &.disable {
+      .swiper-arrow{
+        display: none;
+      }
+      .swiper-wrapper {
+        align-items: center;
         display: flex;
         justify-content: center;
-        gap: 56px;
+        gap: 80px;
         .swiper-slide {
           width: max-content;
         }
