@@ -110,7 +110,7 @@ class DocumentJurnalController extends Controller
 
     public function formCallbackBefore($post,$item,$type)
     {
-        return Helper::formCallbackBefore($post,$item,$type,$this->document);
+        return Helper::formCallbackBefore($post,$item,$type,$this->document, $this->formFields($type));
     }
 
     public function formFields($type)
@@ -237,6 +237,7 @@ class DocumentJurnalController extends Controller
             ],
             'abstract' => [
                 'label' => 'Abstrak',
+                'is_delete' => true,
                 'type' => 'file',
                 'attributes' => [
                     'class' => 'required',

@@ -112,7 +112,7 @@ class DocumentPeraturanController extends Controller
 
     public function formCallbackBefore($post,$item,$type)
     {
-        return Helper::formCallbackBefore($post,$item,$type,$this->document);
+        return Helper::formCallbackBefore($post,$item,$type,$this->document, $this->formFields($type));
     }
 
     public function formFields($type)
@@ -270,6 +270,7 @@ class DocumentPeraturanController extends Controller
             'abstract' => [
                 'label' => 'Abstrak',
                 'type' => 'file',
+                'is_delete' => true,
                 'attributes' => [
                     'class' => 'required'
                 ]

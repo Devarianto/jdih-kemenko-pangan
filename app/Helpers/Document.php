@@ -76,6 +76,19 @@ class Document {
             } else if ($type == 'edit' && $item->abstract != null) {
                 $post['main']['abstract'] = $item->abstract;
             }
+
+            if ($type == 'edit' && 
+            !isset($request['delete_abstract']) && 
+            $item->abstract != null) {
+                $abstract_field = array_get($fields, 'abstract', []);
+                if (isset($abstract_field['is_delete']) && $abstract_field['is_delete']) {
+                    if (Storage::exists($item->abstract))
+                        Storage::delete($item->abstract);
+
+                    $post['main']['abstract'] = null;
+                }
+                
+            }
         }
         
         return $post;
