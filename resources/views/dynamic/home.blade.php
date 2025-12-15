@@ -589,9 +589,8 @@
               <textarea name="comment" class="required" maxlength="500" placeholder="{{ lang::translate('home.rating.popup.form.placeholder.comment') }}"></textarea>
               <div class="supporting-text">@error('comment'){{ $message }}@enderror</div>
             </div>
-            <div class="column column-100 recaptcha-container">
-              <div id="recaptcha-container">
-              </div>
+            <div class="column column-100 recaptcha-validate">
+              <div class="recaptcha-container"></div>
               <div class="supporting-text">@error('g-recaptcha-response'){{ $message }}@enderror</div>
             </div>
             <div class="column column-100">
@@ -742,24 +741,9 @@
         @endif
         @endif
 
-        let recaptchaWidget = null;
         document.getElementById('button-open-rating').addEventListener('click', function (e) {
-          if (recaptchaWidget != null) {
-            recaptchaWidget = grecaptcha.reset(recaptchaWidget);
-          }
-
-          const old = document.getElementById('recaptcha-container');
-          if (old) old.remove();
-
-          const newBox = document.createElement('div');
-          newBox.id = 'recaptcha-container';
-          document.querySelector('.recaptcha-container').prepend(newBox);
-
-          openPopup('#popup-rating');
-          // Render ulang
-          recaptchaWidget = grecaptcha.render('recaptcha-container', {
-              sitekey: "{{ config('cadmin.cadmin.recaptcha.key') }}"
-          });
+          openPopup('#popup-rating')
+          resetRecaptcha('.recaptcha-container');
         })
 
         document.querySelector('#frm-specific-search').addEventListener('submit', function(e) {
@@ -987,13 +971,13 @@
             }
           });
 
-          const recaptchaField = document.querySelector("textarea[name='g-recaptcha-response']");
+          const recaptchaField = document.querySelector(".recaptcha-validate textarea[name='g-recaptcha-response']");
           if (recaptchaField) {
               const recaptchaValue = recaptchaField.value.trim();
 
               if (recaptchaValue === "") {
                   // tampilkan error recaptcha di bagian custom
-                  const recaptchaContainer = document.querySelector(".recaptcha-container");
+                  const recaptchaContainer = document.querySelector(".recaptcha-validate");
                   if (recaptchaContainer) {
                       recaptchaContainer.classList.add("error-field");
 
