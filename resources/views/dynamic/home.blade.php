@@ -520,6 +520,8 @@
       <h5>{{ $data->translated('title') }}</h5>
     </div>
     <div class="logo-slider swiper">
+      <div class="swiper-arrow swiper-prev"></div>
+      <div class="swiper-arrow swiper-next"></div>
       <div class="swiper-wrapper">
         @foreach ($data->childs('institution-images') as $image)
         <a href="{{ $image->link }}" target="__BLANK" class="swiper-slide">
