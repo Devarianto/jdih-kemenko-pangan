@@ -155,6 +155,11 @@ class DocumentNaskahController extends Controller
         ];
 
         $form += [
+            'jenis_bentuk_peraturan' => [
+                'label' => 'Jenis/Bentuk Peraturan',
+                'type' => 'text',
+                'multilang' => true,
+            ],
             'pihak_internal' => [
                 'label' => 'Pihak Internal',
                 'type' => 'text'

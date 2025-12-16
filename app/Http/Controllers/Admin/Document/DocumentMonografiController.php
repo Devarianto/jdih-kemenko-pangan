@@ -166,6 +166,11 @@ class DocumentMonografiController extends Controller
                 'label' => 'No. Panggil',
                 'type' => 'text',
             ],
+            'jenis_bentuk_peraturan' => [
+                'label' => 'Jenis/Bentuk Peraturan',
+                'type' => 'text',
+                'multilang' => true,
+            ],
             'edisi' => [
                 'label' => 'Edisi',
                 'type' => 'text',

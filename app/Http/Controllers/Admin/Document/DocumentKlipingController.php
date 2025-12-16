@@ -164,6 +164,11 @@ class DocumentKlipingController extends Controller
                 'type' => 'text',
                 'multilang' => true,
             ],
+            'jenis_bentuk_peraturan' => [
+                'label' => 'Jenis/Bentuk Peraturan',
+                'type' => 'text',
+                'multilang' => true,
+            ],
             'tempat_terbit' => [
                 'label' => 'Tempat Terbit',
                 'type' => 'text',

@@ -166,6 +166,11 @@ class DocumentPutusanController extends Controller
                 'label' => 'No. Putusan',
                 'type' => 'text',
             ],
+            'jenis_bentuk_peraturan' => [
+                'label' => 'Jenis/Bentuk Peraturan',
+                'type' => 'text',
+                'multilang' => true,
+            ],
             'jenis_peradilan' => [
                 'label' => 'Jenis Peradilan',
                 'type' => 'text',
