@@ -748,6 +748,8 @@
     <h5>Institusi Terkait</h5>
   </div>
   <div class="logo-slider swiper">
+    <div class="swiper-arrow swiper-prev"></div>
+    <div class="swiper-arrow swiper-next"></div>
     <div class="swiper-wrapper">
       @for ($i = 1; $i <= 5; $i++)
         <a href="" class="swiper-slide">
@@ -760,7 +762,7 @@
       <a href="" class="swiper-slide">
         <img src="{{ asset('images/content/partner-1.webp') }}" loading="lazy" decoding="async" alt="">
       </a>
-      <a href="" class="swiper-slide">
+      {{-- <a href="" class="swiper-slide">
         <img src="{{ asset('images/content/partner-2.webp') }}" loading="lazy" decoding="async" alt="">
       </a>
       <a href="" class="swiper-slide">
@@ -771,7 +773,7 @@
       </a>
       <a href="" class="swiper-slide">
         <img src="{{ asset('images/content/partner-2.webp') }}" loading="lazy" decoding="async" alt="">
-      </a>
+      </a> --}}
     </div>
   </div>
 </section>

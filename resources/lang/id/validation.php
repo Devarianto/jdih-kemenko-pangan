@@ -83,6 +83,7 @@ return [
     'unique'               => 'Kolom :attribute sudah ada sebelumnya.',
     'uploaded'             => 'The :attribute failed to upload.',
     'url'                  => 'Format Kolom :attribute tidak valid.',
+    'recaptcha' => 'Centang kotak reCAPTCHA untuk melanjutkan.',
 
     /*
     |---------------------------------------------------------------------------------------

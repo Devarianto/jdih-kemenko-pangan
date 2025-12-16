@@ -102,18 +102,18 @@ home.ratingHome = () => {
 
 home.sliderLogo = () => {
   if ($(window).width() > 1024) {
-    if ($('.logo-slider .swiper-slide').length <= 8) {
-      $('.logo-slider .swiper-wrapper').addClass('disable')
+    if ($('.logo-slider .swiper-slide').length < 6) {
+      $('.logo-slider').addClass('disable')
       return
     }
   } else if ($(window).width() <= 1024) {
     if ($('.logo-slider .swiper-slide').length <= 4) {
-      $('.logo-slider .swiper-wrapper').addClass('disable')
+      $('.logo-slider').addClass('disable')
       return
     }
   } else {
     if ($('.logo-slider .swiper-slide').length <= 2) {
-      $('.logo-slider .swiper-wrapper').addClass('disable')
+      $('.logo-slider').addClass('disable')
       return
     }
   }
@@ -122,8 +122,12 @@ home.sliderLogo = () => {
     slidesPerView: 2,
     spaceBetween: 24,
     autoplay: {
-      delay: 6000,
+      delay: 4000,
       disableOnInteraction: false,
+    },
+    navigation: {
+      nextEl: ".logo-slider .swiper-next",
+      prevEl: ".logo-slider .swiper-prev",
     },
     breakpoints: {
       767: {
@@ -132,7 +136,7 @@ home.sliderLogo = () => {
         centeredSlides: false,
       },
       1200: {
-        slidesPerView: "auto",
+        slidesPerView:6,
         spaceBetween: 0,
       }
     },

@@ -26,12 +26,48 @@
         @yield('content')
 
         <!--Footer -->
+        <script src="https://www.google.com/recaptcha/api.js?hl={{App::getLocale()}}"></script>
         @include('dynamic.component.footer')
         <!--end of Footer -->
+        <script>
+            window.recaptchaWidgets = new Map();
+
+            function renderRecaptcha(selector) {
+                document.querySelectorAll(selector).forEach(container => {
+
+                    // JANGAN render ulang jika sudah ada
+                    if (window.recaptchaWidgets.has(container)) return;
+
+                    const widgetId = grecaptcha.render(container, {
+                        sitekey: "{{ config('cadmin.cadmin.recaptcha.key') }}"
+                    });
+
+                    window.recaptchaWidgets.set(container, widgetId);
+                });
+            }
+
+            function resetRecaptcha(selector) 
+            {
+                document.querySelectorAll(selector).forEach(container => {
+                    if (!window.recaptchaWidgets.has(container)) return;
+
+                    grecaptcha.reset(window.recaptchaWidgets.get(container));
+                });
+            }
+        </script>
         @stack('footer')
         {!! og::foot() !!}
         <script>
-            document.addEventListener("DOMContentLoaded", function(event) { 
+            document.addEventListener("DOMContentLoaded", function(event) {
+                setTimeout(() => {
+                    renderRecaptcha('.recaptcha-container');                    
+                }, 1000);
+                
+                document.getElementById('button-open-login').addEventListener('click', function (e) {
+                    resetRecaptcha('.recaptcha-container');
+                    openPopup('#popup-login')
+                })
+
                 function updateVisitorCount() {
                 fetch('{{ route('api.visitor') }}')
                     .then(response => {

@@ -20,6 +20,11 @@ class AuthController extends Controller
         $credentials = $request->validate([
             'email' => ['required', 'email:dns'],
             'password' => ['required'],
+            'g-recaptcha-response' => 'required|recaptcha'
+        ], [], [
+            'email' => lang::translate('dashboard.form-login.label-email'),
+            'password' => lang::translate('dashboard.form-login.label-password'),
+            'g-recaptcha-response' => lang::translate('global.recaptcha'),
         ]);
 
         $remember = false;

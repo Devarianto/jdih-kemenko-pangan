@@ -97,7 +97,8 @@ return [
 			'recaptcha' => 'Mohon centang reCAPTCHA.',
 			'maxlength' => 'Maksimal :max karakter.',
 			'minlength' => 'Minimal :min karakter.',
-		]
+		],
+		'recaptcha' => 'reCAPTCHA'
 	],
 	'infografis' => [
 		'other-infografis' => 'Infografis Lainnya',

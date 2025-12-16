@@ -69,8 +69,9 @@
               <textarea name="message" class="required" id="" placeholder="{{ lang::translate('contact.form-placeholder.message') }}"></textarea>
               <div class="supporting-text">@error('message'){{ $message }}@enderror</div>
             </div>
-            <div class="column recaptcha-container @error('g-recaptcha-response') error-field @enderror">
-                {!! recaptcha::draw() !!}
+            <div class="column recaptcha-validate @error('g-recaptcha-response') error-field @enderror">
+                <!-- khusus tempat render recaptcha -->
+                <div class="recaptcha-container"></div>
                 <div class="supporting-text">@error('g-recaptcha-response'){{ $message }}@enderror</div>
             </div>
             <div class="column column-100">
@@ -171,13 +172,13 @@
             }
           });
 
-          const recaptchaField = document.querySelector("textarea[name='g-recaptcha-response']");
+          const recaptchaField = document.querySelector(".recaptcha-validate textarea[name='g-recaptcha-response']");
           if (recaptchaField) {
               const recaptchaValue = recaptchaField.value.trim();
 
               if (recaptchaValue === "") {
                   // tampilkan error recaptcha di bagian custom
-                  const recaptchaContainer = document.querySelector(".recaptcha-container");
+                  const recaptchaContainer = document.querySelector(".recaptcha-validate");
                   if (recaptchaContainer) {
                       recaptchaContainer.classList.add("error-field");
 
