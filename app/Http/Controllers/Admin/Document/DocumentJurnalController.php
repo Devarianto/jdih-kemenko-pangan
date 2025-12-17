@@ -245,7 +245,6 @@ class DocumentJurnalController extends Controller
                 'is_delete' => true,
                 'type' => 'file',
                 'attributes' => [
-                    'class' => 'required',
                     'accept' => 'pdf'
                 ]
             ]
