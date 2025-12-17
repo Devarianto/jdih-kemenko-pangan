@@ -161,13 +161,14 @@ class Document extends Model
 
     public function getApiJenisAttribute()
     {
-        $master_document = $this->master_document_id;
+        return $this->jenis_bentuk_peraturan ?? '-';
+        // $master_document = $this->master_document_id;
 
-        if ($master_document == self::PERATURAN) {
-            return $this->jenis_bentuk_peraturan;
-        } else {
-            return '-';
-        }
+        // if ($master_document == self::PERATURAN) {
+        //     return $this->jenis_bentuk_peraturan;
+        // } else {
+        //     return '-';
+        // }
     }
 
     public function getApiTahunPengundanganAttribute()

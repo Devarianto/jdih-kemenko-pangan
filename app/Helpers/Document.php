@@ -41,7 +41,7 @@ class Document {
 
                 $original = pathinfo($request['pdf']->getClientOriginalName(), PATHINFO_FILENAME);
                 $ext = $request['pdf']->getClientOriginalExtension();
-                $filename = $original . '_' . time() . '.' . $ext;
+                $filename = $original . '.' . $ext;
                 $path = $request['pdf']->storeAs('upload/pdf', $filename);
                 
                 $post['main']['pdf'] = $path;
@@ -69,7 +69,7 @@ class Document {
                 }
                 $original = pathinfo($request['abstract']->getClientOriginalName(), PATHINFO_FILENAME);
                 $ext = $request['abstract']->getClientOriginalExtension();
-                $filename = $original . '_' . time() . '.' . $ext;
+                $filename = $original . '.' . $ext;
 
                 $path = $request['abstract']->storeAs('upload/abstract', $filename);
                 $post['main']['abstract'] = $path;

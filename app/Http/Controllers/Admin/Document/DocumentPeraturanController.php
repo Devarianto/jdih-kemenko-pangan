@@ -270,10 +270,7 @@ class DocumentPeraturanController extends Controller
             'abstract' => [
                 'label' => 'Abstrak',
                 'type' => 'file',
-                'is_delete' => true,
-                'attributes' => [
-                    'class' => 'required'
-                ]
+                'is_delete' => true
             ]
         ];
 
