@@ -67,9 +67,7 @@ class NewsController extends Controller
                 'type' => 'text',
                 'multilang' => true,
                 'attributes' => [
-                    'class' => 'required title',
-                    'maxlength' => 150
-                ],
+                    'class' => 'required title',],
                 'ai' => ['translate', 'meta-title','correction'],
             ],
             'permalink' => [
@@ -140,6 +138,27 @@ class NewsController extends Controller
                 'type' => 'meta'
             ]
         ];
+    }
+
+    public function formCallbackBefore($post, $item, $type)
+    {
+        $thumb = $post['main']['thumbnail'] ?? null;
+        if (empty($thumb)) {
+            $post['main']['thumbnail'] = 'default.webp';
+        }
+        if (empty($post['main']['thumbnail_home_small'])) {
+            $post['main']['thumbnail_home_small'] = $post['main']['thumbnail'] ?? 'default.webp';
+        }
+        if (empty($post['main']['thumbnail_home_large'])) {
+            $post['main']['thumbnail_home_large'] = $post['main']['thumbnail'] ?? 'default.webp';
+        }
+        if (empty($post['main']['image'])) {
+            $post['main']['image'] = $post['main']['thumbnail'] ?? 'default.webp';
+        }
+        if (empty($post['main']['date'])) {
+            $post['main']['date'] = date('Y-m-d');
+        }
+        return $post;
     }
 
     public function formAppend()

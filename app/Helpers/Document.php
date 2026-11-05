@@ -10,6 +10,7 @@ use helper;
 use App\Helpers\DocumentPeraturan;
 use App\Models\Document as DocumentModel;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Http\UploadedFile;
 
 class Document {
 
@@ -29,69 +30,126 @@ class Document {
     public static function formCallbackBefore($post,$item,$type,$document,$fields = [])
     {
         $request = request()->all();
-        if ($type == 'create') 
+        if ($type == 'create' && empty($post['main']['master_document_id'])) {
             $post['main']['master_document_id'] = DocumentModel::getId($document);
+        }
+        if (!isset($post['main']['is_active']) || $post['main']['is_active'] === '') {
+            $post['main']['is_active'] = 0;
+        }
         
         if ($type == 'create' || $type == 'edit') {
-            if (isset($request['pdf']) && $request['pdf'] != null) {
-                if ($type == 'edit' && $item->pdf != null) {
-                    if (Storage::exists($item->pdf))
-                        Storage::delete($item->pdf);
+            $handleFile = function($fieldKey, $folder) use (&$post, $request, $item, $type) {
+                $file = request()->file($fieldKey);
+                if (!$file && isset($request[$fieldKey]) && $request[$fieldKey] instanceof UploadedFile) {
+                    $file = $request[$fieldKey];
                 }
 
-                $original = pathinfo($request['pdf']->getClientOriginalName(), PATHINFO_FILENAME);
-                $ext = $request['pdf']->getClientOriginalExtension();
-                $filename = $original . '.' . $ext;
-                $path = $request['pdf']->storeAs('upload/pdf', $filename);
-                
-                $post['main']['pdf'] = $path;
-            } else if ($type == 'edit' && $item->pdf != null) {
-                $post['main']['pdf'] = $item->pdf;
+                if ($file instanceof UploadedFile && $file->isValid()) {
+                    if ($type == 'edit' && !empty($item->{$fieldKey})) {
+                        if (Storage::exists($item->{$fieldKey})) {
+                            Storage::delete($item->{$fieldKey});
+                        }
+                    }
+
+                    $original = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
+                    $ext = $file->getClientOriginalExtension();
+                    $filename = $original . '.' . $ext;
+                    $path = $file->storeAs('upload/' . $folder, $filename);
+
+                    $post['main'][$fieldKey] = $path;
+                } else if (isset($request[$fieldKey]) && is_string($request[$fieldKey]) && trim($request[$fieldKey]) !== '') {
+                    $post['main'][$fieldKey] = $request[$fieldKey];
+                } else if ($type == 'edit' && !empty($item->{$fieldKey})) {
+                    $post['main'][$fieldKey] = $item->{$fieldKey};
+                }
+            };
+
+            $handleFile('pdf', 'pdf');
+            $handleFile('abstract', 'abstract');
+            $handleFile('attachment', 'attachment');
+            $handleFile('translation_pdf', 'pdf');
+            $handleFile('translation_attachment', 'attachment');
+
+            // Handling translation fields
+            if (isset($request['translation_title'])) {
+                $post['main']['translation_title'] = !empty(trim($request['translation_title'])) ? trim($request['translation_title']) : null;
+            }
+            if (isset($request['translation_no_peraturan'])) {
+                $post['main']['translation_no_peraturan'] = !empty(trim($request['translation_no_peraturan'])) ? trim($request['translation_no_peraturan']) : null;
+            }
+            if (isset($request['translation_intro'])) {
+                $post['main']['translation_intro'] = !empty(trim($request['translation_intro'])) ? trim($request['translation_intro']) : null;
             }
 
-            if ($type == 'edit' && 
-            !isset($request['delete_pdf']) && 
-            $item->pdf != null) {
-                $pdf_field = array_get($fields, 'pdf', []);
-                if (isset($pdf_field['is_delete']) && $pdf_field['is_delete']) {
-                    if (Storage::exists($item->pdf))
-                        Storage::delete($item->pdf);
+            // Translation availability flag
+            $hasTranslationInput = !empty($request['has_translation']) || !empty($post['main']['translation_title']) || !empty($post['main']['translation_pdf']);
+            if ($type == 'edit' && !$hasTranslationInput && !empty($item->translation_pdf) && empty($request['delete_translation_pdf'])) {
+                $hasTranslationInput = true;
+            }
+            $post['main']['has_translation'] = $hasTranslationInput ? 1 : 0;
 
-                    $post['main']['pdf'] = null;
+            // Handling delete file when editing
+            foreach (['pdf', 'abstract', 'attachment', 'translation_pdf', 'translation_attachment'] as $fieldKey) {
+                if ($type == 'edit' && !empty($request['delete_' . $fieldKey]) && !empty($item->{$fieldKey})) {
+                    if (Storage::exists($item->{$fieldKey})) {
+                        Storage::delete($item->{$fieldKey});
+                    }
+                    $post['main'][$fieldKey] = null;
                 }
-                
             }
 
-            if (isset($request['abstract']) && $request['abstract'] != null) {
-                if ($type == 'edit' && $item->abstract != null) {
-                    if (Storage::exists($item->abstract))
-                        Storage::delete($item->abstract);
+            // Clean up empty string values for nullable relational/numeric fields
+            foreach (['related_document_id', 'tahapan_puu_id', 'rule_type_id', 'rule_theme_id', 'document_type_id', 'date', 'tanggal_mulai', 'tanggal_selesai'] as $col) {
+                if (isset($post['main'][$col]) && $post['main'][$col] === '') {
+                    $post['main'][$col] = null;
                 }
-                $original = pathinfo($request['abstract']->getClientOriginalName(), PATHINFO_FILENAME);
-                $ext = $request['abstract']->getClientOriginalExtension();
-                $filename = $original . '.' . $ext;
-
-                $path = $request['abstract']->storeAs('upload/abstract', $filename);
-                $post['main']['abstract'] = $path;
-            } else if ($type == 'edit' && $item->abstract != null) {
-                $post['main']['abstract'] = $item->abstract;
-            }
-
-            if ($type == 'edit' && 
-            !isset($request['delete_abstract']) && 
-            $item->abstract != null) {
-                $abstract_field = array_get($fields, 'abstract', []);
-                if (isset($abstract_field['is_delete']) && $abstract_field['is_delete']) {
-                    if (Storage::exists($item->abstract))
-                        Storage::delete($item->abstract);
-
-                    $post['main']['abstract'] = null;
-                }
-                
             }
         }
         
         return $post;
+    }
+
+    public static function formCallbackAfter($item, $type)
+    {
+        // Always touch updated_at so newly created or edited documents appear at the very top of page 1
+        try {
+            $item->touch();
+        } catch (\Throwable $e) {}
+
+        $regulations = request()->input('regulations_relations', []);
+        $crossDocs = request()->input('cross_documents_relations', []);
+
+        if (is_string($regulations)) {
+            $regulations = json_decode($regulations, true) ?: [];
+        }
+        if (is_string($crossDocs)) {
+            $crossDocs = json_decode($crossDocs, true) ?: [];
+        }
+
+        if (is_array($regulations) || is_array($crossDocs)) {
+            \App\Models\DocumentRelation::syncRelations(
+                $item->id,
+                is_array($regulations) ? $regulations : [],
+                is_array($crossDocs) ? $crossDocs : []
+            );
+        }
+
+        // Sync English translation to documents_lang if available
+        if ($item && ($item->has_translation || !empty($item->translation_title) || !empty($item->translation_pdf))) {
+            try {
+                \DB::table('documents_lang')->updateOrInsert(
+                    ['base_id' => $item->id, 'lang' => 'en'],
+                    [
+                        'title' => $item->translation_title ?: $item->title,
+                        'intro' => $item->translation_intro ?: $item->intro,
+                        'pdf_name' => $item->translation_pdf ?: $item->pdf,
+                        'lampiran' => $item->translation_attachment ?: $item->attachment
+                    ]
+                );
+            } catch (\Throwable $e) {}
+        }
+
+        return true;
     }
 
     public static function formFields($document, $type='create')
@@ -107,7 +165,6 @@ class Document {
                 'multilang' => true,
                 'attributes' => [
                     'class' => 'required title',
-                    'maxlength' => 255,
                 ]
             ],
             'permalink' => [

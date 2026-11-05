@@ -28,9 +28,7 @@ class DocumentNaskahController extends Controller
 
     public function __construct()
     {
-        $module = explode('-', $this->module());
-        
-        $this->document = $module[1];
+        $this->document = 'naskah';
     }
 
     public function listingRes()
@@ -100,7 +98,7 @@ class DocumentNaskahController extends Controller
 
     public function listingOrderDefault($res)
     {
-        return $res->orderBy('tanggal_berlaku', 'desc');
+        return $res->orderBy('updated_at', 'desc')->orderBy('created_at', 'desc')->orderBy('id', 'desc');
     }
 
     public function formRes()
@@ -113,6 +111,12 @@ class DocumentNaskahController extends Controller
         return Helper::formCallbackBefore($post,$item,$type,$this->document,$this->formFields($type));
     }
 
+    public function formCallbackAfter($item, $type)
+    {
+        return Helper::formCallbackAfter($item, $type);
+    }
+
+
     public function formFields($type)
     {
         $form = [
@@ -122,7 +126,6 @@ class DocumentNaskahController extends Controller
                 'multilang' => true,
                 'attributes' => [
                     'class' => 'required title',
-                    'maxlength' => 200,
                 ]
             ],
             'permalink' => [
@@ -134,7 +137,6 @@ class DocumentNaskahController extends Controller
                 'multilang' => true,
                 'attributes' => [
                     'class' => 'required',
-                    'maxlength' => 250,
                 ]
             ],
             'thumbnail' => [],

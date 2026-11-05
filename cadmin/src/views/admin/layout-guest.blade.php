@@ -58,7 +58,7 @@
 	</div>
 
 	<div class="copyright">
-        <p>Copyright © 2023 WEBARQ CMS. Site by WEBARQ</p>
+        <p>&copy; {{ date('Y') }} JDIH Kementerian Koordinator Bidang Pangan. All rights reserved.</p>
     </div>
 
     <script>

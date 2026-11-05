@@ -23,12 +23,12 @@
                 </div>
                 <div class="column column-100 @error('name_project') error @enderror">
                   <label for="">{{lang::translate('dashboard.usulan-project.formulir.label-nama-project')}}<i>*</i></label>
-                  <input type="text" class="required" maxlength="255" name="name_project" placeholder="{{lang::translate('dashboard.usulan-project.formulir.placeholder-nama-project')}}" value="{{ old('name_project') }}">
+                  <input type="text" class="required" name="name_project" placeholder="{{lang::translate('dashboard.usulan-project.formulir.placeholder-nama-project')}}" value="{{ old('name_project') }}">
                   <div class="supporting-text"></div>
                 </div>
                 <div class="column column-50 @error('category_id') error @enderror">
                   <label for="">{{lang::translate('dashboard.usulan-project.formulir.label-kategori-project')}}<i>*</i></label>
-                  <select name="category_id" id="" class="required" maxlength="255">
+                  <select name="category_id" id="" class="required">
                     <option value="">{{lang::translate('dashboard.usulan-project.formulir.placeholder-kategori-project')}}</option>
                     @if(isset($categories))
                     @foreach($categories as $id => $label)
@@ -79,7 +79,7 @@
                 </div>
                 <div class="column column-100 @error('applicant_name') error @enderror">
                   <label for="">{{lang::translate('dashboard.usulan-project.formulir.label-nama-pemohon')}}<i>*</i></label>
-                  <input type="text" name="applicant_name" class="required" maxlength="255" placeholder="{{lang::translate('dashboard.usulan-project.formulir.placeholder-nama-pemohon')}}" value="{{ old('applicant_name') }}">
+                  <input type="text" name="applicant_name" class="required" placeholder="{{lang::translate('dashboard.usulan-project.formulir.placeholder-nama-pemohon')}}" value="{{ old('applicant_name') }}">
                   <div class="supporting-text"></div>
                 </div>
               </div>

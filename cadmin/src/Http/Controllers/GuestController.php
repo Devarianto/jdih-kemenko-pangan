@@ -51,9 +51,17 @@ class GuestController extends Controller
             return $this->getLogin();
         }
         
-        if (!Auth::attempt(['name' => Request::get('username'), 'password' => Request::get('password'), 'is_enable' => 'Yes'])) {
-            view()->share('errc', ['user not found']);
-            return $this->getLogin();
+        $credentials = ['password' => Request::get('password'), 'is_enable' => 'Yes'];
+        $loginField = filter_var(Request::get('username'), FILTER_VALIDATE_EMAIL) ? 'email' : 'name';
+        $credentials[$loginField] = Request::get('username');
+
+        if (!Auth::attempt($credentials)) {
+            $altField = ($loginField === 'email') ? 'name' : 'email';
+            $altCredentials = ['password' => Request::get('password'), 'is_enable' => 'Yes', $altField => Request::get('username')];
+            if (!Auth::attempt($altCredentials)) {
+                view()->share('errc', ['User tidak ditemukan atau password salah.']);
+                return $this->getLogin();
+            }
         }
         
         $passwordDay = Auth::user()->passwordDay();
@@ -83,6 +91,12 @@ class GuestController extends Controller
     {
         if (Auth::check() != true)
             return false;
+
+        // Redirect e-Regulasi operator directly to e-Regulasi dashboard
+        if (in_array(Auth::user()->role, ['admin_operator', 'operator_eregulasi'])) {
+            $redirect = redirect()->route('dashboard')->with('success', 'Selamat datang, ' . e(Auth::user()->display_name ?: Auth::user()->name) . '!');
+            return true;
+        }
 
         $path = 'profile';
         

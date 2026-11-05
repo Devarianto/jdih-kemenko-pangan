@@ -19,7 +19,7 @@ class DownloadFileController extends Controller
     {
         $document = Document::findOrFail($id);
 
-        if (in_array($type, ['pdf', 'abstract', 'attachment'])) {
+        if (in_array($type, ['pdf', 'abstract', 'attachment', 'translation_pdf', 'translation_attachment'])) {
             if ($document->{$type} != null && Storage::exists($document->{$type})) {
                 return response()->file(storage_path('app/'. $document->{$type}), [
                     'Content-Type' => 'application/pdf',
@@ -41,7 +41,12 @@ class DownloadFileController extends Controller
         
         $document = Document::whereIsActive(1)->where('id', $id)->firstOrFail();
         if ($document->{$type} != null && Storage::exists($document->{$type})) {
-            $document->{'download_'.$type.'_count'} += 1;
+            $document->timestamps = false;
+            if ($type == 'pdf' || $type == 'translation_pdf') {
+                $document->download_pdf_count += 1;
+            } elseif (isset($document->{'download_'.$type.'_count'})) {
+                $document->{'download_'.$type.'_count'} += 1;
+            }
             $document->save();
 
             return response()->download(storage_path('app/'. $document->{$type}))->setCache(['no_cache' => true]);

@@ -86,6 +86,7 @@
             <th>{{ lang::translate('document.content.lampiran') }}</th>
             <td>{!! nl2br($document->translated('lampiran')) !!}</td>
           </tr>
+          @include('dynamic.component.document-bapanas-rows')
           @if (!is_null($document->pdf))
           <tr>
             <th>{{ lang::translate('document.content.jumlah-unduh') }}</th>

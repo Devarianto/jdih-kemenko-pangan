@@ -58,7 +58,7 @@
                 <div class="row text-muted">
                     <div class="col-6 text-start">
                         <p class="mb-0">
-                            <strong>Copyright (c) 2022 <a href="https://webarq.com" target="_blank" rel="noopener">WEBARQ</a></strong>
+                            <strong>&copy; {{ date('Y') }} JDIH Kementerian Koordinator Bidang Pangan</strong>
                         </p>
                     </div>
                     @if(!request()->get('opener'))

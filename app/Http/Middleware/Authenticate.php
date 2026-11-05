@@ -9,6 +9,10 @@ class Authenticate extends Middleware
 {
     protected function authenticate($request, array $guards)
     {
+        if (empty($guards)) {
+            $guards = [null];
+        }
+
         foreach ($guards as $guard) {
 
             if (auth()->guard($guard)->check()) {
@@ -36,6 +40,9 @@ class Authenticate extends Middleware
     protected function redirectTo($request): ?string
     {
         if (! $request->expectsJson()) {
+            if ($request->is('regulasi*') || $request->is('dashboard*') || $request->is('admin*')) {
+                return url(config('cadmin.cadmin.admin-url', 'admin-panel') . '/guest/login');
+            }
             return route('home');
         }
 

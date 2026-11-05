@@ -68,7 +68,6 @@ class PopupController extends Controller
                         'info'=>'Maximal 15 characters',
                         'attributes' => [
                             'class' => 'required',
-                            'maxlength' => 15,
                         ]
                     ],
                     'target' => [

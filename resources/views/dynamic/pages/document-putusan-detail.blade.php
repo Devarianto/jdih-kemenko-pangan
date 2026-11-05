@@ -14,7 +14,9 @@
       <div class="banner-detail__caption">
         <div class="wrapper-content">
           <div class="detail-pages--top">
-            <a href="{{ $menu->permalink }}" class="back">{{ lang::translate('document.back.putusan') }}</a>
+            <a href="{{ $document->court_type === 'MA' ? route('putusan.ma') : ($document->court_type === 'MK' ? route('putusan.mk') : (isset($menu) ? $menu->permalink : route('putusan-hukum'))) }}" class="back">
+              {{ lang::translate('document.back.putusan') }}
+            </a>
             <div class="medsos">
               <label for="">{{ lang::translate('document.share') }}</label>
               <div class="wrap">
@@ -22,8 +24,11 @@
               </div>
             </div>
           </div>
+          <div style="margin-bottom: 12px;">
+            {!! $document->court_badge !!}
+          </div>
           <h3>{{ $document->translated('title') }}</h3>
-          <p>{{ $document->translated('intro') }}</p>
+          <p>{{ $document->translated('intro') ?: $document->translated('pokok_perkara') }}</p>
           <a href="javascript:;" id="scrollBtn" class="button button-outline-secondary button-icon">
             {{ lang::translate('document.read-decision') }}
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
@@ -50,62 +55,100 @@
         <table>
           <tr>
             <th>{{ lang::translate('document.content.tipe-dokumen') }}</th>
-            <td>{{ $document->document_type->label ?? '' }}</td>
+            <td>{{ $document->document_type->label ?? 'Putusan' }}</td>
+          </tr>
+          <tr>
+            <th>Lembaga Peradilan</th>
+            <td>
+              <div style="display: flex; align-items: center; gap: 8px;">
+                {!! $document->court_badge !!}
+                <strong>{{ $document->court_label }}</strong>
+              </div>
+            </td>
           </tr>
           <tr>
             <th>{{ lang::translate('document.content.judul') }}</th>
             <td>{{ $document->translated('title') }}</td>
           </tr>
           <tr>
-            <th>{{ lang::translate('document.content.teu-badan') }}</th>
-            <td>{{ $document->translated('teu') }}</td>
-          </tr>
-          <tr>
             <th>{{ lang::translate('document.content.no-putusan') }}</th>
-            <td>{{ $document->translated('title') }}</td>
+            <td style="font-weight: 600;">{{ $document->no_putusan ?: '-' }}</td>
           </tr>
           <tr>
-            <tr>
-            <th>{{ lang::translate('document.content.jenis-peradilan') }}</th>
-            <td>{{ $document->translated('jenis_peradilan') }}</td>
-          </tr>
-          </tr>
-          <tr>
-            <th>{{ lang::translate('document.content.singkatan-peradilan') }}</th>
-            <td>{{ $document->translated('singkatan_peradilan') }}</td>
-          </tr>
-          <tr>
-            <th>{{ lang::translate('document.content.tempat-peradilan') }}</th>
-            <td>{{ $document->tempat_peradilan }}</td>
+            <th>Tahun</th>
+            <td>{{ $document->year ?? ($document->tanggal_dibacakan ? \Carbon\Carbon::parse($document->tanggal_dibacakan)->year : '-') }}</td>
           </tr>
           <tr>
             <th>{{ lang::translate('document.content.tanggal-dibacakan') }}</th>
-            <td>{{ num2string($document->tanggal_dibacakan) }}</td>
+            <td>{{ $document->tanggal_dibacakan ? num2string($document->tanggal_dibacakan) : '-' }}</td>
+          </tr>
+          @if(!empty($document->translated('pemohon')))
+          <tr>
+            <th>Pemohon / Pihak Pemohon</th>
+            <td>{{ $document->translated('pemohon') }}</td>
+          </tr>
+          @endif
+          @if(!empty($document->translated('termohon')))
+          <tr>
+            <th>Termohon / Pihak Termohon</th>
+            <td>{{ $document->translated('termohon') }}</td>
+          </tr>
+          @endif
+          @if(!empty($document->translated('pokok_perkara')))
+          <tr>
+            <th>Pokok Perkara</th>
+            <td>{{ $document->translated('pokok_perkara') }}</td>
+          </tr>
+          @endif
+          @if(!empty($document->translated('amar_putusan')))
+          <tr>
+            <th>Amar Putusan</th>
+            <td>{{ $document->translated('amar_putusan') }}</td>
+          </tr>
+          @endif
+          <tr>
+            <th>{{ lang::translate('document.content.teu-badan') }}</th>
+            <td>{{ $document->translated('teu') ?: '-' }}</td>
+          </tr>
+          <tr>
+            <th>{{ lang::translate('document.content.jenis-peradilan') }}</th>
+            <td>{{ $document->translated('jenis_peradilan') ?: '-' }}</td>
+          </tr>
+          <tr>
+            <th>{{ lang::translate('document.content.singkatan-peradilan') }}</th>
+            <td>{{ $document->translated('singkatan_peradilan') ?: '-' }}</td>
+          </tr>
+          <tr>
+            <th>{{ lang::translate('document.content.tempat-peradilan') }}</th>
+            <td>{{ $document->tempat_peradilan ?: '-' }}</td>
           </tr>
           <tr>
             <th>{{ lang::translate('document.content.sumber') }}</th>
-            <td>{{ $document->translated('sumber') }}</td>
+            <td>{{ $document->translated('sumber') ?: '-' }}</td>
           </tr>
           <tr>
             <th>{{ lang::translate('document.content.subjek') }}</th>
-            <td>{{ $document->translated('subjek') }}</td>
+            <td>{{ $document->translated('subjek') ?: '-' }}</td>
           </tr>
           <tr>
             <th>{{ lang::translate('document.content.status-putusan') }}</th>
-            <td>{{ $document->front_status_berlaku }}</td>
+            <td>
+              <span class="category" @if (!$document->status_berlaku) style="background-color: #C25A5A;" @endif>{{ $document->front_status_berlaku }}</span>
+            </td>
           </tr>
           <tr>
             <th>{{ lang::translate('document.content.bahasa') }}</th>
-            <td>{{ $document->translated('bahasa') }}</td>
+            <td>{{ $document->translated('bahasa') ?: '-' }}</td>
           </tr>
           <tr>
             <th>{{ lang::translate('document.content.bidang-hukum-perkara') }}</th>
-            <td>{{ $document->translated('bidang_hukum') }}</td>
+            <td>{{ $document->translated('bidang_hukum') ?: '-' }}</td>
           </tr>
           <tr>
             <th>{{ lang::translate('document.content.lokasi') }}</th>
-            <td>{{ $document->lokasi }}</td>
+            <td>{{ $document->lokasi ?: '-' }}</td>
           </tr>
+          @include('dynamic.component.document-bapanas-rows')
           <tr>
             <th>{{ lang::translate('document.content.jumlah-unduh') }}</th>
             <td>{{ lang::translate('document.content.count.download', ['count' => num2string($document->download_pdf_count)]) }}</td>
@@ -115,12 +158,16 @@
             <td>{{ lang::translate('document.content.count.view', ['count' => num2string($document->view_count)]) }}</td>
           </tr>
         </table>
+
         <div class="box-detail-page__pdf">
           <div class="box-detail-page__pdf--title">
             <h5>{{ lang::translate('document.file.title') }}</h5>
             <nav>
               <ul>
                 <li><a href="" class="active" data-tab="peraturan">{{ lang::translate('document.file.file') }}</a></li>
+                @if($document->attachment)
+                <li><a href="" data-tab="lampiran">Lampiran</a></li>
+                @endif
               </ul>
             </nav>
           </div>
@@ -135,7 +182,7 @@
                   <figure>
                     <img src="{{asset('images/material/pdf-icon.svg')}}" alt="pdf icon">
                   </figure>
-                  <h6>{{ $document->translated('pdf_name') }}</h6>
+                  <h6>{{ $document->translated('pdf_name') ?: $document->translated('title') }}</h6>
                   <a href="{{ route('document.download', ['type' => 'pdf', 'id' => $document->id]) }}?token={{ Str::random(15) }}" target="__BLANK" class="button button-outline button-icon">
                     {{ lang::translate('document.file.button.download-pdf') }}
                     <i class="wa-icon wa-ic-download-outline"></i>
@@ -144,16 +191,28 @@
               </div>
             </section>
           </div>
-          <div class="content-tab" data-tab="abstrak">
-            <div class="wrap-iframe">
-              <iframe src="{{ asset('pdf/sample.pdf') }}#toolbar=1&navpanes=0&scrollbar=1" width="100%" allowfullscreen></iframe>
-            </div>
-          </div>
+          @if($document->attachment)
           <div class="content-tab" data-tab="lampiran">
             <div class="wrap-iframe">
-              <iframe src="{{ asset('pdf/sample.pdf') }}#toolbar=1&navpanes=0&scrollbar=1" width="100%"  allowfullscreen></iframe>
+              <iframe src="{{ route('document.stream', ['type' => 'attachment', 'id' => $document->id]) }}#toolbar=1&navpanes=0&scrollbar=1" width="100%" allowfullscreen></iframe>
             </div>
+            <section class="list-pdf">
+              <div class="list-pdf__item">
+                <span class="no-dots">Lampiran Berkas Putusan</span>
+                <div class="inner">
+                  <figure>
+                    <img src="{{asset('images/material/pdf-icon.svg')}}" alt="pdf icon">
+                  </figure>
+                  <h6>{{ $document->translated('attachment_name') ?: 'Lampiran Putusan' }}</h6>
+                  <a href="{{ route('document.download', ['type' => 'attachment', 'id' => $document->id]) }}?token={{ Str::random(15) }}" target="__BLANK" class="button button-outline button-icon">
+                    Unduh Lampiran
+                    <i class="wa-icon wa-ic-download-outline"></i>
+                  </a>
+                </div>
+              </div>
+            </section>
           </div>
+          @endif
         </div>
       </div>
     </section>
@@ -171,11 +230,33 @@
         if (button && target) {
           button.addEventListener('click', function() {
             target.scrollIntoView({
-              behavior: 'smooth', // efek scroll halus
-              block: 'start'      // posisi elemen di atas layar
+              behavior: 'smooth',
+              block: 'start'
             });
           });
         }
+
+        // Tab switching for PDF & Lampiran
+        const tabLinks = document.querySelectorAll('.box-detail-page__pdf--title nav ul li a');
+        const tabContents = document.querySelectorAll('.box-detail-page__pdf .content-tab');
+
+        tabLinks.forEach(link => {
+          link.addEventListener('click', function(e) {
+            e.preventDefault();
+            const tabName = this.getAttribute('data-tab');
+
+            tabLinks.forEach(l => l.classList.remove('active'));
+            this.classList.add('active');
+
+            tabContents.forEach(c => {
+              if (c.getAttribute('data-tab') === tabName) {
+                c.style.display = 'block';
+              } else {
+                c.style.display = 'none';
+              }
+            });
+          });
+        });
       });
     </script>
   @endpush

@@ -175,6 +175,13 @@ $menu = [
         'parent' => null,
         'fa' => 'file',
     ],
+    'dashboard-statistik' => [
+        'label' => 'Statistik Produk Hukum',
+        'parent' => 'document',
+        'controller' => 'App\Http\Controllers\Admin\StatisticDashboardController',
+        'fa' => 'chart-bar',
+        'routes' => admin::moduleRoutes(['index', 'download'], ['data', 'documents']),
+    ],
     'document-peraturan' => [
         'label' => 'Peraturan Hukum',
         'parent' => 'document',
@@ -216,6 +223,103 @@ $menu = [
         'parent' => 'document',
         'controller' => 'App\Http\Controllers\Admin\Document\DocumentNaskahController',
         'routes' => admin::moduleRoutes(['index', 'create', 'edit', 'delete', 'publish'])
+    ],
+    'puu' => [
+        'label' => 'Dokumen Pembentukan PUU',
+        'parent' => null,
+        'fa' => 'balance-scale',
+    ],
+    'puu-pengajuan' => [
+        'label' => 'Pengajuan PUU',
+        'parent' => 'puu',
+        'controller' => 'App\Http\Controllers\Admin\Puu\PengajuanPuuController',
+        'routes' => admin::moduleRoutes(['index']),
+    ],
+    'puu-program-penyusunan' => [
+        'label' => 'Program Penyusunan PUU',
+        'parent' => 'puu',
+        'controller' => 'App\Http\Controllers\Admin\Puu\ProgramPenyusunanController',
+        'routes' => admin::moduleRoutes(['index', 'create', 'edit', 'delete', 'publish', 'download']),
+    ],
+    'puu-naskah-urgensi' => [
+        'label' => 'Naskah Urgensi / Akademik',
+        'parent' => 'puu',
+        'controller' => 'App\Http\Controllers\Admin\Puu\NaskahUrgensiController',
+        'routes' => admin::moduleRoutes(['index', 'create', 'edit', 'delete', 'publish', 'download']),
+    ],
+    'puu-rancangan' => [
+        'label' => 'Rancangan PUU',
+        'parent' => 'puu',
+        'controller' => 'App\Http\Controllers\Admin\Puu\RancanganPuuController',
+        'routes' => admin::moduleRoutes(['index', 'create', 'edit', 'delete', 'publish', 'download']),
+    ],
+    'puu-risalah' => [
+        'label' => 'Risalah Pembahasan',
+        'parent' => 'puu',
+        'controller' => 'App\Http\Controllers\Admin\Puu\RisalahPembahasanController',
+        'routes' => admin::moduleRoutes(['index', 'create', 'edit', 'delete', 'publish', 'download']),
+    ],
+    'puu-analisis-evaluasi' => [
+        'label' => 'Analisis Evaluasi PUU',
+        'parent' => 'puu',
+        'controller' => 'App\Http\Controllers\Admin\Puu\AnalisisEvaluasiController',
+        'routes' => admin::moduleRoutes(['index', 'create', 'edit', 'delete', 'publish', 'download']),
+    ],
+    'puu-kajian-hukum' => [
+        'label' => 'Kajian Hukum',
+        'parent' => 'puu',
+        'controller' => 'App\Http\Controllers\Admin\Puu\KajianHukumController',
+        'routes' => admin::moduleRoutes(['index', 'create', 'edit', 'delete', 'publish', 'download']),
+    ],
+    'puu-partisipasi-publik' => [
+        'label' => 'Partisipasi Publik',
+        'parent' => 'puu',
+        'controller' => 'App\Http\Controllers\Admin\Puu\PartisipasiPublikController',
+        'routes' => admin::moduleRoutes(
+            ['index', 'create', 'edit', 'delete', 'publish', 'download'],
+            ['feedback', 'feedback-detail'],
+            ['feedback-status']
+        ),
+    ],
+    'eregulasi' => [
+        'label' => 'Modul e-Regulasi',
+        'parent' => null,
+        'fa' => 'gavel',
+    ],
+    'eregulasi-dashboard' => [
+        'label' => 'Dashboard e-Regulasi',
+        'parent' => 'eregulasi',
+        'fa' => 'dashboard',
+        'controller' => 'App\Http\Controllers\Admin\ERegulasi\ERegulasiBridgeController',
+        'routes' => admin::moduleRoutes(['index']),
+    ],
+    'eregulasi-penyusunan' => [
+        'label' => 'Penyusunan Regulasi',
+        'parent' => 'eregulasi',
+        'fa' => 'file-text-o',
+        'controller' => 'App\Http\Controllers\Admin\ERegulasi\ERegulasiBridgeController',
+        'routes' => admin::moduleRoutes(['index']),
+    ],
+    'eregulasi-pengajuan' => [
+        'label' => 'Pengajuan PUU Baru',
+        'parent' => 'eregulasi',
+        'fa' => 'plus-circle',
+        'controller' => 'App\Http\Controllers\Admin\ERegulasi\ERegulasiBridgeController',
+        'routes' => admin::moduleRoutes(['index']),
+    ],
+    'eregulasi-partisipasi' => [
+        'label' => 'Moderasi Partisipasi Publik',
+        'parent' => 'eregulasi',
+        'fa' => 'comments-o',
+        'controller' => 'App\Http\Controllers\Admin\ERegulasi\ERegulasiBridgeController',
+        'routes' => admin::moduleRoutes(['index']),
+    ],
+    'eregulasi-user' => [
+        'label' => 'User e-Regulasi',
+        'parent' => 'eregulasi',
+        'fa' => 'users',
+        'controller' => 'App\Http\Controllers\Admin\ERegulasi\ERegulasiBridgeController',
+        'routes' => admin::moduleRoutes(['index']),
     ],
     'information' => [
         'label' => 'Informasi',

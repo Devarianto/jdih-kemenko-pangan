@@ -146,12 +146,12 @@ class DashboardController extends Controller
     public function storeProject(Request $request)
     {
         $validated = $request->validate([
-            'name_project' => ['required', 'string', 'max:255'],
+            'name_project' => ['required', 'string'],
             'category_id' => ['required', 'integer'],
             'date' => ['required', 'string', 'date_format:d/m/Y'],
             'files' => ['required', 'array', 'min:1', 'max:3'],
             'files.*' => ['file', 'mimes:jpg,jpeg,png,webp,pdf,doc,docx', 'max:5120'],
-            'applicant_name' => ['required', 'string', 'max:255'],
+            'applicant_name' => ['required', 'string'],
             'applicant_divisions' => ['nullable', 'array'],
             'applicant_divisions.*' => ['integer'],
         ]);

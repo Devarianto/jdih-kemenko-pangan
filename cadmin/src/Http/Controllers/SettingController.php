@@ -48,8 +48,8 @@ class SettingController extends Controller
                 'subtitle' => 'Default Meta Data',
                 'type' => 'text',
                 'multilang' => true,
-                'attributes' => ['class' => 'required', 'maxlength'=>60],
-                'info' => 'maximum 60 character',
+                'attributes' => ['class' => 'required', 'maxlength' => 255],
+                'info' => 'maximum 255 character',
             ],
             'meta-keywords' => [
                 'label' => 'Meta Keywords',
@@ -61,8 +61,8 @@ class SettingController extends Controller
                 'label' => 'Meta Description',
                 'type' => 'textarea',
                 'multilang' => true,
-                'attributes' => ['class' => 'required', 'rows' => 3, 'maxlength'=>160],
-                'info' => 'maximum 160 character',
+                'attributes' => ['class' => 'required', 'rows' => 3, ],
+                
             ],
             'meta-image' => [
                 'label' => 'Meta Image',

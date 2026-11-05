@@ -369,7 +369,8 @@ class adminFormDraft extends adminForm
                 $m->module = $this->module.'-draft';
                 $m->uniqid = $res->id;
                 $m->lang = $lang;
-                $m->meta_title = array_get($meta,'title');
+                $rawTitle = array_get($meta, 'title');
+                $m->meta_title = !is_null($rawTitle) ? mb_substr($rawTitle, 0, 255) : null;
                 $m->meta_keywords = array_get($meta,'keywords');
                 $m->meta_description = array_get($meta,'description');
                 $m->meta_image = array_get($meta,'image');

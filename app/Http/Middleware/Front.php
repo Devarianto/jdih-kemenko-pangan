@@ -61,6 +61,7 @@ class Front
             return false;
         }, \lang::translate('validate.email-format'));
 
+        view()->share('menu', null);
         view()->share('mainMenu', Menu::position('main'));
         view()->share('footLeftMenu', Menu::position('foot-left'));
         view()->share('footRightMenu', Menu::position('foot-right'));

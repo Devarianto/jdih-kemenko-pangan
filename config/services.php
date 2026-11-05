@@ -35,4 +35,10 @@ return [
         ],
     ],
 
+    'eregulasi' => [
+        'base_url' => env('EREGULASI_BASE_URL', 'https://regulasikemenkopangan.id/'),
+        'login_url' => env('EREGULASI_LOGIN_URL', 'https://regulasikemenkopangan.id/login'),
+        'submission_url' => env('EREGULASI_SUBMISSION_URL', 'https://regulasikemenkopangan.id/'),
+    ],
+
 ];

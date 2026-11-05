@@ -149,6 +149,11 @@ class admin
     
     public static function str2permalink($str)
     {
-        return trim(preg_replace('/[^A-Za-z0-9-]+/', '/', strtolower($str)), '/');
+        $slug = trim(preg_replace('/[^A-Za-z0-9-]+/', '/', strtolower($str)), '/');
+        if (strlen($slug) > 200) {
+            $slug = substr($slug, 0, 200);
+            $slug = trim($slug, '/');
+        }
+        return $slug;
     }
 }

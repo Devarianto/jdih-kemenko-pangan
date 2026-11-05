@@ -28,9 +28,7 @@ class DocumentPeraturanController extends Controller
 
     public function __construct()
     {
-        $module = explode('-', $this->module());
-        
-        $this->document = $module[1];
+        $this->document = 'peraturan';
     }
 
     public function listingRes()
@@ -81,7 +79,7 @@ class DocumentPeraturanController extends Controller
 
     public function listingOrderDefault($res)
     {
-        return $res->orderBy('tanggal_penetapan','desc');
+        return $res->orderBy('updated_at', 'desc')->orderBy('created_at', 'desc')->orderBy('id', 'desc');
     }
 
     public function listingFilters()
@@ -115,6 +113,12 @@ class DocumentPeraturanController extends Controller
         return Helper::formCallbackBefore($post,$item,$type,$this->document, $this->formFields($type));
     }
 
+    public function formCallbackAfter($item, $type)
+    {
+        return Helper::formCallbackAfter($item, $type);
+    }
+
+
     public function formFields($type)
     {
         $form = [
@@ -124,7 +128,6 @@ class DocumentPeraturanController extends Controller
                 'multilang' => true,
                 'attributes' => [
                     'class' => 'required title',
-                    'maxlength' => 200,
                 ]
             ],
             'permalink' => [
@@ -136,7 +139,6 @@ class DocumentPeraturanController extends Controller
                 'multilang' => true,
                 'attributes' => [
                     'class' => 'required',
-                    'maxlength' => 250,
                 ]
             ],
             'thumbnail' => [],
@@ -293,6 +295,18 @@ class DocumentPeraturanController extends Controller
         }
         
         $form += [
+            'translation' => [
+                'type' => 'free',
+                'html' => function($res) {
+                    return view('admin.document.translation-widget', ['res' => $res])->render();
+                }
+            ],
+            'relations' => [
+                'type' => 'free',
+                'html' => function($res) {
+                    return view('admin.document.relations-widget', ['res' => $res])->render();
+                }
+            ],
             'meta' => [
                 'type' => 'meta'
             ]  

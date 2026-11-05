@@ -26,17 +26,13 @@ class OfflineController extends Controller
 				'type'=>'text',
 				'label'=>'Title',
 				'multilang'=>true,
-				'attributes' => [
-					'maxlength' => 50
-				]
+				'attributes' => []
 			],
 			'intro'=>[
 				'type'=>'textarea',
 				'label'=>'Intro',
 				'multilang'=>true,
-				'attributes' => [
-					'maxlength' => 300
-				]
+				'attributes' => []
 			],
 			'social-media' => [
 				'type' => 'widget',

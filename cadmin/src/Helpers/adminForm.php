@@ -213,7 +213,10 @@ class adminForm
 		$post = $this->postData();
         
         if (is_callable($callbackBefore)) {
-			$post = $callbackBefore($post, $res);
+			$cbResult = $callbackBefore($post, $res);
+			if (is_array($cbResult)) {
+				$post = $cbResult;
+			}
 		}
 		
 		$type = ($res->id) ? 'update' : 'create';
@@ -323,7 +326,8 @@ class adminForm
                     $m->module = $this->module;
                     $m->uniqid = $res->id;
                     $m->lang = $lang;
-                    $m->meta_title = array_get($meta,'title');
+                    $rawTitle = array_get($meta, 'title');
+                    $m->meta_title = !is_null($rawTitle) ? mb_substr($rawTitle, 0, 255) : null;
                     $m->meta_keywords = array_get($meta,'keywords');
                     $m->meta_description = array_get($meta,'description');
                     $m->meta_image = array_get($meta,'image');
@@ -334,6 +338,9 @@ class adminForm
             if ($post['permalink'] != []) {
                 Permalink::whereModule($this->module)->whereUniqid($res->id)->delete();
                 foreach ($post['permalink'] as $lang => $permalink) {
+                    if (empty(trim($permalink))) {
+                        continue;
+                    }
                     $o = new Permalink;
                     $o->module = $this->module;
                     $o->uniqid = $res->id;
@@ -432,8 +439,12 @@ class adminForm
         }
 		
 		if (array_get($field, 'type') == 'free') {
+            $content = array_get($field, 'html');
+            if (is_callable($content)) {
+                $content = $content($res);
+            }
 			$html .= '
-				<div class="form-group clearfix" origin="'.$key.'">'.array_get($field, 'html').'</div>';
+				<div class="form-group clearfix" origin="'.$key.'">'.$content.'</div>';
 		} else {
 			$html .= '
 				<div class="form-group clearfix" origin="'.$key.'" style="position:relative;">

@@ -1,12 +1,12 @@
 <script>
     let valueType = $('select[name="type"]').val();
-    typeGallery(valueType)
+    typeGallery(valueType);
+
     $(document).ready(function() {
         $('select[name="type"]').on('change', function() {
             let value = $(this).val();
-
             typeGallery(value);
-        })
+        });
 
         $('.date').datepicker({
             format: "yyyy-mm-dd",
@@ -22,6 +22,8 @@
             $('div[origin="iframe"]').hide();
             $('div[origin="iframe"] input[name="iframe"]').removeClass('required');
 
+            $('div[origin="classification"]').hide();
+
             $('div.widgets').show();
             $('div.widgets').attr('widget-min', 1);
             $('div.widgets input[origin="widget_image_title"]').addClass('required');
@@ -30,6 +32,8 @@
         } else {
             $('div[origin="iframe"]').show();
             $('div[origin="iframe"] input[name="iframe"]').addClass('required');
+
+            $('div[origin="classification"]').show();
 
             $('div.widgets').hide();
             $('div.widgets').removeAttr('widget-min');

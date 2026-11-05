@@ -28,9 +28,7 @@ class DocumentMonografiController extends Controller
 
     public function __construct()
     {
-        $module = explode('-', $this->module());
-        
-        $this->document = $module[1];
+        $this->document = 'monografi';
     }
 
     public function listingRes()
@@ -101,7 +99,7 @@ class DocumentMonografiController extends Controller
 
     public function listingOrderDefault($res)
     {
-        return $res->orderBy('tahun_terbit', 'desc')->orderBy('created_at','desc');
+        return $res->orderBy('updated_at', 'desc')->orderBy('created_at', 'desc')->orderBy('id', 'desc');
     }
 
     public function formRes()
@@ -114,6 +112,12 @@ class DocumentMonografiController extends Controller
         return Helper::formCallbackBefore($post,$item,$type,$this->document);
     }
 
+    public function formCallbackAfter($item, $type)
+    {
+        return Helper::formCallbackAfter($item, $type);
+    }
+
+
     public function formFields($type)
     {
         $form = [
@@ -123,7 +127,6 @@ class DocumentMonografiController extends Controller
                 'multilang' => true,
                 'attributes' => [
                     'class' => 'required title',
-                    'maxlength' => 200,
                 ]
             ],
             'permalink' => [
@@ -135,7 +138,6 @@ class DocumentMonografiController extends Controller
                 'multilang' => true,
                 'attributes' => [
                     'class' => 'required',
-                    'maxlength' => 250,
                 ]
             ],
             'thumbnail' => [],

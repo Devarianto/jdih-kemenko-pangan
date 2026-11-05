@@ -34,14 +34,14 @@ class Root
       $response->headers->set('X-XSS-Protection', '1; mode=block');
       
       $csp = "default-src 'self'; ";
-      $csp .= "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.gstatic.com https://www.google.com https://www.recaptcha.net https://maps.googleapis.com https://www.youtube.com; ";
-      $csp .= "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://www.gstatic.com https://www.google.com https://www.recaptcha.net https://maps.googleapis.com https://www.youtube.com; ";
+      $csp .= "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://www.gstatic.com https://www.google.com https://www.recaptcha.net https://maps.googleapis.com https://www.youtube.com; ";
+      $csp .= "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com https://www.gstatic.com https://www.google.com https://www.recaptcha.net https://maps.googleapis.com https://www.youtube.com; ";
       $csp .= "img-src 'self' data: https://www.google.co.id https://www.google-analytics.com https://www.googletagmanager.com https://maps.googleapis.com https://maps.gstatic.com https://www.google.com https://www.gstatic.com https://www.youtube.com https://i.ytimg.com; ";
-      $csp .= "frame-src https://www.youtube.com https://www.google.com https://www.recaptcha.net; ";
-      $csp .= "font-src 'self' https://fonts.gstatic.com data:; ";
+      $csp .= "frame-src 'self' https://www.youtube.com https://www.google.com https://www.recaptcha.net; ";
+      $csp .= "font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com data:; ";
       $csp .= "connect-src 'self' https://analytics.google.com https://www.google-analytics.com https://www.googletagmanager.com https://maps.googleapis.com https://www.google.com https://www.gstatic.com; ";
-      $csp .= "child-src https://www.youtube.com https://www.google.com https://www.recaptcha.net; ";
-      $csp .= "object-src 'none'; ";
+      $csp .= "child-src 'self' https://www.youtube.com https://www.google.com https://www.recaptcha.net; ";
+      $csp .= "object-src 'self'; ";
       $csp .= "base-uri 'self'; ";
       $csp .= "form-action 'self'; ";
       $csp .= "frame-ancestors 'self'; ";

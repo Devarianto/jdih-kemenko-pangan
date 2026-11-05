@@ -14,6 +14,7 @@ class Document extends Model
     use TranslateTrait, PermalinkTrait;
 
     protected $table = 'documents';
+    protected $guarded = ['id'];
 
     const PERATURAN = 1;
     const JURNAL = 2;
@@ -22,6 +23,80 @@ class Document extends Model
     const PUTUSAN = 5;
     const MONOGRAFI = 6;
     const NASKAH = 7;
+    const PERATURAN_TERJEMAHAN = 8;
+    const PROGRAM_PENYUSUNAN = 9;
+    const NASKAH_AKADEMIK = 10;
+    const ANALISIS_EVALUASI = 11;
+    const RISALAH_PEMBAHASAN = 12;
+    const KAJIAN_HUKUM = 13;
+    const PARTISIPASI_PUBLIK = 14;
+    const RANCANGAN_PUU = 15;
+
+    const COURT_MA = 'MA';
+    const COURT_MK = 'MK';
+    const COURT_NEEDS_CLASSIFICATION = 'NEEDS_CLASSIFICATION';
+
+    public function regulasi()
+    {
+        return $this->belongsTo(Regulasi::class, 'regulasi_id');
+    }
+
+    public function getStageLabelAttribute()
+    {
+        if ($this->regulasi) {
+            $stage = $this->regulasi->current_stage ?: $this->regulasi->status;
+            $labels = [
+                'pengajuan' => 'Tahap Pengajuan',
+                'pembahasan' => 'Tahap Pembahasan',
+                'uji_publik' => 'Tahap Uji Publik / Partisipasi',
+                'harmonisasi' => 'Tahap Harmonisasi',
+                'penetapan' => 'Tahap Penetapan',
+                'proses' => 'Dalam Proses Penyusunan',
+                'selesai' => 'Selesai Ditetapkan'
+            ];
+            return $labels[$stage] ?? ('Tahap ' . ucfirst(str_replace('_', ' ', $stage)));
+        }
+        return 'Dalam Proses Pembentukan';
+    }
+
+    public static function courtTypes(bool $includeAll = false)
+    {
+        $types = [
+            self::COURT_MA => 'Mahkamah Agung (MA)',
+            self::COURT_MK => 'Mahkamah Konstitusi (MK)',
+        ];
+
+        if ($includeAll) {
+            $types[self::COURT_NEEDS_CLASSIFICATION] = 'Belum Diklasifikasi';
+        }
+
+        return $types;
+    }
+
+    public function getCourtLabelAttribute()
+    {
+        if ($this->court_type === self::COURT_MA) {
+            return 'Mahkamah Agung (MA)';
+        }
+        if ($this->court_type === self::COURT_MK) {
+            return 'Mahkamah Konstitusi (MK)';
+        }
+        if ($this->court_type === self::COURT_NEEDS_CLASSIFICATION) {
+            return 'Perlu Klasifikasi (NEEDS_CLASSIFICATION)';
+        }
+        return $this->translated('jenis_peradilan') ?: ($this->jenis_peradilan ?: '-');
+    }
+
+    public function getCourtBadgeAttribute()
+    {
+        if ($this->court_type === self::COURT_MA) {
+            return '<span class="tag tag-ma badge-court-ma" style="background:#e0f2fe; color:#0369a1; font-weight:600; padding:3px 10px; border-radius:12px; font-size:12px; display:inline-block;">Mahkamah Agung (MA)</span>';
+        }
+        if ($this->court_type === self::COURT_MK) {
+            return '<span class="tag tag-mk badge-court-mk" style="background:#fee2e2; color:#b91c1c; font-weight:600; padding:3px 10px; border-radius:12px; font-size:12px; display:inline-block;">Mahkamah Konstitusi (MK)</span>';
+        }
+        return '<span class="tag tag-needs badge-court-needs" style="background:#fef3c7; color:#92400e; font-weight:600; padding:3px 10px; border-radius:12px; font-size:12px; display:inline-block;">Perlu Klasifikasi</span>';
+    }
 
     const SHARE_FACEBOOK = 'fb';
 	const SHARE_LINKEDIN = 'linkedin';
@@ -89,22 +164,209 @@ class Document extends Model
         return $this->belongsTo(MasterDocument::class, 'master_document_id');
     }
 
+    public function related_document()
+    {
+        return $this->belongsTo(Document::class, 'related_document_id');
+    }
+
+    public function tahapan()
+    {
+        return $this->belongsTo(StatusProject::class, 'tahapan_puu_id');
+    }
+
+    public function feedbacks()
+    {
+        return $this->hasMany(PublicConsultationFeedback::class, 'document_id');
+    }
+
+    public function outgoingRelations()
+    {
+        return $this->hasMany(\App\Models\DocumentRelation::class, 'source_document_id');
+    }
+
+    public function incomingRelations()
+    {
+        return $this->hasMany(\App\Models\DocumentRelation::class, 'related_document_id');
+    }
+
+    /**
+     * Get Peraturan Terkait (both outgoing and incoming reciprocal relations where target is regulation)
+     */
+    public function getPeraturanTerkaitList()
+    {
+        $list = [];
+
+        // 1. Outgoing relations marked as peraturan_terkait
+        $outgoing = $this->outgoingRelations()
+            ->with(['relatedDocument.master_document', 'relatedDocument.rule_type'])
+            ->where('category', 'peraturan_terkait')
+            ->get();
+
+        foreach ($outgoing as $rel) {
+            if ($rel->is_external) {
+                $list[] = [
+                    'id' => $rel->id,
+                    'is_external' => true,
+                    'document_id' => null,
+                    'title' => $rel->external_title,
+                    'no_peraturan' => $rel->external_number ?? '-',
+                    'year' => $rel->external_year ?? '-',
+                    'jenis_peraturan' => $rel->external_category ?? 'Peraturan',
+                    'relationship_type' => $rel->relationship_type,
+                    'relation_label' => $rel->type_label,
+                    'colors' => $rel->type_colors,
+                    'permalink' => $rel->external_url,
+                    'external_url' => $rel->external_url,
+                    'pdf' => null,
+                    'direction' => 'outgoing',
+                    'note' => $rel->note,
+                ];
+                continue;
+            }
+            $doc = $rel->relatedDocument;
+            if (!$doc) continue;
+            $list[] = [
+                'id' => $rel->id,
+                'is_external' => false,
+                'document_id' => $doc->id,
+                'title' => $doc->translated('title') ?: $doc->title,
+                'no_peraturan' => $doc->no_peraturan ?? '-',
+                'year' => $doc->date ? date('Y', strtotime($doc->date)) : '-',
+                'jenis_peraturan' => optional($doc->rule_type)->label ?? optional($doc->master_document)->label ?? 'Peraturan',
+                'relationship_type' => $rel->relationship_type,
+                'relation_label' => $rel->type_label,
+                'colors' => $rel->type_colors,
+                'permalink' => $doc->permalink_document,
+                'pdf' => $doc->pdf,
+                'direction' => 'outgoing',
+                'note' => $rel->note,
+            ];
+        }
+
+        // 2. Incoming relations (reciprocal)
+        $incoming = $this->incomingRelations()
+            ->with(['sourceDocument.master_document', 'sourceDocument.rule_type'])
+            ->where('category', 'peraturan_terkait')
+            ->get();
+
+        foreach ($incoming as $rel) {
+            $doc = $rel->sourceDocument;
+            if (!$doc) continue;
+            $reciprocalType = \App\Models\DocumentRelation::getReciprocal($rel->relationship_type);
+            $list[] = [
+                'id' => $rel->id,
+                'document_id' => $doc->id,
+                'title' => $doc->translated('title') ?: $doc->title,
+                'no_peraturan' => $doc->no_peraturan ?? '-',
+                'year' => $doc->date ? date('Y', strtotime($doc->date)) : '-',
+                'jenis_peraturan' => optional($doc->rule_type)->label ?? optional($doc->master_document)->label ?? 'Peraturan',
+                'relationship_type' => $reciprocalType,
+                'relation_label' => \App\Models\DocumentRelation::TYPE_LABELS[$reciprocalType] ?? ucfirst(str_replace('_', ' ', $reciprocalType)),
+                'colors' => \App\Models\DocumentRelation::TYPE_COLORS[$reciprocalType] ?? ['bg' => '#f8fafc', 'text' => '#475569', 'border' => '#e2e8f0'],
+                'permalink' => $doc->permalink_document,
+                'pdf' => $doc->pdf,
+                'direction' => 'incoming',
+                'note' => $rel->note,
+            ];
+        }
+
+        return $list;
+    }
+
+    /**
+     * Get Dokumen Terkait (cross-category documents)
+     */
+    public function getDokumenTerkaitList()
+    {
+        $list = [];
+
+        // 1. Outgoing relations marked as dokumen_terkait
+        $outgoing = $this->outgoingRelations()
+            ->with(['relatedDocument.master_document', 'relatedDocument.rule_type'])
+            ->where('category', 'dokumen_terkait')
+            ->get();
+
+        foreach ($outgoing as $rel) {
+            if ($rel->is_external) {
+                $list[] = [
+                    'id' => $rel->id,
+                    'is_external' => true,
+                    'document_id' => null,
+                    'title' => $rel->external_title,
+                    'kategori' => $rel->external_category ?? 'Dokumen Eksternal',
+                    'nomor' => $rel->external_number ?? '-',
+                    'year' => $rel->external_year ?? '-',
+                    'relationship_type' => $rel->relationship_type,
+                    'relation_label' => $rel->type_label,
+                    'colors' => $rel->type_colors,
+                    'permalink' => $rel->external_url,
+                    'external_url' => $rel->external_url,
+                    'pdf' => null,
+                    'direction' => 'outgoing',
+                    'note' => $rel->note,
+                ];
+                continue;
+            }
+            $doc = $rel->relatedDocument;
+            if (!$doc) continue;
+            $list[] = [
+                'id' => $rel->id,
+                'is_external' => false,
+                'document_id' => $doc->id,
+                'title' => $doc->translated('title') ?: $doc->title,
+                'kategori' => optional($doc->master_document)->label ?? 'Dokumen Hukum',
+                'nomor' => $doc->no_peraturan ?? $doc->nomor_perjanjian ?? $doc->no_putusan ?? '-',
+                'year' => $doc->date ? date('Y', strtotime($doc->date)) : '-',
+                'relationship_type' => $rel->relationship_type,
+                'relation_label' => $rel->type_label,
+                'colors' => $rel->type_colors,
+                'permalink' => $doc->permalink_document,
+                'pdf' => $doc->pdf,
+                'direction' => 'outgoing',
+                'note' => $rel->note,
+            ];
+        }
+
+        // 2. Incoming relations marked as dokumen_terkait
+        $incoming = $this->incomingRelations()
+            ->with(['sourceDocument.master_document', 'sourceDocument.rule_type'])
+            ->where('category', 'dokumen_terkait')
+            ->get();
+
+        foreach ($incoming as $rel) {
+            $doc = $rel->sourceDocument;
+            if (!$doc) continue;
+            $reciprocalType = \App\Models\DocumentRelation::getReciprocal($rel->relationship_type);
+            $list[] = [
+                'id' => $rel->id,
+                'document_id' => $doc->id,
+                'title' => $doc->translated('title') ?: $doc->title,
+                'kategori' => optional($doc->master_document)->label ?? 'Dokumen Hukum',
+                'nomor' => $doc->no_peraturan ?? $doc->nomor_perjanjian ?? $doc->no_putusan ?? '-',
+                'year' => $doc->date ? date('Y', strtotime($doc->date)) : '-',
+                'relationship_type' => $reciprocalType,
+                'relation_label' => \App\Models\DocumentRelation::TYPE_LABELS[$reciprocalType] ?? ucfirst(str_replace('_', ' ', $reciprocalType)),
+                'colors' => \App\Models\DocumentRelation::TYPE_COLORS[$reciprocalType] ?? ['bg' => '#f8fafc', 'text' => '#475569', 'border' => '#e2e8f0'],
+                'permalink' => $doc->permalink_document,
+                'pdf' => $doc->pdf,
+                'direction' => 'incoming',
+                'note' => $rel->note,
+            ];
+        }
+
+        return $list;
+    }
+
     public function getTagColorHomeAttribute()
     {
         $master_document = $this->master_document == null ? null : $this->master_document->id;
         if ($master_document == self::PUTUSAN) {
             return '#091D77';
-        } else if ($master_document == self::PERATURAN) {
+        } else if ($master_document == self::PERATURAN || $master_document == self::PERATURAN_TERJEMAHAN) {
             return '#091D77';
-        } else if ($master_document == self::KLIPING) {
+        } else if (in_array($master_document, [self::KLIPING, self::MAJALAH, self::JURNAL, self::MONOGRAFI])) {
             return '#0086A7';
-        } else if ($master_document == self::MAJALAH) {
-            return '#0086A7';
-        } else if ($master_document == self::JURNAL) {
-            return '#0086A7';
-        } else if ($master_document == self::MONOGRAFI) {
-            return '#0086A7;';
-        } else if ($master_document == self::NASKAH) {
+        } else if (in_array($master_document, [self::NASKAH, self::PROGRAM_PENYUSUNAN, self::NASKAH_AKADEMIK, self::ANALISIS_EVALUASI, self::RISALAH_PEMBAHASAN, self::KAJIAN_HUKUM, self::PARTISIPASI_PUBLIK])) {
             return '#091D77;';
         }
     }
@@ -143,7 +405,8 @@ class Document extends Model
     {
         $master_document = $this->master_document == null ? null : $this->master_document->id;
         if ($master_document == self::PUTUSAN) {
-            return $this->customPermalink('document-putusan');
+            $p = $this->customPermalink('document-putusan');
+            return $p ?: url('/document-putusan/' . $this->id);
         } else if ($master_document == self::PERATURAN) {
             return $this->customPermalink('document-peraturan');
         } else if ($master_document == self::KLIPING) {
@@ -156,7 +419,33 @@ class Document extends Model
             return $this->customPermalink('document-monografi');
         } else if ($master_document == self::NASKAH) {
             return $this->customPermalink('document-naskah');
+        } else if ($master_document == self::PERATURAN_TERJEMAHAN) {
+            return $this->customPermalink('peraturan-terjemahan');
+        } else if ($master_document == self::PROGRAM_PENYUSUNAN) {
+            return $this->customPermalink('puu-program-penyusunan') ?: $this->customPermalink('program-penyusunan-puu');
+        } else if ($master_document == self::NASKAH_AKADEMIK) {
+            return $this->customPermalink('puu-naskah-urgensi') ?: $this->customPermalink('naskah-akademik');
+        } else if ($master_document == self::ANALISIS_EVALUASI) {
+            return $this->customPermalink('puu-analisis-evaluasi') ?: $this->customPermalink('analisis-evaluasi');
+        } else if ($master_document == self::RISALAH_PEMBAHASAN) {
+            return $this->customPermalink('puu-risalah') ?: $this->customPermalink('risalah-pembahasan');
+        } else if ($master_document == self::KAJIAN_HUKUM) {
+            return $this->customPermalink('puu-kajian-hukum') ?: $this->customPermalink('kajian-hukum');
+        } else if ($master_document == self::PARTISIPASI_PUBLIK) {
+            return $this->customPermalink('puu-partisipasi-publik') ?: $this->customPermalink('partisipasi-publik');
+        } else if ($master_document == self::RANCANGAN_PUU) {
+            return $this->customPermalink('puu-rancangan');
         }
+
+        $module = \DB::table('permalinks')
+            ->where('uniqid', $this->id)
+            ->where('module', '!=', 'menu')
+            ->value('module');
+        if ($module) {
+            return $this->customPermalink($module);
+        }
+
+        return '';
     }
 
     public function getApiJenisAttribute()

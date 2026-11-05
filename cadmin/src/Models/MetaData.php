@@ -9,6 +9,20 @@ class MetaData extends Model
     protected $table = 'meta_datas';
     public $timestamps = false;
 
+    protected $fillable = [
+        'module',
+        'uniqid',
+        'lang',
+        'meta_title',
+        'meta_keywords',
+        'meta_description',
+        'meta_image',
+    ];
+
+    protected $casts = [
+        'meta_title' => 'string',
+    ];
+
     public static function meta($uniqid,$module,$lang = null)
     {
         if (is_null($lang))

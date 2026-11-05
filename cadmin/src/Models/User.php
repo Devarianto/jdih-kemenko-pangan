@@ -12,7 +12,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'display_name', 'email', 'password', 'role', 'unit_kerja', 'is_enable', 'privilege_id',
     ];
 
     /**
@@ -38,17 +38,24 @@ class User extends Authenticatable
     {
         if ($this->isRoot) return true;
         
+        if (in_array($module, ['puu-pengajuan', 'puu-partisipasi-publik']) && in_array($this->role ?: 'super_admin', ['super_admin', 'admin_operator'])) {
+            return true;
+        }
+
         if (in_array($action,['order-up', 'order-down']))
             $action = 'edit';
         
-        foreach ($this->privilege->modules AS $mod) {
-            if ($mod->module == $module && $mod->act == $action)
-                return true;
+        if ($this->privilege && $this->privilege->modules) {
+            foreach ($this->privilege->modules AS $mod) {
+                if ($mod->module == $module && $mod->act == $action)
+                    return true;
+            }
         }
         
         $public = config('cadmin.menu.'.$module.'.public-permission');
         if (is_array($public)
            && in_array($action,$public)
+           && $this->privilege
            && $this->privilege->modules()->whereModule($module)->count() >= 1
            ) {
             return true;

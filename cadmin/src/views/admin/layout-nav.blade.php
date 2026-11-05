@@ -1,5 +1,5 @@
 @php
-$active = admin::module();
+$active = $activeModule ?? admin::module();
 foreach(config('cadmin.menu') as $k=>$v) {
     if (array_get($v, 'merge') && $active == $k)
         $active = $v['merge'];

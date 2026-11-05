@@ -72,6 +72,15 @@ class CactuarAdminServiceProvider extends ServiceProvider
             
             if (!$rule)
                 return $var;
+
+            if ($rule === 'string|numeric') {
+                if (is_string($var) || is_numeric($var)) {
+                    return $var;
+                }
+                if ($die == true)
+                    abort(404);
+                return null;
+            }
             
             if (\Validator::make(['var' => $var],['var' => $rule])->fails() == true) {
                 if ($die == true)
@@ -87,6 +96,15 @@ class CactuarAdminServiceProvider extends ServiceProvider
             
             if (!$rule)
                 return $var;
+
+            if ($rule === 'string|numeric') {
+                if (is_string($var) || is_numeric($var)) {
+                    return $var;
+                }
+                if ($die == true)
+                    abort(404);
+                return null;
+            }
             
             if (\Validator::make(['var' => $var],['var' => $rule])->fails() == true) {
                 if ($die == true)

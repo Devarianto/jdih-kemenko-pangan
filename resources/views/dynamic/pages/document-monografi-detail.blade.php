@@ -90,6 +90,7 @@
             <th>{{ lang::translate('document.content.lokasi') }}</th>
             <td>{{ $document->lokasi }}</td>
           </tr>
+          @include('dynamic.component.document-bapanas-rows')
           <tr>
             <th>{{ lang::translate('document.content.jumlah-unduh') }}</th>
             <td>{{ lang::translate('document.content.count.download', ['count' => num2string($document->download_pdf_count)]) }}</td>

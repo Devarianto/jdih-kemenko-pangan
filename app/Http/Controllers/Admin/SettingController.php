@@ -46,6 +46,15 @@ class SettingController extends BaseController
                 'attributes' => ['class' => 'required'],
                 'info' => 'available keywords:<br>[year] : current year<br>[webarq] : webarq copyright',
             ],
+            'eregulasi-url' => [
+                'subtitle' => 'Integrasi Sistem e-Regulasi',
+                'label' => 'URL Sistem e-Regulasi',
+                'type' => 'text',
+                'info' => 'Alamat sistem e-Regulasi Kemenko Pangan untuk submenu Pengajuan PUU (Default: https://regulasikemenkopangan.id/login)',
+                'attributes' => [
+                    'placeholder' => 'https://regulasikemenkopangan.id/login'
+                ]
+            ],
             /*'use-www' => [ //disabled as request, recommend redirect by htaccess / cpanel
                 'label' => 'Domain',
                 'type' => 'select',
@@ -154,8 +163,8 @@ class SettingController extends BaseController
                 'subtitle' => 'Default Meta Data',
                 'type' => 'text',
                 'multilang' => true,
-                'attributes' => ['class' => 'required', 'maxlength'=>60],
-                'info' => 'maximum 60 character',
+                'attributes' => ['class' => 'required', 'maxlength' => 255],
+                'info' => 'maximum 255 character',
             ],
             'meta-keywords' => [
                 'label' => 'Meta Keywords',
@@ -167,8 +176,8 @@ class SettingController extends BaseController
                 'label' => 'Meta Description',
                 'type' => 'textarea',
                 'multilang' => true,
-                'attributes' => ['class' => 'required', 'rows' => 3, 'maxlength'=>160],
-                'info' => 'maximum 160 character',
+                'attributes' => ['class' => 'required', 'rows' => 3, ],
+                
             ],
             'meta-image' => [
                 'label' => 'Meta Image',

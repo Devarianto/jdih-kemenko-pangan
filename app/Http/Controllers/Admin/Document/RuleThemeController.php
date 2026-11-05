@@ -59,6 +59,14 @@ class RuleThemeController extends Controller
         return new RuleTheme;
     }
 
+    public function createCallbackBefore($post, $item)
+    {
+        if (empty($item->sort_id) && empty($post['main']['sort_id'])) {
+            $post['main']['sort_id'] = (RuleTheme::max('sort_id') ?? 0) + 1;
+        }
+        return $post;
+    }
+
     public function formFields()
     {
         return [

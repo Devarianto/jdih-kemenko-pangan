@@ -55,9 +55,9 @@ trait BaseTrait
                         'draft' => true,
                         'attributes' => [
                             'class' => 'required',
-                            'maxlength' => 60
+                            'maxlength' => 255
                         ],
-                        'info' => 'maximum 60 character'
+                        'info' => 'maximum 255 character'
                     ];
                     $newFields['meta_keywords'] = [
                         'label' => 'Meta Keywords',
@@ -77,9 +77,9 @@ trait BaseTrait
                         'draft' => true,
                         'attributes' => [
                             'rows' => 3,
-                            'maxlength' => 160
+                            
                         ],
-                        'info' => 'maximum 160 character',
+                        
                     ];
                     $newFields['meta_image'] = [
                         'label' => 'Meta Image',
@@ -165,10 +165,21 @@ trait BaseTrait
     protected function validateCallback($post, $type = 'edit', &$error = [])
     {
         $out = true;
+
+        // Validasi batas maksimal 255 karakter pada Meta Title
+        if (isset($post['meta']) && is_array($post['meta'])) {
+            foreach ($post['meta'] as $lang => $metaFields) {
+                if (isset($metaFields['title']) && mb_strlen($metaFields['title']) > 255) {
+                    $error[] = "Meta Title (" . strtoupper($lang) . ") tidak boleh melebihi 255 karakter (saat ini: " . mb_strlen($metaFields['title']) . " karakter).";
+                    $out = false;
+                }
+            }
+        }
+
         if (method_exists($this, $type.'ValidateCallback'))
-            $out = $this->{$type.'ValidateCallback'}($post, $error);
+            $out = $this->{$type.'ValidateCallback'}($post, $error) && $out;
         if (in_array($type, ['edit', 'create']) && method_exists($this, 'formValidateCallback'))
-            $out = $this->formValidateCallback($post, $type, $error);
+            $out = $this->formValidateCallback($post, $type, $error) && $out;
         return $out;
     }
     

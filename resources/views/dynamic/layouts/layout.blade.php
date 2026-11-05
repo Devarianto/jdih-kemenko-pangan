@@ -2,6 +2,16 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
         <meta charset="utf-8">
+        <script>
+            (function() {
+                try {
+                    var saved = localStorage.getItem('jdih_theme');
+                    var sysDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+                    var theme = saved ? saved : (sysDark ? 'dark' : 'light');
+                    document.documentElement.setAttribute('data-theme', theme);
+                } catch(e) {}
+            })();
+        </script>
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
 		{!! og::render() !!}
@@ -99,5 +109,8 @@
                 });
             })
         </script>
+
+        {{-- Widget Aksesibilitas Web (UserWay & EqualWeb Standard) --}}
+        @include('dynamic.component.accessibility-widget')
     </body>
 </html>

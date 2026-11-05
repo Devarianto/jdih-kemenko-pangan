@@ -43,7 +43,7 @@ class PageController extends Controller
         $gallery_image = Gallery::translate()->whereIsActive(1)->where('type', 'image')->orderBy('date', 'desc')->first();
         $gallery_video = Gallery::translate()->whereIsActive(1)->where('type', 'video')->orderBy('date', 'desc')->first();
 
-        $newest_documents = Document::translate()->whereIsActive(1)->orderBy('created_at', 'desc')->limit(5)->get();
+        $newest_documents = Document::translate()->whereIsActive(1)->orderBy('updated_at', 'desc')->orderBy('created_at', 'desc')->orderBy('id', 'desc')->limit(5)->get();
         $popular_documents = Document::translate()->whereIsActive(1)->orderBy('view_count', 'desc')->limit(4)->get();
 
         $menus = [];
@@ -51,7 +51,7 @@ class PageController extends Controller
         $document_monografi = Document::translate()
             ->whereIsActive(1)
             ->where('master_document_id', Document::MONOGRAFI)
-            ->orderBy('tahun_terbit', 'desc')->orderBy('created_at','desc');
+            ->orderBy('updated_at', 'desc')->orderBy('created_at','desc');
         $monografi_count = $document_monografi->count();
         $document_monografi = $document_monografi->limit(4)
             ->get();
@@ -61,7 +61,7 @@ class PageController extends Controller
         $document_peraturan = Document::translate()
             ->whereIsActive(1)
             ->where('master_document_id', Document::PERATURAN)
-            ->orderBy('tanggal_penetapan', 'desc');
+            ->orderBy('updated_at', 'desc')->orderBy('created_at', 'desc')->orderBy('id', 'desc');
         $peraturan_count = $document_peraturan->count();
         $document_peraturan = $document_peraturan->limit(4)
             ->get();
@@ -166,6 +166,13 @@ class PageController extends Controller
 
         $popup = Conf::initial('popup-page');
         
+        $artikel_count = $jurnal_count + $majalah_count;
+        $document_rancangan = Document::translate()
+            ->whereIsActive(1)
+            ->where('master_document_id', Document::RANCANGAN_PUU);
+        $rancangan_count = $document_rancangan->count();
+        $menus['rancangan'] = Menu::fe()->whereIsActive(1)->where('type', 'rancangan-puu')->first();
+
         return view('dynamic.home', compact(
             'news_first', 'news_others', 'newest_documents', 
             'document_monografi', 'monografi_count', 
@@ -175,6 +182,7 @@ class PageController extends Controller
             'document_majalah', 'majalah_count', 
             'document_kliping', 'kliping_count', 
             'document_naskah', 'naskah_count', 
+            'artikel_count', 'rancangan_count',
             'menus', 'popular_documents', 
             'gallery_image', 'gallery_video', 
             'get_chart', 'menu_statistic',
@@ -238,51 +246,45 @@ class PageController extends Controller
 
     public function getAboutStatistik($menu)
     {
-        $rule_types = null;
+        $selectedYear = request()->query('year');
+        $selectedRuleTypeId = request()->query('rule_type_id');
 
-        if (request()->query('year')) {
-            $rule_types = RuleType::withCount([
-                'documents' => function($query) {
-                    $query->where('master_document_id', Document::PERATURAN)->where('year', request()->query('year'));
-                }
-            ])->whereIsActive(1)->get();
-        } else {
-            $rule_types = RuleType::withCount([
-                'documents' => function($query) {
-                    $query->where('master_document_id', Document::PERATURAN);
-                }
-            ])->whereIsActive(1)->get();
-        }
-        
-        $years = Document::select('year')
-            ->whereIsActive(1)
-            ->where('master_document_id', Document::PERATURAN)
-            ->orderBy("year", 'desc')
-            ->groupBy('year')
-            ->get();
+        $stats = StatisticController::getStatisticsData($selectedYear, $selectedRuleTypeId);
+        $matrix = StatisticController::getCrossTabMatrix($selectedYear, $selectedRuleTypeId);
 
-        $now_year = (int) Carbon::now()->format('Y');
-        $arr_years = [];
-        for ($i=0; $i < 5; $i++) { 
-            $arr_years[] = $now_year;
-            $now_year -= 1;
-        }
+        // Populate backward-compatible variables for existing and enhanced blade templates
+        $rule_types = collect($stats['by_type'])->map(function($item) {
+            return (object) [
+                'id' => $item['id'],
+                'label' => $item['label'],
+                'documents_count' => $item['count'],
+                'chart_color' => $item['color'],
+                'percentage' => $item['percentage'],
+            ];
+        });
 
-        sort($arr_years);
+        $years = collect($stats['filters']['available_years'])->map(function($y) {
+            return (object) ['year' => $y];
+        });
 
-        $colors = [];
-        $arr_rule_label = [];
-        $arr_rule_count = [];
+        $colors = collect($stats['by_type'])->pluck('color')->toArray();
+        $arr_rule_label = collect($stats['by_type'])->pluck('label')->toArray();
+        $arr_rule_count = collect($stats['by_type'])->pluck('count')->toArray();
 
-        foreach ($rule_types as $data) {
-            $colors[] = $data->chart_color;
-            $arr_rule_label[] = $data->label;
-            $arr_rule_count[] = $data->documents_count;
-        }
+        $get_chart = [
+            'berlaku' => [
+                'year' => collect($stats['by_year'])->pluck('year')->toArray(),
+                'data' => collect($stats['by_year'])->pluck('berlaku_count')->toArray(),
+            ],
+            'tidak-berlaku' => [
+                'year' => collect($stats['by_year'])->pluck('year')->toArray(),
+                'data' => collect($stats['by_year'])->pluck('tidak_berlaku_count')->toArray(),
+            ],
+        ];
 
-        $get_chart = $this->getChartStatistic($arr_years);
-
-        return view('dynamic.pages.about-statistik', compact('menu', 'rule_types', 'years', 'colors', 'arr_rule_label', 'arr_rule_count', 'get_chart'));
+        return view('dynamic.pages.about-statistik', compact(
+            'menu', 'rule_types', 'years', 'colors', 'arr_rule_label', 'arr_rule_count', 'get_chart', 'stats', 'matrix'
+        ));
     }
 
     public function getChartStatistic($years)
@@ -336,16 +338,31 @@ class PageController extends Controller
     {
         $galleries = Gallery::translate()->whereIsActive(1);
 
-        if (request()->query('filter') == 'image') {
+        $filter = request()->query('filter', 'all');
+        if ($filter == 'image') {
             $galleries = $galleries->where('type', 'image');
-        } else if (request()->query('filter') == 'video') {
-            $galleries = $galleries->where('type', 'video');
+        } else if ($filter == 'video') {
+            $galleries = $galleries->where('type', 'video')
+                ->whereHas('classifications', function($q) {
+                    $q->where('code', 'galeri');
+                });
+        } else {
+            // 'all': images OR videos that have the 'galeri' classification
+            $galleries = $galleries->where(function($q) {
+                $q->where('type', 'image')
+                  ->orWhere(function($sub) {
+                      $sub->where('type', 'video')
+                          ->whereHas('classifications', function($c) {
+                              $c->where('code', 'galeri');
+                          });
+                  });
+            });
         }
         
         if (request()->query('sort') == 'oldest') {
             $galleries = $galleries->orderBy('date', 'asc');
         } else {
-            $galleries = $galleries->orderBy('date', 'desc');
+            $galleries = $galleries->orderBy('sort_id', 'asc')->orderBy('date', 'desc');
         }
         
         $galleries = $galleries->paginate(9);
@@ -470,7 +487,7 @@ class PageController extends Controller
             $documents = $documents->where('year', request()->query('year'));
         }
         
-        $documents = $documents->orderBy('tanggal_penetapan', 'desc')->paginate(8);
+        $documents = $documents->orderBy('updated_at', 'desc')->orderBy('created_at', 'desc')->orderBy('id', 'desc')->paginate(8);
 
         $rule_types = RuleType::whereIsActive(1)->get();
         $rule_themes = RuleTheme::whereIsActive(1)->get();
@@ -496,7 +513,7 @@ class PageController extends Controller
             $documents = $documents->where('tahun_terbit', request()->query('year'));
         }
         
-        $documents = $documents->orderBy('tahun_terbit', 'desc')->orderBy('created_at','desc')->paginate(12);
+        $documents = $documents->orderBy('updated_at', 'desc')->orderBy('created_at', 'desc')->orderBy('id', 'desc')->paginate(12);
 
         $years = Document::select('tahun_terbit')
             ->whereIsActive(1)
@@ -520,7 +537,7 @@ class PageController extends Controller
             $documents = $documents->where('tahun_terbit', request()->query('year'));
         }
         
-        $documents = $documents->orderBy('date', 'desc')->paginate(12);
+        $documents = $documents->orderBy('updated_at', 'desc')->orderBy('created_at', 'desc')->orderBy('id', 'desc')->paginate(12);
 
         $years = Document::select('tahun_terbit')
             ->whereIsActive(1)
@@ -544,7 +561,7 @@ class PageController extends Controller
             $documents = $documents->where('tahun_terbit', request()->query('year'));
         }
         
-        $documents = $documents->orderBy('tahun_terbit', 'desc')->orderBy('created_at', 'desc')->paginate(12);
+        $documents = $documents->orderBy('updated_at', 'desc')->orderBy('created_at', 'desc')->orderBy('id', 'desc')->paginate(12);
 
         $years = Document::select('tahun_terbit')
             ->whereIsActive(1)
@@ -556,34 +573,90 @@ class PageController extends Controller
         return view('dynamic.pages.document-article', compact('menu', 'documents', 'years'));
     }
 
-    public function getPutusanHukum($menu)
+    public function getPutusanHukum($menu, $courtType = null)
     {
-        $documents = Document::translate()->whereIsActive(1)->where('master_document_id', Document::PUTUSAN);
+        $court = $courtType ?: request()->query('court');
+        $query = Document::translate()->whereIsActive(1)->where('master_document_id', Document::PUTUSAN);
+
+        if ($court) {
+            $court = strtoupper(trim($court));
+            if ($court === 'MAHKAMAH-AGUNG' || $court === 'MA') {
+                $query->where(function($q) {
+                    $q->where('documents.court_type', 'MA')
+                      ->orWhere('documents_lang.jenis_peradilan', 'like', '%Mahkamah Agung%')
+                      ->orWhere('documents_lang.singkatan_peradilan', 'MA');
+                });
+                $court = 'MA';
+            } elseif ($court === 'MAHKAMAH-KONSTITUSI' || $court === 'MK') {
+                $query->where(function($q) {
+                    $q->where('documents.court_type', 'MK')
+                      ->orWhere('documents_lang.jenis_peradilan', 'like', '%Mahkamah Konstitusi%')
+                      ->orWhere('documents_lang.singkatan_peradilan', 'MK');
+                });
+                $court = 'MK';
+            }
+        }
 
         if (request()->query('search')) {
-            $documents = $documents->where('title', 'like', '%'.request()->query('search').'%');
+            $search = request()->query('search');
+            $query->where(function($q) use ($search) {
+                $q->where('documents_lang.title', 'like', '%'.$search.'%')
+                  ->orWhere('documents.no_putusan', 'like', '%'.$search.'%')
+                  ->orWhere('documents_lang.intro', 'like', '%'.$search.'%')
+                  ->orWhere('documents_lang.subjek', 'like', '%'.$search.'%')
+                  ->orWhere('documents_lang.bidang_hukum', 'like', '%'.$search.'%')
+                  ->orWhere('documents_lang.pokok_perkara', 'like', '%'.$search.'%')
+                  ->orWhere('documents_lang.pemohon', 'like', '%'.$search.'%');
+            });
+        }
+
+        if (request()->query('no_putusan')) {
+            $query->where('documents.no_putusan', 'like', '%'.request()->query('no_putusan').'%');
         }
 
         if (request()->query('year')) {
-            $documents = $documents->whereYear('tanggal_dibacakan', request()->query('year'));
+            $yearVal = request()->query('year');
+            $query->where(function($q) use ($yearVal) {
+                $q->whereYear('documents.tanggal_dibacakan', $yearVal)
+                  ->orWhere('documents.year', $yearVal);
+            });
         }
 
         if (request()->query('sort') == 'oldest') {
-            $documents = $documents->orderBy('tanggal_dibacakan', 'asc');
+            $query->orderBy('documents.updated_at', 'asc')->orderBy('documents.created_at', 'asc');
         } else {
-            $documents = $documents->orderBy('tanggal_dibacakan', 'desc');
+            $query->orderBy('documents.updated_at', 'desc')->orderBy('documents.created_at', 'desc')->orderBy('documents.id', 'desc');
         }
         
-        $documents = $documents->paginate(8);
+        $documents = $query->paginate(8);
 
-        $years = Document::selectRaw('YEAR(tanggal_dibacakan) as year')
+        $years = Document::selectRaw('COALESCE(year, YEAR(tanggal_dibacakan)) as year')
             ->whereIsActive(1)
             ->where('master_document_id', Document::PUTUSAN)
+            ->whereNotNull('tanggal_dibacakan')
             ->distinct()
             ->orderBy('year', 'desc')
             ->get();
 
-        return view('dynamic.pages.document-putusan', compact('menu', 'documents', 'years'));
+        return view('dynamic.pages.document-putusan', compact('menu', 'documents', 'years', 'court'));
+    }
+
+    public function getPutusanHukumRoute()
+    {
+        $menu = Menu::fe()->whereIsActive(1)->where('type', 'putusan-hukum')->first() ?? Menu::find(16) ?? Menu::first();
+        return $this->getPutusanHukum($menu, null);
+    }
+
+    public function getPutusanMa()
+    {
+        $menu = Menu::fe()->whereIsActive(1)->where('type', 'putusan-hukum')->first() ?? Menu::find(16) ?? Menu::first();
+        return $this->getPutusanHukum($menu, 'MA');
+    }
+
+    public function getPutusanMk()
+    {
+        $menu = Menu::fe()->whereIsActive(1)->where('type', 'putusan-hukum')->first() ?? Menu::find(16) ?? Menu::first();
+        return $this->getPutusanHukum($menu, 'MK');
     }
 
     public function getMonografiHukum($menu)
@@ -598,7 +671,7 @@ class PageController extends Controller
             $documents = $documents->where('tahun_terbit', request()->query('year'));
         }
         
-        $documents = $documents->orderBy('tahun_terbit', 'desc')->orderBy('created_at','desc')->paginate(12);
+        $documents = $documents->orderBy('updated_at', 'desc')->orderBy('created_at', 'desc')->orderBy('id', 'desc')->paginate(12);
 
         $years = Document::select('tahun_terbit')
             ->whereIsActive(1)
@@ -622,7 +695,7 @@ class PageController extends Controller
             $documents = $documents->whereYear('tanggal_berlaku', request()->query('year'));
         }
         
-        $documents = $documents->orderBy('tanggal_berlaku', 'desc')->paginate(8);
+        $documents = $documents->orderBy('updated_at', 'desc')->orderBy('created_at', 'desc')->orderBy('id', 'desc')->paginate(8);
 
         $years = Document::selectRaw('YEAR(tanggal_berlaku) as year')
             ->whereIsActive(1)
@@ -632,5 +705,165 @@ class PageController extends Controller
             ->get();
 
         return view('dynamic.pages.document-naskah', compact('menu', 'documents', 'years'));
+    }
+
+    public function getPeraturanTerjemahan($menu)
+    {
+        $documents = Document::translate()->whereIsActive(1)->where('master_document_id', Document::PERATURAN_TERJEMAHAN);
+
+        if (request()->query('search')) {
+            $documents = $documents->where('title', 'like', '%'.request()->query('search').'%');
+        }
+        if (request()->query('year')) {
+            $documents = $documents->where('year', request()->query('year'));
+        }
+        
+        $documents = $documents->orderBy('updated_at', 'desc')->orderBy('created_at', 'desc')->orderBy('id', 'desc')->paginate(8);
+
+        $years = Document::select('year')
+            ->whereIsActive(1)
+            ->where('master_document_id', Document::PERATURAN_TERJEMAHAN)
+            ->orderBy('year', 'desc')
+            ->groupBy('year')
+            ->get();
+        
+        return view('dynamic.pages.document-peraturan-terjemahan', compact('menu', 'documents', 'years'));
+    }
+
+    public function getProgramPenyusunanPuu($menu)
+    {
+        $documents = Document::translate()->whereIsActive(1)->where('master_document_id', Document::PROGRAM_PENYUSUNAN);
+
+        if (request()->query('search')) {
+            $documents = $documents->where('title', 'like', '%'.request()->query('search').'%');
+        }
+        
+        $documents = $documents->orderBy('updated_at', 'desc')->orderBy('created_at', 'desc')->orderBy('id', 'desc')->paginate(8);
+        $years = collect();
+        return view('dynamic.pages.document-program-penyusunan', compact('menu', 'documents', 'years'));
+    }
+
+    public function getNaskahAkademik($menu)
+    {
+        $documents = Document::translate()->whereIsActive(1)->where('master_document_id', Document::NASKAH_AKADEMIK);
+
+        if (request()->query('search')) {
+            $documents = $documents->where('title', 'like', '%'.request()->query('search').'%');
+        }
+        
+        $documents = $documents->orderBy('updated_at', 'desc')->orderBy('created_at', 'desc')->orderBy('id', 'desc')->paginate(8);
+        $years = collect();
+        return view('dynamic.pages.document-naskah-akademik', compact('menu', 'documents', 'years'));
+    }
+
+    public function getAnalisisEvaluasi($menu)
+    {
+        $documents = Document::translate()->whereIsActive(1)->where('master_document_id', Document::ANALISIS_EVALUASI);
+
+        if (request()->query('search')) {
+            $documents = $documents->where('title', 'like', '%'.request()->query('search').'%');
+        }
+        
+        $documents = $documents->orderBy('updated_at', 'desc')->orderBy('created_at', 'desc')->orderBy('id', 'desc')->paginate(8);
+        $years = collect();
+        return view('dynamic.pages.document-analisis-evaluasi', compact('menu', 'documents', 'years'));
+    }
+
+    public function getRisalahPembahasan($menu)
+    {
+        $documents = Document::translate()->whereIsActive(1)->where('master_document_id', Document::RISALAH_PEMBAHASAN);
+
+        if (request()->query('search')) {
+            $documents = $documents->where('title', 'like', '%'.request()->query('search').'%');
+        }
+        
+        $documents = $documents->orderBy('updated_at', 'desc')->orderBy('created_at', 'desc')->orderBy('id', 'desc')->paginate(8);
+        $years = collect();
+        return view('dynamic.pages.document-risalah-pembahasan', compact('menu', 'documents', 'years'));
+    }
+
+    public function getKajianHukum($menu)
+    {
+        $documents = Document::translate()->whereIsActive(1)->where('master_document_id', Document::KAJIAN_HUKUM);
+
+        if (request()->query('search')) {
+            $documents = $documents->where('title', 'like', '%'.request()->query('search').'%');
+        }
+        
+        $documents = $documents->orderBy('updated_at', 'desc')->orderBy('created_at', 'desc')->orderBy('id', 'desc')->paginate(8);
+        $years = collect();
+        return view('dynamic.pages.document-kajian-hukum', compact('menu', 'documents', 'years'));
+    }
+
+    public function getPartisipasiPublik($menu = null)
+    {
+        return app(\App\Http\Controllers\ERegulasi\PartisipasiPublikController::class)->index(request(), $menu);
+    }
+
+    public function getAksesibilitas($menu = null)
+    {
+        if (!$menu) {
+            $menu = Menu::find(39) ?? Menu::fe()->whereIsActive(1)->where('type', 'aksesibilitas')->first() ?? Menu::first();
+        }
+
+        $videos = Gallery::translate()
+            ->with('classifications')
+            ->whereIsActive(1)
+            ->where('type', 'video')
+            ->whereHas('classifications', function ($q) {
+                $q->where('code', 'aksesibilitas');
+            });
+
+        if (request()->query('search')) {
+            $videos = $videos->where('title', 'like', '%' . request()->query('search') . '%');
+        }
+
+        if (request()->query('sort') === 'oldest') {
+            $videos = $videos->orderBy('date', 'asc');
+        } else {
+            $videos = $videos->orderBy('sort_id', 'asc')->orderBy('date', 'desc');
+        }
+
+        $videos = $videos->paginate(6);
+
+        return view('dynamic.pages.informasi-aksesibilitas', compact('menu', 'videos'));
+    }
+
+    public function getVideografis($menu)
+    {
+        return view('dynamic.pages.informasi-videografis', compact('menu'));
+    }
+
+    public function getRancanganPuu($menu)
+    {
+        $documents = Document::translate()->whereIsActive(1)->where('master_document_id', Document::RANCANGAN_PUU);
+
+        if (request()->query('search')) {
+            $documents = $documents->where('title', 'like', '%'.request()->query('search').'%');
+        }
+
+        if (request()->query('year')) {
+            $documents = $documents->where('year', request()->query('year'));
+        }
+
+        if (request()->query('tahapan')) {
+            $documents = $documents->where('tahapan_puu_id', request()->query('tahapan'));
+        }
+
+        $documents = $documents->with('regulasi')
+            ->orderBy('documents.updated_at', 'desc')
+            ->orderBy('documents.created_at', 'desc')
+            ->orderBy('documents.id', 'desc')
+            ->paginate(8);
+
+        $years = Document::select('year')
+            ->whereIsActive(1)
+            ->where('master_document_id', Document::RANCANGAN_PUU)
+            ->whereNotNull('year')
+            ->distinct()
+            ->orderBy('year', 'desc')
+            ->get();
+
+        return view('dynamic.pages.document-rancangan-puu', compact('menu', 'documents', 'years'));
     }
 }

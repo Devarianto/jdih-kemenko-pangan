@@ -55,6 +55,11 @@ class Admin
             if (Auth::user()->is_enable != 'Yes')
                 return \Cactuar\Admin\Helpers\admin::redirect('guest/logout');
             
+            // Restrict operator e-Regulasi from accessing JDIH CMS backend routes
+            if (in_array(Auth::user()->role, ['admin_operator', 'operator_eregulasi'])) {
+                return redirect()->route('dashboard');
+            }
+
             $module = \Cactuar\Admin\Helpers\admin::module();
             $act = \Cactuar\Admin\Helpers\admin::action();
             

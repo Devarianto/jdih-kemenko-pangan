@@ -29,8 +29,16 @@ class Menu extends Model
 	
     public function getFullUrlAttribute()
     {
-        if ($this->type == 'url')
-            return $this->getOriginal('url');
+        if ($this->type == 'url') {
+            $u = $this->getOriginal('url') ?? $this->url;
+            if (empty($u) || $u === '#') {
+                return '#';
+            }
+            if (str_starts_with($u, 'http://') || str_starts_with($u, 'https://') || str_starts_with($u, 'javascript:')) {
+                return $u;
+            }
+            return url('/' . ltrim($u, '/'));
+        }
         if ($this->type == 'blank') {
             $child = Menu::select('type','id','url')->translate()->whereParentId($this->id)->whereIsActive(1)->orderBy('sort_id')->first();
             if ($child)

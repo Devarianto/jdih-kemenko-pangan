@@ -67,9 +67,7 @@ class KamusHukumController extends Controller
                 'type' => 'text',
                 'multilang' => true,
                 'attributes' => [
-                    'class' => 'required title',
-                    'maxlength' => 150
-                ],
+                    'class' => 'required title',],
                 'ai' => ['translate', 'meta-title','correction'],
             ],
             'permalink' => [
@@ -80,9 +78,7 @@ class KamusHukumController extends Controller
                 'type' => 'text',
                 'multilang' => true,
                 'attributes' => [
-                    'class' => 'required',
-                    'maxlength' => 255
-                ],
+                    'class' => 'required',],
                 'ai' => ['translate', 'correction'],
             ],
             'description' => [

@@ -69,9 +69,7 @@ class InfografisController extends Controller
                 'type' => 'text',
                 'multilang' => true,
                 'attributes' => [
-                    'class' => 'required title',
-                    'maxlength' => 150
-                ],
+                    'class' => 'required title',],
                 'ai' => ['translate', 'meta-title','correction'],
             ],
             'permalink' => [
@@ -126,6 +124,24 @@ class InfografisController extends Controller
                 'type' => 'meta'
             ]
         ];
+    }
+
+    public function formCallbackBefore($post, $item, $type)
+    {
+        if (empty($post['main']['thumbnail'])) {
+            $post['main']['thumbnail'] = 'default.webp';
+        }
+        if (empty($post['main']['date'])) {
+            $post['main']['date'] = date('Y-m-d');
+        }
+
+        foreach (['id', 'en'] as $lang) {
+            if (!isset($post['il8n'][$lang]['description']) || $post['il8n'][$lang]['description'] === null) {
+                $post['il8n'][$lang]['description'] = '';
+            }
+        }
+
+        return $post;
     }
 
     public function formAppend()

@@ -2,12 +2,11 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Foundation\Auth\User as Authenticatable;
+use Cactuar\Admin\Models\User as CactuarUser;
 use Illuminate\Notifications\Notifiable;
 
-class User extends Authenticatable
+class User extends CactuarUser
 {
     use HasFactory, Notifiable;
 
@@ -18,8 +17,13 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
+        'display_name',
         'email',
         'password',
+        'role',
+        'unit_kerja',
+        'is_enable',
+        'privilege_id',
     ];
 
     /**

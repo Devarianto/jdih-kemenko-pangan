@@ -28,9 +28,7 @@ class DocumentPutusanController extends Controller
 
     public function __construct()
     {
-        $module = explode('-', $this->module());
-        
-        $this->document = $module[1];
+        $this->document = 'putusan';
     }
 
     public function listingRes()
@@ -43,11 +41,11 @@ class DocumentPutusanController extends Controller
     public function listingFields()
     {
         return [
-            'title' => 'Judul',
+            'title' => 'Judul Putusan',
             'no_putusan' => 'No. Putusan',
-            'jenis_peradilan' => 'Jenis Peradilan',
-            'singkatan_peradilan' => 'Singkatan Jenis Peradilan',
+            'court_type' => 'Lembaga Peradilan',
             'tempat_peradilan' => 'Tempat Peradilan',
+            'tanggal_dibacakan' => 'Tanggal Dibacakan',
             'status_berlaku' => 'Status Berlaku',
             'view_count' => 'View Count',
             'download_pdf_count' => 'Download Count',
@@ -56,13 +54,18 @@ class DocumentPutusanController extends Controller
 
     public function listingCallback($key,$value,$item,$type)
     {
-        if ($key == 'rule_type_id') {
-            return $item->rule_type->label ?? '';
+        if ($key == 'court_type') {
+            if ($value === 'MA') {
+                return '<span class="badge" style="background:#0284c7; color:#fff; font-size:12px; padding:4px 8px; border-radius:4px;">Mahkamah Agung (MA)</span>';
+            } elseif ($value === 'MK') {
+                return '<span class="badge" style="background:#dc2626; color:#fff; font-size:12px; padding:4px 8px; border-radius:4px;">Mahkamah Konstitusi (MK)</span>';
+            } elseif ($value === 'NEEDS_CLASSIFICATION') {
+                return '<span class="badge" style="background:#d97706; color:#fff; font-size:12px; padding:4px 8px; border-radius:4px;">NEEDS_CLASSIFICATION</span>';
+            }
+            return e($item->court_label ?? $value);
         } else if ($key == 'rule_theme_id') {
             return $item->rule_theme->label ?? '';
-        } else if ($key == 'tanggal_penetapan') {
-            return date2string($value);
-        } else if ($key == 'tanggal_pengundangan') {
+        } else if ($key == 'tanggal_dibacakan') {
             return date2string($value);
         } else if ($key == 'status_berlaku') {
             return $item->display_status_berlaku;
@@ -75,12 +78,20 @@ class DocumentPutusanController extends Controller
 
     public function listingSearchs()
     {
-        return ['title', 'no_putusan'];
+        return ['title', 'no_putusan', 'court_type', 'pemohon', 'pokok_perkara'];
     }
 
     public function listingFilters()
     {
         return [
+            'court_type' => [
+                'label' => 'Lembaga Peradilan',
+                'options' => [
+                    'MA' => 'Mahkamah Agung (MA)',
+                    'MK' => 'Mahkamah Konstitusi (MK)',
+                    'NEEDS_CLASSIFICATION' => 'Perlu Klasifikasi (NEEDS_CLASSIFICATION)',
+                ],
+            ],
             'rule_theme_id' => [
                 'label' => 'Tema',
                 'options' => RuleTheme::pluck('label','id')->all(),
@@ -101,7 +112,7 @@ class DocumentPutusanController extends Controller
 
     public function listingOrderDefault($res)
     {
-        return $res->orderBy('tanggal_dibacakan', 'desc');
+        return $res->orderBy('updated_at', 'desc')->orderBy('created_at', 'desc')->orderBy('id', 'desc');
     }
 
     public function formRes()
@@ -111,31 +122,68 @@ class DocumentPutusanController extends Controller
 
     public function formCallbackBefore($post,$item,$type)
     {
-        return Helper::formCallbackBefore($post,$item,$type,$this->document);
+        // Enforce Lembaga Peradilan classification and sync to jenis_peradilan / singkatan_peradilan
+        if (!empty($post['main']['court_type'])) {
+            $court = $post['main']['court_type'];
+            if ($court === 'MA') {
+                foreach (['id', 'en'] as $l) {
+                    $post['il8n'][$l]['jenis_peradilan'] = 'Mahkamah Agung';
+                    $post['il8n'][$l]['singkatan_peradilan'] = 'MA';
+                }
+            } elseif ($court === 'MK') {
+                foreach (['id', 'en'] as $l) {
+                    $post['il8n'][$l]['jenis_peradilan'] = 'Mahkamah Konstitusi';
+                    $post['il8n'][$l]['singkatan_peradilan'] = 'MK';
+                }
+            }
+        }
+
+        // Auto populate year from tanggal_dibacakan if empty
+        if (!empty($post['main']['tanggal_dibacakan'])) {
+            $post['main']['year'] = date('Y', strtotime($post['main']['tanggal_dibacakan']));
+        }
+
+        return Helper::formCallbackBefore($post,$item,$type,$this->document, $this->formFields($type));
+    }
+
+    public function formCallbackAfter($item, $type)
+    {
+        return Helper::formCallbackAfter($item, $type);
     }
 
     public function formFields($type)
     {
         $form = [
+            'court_type' => [
+                'label' => 'Lembaga Peradilan',
+                'type' => 'select',
+                'options' => [
+                    '' => '-- Pilih Lembaga Peradilan --',
+                    'MA' => 'Mahkamah Agung (MA)',
+                    'MK' => 'Mahkamah Konstitusi (MK)',
+                ],
+                'rules' => 'required|in:MA,MK',
+                'attributes' => [
+                    'class' => 'required',
+                ]
+            ],
             'title' => [
-                'label' => 'Title',
+                'label' => 'Judul Putusan',
                 'type' => 'text',
                 'multilang' => true,
                 'attributes' => [
                     'class' => 'required title',
-                    'maxlength' => 200,
                 ]
             ],
             'permalink' => [
                 'type' => 'permalink'
             ],
             'intro' => [
-                'label' => 'Intro',
+                'label' => 'Ringkasan / Abstrak Putusan',
                 'type' => 'textarea',
                 'multilang' => true,
                 'attributes' => [
                     'class' => 'required',
-                    'maxlength' => 250,
                 ]
             ],
             'thumbnail' => [],
@@ -150,14 +198,14 @@ class DocumentPutusanController extends Controller
                 'type' => 'select',
                 'options' => DocumentType::pluck('label', 'id')->toArray(),
                 'attributes' => [
-                    'class' => 'required select2'
+                    'class' => 'select2'
                 ]
             ],
         ];
 
         $form += [
             'teu' => [
-                'subtitle' => 'Deskripsi', 
+                'subtitle' => 'Metadata Putusan', 
                 'label' => 'T.E.U. Orang/Badan',
                 'type' => 'text',
                 'multilang' => true,
@@ -165,81 +213,93 @@ class DocumentPutusanController extends Controller
             'no_putusan' => [
                 'label' => 'No. Putusan',
                 'type' => 'text',
-            ],
-            'jenis_bentuk_peraturan' => [
-                'label' => 'Jenis/Bentuk Peraturan',
-                'type' => 'text',
-                'multilang' => true,
-            ],
-            'jenis_peradilan' => [
-                'label' => 'Jenis Peradilan',
-                'type' => 'text',
-                'multilang' => true,
-            ],
-            'singkatan_peradilan' => [
-                'label' => 'Singkatan Jenis Peradilan',
-                'type' => 'text',
-                'multilang' => true,
-            ],
-            'tempat_peradilan' => [
-                'label' => 'Tempat Peradilan',
-                'type' => 'text'
+                'attributes' => [
+                    'class' => 'required'
+                ]
             ],
             'tanggal_dibacakan' => [
-                'label' => 'Tanggal Dibacakan',
+                'label' => 'Tanggal Putusan / Dibacakan',
                 'type' => 'text',
                 'attributes' => [
                     'class' => 'required datepicker'
                 ]
             ],
-            'sumber' => [
-                'label' => 'Sumber',
+            'tempat_peradilan' => [
+                'label' => 'Tempat Peradilan',
+                'type' => 'text'
+            ],
+            'pemohon' => [
+                'label' => 'Pemohon / Penggugat / Pihak Terkait',
                 'type' => 'text',
                 'multilang' => true,
+            ],
+            'termohon' => [
+                'label' => 'Termohon / Tergugat',
+                'type' => 'text',
+                'multilang' => true,
+            ],
+            'pokok_perkara' => [
+                'label' => 'Pokok Perkara',
+                'type' => 'textarea',
+                'multilang' => true,
+            ],
+            'amar_putusan' => [
+                'label' => 'Amar Putusan',
+                'type' => 'textarea',
+                'multilang' => true,
+            ],
+            'status_berlaku' => [
+                'label' => 'Status Putusan (1 = Berlaku/BHT, 0 = Tidak Berlaku)',
+                'type' => 'select',
+                'options' => [
+                    1 => 'Berlaku / Berkekuatan Hukum Tetap',
+                    0 => 'Tidak Berlaku / Gugur'
+                ],
+                'attributes' => [
+                    'class' => 'required'
+                ]
             ],
             'subjek' => [
                 'label' => 'Subjek',
                 'type' => 'text',
                 'multilang' => true,
             ],
-            'status_berlaku' => [
-                'label' => 'Status Putusan (Berlaku/Tidak Berlaku)',
-                'type' => 'select',
-                'options' => [
-                    0 => 'Tidak',
-                    1 => 'Ya'
-                ],
-                'attributes' => [
-                    'class' => 'required'
-                ]
+            'bidang_hukum' => [
+                'label' => 'Bidang Hukum / Jenis Perkara',
+                'type' => 'text',
+                'multilang' => true,
+            ],
+            'sumber' => [
+                'label' => 'Sumber',
+                'type' => 'text',
+                'multilang' => true,
             ],
             'bahasa' => [
                 'label' => 'Bahasa',
                 'type' => 'text',
                 'multilang' => true,
             ],
-            'bidang_hukum' => [
-                'label' => 'Bidang Hukum/Jenis Perkara',
-                'type' => 'text',
-                'multilang' => true,
-            ],
             'lokasi' => [
-                'label' => 'Lokasi',
+                'label' => 'Lokasi Fisik',
                 'type' => 'text',
             ],
             'pdf_name' => [
-                'subtitle' => 'File',
-                'label' => 'File Name',
+                'subtitle' => 'Berkas Dokumen',
+                'label' => 'Nama File PDF',
                 'type' => 'text',
                 'multilang' => true
             ],
             'pdf' => [
-                'label' => 'PDF',
+                'label' => 'File PDF Putusan',
                 'type' => 'file',
                 'attributes' => [
                     'class' => 'required',
                     'accept' => 'pdf'
                 ]
+            ],
+            'attachment' => [
+                'label' => 'File Lampiran (Opsional)',
+                'type' => 'file',
             ],
         ];
 
@@ -247,7 +307,7 @@ class DocumentPutusanController extends Controller
             'label' => 'Thumbnail',
             'type' => 'text',
             'attributes' => [
-                'class' => 'required cfind',
+                'class' => 'cfind',
                 'cfind-type' => 'image',
                 'cfind-thumb' => '240x220',
                 'cfind-convert' => 'webp',

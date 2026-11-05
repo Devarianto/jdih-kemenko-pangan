@@ -420,7 +420,14 @@ trait ListingTrait
     
     public function listingOrderDefault($res)
     {
-        return $res->orderBy('id', 'asc');
+        try {
+            $model = $res->getModel();
+            if ($model && method_exists($model, 'usesTimestamps') && $model->usesTimestamps()) {
+                return $res->orderBy($model->getUpdatedAtColumn(), 'desc')->orderBy($model->getKeyName(), 'desc');
+            }
+        } catch (\Throwable $e) {}
+
+        return $res->orderBy('id', 'desc');
     }
     
     public function listingCallback($key, $value, $row, $type = 'html')

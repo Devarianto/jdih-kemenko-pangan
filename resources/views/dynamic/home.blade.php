@@ -71,6 +71,70 @@
         </div>
       </div>
       @endif
+
+      <div class="banner-stats">
+        <div class="banner-stats__row">
+          <a href="{{ $menus['peraturan'] ? url($menus['peraturan']->permalink) : url('/peraturan-hukum') }}" class="banner-stats__item" title="Lihat Peraturan">
+            <span class="banner-stats__icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                <polyline points="14 2 14 8 20 8"></polyline>
+                <line x1="16" y1="13" x2="8" y2="13"></line>
+                <line x1="16" y1="17" x2="8" y2="17"></line>
+                <polyline points="10 9 9 9 8 9"></polyline>
+              </svg>
+            </span>
+            <span class="banner-stats__label">Peraturan</span>
+            <span class="banner-stats__badge">{{ number_format($peraturan_count, 0, ',', '.') }}</span>
+          </a>
+
+          <a href="{{ $menus['monografi'] ? url($menus['monografi']->permalink) : url('/monografi-hukum') }}" class="banner-stats__item" title="Lihat Monografi">
+            <span class="banner-stats__icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
+                <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
+              </svg>
+            </span>
+            <span class="banner-stats__label">Monografi</span>
+            <span class="banner-stats__badge">{{ number_format($monografi_count, 0, ',', '.') }}</span>
+          </a>
+
+          <a href="{{ $menus['jurnal'] ? url($menus['jurnal']->permalink) : ($menus['majalah'] ? url($menus['majalah']->permalink) : url('/jurnal-hukum')) }}" class="banner-stats__item" title="Lihat Artikel Hukum">
+            <span class="banner-stats__icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M16 2H8a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2z"></path>
+                <path d="M9 7h6"></path>
+                <path d="M9 11h6"></path>
+                <path d="M9 15h4"></path>
+                <path d="M4 6h2"></path>
+                <path d="M4 10h2"></path>
+                <path d="M4 14h2"></path>
+                <path d="M4 18h2"></path>
+              </svg>
+            </span>
+            <span class="banner-stats__label">Artikel Hukum</span>
+            <span class="banner-stats__badge">{{ number_format($artikel_count, 0, ',', '.') }}</span>
+          </a>
+        </div>
+
+        <div class="banner-stats__row">
+          <a href="{{ $menus['putusan'] ? url($menus['putusan']->permalink) : url('/putusan-hukum') }}" class="banner-stats__item" title="Lihat Putusan">
+            <span class="banner-stats__icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 21h18"></path>
+                <path d="M3 10h18"></path>
+                <path d="M12 3L2 10h20L12 3z"></path>
+                <path d="M6 10v11"></path>
+                <path d="M10 10v11"></path>
+                <path d="M14 10v11"></path>
+                <path d="M18 10v11"></path>
+              </svg>
+            </span>
+            <span class="banner-stats__label">Putusan</span>
+            <span class="banner-stats__badge">{{ number_format($putusan_count, 0, ',', '.') }}</span>
+          </a>
+        </div>
+      </div>
     </div>
     <div class="wave">
       <svg xmlns="http://www.w3.org/2000/svg"
@@ -682,6 +746,103 @@
       button.is-disabled {
         background: grey !important;
         pointer-events: none;
+      }
+      .banner-stats {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+        margin-top: 24px;
+        width: 100%;
+        position: relative;
+        z-index: 2;
+      }
+      .banner-stats__row {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 14px;
+        flex-wrap: wrap;
+      }
+      .banner-stats__item {
+        display: inline-flex;
+        align-items: center;
+        gap: 9px;
+        background: rgba(30, 48, 88, 0.55);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        border: 1px solid rgba(255, 255, 255, 0.16);
+        border-radius: 9999px;
+        padding: 7px 12px 7px 16px;
+        color: #ffffff;
+        text-decoration: none;
+        box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
+        transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        cursor: pointer;
+      }
+      .banner-stats__item:hover {
+        background: rgba(45, 70, 125, 0.75);
+        border-color: rgba(255, 255, 255, 0.35);
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+        color: #ffffff;
+      }
+      .banner-stats__item:active {
+        transform: translateY(0);
+      }
+      .banner-stats__icon {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        color: rgba(255, 255, 255, 0.9);
+        line-height: 1;
+      }
+      .banner-stats__icon svg {
+        width: 16px;
+        height: 16px;
+        display: block;
+      }
+      .banner-stats__label {
+        font-size: 14px;
+        font-weight: 500;
+        color: #ffffff;
+        line-height: 1;
+        letter-spacing: 0.1px;
+      }
+      .banner-stats__badge {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 24px;
+        padding: 3px 9px;
+        background: #F5A623;
+        color: #1A2238;
+        font-size: 12px;
+        font-weight: 700;
+        line-height: 1.2;
+        border-radius: 9999px;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+      }
+      @media all and (max-width: 767px) {
+        .banner-stats {
+          margin-top: 16px;
+          gap: 8px;
+        }
+        .banner-stats__row {
+          gap: 8px;
+        }
+        .banner-stats__item {
+          padding: 6px 10px 6px 12px;
+          gap: 7px;
+        }
+        .banner-stats__label {
+          font-size: 12.5px;
+        }
+        .banner-stats__badge {
+          font-size: 11px;
+          padding: 2px 7px;
+        }
       }
     </style>
   @endpush
