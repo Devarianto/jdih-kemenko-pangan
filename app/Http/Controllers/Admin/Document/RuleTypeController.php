@@ -31,6 +31,11 @@ class RuleTypeController extends Controller
         ];
     }
 
+    public function listingOrderDefault($res)
+    {
+        return $res->orderBy('updated_at', 'desc')->orderBy('created_at', 'desc')->orderBy('id', 'desc');
+    }
+
     public function formRes()
     {
         return new RuleType;

@@ -71,7 +71,7 @@ class PageController extends Controller
         $document_putusan = Document::translate()
             ->whereIsActive(1)
             ->where('master_document_id', Document::PUTUSAN)
-            ->orderBy('tanggal_dibacakan', 'desc');
+            ->orderBy('updated_at', 'desc')->orderBy('created_at', 'desc')->orderBy('id', 'desc');
         $putusan_count = $document_putusan->count();
         $document_putusan = $document_putusan->limit(4)
             ->get();
@@ -81,7 +81,7 @@ class PageController extends Controller
         $document_jurnal = Document::translate()
             ->whereIsActive(1)
             ->where('master_document_id', Document::JURNAL)
-            ->orderBy('tahun_terbit', 'desc')->orderBy('created_at','desc');
+            ->orderBy('updated_at', 'desc')->orderBy('created_at', 'desc')->orderBy('id', 'desc');
         $jurnal_count = $document_jurnal->count();
         $document_jurnal = $document_jurnal->limit(4)
             ->get();
@@ -91,7 +91,7 @@ class PageController extends Controller
         $document_kliping = Document::translate()
             ->whereIsActive(1)
             ->where('master_document_id', Document::KLIPING)
-            ->orderBy('date', 'desc');
+            ->orderBy('updated_at', 'desc')->orderBy('created_at', 'desc')->orderBy('id', 'desc');
         $kliping_count = $document_kliping->count();
         $document_kliping = $document_kliping->limit(4)
             ->get();
@@ -101,7 +101,7 @@ class PageController extends Controller
         $document_majalah = Document::translate()
             ->whereIsActive(1)
             ->where('master_document_id', Document::MAJALAH)
-            ->orderBy('tahun_terbit', 'desc')->orderBy('created_at', 'desc');
+            ->orderBy('updated_at', 'desc')->orderBy('created_at', 'desc')->orderBy('id', 'desc');
         $majalah_count = $document_majalah->count();
         $document_majalah = $document_majalah->limit(4)
             ->get();
@@ -111,7 +111,7 @@ class PageController extends Controller
         $document_naskah = Document::translate()
             ->whereIsActive(1)
             ->where('master_document_id', Document::NASKAH)
-            ->orderBy('tanggal_berlaku', 'desc');
+            ->orderBy('updated_at', 'desc')->orderBy('created_at', 'desc')->orderBy('id', 'desc');
         $naskah_count = $document_naskah->count();
         $document_naskah = $document_naskah->limit(4)
             ->get();
