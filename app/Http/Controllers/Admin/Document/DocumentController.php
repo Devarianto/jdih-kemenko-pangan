@@ -213,6 +213,18 @@ class DocumentController extends Controller
             ], 422);
         }
 
+        // [AUDIT FIX] SSRF hardening: only http(s) to public hosts.
+        $scheme = strtolower((string) parse_url($url, PHP_URL_SCHEME));
+        $host = (string) parse_url($url, PHP_URL_HOST);
+        $ip = filter_var($host, FILTER_VALIDATE_IP) ? $host : gethostbyname($host);
+        if (!in_array($scheme, ['http', 'https'], true)
+            || !filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE)) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'URL tujuan tidak diizinkan.',
+            ], 422);
+        }
+
         try {
             $response = \Illuminate\Support\Facades\Http::withHeaders([
                 'User-Agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36',

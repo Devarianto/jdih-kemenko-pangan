@@ -15,13 +15,45 @@ use DB;
 
 class DownloadFileController extends Controller
 {
+    /** [AUDIT FIX] Only real file columns may be read through public download/stream endpoints. */
+    private const FILE_TYPES = ['pdf', 'abstract', 'attachment', 'translation_pdf', 'translation_attachment'];
+
+    private function assertFileType($type)
+    {
+        if (!in_array($type, self::FILE_TYPES, true)) {
+            abort(404);
+        }
+    }
+
+    private function resolveFilePath($relative)
+    {
+        if (empty($relative)) {
+            return null;
+        }
+        $relative = ltrim(str_replace('\\', '/', $relative), '/');
+        if (Storage::exists($relative)) {
+            return storage_path('app/' . $relative);
+        }
+        if (Storage::disk('public')->exists($relative)) {
+            return Storage::disk('public')->path($relative);
+        }
+        if (Storage::exists('public/' . $relative)) {
+            return storage_path('app/public/' . $relative);
+        }
+        if (file_exists(public_path($relative))) {
+            return public_path($relative);
+        }
+        return null;
+    }
+
     public function getAdminDownloadFile($type, $id)
     {
         $document = Document::findOrFail($id);
 
-        if (in_array($type, ['pdf', 'abstract', 'attachment', 'translation_pdf', 'translation_attachment'])) {
-            if ($document->{$type} != null && Storage::exists($document->{$type})) {
-                return response()->file(storage_path('app/'. $document->{$type}), [
+        if (in_array($type, self::FILE_TYPES, true)) {
+            $path = $this->resolveFilePath($document->{$type});
+            if ($path && file_exists($path)) {
+                return response()->file($path, [
                     'Content-Type' => 'application/pdf',
                     'Cache-Control' => 'no-cache, no-store, must-revalidate',
                     'Pragma'        => 'no-cache',
@@ -35,12 +67,14 @@ class DownloadFileController extends Controller
 
     public function getDocumentDownload($type, $id)
     {
+        $this->assertFileType($type);
         if (!request()->query('token')) {
             abort(404);
         }
         
         $document = Document::whereIsActive(1)->where('id', $id)->firstOrFail();
-        if ($document->{$type} != null && Storage::exists($document->{$type})) {
+        $path = $this->resolveFilePath($document->{$type});
+        if ($path && file_exists($path)) {
             $document->timestamps = false;
             if ($type == 'pdf' || $type == 'translation_pdf') {
                 $document->download_pdf_count += 1;
@@ -49,7 +83,7 @@ class DownloadFileController extends Controller
             }
             $document->save();
 
-            return response()->download(storage_path('app/'. $document->{$type}))->setCache(['no_cache' => true]);
+            return response()->download($path)->setCache(['no_cache' => true]);
         }
 
         abort(404);
@@ -57,9 +91,11 @@ class DownloadFileController extends Controller
 
     public function getAPIDocumentDownload($type, $id)
     {
+        $this->assertFileType($type);
         $document = Document::whereIsActive(1)->where('id', $id)->firstOrFail();
-        if ($document->{$type} != null && Storage::exists($document->{$type})) {
-            return response()->download(storage_path('app/'. $document->{$type}))->setCache(['no_cache' => true]);
+        $path = $this->resolveFilePath($document->{$type});
+        if ($path && file_exists($path)) {
+            return response()->download($path)->setCache(['no_cache' => true]);
         }
 
         abort(404);
@@ -67,9 +103,11 @@ class DownloadFileController extends Controller
 
     public function getDocumentStream($type, $id)
     {
+        $this->assertFileType($type);
         $document = Document::whereIsActive(1)->where('id', $id)->firstOrFail();
-        if ($document->{$type} != null && Storage::exists($document->{$type})) {
-            return response()->file(storage_path('app/'. $document->{$type}), [
+        $path = $this->resolveFilePath($document->{$type});
+        if ($path && file_exists($path)) {
+            return response()->file($path, [
                 'Content-Type' => 'application/pdf'
             ]);
         }

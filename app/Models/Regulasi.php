@@ -102,15 +102,19 @@ class Regulasi extends Model
         }
 
         $slug = \Illuminate\Support\Str::slug($this->judul);
-        \DB::table('permalinks')->updateOrInsert(
-            ['module' => 'rancangan-puu', 'uniqid' => $doc->id, 'lang' => 'id'],
-            [
-                'permalink' => 'rancangan-puu/' . $slug . '-' . $doc->id,
-                'label' => $this->judul,
-                'description' => $this->abstrak,
-                'is_active' => 1
-            ]
-        );
+        foreach (['puu-rancangan', 'rancangan-puu'] as $mod) {
+            foreach (['id', 'en'] as $lang) {
+                \DB::table('permalinks')->updateOrInsert(
+                    ['module' => $mod, 'uniqid' => $doc->id, 'lang' => $lang],
+                    [
+                        'permalink' => $slug . ($lang === 'en' ? '-en' : '') . '-' . $doc->id,
+                        'label' => $this->judul,
+                        'description' => $this->abstrak,
+                        'is_active' => 1
+                    ]
+                );
+            }
+        }
 
         return $doc;
     }

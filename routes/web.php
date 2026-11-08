@@ -78,44 +78,44 @@ Route::group(['middleware' => ['web','front', 'visitor-count', 'csp']],function(
             Route::get($permalink->permalink, [DocumentController::class, 'getNaskahHukumDetail']);
         }
 
-        // Dokumen Pembentukan PUU
-        if ($permalink->module == 'puu-program-penyusunan') {
+        // Dokumen Pembentukan PUU (support both cadmin module key and URL alias)
+        if ($permalink->module == 'puu-program-penyusunan' || $permalink->module == 'program-penyusunan-puu') {
             Route::get($permalink->permalink, function() {
                 return app(DocumentController::class)->getPuuDetail(Document::PROGRAM_PENYUSUNAN, 'dynamic.pages.document-naskah-detail', 'program-penyusunan-puu');
             });
         }
 
-        if ($permalink->module == 'puu-naskah-urgensi') {
+        if ($permalink->module == 'puu-naskah-urgensi' || $permalink->module == 'naskah-akademik') {
             Route::get($permalink->permalink, function() {
                 return app(DocumentController::class)->getPuuDetail(Document::NASKAH_AKADEMIK, 'dynamic.pages.document-naskah-detail', 'naskah-urgensiakademik');
             });
         }
 
-        if ($permalink->module == 'puu-rancangan') {
+        if ($permalink->module == 'puu-rancangan' || $permalink->module == 'rancangan-puu') {
             Route::get($permalink->permalink, function() {
                 return app(DocumentController::class)->getPuuDetail(Document::RANCANGAN_PUU, 'dynamic.pages.document-peraturan-detail', 'rancangan-puu');
             });
         }
 
-        if ($permalink->module == 'puu-risalah') {
+        if ($permalink->module == 'puu-risalah' || $permalink->module == 'risalah-pembahasan') {
             Route::get($permalink->permalink, function() {
                 return app(DocumentController::class)->getPuuDetail(Document::RISALAH_PEMBAHASAN, 'dynamic.pages.document-naskah-detail', 'risalah-pembahasan');
             });
         }
 
-        if ($permalink->module == 'puu-analisis-evaluasi') {
+        if ($permalink->module == 'puu-analisis-evaluasi' || $permalink->module == 'analisis-evaluasi' || $permalink->module == 'anev-puu') {
             Route::get($permalink->permalink, function() {
                 return app(DocumentController::class)->getPuuDetail(Document::ANALISIS_EVALUASI, 'dynamic.pages.document-naskah-detail', 'anev-puu');
             });
         }
 
-        if ($permalink->module == 'puu-kajian-hukum') {
+        if ($permalink->module == 'puu-kajian-hukum' || $permalink->module == 'kajian-hukum') {
             Route::get($permalink->permalink, function() {
                 return app(DocumentController::class)->getPuuDetail(Document::KAJIAN_HUKUM, 'dynamic.pages.document-naskah-detail', 'kajian-hukum');
             });
         }
 
-        if ($permalink->module == 'puu-partisipasi-publik') {
+        if ($permalink->module == 'puu-partisipasi-publik' || $permalink->module == 'partisipasi-publik') {
             Route::get($permalink->permalink, function() {
                 return app(\App\Http\Controllers\ERegulasi\PartisipasiPublikController::class)->index(request());
             });
@@ -188,8 +188,11 @@ Route::group(['middleware' => ['web','front', 'visitor-count', 'csp']],function(
         Route::get('/statistics/legal-products/documents', [StatisticController::class, 'apiLegalProductsDocuments'])->name('api.stats.documents');
         Route::get('/statistics/legal-products/export-pdf', [StatisticController::class, 'exportPdf'])->name('api.stats.export-pdf');
         Route::get('/videos', [StatisticController::class, 'apiVideos'])->name('api.videos');
-        Route::get('/admin/documents/search-related', ['App\Http\Controllers\Admin\Document\DocumentController', 'apiSearchRelated'])->name('api.admin.documents.search-related');
-        Route::get('/admin/documents/fetch-external-meta', ['App\Http\Controllers\Admin\Document\DocumentController', 'apiFetchExternalMeta'])->name('api.admin.documents.fetch-external-meta');
+        // [AUDIT FIX] Admin-only APIs: previously reachable by guests (data exposure + SSRF proxy).
+        Route::middleware('auth')->group(function () {
+            Route::get('/admin/documents/search-related', ['App\Http\Controllers\Admin\Document\DocumentController', 'apiSearchRelated'])->name('api.admin.documents.search-related');
+            Route::get('/admin/documents/fetch-external-meta', ['App\Http\Controllers\Admin\Document\DocumentController', 'apiFetchExternalMeta'])->name('api.admin.documents.fetch-external-meta');
+        });
     });
 
     Route::get('/pengajuan-puu', [\App\Http\Controllers\Front\ERegulasiController::class, 'redirect']);
@@ -198,9 +201,10 @@ Route::group(['middleware' => ['web','front', 'visitor-count', 'csp']],function(
     Route::get('api/document/download/{type}/{id}', [DownloadFileController::class, 'getAPIDocumentDownload'])->name('document-api.download');
     Route::get('document/stream/{type}/{id}', [DownloadFileController::class, 'getDocumentStream'])->name('document.stream');
 
-    Route::get(ADMIN.'/file/download/{type}/{id}', ['App\Http\Controllers\Front\DownloadFileController', 'getAdminDownloadFile'])->name('admin.download.file');
+    // [AUDIT FIX] Admin file preview must require admin login (unpublished documents were downloadable by guests).
+    Route::get(ADMIN.'/file/download/{type}/{id}', ['App\Http\Controllers\Front\DownloadFileController', 'getAdminDownloadFile'])->middleware('auth')->name('admin.download.file');
     Route::get(ADMIN.'/project/download/{type}/{id}/{loop}', ['App\Http\Controllers\Front\DownloadFileController', 'getProjectDownload'])->name('admin.download.project');
-    Route::post(ADMIN.'/project/download/{type}/{id}/{loop}', ['App\Http\Controllers\Front\DownloadFileController', 'deleteAdminFile'])->name('admin.download.project');
+    // [AUDIT FIX] Removed POST route pointing to non-existent DownloadFileController@deleteAdminFile (always HTTP 500).
 });
 
 Route::get('/api/visitor/get', [VisitorController::class, 'getVisitor'])->name('api.visitor');
@@ -211,11 +215,23 @@ Route::get('jdihn-json', [APIController::class, 'apiJDIH']);//->middleware('auth
 // E-REGULASI INTEGRATION ROUTES
 // ==========================================
 
-// Public Partisipasi Publik (integrated with JDIH Front middleware)
+// Public Partisipasi Publik (integrated with JDIH Front middleware & EN multi-language prefix)
 Route::middleware('front')->group(function () {
+    Route::get('/partisipasi-publik', [\App\Http\Controllers\ERegulasi\PartisipasiPublikController::class, 'index'])->name('partisipasi-publik');
     Route::get('/partisipasi-publik/konsultasi', [\App\Http\Controllers\ERegulasi\PartisipasiPublikController::class, 'index'])->name('partisipasi-publik.index');
     Route::get('/partisipasi-publik/{id}', [\App\Http\Controllers\ERegulasi\PartisipasiPublikController::class, 'show'])->name('partisipasi-publik.show');
     Route::post('/partisipasi-publik/{id}/tanggapan', [\App\Http\Controllers\ERegulasi\TanggapanController::class, 'store'])->name('tanggapan.store');
+
+    Route::prefix('{lang}')->where(['lang' => 'en'])->group(function () {
+        Route::get('/partisipasi-publik', [\App\Http\Controllers\ERegulasi\PartisipasiPublikController::class, 'index']);
+        Route::get('/partisipasi-publik/konsultasi', [\App\Http\Controllers\ERegulasi\PartisipasiPublikController::class, 'index']);
+        Route::get('/partisipasi-publik/{id}', function($lang, $id) {
+            return app(\App\Http\Controllers\ERegulasi\PartisipasiPublikController::class)->show($id);
+        });
+        Route::post('/partisipasi-publik/{id}/tanggapan', function(\Illuminate\Http\Request $request, $lang, $id) {
+            return app(\App\Http\Controllers\ERegulasi\TanggapanController::class)->store($request, $id);
+        });
+    });
 });
 
 // Admin & Operator e-Regulasi
