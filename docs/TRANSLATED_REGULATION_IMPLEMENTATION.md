@@ -57,3 +57,4 @@ Pada halaman detail Peraturan Hukum (`/peraturan-menteri-...`):
 - Helper Upload & Sync: `app/Helpers/Document.php`
 - Public View: `resources/views/dynamic/pages/document-peraturan-detail.blade.php`
 - Stream Controller: `app/Http/Controllers/Front/DownloadFileController.php`
+

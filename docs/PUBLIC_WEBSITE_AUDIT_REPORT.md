@@ -35,3 +35,4 @@
 1. **Aksesibilitas (`/aksesibilitas`):** Mapped video entries dengan klasifikasi `aksesibilitas`. Halaman menampilkan 5 video card dan widget aksesibilitas secara utuh (HTTP 200).
 2. **Galeri (`/galeri`, `/gallery`):** Route terdaftar eksplisit di `routes/web.php` dan `Menu.php` telah memvalidasi URL absolut (HTTP 200).
 3. **Videografis (`/videografis`):** Route terdaftar eksplisit (HTTP 200).
+

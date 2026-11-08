@@ -30,7 +30,8 @@ return Application::configure(basePath: dirname(__DIR__))
             'minify' => \Cactuar\Admin\Http\Middleware\Minify::class,
             'front' => \App\Http\Middleware\Front::class,
             'visitor-count' => \App\Http\Middleware\VisitorCount::class,
-            'csp' => \App\Http\Middleware\ContentSecurityPolicy::class
+            'csp' => \App\Http\Middleware\ContentSecurityPolicy::class,
+            'role' => \App\Http\Middleware\RoleMiddleware::class
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {

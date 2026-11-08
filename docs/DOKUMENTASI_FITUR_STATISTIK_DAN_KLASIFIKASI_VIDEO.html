@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dokumentasi Teknis: Statistik Produk Hukum & Klasifikasi Video | JDIH Kemenko Pangan</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0b2545;
+    --navy-light: #133c6d;
+    --blue: #1d4ed8;
+    --blue-soft: #eff6ff;
+    --teal: #0d9488;
+    --teal-soft: #f0fdfa;
+    --emerald: #059669;
+    --emerald-soft: #ecfdf5;
+    --amber: #d97706;
+    --amber-soft: #fffbeb;
+    --red: #dc2626;
+    --red-soft: #fef2f2;
+    --ink: #0f172a;
+    --muted: #475569;
+    --line: #e2e8f0;
+    --bg: #f8fafc;
+    --card: #ffffff;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    color: var(--ink);
+    background-color: var(--bg);
+    line-height: 1.65;
+    padding: 40px 20px;
+  }
+  .container {
+    max-width: 1120px;
+    margin: 0 auto;
+    background: var(--card);
+    padding: 56px 64px;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(15, 23, 42, 0.06);
+    border: 1px solid var(--line);
+  }
+  .header-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #e0f2fe;
+    color: #0369a1;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    padding: 6px 14px;
+    border-radius: 999px;
+    margin-bottom: 16px;
+  }
+  .header-tag::before {
+    content: "";
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #0284c7;
+  }
+  h1 {
+    color: var(--navy);
+    font-size: 28pt;
+    line-height: 1.25;
+    margin-bottom: 12px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+  }
+  .subtitle {
+    font-size: 15pt;
+    color: var(--navy-light);
+    font-weight: 600;
+    margin-bottom: 24px;
+  }
+  .meta-bar {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+    background: #f1f5f9;
+    padding: 16px 20px;
+    border-radius: 10px;
+    font-size: 13px;
+    margin-bottom: 40px;
+    border: 1px solid #e2e8f0;
+  }
+  .meta-item strong {
+    color: var(--navy);
+    display: block;
+    margin-bottom: 2px;
+  }
+  h2 {
+    color: var(--navy);
+    font-size: 18pt;
+    border-bottom: 2px solid var(--blue);
+    padding-bottom: 10px;
+    margin-top: 48px;
+    margin-bottom: 20px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  h3 {
+    color: var(--navy-light);
+    font-size: 14pt;
+    margin-top: 28px;
+    margin-bottom: 12px;
+    font-weight: 700;
+  }
+  p, li {
+    font-size: 14px;
+    color: var(--ink);
+    margin-bottom: 12px;
+  }
+  ul, ol {
+    margin-left: 24px;
+    margin-bottom: 20px;
+  }
+  li {
+    margin-bottom: 6px;
+  }
+  .highlight-card {
+    background: var(--blue-soft);
+    border-left: 4px solid var(--blue);
+    padding: 18px 24px;
+    border-radius: 0 10px 10px 0;
+    margin: 24px 0;
+  }
+  .highlight-card p {
+    margin-bottom: 0;
+    color: #1e3a8a;
+  }
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 16px;
+    margin: 20px 0;
+  }
+  .stat-card {
+    background: #ffffff;
+    border: 1px solid var(--line);
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+    transition: transform 0.2s ease;
+  }
+  .stat-card:hover {
+    transform: translateY(-2px);
+    border-color: var(--blue);
+  }
+  .stat-card .label {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin-bottom: 6px;
+  }
+  .stat-card .val {
+    font-size: 24pt;
+    font-weight: 800;
+    color: var(--navy);
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+  .stat-card .desc {
+    font-size: 12px;
+    color: var(--muted);
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0 28px 0;
+    font-size: 13px;
+    background: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid var(--line);
+  }
+  th {
+    background: #0f172a;
+    color: #ffffff;
+    font-weight: 600;
+    text-align: left;
+    padding: 12px 14px;
+    font-size: 12px;
+    letter-spacing: 0.02em;
+  }
+  td {
+    padding: 12px 14px;
+    border-bottom: 1px solid var(--line);
+    vertical-align: top;
+  }
+  tr:nth-child(even) td {
+    background: #f8fafc;
+  }
+  tr:hover td {
+    background: #f1f5f9;
+  }
+  .badge {
+    display: inline-block;
+    padding: 3px 8px;
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 600;
+  }
+  .badge-pass { background: #dcfce7; color: #166534; }
+  .badge-blue { background: #dbeafe; color: #1e40af; }
+  .badge-teal { background: #ccfbf1; color: #115e59; }
+  .badge-amber { background: #fef3c7; color: #92400e; }
+  pre, code {
+    font-family: 'JetBrains Mono', Consolas, Monaco, monospace;
+  }
+  code {
+    background: #f1f5f9;
+    color: #0f172a;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 12.5px;
+    border: 1px solid #e2e8f0;
+  }
+  pre {
+    background: #0f172a;
+    color: #e2e8f0;
+    padding: 18px 22px;
+    border-radius: 10px;
+    overflow-x: auto;
+    font-size: 12.5px;
+    line-height: 1.55;
+    margin: 16px 0 24px 0;
+  }
+  pre code {
+    background: transparent;
+    color: inherit;
+    padding: 0;
+    border: none;
+  }
+  .nav-tabs {
+    display: flex;
+    gap: 8px;
+    border-bottom: 2px solid var(--line);
+    margin-bottom: 24px;
+    padding-bottom: 4px;
+  }
+  .nav-tabs a {
+    text-decoration: none;
+    color: var(--muted);
+    font-weight: 600;
+    font-size: 13px;
+    padding: 8px 16px;
+    border-radius: 8px;
+    transition: all 0.2s;
+  }
+  .nav-tabs a:hover {
+    color: var(--navy);
+    background: #f1f5f9;
+  }
+  .nav-tabs a.active {
+    color: var(--blue);
+    background: var(--blue-soft);
+  }
+  .footer {
+    margin-top: 60px;
+    padding-top: 24px;
+    border-top: 1px solid var(--line);
+    font-size: 12px;
+    color: var(--muted);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  @media print {
+    body { padding: 0; background: #fff; }
+    .container { box-shadow: none; border: none; padding: 0; max-width: 100%; }
+    pre { white-space: pre-wrap; }
+    h2 { page-break-before: always; }
+    h2:first-of-type { page-break-before: avoid; }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <div class="header-tag">Dokumentasi Teknis Resmi</div>
+  <h1>Peningkatan Sistem JDIH: Fitur Statistik Produk Hukum & Klasifikasi Video</h1>
+  <div class="subtitle">Kementerian Koordinator Bidang Pangan Republik Indonesia</div>
+
+  <div class="meta-bar">
+    <div class="meta-item">
+      <strong>Instansi</strong>
+      Kemenko Bidang Pangan RI
+    </div>
+    <div class="meta-item">
+      <strong>Unit Pengembang</strong>
+      Biro Hukum dan Kerja Sama (HKS)
+    </div>
+    <div class="meta-item">
+      <strong>Tanggal Rilis</strong>
+      26 Oktober 2026
+    </div>
+    <div class="meta-item">
+      <strong>Status Implementasi</strong>
+      <span class="badge badge-pass">100% Selesai & Teruji</span>
+    </div>
+  </div>
+
+  <div class="nav-tabs">
+    <a href="#ringkasan" class="active">1. Ringkasan Eksekutif</a>
+    <a href="#fitur-statistik">2. Statistik Produk Hukum</a>
+    <a href="#fitur-video">3. Klasifikasi Video</a>
+    <a href="#database">4. Database & Migrasi</a>
+    <a href="#api">5. Referensi API Publik</a>
+    <a href="#pengujian">6. Laporan Pengujian (Testing)</a>
+  </div>
+
+  <!-- SECTION 1 -->
+  <h2 id="ringkasan">1. Ringkasan Eksekutif</h2>
+  <p>Pengembangan ini mencakup penambahan dua fitur strategis pada portal resmi <strong>JDIH Kementerian Koordinator Bidang Pangan</strong> (<code>jdih.kemenkopangan.go.id</code>), yaitu:</p>
+  <ol>
+    <li><strong>Statistik Produk Hukum Berdasarkan Jenis Peraturan & Tahun</strong>: Menyajikan data agregasi regulasi secara transparan, akurat, dan interaktif dengan kalkulasi 100% data riil database (Zero Dummy Data), kartu KPI eksekutif, filter ganda tersinkronisasi AJAX, visualisasi Chart.js, serta fitur ekspor PNG.</li>
+    <li><strong>Sistem Klasifikasi Konten Video (Galeri & Aksesibilitas)</strong>: Memperluas pengelolaan video dengan dukungan relasi <em>Many-to-Many</em> (1 video dapat terhubung ke banyak kategori tanpa duplikasi), normalisasi URL YouTube otomatis, form admin dinamis, serta menghadirkan halaman publik khusus <strong>Aksesibilitas</strong> (<code>/aksesibilitas</code>) ramah disabilitas dan integrasi pada <strong>Galeri</strong> (<code>/galeri</code>).</li>
+  </ol>
+
+  <div class="highlight-card">
+    <p><strong>Prinsip Arsitektur:</strong> Seluruh implementasi dilakukan secara <em>additive</em> dan <em>backward-compatible</em>. Tidak ada penghapusan fitur existing, tidak ada penulisan ulang modul yang telah stabil, dan struktur database dimigrasikan secara aman tanpa gangguan terhadap konten yang sudah beroperasi.</p>
+  </div>
+
+  <div class="card-grid">
+    <div class="stat-card">
+      <div class="label">Total Produk Hukum</div>
+      <div class="val">47</div>
+      <div class="desc">Dokumen peraturan aktif di database</div>
+    </div>
+    <div class="stat-card">
+      <div class="label">Jenis Regulasi Aktif</div>
+      <div class="val">7</div>
+      <div class="desc">Perpres, Permen, PP, Inpres, dll.</div>
+    </div>
+    <div class="stat-card">
+      <div class="label">Tahun Puncak</div>
+      <div class="val">2025</div>
+      <div class="desc">28 dokumen peraturan diterbitkan</div>
+    </div>
+    <div class="stat-card">
+      <div class="label">Tingkat Kelulusan Uji</div>
+      <div class="val">100%</div>
+      <div class="desc">20 dari 20 skenario pengujian PASS</div>
+    </div>
+  </div>
+
+  <!-- SECTION 2 -->
+  <h2 id="fitur-statistik">2. Fitur 1: Statistik Produk Hukum</h2>
+  <p>Modul statistik produk hukum dapat diakses oleh publik pada alamat <code>/statistik-produk-hukum</code> dan terintegrasi langsung pada menu navigasi portal.</p>
+
+  <h3>A. Aturan Agregasi & Integritas Data</h3>
+  <ul>
+    <li><strong>Kategori Peraturan Murni:</strong> Hanya menyertakan dokumen yang bertipe peraturan (<code>master_document_id = 1</code>) dan berstatus aktif (<code>is_active = 1</code>). Dokumen rancangan PUU, artikel, monografi, atau draft unpublished dikecualikan.</li>
+    <li><strong>Basis Tahun Riil:</strong> Menghitung berdasarkan tahun penetapan dokumen (kolom <code>year</code>), bukan waktu pengunggahan ke CMS (<code>created_at</code>).</li>
+    <li><strong>Persentase Dinamis:</strong> Dihitung secara real-time terhadap total dokumen dalam filter yang sedang dipilih:
+      <br><code>Persentase (%) = (Jumlah Dokumen per Jenis / Total Dokumen Terfilter) * 100%</code></li>
+  </ul>
+
+  <h3>B. Komponen Antarmuka & Interaktivitas</h3>
+  <ul>
+    <li><strong>Ringkasan Eksekutif (4 Kartu KPI):</strong> Total Produk Hukum, Total Jenis Peraturan Aktif, Tahun Terbanyak, dan Rasio Status (Berlaku vs Tidak Berlaku).</li>
+    <li><strong>Dual Filter Terintegrasi:</strong> Pilihan Tahun (2015 s.d. 2026) dan Jenis Peraturan dengan tombol <em>Reset</em>. Perubahan filter otomatis memicu pembaruan via AJAX tanpa memuat ulang halaman (*zero page flicker*).</li>
+    <li><strong>Sinkronisasi URL Browser:</strong> Parameter filter tersinkronisasi ke URL melalui <code>window.history.pushState</code> sehingga tautan statistik dapat langsung dibagikan atau disimpan (<em>bookmarkable</em>).</li>
+    <li><strong>Ekspor Dokumen ke Gambar (PNG):</strong> Tersedia tombol unduh beresolusi tinggi untuk Tabel Data dan Grafik menggunakan <code>html2canvas</code>.</li>
+    <li><strong>Visualisasi Ganda (Chart.js):</strong>
+      <ol>
+        <li>Grafik Batang Horisontal/Vertikal: Distribusi per Jenis Peraturan dengan warna master.</li>
+        <li>Grafik Tren Tahunan: Sebaran dokumen per tahun dengan breakdown status keberlakuan (Berlaku vs Tidak Berlaku).</li>
+      </ol>
+    </li>
+  </ul>
+
+  <!-- SECTION 3 -->
+  <h2 id="fitur-video">3. Fitur 2: Klasifikasi Video Galeri & Aksesibilitas</h2>
+  <p>Fitur ini memungkinkan pengelompokan konten video multi-tujuan guna memenuhi standar portal keterbukaan informasi dan ramah disabilitas.</p>
+
+  <h3>A. Skema Multi-Klasifikasi (Many-to-Many)</h3>
+  <p>Satu rekaman video dapat memiliki lebih dari satu kategori klasifikasi secara simultan. Sebagai contoh:</p>
+  <ul>
+    <li><strong>Video ID 1 ("Sharing Session Penguatan Layanan Advokasi Hukum"):</strong> Diberi tanda centang pada <code>Galeri</code> dan <code>Aksesibilitas</code>. Video ini secara otomatis muncul di halaman Galeri (<code>/galeri</code>) sekaligus di halaman Aksesibilitas (<code>/aksesibilitas</code>) tanpa terjadi duplikasi baris pada tabel utama <code>galleries</code>.</li>
+    <li><strong>Video ID 2:</strong> Hanya diklasifikasikan sebagai <code>Galeri</code>, sehingga hanya tampil di <code>/galeri</code> dan tidak tampil di <code>/aksesibilitas</code>.</li>
+  </ul>
+
+  <h3>B. Halaman Publik Aksesibilitas (<code>/aksesibilitas</code>)</h3>
+  <ul>
+    <li><strong>Khusus Video:</strong> Menyajikan hanya konten video panduan dan ramah aksesibilitas. Foto atau galeri gambar umum otomatis tersaring keluar.</li>
+    <li><strong>Kartu Video Modern:</strong> Dilengkapi thumbnail 16:9, label badge hijau "Aksesibilitas", tanggal publikasi, judul, potongan deskripsi ramah pembaca layar, dan ikon putar interaktif.</li>
+    <li><strong>Modal Player Responsif:</strong> Membuka popup video resmi YouTube (<code>#popup-video</code>) dengan rasio layar optimal dan pemutaran otomatis.</li>
+    <li><strong>Pencarian & Pengurutan:</strong> Form pencarian instan dan dropdown pengurutan (Terbaru / Terlama).</li>
+    <li><strong>Empty State Informatif:</strong> Tampilan ramah dan ilustratif apabila belum ada video yang sesuai dengan kata kunci pencarian.</li>
+  </ul>
+
+  <h3>C. Manajemen Konten di Admin Panel</h3>
+  <p>Pada CMS Admin (<strong>Informasi &rarr; Gallery</strong>):</p>
+  <ul>
+    <li><strong>Listing:</strong> Menampilkan label kategori warna pada kolom Klasifikasi (Hijau untuk Aksesibilitas, Biru untuk Galeri, Abu-abu untuk Foto). Tersedia filter dropdown klasifikasi.</li>
+    <li><strong>Form Dinamis:</strong> Form otomatis menyembunyikan field URL Video dan Checkbox Klasifikasi jika tipe konten yang dipilih adalah <code>Foto</code>, dan menampilkannya jika memilih <code>Video</code>.</li>
+    <li><strong>Normalisasi Link YouTube:</strong> Input URL YouTube dalam bentuk <code>watch?v=...</code>, <code>youtu.be/...</code>, atau <code>shorts/...</code> otomatis dikonversi menjadi format embed resmi (<code>https://www.youtube.com/embed/...</code>) sebelum disimpan ke basis data.</li>
+  </ul>
+
+  <!-- SECTION 4 -->
+  <h2 id="database">4. Database & Migrasi</h2>
+  <p>Migrasi dijalankan melalui file <code>database/migrations/2026_10_26_000001_create_video_classifications_and_pivot_tables.php</code>.</p>
+
+  <h3>A. DDL Tabel Baru</h3>
+  <pre><code>-- Tabel Master Klasifikasi Video
+CREATE TABLE `video_classifications` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `code` varchar(50) NOT NULL UNIQUE,
+  `name` varchar(100) NOT NULL,
+  `description` text DEFAULT NULL,
+  `sort_id` int(11) NOT NULL DEFAULT 0,
+  `is_active` tinyint(1) NOT NULL DEFAULT 1,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Tabel Pivot Relasi Many-to-Many
+CREATE TABLE `gallery_video_classifications` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `gallery_id` bigint(20) unsigned NOT NULL,
+  `classification_id` bigint(20) unsigned NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `gallery_video_class_unique` (`gallery_id`, `classification_id`),
+  CONSTRAINT `gvc_gallery_fk` FOREIGN KEY (`gallery_id`) REFERENCES `galleries` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `gvc_classification_fk` FOREIGN KEY (`classification_id`) REFERENCES `video_classifications` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;</code></pre>
+
+  <h3>B. Perubahan Kolom Tabel Existing</h3>
+  <pre><code>-- Penambahan urutan tampil pada tabel galleries
+ALTER TABLE `galleries` ADD `sort_id` INT NOT NULL DEFAULT 0 AFTER `thumbnail`;
+
+-- Penambahan deskripsi multibahasa pada tabel galleries_lang
+ALTER TABLE `galleries_lang` ADD `description` TEXT NULL AFTER `title`;</code></pre>
+
+  <!-- SECTION 5 -->
+  <h2 id="api">5. Referensi API Publik</h2>
+  <p>Seluruh endpoint API mengembalikan data dalam format standar JSON dengan header <code>Content-Type: application/json</code>.</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Endpoint</th>
+        <th>Method</th>
+        <th>Parameter Query</th>
+        <th>Deskripsi & Kegunaan</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>/api/statistics/legal-products</code></td>
+        <td><span class="badge badge-blue">GET</span></td>
+        <td><code>year</code> (int), <code>rule_type_id</code> (int)</td>
+        <td>Mengambil payload lengkap: ringkasan KPI, distribusi jenis peraturan, tren tahunan, dan opsi filter aktif.</td>
+      </tr>
+      <tr>
+        <td><code>/api/statistics/legal-products/by-type</code></td>
+        <td><span class="badge badge-blue">GET</span></td>
+        <td><code>year</code> (int)</td>
+        <td>Mengambil data statistik khusus distribusi jenis peraturan beserta persentase dan warna grafik.</td>
+      </tr>
+      <tr>
+        <td><code>/api/statistics/legal-products/by-year</code></td>
+        <td><span class="badge badge-blue">GET</span></td>
+        <td><code>rule_type_id</code> (int)</td>
+        <td>Mengambil data statistik tren tahunan dengan rincian status keberlakuan dokumen.</td>
+      </tr>
+      <tr>
+        <td><code>/api/videos</code></td>
+        <td><span class="badge badge-blue">GET</span></td>
+        <td><code>category</code> (string: <code>gallery</code> | <code>accessibility</code>), <code>search</code>, <code>sort</code></td>
+        <td>Mengambil daftar video terpublikasi dengan filter kategori klasifikasi, pencarian, dan paginasi.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- SECTION 6 -->
+  <h2 id="pengujian">6. Laporan Pengujian (Testing Report)</h2>
+  <p>Pengujian dilakukan secara komprehensif mencakup validitas kalkulasi data, fungsionalitas UI, dan reliabilitas API HTTP.</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th style="width: 70px;">Kode</th>
+        <th style="width: 200px;">Skenario Pengujian</th>
+        <th>Kondisi Uji & Tindakan</th>
+        <th>Hasil Pengujian Aktual</th>
+        <th style="width: 80px; text-align: center;">Hasil</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>ST-01</code></td>
+        <td>Validitas Agregasi Total</td>
+        <td>Membandingkan total peraturan statistik dengan record database (<code>master_document_id=1</code>).</td>
+        <td>Dihitung tepat 47 dokumen, 7 jenis peraturan aktif.</td>
+        <td style="text-align: center;"><span class="badge badge-pass">PASS</span></td>
+      </tr>
+      <tr>
+        <td><code>ST-02</code></td>
+        <td>Distribusi Jenis Peraturan</td>
+        <td>Agregasi <code>GROUP BY rule_type_id</code>.</td>
+        <td>Perpres: 13, Permen: 10, PP: 9, Inpres: 8, Kepmen: 3, Keppres: 3, UU: 1. Persentase akurat 100%.</td>
+        <td style="text-align: center;"><span class="badge badge-pass">PASS</span></td>
+      </tr>
+      <tr>
+        <td><code>ST-03</code></td>
+        <td>Sebaran Tahun & Status</td>
+        <td>Agregasi tahun dokumen dan status berlaku.</td>
+        <td>Tahun 2026: 10, 2025: 28, 2024: 3, 2023: 1, 2022: 2, 2021: 1, 2019: 1, 2015: 1. Berlaku: 45, Tidak Berlaku: 2.</td>
+        <td style="text-align: center;"><span class="badge badge-pass">PASS</span></td>
+      </tr>
+      <tr>
+        <td><code>ST-04</code></td>
+        <td>Filter Tunggal Tahun</td>
+        <td>Memilih filter <code>year = 2025</code>.</td>
+        <td>Hanya 28 dokumen tahun 2025 yang dihitung; tabel dan chart tersaring sinkron.</td>
+        <td style="text-align: center;"><span class="badge badge-pass">PASS</span></td>
+      </tr>
+      <tr>
+        <td><code>ST-05</code></td>
+        <td>Filter Tunggal Jenis</td>
+        <td>Memilih filter <code>rule_type_id = 6</code> (Perpres).</td>
+        <td>Hanya 13 dokumen Perpres yang ditampilkan pada grafik tren tahunan.</td>
+        <td style="text-align: center;"><span class="badge badge-pass">PASS</span></td>
+      </tr>
+      <tr>
+        <td><code>ST-06</code></td>
+        <td>Kombinasi Dual Filter</td>
+        <td>Filter <code>year = 2025</code> dan <code>rule_type_id = 6</code>.</td>
+        <td>Tepat 9 dokumen Perpres tahun 2025 terhitung.</td>
+        <td style="text-align: center;"><span class="badge badge-pass">PASS</span></td>
+      </tr>
+      <tr>
+        <td><code>ST-07</code></td>
+        <td>Penanganan Zero Data</td>
+        <td>Filter pada kombinasi yang tidak memiliki record di database.</td>
+        <td>Tabel menampilkan pesan "Tidak ada data dokumen ditemukan" tanpa galat sistem.</td>
+        <td style="text-align: center;"><span class="badge badge-pass">PASS</span></td>
+      </tr>
+      <tr>
+        <td><code>ST-08</code></td>
+        <td>Isolasi Status Publik</td>
+        <td>Memeriksa dokumen draft, deleted, atau non-peraturan.</td>
+        <td>Seluruh dokumen non-aktif dikecualikan dari perhitungan publik.</td>
+        <td style="text-align: center;"><span class="badge badge-pass">PASS</span></td>
+      </tr>
+      <tr>
+        <td><code>ST-09</code></td>
+        <td>Sinkronisasi AJAX & URL</td>
+        <td>Mengubah opsi dropdown pada antarmuka pengguna.</td>
+        <td>UI terbarui instan tanpa reload; URL browser ter-pushState.</td>
+        <td style="text-align: center;"><span class="badge badge-pass">PASS</span></td>
+      </tr>
+      <tr>
+        <td><code>ST-10</code></td>
+        <td>Ekspor Gambar PNG</td>
+        <td>Menekan tombol "Unduh Tabel" dan "Unduh Grafik".</td>
+        <td>File PNG beresolusi tajam berhasil di-generate oleh <code>html2canvas</code>.</td>
+        <td style="text-align: center;"><span class="badge badge-pass">PASS</span></td>
+      </tr>
+      <tr>
+        <td><code>VD-01</code></td>
+        <td>Multi-Klasifikasi Video</td>
+        <td>Mencentang [x] Galeri dan [x] Aksesibilitas pada Video ID 1.</td>
+        <td>Tersimpan 2 relasi pivot; record tabel <code>galleries</code> tetap 1 (tanpa duplikasi).</td>
+        <td style="text-align: center;"><span class="badge badge-pass">PASS</span></td>
+      </tr>
+      <tr>
+        <td><code>VD-02</code></td>
+        <td>Tampilan Halaman Galeri</td>
+        <td>Mengakses <code>/galeri</code> pada tab video.</td>
+        <td>Hanya video dengan klasifikasi Galeri yang ditampilkan.</td>
+        <td style="text-align: center;"><span class="badge badge-pass">PASS</span></td>
+      </tr>
+      <tr>
+        <td><code>VD-03</code></td>
+        <td>Halaman Aksesibilitas</td>
+        <td>Mengakses <code>/aksesibilitas</code>.</td>
+        <td>Khusus video berklasifikasi Aksesibilitas. Konten foto tidak ditampilkan.</td>
+        <td style="text-align: center;"><span class="badge badge-pass">PASS</span></td>
+      </tr>
+      <tr>
+        <td><code>VD-04</code></td>
+        <td>Pemisahan Konten Eksklusif</td>
+        <td>Video ID 2 diklasifikasikan hanya sebagai Galeri.</td>
+        <td>Muncul di <code>/galeri</code>, dan TIDAK muncul di <code>/aksesibilitas</code>.</td>
+        <td style="text-align: center;"><span class="badge badge-pass">PASS</span></td>
+      </tr>
+      <tr>
+        <td><code>VD-05</code></td>
+        <td>Normalisasi URL YouTube</td>
+        <td>Memasukkan format <code>watch?v=...</code> dan <code>youtu.be/...</code>.</td>
+        <td>Otomatis dikonversi menjadi URL embed YouTube yang sah.</td>
+        <td style="text-align: center;"><span class="badge badge-pass">PASS</span></td>
+      </tr>
+      <tr>
+        <td><code>VD-06</code></td>
+        <td>Form Admin Dinamis</td>
+        <td>Beralih antara tipe Foto dan Video pada form CMS.</td>
+        <td>Field klasifikasi dan embed URL otomatis sembunyi/tampil sesuai tipe.</td>
+        <td style="text-align: center;"><span class="badge badge-pass">PASS</span></td>
+      </tr>
+      <tr>
+        <td><code>VD-07</code></td>
+        <td>Modal Popup Player</td>
+        <td>Mengklik thumbnail kartu video di halaman publik.</td>
+        <td>Modal responsif <code>#popup-video</code> terbuka dan memutar video.</td>
+        <td style="text-align: center;"><span class="badge badge-pass">PASS</span></td>
+      </tr>
+      <tr>
+        <td><code>VD-08</code></td>
+        <td>Penanganan Empty State</td>
+        <td>Mencari kata kunci video yang tidak ada di basis data.</td>
+        <td>Menampilkan pesan informatif dan ramah pengguna.</td>
+        <td style="text-align: center;"><span class="badge badge-pass">PASS</span></td>
+      </tr>
+      <tr>
+        <td><code>VD-09</code></td>
+        <td>Relasi Cascade Delete</td>
+        <td>Menghapus video yang berelasi di CMS admin.</td>
+        <td>Relasi pivot terhapus bersih secara otomatis oleh database engine (ON DELETE CASCADE).</td>
+        <td style="text-align: center;"><span class="badge badge-pass">PASS</span></td>
+      </tr>
+      <tr>
+        <td><code>VD-10</code></td>
+        <td>Filter Listing Admin</td>
+        <td>Memilih filter klasifikasi di tabel CMS galeri.</td>
+        <td>Menyaring daftar video sesuai klasifikasi terpilih dengan benar.</td>
+        <td style="text-align: center;"><span class="badge badge-pass">PASS</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="footer">
+    <div><strong>JDIH Kementerian Koordinator Bidang Pangan RI</strong> &mdash; Laporan Pengembangan & Dokumentasi Sistem</div>
+    <div>Dicetak pada: 26 Oktober 2026</div>
+  </div>
+</div>
+
+</body>
+</html>

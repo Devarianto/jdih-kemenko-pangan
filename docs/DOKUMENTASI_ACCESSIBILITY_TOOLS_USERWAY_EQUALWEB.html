@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dokumentasi Teknis: Accessibility Widget (Full UserWay Suite & Model JDIH Kemenkumham) | JDIH Kemenko Pangan</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #1a263f;
+    --navy-light: #243556;
+    --blue: #1d4ed8;
+    --blue-soft: #eff6ff;
+    --emerald: #059669;
+    --emerald-soft: #ecfdf5;
+    --amber: #d97706;
+    --ink: #0f172a;
+    --muted: #475569;
+    --line: #e2e8f0;
+    --bg: #f8fafc;
+    --card: #ffffff;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    color: var(--ink);
+    background-color: var(--bg);
+    line-height: 1.65;
+    padding: 40px 20px;
+  }
+  .container {
+    max-width: 1080px;
+    margin: 0 auto;
+    background: var(--card);
+    padding: 56px 64px;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(15, 23, 42, 0.06);
+    border: 1px solid var(--line);
+  }
+  .header-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #e0f2fe;
+    color: #0369a1;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    padding: 6px 14px;
+    border-radius: 999px;
+    margin-bottom: 16px;
+  }
+  .header-tag::before {
+    content: "";
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #0284c7;
+  }
+  h1 {
+    color: var(--navy);
+    font-size: 26pt;
+    line-height: 1.25;
+    margin-bottom: 12px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+  }
+  .subtitle {
+    font-size: 14.5pt;
+    color: var(--navy-light);
+    font-weight: 600;
+    margin-bottom: 24px;
+  }
+  .meta-bar {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+    background: #f1f5f9;
+    padding: 16px 20px;
+    border-radius: 10px;
+    font-size: 13px;
+    margin-bottom: 40px;
+    border: 1px solid #e2e8f0;
+  }
+  .meta-item strong {
+    color: var(--navy);
+    display: block;
+    margin-bottom: 2px;
+  }
+  h2 {
+    color: var(--navy);
+    font-size: 18pt;
+    border-bottom: 2px solid var(--blue);
+    padding-bottom: 10px;
+    margin-top: 48px;
+    margin-bottom: 20px;
+    font-weight: 700;
+  }
+  p, li {
+    font-size: 14px;
+    color: var(--ink);
+    margin-bottom: 12px;
+  }
+  ul, ol {
+    margin-left: 24px;
+    margin-bottom: 20px;
+  }
+  li {
+    margin-bottom: 6px;
+  }
+  .mockup-preview {
+    display: flex;
+    justify-content: center;
+    padding: 30px;
+    background: #f8fafc;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    margin: 24px 0;
+  }
+  .mockup-card {
+    width: 320px;
+    background: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 14px 40px rgba(15, 23, 42, 0.2);
+    border: 1px solid rgba(226, 232, 240, 0.9);
+    overflow: hidden;
+  }
+  .mockup-header {
+    background: #1a263f;
+    color: #ffffff;
+    padding: 16px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: 700;
+    font-size: 16px;
+  }
+  .mockup-item {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 10px 20px;
+    color: #1e293b;
+    font-size: 13.5px;
+    border-bottom: 1px solid #f8fafc;
+  }
+  .mockup-item:hover { background: #f1f5f9; }
+  .badge-pass { background: #dcfce7; color: #166534; padding: 3px 8px; border-radius: 6px; font-size: 11px; font-weight: 600; }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0 28px 0;
+    font-size: 13px;
+    background: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid var(--line);
+  }
+  th {
+    background: #0f172a;
+    color: #ffffff;
+    font-weight: 600;
+    text-align: left;
+    padding: 12px 14px;
+  }
+  td {
+    padding: 11px 14px;
+    border-bottom: 1px solid var(--line);
+  }
+  tr:nth-child(even) td { background: #f8fafc; }
+  kbd {
+    background: #f1f5f9;
+    border: 1px solid #cbd5e1;
+    border-bottom-width: 2px;
+    border-radius: 4px;
+    padding: 2px 6px;
+    font-size: 11px;
+    font-weight: 700;
+    color: #0f172a;
+  }
+  .footer {
+    margin-top: 60px;
+    padding-top: 24px;
+    border-top: 1px solid var(--line);
+    font-size: 12px;
+    color: var(--muted);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <div class="header-tag">Dokumentasi Standarisasi & Fitur Lengkap</div>
+  <h1>Accessibility Widget: Full UserWay Suite & Model JDIH Kemenkumham</h1>
+  <div class="subtitle">JDIH Kementerian Koordinator Bidang Pangan Republik Indonesia</div>
+
+  <div class="meta-bar">
+    <div class="meta-item">
+      <strong>Referensi Desain</strong>
+      <a href="https://jdih.kemenkum.go.id/" target="_blank">jdih.kemenkum.go.id</a>
+    </div>
+    <div class="meta-item">
+      <strong>Standar Fitur</strong>
+      UserWay & WCAG 2.1 (Level AA)
+    </div>
+    <div class="meta-item">
+      <strong>Jumlah Fitur</strong>
+      19 Fitur Aksesibilitas Terintegrasi
+    </div>
+    <div class="meta-item">
+      <strong>Status Pengujian</strong>
+      <span class="badge-pass">19 / 19 Fitur PASS</span>
+    </div>
+  </div>
+
+  <h2>1. Ringkasan Desain & Fungsionalitas</h2>
+  <p>Widget aksesibilitas menggabungkan model visual popup card JDIH Kemenkumham dengan rangkaian lengkap fungsionalitas UserWay:</p>
+
+  <div class="mockup-preview">
+    <div class="mockup-card">
+      <div class="mockup-header">
+        <span>Aksesibilitas</span>
+        <span>✕</span>
+      </div>
+      <div style="max-height: 340px; overflow-y: auto;">
+        <div class="mockup-item"><span>◐</span><span>Kontras tinggi</span></div>
+        <div class="mockup-item"><span>☀️</span><span>Kontras terang</span></div>
+        <div class="mockup-item"><span>🎨</span><span>Mode abu-abu</span></div>
+        <div class="mockup-item"><span>🔄</span><span>Inversi warna</span></div>
+        <div class="mockup-item"><span>🔗</span><span>Sorot tautan</span></div>
+        <div class="mockup-item"><span>📑</span><span>Sorot judul</span></div>
+        <div class="mockup-item"><span>Aa</span><span>Font mudah dibaca</span></div>
+        <div class="mockup-item"><span>A+</span><span>Perbesar teks</span></div>
+        <div class="mockup-item"><span>A-</span><span>Perkecil teks</span></div>
+        <div class="mockup-item"><span>↔️</span><span>Spasi teks</span></div>
+        <div class="mockup-item"><span>📄</span><span>Rata kiri teks</span></div>
+        <div class="mockup-item"><span>🖱️</span><span>Kursor besar</span></div>
+        <div class="mockup-item"><span>📏</span><span>Panduan membaca</span></div>
+        <div class="mockup-item"><span>🔦</span><span>Masker fokus baca</span></div>
+        <div class="mockup-item"><span>⏸️</span><span>Hentikan animasi</span></div>
+        <div class="mockup-item"><span>🖼️</span><span>Sembunyikan gambar</span></div>
+        <div class="mockup-item"><span>🔊</span><span>Baca layar</span></div>
+        <div class="mockup-item"><span>⏹</span><span>Hentikan bacaan</span></div>
+        <div style="height: 1px; background: #e2e8f0; margin: 4px 16px;"></div>
+        <div class="mockup-item"><span>↺</span><span>Atur ulang</span></div>
+      </div>
+    </div>
+  </div>
+
+  <h2>2. Matriks 19 Fitur Aksesibilitas Lengkap</h2>
+  <table>
+    <thead>
+      <tr>
+        <th style="width: 25%;">Fitur</th>
+        <th style="width: 10%;">Ikon</th>
+        <th style="width: 20%;">Kategori</th>
+        <th>Deskripsi & Efek Fungsional</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Kontras tinggi</strong></td>
+        <td>◐</td>
+        <td>Warna & Kontras</td>
+        <td>Mode gelap pekat dengan teks putih dan link biru kontras tinggi.</td>
+      </tr>
+      <tr>
+        <td><strong>Kontras terang</strong></td>
+        <td>☀️</td>
+        <td>Warna & Kontras</td>
+        <td>Mode latar putih bersih dengan teks hitam pekat.</td>
+      </tr>
+      <tr>
+        <td><strong>Mode abu-abu</strong></td>
+        <td>🎨</td>
+        <td>Warna & Kontras</td>
+        <td>Menghapus warna menjadi grayscale 100% untuk pengguna buta warna.</td>
+      </tr>
+      <tr>
+        <td><strong>Inversi warna</strong></td>
+        <td>🔄</td>
+        <td>Warna & Kontras</td>
+        <td>Membalikkan spektrum warna untuk mata yang sangat sensitif cahaya.</td>
+      </tr>
+      <tr>
+        <td><strong>Sorot tautan</strong></td>
+        <td>🔗</td>
+        <td>Navigasi & Fokus</td>
+        <td>Memberikan penanda kuning cerah dan garis bawah tebal pada semua tautan link.</td>
+      </tr>
+      <tr>
+        <td><strong>Sorot judul</strong></td>
+        <td>📑</td>
+        <td>Navigasi & Fokus</td>
+        <td>Menyorot judul h1-h6 dengan kotak penanda biru kontras.</td>
+      </tr>
+      <tr>
+        <td><strong>Font mudah dibaca</strong></td>
+        <td>Aa</td>
+        <td>Tipografi</td>
+        <td>Mengubah font seluruh dokumen menjadi font ramah disleksia (Lexend).</td>
+      </tr>
+      <tr>
+        <td><strong>Perbesar teks</strong></td>
+        <td>A+</td>
+        <td>Tipografi</td>
+        <td>Menaikkan ukuran teks secara proporsional (+12%, +24%, +36%, +48%).</td>
+      </tr>
+      <tr>
+        <td><strong>Perkecil teks</strong></td>
+        <td>A-</td>
+        <td>Tipografi</td>
+        <td>Menurunkan ukuran teks kembali ke ukuran normal atau minimal.</td>
+      </tr>
+      <tr>
+        <td><strong>Spasi teks</strong></td>
+        <td>↔️</td>
+        <td>Tipografi</td>
+        <td>Memperlebar jarak antar baris (line height 1.85) dan jarak spasi huruf.</td>
+      </tr>
+      <tr>
+        <td><strong>Rata kiri teks</strong></td>
+        <td>📄</td>
+        <td>Tipografi</td>
+        <td>Mengatur perataan teks menjadi rata kiri alami (mencegah teks justify berantakan).</td>
+      </tr>
+      <tr>
+        <td><strong>Kursor besar</strong></td>
+        <td>🖱️</td>
+        <td>Navigasi & Motorik</td>
+        <td>Mengubah mouse pointer menjadi kursor panah berukuran besar 44px kontras tinggi.</td>
+      </tr>
+      <tr>
+        <td><strong>Panduan membaca</strong></td>
+        <td>📏</td>
+        <td>Alat Membaca</td>
+        <td>Garis ruler horisontal transparan yang bergerak mengikuti kursor mouse saat membaca.</td>
+      </tr>
+      <tr>
+        <td><strong>Masker fokus baca</strong></td>
+        <td>🔦</td>
+        <td>Alat Membaca</td>
+        <td>Menggelapkan atas-bawah layar menyisakan celah baca fokus 110px.</td>
+      </tr>
+      <tr>
+        <td><strong>Hentikan animasi</strong></td>
+        <td>⏸️</td>
+        <td>Gerakan & Sensitif</td>
+        <td>Mematikan seluruh animasi slider, keyframes, dan transisi untuk penderita epilepsi.</td>
+      </tr>
+      <tr>
+        <td><strong>Sembunyikan gambar</strong></td>
+        <td>🖼️</td>
+        <td>Konten</td>
+        <td>Menurunkan opasitas gambar menjadi 5% blur agar pengguna fokus pada teks hukum.</td>
+      </tr>
+      <tr>
+        <td><strong>Baca layar</strong></td>
+        <td>🔊</td>
+        <td>Suara & Audio</td>
+        <td>Membacakan teks yang diklik dalam Bahasa Indonesia resmi via Web Speech API browser.</td>
+      </tr>
+      <tr>
+        <td><strong>Hentikan bacaan</strong></td>
+        <td>⏹</td>
+        <td>Suara & Audio</td>
+        <td>Menghentikan pembacaan audio secara instan.</td>
+      </tr>
+      <tr>
+        <td><strong>Atur ulang</strong></td>
+        <td>↺</td>
+        <td>Kontrol</td>
+        <td>Mengembalikan seluruh tampilan ke kondisi standar website dalam 1 klik.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>3. Interaksi & Aksesibilitas Pintasan</h2>
+  <ul>
+    <li><strong>Klik Ikon Melayang:</strong> Tombol bulat navy di pojok kiri bawah membuka/menutup kartu aksesibilitas secara instan.</li>
+    <li><strong>Pintasan Keyboard <kbd>Alt + A</kbd>:</strong> Membuka dan menutup widget kapan saja tanpa mouse.</li>
+    <li><strong>Pintasan Keyboard <kbd>Esc</kbd>:</strong> Menutup kartu seketika.</li>
+    <li><strong>Klik Luar (*Click Outside*):</strong> Mengklik area di luar kartu otomatis menutup jendela popup.</li>
+    <li><strong>Penyimpanan Otomatis (<code>localStorage</code>):</strong> Pengaturan tetap aktif saat berpindah ke halaman lain.</li>
+  </ul>
+
+  <div class="footer">
+    <div><strong>JDIH Kementerian Koordinator Bidang Pangan RI</strong> &mdash; Biro Hukum dan Kerja Sama</div>
+    <div>Tanggal Pembaruan: 26 Oktober 2026</div>
+  </div>
+</div>
+
+</body>
+</html>

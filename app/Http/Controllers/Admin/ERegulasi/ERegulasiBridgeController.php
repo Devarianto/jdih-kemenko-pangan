@@ -26,3 +26,4 @@ class ERegulasiBridgeController extends Controller
         return redirect()->route('dashboard');
     }
 }
+

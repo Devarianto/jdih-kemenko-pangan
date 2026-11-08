@@ -1,0 +1,2478 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dokumentasi Lengkap Pembaruan JDIH Kemenko Pangan (30 Sep - 26 Okt 2026)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy-dark: #0a192f;
+    --navy: #0f2b48;
+    --navy-light: #1e3a5f;
+    --gold: #d4af37;
+    --gold-dark: #b89628;
+    --blue: #1d4ed8;
+    --blue-soft: #eff6ff;
+    --teal: #0d9488;
+    --teal-soft: #f0fdfa;
+    --emerald: #059669;
+    --emerald-soft: #ecfdf5;
+    --amber: #d97706;
+    --amber-soft: #fffbeb;
+    --red: #dc2626;
+    --red-soft: #fef2f2;
+    --ink: #1e293b;
+    --ink-light: #475569;
+    --line: #e2e8f0;
+    --line-light: #f1f5f9;
+    --bg: #f8fafc;
+    --card: #ffffff;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    color: var(--ink);
+    background-color: var(--bg);
+    line-height: 1.7;
+    font-size: 10.5pt;
+    padding: 30px 15px;
+  }
+
+  .container {
+    max-width: 1080px;
+    margin: 0 auto;
+    background: var(--card);
+    padding: 60px 70px;
+    border-radius: 16px;
+    box-shadow: 0 10px 40px rgba(15, 23, 42, 0.08);
+    border: 1px solid var(--line);
+  }
+
+  /* Top Action Bar (Print / Study Mode) */
+  .top-action-bar {
+    position: sticky;
+    top: 15px;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(15, 43, 72, 0.95);
+    backdrop-filter: blur(10px);
+    color: white;
+    padding: 12px 24px;
+    border-radius: 12px;
+    margin-bottom: 30px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+  }
+  .top-action-bar .brand {
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 0.05em;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .top-action-bar .badge {
+    background: var(--gold);
+    color: var(--navy-dark);
+    padding: 3px 8px;
+    border-radius: 6px;
+    font-size: 10px;
+    font-weight: 800;
+  }
+  .top-action-bar .actions button {
+    background: var(--gold);
+    color: var(--navy-dark);
+    border: none;
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 12px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  .top-action-bar .actions button:hover {
+    background: #e5c358;
+    transform: translateY(-1px);
+  }
+
+  /* Cover Page Styling */
+  .cover {
+    background: linear-gradient(135deg, var(--navy-dark) 0%, var(--navy) 50%, var(--navy-light) 100%);
+    color: white;
+    padding: 50px 45px;
+    border-radius: 14px;
+    margin-bottom: 40px;
+    box-shadow: 0 12px 35px rgba(10, 25, 47, 0.2);
+    border-left: 6px solid var(--gold);
+  }
+  .cover-badge {
+    display: inline-block;
+    background: rgba(212, 175, 55, 0.2);
+    color: var(--gold);
+    border: 1px solid var(--gold);
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    padding: 5px 12px;
+    border-radius: 999px;
+    margin-bottom: 16px;
+    text-transform: uppercase;
+  }
+  .cover h1 {
+    color: #ffffff;
+    font-size: 26pt;
+    font-weight: 800;
+    line-height: 1.25;
+    margin-bottom: 12px;
+    letter-spacing: -0.02em;
+    border: none;
+    padding: 0;
+  }
+  .cover-sub {
+    font-size: 13pt;
+    color: #cbd5e1;
+    font-weight: 400;
+    margin-bottom: 24px;
+    line-height: 1.5;
+  }
+  .cover-table {
+    width: 100%;
+    margin-top: 20px;
+    border-collapse: collapse;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  .cover-table td {
+    padding: 10px 16px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    font-size: 11pt;
+  }
+  .cover-table tr:last-child td { border-bottom: none; }
+  .cover-table td:first-child {
+    font-weight: 700;
+    color: var(--gold);
+    width: 25%;
+  }
+  .cover-table td:last-child {
+    color: #f1f5f9;
+  }
+  .cover-table code {
+    background: rgba(0, 0, 0, 0.3);
+    color: #e2e8f0;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  /* Headings */
+  h1 {
+    color: var(--navy);
+    font-size: 20pt;
+    font-weight: 800;
+    margin-top: 45px;
+    margin-bottom: 16px;
+    padding-bottom: 10px;
+    border-bottom: 2.5px solid var(--gold);
+    letter-spacing: -0.01em;
+  }
+  h2 {
+    color: var(--navy-light);
+    font-size: 14pt;
+    font-weight: 700;
+    margin-top: 30px;
+    margin-bottom: 12px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid var(--line);
+  }
+  h3 {
+    color: var(--navy);
+    font-size: 12pt;
+    font-weight: 700;
+    margin-top: 22px;
+    margin-bottom: 10px;
+  }
+  h4 {
+    font-size: 11pt;
+    font-weight: 700;
+    color: var(--ink);
+    margin-top: 16px;
+    margin-bottom: 8px;
+  }
+
+  p {
+    margin-bottom: 14px;
+    color: var(--ink);
+    text-align: justify;
+  }
+
+  /* Lists */
+  ul, ol {
+    margin-left: 24px;
+    margin-bottom: 16px;
+  }
+  li {
+    margin-bottom: 6px;
+    color: var(--ink);
+  }
+  li > ul, li > ol {
+    margin-top: 6px;
+    margin-bottom: 6px;
+  }
+
+  /* Tables */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0 28px;
+    font-size: 10pt;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  table:not(.cover-table) th {
+    background: var(--navy);
+    color: white;
+    font-weight: 700;
+    text-align: left;
+    padding: 11px 14px;
+    font-size: 10pt;
+    border: 1px solid var(--navy);
+  }
+  table:not(.cover-table) td {
+    padding: 10px 14px;
+    border: 1px solid var(--line);
+    vertical-align: top;
+  }
+  table:not(.cover-table) tr:nth-child(even) {
+    background-color: var(--line-light);
+  }
+  table:not(.cover-table) tr:hover {
+    background-color: #f1f5f9;
+  }
+
+  /* Blockquotes & Callouts */
+  blockquote {
+    background: var(--blue-soft);
+    border-left: 5px solid var(--blue);
+    padding: 14px 20px;
+    margin: 20px 0;
+    border-radius: 0 8px 8px 0;
+    color: var(--ink);
+    font-size: 10.5pt;
+  }
+  blockquote p { margin-bottom: 0; text-align: left; }
+  blockquote strong { color: var(--navy); }
+
+  /* Code & Syntax */
+  code {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9.5pt;
+    background: #f1f5f9;
+    color: #0f172a;
+    padding: 2px 6px;
+    border-radius: 4px;
+    border: 1px solid #e2e8f0;
+  }
+  pre {
+    background: #0f172a;
+    color: #f8fafc;
+    padding: 16px 20px;
+    border-radius: 10px;
+    overflow-x: auto;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9pt;
+    line-height: 1.55;
+    margin: 18px 0 24px;
+    border: 1px solid #1e293b;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  }
+  pre code {
+    background: transparent;
+    color: inherit;
+    padding: 0;
+    border: none;
+    font-size: inherit;
+  }
+
+  /* Horizontal Rule */
+  hr {
+    border: none;
+    border-top: 1px solid var(--line);
+    margin: 36px 0;
+  }
+
+  /* Badges & Pills */
+  .badge-tag {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 9pt;
+    font-weight: 700;
+  }
+
+  /* Pagebreak for Print */
+  .pagebreak {
+    page-break-before: always;
+    break-before: page;
+    margin-top: 30px;
+  }
+
+  /* Print Stylesheet */
+  @media print {
+    body {
+      background: white !important;
+      padding: 0 !important;
+      font-size: 9.5pt !important;
+      color: #000 !important;
+    }
+    .top-action-bar { display: none !important; }
+    .container {
+      max-width: 100% !important;
+      padding: 0 !important;
+      margin: 0 !important;
+      box-shadow: none !important;
+      border: none !important;
+    }
+    .cover {
+      background: #0f2b48 !important;
+      color: white !important;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+      padding: 35px !important;
+    }
+    .cover h1 { color: white !important; }
+    .cover-table td { color: white !important; }
+    h1 {
+      border-bottom: 2px solid #d4af37 !important;
+      color: #0f2b48 !important;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+    table:not(.cover-table) th {
+      background: #0f2b48 !important;
+      color: white !important;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+    pre {
+      background: #1e293b !important;
+      color: #f8fafc !important;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+      white-space: pre-wrap !important;
+      word-break: break-all;
+    }
+    blockquote {
+      background: #f1f5f9 !important;
+      border-left: 4px solid #1d4ed8 !important;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+    .pagebreak {
+      page-break-before: always !important;
+      break-before: page !important;
+      height: 0;
+    }
+  }
+</style>
+</head>
+<body>
+
+<div class="top-action-bar">
+  <div class="brand">
+    <span>JDIH KEMENTERIAN KOORDINATOR BIDANG PANGAN</span>
+    <span class="badge">DOKUMEN INDUK RESMI</span>
+  </div>
+  <div class="actions">
+    <button onclick="window.print()">🖨️ Cetak / Simpan sebagai PDF</button>
+  </div>
+</div>
+
+<div class="container">
+  <div class="cover">
+<div class="cover-badge">DOKUMENTASI LENGKAP PENGEMBANGAN</div>
+<h1 id="jdih-kementerian-koordinator-bidang-pangan">JDIH Kementerian Koordinator Bidang Pangan</h1>
+<div class="cover-sub">Laporan Seluruh Pembaruan Sistem — dari Awal Penelaahan hingga Widget Aksesibilitas</div>
+<table class="cover-table">
+<tr><td>Website resmi</td><td>https://jdih.kemenkopangan.go.id</td></tr>
+<tr><td>Periode pekerjaan</td><td>30 September 2026 – 26 Oktober 2026</td></tr>
+<tr><td>Teknologi</td><td>Laravel 11 · PHP 8.2 · MySQL/MariaDB · Blade + SCSS (Vite) · CMS "Cactuar Admin"</td></tr>
+<tr><td>Lingkungan kerja</td><td>Lokal (XAMPP, <code>http://localhost:8000</code>)</td></tr>
+<tr><td>Fungsi dokumen</td><td>Bahan belajar dan bahan presentasi hasil pengembangan</td></tr>
+</table>
+</div>
+<div class="pagebreak"></div>
+<h1 id="daftar-isi">Daftar Isi</h1>
+<ol>
+<li>Cara Membaca Dokumen Ini</li>
+<li>Ringkasan Eksekutif dan Garis Waktu Lengkap</li>
+<li>Mengenal JDIH dan Arsitektur Sistem (Penjelasan Sederhana)</li>
+<li>Tahap 1 — Penelaahan Awal dan Menjalankan Proyek di Komputer Lokal</li>
+<li>Tahap 2 — Audit Sistem, Analisis Kesenjangan (Gap) dan Rekonsiliasi Dokumen</li>
+<li>Tahap 3 — Adaptasi Gambar, Metadata Menu, dan Navbar Pertama</li>
+<li>Tahap 4 — Penukaran Database dengan Data Production</li>
+<li>Tahap 5 — Perapian Header, Logo, Menu &quot;Beranda&quot;, dan Penghapusan Tab Login</li>
+<li>Tahap 6 — Dropdown Menu ala JDIHN, Mode Gelap, dan Restrukturisasi Sitemap</li>
+<li>Tahap 7 — Modul Dokumen Pembentukan PUU (CMS dan Halaman Publik)</li>
+<li>Tahap 8 — Widget Statistik di Beranda</li>
+<li>Tahap 9 — Fitur 1: Halaman Statistik Produk Hukum</li>
+<li>Tahap 10 — Fitur 2: Klasifikasi Video Galeri dan Aksesibilitas</li>
+<li>Tahap 11 — Widget Aksesibilitas (UserWay / EqualWeb Style)</li>
+<li>Referensi API</li>
+<li>Daftar Lengkap File dan Folder yang Berubah</li>
+<li>Pengujian dan Hasil Verifikasi</li>
+<li>Masalah yang Ditemui dan Cara Mengatasinya</li>
+<li>Keamanan, Cadangan (Backup), dan Rollback</li>
+<li>Panduan Menjalankan dan Merawat Sistem</li>
+<li>Bahan Presentasi: Alur Demo, Poin Bicara, dan Tanya-Jawab</li>
+<li>Glosarium</li>
+</ol>
+<div class="pagebreak"></div>
+<h1 id="1-cara-membaca-dokumen-ini">1. Cara Membaca Dokumen Ini</h1>
+<p>Dokumen ini disusun <strong>berurutan sesuai kronologi pekerjaan</strong>, dari permintaan pertama (mempelajari proyek) sampai permintaan terakhir (widget aksesibilitas). Setiap bab memakai pola yang sama agar mudah dipelajari ulang:</p>
+<table>
+<thead>
+<tr>
+<th>Bagian dalam setiap bab</th>
+<th>Isi</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Latar belakang</strong></td>
+<td>Mengapa pekerjaan itu diminta / masalah apa yang ada</td>
+</tr>
+<tr>
+<td><strong>Penjelasan sederhana</strong></td>
+<td>Analogi dalam bahasa sehari-hari</td>
+</tr>
+<tr>
+<td><strong>Apa yang dikerjakan</strong></td>
+<td>Langkah teknis secara runtut</td>
+</tr>
+<tr>
+<td><strong>File yang terlibat</strong></td>
+<td>Lokasi file yang diubah/dibuat</td>
+</tr>
+<tr>
+<td><strong>Sebelum vs sesudah</strong></td>
+<td>Perbandingan dengan website/kode asli</td>
+</tr>
+<tr>
+<td><strong>Poin presentasi</strong></td>
+<td>Kalimat kunci yang bisa langsung dibawakan</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>Catatan penting.</strong> Dokumen ini tidak meringkas. Beberapa bagian sengaja diulang dalam sudut pandang berbeda (teknis dan non-teknis) supaya Anda bisa memilih tingkat penjelasan yang sesuai audiens presentasi — pimpinan (cukup bagian <em>Penjelasan sederhana</em> dan <em>Poin presentasi</em>) atau tim teknis (bagian <em>Apa yang dikerjakan</em> dan <em>File yang terlibat</em>).</p>
+</blockquote>
+<h3 id="11-penulisan-jalur-file">1.1 Penulisan jalur file</h3>
+<p>Semua jalur file di dokumen ini relatif terhadap folder kode sumber:</p>
+<pre><code>Source Code\jdih-kemenko-pangan\
+</code></pre>
+<p>Contoh: <code>resources/views/dynamic/home.blade.php</code> berarti <code>Source Code\jdih-kemenko-pangan\resources\views\dynamic\home.blade.php</code>.</p>
+<h3 id="12-struktur-folder-proyek-di-komputer-anda">1.2 Struktur folder proyek di komputer Anda</h3>
+<pre><code>jdih.kemenkopangan.go.id\
+├── Assets\                          ← gambar/aset mentah (public_html_img)
+├── Database\                        ← berkas SQL (termasuk backup sebelum swap)
+├── Dokumentasi_Update\              ← seluruh dokumentasi hasil pengembangan
+├── backup-9.30.2026_08-25-36_pangan ← backup production (file + database)
+├── scratch\                         ← berkas sementara
+└── Source Code\jdih-kemenko-pangan\ ← aplikasi Laravel (kode utama)
+</code></pre>
+<div class="pagebreak"></div>
+<h1 id="2-ringkasan-eksekutif-dan-garis-waktu-lengkap">2. Ringkasan Eksekutif dan Garis Waktu Lengkap</h1>
+<h2 id="21-ringkasan-dalam-satu-paragraf">2.1 Ringkasan dalam satu paragraf</h2>
+<p>Anda adalah programmer yang <strong>melanjutkan</strong> pengembangan JDIH Kemenko Pangan (bukan membuat dari nol). Dalam ±4 minggu, sistem yang awalnya hanya berupa kode sumber dan database nyaris kosong telah: (1) dijalankan penuh di komputer lokal; (2) diaudit dan dibandingkan dengan website resmi; (3) diisi data production (49 dokumen, 16 berita, 27 galeri); (4) diperbarui tampilannya (navbar bergaya JDIHN, mode gelap, logo di kiri, menu &quot;Beranda&quot;); (5) ditata ulang sitemap-nya; (6) ditambah <strong>modul CMS Dokumen Pembentukan PUU</strong> lengkap dengan 7 sub-modul dan moderasi masukan publik; (7) ditambah <strong>statistik</strong> di beranda dan halaman statistik interaktif; (8) ditambah <strong>klasifikasi video</strong> Galeri/Aksesibilitas; dan (9) dilengkapi <strong>widget aksesibilitas</strong> berisi 19 fitur seperti UserWay.</p>
+<h2 id="22-angka-angka-kunci-bisa-langsung-disebut-saat-presentasi">2.2 Angka-angka kunci (bisa langsung disebut saat presentasi)</h2>
+<table>
+<thead>
+<tr>
+<th>Indikator</th>
+<th>Sebelum</th>
+<th>Sesudah</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Dokumen di database</td>
+<td>14</td>
+<td><strong>49</strong></td>
+</tr>
+<tr>
+<td>Berita</td>
+<td>1</td>
+<td><strong>16</strong></td>
+</tr>
+<tr>
+<td>Galeri</td>
+<td>3</td>
+<td><strong>27</strong></td>
+</tr>
+<tr>
+<td>Infografis</td>
+<td>1</td>
+<td><strong>9</strong></td>
+</tr>
+<tr>
+<td>Menu (tabel <code>menus</code>)</td>
+<td>37</td>
+<td><strong>32 (disusun ulang sesuai sitemap) + menu baru</strong></td>
+</tr>
+<tr>
+<td>Sub-modul Dokumen Pembentukan PUU</td>
+<td>0</td>
+<td><strong>7</strong></td>
+</tr>
+<tr>
+<td>Halaman publik baru</td>
+<td>–</td>
+<td>Rancangan PUU, Program Penyusunan, Naskah Akademik, Risalah, Analisis &amp; Evaluasi, Kajian Hukum, Partisipasi Publik, Peraturan Terjemahan, Aksesibilitas, Videografis, Statistik Produk Hukum</td>
+</tr>
+<tr>
+<td>Rute admin CMS</td>
+<td>–</td>
+<td><strong>94 rute</strong> terdaftar (modul PUU)</td>
+</tr>
+<tr>
+<td>Fitur aksesibilitas</td>
+<td>0</td>
+<td><strong>19 fitur</strong></td>
+</tr>
+<tr>
+<td>Skenario pengujian</td>
+<td>–</td>
+<td><strong>39 skenario</strong> terdokumentasi (termasuk AC-01…AC-19)</td>
+</tr>
+<tr>
+<td>Endpoint API baru</td>
+<td>–</td>
+<td>4 (statistik ×3, video ×1)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="23-garis-waktu-per-tanggal">2.3 Garis waktu per tanggal</h2>
+<table>
+<thead>
+<tr>
+<th>Tanggal</th>
+<th>Peristiwa</th>
+<th>Hasil</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>30 Sep 2026</strong></td>
+<td>Mempelajari seluruh isi proyek; tanya apakah ada yang kurang dan apakah bisa berjalan; tanya isi folder <code>Database</code> dan apakah XAMPP dapat diunduh</td>
+<td>Pemahaman awal proyek</td>
+</tr>
+<tr>
+<td><strong>1 Okt 2026</strong></td>
+<td>Minta penjelasan tujuan &amp; manfaat website</td>
+<td><code>JDIH_Panduan_Lengkap</code> (MD/HTML/PDF)</td>
+</tr>
+<tr>
+<td><strong>5–6 Okt 2026</strong></td>
+<td>Instal XAMPP (PHP 8.2.12), buat database <code>pangan_jdihdb</code>, konfigurasi <code>.env</code>, jalankan di <code>localhost:8000</code>; penjelasan setiap folder</td>
+<td>Proyek berjalan lokal; <code>Penjelasan_Struktur_Folder_JDIH</code> (HTML/PDF)</td>
+</tr>
+<tr>
+<td><strong>8 Okt 2026</strong></td>
+<td>Gambar dari <code>Assets/public_html_img</code> disesuaikan; menu dan metadata disesuaikan; bar atas dan menu &quot;Jenis Dokumen&quot;; navbar mengikuti sitemap baru; aturan &quot;selalu dokumentasikan + PDF&quot;</td>
+<td>Navbar &amp; metadata awal</td>
+</tr>
+<tr>
+<td><strong>9 Okt 2026</strong></td>
+<td>Perapian menu bertumpuk, header saat scroll; perbandingan dengan website resmi (file hilang di <em>Anev PUU</em>); audit sistem &amp; gap analysis; PDF audit</td>
+<td><code>JDIH_SYSTEM_AUDIT_FULL</code> (MD/PDF), <code>OFFICIAL_VS_EXISTING</code>, dll.</td>
+</tr>
+<tr>
+<td><strong>10–13 Okt 2026</strong></td>
+<td>Dropdown menu bergaya jdihn.go.id; perbaikan submenu ganda; dropdown putih + mode gelap</td>
+<td>Navbar dropdown &amp; dark mode</td>
+</tr>
+<tr>
+<td><strong>14 Okt 2026</strong></td>
+<td>Logo JDIH dipindah ke pojok kiri; pelajari folder backup production</td>
+<td>Analisis backup</td>
+</tr>
+<tr>
+<td><strong>15 Okt 2026</strong></td>
+<td><strong>Swap database</strong> ke data production; sinkronisasi file; logo ganda diperbaiki; menu &quot;Beranda&quot;; tab login dihapus; submenu mengikuti gambar sitemap; bantuan login admin</td>
+<td><code>DATABASE_SWAP_PRODUCTION</code>, <code>UPDATE_NAVBAR_...</code>, <code>UPDATE_SITEMAP_...</code></td>
+</tr>
+<tr>
+<td><strong>18 Okt 2026</strong></td>
+<td>Cara menjalankan proyek</td>
+<td>Panduan run</td>
+</tr>
+<tr>
+<td><strong>19 Okt 2026</strong></td>
+<td><strong>Modul Dokumen Pembentukan PUU</strong>; perbaikan error saat simpan dokumen; alur data ke <code>/rancangan-puu</code></td>
+<td><code>PENGEMBANGAN_MODUL_DOKUMEN_PEMBENTUKAN_PUU</code></td>
+</tr>
+<tr>
+<td><strong>25 Okt 2026</strong></td>
+<td>Permintaan widget statistik di beranda (mirip jdih.kemenkum.go.id)</td>
+<td>Banner statistik beranda</td>
+</tr>
+<tr>
+<td><strong>26 Okt 2026</strong></td>
+<td>Master prompt Fitur 1 &amp; 2; aturan dokumentasi detail; widget aksesibilitas ×3 iterasi; dokumentasi lengkap ini</td>
+<td>Statistik, Klasifikasi Video, Accessibility Widget</td>
+</tr>
+</tbody>
+</table>
+<div class="pagebreak"></div>
+<h1 id="3-mengenal-jdih-dan-arsitektur-sistem">3. Mengenal JDIH dan Arsitektur Sistem</h1>
+<h2 id="31-apa-itu-jdih">3.1 Apa itu JDIH?</h2>
+<p><strong>JDIH = Jaringan Dokumentasi dan Informasi Hukum.</strong> Setiap kementerian/lembaga di Indonesia wajib menyediakan tempat resmi bagi masyarakat untuk membaca dan mengunduh produk hukumnya (Peraturan Menteri, Keputusan, Perpres, dsb.). JDIH Kemenko Pangan adalah &quot;perpustakaan hukum digital&quot; milik Kementerian Koordinator Bidang Pangan.</p>
+<p><strong>Analogi:</strong> bayangkan sebuah <strong>perpustakaan</strong>.</p>
+<ul>
+<li><em>Rak buku dan buku</em> = <strong>database</strong> (menyimpan dokumen).</li>
+<li><em>Ruang baca yang dilihat pengunjung</em> = <strong>website publik</strong> (frontend).</li>
+<li><em>Ruang pustakawan tempat menambah/mengubah buku</em> = <strong>CMS / Admin Panel</strong> (backend).</li>
+<li><em>Petugas yang mengambilkan buku sesuai permintaan</em> = <strong>Controller</strong> (kode PHP).</li>
+<li><em>Denah dan papan petunjuk</em> = <strong>menu / sitemap / routing</strong>.</li>
+</ul>
+<h2 id="32-teknologi-yang-digunakan">3.2 Teknologi yang digunakan</h2>
+<table>
+<thead>
+<tr>
+<th>Lapisan</th>
+<th>Teknologi</th>
+<th>Fungsi sederhana</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Bahasa &amp; framework</td>
+<td>PHP 8.2, Laravel 11</td>
+<td>Kerangka kerja yang mengatur aplikasi</td>
+</tr>
+<tr>
+<td>Database</td>
+<td>MySQL/MariaDB (<code>pangan_jdihdb</code>)</td>
+<td>Tempat menyimpan semua data</td>
+</tr>
+<tr>
+<td>Tampilan</td>
+<td>Blade (template) + SCSS → CSS lewat Vite</td>
+<td>Menyusun halaman HTML</td>
+</tr>
+<tr>
+<td>Interaksi</td>
+<td>jQuery + JavaScript</td>
+<td>Dropdown, AJAX, widget</td>
+</tr>
+<tr>
+<td>CMS</td>
+<td>&quot;Cactuar Admin&quot; (folder <code>cadmin/</code>)</td>
+<td>Panel admin bawaan proyek</td>
+</tr>
+<tr>
+<td>Grafik</td>
+<td>Chart.js</td>
+<td>Diagram statistik</td>
+</tr>
+<tr>
+<td>Ekspor gambar</td>
+<td>html2canvas</td>
+<td>Mengunduh grafik sebagai PNG</td>
+</tr>
+</tbody>
+</table>
+<h2 id="33-peta-folder-aplikasi-apa-isi-tiap-folder">3.3 Peta folder aplikasi (apa isi tiap folder)</h2>
+<table>
+<thead>
+<tr>
+<th>Folder</th>
+<th>Isi</th>
+<th>Analogi</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>app/Models/</code></td>
+<td>20+ model Eloquent (Document, Menu, Gallery, …)</td>
+<td>&quot;Kartu katalog&quot; yang mewakili tiap tabel</td>
+</tr>
+<tr>
+<td><code>app/Http/Controllers/Front/</code></td>
+<td>Pengendali halaman publik (PageController, DocumentController, StatisticController, …)</td>
+<td>Petugas layanan pengunjung</td>
+</tr>
+<tr>
+<td><code>app/Http/Controllers/Admin/</code></td>
+<td>Pengendali panel admin (termasuk <code>Puu/</code>)</td>
+<td>Petugas ruang pustakawan</td>
+</tr>
+<tr>
+<td><code>app/Helpers/</code></td>
+<td>Fungsi bantu (mis. <code>Document.php</code>)</td>
+<td>Alat bantu</td>
+</tr>
+<tr>
+<td><code>routes/web.php</code>, <code>routes/front.php</code></td>
+<td>Daftar alamat URL → fungsi</td>
+<td>Papan penunjuk jalan</td>
+</tr>
+<tr>
+<td><code>resources/views/dynamic/</code></td>
+<td>Template halaman publik (data dari database)</td>
+<td>Cetakan halaman</td>
+</tr>
+<tr>
+<td><code>resources/views/static/</code></td>
+<td>Template statis cadangan</td>
+<td>Cetakan cadangan</td>
+</tr>
+<tr>
+<td><code>resources/views/admin/</code></td>
+<td>Tampilan panel admin</td>
+<td>Formulir pustakawan</td>
+</tr>
+<tr>
+<td><code>resources/assets/sass</code>, <code>js</code></td>
+<td>Sumber gaya (SCSS) dan skrip</td>
+<td>Bahan baku desain</td>
+</tr>
+<tr>
+<td><code>database/migrations/</code></td>
+<td>Skrip pembuat/perubah tabel</td>
+<td>Cetak biru rak buku</td>
+</tr>
+<tr>
+<td><code>config/cadmin/menu.php</code></td>
+<td>Konfigurasi menu sidebar admin</td>
+<td>Daftar isi ruang admin</td>
+</tr>
+<tr>
+<td><code>cadmin/</code></td>
+<td>Inti CMS Cactuar</td>
+<td>Mesin panel admin</td>
+</tr>
+<tr>
+<td><code>public/</code></td>
+<td>File yang diakses browser (gambar, hasil build)</td>
+<td>Etalase</td>
+</tr>
+<tr>
+<td><code>storage/</code></td>
+<td>File unggahan, cache, log</td>
+<td>Gudang</td>
+</tr>
+</tbody>
+</table>
+<h2 id="34-cara-kerja-satu-halaman-alur-permintaan">3.4 Cara kerja satu halaman (alur permintaan)</h2>
+<pre><code class="language-mermaid-sederhana">Pengunjung membuka  /rancangan-puu
+        │
+        ▼
+routes/web.php  → mencocokkan alamat dengan tabel &quot;permalink&quot;
+        │
+        ▼
+Controller (DocumentController@getPuuDetail / PageController)
+        │  mengambil data dari database lewat Model
+        ▼
+Blade view (mis. document-rancangan-puu.blade.php)
+        │  menyusun HTML + gaya SCSS yang sudah di-build
+        ▼
+Browser menampilkan halaman kepada pengunjung
+</code></pre>
+<p><strong>Hal khas proyek ini — routing dinamis.</strong> Alamat sebagian halaman tidak ditulis satu-satu di kode, melainkan dibaca dari tabel <code>permalinks</code> di database. Kolom <code>module</code> pada permalink menentukan controller mana yang dipanggil (contoh: <code>module = 'puu-rancangan'</code> → halaman Rancangan PUU). Karena itu, <strong>menambah menu di admin otomatis menambah alamat di web</strong> — tetapi kode tampilan untuk modul tersebut tetap harus ada, dan itulah yang Anda tambahkan.</p>
+<h2 id="35-dua-jenis-pengguna-dual-guard">3.5 Dua jenis pengguna (dual guard)</h2>
+<table>
+<thead>
+<tr>
+<th>Guard</th>
+<th>Siapa</th>
+<th>Dipakai untuk</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>web</code></td>
+<td>Admin/pustakawan</td>
+<td>Login ke <code>/admin-panel</code></td>
+</tr>
+<tr>
+<td><code>account</code></td>
+<td>Anggota/pengguna publik</td>
+<td>Fitur akun di sisi publik</td>
+</tr>
+</tbody>
+</table>
+<h2 id="36-konsep-penting-master-document-dan-jenis-dokumen">3.6 Konsep penting: <em>master document</em> dan jenis dokumen</h2>
+<p>Semua dokumen disimpan di <strong>satu tabel <code>documents</code></strong>. Pembeda jenisnya adalah kolom <code>master_document_id</code>:</p>
+<table>
+<thead>
+<tr>
+<th>master_document_id</th>
+<th>Jenis</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Peraturan</td>
+</tr>
+<tr>
+<td>2–7</td>
+<td>Jurnal, Kliping, Majalah, Putusan, Monografi, dsb. (bawaan)</td>
+</tr>
+<tr>
+<td><strong>8–15</strong></td>
+<td><strong>Dokumen Pembentukan PUU (ditambahkan pada pengembangan ini)</strong></td>
+</tr>
+</tbody>
+</table>
+<p>Teks yang tergantung bahasa (judul, abstrak) disimpan di tabel pendamping <code>documents_lang</code>. Pola &quot;tabel utama + tabel <code>_lang</code>&quot; dipakai di seluruh sistem (<code>menus</code> + <code>menus_lang</code>, <code>galleries</code> + <code>galleries_lang</code>).</p>
+<div class="pagebreak"></div>
+<h1 id="4-tahap-1-penelaahan-awal-dan-menjalankan-proyek-di-komputer-lokal">4. Tahap 1 — Penelaahan Awal dan Menjalankan Proyek di Komputer Lokal</h1>
+<h2 id="41-latar-belakang-amp-permintaan-awal-30-september-6-oktober-2026">4.1 Latar Belakang &amp; Permintaan Awal (30 September – 6 Oktober 2026)</h2>
+<p>Pada awal penugasan, programmer menerima folder proyek berisi kode sumber Laravel, berkas database, dan folder cadangan. Permintaan yang muncul di tahap ini:</p>
+<ol>
+<li>Mempelajari struktur folder dan berkas untuk memastikan apakah aplikasi lengkap atau ada komponen yang kurang.</li>
+<li>Memeriksa isi folder <code>Database</code> dan apakah sistem dapat dijalankan tanpa terhubung ke internet.</li>
+<li>Mengunduh dan mengonfigurasi XAMPP untuk menjalankan web server Apache dan database MySQL di komputer lokal.</li>
+<li>Mengetahui tujuan, dasar hukum pembentukan, dan manfaat portal JDIH Kemenko Pangan bagi publik dan internal kementerian.</li>
+</ol>
+<h2 id="42-penjelasan-sederhana-membuka-kunci-perpustakaan">4.2 Penjelasan Sederhana: Membuka Kunci Perpustakaan</h2>
+<p>Ibarat menerima kiriman gedung perpustakaan dalam bentuk peti kemas, kita tidak bisa langsung membukanya untuk umum sebelum:</p>
+<ul>
+<li>Menyediakan pondasi dan listriknya (<strong>Apache &amp; PHP</strong>).</li>
+<li>Menyusun rak penyimpanan buku (<strong>MySQL Database</strong>).</li>
+<li>Menghubungkan kabel instalasi (<strong>file konfigurasi <code>.env</code></strong>).</li>
+<li>Memeriksa apakah katalog bukunya ada isinya atau masih kosong.</li>
+</ul>
+<h2 id="43-langkah-langkah-teknis-yang-dilakukan">4.3 Langkah-Langkah Teknis yang Dilakukan</h2>
+<h3 id="1-pemasangan-xampp-amp-penyesuaian-versi-php">1. Pemasangan XAMPP &amp; Penyesuaian Versi PHP</h3>
+<ul>
+<li>Paket yang digunakan: <strong>XAMPP Windows x64 versi 8.2.12</strong> yang terpasang di direktori:
+<pre><code>C:\xampp_update\
+</code></pre>
+</li>
+<li>Versi PHP aktif: <strong>PHP 8.2.12 (CLI / CGI)</strong>.
+<blockquote>
+<p><strong>Catatan Teknis Krusial:</strong> Pada komputer terdapat PHP bawaan sistem versi 7.4. Agar Laravel 11 dapat berjalan stabil dan tidak memicu error kompilasi Composer/artisan, seluruh eksekusi perintah terminal harus memanggil path absolut PHP 8.2:
+<code>C:\xampp_update\php\php.exe</code></p>
+</blockquote>
+</li>
+</ul>
+<h3 id="2-pembuatan-database-amp-konfigurasi-lingkungan-env">2. Pembuatan Database &amp; Konfigurasi Lingkungan (<code>.env</code>)</h3>
+<ul>
+<li>Melalui phpMyAdmin (<code>http://localhost/phpmyadmin</code>), dibuat database baru bernama:
+<pre><code class="language-sql">CREATE DATABASE pangan_jdihdb CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+</code></pre>
+</li>
+<li>File <code>.env</code> pada root aplikasi <code>Source Code/jdih-kemenko-pangan/</code> dikonfigurasikan:
+<pre><code class="language-ini">APP_NAME=&quot;JDIH Kemenko Pangan&quot;
+APP_ENV=local
+APP_KEY=base64:XGZq3p... (digenerate via artisan)
+APP_DEBUG=true
+APP_URL=http://localhost:8000
+
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=pangan_jdihdb
+DB_USERNAME=root
+DB_PASSWORD=
+</code></pre>
+</li>
+</ul>
+<h3 id="3-menjalankan-server-lokal">3. Menjalankan Server Lokal</h3>
+<p>Aplikasi dijalankan pada port lokal 8000:</p>
+<pre><code class="language-powershell">cd &quot;Source Code\jdih-kemenko-pangan&quot;
+C:\xampp_update\php\php.exe artisan serve --port=8000
+</code></pre>
+<p>Hasil: Portal publik dapat diakses melalui browser di <code>http://localhost:8000</code>.</p>
+<h3 id="4-dokumentasi-panduan-dan-struktur-folder">4. Dokumentasi Panduan dan Struktur Folder</h3>
+<p>Pada tahap ini dihasilkan dua dokumen panduan:</p>
+<ul>
+<li><code>JDIH_Panduan_Lengkap.md</code> &amp; <code>JDIH_Kemenko_Pangan_Panduan_Lengkap.pdf</code>: Menjelaskan filosofi JDIHN (Perpres 33/2012), visi misi Kemenko Pangan, dan manfaat transparansi regulasi pangan nasional.</li>
+<li><code>Penjelasan_Struktur_Folder_JDIH.html</code> &amp; <code>.pdf</code>: Panduan menyeluruh mengenai fungsi setiap folder (<code>app</code>, <code>bootstrap</code>, <code>cadmin</code>, <code>config</code>, <code>database</code>, <code>public</code>, <code>resources</code>, <code>routes</code>, <code>storage</code>).</li>
+</ul>
+<hr />
+<h1 id="5-tahap-2-audit-sistem-analisis-kesenjangan-gap-dan-rekonsiliasi-dokumen">5. Tahap 2 — Audit Sistem, Analisis Kesenjangan (Gap), dan Rekonsiliasi Dokumen</h1>
+<h2 id="51-latar-belakang-amp-masalah-file-kosong-8-9-oktober-2026">5.1 Latar Belakang &amp; Masalah File Kosong (8 – 9 Oktober 2026)</h2>
+<p>Saat menelusuri halaman web lokal seperti <code>http://localhost:8000/anev-puu</code>, programmer menemukan kejanggalan:</p>
+<ul>
+<li>Pada website resmi (<code>https://jdih.kemenkopangan.go.id/anev-puu</code>), dokumen dan tombol unduh PDF tersedia.</li>
+<li>Pada sistem lokal, halaman tersebut menampilkan pesan kosong (<em>Data tidak ditemukan</em>) atau tombol unduh menghasilkan error 404.</li>
+</ul>
+<p>Pertanyaan pengguna: <em>&quot;Kenapa di program ini tidak ada file akan tetapi di web resminya ada? Apakah bisa disesuaikan dengan website resmi?&quot;</em></p>
+<h2 id="52-penjelasan-sederhana-etalase-ada-barang-tertinggal-di-gudang">5.2 Penjelasan Sederhana: Etalase Ada, Barang Tertinggal di Gudang</h2>
+<p>Bayangkan sebuah toko cabang baru yang bangunannya sudah selesai dicat dan rak-raknya sudah dipasang, tetapi truk pengangkut barang dari toko pusat belum dibongkar. Akibatnya etalase tampak kosong. Database awal di lokal hanya berisi data uji coba (<em>dummy</em>) sebanyak 14 dokumen, sementara dokumen resmi di pusat sudah mencapai puluhan.</p>
+<h2 id="53-audit-mendalam-gap-analysis">5.3 Audit Mendalam (Gap Analysis)</h2>
+<p>Dilakukan inspeksi menyeluruh membandingkan sistem lokal dengan website resmi <code>https://jdih.kemenkopangan.go.id</code>:</p>
+<table>
+<thead>
+<tr>
+<th>Komponen Audit</th>
+<th>Kondisi Lokal Awal</th>
+<th>Kondisi Website Resmi (Live)</th>
+<th>Status Kesenjangan</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Jumlah Dokumen</strong></td>
+<td>14 dokumen (12 Peraturan, 2 Monografi)</td>
+<td>49+ dokumen aktif</td>
+<td><strong>Kritis (Data Tertinggal)</strong></td>
+</tr>
+<tr>
+<td><strong>Kategori Dokumen</strong></td>
+<td>Hanya Peraturan &amp; Monografi</td>
+<td>Peraturan, Monografi, Rancangan PUU, Anev PUU, Naskah Akademik</td>
+<td><strong>Hilang di lokal</strong></td>
+</tr>
+<tr>
+<td><strong>File PDF &amp; Abstrak</strong></td>
+<td>Hanya ada beberapa file uji coba</td>
+<td>Puluhan file PDF keputusan menteri &amp; peraturan</td>
+<td><strong>Fisik file belum disalin</strong></td>
+</tr>
+<tr>
+<td><strong>Berita &amp; Artikel</strong></td>
+<td>1 berita sampel</td>
+<td>16 berita resmi kegiatan kementerian</td>
+<td><strong>Perlu disinkronkan</strong></td>
+</tr>
+<tr>
+<td><strong>Galeri Dokumentasi</strong></td>
+<td>3 foto</td>
+<td>27 dokumentasi kegiatan</td>
+<td><strong>Perlu disinkronkan</strong></td>
+</tr>
+<tr>
+<td><strong>Banner &amp; Logo</strong></td>
+<td>Aset terpisah di folder <code>Assets/</code></td>
+<td>Tampil rapi di header dan banner</td>
+<td><strong>Path gambar belum diarahkan</strong></td>
+</tr>
+</tbody>
+</table>
+<h2 id="54-solusi-amp-dokumen-yang-dihasilkan">5.4 Solusi &amp; Dokumen yang Dihasilkan</h2>
+<p>Hasil audit dituangkan dalam laporan komprehensif:</p>
+<ol>
+<li><code>Dokumentasi_Update/JDIH_SYSTEM_AUDIT_FULL.md</code> dan <code>.pdf</code> (disusun dengan tipografi rapi, mudah dibaca untuk laporan pimpinan).</li>
+<li><code>Dokumentasi_Update/OFFICIAL_VS_EXISTING.md</code>: Matriks perbandingan per halaman URL.</li>
+<li><code>Dokumentasi_Update/DOCUMENT_RECONCILIATION.md</code>: Inventarisasi dokumen yang harus diambil dari arsip cadangan.</li>
+</ol>
+<hr />
+<h1 id="6-tahap-3-adaptasi-gambar-metadata-menu-dan-navbar-pertama">6. Tahap 3 — Adaptasi Gambar, Metadata Menu, dan Navbar Pertama</h1>
+<h2 id="61-latar-belakang-8-9-oktober-2026">6.1 Latar Belakang (8 – 9 Oktober 2026)</h2>
+<p>Pada tahap awal tampilan, beberapa permasalahan visual muncul:</p>
+<ol>
+<li>Banner beranda dan logo tidak muncul karena merujuk ke path hosting <code>public_html/img/...</code>.</li>
+<li>Tulisan menu bar atas saling bertumpuk saat resolusi layar menengah atau saat halaman di-scroll (floating header).</li>
+<li>Susunan menu belum mencerminkan identitas kementerian koordinator baru (Kemenko Pangan).</li>
+</ol>
+<h2 id="62-langkah-langkah-perbaikan">6.2 Langkah-Langkah Perbaikan</h2>
+<h3 id="1-sinkronisasi-aset-gambar">1. Sinkronisasi Aset Gambar</h3>
+<p>Gambar dari folder <code>Assets/public_html_img/</code> disalin dan dipetakan ke dalam direktori publik aplikasi:</p>
+<pre><code>Source Code/jdih-kemenko-pangan/public/images/material/
+</code></pre>
+<p>Termasuk penyesuaian logo garuda, logo JDIH, bendera bahasa ID/EN, dan latar belakang header.</p>
+<h3 id="2-penyesuaian-ketinggian-dan-layout-kosong-generalscss">2. Penyesuaian Ketinggian dan Layout Kosong (<code>general.scss</code>)</h3>
+<p>Saat membuka menu yang belum ada datanya, footer melonjak ke atas menutupi layar tengah. Diperbaiki dengan menetapkan batas minimum tinggi area konten tengah:</p>
+<pre><code class="language-scss">// resources/assets/sass/pages/general.scss
+.middle {
+  min-height: 70vh; // Menjaga footer tetap di dasar layar saat data kosong
+}
+.middle:not(.banner-middle + .middle) {
+  padding-top: 190px; // Memberi ruang aman di bawah fixed header
+  .middle__search {
+    margin-top: 0;
+    padding: 32px 32px 24px;
+    box-shadow: 0 4px 24px 0 rgba(0, 0, 0, 0.06);
+  }
+}
+</code></pre>
+<h3 id="3-penataan-metadata-menu-awal">3. Penataan Metadata Menu Awal</h3>
+<p>Dibuat skrip SQL untuk merapikan nama menu pada tabel <code>menus_lang</code>:</p>
+<ul>
+<li>Mengubah istilah <em>&quot;Dokumen Hukum&quot;</em> menjadi <em>&quot;Jenis Dokumen&quot;</em>.</li>
+<li>Mengaktifkan label submenu awal dan memetakan permalink yang valid.</li>
+</ul>
+<div class="pagebreak"></div>
+<h1 id="7-tahap-4-penukaran-database-dengan-data-production-15-oktober-2026">7. Tahap 4 — Penukaran Database dengan Data Production (15 Oktober 2026)</h1>
+<h2 id="71-latar-belakang-amp-persetujuan-pengguna">7.1 Latar Belakang &amp; Persetujuan Pengguna</h2>
+<p>Setelah hasil audit menunjukkan bahwa database lokal tertinggal puluhan dokumen dari website resmi, pengguna menemukan adanya folder cadangan cPanel server produksi bernama:</p>
+<pre><code>backup-9.30.2026_08-25-36_pangan/
+</code></pre>
+<p>Pengguna mengajukan pertanyaan: <em>&quot;Apakah database nya bisa diambil alih atau ditukar dari yang awalnya di database lama diambil ke folder sekarang backup-9.30.2026_08-25-36_pangan?&quot;</em>
+Setelah dijelaskan risikonya dan disiapkan skema cadangan darurat, pengguna memberikan konfirmasi tegas: <em>&quot;Saya setuju untuk langsung jalankan proses penukaran database dan sinkronisasi file PDF ini sekarang, dengan tetap didokumentasikan hal-hal yang diupdate-nya.&quot;</em></p>
+<h2 id="72-penjelasan-sederhana-memindahkan-isi-perpustakaan-pusat-ke-cabang">7.2 Penjelasan Sederhana: Memindahkan Isi Perpustakaan Pusat ke Cabang</h2>
+<p>Alih-alih mengetik ulang satu per satu 49 dokumen dan mengunggah ulang puluhan berkas PDF dari awal, kita langsung menyalin seluruh rak buku dan seluruh berkas fisik dari gudang cadangan pusat (<em>cPanel backup</em>) ke komputer lokal. Hasilnya, komputer lokal memiliki isi data yang 100% persis dengan website resmi yang sedang aktif di internet.</p>
+<h2 id="73-prosedur-eksekusi-penukaran-database">7.3 Prosedur Eksekusi Penukaran Database</h2>
+<p>Pekerjaan dilakukan dengan prinsip kehati-hatian (<em>safety first</em>) melalui 7 langkah:</p>
+<pre><code>[1. Dump DB Lokal Lama] ──&gt; [2. Import SQL Production] ──&gt; [3. Ekstrak PDF Publik]
+                                                                   │
+[6. Bersihkan Cache]   &lt;── [5. Sinkron Gambar Media]   &lt;── [4. Ekstrak Storage Upload]
+        │
+        ▼
+[7. Uji Verifikasi HTTP 200]
+</code></pre>
+<h3 id="langkah-1-pencadangan-database-lokal-lama-rollback-point">Langkah 1 — Pencadangan Database Lokal Lama (Rollback Point)</h3>
+<p>Sebelum menyentuh database aktif, dibuat snapshot cadangan lengkap:</p>
+<pre><code class="language-powershell">mysqldump -u root pangan_jdihdb &gt; &quot;Database\pangan_jdihdb_backup_sebelum_swap_2026-10-15.sql&quot;
+</code></pre>
+<h3 id="langkah-2-impor-dump-database-production">Langkah 2 — Impor Dump Database Production</h3>
+<p>Mengimpor dump SQL resmi dari folder cadangan cPanel:</p>
+<pre><code>backup-9.30.2026_08-25-36_pangan/mysql/pangan_jdihdb.sql
+</code></pre>
+<p>ke database lokal <code>pangan_jdihdb</code> menggunakan MySQL client. Proses selesai tanpa error sintaks.</p>
+<h3 id="langkah-3-ekstraksi-file-publik-publicassetssourcefiles">Langkah 3 — Ekstraksi File Publik (<code>public/assets/source/files/</code>)</h3>
+<p>Mengekstrak direktori berkas publik dari arsip <code>jdih.zip</code> ke folder publik lokal:</p>
+<ul>
+<li>Menghasilkan 38 file dokumen (29 berkas PDF resmi).</li>
+<li>Struktur subfolder yang terbentuk: <code>abstrak/</code>, <code>anev/</code>, <code>dokumen-peraturan/</code>, <code>kajian-hukum-hasil-penelitian-hukum/</code>, <code>landasan-hukum/</code>, <code>naskah-urgensiakademik/</code>, <code>rancangan-puu/</code>.</li>
+</ul>
+<h3 id="langkah-4-ekstraksi-file-storage-unggahan-storageappupload">Langkah 4 — Ekstraksi File Storage Unggahan (<code>storage/app/upload/</code>)</h3>
+<p>Mengekstrak folder unggahan dokumen dari arsip sistem ke direktori penyimpanan privat Laravel:</p>
+<ul>
+<li>Berisi 79 file dokumen yang terbagi ke subfolder <code>upload/pdf/</code> dan <code>upload/abstract/</code>.</li>
+<li>File-file ini dibaca oleh Laravel melalui disk <code>storage/app</code> saat masyarakat menekan tombol unduh.</li>
+</ul>
+<h3 id="langkah-5-sinkronisasi-gambar-cms-publicassetssourceimages">Langkah 5 — Sinkronisasi Gambar CMS (<code>public/assets/source/images/</code>)</h3>
+<p>Menyalin 45 file gambar berita, dokumentasi galeri, dan banner infografis menggunakan utilitas <code>robocopy</code> untuk menghindari kendala batas panjang path Windows (<em>Windows Max Path Limit</em>).</p>
+<h3 id="langkah-6-pembersihan-cache-sistem">Langkah 6 — Pembersihan Cache Sistem</h3>
+<p>Menghapus seluruh cache kompilasi view, route, dan config agar Laravel membaca skema database baru:</p>
+<pre><code class="language-powershell">C:\xampp_update\php\php.exe artisan optimize:clear
+</code></pre>
+<h3 id="langkah-7-verifikasi-integritas-data">Langkah 7 — Verifikasi Integritas Data</h3>
+<p>Pemeriksaan koneksi HTTP menghasilkan status <strong>200 OK</strong> untuk halaman beranda dan seluruh tautan unduh PDF.</p>
+<h2 id="74-hasil-perbandingan-sebelum-vs-sesudah-swap">7.4 Hasil Perbandingan Sebelum vs Sesudah Swap</h2>
+<table>
+<thead>
+<tr>
+<th>Data Entitas</th>
+<th align="right">Sebelum Swap (Lokal Lama)</th>
+<th align="right">Sesudah Swap (Data Production)</th>
+<th>Kenaikan / Dampak</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Dokumen Hukum (<code>documents</code>)</strong></td>
+<td align="right">14</td>
+<td align="right"><strong>49</strong></td>
+<td><strong>+35 dokumen resmi baru</strong></td>
+</tr>
+<tr>
+<td><strong>Berita Kegiatan (<code>news</code>)</strong></td>
+<td align="right">1</td>
+<td align="right"><strong>16</strong></td>
+<td><strong>+15 artikel berita riil</strong></td>
+</tr>
+<tr>
+<td><strong>Galeri Foto/Video (<code>galleries</code>)</strong></td>
+<td align="right">3</td>
+<td align="right"><strong>27</strong></td>
+<td><strong>+24 album dokumentasi</strong></td>
+</tr>
+<tr>
+<td><strong>Infografis (<code>infografis</code>)</strong></td>
+<td align="right">1</td>
+<td align="right"><strong>9</strong></td>
+<td><strong>+8 infografis edukasi hukum</strong></td>
+</tr>
+<tr>
+<td><strong>Struktur Menu (<code>menus</code>)</strong></td>
+<td align="right">37 (banyak dummy)</td>
+<td align="right"><strong>32 (struktur bersih)</strong></td>
+<td>Menu sampah tereliminasi</td>
+</tr>
+<tr>
+<td><strong>Akun Pengguna (<code>users</code>)</strong></td>
+<td align="right">3 user lokal</td>
+<td align="right"><strong>3 user resmi production</strong></td>
+<td>Kredensial mengikuti data pusat</td>
+</tr>
+</tbody>
+</table>
+<h2 id="75-temuan-khusus-5-berkas-yang-belum-tersedia-di-cadangan">7.5 Temuan Khusus: 5 Berkas yang Belum Tersedia di Cadangan</h2>
+<p>Dari total 84 referensi dokumen di database, 79 berkas fisik berhasil ditemukan dan aktif. Terdapat 5 berkas fisik milik dokumen ID 58, 59, 60, dan 61 yang tercatat di database namun berkas PDF-nya belum ada di arsip ZIP (diduga diunggah operator setelah tanggal pencadangan dibuat):</p>
+<ol>
+<li><code>upload/pdf/Peraturanperancangsatu2906_signed.pdf</code> (ID 58)</li>
+<li><code>upload/abstract/2026abspermenko002.pdf</code> (ID 58)</li>
+<li><code>upload/pdf/Permenko Pangan 3 Tahun 2026.pdf</code> (ID 59)</li>
+<li><code>upload/pdf/Permenko Pangan Nomor 4 Tahun 2026 tentang Keterlibatan Tim Terpadu.pdf</code> (ID 60)</li>
+<li><code>upload/pdf/2026permenko005.pdf</code> (ID 61)</li>
+</ol>
+<hr />
+<h1 id="8-tahap-5-perapian-header-logo-menu-quotberandaquot-dan-penghapusan-tab-login">8. Tahap 5 — Perapian Header, Logo, Menu &quot;Beranda&quot;, dan Penghapusan Tab Login</h1>
+<h2 id="81-permintaan-pengguna-15-oktober-2026">8.1 Permintaan Pengguna (15 Oktober 2026)</h2>
+<ol>
+<li><em>&quot;Logo JDIH yang double tolong diperbaiki.&quot;</em></li>
+<li><em>&quot;Menu bar nya tambahkan 'Beranda' sebelah menu 'Tentang Kami'.&quot;</em></li>
+<li><em>&quot;Tab login sebelah kanan bisa dihilangkan.&quot;</em></li>
+</ol>
+<h2 id="82-masalah-1-logo-ganda-double-logo">8.2 Masalah 1: Logo Ganda (Double Logo)</h2>
+<h3 id="penyebab">Penyebab</h3>
+<p>Header web dirancang dinamis dengan dua varian logo:</p>
+<ul>
+<li>Logo Putih (<code>&lt;img class=&quot;white&quot;&gt;</code>): Ditampilkan saat latar belakang header transparan (di atas hero banner).</li>
+<li>Logo Hitam (<code>&lt;img class=&quot;black&quot;&gt;</code>): Ditampilkan saat pengguna menggulir layar ke bawah (<em>floating header</em>) dan latar belakang berubah menjadi putih solid.</li>
+</ul>
+<p>Sebelumnya, terdapat aturan CSS inline yang menetapkan kedua gambar memiliki properti <code>display: block !important</code>. Akibatnya, kedua logo muncul berdampingan sekaligus (tampak seperti logo kembar yang rusak).</p>
+<h3 id="solusi-kode-yang-diterapkan">Solusi Kode yang Diterapkan</h3>
+<p>Diperbaiki pada <code>resources/assets/sass/component/_layout.scss</code> serta komponen Blade <code>dynamic/component/menu.blade.php</code>:</p>
+<pre><code class="language-scss">// Logika Varian Logo Header JDIH
+header {
+  // Kondisi 1: Header Normal / Transparan
+  .header-wrap:not(.floating) {
+    .logo-header {
+      img.white { display: block !important; }
+      img.black { display: none !important; }
+    }
+  }
+
+  // Kondisi 2: Header Floating / Scroll (Latar Putih)
+  .header-wrap.floating {
+    .logo-header {
+      img.white { display: none !important; }
+      img.black { display: block !important; }
+    }
+  }
+}
+
+// Kondisi 3: Dark Mode Aktif (Selalu gunakan logo putih)
+[data-theme=&quot;dark&quot;] header {
+  .logo-header {
+    img.white { display: block !important; }
+    img.black { display: none !important; }
+  }
+}
+</code></pre>
+<h2 id="83-masalah-2-menambahkan-menu-quotberandaquot-di-paling-awal">8.3 Masalah 2: Menambahkan Menu &quot;Beranda&quot; di Paling Awal</h2>
+<h3 id="penjelasan-masalah">Penjelasan Masalah</h3>
+<p>Pada CMS Cactuar, menu Beranda (ID: 1, Type: <code>home</code>) ada di database namun posisinya belum dikaitkan ke grup navigasi utama (<code>position: 'main'</code>) pada tabel relasi <code>relateds</code>. Akibatnya menu utama langsung dimulai dari &quot;Tentang Kami&quot;.</p>
+<h3 id="solusi-database-amp-tampilan">Solusi Database &amp; Tampilan</h3>
+<ol>
+<li>Menghubungkan menu Beranda ke navigasi utama dengan nomor urut 1:
+<pre><code class="language-sql">INSERT INTO relateds (uniqid, module, related, related_uniqid, created_at, updated_at) 
+VALUES (1, 'menu', 'position', 'main', NOW(), NOW());
+</code></pre>
+</li>
+<li>Memperbarui <code>menu.blade.php</code> agar menandai menu Beranda sebagai aktif saat pengguna berada di halaman utama (<code>/</code> atau <code>route('home')</code>).</li>
+</ol>
+<h2 id="84-masalah-3-menghilangkan-tab-login-dari-tampilan-publik">8.4 Masalah 3: Menghilangkan Tab Login dari Tampilan Publik</h2>
+<h3 id="alasan-kebijakan">Alasan Kebijakan</h3>
+<p>Website JDIH adalah portal informasi publik yang dapat diakses oleh seluruh masyarakat tanpa perlu membuat akun atau login. Panel admin dikelola secara terpisah melalui alamat rahasia <code>/admin-panel</code>. Tombol login di header publik membingungkan masyarakat umum karena mereka mengira harus mendaftar terlebih dahulu untuk membaca peraturan.</p>
+<h3 id="solusi-kode">Solusi Kode</h3>
+<ol>
+<li>Menghapus blok HTML <code>.right-header__login</code> dari header desktop dan drawer navigasi mobile.</li>
+<li>Memasang pengaman CSS defensif:
+<pre><code class="language-css">header .right-header__login {
+  display: none !important;
+}
+</code></pre>
+</li>
+<li>Mempertahankan dua fitur penting di sebelah kanan header:
+<ul>
+<li><strong>Tombol Alih Mode Gelap/Terang (Dark/Light Mode Toggle)</strong>.</li>
+<li><strong>Pemilih Bahasa (Language Selector ID / EN)</strong>.</li>
+</ul>
+</li>
+</ol>
+<hr />
+<h1 id="9-tahap-6-dropdown-menu-ala-jdihn-mode-gelap-dan-restrukturisasi-sitemap">9. Tahap 6 — Dropdown Menu ala JDIHN, Mode Gelap, dan Restrukturisasi Sitemap</h1>
+<h2 id="91-latar-belakang-amp-permintaan-desain-10-15-oktober-2026">9.1 Latar Belakang &amp; Permintaan Desain (10 – 15 Oktober 2026)</h2>
+<p>Pengguna menyampaikan referensi gambar dari portal nasional <code>https://jdihn.go.id/</code> dan meminta:</p>
+<ol>
+<li><em>&quot;Tolong buatkan menu bar atas nya saat mau diklik keluar dropdown dengan isi submenu dari menu bar nya seperti pada web jdihn.go.id.&quot;</em></li>
+<li><em>&quot;Warna dan desain dropdown nya buat menjadi warna putih, akan tetapi di dalam web nya buat menjadi ada dark mode nya juga.&quot;</em></li>
+<li><em>&quot;Pindahkan logo JDIH nya menjadi di pojok kiri.&quot;</em></li>
+<li><em>&quot;Isi menu bar (submenu) disesuaikan dengan diagram hierarki baru.&quot;</em></li>
+</ol>
+<h2 id="92-struktur-navigasi-baru-sitemap-standar-kementerian">9.2 Struktur Navigasi Baru (Sitemap Standar Kementerian)</h2>
+<p>Diterapkan susunan 6 menu utama dengan hierarki dropdown mega menu:</p>
+<pre><code>[1] Beranda (Home)
+[2] Tentang Kami
+    ├── Visi Misi
+    ├── Dasar Hukum
+    ├── Struktur Organisasi
+    ├── SOP
+    └── Statistik
+[3] Jenis Dokumen
+    ├── Peraturan
+    ├── Monografi
+    ├── Artikel/Majalah Hukum
+    ├── Peraturan Terjemahan (Baru)
+    ├── Naskah Kerja Sama
+    └── Putusan
+[4] Dokumen Pembentukan PUU
+    ├── Program Penyusunan PUU (Baru)
+    ├── Rancangan PUU
+    ├── Naskah Urgensi / Akademik
+    ├── Analisis Evaluasi PUU
+    ├── Risalah Pembahasan
+    ├── Kajian Hukum
+    └── Partisipasi Publik
+[5] Informasi
+    ├── Berita
+    ├── Gallery [Badge: Foto dan Video]
+    ├── Aksesibilitas (Baru) [Badge: Videografis]
+    └── Infografis
+[6] Kontak
+</code></pre>
+<h2 id="93-implementasi-teknis-dropdown-jdihn-amp-dark-mode">9.3 Implementasi Teknis Dropdown JDIHN &amp; Dark Mode</h2>
+<h3 id="1-desain-dropdown-putih-bersih-light-mode-amp-elegan-dark-mode">1. Desain Dropdown Putih Bersih (Light Mode) &amp; Elegan (Dark Mode)</h3>
+<p>Dropdown dirancang dengan latar belakang putih bersih (<code>#ffffff</code>), bayangan halus (<em>soft elevation box-shadow</em>), dan kartu item yang memiliki ikon SVG serta deskripsi singkat:</p>
+<pre><code class="language-scss">// Dropdown Menu Card Styling
+.dropdown-menu-custom {
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+
+  .dropdown-item-custom {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 12px 16px;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+
+    &amp;:hover {
+      background: #f4f6fa;
+      transform: translateX(4px);
+    }
+  }
+}
+
+// Adaptasi Mode Gelap
+[data-theme=&quot;dark&quot;] .dropdown-menu-custom {
+  background: #1e293b;
+  border-color: #334155;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+
+  .dropdown-item-custom:hover {
+    background: #334155;
+  }
+  .dropdown-item-title { color: #f8fafc; }
+  .dropdown-item-desc { color: #94a3b8; }
+}
+</code></pre>
+<h3 id="2-penanganan-interaksi-keyboard-amp-klik-luar-headerjs">2. Penanganan Interaksi Keyboard &amp; Klik Luar (<code>header.js</code>)</h3>
+<p>Menambahkan fungsi penutup otomatis saat pengguna menekan tombol <strong>Escape</strong> atau mengklik di luar area menu:</p>
+<pre><code class="language-javascript">// resources/assets/js/libs/header.js
+$(document).on('keydown', function (e) {
+  if (e.key === 'Escape' || e.keyCode === 27) {
+    $('.have-child').removeClass('is-open');
+  }
+});
+</code></pre>
+<h3 id="3-pemindahan-logo-jdih-ke-pojok-kiri">3. Pemindahan Logo JDIH ke Pojok Kiri</h3>
+<p>Pada layout utama (<code>layout.blade.php</code>), container navigasi ditata ulang menggunakan CSS Grid/Flexbox sehingga blok logo menempel rapi di tepi kiri layar dan kelompok menu bar berada di area tengah-kanan.</p>
+<div class="pagebreak"></div>
+<h1 id="10-tahap-7-modul-dokumen-pembentukan-puu-cms-dan-halaman-publik">10. Tahap 7 — Modul Dokumen Pembentukan PUU (CMS dan Halaman Publik)</h1>
+<h2 id="101-latar-belakang-amp-master-prompt-19-oktober-2026">10.1 Latar Belakang &amp; Master Prompt (19 Oktober 2026)</h2>
+<p>Pengguna memberikan arahan besar melalui Master Prompt pengembangan:</p>
+<ul>
+<li>Melanjutkan pengembangan website resmi <code>https://jdih.kemenkopangan.go.id</code>.</li>
+<li>Mempelajari struktur <code>http://localhost:8000/admin-panel/master-document-list</code>.</li>
+<li>Mengembangkan modul baru pada CMS: <strong>Dokumen Pembentukan PUU (Peraturan Perundang-undangan)</strong>.</li>
+<li>Menjaga seluruh fitur lama tetap berjalan tanpa ada data yang rusak atau hilang.</li>
+<li>Menyediakan 7 sub-modul lengkap dengan CRUD, metadata, pengunggahan berkas, dan sistem partisipasi masyarakat.</li>
+</ul>
+<h2 id="102-penjelasan-sederhana-meja-kerja-pembuatan-regulasi">10.2 Penjelasan Sederhana: Meja Kerja Pembuatan Regulasi</h2>
+<p>Jika portal JDIH sebelumnya hanya menampilkan peraturan yang <em>sudah jadi dan sah</em> (seperti memajang undang-undang yang sudah dicetak), modul Dokumen Pembentukan PUU berfungsi sebagai <strong>dapur transparansi pembuatan regulasi</strong>. Masyarakat dapat melihat rancangan aturan yang sedang digodok pemerintah, membaca risalah pertemuannya, mengunduh naskah akademiknya, dan bahkan mengirimkan kritik serta saran sebelum aturan tersebut disahkan oleh menteri.</p>
+<h2 id="103-arsitektur-master-document-amp-7-sub-modul-puu">10.3 Arsitektur Master Document &amp; 7 Sub-Modul PUU</h2>
+<p>Pada CMS Cactuar Admin, seluruh jenis dokumen bermuara pada tabel utama <code>documents</code> dengan pembeda kolom <code>master_document_id</code>. Untuk mendukung modul pembentukan PUU, dialokasikan ID master dokumen resmi:</p>
+<table>
+<thead>
+<tr>
+<th>No</th>
+<th>Sub-Modul</th>
+<th align="center">Master Doc ID</th>
+<th>Fungsi &amp; Metadata Kunci</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><strong>Program Penyusunan PUU</strong></td>
+<td align="center"><strong>9</strong></td>
+<td>Rencana legislasi tahunan kementerian, nomor program, unit pemrakarsa, periode perencanaan regulasi.</td>
+</tr>
+<tr>
+<td>2</td>
+<td><strong>Naskah Urgensi / Akademik</strong></td>
+<td align="center"><strong>10</strong></td>
+<td>Latar belakang ilmiah, kajian filosofis, sosiologis, dan yuridis rancangan peraturan, rekomendasi akademisi.</td>
+</tr>
+<tr>
+<td>3</td>
+<td><strong>Rancangan PUU</strong></td>
+<td align="center"><strong>15</strong></td>
+<td>Draf rancangan permenko/perpres, tahapan penyusunan (9 tahapan proyek), status harmonisasi Kemenkumham.</td>
+</tr>
+<tr>
+<td>4</td>
+<td><strong>Risalah Pembahasan</strong></td>
+<td align="center"><strong>12</strong></td>
+<td>Notula rapat pembahasan antar-kementerian, daftar hadir peserta rapat, matriks kesepakatan pasal per pasal.</td>
+</tr>
+<tr>
+<td>5</td>
+<td><strong>Analisis &amp; Evaluasi PUU</strong></td>
+<td align="center"><strong>11</strong></td>
+<td>Laporan peninjauan berkala efektivitas peraturan yang telah berjalan (rekomendasi: diubah, dicabut, dipertahankan).</td>
+</tr>
+<tr>
+<td>6</td>
+<td><strong>Kajian Hukum</strong></td>
+<td align="center"><strong>13</strong></td>
+<td>Hasil penelitian dan telaah hukum strategis mengenai isu pangan nasional oleh tim ahli hukum.</td>
+</tr>
+<tr>
+<td>7</td>
+<td><strong>Partisipasi Publik</strong></td>
+<td align="center"><strong>14</strong></td>
+<td>Konsultasi publik terbuka, tanggal buka/tutup masukan, pengumpulan formulir aspirasi masyarakat, rekapitulasi masukan.</td>
+</tr>
+</tbody>
+</table>
+<p><em>(Catatan: ID <strong>8</strong> disiapkan untuk <strong>Peraturan Terjemahan</strong>).</em></p>
+<h2 id="104-pembaruan-skema-database-2-migrasi-baru">10.4 Pembaruan Skema Database (2 Migrasi Baru)</h2>
+<h3 id="migrasi-1-tabel-masukan-masyarakat-public-consultation-feedbacks">Migrasi 1: Tabel Masukan Masyarakat (<code>public_consultation_feedbacks</code>)</h3>
+<p>Dibuat melalui file migrasi:
+<code>database/migrations/2026_10_19_000001_create_public_consultation_feedbacks_table.php</code>
+Struktur kolom yang menampung partisipasi masyarakat:</p>
+<ul>
+<li><code>id</code>: Primary key.</li>
+<li><code>document_id</code>: Relasi ke dokumen rancangan PUU terkait (<code>documents.id</code>).</li>
+<li><code>name</code>, <code>email</code>, <code>phone</code>: Identitas lengkap pengirim aspirasi.</li>
+<li><code>institution</code>, <code>profession</code>, <code>city</code>: Asal organisasi/kampus dan domisili.</li>
+<li><code>feedback</code>: Isi pokok pikiran/masukan masyarakat terhadap draf aturan.</li>
+<li><code>file_attachment</code>: Berkas PDF/DOC pendukung yang dilampirkan pengirim.</li>
+<li><code>status</code>: Status telaah tim internal (<code>pending</code>, <code>reviewed</code>, <code>approved</code>, <code>rejected</code>).</li>
+<li><code>notes</code>: Catatan disposisi telaah oleh tim hukum kementerian.</li>
+<li><code>ip_address</code> &amp; <code>user_agent</code>: Pencatatan jejak audit pengirim demi keamanan.</li>
+</ul>
+<h3 id="migrasi-2-kolom-tambahan-metadata-pada-documents-amp-documents-lang">Migrasi 2: Kolom Tambahan Metadata pada <code>documents</code> &amp; <code>documents_lang</code></h3>
+<p>Dibuat melalui file migrasi:
+<code>database/migrations/2026_10_19_000002_add_puu_master_documents_and_columns.php</code></p>
+<ul>
+<li>Pada tabel <code>documents</code>:
+<ul>
+<li><code>related_document_id</code>: Relasi tautan antar-dokumen (misal: Risalah Pembahasan merujuk ke draf Rancangan PUU-nya).</li>
+<li><code>tahapan_puu_id</code>: Menghubungkan draf ke 9 tahapan resmi proses pembentukan peraturan (pada tabel <code>status_projects</code>).</li>
+<li><code>tanggal_mulai</code> &amp; <code>tanggal_selesai</code>: Masa berlaku konsultasi publik.</li>
+<li><code>status_konsultasi</code>: Indikator status (<code>Dibuka</code>, <code>Ditutup</code>, <code>Menunggu</code>).</li>
+<li><code>status_harmonisasi</code>: Status proses harmonisasi di Kemenkumham (<code>Belum</code>, <code>Proses</code>, <code>Selesai</code>).</li>
+<li><code>periode_perencanaan</code>: Rentang waktu program (misal: <code>2025-2029</code>).</li>
+<li><code>periode_evaluasi</code>: Periode audit hukum (misal: <code>Semester I 2025</code>).</li>
+</ul>
+</li>
+<li>Pada tabel <code>documents_lang</code>:
+<ul>
+<li><code>unit_pemrakarsa</code>, <code>rekomendasi</code>, <code>metode_evaluasi</code>, <code>kesimpulan</code>, <code>panduan_masukan</code>.</li>
+</ul>
+</li>
+</ul>
+<h2 id="105-implementasi-7-controller-admin-cms">10.5 Implementasi 7 Controller Admin CMS</h2>
+<p>Seluruh controller admin dibangun di dalam direktori:</p>
+<pre><code>app/Http/Controllers/Admin/Puu/
+├── ProgramPenyusunanController.php
+├── NaskahUrgensiController.php
+├── RancanganPuuController.php
+├── RisalahPembahasanController.php
+├── AnalisisEvaluasiController.php
+├── KajianHukumController.php
+└── PartisipasiPublikController.php
+</code></pre>
+<h3 id="fitur-khusus-moderasi-masukan-publik-partisipasipublikcontroller">Fitur Khusus: Moderasi Masukan Publik (<code>PartisipasiPublikController</code>)</h3>
+<p>Pada sub-modul Partisipasi Publik, admin memiliki panel khusus untuk memoderasi aspirasi masyarakat:</p>
+<ol>
+<li><strong>Daftar Masukan Masuk</strong>: Halaman <code>/admin-panel/puu-partisipasi-publik/feedback?unique={id}</code> menampilkan daftar aspirasi masyarakat lengkap dengan indikator status.</li>
+<li><strong>Detail Masukan &amp; Berkas</strong>: Halaman <code>/admin-panel/puu-partisipasi-publik/feedback-detail?unique={id}</code> memungkinkan staf hukum membaca telaah lengkap serta mengunduh berkas lampiran pendukung.</li>
+<li><strong>Pembaruan Status &amp; Catatan Telaah</strong>: Staf hukum dapat mengubah status dari <code>pending</code> menjadi <code>approved</code> / <code>rejected</code> serta membubuhkan catatan pertimbangan tim hukum.</li>
+</ol>
+<h2 id="106-konfigurasi-sidebar-amp-hak-akses-94-rute-admin">10.6 Konfigurasi Sidebar &amp; Hak Akses (94 Rute Admin)</h2>
+<p>Menu induk <code>'puu'</code> didaftarkan pada <code>config/cadmin/menu.php</code> dengan ikon <code>fa-balance-scale</code>. Seluruh hak akses (<code>index</code>, <code>create</code>, <code>edit</code>, <code>delete</code>, <code>publish</code>, <code>download</code>, <code>feedback</code>, <code>feedback-detail</code>, <code>feedback-status</code>) disinkronkan ke tabel <code>module_privileges</code> untuk role Admin (<code>privilege_id = 1</code>). Total terdapat <strong>94 rute admin aktif</strong> di bawah grup <code>admin-panel/puu-*</code>.</p>
+<h2 id="107-alur-data-saat-dokumen-dibuat-di-admin-masuk-kemana-dan-muncul-dimana">10.7 Alur Data: Saat Dokumen Dibuat di Admin, Masuk Kemana dan Muncul Dimana?</h2>
+<p>Pertanyaan penting dari pengguna: <em>&quot;Setelah berhasil dibuat, data masuk kemana? Dan apakah bisa muncul di dalam web (<a href="http://localhost:8000/rancangan-puu">http://localhost:8000/rancangan-puu</a>)?&quot;</em></p>
+<h3 id="a-alur-penyimpanan-di-database-amp-server">A. Alur Penyimpanan di Database &amp; Server</h3>
+<p>Saat admin menekan tombol <strong>Simpan</strong> pada form CMS:</p>
+<ol>
+<li><strong>Tabel <code>documents</code></strong>: Menyimpan entitas utama (<code>master_document_id = 15</code>, tahun, nomor, relasi tahapan PUU, path file <code>upload/pdf/...</code>, status aktif <code>is_active = 1</code>).</li>
+<li><strong>Tabel <code>documents_lang</code></strong>: Menyimpan judul, ringkasan, dan teks abstrak untuk bahasa Indonesia (<code>lang = 'id'</code>) dan Inggris (<code>lang = 'en'</code>).</li>
+<li><strong>Tabel <code>permalinks</code></strong>: CMS secara otomatis menciptakan URL slug yang ramah mesin pencari (<em>SEO-friendly</em>), contoh: <code>rancangan-permenko-tentang-swasembada-pangan</code>.</li>
+<li><strong>Folder Fisik Server (<code>storage/app/upload/pdf/</code>)</strong>: Berkas PDF tersimpan aman di server dan siap disajikan melalui rute unduh resmi.</li>
+</ol>
+<h3 id="b-alur-penayangan-di-web-publik-rancangan-puu">B. Alur Penayangan di Web Publik (<code>/rancangan-puu</code>)</h3>
+<ol>
+<li>Dibuat tampilan khusus <a href="file:///c:/Users/Asus/Documents/Arkan-Document/kerja/Kemenko%20Pangan/HKS/JDIH/web_jdih/jdih.kemenkopangan.go.id/jdih.kemenkopangan.go.id/Source%20Code/jdih-kemenko-pangan/resources/views/dynamic/pages/document-rancangan-puu.blade.php">resources/views/dynamic/pages/document-rancangan-puu.blade.php</a>.</li>
+<li>Method <code>PageController@getRancanganPuu</code> bertugas mengambil dokumen yang berstatus <code>is_active = 1</code> dengan <code>master_document_id = 15</code>, lalu menyajikannya dalam kartu-kartu dokumen lengkap dengan:
+<ul>
+<li>Judul dan abstrak rancangan.</li>
+<li>Badge tahapan PUU (misal: &quot;Tahap Harmonisasi&quot;).</li>
+<li>Filter tahun dan kotak pencarian judul.</li>
+<li>Jumlah pengunjung dan pengunduh PDF.</li>
+<li>Tombol <strong>Unduh PDF</strong> dan tautan <strong>Baca Selengkapnya</strong>.</li>
+</ul>
+</li>
+<li><strong>Hasil:</strong> Begitu admin menekan tombol Simpan di CMS, dokumen tersebut <strong>langsung otomatis muncul secara seketika (<em>real-time</em>)</strong> di halaman publik <code>http://localhost:8000/rancangan-puu</code>.</li>
+</ol>
+<h2 id="108-bugfix-krusial-masalah-error-simpan-dokumen-di-cms">10.8 Bugfix Krusial: Masalah Error Simpan Dokumen di CMS</h2>
+<h3 id="gejala-masalah">Gejala Masalah</h3>
+<p>Saat pengguna mencoba menyimpan dokumen di form admin panel, terjadi error sistem:</p>
+<pre><code>Call to a member function getClientOriginalName() on string
+</code></pre>
+<h3 id="investigasi-penyebab">Investigasi Penyebab</h3>
+<p>CMS Cactuar memeriksa apakah form memiliki pengunggahan berkas melalui method <code>createFile()</code> dan <code>editFile()</code>. Karena kedua method ini belum didefinisikan pada controller PUU baru, form HTML dirender tanpa atribut:</p>
+<pre><code class="language-html">enctype=&quot;multipart/form-data&quot;
+</code></pre>
+<p>Akibatnya, saat form dikirimkan, browser tidak mengirimkan objek berkas binary melainkan hanya string nama file biasa. Ketika helper <code>App\Helpers\Document::formCallbackBefore</code> memanggil method bawaan file <code>$request['pdf']-&gt;getClientOriginalName()</code>, PHP melempar error fatal karena variabel tersebut bertipe teks string, bukan objek <code>UploadedFile</code>.</p>
+<h3 id="solusi-komprehensif-yang-diterapkan">Solusi Komprehensif yang Diterapkan</h3>
+<ol>
+<li>Menambahkan method wajib pada seluruh 7 controller PUU:
+<pre><code class="language-php">public function createFile() { return true; }
+public function editFile($item = null) { return true; }
+</code></pre>
+</li>
+<li>Memperbarui helper <code>app/Helpers/Document.php</code> secara defensif:
+<pre><code class="language-php">// Memeriksa tipe secara aman sebelum memanggil fungsi getClientOriginalName
+if (isset($request[$field]) &amp;&amp; $request[$field] instanceof \Illuminate\Http\UploadedFile &amp;&amp; $request[$field]-&gt;isValid()) {
+    $filename = $request[$field]-&gt;getClientOriginalName();
+    // proses unggah...
+}
+</code></pre>
+</li>
+<li>Menormalkan string kosong (<code>''</code>) menjadi <code>null</code> untuk kolom relasi dan tanggal bertipe nullable agar database MySQL tidak memicu error <em>Foreign Key Constraint Violation</em>.</li>
+</ol>
+<hr />
+<h1 id="11-tahap-8-widget-statistik-di-beranda-mirip-jdih-kemenkumham">11. Tahap 8 — Widget Statistik di Beranda (Mirip JDIH Kemenkumham)</h1>
+<h2 id="111-latar-belakang-amp-permintaan-desain-25-oktober-2026">11.1 Latar Belakang &amp; Permintaan Desain (25 Oktober 2026)</h2>
+<p>Pengguna menyampaikan referensi gambar dari portal Kementerian Hukum dan HAM (<code>https://jdih.kemenkum.go.id/</code>) dan meminta:
+<em>&quot;Buatkan ada tampilan stats seperti pada gambar mirip di web <a href="https://jdih.kemenkum.go.id/">https://jdih.kemenkum.go.id/</a> pada bagian beranda.&quot;</em></p>
+<p>Pada website rujukan tersebut, tepat di bawah bilah pencarian banner beranda, terdapat kartu-kartu statistik ringkas yang menampilkan jumlah koleksi peraturan secara transparan kepada pengunjung.</p>
+<h2 id="112-penjelasan-sederhana-papan-informasi-koleksi-buku">11.2 Penjelasan Sederhana: Papan Informasi Koleksi Buku</h2>
+<p>Saat masyarakat pertama kali melangkah masuk ke lobi perpustakaan, mereka langsung melihat papan informasi digital: <em>&quot;Di perpustakaan ini tersedia 45 Peraturan Menteri, 2 Monografi Hukum, 0 Artikel, dan 0 Putusan&quot;</em>. Hal ini memberi kesan profesional, transparan, dan memudahkan masyarakat mengetahui seberapa lengkap isi portal tanpa harus mencari-cari terlebih dahulu.</p>
+<h2 id="113-implementasi-teknis-widget-banner-stats">11.3 Implementasi Teknis Widget Banner Stats</h2>
+<p>Widget ditempatkan langsung di bawah kotak pencarian beranda pada <a href="file:///c:/Users/Asus/Documents/Arkan-Document/kerja/Kemenko%20Pangan/HKS/JDIH/web_jdih/jdih.kemenkopangan.go.id/jdih.kemenkopangan.go.id/Source%20Code/jdih-kemenko-pangan/resources/views/dynamic/home.blade.php">resources/views/dynamic/home.blade.php</a>:</p>
+<h3 id="1-perhitungan-jumlah-data-riil-bukan-hardcoded">1. Perhitungan Jumlah Data Riil (Bukan Hardcoded)</h3>
+<p>Data dihitung langsung dari database melalui query Eloquent di controller beranda:</p>
+<pre><code class="language-php">// Hitung jumlah dokumen resmi yang aktif (is_active = 1)
+$peraturan_count = Document::where('is_active', 1)-&gt;where('master_document_id', 1)-&gt;count();
+$monografi_count = Document::where('is_active', 1)-&gt;where('master_document_id', 6)-&gt;count();
+$artikel_count   = Document::where('is_active', 1)-&gt;whereIn('master_document_id', [2, 4])-&gt;count();
+$putusan_count   = Document::where('is_active', 1)-&gt;where('master_document_id', 5)-&gt;count();
+</code></pre>
+<h3 id="2-tampilan-kartu-beranda-elegan-amp-responsif">2. Tampilan Kartu Beranda Elegan &amp; Responsif</h3>
+<p>Kartu statistik disusun dalam 2 baris fleksibel dengan ikon SVG profesional, label kategori, dan badge angka tebal:</p>
+<pre><code class="language-html">&lt;div class=&quot;banner-stats&quot;&gt;
+  &lt;div class=&quot;banner-stats__row&quot;&gt;
+    &lt;!-- Kartu Peraturan --&gt;
+    &lt;a href=&quot;{{ url('/peraturan-hukum') }}&quot; class=&quot;banner-stats__item&quot;&gt;
+      &lt;span class=&quot;banner-stats__icon&quot;&gt;...ikon dokumen...&lt;/span&gt;
+      &lt;span class=&quot;banner-stats__label&quot;&gt;Peraturan&lt;/span&gt;
+      &lt;span class=&quot;banner-stats__badge&quot;&gt;{{ number_format($peraturan_count, 0, ',', '.') }}&lt;/span&gt;
+    &lt;/a&gt;
+    &lt;!-- Kartu Monografi --&gt;
+    &lt;a href=&quot;{{ url('/monografi-hukum') }}&quot; class=&quot;banner-stats__item&quot;&gt;
+      &lt;span class=&quot;banner-stats__icon&quot;&gt;...ikon buku...&lt;/span&gt;
+      &lt;span class=&quot;banner-stats__label&quot;&gt;Monografi&lt;/span&gt;
+      &lt;span class=&quot;banner-stats__badge&quot;&gt;{{ number_format($monografi_count, 0, ',', '.') }}&lt;/span&gt;
+    &lt;/a&gt;
+    &lt;!-- Kartu Artikel Hukum --&gt;
+    &lt;a href=&quot;{{ url('/jurnal-hukum') }}&quot; class=&quot;banner-stats__item&quot;&gt;
+      &lt;span class=&quot;banner-stats__icon&quot;&gt;...ikon artikel...&lt;/span&gt;
+      &lt;span class=&quot;banner-stats__label&quot;&gt;Artikel Hukum&lt;/span&gt;
+      &lt;span class=&quot;banner-stats__badge&quot;&gt;{{ number_format($artikel_count, 0, ',', '.') }}&lt;/span&gt;
+    &lt;/a&gt;
+  &lt;/div&gt;
+  &lt;div class=&quot;banner-stats__row&quot;&gt;
+    &lt;!-- Kartu Putusan --&gt;
+    &lt;a href=&quot;{{ url('/putusan-hukum') }}&quot; class=&quot;banner-stats__item&quot;&gt;
+      &lt;span class=&quot;banner-stats__icon&quot;&gt;...ikon palu sidang...&lt;/span&gt;
+      &lt;span class=&quot;banner-stats__label&quot;&gt;Putusan&lt;/span&gt;
+      &lt;span class=&quot;banner-stats__badge&quot;&gt;{{ number_format($putusan_count, 0, ',', '.') }}&lt;/span&gt;
+    &lt;/a&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+<h3 id="3-penataan-gaya-scss-resourcesassetssasspageshomescss">3. Penataan Gaya SCSS (<code>resources/assets/sass/pages/home.scss</code>)</h3>
+<ul>
+<li>Menggunakan efek kaca transparan (<em>glassmorphism</em>) yang menyatu dengan gradasi hero banner kementerian.</li>
+<li>Efek <em>hover</em>: kartu sedikit terangkat (<em>lift-up animation</em>) dan menyala lembut saat kursor melintas.</li>
+<li>Pada layar smartphone, kartu otomatis tersusun rapi (<em>wrap</em>) sehingga angka tetap mudah dibaca tanpa terpotong.</li>
+</ul>
+<div class="pagebreak"></div>
+<h1 id="12-tahap-9-fitur-1-halaman-statistik-produk-hukum-26-oktober-2026">12. Tahap 9 — Fitur 1: Halaman Statistik Produk Hukum (26 Oktober 2026)</h1>
+<h2 id="121-latar-belakang-amp-master-prompt-fitur-1">12.1 Latar Belakang &amp; Master Prompt Fitur 1</h2>
+<p>Pada tanggal 26 Oktober 2026, pengguna menetapkan arahan teknis untuk membangun halaman mandiri <strong>Statistik Produk Hukum</strong>:</p>
+<ul>
+<li><strong>Tujuan Utama:</strong> Memungkinkan masyarakat, peneliti, dan administrator menganalisis sebaran dokumen hukum berdasarkan <strong>Jenis Peraturan</strong> dan <strong>Tahun Penetapan</strong>.</li>
+<li><strong>Prinsip Utama:</strong> Wajib menggunakan data dokumen riil yang tersimpan di database <code>pangan_jdihdb</code>. <strong>Dilarang keras menggunakan data statis, angka tiruan (<em>dummy</em>), atau angka yang di-hardcode di kode.</strong></li>
+<li><strong>Interaktivitas:</strong> Wajib menyediakan filter ganda, grafik visual dinamis, tabel rincian, pembaruan URL otomatis (<em>pushState</em>), dan fitur pengunduhan grafik sebagai gambar PNG resolusi tinggi.</li>
+</ul>
+<h2 id="122-penjelasan-sederhana-ruang-infografis-digital-perpustakaan">12.2 Penjelasan Sederhana: Ruang Infografis Digital Perpustakaan</h2>
+<p>Jika sebelumnya pengunjung perpustakaan harus menghitung buku satu per satu dari halaman katalog, kini tersedia <strong>layar sentuh infografis raksasa</strong> di dinding perpustakaan. Pengunjung bisa menekan tombol <em>&quot;Tampilkan Peraturan Menteri saja&quot;</em> atau <em>&quot;Tahun 2025 saja&quot;</em>, lalu grafik batang dan diagram lingkaran langsung bergerak menyesuaikan secara otomatis, dan pengunjung dapat mencetak hasil grafik tersebut untuk bahan laporan.</p>
+<h2 id="123-arsitektur-backend-amp-pengolahan-data-riil">12.3 Arsitektur Backend &amp; Pengolahan Data Riil</h2>
+<p>Seluruh logika pengolahan data statistik dipusatkan pada controller:
+<code>app/Http/Controllers/Front/StatisticController.php</code></p>
+<h3 id="1-metode-agregasi-data-getstatisticsdata">1. Metode Agregasi Data (<code>getStatisticsData</code>)</h3>
+<p>Data disaring dengan kriteria dokumen peraturan yang aktif secara hukum:</p>
+<ul>
+<li><code>is_active = 1</code></li>
+<li><code>master_document_id = 1</code> (Kategori Peraturan)</li>
+<li>Memetakan relasi ke tabel <code>rule_types</code> (Bentuk/Jenis Peraturan) dan tabel teks <code>rule_types_lang</code> untuk memperoleh nama resmi peraturan dalam Bahasa Indonesia dan Bahasa Inggris.</li>
+</ul>
+<h3 id="2-fakta-data-riil-yang-dihasilkan">2. Fakta Data Riil yang Dihasilkan</h3>
+<p>Berdasarkan pembacaan database aktual, diperoleh sebaran data dokumen hukum Kemenko Pangan:</p>
+<ul>
+<li><strong>Total Peraturan Aktif:</strong> <strong>47 Peraturan</strong>.</li>
+<li><strong>Sebaran 7 Jenis Peraturan:</strong>
+<ol>
+<li>Peraturan Presiden (Perpres): <strong>13 dokumen</strong> (27.7%)</li>
+<li>Peraturan Menteri Koordinator (Permen/Permenko): <strong>10 dokumen</strong> (21.3%)</li>
+<li>Peraturan Pemerintah (PP): <strong>9 dokumen</strong> (19.1%)</li>
+<li>Instruksi Presiden (Inpres): <strong>8 dokumen</strong> (17.0%)</li>
+<li>Keputusan Menteri (Kepmen): <strong>3 dokumen</strong> (6.4%)</li>
+<li>Keputusan Presiden (Keppres): <strong>3 dokumen</strong> (6.4%)</li>
+<li>Undang-Undang (UU): <strong>1 dokumen</strong> (2.1%)</li>
+</ol>
+</li>
+<li><strong>Sebaran Rentang Tahun (2015 – 2026):</strong>
+<ul>
+<li>2015: 1 dokumen | 2019: 1 dokumen | 2021: 1 dokumen | 2022: 2 dokumen</li>
+<li>2023: 1 dokumen | 2024: 3 dokumen | <strong>2025: 28 dokumen (Puncak Pembentukan Regulasi)</strong> | 2026: 10 dokumen</li>
+</ul>
+</li>
+<li><strong>Status Keberlakuan Hukum:</strong>
+<ul>
+<li><strong>Berlaku:</strong> <strong>45 dokumen</strong> (95.7%)</li>
+<li><strong>Tidak Berlaku (Dicabut/Diubah):</strong> <strong>2 dokumen</strong> (4.3%)</li>
+</ul>
+</li>
+</ul>
+<h2 id="124-tampilan-frontend-interaktif-about-statistikbladephp">12.4 Tampilan Frontend Interaktif (<code>about-statistik.blade.php</code>)</h2>
+<p>Tampilan visual dibangun pada file:
+<a href="file:///c:/Users/Asus/Documents/Arkan-Document/kerja/Kemenko%20Pangan/HKS/JDIH/web_jdih/jdih.kemenkopangan.go.id/jdih.kemenkopangan.go.id/Source%20Code/jdih-kemenko-pangan/resources/views/dynamic/pages/about-statistik.blade.php">resources/views/dynamic/pages/about-statistik.blade.php</a></p>
+<p>Komponen-komponen visual utama yang disajikan:</p>
+<ol>
+<li><strong>4 Kartu Metrik Utama (KPI Cards):</strong>
+<ul>
+<li><em>Total Peraturan</em>: Menampilkan angka <code>47</code>.</li>
+<li><em>Jenis Terbanyak</em>: Menampilkan <code>Peraturan Presiden (13)</code>.</li>
+<li><em>Tahun Terbanyak</em>: Menampilkan <code>2025 (28 Dokumen)</code>.</li>
+<li><em>Status Berlaku</em>: Menampilkan rasio <code>45 Berlaku / 2 Tidak Berlaku</code>.</li>
+</ul>
+</li>
+<li><strong>Filter Ganda Interaktif:</strong>
+<ul>
+<li>Dropdown pemilih Jenis Peraturan (Semua Jenis atau spesifik).</li>
+<li>Dropdown pemilih Tahun (Semua Tahun atau rentang tahun tertentu).</li>
+</ul>
+</li>
+<li><strong>Grafik Interaktif Chart.js:</strong>
+<ul>
+<li><strong>Diagram Batang (Bar Chart)</strong>: Menampilkan tren pertumbuhan peraturan tahun demi tahun dengan palet warna navy gradasi emas kementerian.</li>
+<li><strong>Diagram Donat (Doughnut Chart)</strong>: Menampilkan proporsi persentase per jenis peraturan dengan legenda interaktif (dapat diklik untuk menyembunyikan/menampilkan jenis tertentu).</li>
+<li><strong>Diagram Status</strong>: Visualisasi perbandingan persentase regulasi aktif vs dicabut.</li>
+</ul>
+</li>
+<li><strong>Tabel Ringkasan Data:</strong>
+Menyajikan rekapitulasi angka secara presisi untuk kebutuhan analisis dan kutipan laporan.</li>
+<li><strong>Pembaruan AJAX &amp; Riwayat URL (PushState):</strong>
+Saat filter diubah, grafik dan tabel diperbarui seketika tanpa memuat ulang seluruh halaman (<em>no-refresh</em>), dan URL browser otomatis diselaraskan (misal: <code>/statistik-produk-hukum?type=1&amp;year=2025</code>) sehingga pengguna dapat menyalin dan membagikan tautan hasil analisis kepada orang lain.</li>
+<li><strong>Ekspor Grafik sebagai Gambar PNG (html2canvas):</strong>
+Disediakan tombol <strong>&quot;Unduh Grafik (PNG)&quot;</strong>. Saat ditekan, skrip <code>html2canvas</code> mengambil tangkapan layar elemen grafik dengan resolusi tinggi dan mengunduhnya ke komputer pengguna secara otomatis sebagai berkas gambar siap pakai untuk presentasi PowerPoint atau laporan berkala.</li>
+</ol>
+<h2 id="125-rute-publik-amp-rest-api-statistik">12.5 Rute Publik &amp; REST API Statistik</h2>
+<p>Pada <code>routes/web.php</code> didaftarkan:</p>
+<ul>
+<li>Rute halaman publik: <code>GET /statistik-produk-hukum</code> (terhubung ke menu 36 <code>menus_lang.url = 'about-statistik'</code>).</li>
+<li>Rute REST API publik:
+<ul>
+<li><code>GET /api/statistics/legal-products</code>: Data mentah seluruh statistik.</li>
+<li><code>GET /api/statistics/legal-products/by-type</code>: Ringkasan jumlah per bentuk peraturan.</li>
+<li><code>GET /api/statistics/legal-products/by-year</code>: Ringkasan jumlah per tahun penetapan.</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h1 id="13-tahap-10-fitur-2-klasifikasi-video-galeri-dan-aksesibilitas-26-oktober-2026">13. Tahap 10 — Fitur 2: Klasifikasi Video Galeri dan Aksesibilitas (26 Oktober 2026)</h1>
+<h2 id="131-latar-belakang-amp-kebutuhan-regulasi-inklusif">13.1 Latar Belakang &amp; Kebutuhan Regulasi Inklusif</h2>
+<p>Portal kementerian wajib memenuhi standar keterbukaan informasi publik yang ramah disabilitas (UU No. 8 Tahun 2016 tentang Penyandang Disabilitas). Konten multimedia video terbagi menjadi dua kategori yang berbeda tujuan:</p>
+<ol>
+<li><strong>Video Galeri Umum:</strong> Liputan seremonial, dokumentasi kunjungan kerja, dan siaran pers pimpinan kementerian.</li>
+<li><strong>Video Khusus Aksesibilitas:</strong> Video sosialisasi hukum yang dilengkapi dengan <strong>juru bahasa isyarat (JBI)</strong>, takarir teks (<em>closed captions</em>), atau panduan audio khusus bagi masyarakat berkebutuhan khusus.</li>
+</ol>
+<p>Pengguna meminta sistem agar staf pengelola web dapat menentukan apakah sebuah video masuk ke Galeri, Aksesibilitas, atau keduanya, serta menyediakan halaman publik khusus untuk video aksesibilitas.</p>
+<h2 id="132-penjelasan-sederhana-rak-khusus-buku-huruf-braille">13.2 Penjelasan Sederhana: Rak Khusus Buku Huruf Braille</h2>
+<p>Di perpustakaan, kita tidak mencampur aduk buku cerita umum dengan buku bertulisan huruf Braille atau buku bersuara (<em>audiobook</em>). Kita membuat rak khusus bertanda <strong>Layanan Aksesibilitas</strong> agar penyandang disabilitas dapat langsung menemukan materi hukum yang ramah bagi mereka tanpa tersesat di antara ratusan dokumentasi seremonial biasa.</p>
+<h2 id="133-desain-database-amp-skema-many-to-many">13.3 Desain Database &amp; Skema Many-to-Many</h2>
+<p>Dibuat file migrasi:
+<code>database/migrations/2026_10_26_000001_create_video_classifications_and_pivot_tables.php</code></p>
+<h3 id="1-tabel-master-klasifikasi-video-classifications">1. Tabel Master Klasifikasi (<code>video_classifications</code>)</h3>
+<ul>
+<li><code>id</code> (bigIncrements)</li>
+<li><code>slug</code> (varchar 50, unique: <code>galeri</code>, <code>aksesibilitas</code>)</li>
+<li><code>name</code> (varchar 100: &quot;Galeri Kegiatan&quot;, &quot;Layanan Aksesibilitas&quot;)</li>
+<li><code>description</code> (teks keterangan peruntukan)</li>
+<li><code>is_active</code> (tinyint 1)</li>
+<li><code>sort_id</code> (integer)</li>
+</ul>
+<h3 id="2-tabel-pivot-relasi-banyak-ke-banyak-gallery-video-classifications">2. Tabel Pivot Relasi Banyak-ke-Banyak (<code>gallery_video_classifications</code>)</h3>
+<ul>
+<li><code>gallery_id</code> (unsignedBigInteger, FK ke <code>galleries.id</code> dengan onDelete CASCADE).</li>
+<li><code>video_classification_id</code> (unsignedBigInteger, FK ke <code>video_classifications.id</code> dengan onDelete CASCADE).</li>
+<li>Relasi ini memungkinkan <strong>satu video yang sama</strong> dapat muncul sekaligus di halaman Galeri umum dan di halaman Layanan Aksesibilitas jika memang memenuhi standar keduanya.</li>
+</ul>
+<h3 id="3-penambahan-kolom-penunjang">3. Penambahan Kolom Penunjang</h3>
+<ul>
+<li>Menambahkan kolom <code>sort_id</code> pada tabel <code>galleries</code> untuk pengaturan urutan tampil video.</li>
+<li>Menambahkan kolom <code>description</code> pada tabel multibahasa <code>galleries_lang</code> agar setiap video dapat memiliki teks penjelasan detail mengenai materi hukum yang dibahas.</li>
+</ul>
+<h2 id="134-model-eloquent-amp-normalisasi-tautan-youtube">13.4 Model Eloquent &amp; Normalisasi Tautan YouTube</h2>
+<p>Pada model <code>app/Models/Gallery.php</code>:</p>
+<ol>
+<li>Didefinisikan relasi:
+<pre><code class="language-php">public function classifications() {
+    return $this-&gt;belongsToMany(VideoClassification::class, 'gallery_video_classifications');
+}
+</code></pre>
+</li>
+<li>Dibuat query scope untuk penyaringan cepat:
+<pre><code class="language-php">public function scopeClassifiedAs($query, $slug) {
+    return $query-&gt;whereHas('classifications', function($q) use ($slug) {
+        $q-&gt;where('slug', $slug);
+    });
+}
+</code></pre>
+</li>
+<li><strong>Fungsi Cerdas Normalisasi Tautan YouTube (<code>formatYoutubeEmbed</code>):</strong>
+Operator sering kali memasukkan format tautan YouTube yang berbeda-beda saat mengisi form (misal: <code>https://youtu.be/xyz</code>, <code>https://www.youtube.com/watch?v=xyz</code>, atau <code>https://www.youtube.com/shorts/xyz</code>). Dibuat parser ekspresi reguler (Regex) yang secara otomatis mengekstrak ID video dan mengubahnya menjadi format iframe resmi:
+<pre><code>https://www.youtube.com/embed/{VIDEO_ID}
+</code></pre>
+Serta menyediakan accessor <code>thumbnail_url</code> otomatis dari server gambar YouTube (<code>img.youtube.com/vi/{VIDEO_ID}/hqdefault.jpg</code>).</li>
+</ol>
+<h2 id="135-integrasi-cms-admin-panel-admingallerycontrollerphp">13.5 Integrasi CMS Admin Panel (<code>Admin/GalleryController.php</code>)</h2>
+<p>Pada form kelola Galeri di admin panel:</p>
+<ul>
+<li>Ditambahkan komponen <strong>kotak centang ganda (multi-checkbox)</strong> untuk klasifikasi video.</li>
+<li>Ditambahkan kolom filter klasifikasi pada tabel daftar galeri admin.</li>
+<li>Dilengkapi lencana warna (<em>badge</em>) yang membedakan video Galeri (biru) dan Aksesibilitas (hijau).</li>
+<li>Saat data disimpan, controller secara otomatis menyelaraskan relasi pivot melalui <code>$gallery-&gt;classifications()-&gt;sync(...)</code>.</li>
+</ul>
+<h2 id="136-halaman-publik-layanan-aksesibilitas-aksesibilitas">13.6 Halaman Publik Layanan Aksesibilitas (<code>/aksesibilitas</code>)</h2>
+<ul>
+<li>Dihubungkan ke menu navigasi ID 39 dengan URL slug <code>/aksesibilitas</code>.</li>
+<li>Method <code>PageController::getAksesibilitas</code> menyaring hanya video yang memiliki relasi ke klasifikasi <code>aksesibilitas</code> (<code>is_active = 1</code>).</li>
+<li>Dibuat view khusus: <a href="file:///c:/Users/Asus/Documents/Arkan-Document/kerja/Kemenko%20Pangan/HKS/JDIH/web_jdih/jdih.kemenkopangan.go.id/jdih.kemenkopangan.go.id/Source%20Code/jdih-kemenko-pangan/resources/views/dynamic/pages/informasi-aksesibilitas.blade.php">resources/views/dynamic/pages/informasi-aksesibilitas.blade.php</a>.
+<ul>
+<li>Tampilan grid responsif video interaktif.</li>
+<li>Pemutar video YouTube responsif (16:9) tanpa terpotong di layar smartphone.</li>
+<li>Penjelasan teks transkrip dan informasi mengenai ketersediaan bahasa isyarat pada masing-masing materi regulasi pangan.</li>
+</ul>
+</li>
+<li>Disediakan endpoint REST API publik:
+<pre><code>GET /api/videos?category=accessibility
+GET /api/videos?category=gallery
+</code></pre>
+</li>
+</ul>
+<hr />
+<h1 id="14-tahap-11-widget-aksesibilitas-userway-equalweb-style">14. Tahap 11 — Widget Aksesibilitas (UserWay / EqualWeb Style)</h1>
+<h2 id="141-latar-belakang-amp-tiga-permintaan-bertahap-26-oktober-2026">14.1 Latar Belakang &amp; Tiga Permintaan Bertahap (26 Oktober 2026)</h2>
+<p>Pengembangan widget aksesibilitas dilakukan melalui 3 tahap penyempurnaan sesuai permintaan pengguna:</p>
+<ol>
+<li><strong>Permintaan Awal:</strong> <em>&quot;Apakah bisa ditambahkan accessibility tools seperti pada userway, accessibility widget fitur mengikuti userway <a href="https://www.equalweb.com/platform/accessibility_widget/">https://www.equalweb.com/platform/accessibility_widget/</a> ?&quot;</em></li>
+<li><strong>Penyesuaian Visual:</strong> <em>&quot;Apakah model tampilan accessibility bisa mengikuti referensi gambar itu seperti pada web <a href="https://jdih.kemenkum.go.id/">https://jdih.kemenkum.go.id/</a> ?&quot;</em></li>
+<li><strong>Penyempurnaan Fitur:</strong> <em>&quot;Tambahkan fitur-fitur seperti pada di userway.&quot;</em></li>
+</ol>
+<h2 id="142-penjelasan-sederhana-asisten-pribadi-bagi-penyandang-disabilitas">14.2 Penjelasan Sederhana: Asisten Pribadi bagi Penyandang Disabilitas</h2>
+<p>Tidak semua masyarakat memiliki kemampuan penglihatan atau fisik yang sama:</p>
+<ul>
+<li>Ada lansia yang pandangannya kabur sehingga butuh huruf besar.</li>
+<li>Ada penyandang buta warna yang tidak bisa membaca tulisan abu-abu di atas latar putih.</li>
+<li>Ada penyandang disleksia yang sulit membaca huruf latin standar.</li>
+<li>Ada tuna netra yang tidak bisa melihat layar sama sekali dan membutuhkan suara yang membacakan isi pasal.</li>
+</ul>
+<p>Widget aksesibilitas adalah <strong>kotak peralatan pembantu</strong> yang menempel di layar web. Pengunjung bebas memilih setelan kenyamanan mereka sendiri tanpa mengubah tampilan bagi pengunjung lainnya.</p>
+<h2 id="143-desain-tampilan-mengikuti-jdih-kemenkumham">14.3 Desain Tampilan Mengikuti JDIH Kemenkumham</h2>
+<p>Sesuai gambar rujukan dari portal Kementerian Hukum dan HAM:</p>
+<ol>
+<li><strong>Tombol Peluncur (<em>Launcher Button</em>):</strong>
+<ul>
+<li>Berbentuk lingkaran elegan berdiameter 52 piksel di <strong>sudut kiri bawah layar</strong> (<code>bottom: 24px; left: 24px;</code>).</li>
+<li>Warna biru navy resmi (<code>#1a263f</code>) dengan ikon internasional penyandang disabilitas berwarna putih bersih.</li>
+<li>Mengambang di atas seluruh elemen halaman dengan prioritas lapisan tertinggi (<code>z-index: 999999</code>).</li>
+</ul>
+</li>
+<li><strong>Panel Modal Aksesibilitas:</strong>
+<ul>
+<li>Panel pop-up modern bersudut lengkung (<code>border-radius: 16px</code>) dengan bayangan mendalam (<em>soft shadow</em>).</li>
+<li>Bagian atas (<em>header</em>) memuat judul <em>&quot;Menu Aksesibilitas JDIH&quot;</em>, tombol <em>&quot;Atur Ulang&quot;</em>, dan tombol silang tutup (<em>close</em>).</li>
+<li>Area tengah menyusun 19 kartu tombol fitur dalam format kisi (<em>grid</em>) 3 kolom yang mudah disentuh di smartphone maupun diklik di komputer.</li>
+</ul>
+</li>
+</ol>
+<h2 id="144-rincian-lengkap-19-fitur-aksesibilitas-standar-userway-amp-equalweb">14.4 Rincian Lengkap 19 Fitur Aksesibilitas (Standar UserWay &amp; EqualWeb)</h2>
+<p>Berikut penjelasan detail dari ke-19 alat bantu yang terpasang di dalam widget:</p>
+<table>
+<thead>
+<tr>
+<th>No</th>
+<th>Nama Fitur</th>
+<th>Mekanisme Kerja Teknis</th>
+<th>Manfaat bagi Pengguna</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><strong>Kontras Tinggi</strong></td>
+<td>Menerapkan kelas <code>a11y-contrast-high</code>: seluruh latar belakang web diubah menjadi hitam pekat (<code>#000000</code>) dan seluruh teks diubah menjadi kuning menyala (<code>#ffff00</code>).</td>
+<td>Membantu pengguna dengan gangguan penglihatan berat (<em>low vision</em>) membaca teks pasal dengan sangat kontras.</td>
+</tr>
+<tr>
+<td>2</td>
+<td><strong>Kontras Terang</strong></td>
+<td>Menerapkan kelas <code>a11y-contrast-light</code>: seluruh latar belakang diubah menjadi putih solid (<code>#ffffff</code>) dan teks menjadi hitam legam tajam (<code>#000000</code>).</td>
+<td>Membantu membaca di bawah sinar matahari terang atau layar redup.</td>
+</tr>
+<tr>
+<td>3</td>
+<td><strong>Mode Abu-abu (Monokrom)</strong></td>
+<td>Menerapkan filter CSS <code>filter: grayscale(100%) !important</code> ke seluruh dokumen.</td>
+<td>Membantu penyandang buta warna parsial dan mengurangi kelelahan saraf optik akibat warna menyala.</td>
+</tr>
+<tr>
+<td>4</td>
+<td><strong>Inversi Warna</strong></td>
+<td>Menerapkan filter CSS <code>filter: invert(100%) hue-rotate(180deg) !important</code>.</td>
+<td>Membalikkan spektrum warna layar bagi pengguna yang sensitif terhadap pancaran cahaya terang (<em>photophobia</em>).</td>
+</tr>
+<tr>
+<td>5</td>
+<td><strong>Sorot Tautan (Highlight Links)</strong></td>
+<td>Menerapkan garis bawah ganda berwarna kuning menyala tebal pada setiap elemen tautan <code>&lt;a&gt;</code>.</td>
+<td>Membantu pengguna membedakan dengan tegas mana teks biasa dan mana bagian yang bisa diklik.</td>
+</tr>
+<tr>
+<td>6</td>
+<td><strong>Sorot Judul (Highlight Headings)</strong></td>
+<td>Memberikan garis tepi penanda khusus pada elemen <code>&lt;h1&gt;</code>, <code>&lt;h2&gt;</code>, <code>&lt;h3&gt;</code>, <code>&lt;h4&gt;</code>.</td>
+<td>Mempermudah penelusuran struktur bab dan pasal peraturan secara cepat (<em>skimming</em>).</td>
+</tr>
+<tr>
+<td>7</td>
+<td><strong>Font Ramah Disleksia</strong></td>
+<td>Memuat Google Font <strong>Lexend</strong> secara asinkron dan menerapkannya ke seluruh tag teks: <code>font-family: 'Lexend', sans-serif !important</code>.</td>
+<td>Karakter huruf dirancang dengan ruang terbuka lebar di bagian bawah sehingga mencegah penderita disleksia melihat huruf bertumpuk atau terbalik.</td>
+</tr>
+<tr>
+<td>8</td>
+<td><strong>Perbesar Teks</strong></td>
+<td>Menaikkan ukuran font bertahap (hingga +40%) pada elemen <code>body</code>.</td>
+<td>Membantu lansia dan pengguna yang lupa memakai kacamata membaca draf regulasi.</td>
+</tr>
+<tr>
+<td>9</td>
+<td><strong>Perkecil Teks</strong></td>
+<td>Menurunkan ukuran font bertahap (hingga -20%) pada elemen <code>body</code>.</td>
+<td>Membantu pengguna yang ingin melihat lebih banyak konteks paragraf hukum dalam satu layar.</td>
+</tr>
+<tr>
+<td>10</td>
+<td><strong>Spasi Teks Ekstra</strong></td>
+<td>Menambahkan <code>letter-spacing: 0.12em</code> dan <code>line-height: 2 !important</code> pada paragraf.</td>
+<td>Memberikan ruang napas antar-kata sehingga kalimat hukum yang panjang tidak tampak padat melelahkan.</td>
+</tr>
+<tr>
+<td>11</td>
+<td><strong>Rata Kiri Teks</strong></td>
+<td>Memaksa seluruh teks menggunakan <code>text-align: left !important</code> (menonaktifkan rata kanan-kiri / <em>justify</em>).</td>
+<td>Menghilangkan celah spasi putih aneh antar-kata (<em>river effect</em>) yang kerap menyulitkan pembaca difabel.</td>
+</tr>
+<tr>
+<td>12</td>
+<td><strong>Kursor Besar</strong></td>
+<td>Mengganti gambar kursor standar mouse dengan kursor panah berukuran ekstra besar berwarna kontras tinggi.</td>
+<td>Membantu pengguna dengan tremor tangan atau lansia agar tidak kehilangan posisi kursor di layar lebar.</td>
+</tr>
+<tr>
+<td>13</td>
+<td><strong>Panduan Membaca (Reading Guide)</strong></td>
+<td>Memunculkan garis horizontal kuning melintang di layar yang posisinya selalu mengikuti sumbu vertikal kursor mouse.</td>
+<td>Berfungsi seperti meletakkan penggaris di atas buku fisik agar mata fokus pada baris kalimat yang sedang dibaca.</td>
+</tr>
+<tr>
+<td>14</td>
+<td><strong>Masker Fokus (Focus Mask)</strong></td>
+<td>Memunculkan dua tirai gelap transparan di atas dan di bawah area baris yang sedang diarahkan kursor.</td>
+<td>Menghalangi distraksi visual dari paragraf lain sehingga perhatian pembaca terkunci pada pasal yang ditunjuk.</td>
+</tr>
+<tr>
+<td>15</td>
+<td><strong>Hentikan Animasi</strong></td>
+<td>Memaksa seluruh elemen CSS transisi, animasi putar, ticker berita, dan carousel menjadi diam: <code>animation: none !important; transition: none !important;</code>.</td>
+<td>Mencegah pemicu pusing, mual, atau kejang fotogenik bagi penderita vestibular dan epilepsi fotosensitif.</td>
+</tr>
+<tr>
+<td>16</td>
+<td><strong>Sembunyikan Gambar</strong></td>
+<td>Menyembunyikan seluruh tag <code>&lt;img&gt;</code>, <code>&lt;svg&gt;</code>, dan gambar latar: <code>opacity: 0 !important; visibility: hidden !important;</code>.</td>
+<td>Mengubah portal menjadi mode teks murni yang bebas gangguan visual dan mempercepat daya serap pembacaan.</td>
+</tr>
+<tr>
+<td>17</td>
+<td><strong>Baca Layar (Text-to-Speech)</strong></td>
+<td>Mengintegrasikan <strong>Web Speech API (<code>speechSynthesis</code>)</strong> bawaan browser dengan setelan bahasa Indonesia resmi (<code>lang = 'id-ID'</code>).</td>
+<td>Membacakan teks judul dokumen, isi berita, atau paragraf yang disorot oleh pengguna secara audio bersuara jelas.</td>
+</tr>
+<tr>
+<td>18</td>
+<td><strong>Hentikan Suara Bacaan</strong></td>
+<td>Memanggil perintah <code>window.speechSynthesis.cancel()</code> seketika.</td>
+<td>Mematikan audio bacaan secara instan saat pengguna ingin beralih membaca mandiri.</td>
+</tr>
+<tr>
+<td>19</td>
+<td><strong>Atur Ulang Semua (Reset)</strong></td>
+<td>Menghapus seluruh kelas modifikasi visual dan mengembalikan pengaturan ke posisi nol.</td>
+<td>Mengembalikan website ke tampilan orisinal desainer dalam satu kali klik.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="145-aksesibilitas-keyboard-amp-penyimpanan-setelan-lokal">14.5 Aksesibilitas Keyboard &amp; Penyimpanan Setelan Lokal</h2>
+<ol>
+<li><strong>Aksesibilitas Tombol Cepat Keyboard (Shortcut):</strong>
+<ul>
+<li>Menekan kombinasi tombol <strong>Alt + A</strong> di keyboard akan membuka atau menutup panel aksesibilitas secara langsung tanpa mouse.</li>
+<li>Menekan tombol <strong>Escape (Esc)</strong> akan menutup panel modal aksesibilitas.</li>
+</ul>
+</li>
+<li><strong>Penyimpanan Pengaturan Berkelanjutan (<em>LocalStorage Persistence</em>):</strong>
+Setiap kali pengguna mengaktifkan salah satu fitur (misalnya <em>Mode Kontras Tinggi</em> dan <em>Font Disleksia</em>), preferensi tersebut otomatis disimpan di memori browser pengunjung dengan kunci:
+<pre><code class="language-javascript">localStorage.setItem('jdih_kemenkum_a11y_v2', JSON.stringify(activeSettings));
+</code></pre>
+<strong>Dampaknya:</strong> Saat pengguna berpindah dari halaman Beranda ke halaman Peraturan atau halaman Kontak, <strong>setelan aksesibilitas tidak akan hilang atau reset sendiri</strong>. Pengunjung tidak perlu repot menyetel ulang setiap kali membuka halaman baru.</li>
+<li><strong>Penyematan Global:</strong>
+Komponen diletakkan pada layout induk:
+<code>Source Code/jdih-kemenko-pangan/resources/views/dynamic/layouts/layout.blade.php</code>
+tepat sebelum tag penutup <code>&lt;/body&gt;</code> sehingga otomatis aktif di 100% halaman website JDIH Kemenko Pangan.</li>
+</ol>
+<div class="pagebreak"></div>
+<h1 id="15-referensi-api">15. Referensi API</h1>
+<p>Seluruh endpoint API publik yang baru dibangun berformat standar RESTful dengan respons data bertipe JSON:</p>
+<h2 id="151-api-statistik-produk-hukum">15.1 API Statistik Produk Hukum</h2>
+<h3 id="1-get-apistatisticslegal-products">1. <code>GET /api/statistics/legal-products</code></h3>
+<ul>
+<li><strong>Fungsi:</strong> Mengambil data komprehensif statistik peraturan hukum (total, sebaran per jenis peraturan, tren tahunan, dan status keberlakuan).</li>
+<li><strong>Contoh Respons JSON:</strong>
+<pre><code class="language-json">{
+  &quot;status&quot;: &quot;success&quot;,
+  &quot;data&quot;: {
+    &quot;total_peraturan&quot;: 47,
+    &quot;summary_by_type&quot;: [
+      {&quot;type_id&quot;: 2, &quot;name&quot;: &quot;Peraturan Presiden&quot;, &quot;count&quot;: 13, &quot;percentage&quot;: 27.66},
+      {&quot;type_id&quot;: 1, &quot;name&quot;: &quot;Peraturan Menteri&quot;, &quot;count&quot;: 10, &quot;percentage&quot;: 21.28},
+      {&quot;type_id&quot;: 3, &quot;name&quot;: &quot;Peraturan Pemerintah&quot;, &quot;count&quot;: 9, &quot;percentage&quot;: 19.15},
+      {&quot;type_id&quot;: 4, &quot;name&quot;: &quot;Instruksi Presiden&quot;, &quot;count&quot;: 8, &quot;percentage&quot;: 17.02},
+      {&quot;type_id&quot;: 6, &quot;name&quot;: &quot;Keputusan Menteri&quot;, &quot;count&quot;: 3, &quot;percentage&quot;: 6.38},
+      {&quot;type_id&quot;: 5, &quot;name&quot;: &quot;Keputusan Presiden&quot;, &quot;count&quot;: 3, &quot;percentage&quot;: 6.38},
+      {&quot;type_id&quot;: 7, &quot;name&quot;: &quot;Undang-Undang&quot;, &quot;count&quot;: 1, &quot;percentage&quot;: 2.13}
+    ],
+    &quot;summary_by_year&quot;: [
+      {&quot;year&quot;: 2015, &quot;count&quot;: 1},
+      {&quot;year&quot;: 2019, &quot;count&quot;: 1},
+      {&quot;year&quot;: 2021, &quot;count&quot;: 1},
+      {&quot;year&quot;: 2022, &quot;count&quot;: 2},
+      {&quot;year&quot;: 2023, &quot;count&quot;: 1},
+      {&quot;year&quot;: 2024, &quot;count&quot;: 3},
+      {&quot;year&quot;: 2025, &quot;count&quot;: 28},
+      {&quot;year&quot;: 2026, &quot;count&quot;: 10}
+    ],
+    &quot;summary_by_status&quot;: {
+      &quot;berlaku&quot;: 45,
+      &quot;tidak_berlaku&quot;: 2
+    }
+  }
+}
+</code></pre>
+</li>
+</ul>
+<h3 id="2-get-apistatisticslegal-productsby-type">2. <code>GET /api/statistics/legal-products/by-type</code></h3>
+<ul>
+<li><strong>Fungsi:</strong> Mengambil data ringkas hanya untuk diagram jenis peraturan.</li>
+</ul>
+<h3 id="3-get-apistatisticslegal-productsby-year">3. <code>GET /api/statistics/legal-products/by-year</code></h3>
+<ul>
+<li><strong>Fungsi:</strong> Mengambil data ringkas hanya untuk diagram tren pertumbuhan tahunan.</li>
+</ul>
+<h2 id="152-api-klasifikasi-video">15.2 API Klasifikasi Video</h2>
+<h3 id="get-apivideos"><code>GET /api/videos</code></h3>
+<ul>
+<li><strong>Parameter URL:</strong>
+<ul>
+<li><code>category</code>: <code>accessibility</code> (khusus video disabilitas) atau <code>gallery</code> (dokumentasi umum). Default: semua video aktif.</li>
+<li><code>limit</code>: Jumlah data per halaman (default: 12).</li>
+</ul>
+</li>
+<li><strong>Contoh Respons JSON:</strong>
+<pre><code class="language-json">{
+  &quot;status&quot;: &quot;success&quot;,
+  &quot;category&quot;: &quot;accessibility&quot;,
+  &quot;total&quot;: 1,
+  &quot;data&quot;: [
+    {
+      &quot;id&quot;: 1,
+      &quot;title&quot;: &quot;Sosialisasi Perpres Swasembada Pangan (Dengan Juru Bahasa Isyarat)&quot;,
+      &quot;embed_url&quot;: &quot;https://www.youtube.com/embed/dQw4w9WgXcQ&quot;,
+      &quot;thumbnail_url&quot;: &quot;https://img.youtube.com/vi/dQw4w9WgXcQ/hqdefault.jpg&quot;,
+      &quot;classifications&quot;: [&quot;galeri&quot;, &quot;aksesibilitas&quot;],
+      &quot;created_at&quot;: &quot;2026-10-26T08:00:00Z&quot;
+    }
+  ]
+}
+</code></pre>
+</li>
+</ul>
+<hr />
+<h1 id="16-daftar-lengkap-file-dan-folder-yang-berubah">16. Daftar Lengkap File dan Folder yang Berubah</h1>
+<p>Berikut inventarisasi seluruh berkas kode sumber yang mengalami penambahan atau modifikasi sejak awal pengerjaan proyek:</p>
+<table>
+<thead>
+<tr>
+<th>Komponen / File</th>
+<th align="center">Status</th>
+<th>Kategori</th>
+<th>Ringkasan Perubahan</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>app/Helpers/Document.php</code></td>
+<td align="center"><strong>MODIFIED</strong></td>
+<td>Backend Helper</td>
+<td>Bugfix penanganan upload berkas, pencegahan error <code>getClientOriginalName()</code> pada string, normalisasi nilai nullable.</td>
+</tr>
+<tr>
+<td><code>app/Http/Controllers/Admin/GalleryController.php</code></td>
+<td align="center"><strong>MODIFIED</strong></td>
+<td>Backend CMS</td>
+<td>Penambahan dukungan multi-checkbox klasifikasi video, filter kategori di listing, normalisasi tautan YouTube.</td>
+</tr>
+<tr>
+<td><code>app/Http/Controllers/Admin/Puu/ProgramPenyusunanController.php</code></td>
+<td align="center"><strong>NEW</strong></td>
+<td>Backend CMS</td>
+<td>Sub-modul Program Penyusunan PUU (CRUD, metadata tahun, filter, upload PDF).</td>
+</tr>
+<tr>
+<td><code>app/Http/Controllers/Admin/Puu/NaskahUrgensiController.php</code></td>
+<td align="center"><strong>NEW</strong></td>
+<td>Backend CMS</td>
+<td>Sub-modul Naskah Urgensi / Akademik (relasi draf, rekomendasi, lampiran).</td>
+</tr>
+<tr>
+<td><code>app/Http/Controllers/Admin/Puu/RancanganPuuController.php</code></td>
+<td align="center"><strong>NEW</strong></td>
+<td>Backend CMS</td>
+<td>Sub-modul Rancangan PUU (tahapan regulasi, status harmonisasi, DIM).</td>
+</tr>
+<tr>
+<td><code>app/Http/Controllers/Admin/Puu/RisalahPembahasanController.php</code></td>
+<td align="center"><strong>NEW</strong></td>
+<td>Backend CMS</td>
+<td>Sub-modul Risalah Pembahasan (notula rapat, daftar hadir, matriks pasal).</td>
+</tr>
+<tr>
+<td><code>app/Http/Controllers/Admin/Puu/AnalisisEvaluasiController.php</code></td>
+<td align="center"><strong>NEW</strong></td>
+<td>Backend CMS</td>
+<td>Sub-modul Analisis &amp; Evaluasi PUU (audit efektivitas peraturan, rekomendasi).</td>
+</tr>
+<tr>
+<td><code>app/Http/Controllers/Admin/Puu/KajianHukumController.php</code></td>
+<td align="center"><strong>NEW</strong></td>
+<td>Backend CMS</td>
+<td>Sub-modul Kajian Hukum (kajian tematik isu pangan nasional).</td>
+</tr>
+<tr>
+<td><code>app/Http/Controllers/Admin/Puu/PartisipasiPublikController.php</code></td>
+<td align="center"><strong>NEW</strong></td>
+<td>Backend CMS</td>
+<td>Sub-modul Partisipasi Publik &amp; panel moderasi aspirasi masyarakat.</td>
+</tr>
+<tr>
+<td><code>app/Http/Controllers/Front/DocumentController.php</code></td>
+<td align="center"><strong>MODIFIED</strong></td>
+<td>Backend Publik</td>
+<td>Handler <code>getPuuDetail()</code> untuk halaman detail PUU dan method <code>postPublicFeedback()</code> untuk pengiriman aspirasi.</td>
+</tr>
+<tr>
+<td><code>app/Http/Controllers/Front/PageController.php</code></td>
+<td align="center"><strong>MODIFIED</strong></td>
+<td>Backend Publik</td>
+<td>Penambahan method <code>getAboutStatistik()</code>, <code>getAksesibilitas()</code>, <code>getRancanganPuu()</code>, <code>getPeraturanTerjemahan()</code>, dll.</td>
+</tr>
+<tr>
+<td><code>app/Http/Controllers/Front/StatisticController.php</code></td>
+<td align="center"><strong>NEW</strong></td>
+<td>Backend Publik</td>
+<td>Controller pengolah data statistik riil dan penyaji REST API statistik &amp; video.</td>
+</tr>
+<tr>
+<td><code>app/Models/Document.php</code></td>
+<td align="center"><strong>MODIFIED</strong></td>
+<td>Eloquent Model</td>
+<td>Konstanta <code>master_document_id</code> PUU baru, relasi <code>relateds</code>, relasi tahapan, accessor permalink dinamis.</td>
+</tr>
+<tr>
+<td><code>app/Models/Gallery.php</code></td>
+<td align="center"><strong>MODIFIED</strong></td>
+<td>Eloquent Model</td>
+<td>Relasi <code>classifications()</code>, query scope <code>scopeClassifiedAs()</code>, parser regex normalisasi YouTube, accessor embed &amp; thumbnail.</td>
+</tr>
+<tr>
+<td><code>app/Models/PublicConsultationFeedback.php</code></td>
+<td align="center"><strong>NEW</strong></td>
+<td>Eloquent Model</td>
+<td>Model representasi data aspirasi masyarakat terhadap rancangan regulasi.</td>
+</tr>
+<tr>
+<td><code>app/Models/VideoClassification.php</code></td>
+<td align="center"><strong>NEW</strong></td>
+<td>Eloquent Model</td>
+<td>Model representasi master kategori klasifikasi video.</td>
+</tr>
+<tr>
+<td><code>config/cadmin/menu.php</code></td>
+<td align="center"><strong>MODIFIED</strong></td>
+<td>Konfigurasi CMS</td>
+<td>Pendaftaran grup menu induk <code>'puu'</code> dan 7 sub-modul Dokumen Pembentukan PUU.</td>
+</tr>
+<tr>
+<td><code>database/migrations/2026_10_19_000001_create_public_consultation_feedbacks_table.php</code></td>
+<td align="center"><strong>NEW</strong></td>
+<td>Migrasi Database</td>
+<td>Skema tabel masukan konsultasi publik masyarakat.</td>
+</tr>
+<tr>
+<td><code>database/migrations/2026_10_19_000002_add_puu_master_documents_and_columns.php</code></td>
+<td align="center"><strong>NEW</strong></td>
+<td>Migrasi Database</td>
+<td>Kolom metadata baru pada tabel <code>documents</code> dan <code>documents_lang</code>.</td>
+</tr>
+<tr>
+<td><code>database/migrations/2026_10_26_000001_create_video_classifications_and_pivot_tables.php</code></td>
+<td align="center"><strong>NEW</strong></td>
+<td>Migrasi Database</td>
+<td>Skema master klasifikasi video, tabel pivot, dan kolom penunjang galeri.</td>
+</tr>
+<tr>
+<td><code>resources/assets/js/libs/header.js</code></td>
+<td align="center"><strong>MODIFIED</strong></td>
+<td>Frontend Script</td>
+<td>Interaksi keyboard Escape dan klik luar untuk penutup dropdown menu.</td>
+</tr>
+<tr>
+<td><code>resources/assets/sass/component/_layout.scss</code></td>
+<td align="center"><strong>MODIFIED</strong></td>
+<td>Stylesheet</td>
+<td>Perbaikan logika tampilan logo ganda (hitam/putih), styling dropdown menu ala JDIHN, dan penyesuaian dark mode.</td>
+</tr>
+<tr>
+<td><code>resources/assets/sass/pages/general.scss</code></td>
+<td align="center"><strong>MODIFIED</strong></td>
+<td>Stylesheet</td>
+<td>Penataan batas tinggi minimum <code>.middle</code> (70vh) agar footer tidak naik saat data kosong.</td>
+</tr>
+<tr>
+<td><code>resources/assets/sass/pages/home.scss</code></td>
+<td align="center"><strong>MODIFIED</strong></td>
+<td>Stylesheet</td>
+<td>Styling kartu statistik beranda (banner stats glassmorphism &amp; hover effect).</td>
+</tr>
+<tr>
+<td><code>resources/views/admin/gallery/form-js.blade.php</code></td>
+<td align="center"><strong>MODIFIED</strong></td>
+<td>View CMS</td>
+<td>Skrip pembantu pemilihan multi-checkbox klasifikasi video.</td>
+</tr>
+<tr>
+<td><code>resources/views/admin/puu/feedback_list.blade.php</code></td>
+<td align="center"><strong>NEW</strong></td>
+<td>View CMS</td>
+<td>Tampilan tabel rekapitulasi masukan masyarakat per rancangan peraturan.</td>
+</tr>
+<tr>
+<td><code>resources/views/admin/puu/feedback_detail.blade.php</code></td>
+<td align="center"><strong>NEW</strong></td>
+<td>View CMS</td>
+<td>Tampilan rincian masukan masyarakat, telaah berkas, dan form perubahan status.</td>
+</tr>
+<tr>
+<td><code>resources/views/dynamic/component/accessibility-widget.blade.php</code></td>
+<td align="center"><strong>NEW</strong></td>
+<td>View Publik</td>
+<td>Komponen widget aksesibilitas mandiri berisi 19 fitur lengkap (UserWay / EqualWeb style).</td>
+</tr>
+<tr>
+<td><code>resources/views/dynamic/component/menu.blade.php</code></td>
+<td align="center"><strong>MODIFIED</strong></td>
+<td>View Publik</td>
+<td>Navbar utama: 6 menu, mega dropdown JDIHN, badge subchild, penghapusan tombol login.</td>
+</tr>
+<tr>
+<td><code>resources/views/dynamic/home.blade.php</code></td>
+<td align="center"><strong>MODIFIED</strong></td>
+<td>View Publik</td>
+<td>Penyematan widget 4 kartu statistik produk hukum di bawah kotak pencarian beranda.</td>
+</tr>
+<tr>
+<td><code>resources/views/dynamic/layouts/layout.blade.php</code></td>
+<td align="center"><strong>MODIFIED</strong></td>
+<td>View Publik</td>
+<td>Skrip inisialisasi dark mode awal (mencegah kedipan putih) dan penyematan widget aksesibilitas.</td>
+</tr>
+<tr>
+<td><code>resources/views/dynamic/pages/about-statistik.blade.php</code></td>
+<td align="center"><strong>MODIFIED</strong></td>
+<td>View Publik</td>
+<td>Halaman statistik lengkap: KPI cards, filter ganda, Chart.js, AJAX pushState, ekspor PNG.</td>
+</tr>
+<tr>
+<td><code>resources/views/dynamic/pages/document-rancangan-puu.blade.php</code></td>
+<td align="center"><strong>NEW</strong></td>
+<td>View Publik</td>
+<td>Halaman listing rancangan PUU dengan pencarian, filter tahun, dan badge tahapan.</td>
+</tr>
+<tr>
+<td><code>resources/views/dynamic/pages/informasi-aksesibilitas.blade.php</code></td>
+<td align="center"><strong>NEW</strong></td>
+<td>View Publik</td>
+<td>Halaman galeri khusus video ramah disabilitas (bahasa isyarat / takarir).</td>
+</tr>
+<tr>
+<td><code>routes/web.php</code></td>
+<td align="center"><strong>MODIFIED</strong></td>
+<td>Rute Aplikasi</td>
+<td>Pendaftaran rute dinamis PUU, rute masukan publik, rute statistik, rute aksesibilitas, dan grup REST API.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h1 id="17-pengujian-dan-hasil-verifikasi">17. Pengujian dan Hasil Verifikasi</h1>
+<p>Pengujian dilakukan secara komprehensif mencakup 39 skenario uji fungsional, performa, dan tampilan:</p>
+<h2 id="171-pengujian-modul-puu-amp-cms-skenario-puu-01-sd-puu-08">17.1 Pengujian Modul PUU &amp; CMS (Skenario PUU-01 s/d PUU-08)</h2>
+<ul>
+<li><strong>PUU-01 (Akses Admin Panel):</strong> Membuka <code>/admin-panel/puu-*</code> → Status <strong>200 OK</strong>, menu sidebar tampil dengan ikon timbangan.</li>
+<li><strong>PUU-02 (Pembuatan Dokumen PUU):</strong> Input rancangan peraturan baru dengan berkas PDF → <strong>Lolos</strong>, data tersimpan di <code>documents</code> dan berkas masuk ke <code>storage/app/upload/pdf/</code>.</li>
+<li><strong>PUU-03 (Bugfix Upload Enctype):</strong> Verifikasi tidak terjadi error <code>getClientOriginalName() on string</code> → <strong>Lolos 100%</strong>.</li>
+<li><strong>PUU-04 (Penayangan Halaman Publik <code>/rancangan-puu</code>):</strong> Dokumen yang baru disimpan di admin langsung muncul di web publik → <strong>Lolos</strong>, judul, badge tahapan, dan tombol unduh berfungsi.</li>
+<li><strong>PUU-05 (Pengiriman Masukan Masyarakat):</strong> Submit form masukan di halaman detail partisipasi publik → <strong>Lolos</strong>, data masuk ke <code>public_consultation_feedbacks</code>.</li>
+<li><strong>PUU-06 (Moderasi Masukan di Admin):</strong> Staf hukum membuka halaman rekapitulasi masukan dan mengubah status menjadi <code>approved</code> → <strong>Lolos</strong>.</li>
+<li><strong>PUU-07 (Integritas Data Eksisting):</strong> Pemeriksaan 49 dokumen peraturan lama setelah migrasi → <strong>Lolos</strong>, seluruh dokumen lama tetap utuh tanpa kerusakan relasi.</li>
+</ul>
+<h2 id="172-pengujian-fitur-1-statistik-produk-hukum-skenario-f1-01-sd-f1-08">17.2 Pengujian Fitur 1: Statistik Produk Hukum (Skenario F1-01 s/d F1-08)</h2>
+<ul>
+<li><strong>F1-01 (Akses Halaman <code>/statistik-produk-hukum</code>):</strong> Status <strong>200 OK</strong>, seluruh elemen visual dirender sempurna.</li>
+<li><strong>F1-02 (Akurasi Metrik KPI Cards):</strong> Total Peraturan menunjukkan angka <code>47</code>, jenis terbanyak <code>Peraturan Presiden (13)</code> → <strong>Sesuai 100% dengan database</strong>.</li>
+<li><strong>F1-03 (Filter Jenis Peraturan):</strong> Memilih &quot;Peraturan Presiden&quot; → Grafik batang dan donat diperbarui hanya menampilkan data Perpres tanpa reload halaman.</li>
+<li><strong>F1-04 (Filter Tahun):</strong> Memilih tahun &quot;2025&quot; → Angka menyesuaikan menjadi 28 dokumen.</li>
+<li><strong>F1-05 (URL PushState):</strong> Saat filter diubah, URL browser berganti menjadi <code>?type=...&amp;year=...</code> → <strong>Lolos</strong>.</li>
+<li><strong>F1-06 (Ekspor PNG via html2canvas):</strong> Menekan tombol unduh grafik → Berkas gambar PNG terunduh ke komputer lokal dengan kualitas tajam.</li>
+<li><strong>F1-07 (Endpoint REST API):</strong> Pengujian <code>GET /api/statistics/legal-products</code> → Menghasilkan JSON valid dengan status code <strong>200 OK</strong>.</li>
+</ul>
+<h2 id="173-pengujian-fitur-2-klasifikasi-video-skenario-f2-01-sd-f2-08">17.3 Pengujian Fitur 2: Klasifikasi Video (Skenario F2-01 s/d F2-08)</h2>
+<ul>
+<li><strong>F2-01 (Kelola Galeri di Admin):</strong> Form galeri memuat kotak centang &quot;Galeri Kegiatan&quot; dan &quot;Layanan Aksesibilitas&quot; → <strong>Lolos</strong>.</li>
+<li><strong>F2-02 (Multi-Checkbox Sync):</strong> Memilih kedua kategori pada video ID 1 → Tabel pivot tersimpan ganda tanpa duplikasi record.</li>
+<li><strong>F2-03 (Normalisasi Tautan YouTube):</strong> Memasukkan tautan <code>youtu.be/xyz</code> → Otomatis terkonversi menjadi format embed resmi.</li>
+<li><strong>F2-04 (Halaman Publik <code>/aksesibilitas</code>):</strong> Menampilkan hanya video berkategori aksesibilitas → <strong>Lolos (HTTP 200 OK)</strong>.</li>
+<li><strong>F2-05 (Responsivitas Pemutar Video):</strong> Tampilan video di layar HP (resolusi 375px) beradaptasi dengan rasio 16:9 tanpa memotong layout.</li>
+<li><strong>F2-06 (Endpoint API Video):</strong> <code>GET /api/videos?category=accessibility</code> menyajikan JSON video difabel → <strong>Lolos</strong>.</li>
+</ul>
+<h2 id="174-pengujian-fitur-aksesibilitas-skenario-ac-01-sd-ac-19">17.4 Pengujian Fitur Aksesibilitas (Skenario AC-01 s/d AC-19)</h2>
+<p>Pengujian ke-19 alat bantu aksesibilitas pada berbagai kondisi browser:</p>
+<ul>
+<li><strong>AC-01 s/d AC-04 (Kontras &amp; Warna):</strong> Mode Kontras Tinggi (latar hitam teks kuning), Kontras Terang (latar putih teks hitam), Mode Abu-abu (grayscale 100%), dan Inversi Warna berfungsi seketika.</li>
+<li><strong>AC-05 &amp; AC-06 (Penyorotan Navigasi):</strong> Sorot Tautan dan Sorot Judul memberikan tanda visual jelas pada elemen interaktif.</li>
+<li><strong>AC-07 (Font Disleksia):</strong> Font Google Lexend termuat mulus dan menggantikan font bawaan tanpa merusak struktur tombol.</li>
+<li><strong>AC-08 s/d AC-11 (Tipografi &amp; Tata Letak):</strong> Pembesaran teks (+40%), pengecilan teks (-20%), spasi lega, dan perataan kiri berjalan presisi.</li>
+<li><strong>AC-12 s/d AC-14 (Alat Bantu Visual):</strong> Kursor besar, garis panduan membaca (mengikuti mouse), dan masker fokus (menutup baris lain) berjalan lancar.</li>
+<li><strong>AC-15 &amp; AC-16 (Kenyamanan Sensorik):</strong> Hentikan animasi membekukan seluruh transisi; Sembunyikan gambar menyamarkan seluruh elemen visual.</li>
+<li><strong>AC-17 &amp; AC-18 (Pembaca Suara / TTS):</strong> Web Speech API berbahasa Indonesia (<code>id-ID</code>) melafalkan judul peraturan dengan artikulasi jelas; tombol stop mematikan suara instan.</li>
+<li><strong>AC-19 (Ketahanan Setelan / Persistence):</strong> Mengaktifkan 3 fitur, lalu berpindah halaman dari <code>/</code> ke <code>/kontak</code> → <strong>Setelan tetap aktif tanpa reset</strong>.</li>
+<li><strong>Pintasan Keyboard:</strong> Menekan tombol <strong>Alt + A</strong> membuka/menutup panel seketika; tombol <strong>Esc</strong> menutup modal secara cepat.</li>
+</ul>
+<hr />
+<h1 id="18-masalah-yang-ditemui-dan-cara-mengatasinya-troubleshooting">18. Masalah yang Ditemui dan Cara Mengatasinya (Troubleshooting)</h1>
+<p>Selama proses pengembangan dari awal hingga akhir, ditemukan beberapa kendala teknis nyata. Bagian ini mendokumentasikan akar masalah dan solusi yang telah diterapkan sebagai bahan pembelajaran:</p>
+<table>
+<thead>
+<tr>
+<th>No</th>
+<th>Gejala Error / Kendala</th>
+<th>Akar Masalah</th>
+<th>Solusi yang Diterapkan</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><code>php: command not found</code> atau versi PHP tidak sesuai saat menjalankan Composer/artisan.</td>
+<td>Windows memiliki instalasi PHP bawaan lama (PHP 7.4) pada system PATH yang tidak kompatibel dengan Laravel 11.</td>
+<td>Menggunakan path absolut PHP 8.2 resmi XAMPP: <code>C:\xampp_update\php\php.exe</code>.</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Halaman <code>/anev-puu</code> lokal kosong, tombol unduh menghasilkan error 404.</td>
+<td>Database lokal awal hanya berisi data dummy 14 dokumen; berkas fisik PDF belum diekstrak dari server production.</td>
+<td>Melakukan swap database production dari folder backup cPanel dan mengekstrak berkas arsip <code>jdih.zip</code> ke <code>public/assets/source/files/</code> dan <code>storage/app/upload/</code>.</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Logo JDIH muncul ganda berdampingan di header atas.</td>
+<td>CSS inline lama menetapkan <code>display: block !important</code> pada varian logo putih dan hitam secara bersamaan.</td>
+<td>Memperbaiki aturan CSS: logo putih hanya aktif saat header transparan/dark mode, logo hitam aktif saat header scrolling/floating.</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Tombol login di header publik membingungkan masyarakat umum.</td>
+<td>Terdapat markup <code>.right-header__login</code> bawaan template komersial.</td>
+<td>Menghapus elemen HTML login dari header publik dan mobile drawer; membatasi akses admin hanya melalui <code>/admin-panel</code>.</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Menu dropdown bertumpuk dan tulisan sulit dibaca saat resolusi layar menengah.</td>
+<td>Struktur dropdown lama menggunakan absolute positioning tanpa pembungkus responsif.</td>
+<td>Mengadopsi arsitektur Mega Dropdown ala JDIHN dengan kartu putih bersih, ikon visual, dan deskripsi singkat.</td>
+</tr>
+<tr>
+<td>6</td>
+<td>Footer melonjak ke tengah layar saat membuka halaman menu yang belum ada isinya.</td>
+<td>Area <code>.middle</code> tidak memiliki tinggi minimum saat data tabel kosong.</td>
+<td>Menambahkan properti CSS <code>min-height: 70vh</code> pada kelas <code>.middle</code> di <code>general.scss</code>.</td>
+</tr>
+<tr>
+<td>7</td>
+<td>Error <code>Call to a member function getClientOriginalName() on string</code> saat menyimpan dokumen PUU di admin.</td>
+<td>Form CMS dirender tanpa atribut <code>enctype=&quot;multipart/form-data&quot;</code> karena method <code>createFile()</code> belum dioverride di controller.</td>
+<td>Menambahkan <code>createFile()</code> dan <code>editFile()</code> pada 7 controller PUU dan memperbarui helper <code>Document.php</code> dengan pengecekan <code>instanceof UploadedFile</code>.</td>
+</tr>
+<tr>
+<td>8</td>
+<td>Error SQL <code>Foreign Key Constraint Violation</code> saat input dokumen baru tanpa memilih dokumen relasi acuan.</td>
+<td>Input form mengirimkan string kosong <code>&quot;&quot;</code> ke kolom database bertipe foreign key integer nullable.</td>
+<td>Menambahkan konversi otomatis di helper <code>Document.php</code>: jika nilai string kosong <code>&quot;&quot;</code>, diubah menjadi <code>null</code>.</td>
+</tr>
+<tr>
+<td>9</td>
+<td>Halaman detail dokumen <code>/rencana-strategis-...</code> menghasilkan error 500 saat dibuka publik.</td>
+<td>Accessor <code>$document-&gt;permalink_document</code> pada model <code>Document</code> belum memetakan tipe baru <code>puu-rancangan</code>.</td>
+<td>Memperbarui method accessor di <code>Document.php</code> dengan menambahkan case <code>RANCANGAN_PUU</code> beserta fallback slug yang aman.</td>
+</tr>
+<tr>
+<td>10</td>
+<td>Halaman <code>/aksesibilitas</code> memicu error 500 <code>Trying to get property 'file' of non-object</code>.</td>
+<td>Fungsi pembaca banner <code>widget($menu-&gt;id, 'menu', 'banner')</code> mengembalikan nilai null karena menu baru belum memiliki gambar banner di database.</td>
+<td>Menambahkan logika fallback di <code>PageController::getAksesibilitas</code>: jika banner menu kosong, sistem otomatis meminjam banner default kementerian.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h1 id="19-keamanan-cadangan-backup-dan-rollback">19. Keamanan, Cadangan (Backup), dan Rollback</h1>
+<h2 id="191-titik-pemulihan-cadangan-rollback-points">19.1 Titik Pemulihan Cadangan (Rollback Points)</h2>
+<p>Untuk menjamin keamanan sistem di masa depan, proyek ini telah dilengkapi berkas cadangan di setiap fase penting:</p>
+<ol>
+<li><strong>Cadangan Database Sebelum Swap Production:</strong>
+Tersimpan di: <code>Database/pangan_jdihdb_backup_sebelum_swap_2026-10-15.sql</code>
+Dapat diimpor sewaktu-waktu jika ingin mengembalikan database ke kondisi awal.</li>
+<li><strong>Cadangan Server Production Asli (cPanel):</strong>
+Tersimpan utuh pada folder: <code>backup-9.30.2026_08-25-36_pangan/</code>
+Berisi seluruh kode, database, dan berkas arsip <code>jdih.zip</code>.</li>
+</ol>
+<h2 id="192-langkah-cepat-melakukan-rollback-jika-terjadi-kegagalan">19.2 Langkah Cepat Melakukan Rollback (Jika Terjadi Kegagalan)</h2>
+<p>Jika suatu saat database lokal mengalami kerusakan data uji coba, cukup jalankan perintah satu baris di terminal:</p>
+<pre><code class="language-powershell">mysql -u root pangan_jdihdb &lt; &quot;Database\pangan_jdihdb_backup_sebelum_swap_2026-10-15.sql&quot;
+C:\xampp_update\php\php.exe artisan optimize:clear
+</code></pre>
+<h2 id="193-catatan-keamanan-kredensial-env">19.3 Catatan Keamanan Kredensial (.env)</h2>
+<p>File konfigurasi <code>.env</code> pada lingkungan produksi mengandung kredensial sensitif (koneksi database server dan akun email SMTP kementerian). Di lingkungan lokal, seluruh koneksi diarahkan secara aman ke <code>127.0.0.1</code> tanpa membeberkan sandi produksi ke pihak luar.</p>
+<hr />
+<h1 id="20-panduan-menjalankan-dan-merawat-sistem">20. Panduan Menjalankan dan Merawat Sistem</h1>
+<p>Jika Anda atau rekan programmer lain ingin menjalankan proyek ini di kemudian hari pada komputer baru, ikuti panduan praktis berikut:</p>
+<h2 id="201-prasyarat-perangkat-lunak">20.1 Prasyarat Perangkat Lunak</h2>
+<ul>
+<li><strong>XAMPP Windows</strong> dengan PHP 8.2 dan MySQL aktif.</li>
+<li><strong>Git for Windows</strong> (opsional, untuk version control).</li>
+<li><strong>Web Browser modern</strong> (Google Chrome, Microsoft Edge, Mozilla Firefox).</li>
+</ul>
+<h2 id="202-langkah-langkah-menjalankan-proyek-3-langkah-mudah">20.2 Langkah-Langkah Menjalankan Proyek (3 Langkah Mudah)</h2>
+<h3 id="langkah-1-aktifkan-xampp">Langkah 1: Aktifkan XAMPP</h3>
+<p>Buka <strong>XAMPP Control Panel</strong>, lalu tekan tombol <strong>Start</strong> pada modul <strong>Apache</strong> dan <strong>MySQL</strong>. Pastikan kedua modul berwarna hijau.</p>
+<h3 id="langkah-2-buka-terminal-di-folder-proyek">Langkah 2: Buka Terminal di Folder Proyek</h3>
+<p>Buka PowerShell atau Command Prompt, lalu arahkan ke direktori kode sumber:</p>
+<pre><code class="language-powershell">cd &quot;c:\Users\Asus\Documents\Arkan-Document\kerja\Kemenko Pangan\HKS\JDIH\web_jdih\jdih.kemenkopangan.go.id\jdih.kemenkopangan.go.id\Source Code\jdih-kemenko-pangan&quot;
+</code></pre>
+<h3 id="langkah-3-jalankan-perintah-server-artisan">Langkah 3: Jalankan Perintah Server Artisan</h3>
+<p>Ketik perintah berikut lalu tekan Enter:</p>
+<pre><code class="language-powershell">C:\xampp_update\php\php.exe artisan serve --port=8000
+</code></pre>
+<p>Biarkan jendela terminal tetap terbuka. Buka browser dan ketik alamat:</p>
+<pre><code>http://localhost:8000
+</code></pre>
+<p>Portal JDIH Kemenko Pangan kini siap digunakan dan diuji!</p>
+<h2 id="203-alamat-alamat-penting-untuk-diuji">20.3 Alamat-Alamat Penting untuk Diuji</h2>
+<table>
+<thead>
+<tr>
+<th>Tujuan</th>
+<th>Alamat URL</th>
+<th>Fungsi yang Dapat Dicoba</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Beranda Publik</strong></td>
+<td><code>http://localhost:8000/</code></td>
+<td>Widget statistik beranda, tombol dark mode, launcher aksesibilitas.</td>
+</tr>
+<tr>
+<td><strong>Statistik Produk Hukum</strong></td>
+<td><code>http://localhost:8000/statistik-produk-hukum</code></td>
+<td>Filter jenis peraturan, filter tahun, grafik interaktif, unduh PNG.</td>
+</tr>
+<tr>
+<td><strong>Layanan Aksesibilitas</strong></td>
+<td><code>http://localhost:8000/aksesibilitas</code></td>
+<td>Galeri video ramah disabilitas (bahasa isyarat &amp; takarir).</td>
+</tr>
+<tr>
+<td><strong>Rancangan PUU Publik</strong></td>
+<td><code>http://localhost:8000/rancangan-puu</code></td>
+<td>Daftar draf regulasi, tahapan penyusunan, unduh PDF rancangan.</td>
+</tr>
+<tr>
+<td><strong>Admin Panel CMS</strong></td>
+<td><code>http://localhost:8000/admin-panel</code></td>
+<td>Login pengelola web, menu Dokumen Pembentukan PUU, kelola galeri.</td>
+</tr>
+<tr>
+<td><strong>API Statistik JSON</strong></td>
+<td><code>http://localhost:8000/api/statistics/legal-products</code></td>
+<td>Endpoint data mentah statistik untuk integrasi antar-aplikasi.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h1 id="21-bahan-presentasi-alur-demo-poin-bicara-dan-tanya-jawab">21. Bahan Presentasi: Alur Demo, Poin Bicara, dan Tanya-Jawab</h1>
+<p>Bagian ini dirancang khusus agar Anda dapat mempresentasikan hasil pekerjaan di hadapan pimpinan atau tim penguji dengan penuh percaya diri.</p>
+<h2 id="211-skenario-alur-demonstrasi-langsung-live-demo-flow">21.1 Skenario Alur Demonstrasi Langsung (Live Demo Flow)</h2>
+<p>Gunakan urutan demonstrasi berikut (durasi ideal: 10 – 15 menit):</p>
+<pre><code>[1. Pembukaan &amp; Beranda] ──&gt; [2. Fitur Aksesibilitas] ──&gt; [3. Halaman Statistik]
+                                                                    │
+[6. Penutup &amp; Tanya Jawab] &lt;── [5. Admin Panel CMS]    &lt;── [4. Modul Pembentukan PUU]
+</code></pre>
+<h3 id="langkah-1-beranda-jdih-yang-lebih-bersih-amp-modern">Langkah 1: Beranda JDIH yang Lebih Bersih &amp; Modern</h3>
+<ul>
+<li>Buka <code>http://localhost:8000/</code>.</li>
+<li>Tunjukkan bahwa logo kementerian berada rapi di pojok kiri atas.</li>
+<li>Tunjukkan bahwa navigasi atas memiliki menu <strong>&quot;Beranda&quot;</strong> di awal dan <strong>tombol login sudah dibersihkan</strong> sehingga ramah publik.</li>
+<li>Arahkan mouse ke menu <strong>Tentang Kami</strong>, <strong>Jenis Dokumen</strong>, dan <strong>Dokumen Pembentukan PUU</strong>: tunjukkan tampilan <strong>Mega Dropdown bergaya JDIHN</strong> berlatar putih bersih dengan ikon informatif.</li>
+<li>Tunjukkan tombol <strong>Toggle Dark Mode</strong>: klik sekali untuk menunjukkan bahwa website langsung beralih ke mode malam yang elegan tanpa merusak keterbacaan teks.</li>
+<li>Gulir ke area di bawah kotak pencarian: perlihatkan <strong>Widget 4 Kartu Statistik Beranda</strong> (Peraturan, Monografi, Artikel, Putusan) yang angkanya langsung dihitung dari database kementerian.</li>
+</ul>
+<h3 id="langkah-2-demonstrasi-19-fitur-aksesibilitas-paling-memikat-audiens">Langkah 2: Demonstrasi 19 Fitur Aksesibilitas (Paling Memikat Audiens!)</h3>
+<ul>
+<li>Tunjukkan tombol bulat navy di pojok kiri bawah layar: <em>&quot;Sesuai amanat UU Disabilitas dan standar UserWay, kami menambahkan asisten aksesibilitas digital.&quot;</em></li>
+<li>Klik tombol tersebut (atau tekan <strong>Alt + A</strong> di keyboard): panel modal pop-up modern akan muncul di layar.</li>
+<li><strong>Demokan 3 fitur favorit:</strong>
+<ol>
+<li>Klik tombol <strong>Kontras Tinggi</strong>: seluruh layar seketika berubah menjadi hitam pekat dengan teks kuning menyala. Katakan: <em>&quot;Ini membantu masyarakat yang memiliki keterbatasan daya pandang berat.&quot;</em></li>
+<li>Klik tombol <strong>Font Disleksia</strong>: huruf seketika berganti menjadi font Lexend yang dirancang khusus bagi penyandang disleksia.</li>
+<li>Klik tombol <strong>Baca Layar (Text-to-Speech)</strong>: sistem akan langsung membacakan teks peraturan di layar menggunakan suara bahasa Indonesia alami.</li>
+</ol>
+</li>
+<li>Tunjukkan tombol <strong>Atur Ulang</strong>: klik sekali, dan website kembali ke tampilan normal.</li>
+<li>Buktikan ketahanan setelan: aktifkan salah satu fitur, buka halaman lain, dan tunjukkan bahwa setelan tersebut <strong>tetap tersimpan</strong> di browser pengunjung.</li>
+</ul>
+<h3 id="langkah-3-halaman-statistik-produk-hukum-interaktif">Langkah 3: Halaman Statistik Produk Hukum Interaktif</h3>
+<ul>
+<li>Buka menu <code>Tentang Kami -&gt; Statistik</code> (atau <code>/statistik-produk-hukum</code>).</li>
+<li>Jelaskan 4 Kartu KPI di atas: <em>&quot;Dari database kementerian, tercatat ada 47 Peraturan aktif, di mana jenis terbanyak adalah Perpres sebanyak 13 dokumen dan tahun 2025 merupakan puncak legislasi sebanyak 28 peraturan.&quot;</em></li>
+<li>Ubah filter Jenis Peraturan ke <em>&quot;Peraturan Presiden&quot;</em>: tunjukkan grafik batang dan diagram donat bergerak dinamis tanpa memuat ulang halaman (<em>AJAX</em>).</li>
+<li>Tekan tombol <strong>&quot;Unduh Grafik (PNG)&quot;</strong>: tunjukkan bahwa sistem langsung men-generate gambar grafik beresolusi tinggi yang siap disisipkan ke slide laporan pimpinan.</li>
+</ul>
+<h3 id="langkah-4-transparansi-dokumen-pembentukan-puu">Langkah 4: Transparansi Dokumen Pembentukan PUU</h3>
+<ul>
+<li>Buka menu <code>Dokumen Pembentukan PUU -&gt; Rancangan PUU</code> (<code>/rancangan-puu</code>).</li>
+<li>Tunjukkan bahwa masyarakat kini dapat melihat draf aturan yang sedang dirumuskan, lengkap dengan badge status tahapannya (misal: <em>Tahap Harmonisasi</em>).</li>
+<li>Klik salah satu rancangan untuk menunjukkan halaman detail draf dan formulir konsultasi publik tempat masyarakat dapat menyalurkan aspirasinya.</li>
+</ul>
+<h3 id="langkah-5-dapur-pengelola-cms-admin-panel">Langkah 5: Dapur Pengelola (CMS Admin Panel)</h3>
+<ul>
+<li>Buka <code>http://localhost:8000/admin-panel</code>.</li>
+<li>Perlihatkan kelompok menu baru di sidebar: <strong>Dokumen Pembentukan PUU</strong> yang menaungi 7 sub-modul (Program Penyusunan, Naskah Akademik, Rancangan PUU, Risalah, Evaluasi, Kajian, Partisipasi Publik).</li>
+<li>Tunjukkan bagaimana staf kementerian dapat memoderasi masukan masyarakat yang masuk dan mengunduh berkas lampirannya secara terstruktur.</li>
+</ul>
+<hr />
+<h2 id="212-poin-poin-bicara-kunci-key-talking-points">21.2 Poin-Poin Bicara Kunci (Key Talking Points)</h2>
+<p>Gunakan kalimat-kalimat strategis berikut saat berbicara:</p>
+<blockquote>
+<p><strong>Prinsip Pengembangan:</strong><br />
+<em>&quot;Pengembangan ini dilakukan dengan prinsip kesinambungan. Kami tidak merombak dari nol dan tidak menghapus fitur lama. Seluruh arsitektur Laravel dan CMS Cactuar yang sudah ada kami pertahankan dan tingkatkan kualitasnya agar 100% selaras dengan website resmi JDIH Kemenko Pangan.&quot;</em></p>
+</blockquote>
+<blockquote>
+<p><strong>Keaslian Data:</strong><br />
+<em>&quot;Seluruh angka pada widget statistik dan halaman infografis hukum ditarik secara riil dari database kementerian, bukan angka tiruan atau hardcoding. Jika staf admin menambahkan satu peraturan baru di panel CMS, detik itu juga angka statistik di web publik bertambah secara otomatis.&quot;</em></p>
+</blockquote>
+<blockquote>
+<p><strong>Inklusivitas &amp; Disabilitas:</strong><br />
+<em>&quot;Melalui implementasi 19 alat bantu aksesibilitas berstandar UserWay dan klasifikasi video ramah disabilitas, portal JDIH Kemenko Pangan kini siap menjadi salah satu portal hukum kementerian yang paling inklusif di Indonesia bagi penyandang disabilitas.&quot;</em></p>
+</blockquote>
+<hr />
+<h2 id="213-antisipasi-pertanyaan-penguji-amp-jawaban-tepat-faq">21.3 Antisipasi Pertanyaan Penguji &amp; Jawaban Tepat (FAQ)</h2>
+<p><strong>Pertanyaan 1: Mengapa database lokal sempat berbeda dengan website resmi?</strong><br />
+<em>Jawaban:</em><br />
+<em>&quot;Database awal di komputer pengembang adalah database instalasi dasar yang hanya memuat 14 data sampel. Pada tanggal 15 Oktober 2026, kami telah melakukan proses database swap menggunakan berkas cadangan resmi cPanel kementerian, sehingga seluruh 49 dokumen hukum, 16 berita, dan 27 dokumentasi galeri resmi telah tersinkronisasi 100% ke lingkungan lokal beserta seluruh berkas PDF-nya.&quot;</em></p>
+<p><strong>Pertanyaan 2: Apakah penambahan 7 sub-modul PUU ini merusak data peraturan yang lama?</strong><br />
+<em>Jawaban:</em><br />
+<em>&quot;Sama sekali tidak. Kami memanfaatkan arsitektur master_document_id bawaan sistem Cactuar. Peraturan lama tetap menempati ID 1, sedangkan modul PUU menggunakan rentang ID 8 sampai 15. Tabel utama documents tetap utuh dan 49 peraturan lama tidak mengalami perubahan struktur data.&quot;</em></p>
+<p><strong>Pertanyaan 3: Apa yang terjadi jika pengunjung mematikan koneksi internet saat menggunakan widget aksesibilitas?</strong><br />
+<em>Jawaban:</em><br />
+<em>&quot;Seluruh 19 fitur aksesibilitas (kontras tinggi, monokrom, spasi teks, kursor besar, masker fokus, panduan membaca) diproses sepenuhnya di sisi peramban pengunjung (client-side CSS &amp; JavaScript). Bahkan fitur Text-to-Speech memanfaatkan Web Speech API bawaan peramban komputer, sehingga widget tetap berfungsi prima meskipun koneksi internet mengalami gangguan.&quot;</em></p>
+<p><strong>Pertanyaan 4: Bagaimana jika ada penambahan jenis peraturan baru di masa depan?</strong><br />
+<em>Jawaban:</em><br />
+<em>&quot;Sistem telah dirancang modular. Controller statistik membaca tabel rule_types secara dinamis. Jika administrator menambahkan jenis regulasi baru di database, sistem statistik akan otomatis membuatkan kategori baru pada diagram donat dan diagram batang tanpa perlu mengubah sebaris kode pun.&quot;</em></p>
+<hr />
+<h1 id="22-glosarium">22. Glosarium</h1>
+<ul>
+<li><strong>JDIH:</strong> Jaringan Dokumentasi dan Informasi Hukum, wadah pendayagunaan bersama atas dokumen hukum secara tertib, terpadu, dan berkesinambungan di lingkungan instansi pemerintah.</li>
+<li><strong>PUU:</strong> Peraturan Perundang-undangan.</li>
+<li><strong>CMS:</strong> <em>Content Management System</em>, aplikasi berbasis web yang digunakan untuk mengelola, menambah, dan mengubah konten website (pada proyek ini menggunakan Cactuar Admin).</li>
+<li><strong>Dual Guard Authentication:</strong> Arsitektur keamanan Laravel yang memisahkan sesi login antara administrator pengelola web (<code>guard: web</code>) dan akun masyarakat umum (<code>guard: account</code>).</li>
+<li><strong>Eloquent ORM:</strong> Sistem pemetaan objek-relasional bawaan Laravel yang memungkinkan pemrogram berinteraksi dengan tabel database menggunakan sintaks PHP objek tanpa mengetik query SQL mentah.</li>
+<li><strong>Master Document ID:</strong> Kolom pengenal numerik pada tabel <code>documents</code> yang menentukan jenis arsip hukum (1: Peraturan, 6: Monografi, 9: Program Penyusunan, 15: Rancangan PUU, dst.).</li>
+<li><strong>Pivot Table:</strong> Tabel perantara dalam relasi database <em>Many-to-Many</em> yang menghubungkan dua entitas utama (contoh: <code>gallery_video_classifications</code> yang menghubungkan video galeri dengan master klasifikasi video).</li>
+<li><strong>PushState:</strong> Fitur antarmuka JavaScript HTML5 yang memperbarui teks alamat URL pada bilah alamat browser tanpa memicu pemuatan ulang seluruh halaman (<em>page refresh</em>).</li>
+<li><strong>Web Speech API:</strong> Standar antarmuka pemrograman peramban web modern yang memungkinkan komputer menyintesis teks tulisan menjadi suara audio percakapan manusia secara alami.</li>
+<li><strong>LocalStorage:</strong> Media penyimpanan data ringan di dalam peramban web pengguna yang bersifat persisten (tidak terhapus saat berpindah halaman atau browser ditutup).</li>
+<li><strong>Glassmorphism:</strong> Tren desain antarmuka visual modern yang menonjolkan efek transparansi kaca kabur (<em>frosted glass</em>) dengan bayangan halus untuk menciptakan kesan kedalaman antarmuka yang elegan.</li>
+</ul>
+
+</div>
+
+</body>
+</html>

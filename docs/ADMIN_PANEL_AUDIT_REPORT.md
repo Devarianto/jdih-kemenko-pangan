@@ -48,3 +48,4 @@ Super Admin kini memiliki tombol pintas:
 - `[Web Partisipasi Publik]` -> Langsung membuka halaman publik.
 Dan di dalam e-Regulasi (`resources/views/layouts/app.blade.php`), Super Admin memiliki tombol:
 - `[Kembali ke Admin Panel JDIH]` -> Langsung kembali ke `/admin-panel`.
+

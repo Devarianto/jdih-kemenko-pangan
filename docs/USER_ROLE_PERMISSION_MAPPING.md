@@ -29,3 +29,4 @@
    Middleware `cadmin/src/Http/Middleware/Admin.php` memeriksa apakah pengguna ber-role `admin_operator`. Jika mencoba mengetik URL seperti `/admin-panel/document-peraturan` atau `/admin-panel/setting`, sistem otomatis mencegat dan me-redirect pengguna kembali ke `/dashboard`.
 3. **UI / Sidebar Isolation:**
    Pada template `resources/views/layouts/app.blade.php`, sidebar navigasi JDIH (`cactuar::admin.layout-nav`) disembunyikan untuk operator e-Regulasi, sehingga tampilan bersih dan fokus pada operasional e-Regulasi saja.
+

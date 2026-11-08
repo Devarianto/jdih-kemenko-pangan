@@ -1,66 +1,169 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# JDIH & e-Regulasi — Kementerian Koordinator Bidang Pangan RI
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Repository resmi pengembangan terpadu **Jaringan Dokumentasi dan Informasi Hukum (JDIH)** dan sistem perancangan regulasi **e-Regulasi** Kementerian Koordinator Bidang Pangan Republik Indonesia.
 
-## About Laravel
+---
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## 🌟 Fitur Utama Sistem
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+1. **Portal Publik JDIH (`/`)**
+   - Pencarian cerdas produk hukum (Peraturan, Monografi, Naskah Kerja Sama, Putusan, Kliping, Majalah).
+   - Filter berdasarkan bentuk/jenis, tahun, nomor, dan status keberlakuan peraturan.
+   - Fitur **Peraturan Terjemahan Bahasa Inggris** (Bilingual switcher ID/EN pada dokumen terkait).
+   - Aksesibilitas (Widget ramah disabilitas / High Contrast / Text Resize).
+   - Informasi hukum (Berita, Infografis, Galeri, Kamus Hukum).
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+2. **Sistem Perancangan e-Regulasi (`/dashboard`)**
+   - Monitoring alur penyusunan peraturan perundang-undangan (PUU) secara digital.
+   - Manajemen tahapan: Perencanaan, Penyusunan, Harmonisasi, Penetapan, Pengundangan.
+   - Upload naskah akademik/urgensi, draf raperpres/rapermen, dan lampiran.
+   - Log riwayat tahapan dan approval.
 
-## Learning Laravel
+3. **Partisipasi Publik PUU (`/partisipasi-publik`)**
+   - Kanal resmi keterbukaan bagi masyarakat untuk memberikan aspirasi, masukan, dan saran terhadap rancangan regulasi yang sedang dalam proses penyusunan.
+   - Panel moderasi masukan publik pada dashboard admin.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+4. **Multi-Role & Role Isolation (RBAC)**
+   - **Super Admin (`super_admin`):** Akses menyeluruh ke CMS JDIH, e-Regulasi, publikasi, dan user management.
+   - **Operator e-Regulasi (`admin_operator`):** Terisolasi penuh khusus untuk unit kerja penyusun regulasi. Login langsung masuk ke dashboard e-Regulasi tanpa akses ke modul CMS JDIH internal.
+   - **User Publik (`masyarakat`):** Pengguna masyarakat untuk menyampaikan tanggapan partisipasi publik.
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+---
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## 🛠️ Kebutuhan Sistem (Prerequisites)
 
-## Laravel Sponsors
+- **PHP:** `>= 8.2` (dengan ekstensi: `pdo_mysql`, `mbstring`, `openssl`, `curl`, `gd`, `zip`, `fileinfo`)
+- **Web Server:** Nginx / Apache / Laravel Built-in Server
+- **Database:** MariaDB `>= 10.4` atau MySQL `>= 8.0`
+- **Composer:** `>= 2.2`
+- **Node.js & NPM:** `>= 18.x` (opsional untuk re-compile SCSS/JS)
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+---
 
-### Premium Partners
+## 🚀 Panduan Setup untuk Kolaborator (Quick Start)
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+Ikuti langkah-langkah di bawah ini untuk menjalankan project di komputer lokal:
 
-## Contributing
+### 1. Clone Repository
+```bash
+git clone https://github.com/Arkandrvesh/JDIH-Update.git
+cd JDIH-Update
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+### 2. Install Dependencies Backend
+```bash
+composer install
+```
 
-## Code of Conduct
+### 3. Konfigurasi Environment (`.env`)
+Salin file konfigurasi contoh:
+```bash
+cp .env.example .env
+```
+Buka file `.env` dan sesuaikan koneksi database Anda:
+```env
+APP_NAME="JDIH Kemenko Pangan"
+APP_ENV=local
+APP_KEY=
+APP_DEBUG=true
+APP_URL=http://127.0.0.1:8000
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=pangan_jdihdb
+DB_USERNAME=root
+DB_PASSWORD=
+```
 
-## Security Vulnerabilities
+Generate application key:
+```bash
+php artisan key:generate
+```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+### 4. Setup Database
+1. Buat database baru di MySQL/MariaDB dengan nama:
+   ```sql
+   CREATE DATABASE pangan_jdihdb CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+   ```
+2. Import file starter database yang sudah terintegrasi lengkap:
+   ```bash
+   mysql -u root -p pangan_jdihdb < database/sql/pangan_jdihdb_starter.sql
+   ```
+   *(Atau import file `database/sql/pangan_jdihdb_starter.sql` melalui phpMyAdmin / DBeaver).*
 
-## License
+### 5. Setup Storage Link
+```bash
+php artisan storage:link
+```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+### 6. Jalankan Server Lokal
+```bash
+php artisan serve --port=8000
+```
+Aplikasi kini berjalan di: **[http://127.0.0.1:8000](http://127.0.0.1:8000)**
+
+---
+
+## 🔑 Akun Default untuk Pengujian Lokal
+
+| Peran (Role) | Username / Email | Password | Hak Akses & Fitur |
+| :--- | :--- | :--- | :--- |
+| **Super Admin** | `superadmin` / `superadmin@webadmin.com` | `password123` | Akses penuh CMS JDIH, e-Regulasi, User Management |
+| **Operator e-Regulasi** | `operator.test@kemenkopangan.go.id` | `password123` | Khusus penyusunan PUU & Partisipasi Publik (Biro Hukum) |
+| **Operator e-Regulasi** | `durraniazka.herbs@gmail.com` (user: `ibnu`) | `password123` | Khusus penyusunan PUU & Partisipasi Publik |
+
+**Halaman Login:**
+👉 `http://127.0.0.1:8000/admin-panel/guest/login`
+
+---
+
+## 📁 Struktur Folder Utama
+
+```text
+├── app/                  # Controller, Model, Middleware, Service
+│   ├── Http/Controllers/
+│   │   ├── Admin/        # Controller CMS JDIH & Bridge e-Regulasi
+│   │   ├── ERegulasi/    # Controller modul e-Regulasi (Dashboard, PUU, Partisipasi)
+│   │   └── Front/        # Controller publik JDIH
+│   └── Models/           # Model Eloquent (Document, User, Regulasi, Partisipasi)
+├── cadmin/               # Package internal Cactuar Admin CMS
+├── config/               # Konfigurasi aplikasi & menu admin
+├── database/             # Migrations, seeders, factories
+│   └── sql/              # File SQL database starter terintegrasi
+├── docs/                 # Dokumentasi teknis, audit, API, dan arsitektur
+├── public/               # Web root (CSS, JS, Asset tema, logo)
+├── resources/            # Blade templates (JDIH & e-Regulasi) & file Sass
+├── routes/               # Definisi routing web (web.php)
+└── storage/              # Cache runtime & upload lokal
+```
+
+---
+
+## 📚 Indeks Dokumentasi Teknis
+
+Dokumentasi detail tersimpan di dalam folder [`docs/`](docs/):
+- [`docs/FULL_SYSTEM_AUDIT_REPORT.md`](docs/FULL_SYSTEM_AUDIT_REPORT.md) — Laporan audit sistem, crawling 300+ rute, dan mitigasi keamanan.
+- [`docs/USER_ROLE_PERMISSION_MAPPING.md`](docs/USER_ROLE_PERMISSION_MAPPING.md) — Matriks peran pengguna (Super Admin vs Operator e-Regulasi).
+- [`docs/TRANSLATED_REGULATION_IMPLEMENTATION.md`](docs/TRANSLATED_REGULATION_IMPLEMENTATION.md) — Panduan fitur bilingual peraturan hukum.
+- [`docs/EREGULASI_INTEGRATION_REPORT.md`](docs/EREGULASI_INTEGRATION_REPORT.md) — Rangkuman arsitektur integrasi e-Regulasi ke JDIH.
+
+---
+
+## 🤝 Panduan Kolaborasi (Git Workflow)
+
+1. **Selalu buat branch baru untuk fitur atau perbaikan:**
+   ```bash
+   git checkout -b feature/nama-fitur
+   # atau
+   git checkout -b fix/nama-bug
+   ```
+2. **Jangan pernah meng-commit file `.env` atau credential rahasia.**
+3. **Pastikan database schema tetap sinkron dengan migrations atau update file starter SQL.**
+4. **Push branch dan ajukan Pull Request (PR) ke branch `main`:**
+   ```bash
+   git push origin feature/nama-fitur
+   ```
+
+---
+*Kementerian Koordinator Bidang Pangan Republik Indonesia — Biro Hukum dan Kerja Sama*

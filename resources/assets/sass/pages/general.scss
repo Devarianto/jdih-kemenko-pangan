@@ -1239,3 +1239,19 @@
     }
   }
 }
+
+/* Halaman tanpa banner (menu baru: Program Penyusunan PUU, dll)
+----------------------------------------------------------------------------------------------*/
+.middle {
+  min-height: 70vh; // footer tidak naik saat data kosong
+}
+.middle:not(.banner-middle + .middle) {
+  padding-top: 190px; // ruang untuk header fixed (menu + search bar)
+  .middle__search {
+    margin-top: 0;
+    margin-left: 0;
+    margin-right: 0;
+    padding: 32px 32px 24px;
+    box-shadow: 0 4px 24px 0 rgba(0, 0, 0, 0.06);
+  }
+}
