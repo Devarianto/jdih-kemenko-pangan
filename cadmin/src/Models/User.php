@@ -31,7 +31,10 @@ class User extends Authenticatable
     
     public function getIsRootAttribute()
     {
-        return $this->privilege_id === null;
+        if (in_array($this->role, ['admin_operator', 'operator_eregulasi'])) {
+            return false;
+        }
+        return $this->privilege_id === null && ($this->role === 'super_admin' || empty($this->role));
     }
     
     public function allow($module, $action)
