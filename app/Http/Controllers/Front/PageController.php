@@ -709,25 +709,60 @@ class PageController extends Controller
 
     public function getPeraturanTerjemahan($menu)
     {
-        $documents = Document::translate()->whereIsActive(1)->where('master_document_id', Document::PERATURAN_TERJEMAHAN);
+        $documents = Document::translate()
+            ->whereIsActive(1)
+            ->where(function($query) {
+                $query->where('master_document_id', Document::PERATURAN_TERJEMAHAN)
+                    ->orWhere(function($sub) {
+                        $sub->whereIn('master_document_id', [Document::PERATURAN, Document::PERATURAN_TERJEMAHAN])
+                            ->where(function($t) {
+                                $t->where('has_translation', 1)
+                                  ->orWhereNotNull('translation_title')
+                                  ->orWhereNotNull('translation_pdf');
+                            });
+                    });
+            });
 
-        if (request()->query('search')) {
-            $documents = $documents->where('title', 'like', '%'.request()->query('search').'%');
+        if ($search = request()->query('search')) {
+            $documents = $documents->where(function($q) use ($search) {
+                $q->where('title', 'like', '%'.$search.'%')
+                  ->orWhere('translation_title', 'like', '%'.$search.'%')
+                  ->orWhere('no_peraturan', 'like', '%'.$search.'%')
+                  ->orWhere('translation_no_peraturan', 'like', '%'.$search.'%');
+            });
         }
-        if (request()->query('year')) {
-            $documents = $documents->where('year', request()->query('year'));
+
+        if ($year = request()->query('year')) {
+            $documents = $documents->where('year', $year);
+        }
+
+        if ($ruleType = request()->query('rule_type')) {
+            $documents = $documents->where('rule_type_id', $ruleType);
         }
         
         $documents = $documents->orderBy('updated_at', 'desc')->orderBy('created_at', 'desc')->orderBy('id', 'desc')->paginate(8);
 
         $years = Document::select('year')
             ->whereIsActive(1)
-            ->where('master_document_id', Document::PERATURAN_TERJEMAHAN)
+            ->where(function($query) {
+                $query->where('master_document_id', Document::PERATURAN_TERJEMAHAN)
+                    ->orWhere(function($sub) {
+                        $sub->whereIn('master_document_id', [Document::PERATURAN, Document::PERATURAN_TERJEMAHAN])
+                            ->where(function($t) {
+                                $t->where('has_translation', 1)
+                                  ->orWhereNotNull('translation_title')
+                                  ->orWhereNotNull('translation_pdf');
+                            });
+                    });
+            })
+            ->whereNotNull('year')
             ->orderBy('year', 'desc')
             ->groupBy('year')
             ->get();
         
-        return view('dynamic.pages.document-peraturan-terjemahan', compact('menu', 'documents', 'years'));
+        $rule_types = \App\Models\RuleType::whereIsActive(1)->orderBy('id', 'asc')->get();
+
+        return view('dynamic.pages.document-peraturan-terjemahan', compact('menu', 'documents', 'years', 'rule_types'));
     }
 
     public function getProgramPenyusunanPuu($menu)

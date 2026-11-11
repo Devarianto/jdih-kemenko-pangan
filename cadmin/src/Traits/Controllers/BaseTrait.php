@@ -23,6 +23,12 @@ trait BaseTrait
         $fields = $this->{$type.'Fields'}();
         if (method_exists($this, 'formFields'))
             $fields = $this->formFields($type);
+
+        // CMS Metadata Dinamis: controller dokumen yang punya $masterId otomatis mendapat widget metadata tambahan
+        if (in_array($type, ['create', 'edit']) && property_exists($this, 'masterId') && !empty($this->masterId)
+            && class_exists(\App\Helpers\DynamicMetadata::class)) {
+            $fields = \App\Helpers\DynamicMetadata::inject($fields, (int) $this->masterId);
+        }
         
         if (in_array($type,['create','edit','draft'])) {
             $newFields = [];

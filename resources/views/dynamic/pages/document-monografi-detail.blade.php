@@ -38,6 +38,8 @@
             <th>{{ lang::translate('document.content.tipe-dokumen') }}</th>
             <td>{{ $document->document_type->label }}</td>
           </tr>
+          @php $__dmReplace = \App\Helpers\DynamicMetadata::replacesStatic($document); @endphp
+          @unless($__dmReplace)
           <tr>
             <th>{{ lang::translate('document.content.teu-orang') }}</th>
             <td>{{ $document->translated('teu') }}</td>
@@ -90,6 +92,8 @@
             <th>{{ lang::translate('document.content.lokasi') }}</th>
             <td>{{ $document->lokasi }}</td>
           </tr>
+          @endunless
+          @include('dynamic.component.document-dynamic-meta-rows')
           @include('dynamic.component.document-bapanas-rows')
           <tr>
             <th>{{ lang::translate('document.content.jumlah-unduh') }}</th>

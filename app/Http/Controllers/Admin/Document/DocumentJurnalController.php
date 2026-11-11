@@ -24,6 +24,8 @@ class DocumentJurnalController extends Controller
 {
     use BaseTrait, ListingTrait, CreateTrait, EditTrait, DeleteTrait, PublishTrait;
 
+    protected $masterId = \App\Models\Document::JURNAL;
+
     private $document;
 
     public function __construct()

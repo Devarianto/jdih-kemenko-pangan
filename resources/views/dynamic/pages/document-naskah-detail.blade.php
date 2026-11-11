@@ -42,12 +42,14 @@
         <table>
           <tr>
             <th>{{ lang::translate('document.content.tipe-dokumen') }}</th>
-            <td>{{ $document->document_type->label ?? '' }}</td>
+            <td>{{ $document->document_type->label ?? $document->master_document->label ?? '-' }}</td>
           </tr>
           <tr>
             <th>{{ lang::translate('document.content.judul') }}</th>
             <td>{{ $document->translated('title') }}</td>
           </tr>
+          @php $__dmReplace = \App\Helpers\DynamicMetadata::replacesStatic($document); @endphp
+          @unless($__dmReplace)
           <tr>
             <th>{{ lang::translate('document.content.pihak-internal') }}</th>
             <td>{{ $document->pihak_internal }}</td>
@@ -82,6 +84,8 @@
             <th>{{ lang::translate('document.content.bahasa') }}</th>
             <td>{{ $document->translated('bahasa') }}</td>
           </tr>
+          @endunless
+          @include('dynamic.component.document-dynamic-meta-rows')
           <tr>
             <th>{{ lang::translate('document.content.lampiran') }}</th>
             <td>{!! nl2br($document->translated('lampiran')) !!}</td>

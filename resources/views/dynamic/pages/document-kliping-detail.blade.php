@@ -52,6 +52,8 @@
             <th>{{ lang::translate('document.content.judul') }}</th>
             <td>{{ $document->translated('title') }}</td>
           </tr>
+          @php $__dmReplace = \App\Helpers\DynamicMetadata::replacesStatic($document); @endphp
+          @unless($__dmReplace)
           <tr>
             <th>{{ lang::translate('document.content.teu-orang') }}</th>
             <td>{{ $document->translated('teu') }}</td>
@@ -84,6 +86,8 @@
             <th>{{ lang::translate('document.content.lokasi') }}</th>
             <td>{{ $document->lokasi }}</td>
           </tr>
+          @endunless
+          @include('dynamic.component.document-dynamic-meta-rows')
           <tr>
             <th>{{ lang::translate('document.content.lampiran') }}</th>
             <td>{!! nl2br($document->translated('lampiran')) !!}</td>

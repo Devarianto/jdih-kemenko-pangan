@@ -116,6 +116,13 @@ class Document {
             $item->touch();
         } catch (\Throwable $e) {}
 
+        // CMS Metadata Dinamis
+        try {
+            DynamicMetadata::save($item);
+        } catch (\Throwable $e) {
+            \Log::warning('DynamicMetadata save failed: ' . $e->getMessage());
+        }
+
         $regulations = request()->input('regulations_relations', []);
         $crossDocs = request()->input('cross_documents_relations', []);
 

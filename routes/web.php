@@ -161,6 +161,18 @@ Route::group(['middleware' => ['web','front', 'visitor-count', 'csp']],function(
             $menu = \Cactuar\Admin\Models\Menu::find(37) ?? \Cactuar\Admin\Models\Menu::first();
             return app(PageController::class)->getProgramPenyusunanPuu($menu);
         })->name('program-penyusunan-puu');
+        Route::get('/peraturan-terjemahan', function() {
+            $menu = \Cactuar\Admin\Models\Menu::find(36) ?? \Cactuar\Admin\Models\Menu::first();
+            return app(PageController::class)->getPeraturanTerjemahan($menu);
+        })->name('peraturan-terjemahan');
+        Route::get('/translated-regulations', function() {
+            $menu = \Cactuar\Admin\Models\Menu::find(36) ?? \Cactuar\Admin\Models\Menu::first();
+            return app(PageController::class)->getPeraturanTerjemahan($menu);
+        })->name('translated-regulations');
+        Route::get('/dokumen-hukum/peraturan-terjemahan', function() {
+            $menu = \Cactuar\Admin\Models\Menu::find(36) ?? \Cactuar\Admin\Models\Menu::first();
+            return app(PageController::class)->getPeraturanTerjemahan($menu);
+        });
         Route::get('/partisipasi-publik', [\App\Http\Controllers\ERegulasi\PartisipasiPublikController::class, 'index'])->name('partisipasi-publik');
         Route::get('/putusan-hukum', [PageController::class, 'getPutusanHukumRoute'])->name('putusan-hukum');
         Route::get('/putusan-hukum/mahkamah-agung', [PageController::class, 'getPutusanMa'])->name('putusan.ma');

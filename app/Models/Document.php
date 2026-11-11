@@ -270,6 +270,29 @@ class Document extends Model
             ];
         }
 
+        // 3. Direct related_document_id column (used on PUU forms)
+        if ($this->related_document_id && ($relDoc = $this->related_document)) {
+            $already = collect($list)->contains(fn ($r) => ($r['document_id'] ?? null) == $relDoc->id);
+            if (!$already) {
+                $list[] = [
+                    'id' => 'direct_' . $relDoc->id,
+                    'is_external' => false,
+                    'document_id' => $relDoc->id,
+                    'title' => $relDoc->translated('title') ?: $relDoc->title,
+                    'no_peraturan' => $relDoc->no_peraturan ?? '-',
+                    'year' => $relDoc->year ?: ($relDoc->date ? date('Y', strtotime($relDoc->date)) : '-'),
+                    'jenis_peraturan' => optional($relDoc->rule_type)->label ?? optional($relDoc->master_document)->label ?? 'Peraturan',
+                    'relationship_type' => 'terkait',
+                    'relation_label' => 'Peraturan Terkait',
+                    'colors' => ['bg' => '#eff6ff', 'text' => '#1d4ed8', 'border' => '#bfdbfe'],
+                    'permalink' => $relDoc->permalink_document,
+                    'pdf' => $relDoc->pdf,
+                    'direction' => 'outgoing',
+                    'note' => null,
+                ];
+            }
+        }
+
         return $list;
     }
 

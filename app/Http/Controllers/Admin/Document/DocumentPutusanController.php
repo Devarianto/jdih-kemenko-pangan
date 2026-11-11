@@ -24,6 +24,8 @@ class DocumentPutusanController extends Controller
 {
     use BaseTrait, ListingTrait, CreateTrait, EditTrait, DeleteTrait, PublishTrait;
 
+    protected $masterId = \App\Models\Document::PUTUSAN;
+
     private $document;
 
     public function __construct()

@@ -24,6 +24,8 @@ class DocumentPeraturanController extends Controller
 {
     use BaseTrait, ListingTrait, CreateTrait, EditTrait, DeleteTrait, PublishTrait;
 
+    protected $masterId = \App\Models\Document::PERATURAN;
+
     private $document;
 
     public function __construct()

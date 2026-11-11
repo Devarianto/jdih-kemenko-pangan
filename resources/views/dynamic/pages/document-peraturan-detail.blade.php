@@ -76,12 +76,14 @@
         <table>
           <tr>
             <th>{{ lang::translate('document.content.tipe-dokumen') }}</th>
-            <td>{{ $document->document_type->label ?? '' }}</td>
+            <td>{{ $document->document_type->label ?? $document->master_document->label ?? '-' }}</td>
           </tr>
           <tr>
             <th>{{ lang::translate('document.content.judul') }}</th>
             <td id="meta-doc-title">{{ $idTitle }}</td>
           </tr>
+          @php $__dmReplace = \App\Helpers\DynamicMetadata::replacesStatic($document); @endphp
+          @unless($__dmReplace)
           <tr>
             <th>{{ lang::translate('document.content.teu-badan') }}</th>
             <td>{{ $document->translated('teu') }}</td>
@@ -137,6 +139,8 @@
             <th>{{ lang::translate('document.content.bidang-hukum') }}</th>
             <td>{{ $document->translated('bidang_hukum') }}</td>
           </tr>
+          @endunless
+          @include('dynamic.component.document-dynamic-meta-rows')
           @include('dynamic.component.document-bapanas-rows')
           <tr>
             <th>{{ lang::translate('document.content.jumlah-unduh') }}</th>

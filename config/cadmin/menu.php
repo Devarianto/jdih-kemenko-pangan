@@ -170,6 +170,13 @@ $menu = [
         'controller' => 'App\Http\Controllers\Admin\Document\DocumentTypeController',
         'routes' => admin::moduleRoutes(['index', 'create', 'edit', 'delete', 'publish'])
     ],
+    'master-document-metadata' => [
+        'label' => 'Pengaturan Metadata',
+        'parent' => 'master-document',
+        'fa' => 'tags',
+        'controller' => 'App\Http\Controllers\Admin\Document\MetadataFieldController',
+        'routes' => admin::moduleRoutes(['index', 'create', 'edit', 'delete', 'publish'])
+    ],
     'document' => [
         'label' => 'Dokumen Hukum',
         'parent' => null,

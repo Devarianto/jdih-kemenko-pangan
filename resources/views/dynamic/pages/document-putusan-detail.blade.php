@@ -148,6 +148,7 @@
             <th>{{ lang::translate('document.content.lokasi') }}</th>
             <td>{{ $document->lokasi ?: '-' }}</td>
           </tr>
+          @include('dynamic.component.document-dynamic-meta-rows')
           @include('dynamic.component.document-bapanas-rows')
           <tr>
             <th>{{ lang::translate('document.content.jumlah-unduh') }}</th>

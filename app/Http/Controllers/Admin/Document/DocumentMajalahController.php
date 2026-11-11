@@ -24,6 +24,8 @@ class DocumentMajalahController extends Controller
 {
     use BaseTrait, ListingTrait, CreateTrait, EditTrait, DeleteTrait, PublishTrait;
 
+    protected $masterId = \App\Models\Document::MAJALAH;
+
     private $document;
 
     public function __construct()

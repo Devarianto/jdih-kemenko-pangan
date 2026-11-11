@@ -24,6 +24,8 @@ class DocumentMonografiController extends Controller
 {
     use BaseTrait, ListingTrait, CreateTrait, EditTrait, DeleteTrait, PublishTrait;
 
+    protected $masterId = \App\Models\Document::MONOGRAFI;
+
     private $document;
 
     public function __construct()
