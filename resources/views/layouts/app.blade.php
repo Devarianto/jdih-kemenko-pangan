@@ -45,9 +45,14 @@
             box-sizing: border-box;
         }
 
-        /* Module Top Sub-Navigation Bar */
+        /* Module Top Sub-Navigation Bar (Floating / Sticky on Scroll) */
         .ereg-subnav-bar {
-            background: #ffffff;
+            position: sticky;
+            top: 12px;
+            z-index: 1030;
+            background: rgba(255, 255, 255, 0.96);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
             border: 1px solid #e4eaf6;
             border-radius: 12px;
             padding: 12px 16px;
@@ -57,7 +62,25 @@
             justify-content: space-between;
             flex-wrap: wrap;
             gap: 12px;
-            box-shadow: 0 1px 3px rgba(0, 32, 96, 0.04);
+            box-shadow: 0 2px 8px rgba(0, 32, 96, 0.05);
+            transition: box-shadow 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+        }
+
+        .ereg-subnav-bar.is-floating {
+            position: fixed;
+            top: 12px;
+            margin-bottom: 0;
+            border-color: #d0dfff;
+            box-shadow: 0 10px 28px rgba(15, 43, 72, 0.14);
+        }
+
+        .ereg-subnav-placeholder {
+            display: none;
+        }
+
+        .ereg-subnav-placeholder.is-active {
+            display: block;
+            margin-bottom: 22px;
         }
 
         .ereg-subnav-links {
@@ -842,8 +865,9 @@
                         </div>
                     </aside>
 
-                    {{-- Desktop Sub-Navigation Bar --}}
-                    <div class="ereg-subnav-bar">
+                    {{-- Desktop Sub-Navigation Bar (Floating on Scroll) --}}
+                    <div class="ereg-subnav-placeholder" id="eregSubnavPlaceholder"></div>
+                    <div class="ereg-subnav-bar" id="eregSubnavBar">
                         <div class="ereg-subnav-links">
                             <a href="{{ route('dashboard') }}"
                                class="ereg-subnav-item {{ request()->routeIs('dashboard') ? 'active' : '' }}">
@@ -1007,6 +1031,75 @@
                 }
             }
         }, { passive: true });
+    })();
+
+    // Floating / Sticky Desktop Sub-Navigation Bar saat di-scroll ke bawah
+    (function () {
+        var subnav = document.getElementById('eregSubnavBar');
+        var placeholder = document.getElementById('eregSubnavPlaceholder');
+        var container = document.querySelector('.ereg-admin-container');
+        if (!subnav || !placeholder || !container) return;
+
+        var triggerTop = 0;
+        var isPinned = false;
+
+        function measureTriggerTop() {
+            if (!isPinned) {
+                var rect = subnav.getBoundingClientRect();
+                triggerTop = rect.top + window.pageYOffset - 12;
+            } else {
+                var pRect = placeholder.getBoundingClientRect();
+                triggerTop = pRect.top + window.pageYOffset - 12;
+            }
+        }
+
+        function syncFloatingState() {
+            if (window.innerWidth <= 768) {
+                if (isPinned) {
+                    isPinned = false;
+                    subnav.classList.remove('is-floating');
+                    subnav.style.width = '';
+                    subnav.style.left = '';
+                    placeholder.classList.remove('is-active');
+                    placeholder.style.height = '';
+                }
+                return;
+            }
+
+            if (triggerTop <= 0) {
+                measureTriggerTop();
+            }
+
+            var scrollY = window.pageYOffset || document.documentElement.scrollTop;
+            if (scrollY > triggerTop) {
+                var cRect = container.getBoundingClientRect();
+                if (!isPinned) {
+                    placeholder.style.height = subnav.offsetHeight + 'px';
+                    placeholder.classList.add('is-active');
+                    subnav.classList.add('is-floating');
+                    isPinned = true;
+                }
+                subnav.style.width = cRect.width + 'px';
+                subnav.style.left = cRect.left + 'px';
+            } else if (isPinned) {
+                isPinned = false;
+                subnav.classList.remove('is-floating');
+                subnav.style.width = '';
+                subnav.style.left = '';
+                placeholder.classList.remove('is-active');
+                placeholder.style.height = '';
+            }
+        }
+
+        window.addEventListener('load', function () {
+            measureTriggerTop();
+            syncFloatingState();
+        });
+        window.addEventListener('scroll', syncFloatingState, { passive: true });
+        window.addEventListener('resize', function () {
+            measureTriggerTop();
+            syncFloatingState();
+        });
     })();
 </script>
 
