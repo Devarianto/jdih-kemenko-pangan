@@ -64,9 +64,14 @@
     @php
         $jam = (int) $now->format('G');
         $sapaan = $jam < 11 ? 'Selamat pagi' : ($jam < 15 ? 'Selamat siang' : ($jam < 19 ? 'Selamat sore' : 'Selamat malam'));
-        $namaUser = $user->display_name ?: $user->name;
-        $inisial = collect(preg_split('/\s+/', trim($namaUser)))->filter()->take(2)
-            ->map(fn($w) => mb_strtoupper(mb_substr($w, 0, 1)))->implode('');
+        $rawNama = $user->display_name ?: $user->name;
+        $namaUser = trim(preg_replace('/\s*\([^)]*\)/', '', $rawNama)) ?: $rawNama;
+        $inisial = collect(preg_split('/\s+/', $namaUser))
+            ->map(fn($w) => preg_replace('/[^a-zA-Z0-9]/u', '', $w))
+            ->filter()
+            ->take(2)
+            ->map(fn($w) => mb_strtoupper(mb_substr($w, 0, 1)))
+            ->implode('');
         $jumlahPending = $pendingUjiPublik->count();
         $jumlahDitolak = $isSuperAdmin ? 0 : $rejectedUjiPublik->count();
         $perluPerhatian = $isSuperAdmin ? $jumlahPending : ($jumlahDitolak + $stuckRegulasi->count());
@@ -533,24 +538,68 @@
 
         @media (max-width: 640px) {
             .dash-hero {
-                padding: 20px 18px;
+                padding: 18px 16px;
                 border-radius: 14px;
+                gap: 14px;
             }
 
             .dash-hero-main {
-                flex-direction: column;
+                flex-direction: row;
                 align-items: flex-start;
                 gap: 12px;
+                flex: 1 1 100%;
+            }
+
+            .dash-hero-avatar {
+                width: 46px;
+                height: 46px;
+                font-size: 17px;
+                margin-top: 2px;
+            }
+
+            .dash-hero-date {
+                font-size: 11px;
             }
 
             .dash-hero-title {
-                font-size: 20px;
+                font-size: 18.5px;
+                margin: 2px 0 6px;
             }
 
-            .dash-hero-actions,
+            .dash-hero-meta {
+                gap: 6px;
+                margin-bottom: 8px;
+            }
+
+            .hero-chip {
+                font-size: 11px;
+                padding: 2px 10px;
+            }
+
+            .dash-hero-sub {
+                font-size: 12.5px;
+                line-height: 1.45;
+            }
+
+            .dash-hero-actions {
+                width: 100%;
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 8px;
+            }
+
             .hero-btn {
                 width: 100%;
                 justify-content: center;
+                padding: 9px 10px;
+                font-size: 12px;
+                text-align: center;
+            }
+
+            .hero-btn-primary {
+                grid-column: 1 / -1;
+                padding: 10px 14px;
+                font-size: 13px;
             }
         }
 
@@ -1301,8 +1350,13 @@
             }
 
             .dash-card-title {
-                font-size: 11px;
+                font-size: 13.5px;
                 margin-bottom: 12px;
+                line-height: 1.35;
+            }
+
+            .dash-stat.is-clickable:active {
+                transform: scale(0.98);
             }
 
             /* Approval rows — stack vertikal */
@@ -1403,21 +1457,24 @@
 
             /* Regulasi terbaru */
             .regulasi-link {
-                padding: 11px 4px;
-                gap: 8px;
+                padding: 12px 6px;
+                gap: 10px;
+                flex-wrap: wrap;
             }
 
             .regulasi-judul {
-                font-size: 12.5px;
+                font-size: 13px;
+                line-height: 1.4;
             }
 
             .regulasi-meta {
-                font-size: 11px;
+                font-size: 11.5px;
+                margin-top: 3px;
             }
 
             .reg-status-dot {
                 font-size: 10.5px;
-                padding: 3px 8px 3px 7px;
+                padding: 3px 9px 3px 7px;
             }
 
             .reg-status-dot-circle {

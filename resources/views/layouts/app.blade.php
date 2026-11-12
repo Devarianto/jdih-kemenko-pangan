@@ -449,13 +449,152 @@
             box-shadow: 0 0 0 3px rgba(0, 32, 96, 0.1);
         }
 
+        /* Mobile Bottom Quick-Access Navigation Bar */
+        .ereg-mobile-bottom-nav {
+            display: none;
+        }
+
         @media (max-width: 768px) {
+            .main .content {
+                padding: 14px 12px 86px !important;
+            }
+
+            .ereg-subnav-bar {
+                padding: 10px 12px;
+                margin-bottom: 14px;
+                border-radius: 12px;
+                gap: 8px;
+            }
+
+            .ereg-subnav-links {
+                width: 100%;
+                flex-wrap: nowrap;
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+                scrollbar-width: none;
+                gap: 6px;
+                padding-bottom: 2px;
+            }
+
+            .ereg-subnav-links::-webkit-scrollbar {
+                display: none;
+            }
+
+            .ereg-subnav-item {
+                white-space: nowrap;
+                flex-shrink: 0;
+                padding: 7px 12px;
+                font-size: 12px;
+                border-radius: 8px;
+            }
+
+            .ereg-subnav-right {
+                width: 100%;
+                justify-content: space-between;
+                padding-top: 8px;
+                border-top: 1px solid #f1f5f9;
+                gap: 6px;
+            }
+
+            .ereg-public-link {
+                padding: 5px 10px;
+                font-size: 11.5px;
+            }
+
+            .ereg-admin-container .user-badge {
+                padding: 4px 10px;
+                font-size: 11px;
+                max-width: 100%;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+
+            .ereg-admin-container .page-header {
+                margin-bottom: 14px;
+                padding-bottom: 10px;
+            }
+
+            .ereg-admin-container .page-title {
+                font-size: 18px;
+            }
+
             .ereg-admin-container .stats-grid {
                 grid-template-columns: repeat(2, 1fr);
                 gap: 10px;
             }
+
+            .ereg-admin-container .card,
+            .ereg-admin-container .form-card {
+                padding: 16px;
+                border-radius: 12px;
+            }
+
             .ereg-admin-container .search-input {
                 width: 100%;
+            }
+
+            .footer {
+                padding-bottom: 76px !important;
+            }
+
+            /* Fixed Bottom Bar for One-Thumb Mobile Navigation */
+            .ereg-mobile-bottom-nav {
+                position: fixed;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                z-index: 1040;
+                display: flex;
+                align-items: center;
+                justify-content: space-around;
+                background: rgba(255, 255, 255, 0.98);
+                backdrop-filter: blur(10px);
+                border-top: 1px solid #e2e8f0;
+                padding: 6px 8px calc(6px + env(safe-area-inset-bottom, 0px));
+                box-shadow: 0 -4px 18px rgba(15, 43, 72, 0.08);
+            }
+
+            .ereg-mnav-item {
+                flex: 1;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                gap: 3px;
+                padding: 5px 4px;
+                border-radius: 10px;
+                color: #64748b;
+                font-size: 10.5px;
+                font-weight: 600;
+                text-decoration: none !important;
+                transition: all 0.15s ease;
+                min-width: 0;
+            }
+
+            .ereg-mnav-item i {
+                font-size: 15px;
+                line-height: 1;
+            }
+
+            .ereg-mnav-item span {
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                max-width: 100%;
+            }
+
+            .ereg-mnav-item.active {
+                color: #002060;
+                background: #eff6ff;
+            }
+
+            .ereg-mnav-item.mnav-cta {
+                color: #ffffff !important;
+                background: linear-gradient(135deg, #002060, #1d4ed8);
+                box-shadow: 0 3px 10px rgba(29, 78, 216, 0.28);
+                padding: 6px 6px;
+                margin: 0 3px;
             }
         }
     </style>
@@ -553,17 +692,49 @@
             </div>
         </main>
 
+        @auth
+            <nav class="ereg-mobile-bottom-nav" aria-label="Navigasi Cepat Mobile e-Regulasi">
+                <a href="{{ route('dashboard') }}" class="ereg-mnav-item {{ request()->routeIs('dashboard') ? 'active' : '' }}">
+                    <i class="fa fa-chart-pie"></i>
+                    <span>Dashboard</span>
+                </a>
+                <a href="{{ route('regulasi.index') }}" class="ereg-mnav-item {{ (request()->routeIs('regulasi.*') && !request()->routeIs('regulasi.create')) ? 'active' : '' }}">
+                    <i class="fa fa-folder-open"></i>
+                    <span>Pengajuan</span>
+                </a>
+                <a href="{{ route('regulasi.create') }}" class="ereg-mnav-item mnav-cta">
+                    <i class="fa fa-plus-circle"></i>
+                    <span>Ajukan PUU</span>
+                </a>
+                <a href="{{ route('admin.partisipasi.index') }}" class="ereg-mnav-item {{ request()->routeIs('admin.partisipasi.*') ? 'active' : '' }}">
+                    <i class="fa fa-comments"></i>
+                    <span>Partisipasi</span>
+                </a>
+                @if(auth()->user()->role === 'super_admin')
+                    <a href="{{ route('users.index') }}" class="ereg-mnav-item {{ request()->routeIs('users.*') ? 'active' : '' }}">
+                        <i class="fa fa-users-cog"></i>
+                        <span>Operator</span>
+                    </a>
+                @else
+                    <a href="{{ route('partisipasi-publik') }}" target="_blank" class="ereg-mnav-item">
+                        <i class="fa fa-globe"></i>
+                        <span>Web Publik</span>
+                    </a>
+                @endif
+            </nav>
+        @endauth
+
         <footer class="footer">
             <div class="container-fluid">
-                <div class="row text-muted">
-                    <div class="col-6 text-start">
-                        <p class="mb-0">
+                <div class="row text-muted gy-2">
+                    <div class="col-12 col-md-6 text-center text-md-start">
+                        <p class="mb-0" style="font-size: 12.5px;">
                             <strong>JDIH Kementerian Koordinator Bidang Pangan &mdash; Modul e-Regulasi Terintegrasi</strong>
                         </p>
                     </div>
                     @if(!request()->get('opener'))
-                    <div class="col-6 text-end">
-                        <ul class="list-inline mb-0">
+                    <div class="col-12 col-md-6 text-center text-md-end">
+                        <ul class="list-inline mb-0" style="font-size: 12.5px;">
                             <li class="list-inline-item">
                                 <a class="text-muted" href="{{ url('/') }}" target="_blank" rel="noopener">Website Utama JDIH</a>
                             </li>
