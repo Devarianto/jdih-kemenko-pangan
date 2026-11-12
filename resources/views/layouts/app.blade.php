@@ -513,9 +513,9 @@
                                     <span>Kembali ke Admin Panel JDIH</span>
                                 </a>
                             @endif
-                            <a href="{{ route('partisipasi-publik') }}" target="_blank" class="ereg-public-link" title="Buka halaman Partisipasi Publik di Website Utama JDIH">
+                            <a href="{{ url('/') }}" target="_blank" class="ereg-public-link" title="Buka Website Utama JDIH">
                                 <i class="fa fa-external-link-alt"></i>
-                                <span>Lihat Halaman Publik</span>
+                                <span>Lihat Website JDIH</span>
                             </a>
                             <span class="user-badge">
                                 <i class="fa fa-user-shield" style="margin-right: 4px;"></i>
@@ -563,9 +563,6 @@
                         <ul class="list-inline mb-0">
                             <li class="list-inline-item">
                                 <a class="text-muted" href="{{ url('/') }}" target="_blank" rel="noopener">Website Utama JDIH</a>
-                            </li>
-                            <li class="list-inline-item">
-                                <a class="text-muted" href="{{ route('partisipasi-publik') }}" target="_blank" rel="noopener">Partisipasi Publik</a>
                             </li>
                         </ul>
                     </div>

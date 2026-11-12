@@ -39,7 +39,6 @@ class ComprehensiveSystemAuditTest extends TestCase
             '/anev-puu',
             '/risalah-pembahasan',
             '/kajian-hukum',
-            '/partisipasi-publik',
             '/berita',
             '/galeri',
             '/infografis',
@@ -53,6 +52,10 @@ class ComprehensiveSystemAuditTest extends TestCase
             $this->assertSame(200, $response->status(), "Route {$route} failed with status {$response->status()}");
             $this->assertNotEmpty($response->body());
         }
+
+        // Verify disabled public participation feature returns 404
+        $resDisabled = Http::get($this->baseUrl . '/partisipasi-publik');
+        $this->assertSame(404, $resDisabled->status(), "Disabled route /partisipasi-publik should return 404");
     }
 
     /**

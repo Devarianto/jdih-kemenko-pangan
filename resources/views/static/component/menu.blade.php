@@ -273,7 +273,6 @@
                   ['label' => 'Permohonan Pengundangan', 'url' => '#'],
                   ['label' => 'Pengajuan PUU', 'url' => url('/pengajuan-puu')],
                   ['label' => 'Program Penyusunan PUU', 'url' => '#'],
-                  ['label' => 'Partisipasi Publik', 'url' => 'https://regulasikemenkopangan.id/'],
                 ];
               @endphp
               @foreach($puuItems as $item)
@@ -515,7 +514,6 @@
           <a href="#">Permohonan Pengundangan</a>
           <a href="{{ url('/pengajuan-puu') }}" target="_blank" rel="noopener noreferrer">Pengajuan PUU (e-Regulasi)</a>
           <a href="#">Program Penyusunan PUU</a>
-          <a href="https://regulasikemenkopangan.id/" target="_blank" rel="noopener noreferrer">Partisipasi Publik</a>
         </div>
       </li>
       <li>
