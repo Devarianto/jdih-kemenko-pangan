@@ -61,7 +61,54 @@
             ->values();
     @endphp
 
+    @php
+        $jam = (int) $now->format('G');
+        $sapaan = $jam < 11 ? 'Selamat pagi' : ($jam < 15 ? 'Selamat siang' : ($jam < 19 ? 'Selamat sore' : 'Selamat malam'));
+        $namaUser = $user->display_name ?: $user->name;
+        $inisial = collect(preg_split('/\s+/', trim($namaUser)))->filter()->take(2)
+            ->map(fn($w) => mb_strtoupper(mb_substr($w, 0, 1)))->implode('');
+        $jumlahPending = $pendingUjiPublik->count();
+        $jumlahDitolak = $isSuperAdmin ? 0 : $rejectedUjiPublik->count();
+        $perluPerhatian = $isSuperAdmin ? $jumlahPending : ($jumlahDitolak + $stuckRegulasi->count());
+    @endphp
+
     <div class="dash-wrap">
+
+        {{-- ═══ HERO / SELAMAT DATANG ═══ --}}
+        <section class="dash-hero slide-in" aria-label="Selamat datang">
+            <div class="dash-hero-main">
+                <div class="dash-hero-avatar" aria-hidden="true">{{ $inisial ?: 'U' }}</div>
+                <div class="dash-hero-text">
+                    <div class="dash-hero-date">{{ $now->locale('id')->isoFormat('dddd, D MMMM Y') }}</div>
+                    <h2 class="dash-hero-title">{{ $sapaan }}, {{ $namaUser }}!</h2>
+                    <div class="dash-hero-meta">
+                        <span class="hero-chip">{{ $isSuperAdmin ? 'Super Admin' : 'Operator e-Regulasi' }}</span>
+                        @if(!$isSuperAdmin && $user->unit_kerja)
+                            <span class="hero-chip hero-chip-soft">{{ $user->unit_kerja }}</span>
+                        @endif
+                    </div>
+                    <p class="dash-hero-sub">
+                        @if($perluPerhatian > 0)
+                            Ada <strong>{{ $perluPerhatian }}</strong> hal yang perlu perhatian Anda hari ini.
+                        @else
+                            Semua berjalan lancar. Tidak ada tindakan mendesak saat ini.
+                        @endif
+                        Kelola dan pantau proses pembentukan peraturan dari satu tempat.
+                    </p>
+                </div>
+            </div>
+            <div class="dash-hero-actions">
+                <a href="{{ route('regulasi.create') }}" class="hero-btn hero-btn-primary">
+                    <i class="fa fa-plus-circle"></i> Ajukan Regulasi Baru
+                </a>
+                <a href="{{ route('regulasi.index') }}" class="hero-btn">
+                    <i class="fa fa-folder-open"></i> Daftar Pengajuan
+                </a>
+                <a href="{{ route('admin.partisipasi.index') }}" class="hero-btn">
+                    <i class="fa fa-comments"></i> Partisipasi Publik
+                </a>
+            </div>
+        </section>
 
         {{-- ═══ STAT ROW ═══ --}}
         <div class="dash-stats">
@@ -148,7 +195,7 @@
         {{-- ═══ SUPER ADMIN: pending approval ═══ --}}
         @if($isSuperAdmin && $pendingUjiPublik->isNotEmpty())
             <div class="dash-card approval-card slide-in">
-                <div class="dash-card-title approval-title">⏱ MENUNGGU PERSETUJUAN PARTISIPASI PUBLIK
+                <div class="dash-card-title approval-title">⏱ Menunggu Persetujuan Partisipasi Publik
                     ({{ $pendingUjiPublik->count() }})</div>
                 <div class="approval-list">
                     @foreach($pendingUjiPublik as $reg)
@@ -189,8 +236,7 @@
         <div class="dash-grid-2">
 
             <div class="dash-card">
-                <div class="dash-card-title">SEBARAN TAHAP
-                    REGULASI{{ $isSuperAdmin ? '' : ' — ' . strtoupper($user->unit_kerja) }}</div>
+                <div class="dash-card-title">Sebaran Tahap Regulasi{{ $isSuperAdmin ? '' : ' — ' . $user->unit_kerja }}</div>
 
                 <div class="bar-legend">
                     @foreach($stageOrder as $sk)
@@ -231,7 +277,7 @@
 
             <div class="dash-card">
                 @if($isSuperAdmin)
-                    <div class="dash-card-title">PER UNIT KERJA</div>
+                    <div class="dash-card-title">Regulasi per Unit Kerja</div>
                     <div class="unit-list">
                         @foreach($perUnitKerja as $item)
                             <div class="unit-row" data-unit="{{ $item->unit_kerja ?? '' }}" data-total="{{ $item->jumlah }}">
@@ -241,7 +287,7 @@
                         @endforeach
                     </div>
                 @else
-                    <div class="dash-card-title">STATUS REQUEST</div>
+                    <div class="dash-card-title">Status Pengajuan Partisipasi Publik</div>
                     <div class="status-request-list">
                         <div class="sr-row">
                             <span class="sr-label">Menunggu persetujuan</span>
@@ -259,7 +305,7 @@
 
                     {{-- Regulasi yang mandek — belum selesai & lama tanpa update --}}
                     <div class="dash-card-title" style="margin-top: 22px; padding-top: 18px; border-top: 1px solid #f3f5fa;">
-                        REGULASI PERLU TINDAK LANJUT
+                        Regulasi Perlu Tindak Lanjut
                         @if($stuckRegulasi->isNotEmpty())
                             <span class="stuck-title-badge">{{ $stuckRegulasi->count() }}</span>
                         @endif
@@ -294,7 +340,7 @@
         <div class="dash-card">
             <div style="display:flex; justify-content: space-between; align-items: center;">
                 <div class="dash-card-title" id="regulasiTerbaruTitle">
-                    REGULASI TERBARU{{ $isSuperAdmin ? ' — SEMUA UNIT' : ' — ' . strtoupper($user->unit_kerja) }}
+                    Regulasi Terbaru{{ $isSuperAdmin ? ' — Semua Unit' : ' — ' . $user->unit_kerja }}
                 </div>
                 <button type="button" class="filter-reset-btn" id="filterResetBtn" style="display:none;">✕ Hapus
                     Filter</button>
@@ -340,7 +386,172 @@
         .dash-wrap {
             display: flex;
             flex-direction: column;
+            gap: 20px;
+        }
+
+        /* ── Hero / Selamat datang ── */
+        .dash-hero {
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            padding: 26px 30px;
+            border-radius: 18px;
+            color: #fff;
+            background: linear-gradient(120deg, #0f2b48 0%, #1d4ed8 60%, #0e9f8e 130%);
+            box-shadow: 0 12px 30px rgba(15, 43, 72, 0.22);
+        }
+
+        .dash-hero::after {
+            content: '';
+            position: absolute;
+            right: -60px;
+            top: -80px;
+            width: 260px;
+            height: 260px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.07);
+            pointer-events: none;
+        }
+
+        .dash-hero-main {
+            display: flex;
+            align-items: center;
             gap: 18px;
+            min-width: 0;
+            flex: 1 1 420px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .dash-hero-avatar {
+            flex-shrink: 0;
+            width: 62px;
+            height: 62px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            font-weight: 700;
+            background: rgba(255, 255, 255, 0.18);
+            border: 2px solid rgba(255, 255, 255, 0.45);
+        }
+
+        .dash-hero-text {
+            min-width: 0;
+        }
+
+        .dash-hero-date {
+            font-size: 12px;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            opacity: 0.8;
+        }
+
+        .dash-hero-title {
+            margin: 4px 0 8px;
+            font-size: 24px;
+            font-weight: 700;
+            line-height: 1.25;
+            color: #fff;
+            word-break: break-word;
+        }
+
+        .dash-hero-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 10px;
+        }
+
+        .hero-chip {
+            display: inline-block;
+            padding: 3px 12px;
+            border-radius: 999px;
+            font-size: 12px;
+            font-weight: 600;
+            background: #d4af37;
+            color: #1f2937;
+        }
+
+        .hero-chip-soft {
+            background: rgba(255, 255, 255, 0.18);
+            color: #fff;
+        }
+
+        .dash-hero-sub {
+            margin: 0;
+            font-size: 13.5px;
+            line-height: 1.55;
+            opacity: 0.92;
+            max-width: 560px;
+        }
+
+        .dash-hero-actions {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .hero-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 16px;
+            border-radius: 10px;
+            font-size: 13px;
+            font-weight: 600;
+            text-decoration: none;
+            color: #fff;
+            background: rgba(255, 255, 255, 0.14);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            transition: background 0.15s ease, transform 0.15s ease;
+        }
+
+        .hero-btn:hover {
+            background: rgba(255, 255, 255, 0.26);
+            color: #fff;
+            transform: translateY(-1px);
+        }
+
+        .hero-btn-primary {
+            background: #fff;
+            color: #0f2b48;
+            border-color: #fff;
+        }
+
+        .hero-btn-primary:hover {
+            background: #eef2ff;
+            color: #0f2b48;
+        }
+
+        @media (max-width: 640px) {
+            .dash-hero {
+                padding: 20px 18px;
+                border-radius: 14px;
+            }
+
+            .dash-hero-main {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 12px;
+            }
+
+            .dash-hero-title {
+                font-size: 20px;
+            }
+
+            .dash-hero-actions,
+            .hero-btn {
+                width: 100%;
+                justify-content: center;
+            }
         }
 
         /* ── Stat row ── */
@@ -484,10 +695,9 @@
         }
 
         .dash-card-title {
-            font-size: 11.5px;
+            font-size: 14.5px;
             font-weight: 700;
-            color: #6b7280;
-            letter-spacing: 0.04em;
+            color: #1f2a44;
             margin-bottom: 16px;
         }
 

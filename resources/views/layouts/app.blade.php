@@ -513,9 +513,9 @@
                                     <span>Kembali ke Admin Panel JDIH</span>
                                 </a>
                             @endif
-                            <a href="{{ url('/') }}" target="_blank" class="ereg-public-link" title="Buka Website Utama JDIH">
+                            <a href="{{ route('partisipasi-publik') }}" target="_blank" class="ereg-public-link" title="Buka halaman Partisipasi Publik di Website Utama JDIH">
                                 <i class="fa fa-external-link-alt"></i>
-                                <span>Lihat Website JDIH</span>
+                                <span>Lihat Halaman Publik</span>
                             </a>
                             <span class="user-badge">
                                 <i class="fa fa-user-shield" style="margin-right: 4px;"></i>
@@ -528,11 +528,14 @@
                     </div>
                 @endauth
 
-                <div class="page-header">
-                    <h1 class="page-title">@yield('page-title')</h1>
-                </div>
+                @unless(request()->routeIs('dashboard'))
+                    <div class="page-header">
+                        <h1 class="page-title">@yield('page-title')</h1>
+                    </div>
+                @endunless
 
-                @if(session('success') && !request()->routeIs('regulasi.show'))
+                {{-- Pesan "Selamat datang" ditampilkan di hero section dashboard, bukan sebagai alert --}}
+                @if(session('success') && !request()->routeIs('regulasi.show') && !(request()->routeIs('dashboard') && str_starts_with(session('success'), 'Selamat datang')))
                     <div class="alert alert-success alert-dismissible fade show" role="alert" style="border-radius: 10px; margin-bottom: 18px;">
                         <i class="fa fa-check-circle me-1"></i> {{ session('success') }}
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
@@ -563,6 +566,9 @@
                         <ul class="list-inline mb-0">
                             <li class="list-inline-item">
                                 <a class="text-muted" href="{{ url('/') }}" target="_blank" rel="noopener">Website Utama JDIH</a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a class="text-muted" href="{{ route('partisipasi-publik') }}" target="_blank" rel="noopener">Partisipasi Publik</a>
                             </li>
                         </ul>
                     </div>
