@@ -1,5 +1,8 @@
 <nav class="navbar navbar-expand navbar-light navbar-bg">
     @if(Auth::check() && in_array(Auth::user()->role, ['admin_operator', 'operator_eregulasi']))
+        <a class="sidebar-toggle js-ereg-drawer-toggle d-inline-flex d-md-none me-2" role="button" tabindex="0" aria-label="Buka Menu Navigasi e-Regulasi" style="cursor: pointer;">
+            <i class="hamburger align-self-center"></i>
+        </a>
         <a href="{{ route('dashboard') }}" class="d-inline-flex align-items-center text-decoration-none fw-bold ms-1" style="color: #002060; font-size: 14px; gap: 8px;">
             <span style="width: 32px; height: 32px; border-radius: 8px; background: linear-gradient(135deg, #002060, #1d4ed8); color: #fff; display: inline-flex; align-items: center; justify-content: center; font-size: 13px; flex-shrink: 0;">
                 <i class="fa fa-balance-scale"></i>

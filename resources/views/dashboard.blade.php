@@ -92,14 +92,6 @@
                             <span class="hero-chip hero-chip-soft">{{ $user->unit_kerja }}</span>
                         @endif
                     </div>
-                    <p class="dash-hero-sub">
-                        @if($perluPerhatian > 0)
-                            Ada <strong>{{ $perluPerhatian }}</strong> hal yang perlu perhatian Anda hari ini.
-                        @else
-                            Semua berjalan lancar. Tidak ada tindakan mendesak saat ini.
-                        @endif
-                        Kelola dan pantau proses pembentukan peraturan dari satu tempat.
-                    </p>
                 </div>
             </div>
             <div class="dash-hero-actions">
@@ -470,7 +462,7 @@
             display: flex;
             flex-wrap: wrap;
             gap: 8px;
-            margin-bottom: 10px;
+            margin-bottom: 0;
         }
 
         .hero-chip {

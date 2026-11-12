@@ -449,65 +449,251 @@
             box-shadow: 0 0 0 3px rgba(0, 32, 96, 0.1);
         }
 
-        /* Mobile Bottom Quick-Access Navigation Bar */
-        .ereg-mobile-bottom-nav {
+        /* Mobile Top Bar & Left Slide-Out Navigation Drawer */
+        .ereg-mobile-topbar,
+        .ereg-drawer-backdrop,
+        .ereg-drawer {
             display: none;
         }
 
         @media (max-width: 768px) {
             .main .content {
-                padding: 14px 12px 86px !important;
+                padding: 14px 12px 28px !important;
             }
 
+            /* Sembunyikan subnav bar desktop saat mobile, digantikan slide-left drawer */
             .ereg-subnav-bar {
-                padding: 10px 12px;
-                margin-bottom: 14px;
-                border-radius: 12px;
-                gap: 8px;
+                display: none !important;
             }
 
-            .ereg-subnav-links {
-                width: 100%;
-                flex-wrap: nowrap;
-                overflow-x: auto;
-                -webkit-overflow-scrolling: touch;
-                scrollbar-width: none;
-                gap: 6px;
-                padding-bottom: 2px;
-            }
-
-            .ereg-subnav-links::-webkit-scrollbar {
-                display: none;
-            }
-
-            .ereg-subnav-item {
-                white-space: nowrap;
-                flex-shrink: 0;
-                padding: 7px 12px;
-                font-size: 12px;
-                border-radius: 8px;
-            }
-
-            .ereg-subnav-right {
-                width: 100%;
+            /* Bar Pemicu Menu di Atas Halaman saat Mobile */
+            .ereg-mobile-topbar {
+                display: flex;
+                align-items: center;
                 justify-content: space-between;
-                padding-top: 8px;
-                border-top: 1px solid #f1f5f9;
-                gap: 6px;
+                gap: 10px;
+                background: #ffffff;
+                border: 1px solid #e4eaf6;
+                border-radius: 12px;
+                padding: 10px 14px;
+                margin-bottom: 14px;
+                box-shadow: 0 2px 6px rgba(0, 32, 96, 0.05);
             }
 
-            .ereg-public-link {
-                padding: 5px 10px;
-                font-size: 11.5px;
+            .ereg-mobile-menu-btn {
+                display: inline-flex;
+                align-items: center;
+                gap: 9px;
+                background: #002060;
+                color: #ffffff;
+                border: none;
+                border-radius: 9px;
+                padding: 8px 14px;
+                font-size: 13px;
+                font-weight: 600;
+                cursor: pointer;
+                box-shadow: 0 2px 6px rgba(0, 32, 96, 0.18);
+                transition: background 0.15s ease, transform 0.15s ease;
             }
 
-            .ereg-admin-container .user-badge {
-                padding: 4px 10px;
-                font-size: 11px;
-                max-width: 100%;
+            .ereg-mobile-menu-btn:active {
+                transform: scale(0.97);
+            }
+
+            .ereg-mobile-current-page {
+                font-size: 12px;
+                font-weight: 600;
+                color: #475569;
+                background: #f1f5f9;
+                padding: 6px 11px;
+                border-radius: 20px;
                 white-space: nowrap;
                 overflow: hidden;
                 text-overflow: ellipsis;
+                max-width: 55%;
+            }
+
+            /* Backdrop Overlay Slide-Left Drawer */
+            .ereg-drawer-backdrop {
+                display: block;
+                position: fixed;
+                inset: 0;
+                z-index: 1055;
+                background: rgba(15, 23, 42, 0.52);
+                backdrop-filter: blur(2px);
+                opacity: 0;
+                visibility: hidden;
+                pointer-events: none;
+                transition: opacity 0.28s ease, visibility 0.28s ease;
+            }
+
+            .ereg-drawer-backdrop.is-open {
+                opacity: 1;
+                visibility: visible;
+                pointer-events: auto;
+            }
+
+            /* Panel Slide-Left Drawer */
+            .ereg-drawer {
+                display: flex;
+                flex-direction: column;
+                position: fixed;
+                top: 0;
+                left: 0;
+                bottom: 0;
+                width: 290px;
+                max-width: 85vw;
+                z-index: 1060;
+                background: #ffffff;
+                box-shadow: 10px 0 32px rgba(15, 43, 72, 0.22);
+                transform: translateX(-100%);
+                transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+                overflow-y: auto;
+                -webkit-overflow-scrolling: touch;
+            }
+
+            .ereg-drawer.is-open {
+                transform: translateX(0);
+            }
+
+            .ereg-drawer-header {
+                padding: 20px 18px 18px;
+                background: linear-gradient(135deg, #0f2b48 0%, #1d4ed8 100%);
+                color: #ffffff;
+                position: relative;
+            }
+
+            .ereg-drawer-header-top {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                gap: 10px;
+                margin-bottom: 12px;
+            }
+
+            .ereg-drawer-brand {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                font-weight: 700;
+                font-size: 15px;
+                color: #ffffff;
+            }
+
+            .ereg-drawer-brand-icon {
+                width: 34px;
+                height: 34px;
+                border-radius: 9px;
+                background: rgba(255, 255, 255, 0.18);
+                border: 1px solid rgba(255, 255, 255, 0.35);
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 15px;
+            }
+
+            .ereg-drawer-close {
+                width: 32px;
+                height: 32px;
+                border-radius: 8px;
+                border: 1px solid rgba(255, 255, 255, 0.3);
+                background: rgba(255, 255, 255, 0.14);
+                color: #ffffff;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 15px;
+                cursor: pointer;
+            }
+
+            .ereg-drawer-user {
+                font-size: 11.5px;
+                color: rgba(255, 255, 255, 0.9);
+                background: rgba(255, 255, 255, 0.12);
+                padding: 7px 11px;
+                border-radius: 8px;
+                line-height: 1.4;
+            }
+
+            .ereg-drawer-body {
+                flex: 1;
+                padding: 14px 12px;
+                display: flex;
+                flex-direction: column;
+                gap: 6px;
+            }
+
+            .ereg-drawer-section-label {
+                font-size: 10.5px;
+                font-weight: 700;
+                text-transform: uppercase;
+                letter-spacing: 0.06em;
+                color: #94a3b8;
+                padding: 6px 10px 2px;
+            }
+
+            .ereg-drawer-link {
+                display: flex;
+                align-items: center;
+                gap: 12px;
+                padding: 11px 14px;
+                border-radius: 10px;
+                font-size: 13.5px;
+                font-weight: 600;
+                color: #334155;
+                text-decoration: none !important;
+                transition: background 0.15s ease, color 0.15s ease;
+            }
+
+            .ereg-drawer-link i {
+                width: 20px;
+                text-align: center;
+                font-size: 15px;
+                color: #64748b;
+            }
+
+            .ereg-drawer-link:hover {
+                background: #f1f5f9;
+                color: #002060;
+            }
+
+            .ereg-drawer-link.active {
+                background: #002060;
+                color: #ffffff !important;
+                box-shadow: 0 4px 12px rgba(0, 32, 96, 0.18);
+            }
+
+            .ereg-drawer-link.active i {
+                color: #ffffff;
+            }
+
+            .ereg-drawer-link.drawer-cta {
+                background: #eff6ff;
+                color: #1d4ed8;
+                border: 1px solid #bfdbfe;
+            }
+
+            .ereg-drawer-link.drawer-cta i {
+                color: #1d4ed8;
+            }
+
+            .ereg-drawer-link.drawer-cta.active {
+                background: #002060;
+                color: #ffffff !important;
+                border-color: #002060;
+            }
+
+            .ereg-drawer-link.drawer-cta.active i {
+                color: #ffffff;
+            }
+
+            .ereg-drawer-footer {
+                padding: 12px;
+                border-top: 1px solid #eef2f6;
+                background: #f8fafc;
+                display: flex;
+                flex-direction: column;
+                gap: 6px;
             }
 
             .ereg-admin-container .page-header {
@@ -533,69 +719,6 @@
             .ereg-admin-container .search-input {
                 width: 100%;
             }
-
-            .footer {
-                padding-bottom: 76px !important;
-            }
-
-            /* Fixed Bottom Bar for One-Thumb Mobile Navigation */
-            .ereg-mobile-bottom-nav {
-                position: fixed;
-                bottom: 0;
-                left: 0;
-                right: 0;
-                z-index: 1040;
-                display: flex;
-                align-items: center;
-                justify-content: space-around;
-                background: rgba(255, 255, 255, 0.98);
-                backdrop-filter: blur(10px);
-                border-top: 1px solid #e2e8f0;
-                padding: 6px 8px calc(6px + env(safe-area-inset-bottom, 0px));
-                box-shadow: 0 -4px 18px rgba(15, 43, 72, 0.08);
-            }
-
-            .ereg-mnav-item {
-                flex: 1;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                justify-content: center;
-                gap: 3px;
-                padding: 5px 4px;
-                border-radius: 10px;
-                color: #64748b;
-                font-size: 10.5px;
-                font-weight: 600;
-                text-decoration: none !important;
-                transition: all 0.15s ease;
-                min-width: 0;
-            }
-
-            .ereg-mnav-item i {
-                font-size: 15px;
-                line-height: 1;
-            }
-
-            .ereg-mnav-item span {
-                white-space: nowrap;
-                overflow: hidden;
-                text-overflow: ellipsis;
-                max-width: 100%;
-            }
-
-            .ereg-mnav-item.active {
-                color: #002060;
-                background: #eff6ff;
-            }
-
-            .ereg-mnav-item.mnav-cta {
-                color: #ffffff !important;
-                background: linear-gradient(135deg, #002060, #1d4ed8);
-                box-shadow: 0 3px 10px rgba(29, 78, 216, 0.28);
-                padding: 6px 6px;
-                margin: 0 3px;
-            }
         }
     </style>
 </head>
@@ -614,6 +737,112 @@
             <div class="container-fluid p-0 ereg-admin-container">
                 {{-- Sub-Navigation Bar for e-Regulasi & Partisipasi Publik inside JDIH Admin Panel --}}
                 @auth
+                    @php
+                        $activeMenuLabel = 'Dashboard PUU';
+                        if (request()->routeIs('regulasi.create')) {
+                            $activeMenuLabel = 'Ajukan Regulasi Baru';
+                        } elseif (request()->routeIs('regulasi.*')) {
+                            $activeMenuLabel = 'Daftar Pengajuan PUU';
+                        } elseif (request()->routeIs('admin.partisipasi.*')) {
+                            $activeMenuLabel = 'Kelola Partisipasi Publik';
+                        } elseif (request()->routeIs('users.*')) {
+                            $activeMenuLabel = 'Manajemen Operator Unit';
+                        }
+                    @endphp
+
+                    {{-- Mobile Trigger Bar (membuka Slide-Left Drawer) --}}
+                    <div class="ereg-mobile-topbar">
+                        <button type="button" class="ereg-mobile-menu-btn js-ereg-drawer-toggle" aria-label="Buka Menu e-Regulasi">
+                            <i class="fa fa-bars"></i>
+                            <span>Menu e-Regulasi</span>
+                        </button>
+                        <span class="ereg-mobile-current-page">
+                            {{ $activeMenuLabel }}
+                        </span>
+                    </div>
+
+                    {{-- Mobile Slide-Left Offcanvas Drawer & Backdrop --}}
+                    <div class="ereg-drawer-backdrop" id="eregDrawerBackdrop"></div>
+                    <aside class="ereg-drawer" id="eregMobileDrawer" aria-label="Navigasi Slide e-Regulasi">
+                        <div class="ereg-drawer-header">
+                            <div class="ereg-drawer-header-top">
+                                <div class="ereg-drawer-brand">
+                                    <span class="ereg-drawer-brand-icon">
+                                        <i class="fa fa-balance-scale"></i>
+                                    </span>
+                                    <div>
+                                        <div style="line-height: 1.2;">e-Regulasi</div>
+                                        <div style="font-size: 11px; font-weight: 400; opacity: 0.85;">JDIH Kemenko Pangan</div>
+                                    </div>
+                                </div>
+                                <button type="button" class="ereg-drawer-close" id="eregDrawerClose" aria-label="Tutup Menu">
+                                    <i class="fa fa-times"></i>
+                                </button>
+                            </div>
+                            <div class="ereg-drawer-user">
+                                <i class="fa fa-user-shield me-1"></i>
+                                <strong>{{ auth()->user()->role === 'super_admin' ? 'Super Admin' : 'Operator e-Regulasi' }}</strong>
+                                @if(auth()->user()->unit_kerja)
+                                    <div style="margin-top: 2px; opacity: 0.9;">{{ auth()->user()->unit_kerja }}</div>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="ereg-drawer-body">
+                            <div class="ereg-drawer-section-label">Menu Utama</div>
+                            <a href="{{ route('dashboard') }}"
+                               class="ereg-drawer-link {{ request()->routeIs('dashboard') ? 'active' : '' }}">
+                                <i class="fa fa-chart-pie"></i>
+                                <span>Dashboard PUU</span>
+                            </a>
+                            <a href="{{ route('regulasi.index') }}"
+                               class="ereg-drawer-link {{ (request()->routeIs('regulasi.*') && !request()->routeIs('regulasi.create')) ? 'active' : '' }}">
+                                <i class="fa fa-folder-open"></i>
+                                <span>Daftar Pengajuan PUU</span>
+                            </a>
+                            <a href="{{ route('regulasi.create') }}"
+                               class="ereg-drawer-link drawer-cta {{ request()->routeIs('regulasi.create') ? 'active' : '' }}">
+                                <i class="fa fa-plus-circle"></i>
+                                <span>Ajukan Regulasi Baru</span>
+                            </a>
+                            <a href="{{ route('admin.partisipasi.index') }}"
+                               class="ereg-drawer-link {{ request()->routeIs('admin.partisipasi.*') ? 'active' : '' }}">
+                                <i class="fa fa-comments"></i>
+                                <span>Kelola Partisipasi Publik</span>
+                            </a>
+                            @if(auth()->user()->role === 'super_admin')
+                                <a href="{{ route('users.index') }}"
+                                   class="ereg-drawer-link {{ request()->routeIs('users.*') ? 'active' : '' }}">
+                                    <i class="fa fa-users-cog"></i>
+                                    <span>Manajemen Operator Unit</span>
+                                </a>
+                            @endif
+                        </div>
+
+                        <div class="ereg-drawer-footer">
+                            <div class="ereg-drawer-section-label">Pintasan & Akun</div>
+                            @if(auth()->user()->role === 'super_admin')
+                                <a href="{{ url('/admin-panel') }}" class="ereg-drawer-link" style="color: #3730a3;">
+                                    <i class="fa fa-arrow-left" style="color: #3730a3;"></i>
+                                    <span>Admin Panel JDIH</span>
+                                </a>
+                            @endif
+                            <a href="{{ route('partisipasi-publik') }}" target="_blank" class="ereg-drawer-link" style="color: #0f766e;">
+                                <i class="fa fa-external-link-alt" style="color: #0f766e;"></i>
+                                <span>Lihat Halaman Publik</span>
+                            </a>
+                            <a href="{{ url()->admin('profile') }}" class="ereg-drawer-link">
+                                <i class="fa fa-user"></i>
+                                <span>Profil Pengguna</span>
+                            </a>
+                            <a href="{{ url()->admin('logout') }}" class="ereg-drawer-link" style="color: #dc2626;">
+                                <i class="fa fa-sign-out-alt" style="color: #dc2626;"></i>
+                                <span>Log Out</span>
+                            </a>
+                        </div>
+                    </aside>
+
+                    {{-- Desktop Sub-Navigation Bar --}}
                     <div class="ereg-subnav-bar">
                         <div class="ereg-subnav-links">
                             <a href="{{ route('dashboard') }}"
@@ -692,38 +921,6 @@
             </div>
         </main>
 
-        @auth
-            <nav class="ereg-mobile-bottom-nav" aria-label="Navigasi Cepat Mobile e-Regulasi">
-                <a href="{{ route('dashboard') }}" class="ereg-mnav-item {{ request()->routeIs('dashboard') ? 'active' : '' }}">
-                    <i class="fa fa-chart-pie"></i>
-                    <span>Dashboard</span>
-                </a>
-                <a href="{{ route('regulasi.index') }}" class="ereg-mnav-item {{ (request()->routeIs('regulasi.*') && !request()->routeIs('regulasi.create')) ? 'active' : '' }}">
-                    <i class="fa fa-folder-open"></i>
-                    <span>Pengajuan</span>
-                </a>
-                <a href="{{ route('regulasi.create') }}" class="ereg-mnav-item mnav-cta">
-                    <i class="fa fa-plus-circle"></i>
-                    <span>Ajukan PUU</span>
-                </a>
-                <a href="{{ route('admin.partisipasi.index') }}" class="ereg-mnav-item {{ request()->routeIs('admin.partisipasi.*') ? 'active' : '' }}">
-                    <i class="fa fa-comments"></i>
-                    <span>Partisipasi</span>
-                </a>
-                @if(auth()->user()->role === 'super_admin')
-                    <a href="{{ route('users.index') }}" class="ereg-mnav-item {{ request()->routeIs('users.*') ? 'active' : '' }}">
-                        <i class="fa fa-users-cog"></i>
-                        <span>Operator</span>
-                    </a>
-                @else
-                    <a href="{{ route('partisipasi-publik') }}" target="_blank" class="ereg-mnav-item">
-                        <i class="fa fa-globe"></i>
-                        <span>Web Publik</span>
-                    </a>
-                @endif
-            </nav>
-        @endauth
-
         <footer class="footer">
             <div class="container-fluid">
                 <div class="row text-muted gy-2">
@@ -749,6 +946,69 @@
         </footer>
     </div>
 </div>
+
+<script>
+    (function () {
+        var drawer = document.getElementById('eregMobileDrawer');
+        var backdrop = document.getElementById('eregDrawerBackdrop');
+        var closeBtn = document.getElementById('eregDrawerClose');
+        var toggles = document.querySelectorAll('.js-ereg-drawer-toggle');
+
+        if (!drawer || !backdrop) return;
+
+        function openDrawer() {
+            drawer.classList.add('is-open');
+            backdrop.classList.add('is-open');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeDrawer() {
+            drawer.classList.remove('is-open');
+            backdrop.classList.remove('is-open');
+            document.body.style.overflow = '';
+        }
+
+        toggles.forEach(function (btn) {
+            btn.addEventListener('click', function (e) {
+                e.preventDefault();
+                if (drawer.classList.contains('is-open')) {
+                    closeDrawer();
+                } else {
+                    openDrawer();
+                }
+            });
+        });
+
+        if (closeBtn) {
+            closeBtn.addEventListener('click', closeDrawer);
+        }
+
+        backdrop.addEventListener('click', closeDrawer);
+
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape' && drawer.classList.contains('is-open')) {
+                closeDrawer();
+            }
+        });
+
+        // Dukungan gestur swipe kiri untuk menutup drawer di layar sentuh
+        var touchStartX = 0;
+        drawer.addEventListener('touchstart', function (e) {
+            if (e.touches && e.touches.length === 1) {
+                touchStartX = e.touches[0].clientX;
+            }
+        }, { passive: true });
+
+        drawer.addEventListener('touchend', function (e) {
+            if (e.changedTouches && e.changedTouches.length === 1) {
+                var deltaX = e.changedTouches[0].clientX - touchStartX;
+                if (deltaX < -50) {
+                    closeDrawer();
+                }
+            }
+        }, { passive: true });
+    })();
+</script>
 
 <script>
     var $url = "{{ admin::url() }}";
