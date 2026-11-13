@@ -593,6 +593,15 @@
   /* ==========================================================================
      HEADER FULL WIDTH & LOGO FAR LEFT CORNER ALIGNMENT
      ========================================================================== */
+  header {
+    z-index: 100 !important;
+  }
+  header .menu-mobile {
+    z-index: 100 !important;
+  }
+  .popup {
+    z-index: 99990 !important;
+  }
   header .wrapper {
     max-width: 100% !important;
     width: 100% !important;

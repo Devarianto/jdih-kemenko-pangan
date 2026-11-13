@@ -747,10 +747,10 @@
       }
       .banner-homepage__caption .wrap-filter {
         position: relative;
-        z-index: 30 !important;
+        z-index: 5 !important;
       }
       .banner-homepage__caption .wrap-filter .filter {
-        z-index: 40 !important;
+        z-index: 6 !important;
       }
       .banner-stats {
         display: flex;

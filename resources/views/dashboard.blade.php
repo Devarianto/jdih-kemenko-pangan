@@ -659,10 +659,10 @@
 
         .dash-stat-icon {
             flex-shrink: 0;
-            width: 22px;
-            height: 22px;
+            width: 28px;
+            height: 28px;
             color: var(--accent, #8a90a6);
-            opacity: 0.85;
+            opacity: 0.9;
         }
 
         .dash-stat-icon svg {
@@ -676,9 +676,9 @@
         }
 
         .dash-stat-top {
-            font-size: 12.5px;
-            color: #6b7280;
-            font-weight: 500;
+            font-size: 13px;
+            color: #4b5563;
+            font-weight: 700;
             letter-spacing: 0.01em;
         }
 
@@ -1317,8 +1317,8 @@
             }
 
             .dash-stat-icon {
-                width: 18px;
-                height: 18px;
+                width: 22px;
+                height: 22px;
                 margin-top: 2px;
             }
 

@@ -6,7 +6,7 @@ header {
   position: fixed;
   inset: 0;
   bottom: auto;
-  z-index: 9;
+  z-index: 100;
   transition: 0.2s all ease-out;
   &::before {
     content: "";

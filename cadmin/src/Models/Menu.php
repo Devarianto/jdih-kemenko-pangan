@@ -96,10 +96,14 @@ class Menu extends Model
         $out = [];
         foreach (Related::whereModule('menu')->whereRelated('position')->whereRelatedUniqid($position)->get() as $v) {
             if ($menu = self::translate()->whereIsActive(1)->find($v->uniqid)) {
-                $out[$menu->sortIds] = $menu;
+                $key = (string) $menu->sortIds;
+                while (array_key_exists($key, $out)) {
+                    $key .= '.' . $menu->id;
+                }
+                $out[$key] = $menu;
             }
         }
-        ksort($out);
+        ksort($out, SORT_NATURAL);
         return $out;
     }
 

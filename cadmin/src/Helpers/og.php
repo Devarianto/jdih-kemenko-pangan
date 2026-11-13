@@ -158,6 +158,9 @@ class og {
             'webarq' => '',
         ] as $k=>$v)
             $copyright = str_replace('['.$k.']',$v,$copyright);
+
+        // Ensure valid HTML entity even if DB contains legacy mojibake
+        $copyright = str_replace(['┬⌐', 'Â©', '©'], '&copy;', $copyright);
         
         return $copyright;
     }
