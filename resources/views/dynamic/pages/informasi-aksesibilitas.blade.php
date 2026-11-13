@@ -92,7 +92,7 @@
             </svg>
           </div>
           <h4 style="font-weight: 600; color: #1e293b; margin-bottom: 8px;">Belum ada video aksesibilitas yang tersedia.</h4>
-          <p style="color: #64748b; font-size: 14px; max-width: 480px; margin: 0 auto;">Konten video panduan dan ramah disabilitas sedang dipersiapkan dan akan segera dipublikasikan pada halaman ini.</p>
+          <p style="color: #64748b; font-size: 14px; max-width: 480px; margin: 0 auto;">Konten video panduan aksesibilitas sedang dipersiapkan dan akan segera dipublikasikan pada halaman ini.</p>
         </div>
       @endif
     </div>

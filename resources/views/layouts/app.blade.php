@@ -45,63 +45,117 @@
             box-sizing: border-box;
         }
 
-        /* Module Top Sub-Navigation Bar (Floating / Sticky on Scroll) */
-        .ereg-subnav-bar {
+        /* Unified Single-Row Top Navigation Bar (Attached to Top & Floating on Scroll) */
+        .ereg-unified-topbar {
             position: sticky;
-            top: 12px;
-            z-index: 1030;
-            background: rgba(255, 255, 255, 0.96);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid #e4eaf6;
-            border-radius: 12px;
-            padding: 12px 16px;
-            margin-bottom: 22px;
+            top: 0;
+            z-index: 1040;
+            background: rgba(255, 255, 255, 0.97);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid #e2e8f0;
+            padding: 0 22px;
+            min-height: 64px;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            flex-wrap: wrap;
+            flex-wrap: nowrap;
             gap: 12px;
-            box-shadow: 0 2px 8px rgba(0, 32, 96, 0.05);
-            transition: box-shadow 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+            box-shadow: 0 2px 10px rgba(0, 32, 96, 0.05);
+            transition: box-shadow 0.2s ease, background 0.2s ease, border-color 0.2s ease;
         }
 
-        .ereg-subnav-bar.is-floating {
+        .ereg-unified-topbar.is-floating {
             position: fixed;
-            top: 12px;
-            margin-bottom: 0;
-            border-color: #d0dfff;
-            box-shadow: 0 10px 28px rgba(15, 43, 72, 0.14);
+            top: 0;
+            border-bottom-color: #cbd5e1;
+            box-shadow: 0 8px 24px rgba(15, 43, 72, 0.12);
         }
 
-        .ereg-subnav-placeholder {
+        .ereg-topbar-placeholder {
             display: none;
         }
 
-        .ereg-subnav-placeholder.is-active {
+        .ereg-topbar-placeholder.is-active {
             display: block;
-            margin-bottom: 22px;
         }
 
-        .ereg-subnav-links {
+        .ereg-topbar-left {
             display: flex;
             align-items: center;
-            flex-wrap: wrap;
-            gap: 6px;
+            gap: 10px;
+            flex-shrink: 0;
+        }
+
+        .ereg-topbar-brand {
+            display: inline-flex;
+            align-items: center;
+            gap: 9px;
+            text-decoration: none !important;
+            color: #002060 !important;
+            font-weight: 700;
+            font-size: 14px;
+            white-space: nowrap;
+        }
+
+        .ereg-topbar-brand-icon {
+            width: 34px;
+            height: 34px;
+            border-radius: 9px;
+            background: linear-gradient(135deg, #002060, #1d4ed8);
+            color: #ffffff;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            flex-shrink: 0;
+            box-shadow: 0 2px 6px rgba(0, 32, 96, 0.2);
+        }
+
+        .ereg-topbar-brand-text {
+            display: flex;
+            flex-direction: column;
+            line-height: 1.18;
+        }
+
+        .ereg-topbar-brand-sub {
+            font-size: 10.5px;
+            font-weight: 500;
+            color: #64748b;
+        }
+
+        .ereg-topbar-nav {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: nowrap;
+            gap: 5px;
+            flex: 1 1 auto;
+            min-width: 0;
+            overflow-x: auto;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+            padding: 4px 2px;
+        }
+
+        .ereg-topbar-nav::-webkit-scrollbar {
+            display: none;
         }
 
         .ereg-subnav-item {
             display: inline-flex;
             align-items: center;
-            gap: 8px;
-            padding: 8px 14px;
+            gap: 7px;
+            padding: 7px 12px;
             border-radius: 8px;
-            font-size: 13px;
+            font-size: 12.5px;
             font-weight: 600;
             color: #475569;
             text-decoration: none !important;
             transition: all 0.16s ease;
             border: 1px solid transparent;
+            white-space: nowrap;
+            flex-shrink: 0;
         }
 
         .ereg-subnav-item:hover {
@@ -132,31 +186,119 @@
             border-color: #002060;
         }
 
-        .ereg-subnav-right {
+        .ereg-topbar-right {
             display: flex;
             align-items: center;
-            gap: 10px;
-            flex-wrap: wrap;
+            gap: 8px;
+            flex-wrap: nowrap;
+            flex-shrink: 0;
         }
 
         .ereg-public-link {
             display: inline-flex;
             align-items: center;
             gap: 6px;
-            padding: 7px 13px;
+            padding: 6px 11px;
             border-radius: 8px;
-            font-size: 12.5px;
+            font-size: 12px;
             font-weight: 600;
             color: #0f766e;
             background: #f0fdfa;
             border: 1px solid #99f6e4;
             text-decoration: none !important;
             transition: all 0.16s ease;
+            white-space: nowrap;
+            flex-shrink: 0;
         }
 
         .ereg-public-link:hover {
             background: #ccfbf1;
             color: #115e59;
+        }
+
+        .ereg-profile-dropdown {
+            position: relative;
+            flex-shrink: 0;
+        }
+
+        .ereg-profile-trigger {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 5px 11px 5px 7px;
+            border-radius: 999px;
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            color: #1e293b !important;
+            font-size: 12.5px;
+            font-weight: 600;
+            text-decoration: none !important;
+            transition: all 0.16s ease;
+            white-space: nowrap;
+            cursor: pointer;
+        }
+
+        .ereg-profile-trigger:hover,
+        .ereg-profile-trigger[aria-expanded="true"] {
+            background: #eff6ff;
+            border-color: #bfdbfe;
+            color: #002060 !important;
+        }
+
+        .ereg-profile-trigger::after {
+            display: none !important;
+        }
+
+        .ereg-profile-avatar {
+            width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #002060, #2563eb);
+            color: #ffffff;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        .ereg-profile-name {
+            max-width: 190px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .ereg-profile-caret {
+            font-size: 10px;
+            color: #64748b;
+            transition: transform 0.18s ease;
+        }
+
+        .ereg-profile-trigger[aria-expanded="true"] .ereg-profile-caret {
+            transform: rotate(180deg);
+        }
+
+        @media (max-width: 1200px) and (min-width: 769px) {
+            .ereg-unified-topbar {
+                padding: 0 14px;
+                gap: 8px;
+            }
+            .ereg-topbar-brand-sub {
+                display: none;
+            }
+            .ereg-subnav-item {
+                padding: 6px 10px;
+                font-size: 12px;
+                gap: 5px;
+            }
+            .ereg-public-link span {
+                display: none;
+            }
+            .ereg-profile-name {
+                max-width: 140px;
+            }
         }
 
         .ereg-admin-container .page-header {
@@ -509,9 +651,20 @@
                 padding: 14px 12px 28px !important;
             }
 
-            /* Sembunyikan subnav bar desktop saat mobile, digantikan slide-left drawer */
-            .ereg-subnav-bar {
+            .ereg-unified-topbar {
+                padding: 0 12px;
+                min-height: 56px;
+            }
+
+            /* Sembunyikan menu link tengah & tombol publik desktop saat mobile, digantikan slide-left drawer */
+            .ereg-topbar-nav,
+            .ereg-topbar-right .ereg-public-link {
                 display: none !important;
+            }
+
+            .ereg-profile-name {
+                max-width: 120px;
+                font-size: 12px;
             }
 
             /* Bar Pemicu Menu di Atas Halaman saat Mobile */
@@ -777,13 +930,120 @@
     @endif
 
     <div class="main">
-        @if(!request()->get('opener'))
-            @include('cactuar::admin.layout-top-menu')
+        @if(!request()->get('opener') && auth()->check())
+            @php
+                $rawTopName = trim(preg_replace('/\s*\(.*?\)\s*/', '', auth()->user()->display_name ?? auth()->user()->username ?? 'User'));
+                if ($rawTopName === '') {
+                    $rawTopName = auth()->user()->display_name ?? 'User';
+                }
+                $topAvatarInitial = mb_strtoupper(mb_substr($rawTopName, 0, 1));
+            @endphp
+
+            {{-- Unified Single-Row Top Bar (Attached to Top & Floating on Scroll) --}}
+            <div class="ereg-topbar-placeholder" id="eregTopbarPlaceholder"></div>
+            <header class="ereg-unified-topbar" id="eregUnifiedTopbar">
+                {{-- Left: Sidebar Toggle / Mobile Hamburger + Brand --}}
+                <div class="ereg-topbar-left">
+                    @if(in_array(auth()->user()->role, ['admin_operator', 'operator_eregulasi']))
+                        <a class="sidebar-toggle js-ereg-drawer-toggle d-inline-flex d-md-none me-1" role="button" tabindex="0" aria-label="Buka Menu Navigasi e-Regulasi" style="cursor: pointer;">
+                            <i class="hamburger align-self-center"></i>
+                        </a>
+                    @else
+                        <a class="sidebar-toggle js-sidebar-toggle me-1" role="button" tabindex="0" aria-label="Toggle Sidebar">
+                            <i class="hamburger align-self-center"></i>
+                        </a>
+                    @endif
+
+                    <a href="{{ route('dashboard') }}" class="ereg-topbar-brand">
+                        <span class="ereg-topbar-brand-icon">
+                            <i class="fa fa-balance-scale"></i>
+                        </span>
+                        <span class="ereg-topbar-brand-text">
+                            <span>e-Regulasi</span>
+                            <span class="ereg-topbar-brand-sub">JDIH Kemenko Pangan</span>
+                        </span>
+                    </a>
+                </div>
+
+                {{-- Center: 1-Row Navigation Links (Desktop) --}}
+                <nav class="ereg-topbar-nav" aria-label="Navigasi Utama e-Regulasi">
+                    <a href="{{ route('dashboard') }}"
+                       class="ereg-subnav-item {{ request()->routeIs('dashboard') ? 'active' : '' }}">
+                        <i class="fa fa-chart-pie"></i>
+                        <span>Dashboard PUU</span>
+                    </a>
+                    <a href="{{ route('regulasi.index') }}"
+                       class="ereg-subnav-item {{ (request()->routeIs('regulasi.*') && !request()->routeIs('regulasi.create')) ? 'active' : '' }}">
+                        <i class="fa fa-folder-open"></i>
+                        <span>Daftar Pengajuan PUU</span>
+                    </a>
+                    <a href="{{ route('regulasi.create') }}"
+                       class="ereg-subnav-item btn-create-shortcut {{ request()->routeIs('regulasi.create') ? 'active' : '' }}">
+                        <i class="fa fa-plus-circle"></i>
+                        <span>Ajukan Regulasi Baru</span>
+                    </a>
+                    <a href="{{ route('admin.partisipasi.index') }}"
+                       class="ereg-subnav-item {{ request()->routeIs('admin.partisipasi.*') ? 'active' : '' }}">
+                        <i class="fa fa-comments"></i>
+                        <span>Kelola Partisipasi Publik</span>
+                    </a>
+                    @if(auth()->user()->role === 'super_admin')
+                        <a href="{{ route('users.index') }}"
+                           class="ereg-subnav-item {{ request()->routeIs('users.*') ? 'active' : '' }}">
+                            <i class="fa fa-users-cog"></i>
+                            <span>Operator Unit</span>
+                        </a>
+                    @endif
+                </nav>
+
+                {{-- Right: Lihat Halaman Publik + Login Profile Dropdown (Aligned in Same Row) --}}
+                <div class="ereg-topbar-right">
+                    @if(auth()->user()->role === 'super_admin')
+                        <a href="{{ url('/admin-panel') }}" class="ereg-public-link" style="background:#eef2ff; color:#3730a3; border-color:#c7d2fe;" title="Kembali ke Panel Pengelolaan JDIH">
+                            <i class="fa fa-arrow-left"></i>
+                            <span>Admin JDIH</span>
+                        </a>
+                    @endif
+                    <a href="{{ route('partisipasi-publik') }}" target="_blank" class="ereg-public-link" title="Buka halaman Partisipasi Publik di Website Utama JDIH">
+                        <i class="fa fa-external-link-alt"></i>
+                        <span>Lihat Halaman Publik</span>
+                    </a>
+
+                    <div class="dropdown ereg-profile-dropdown">
+                        <a class="ereg-profile-trigger dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <span class="ereg-profile-avatar">{{ $topAvatarInitial }}</span>
+                            <span class="ereg-profile-name">{{ auth()->user()->display_name }}</span>
+                            <i class="fa fa-chevron-down ereg-profile-caret"></i>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-end shadow-sm" style="min-width: 220px; border-radius: 12px; border: 1px solid #e2e8f0; padding: 6px;">
+                            <div class="px-3 py-2 border-bottom mb-1" style="background: #f8fafc; border-radius: 8px 8px 0 0;">
+                                <div class="fw-bold text-dark" style="font-size: 13px;">{{ $rawTopName }}</div>
+                                <div class="text-muted" style="font-size: 11.5px;">
+                                    {{ auth()->user()->role === 'super_admin' ? 'Super Admin' : 'Admin / Operator e-Regulasi' }}
+                                    @if(auth()->user()->unit_kerja)
+                                        &middot; {{ auth()->user()->unit_kerja }}
+                                    @endif
+                                </div>
+                            </div>
+                            <a class="dropdown-item rounded-2 py-2" href="{{ url()->admin('profile') }}" style="font-size: 13px;">
+                                <i class="align-middle me-2 fa fa-user text-secondary"></i> Profile
+                            </a>
+                            <a class="dropdown-item rounded-2 py-2" href="{{ route('partisipasi-publik') }}" target="_blank" style="font-size: 13px;">
+                                <i class="align-middle me-2 fa fa-globe text-teal" style="color: #0f766e;"></i> Halaman Partisipasi Publik
+                            </a>
+                            <div class="dropdown-divider my-1"></div>
+                            <a class="dropdown-item rounded-2 py-2 text-danger" href="{{ url()->admin('logout') }}" style="font-size: 13px; font-weight: 600;">
+                                <i class="align-middle me-2 fa fa-sign-out-alt"></i> Log out
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </header>
         @endif
 
         <main class="content">
             <div class="container-fluid p-0 ereg-admin-container">
-                {{-- Sub-Navigation Bar for e-Regulasi & Partisipasi Publik inside JDIH Admin Panel --}}
+                {{-- Mobile Trigger & Slide-Left Offcanvas Drawer --}}
                 @auth
                     @php
                         $activeMenuLabel = 'Dashboard PUU';
@@ -889,60 +1149,6 @@
                             </a>
                         </div>
                     </aside>
-
-                    {{-- Desktop Sub-Navigation Bar (Floating on Scroll) --}}
-                    <div class="ereg-subnav-placeholder" id="eregSubnavPlaceholder"></div>
-                    <div class="ereg-subnav-bar" id="eregSubnavBar">
-                        <div class="ereg-subnav-links">
-                            <a href="{{ route('dashboard') }}"
-                               class="ereg-subnav-item {{ request()->routeIs('dashboard') ? 'active' : '' }}">
-                                <i class="fa fa-chart-pie"></i>
-                                <span>Dashboard PUU</span>
-                            </a>
-                            <a href="{{ route('regulasi.index') }}"
-                               class="ereg-subnav-item {{ (request()->routeIs('regulasi.*') && !request()->routeIs('regulasi.create')) ? 'active' : '' }}">
-                                <i class="fa fa-folder-open"></i>
-                                <span>Daftar Pengajuan PUU</span>
-                            </a>
-                            <a href="{{ route('regulasi.create') }}"
-                               class="ereg-subnav-item btn-create-shortcut {{ request()->routeIs('regulasi.create') ? 'active' : '' }}">
-                                <i class="fa fa-plus-circle"></i>
-                                <span>Ajukan Regulasi Baru</span>
-                            </a>
-                            <a href="{{ route('admin.partisipasi.index') }}"
-                               class="ereg-subnav-item {{ request()->routeIs('admin.partisipasi.*') ? 'active' : '' }}">
-                                <i class="fa fa-comments"></i>
-                                <span>Kelola Partisipasi Publik</span>
-                            </a>
-                            @if(auth()->user()->role === 'super_admin')
-                                <a href="{{ route('users.index') }}"
-                                   class="ereg-subnav-item {{ request()->routeIs('users.*') ? 'active' : '' }}">
-                                    <i class="fa fa-users-cog"></i>
-                                    <span>Manajemen Operator Unit</span>
-                                </a>
-                            @endif
-                        </div>
-
-                        <div class="ereg-subnav-right">
-                            @if(auth()->user()->role === 'super_admin')
-                                <a href="{{ url('/admin-panel') }}" class="ereg-public-link" style="background:#eef2ff; color:#3730a3; border-color:#c7d2fe;" title="Kembali ke Panel Pengelolaan JDIH">
-                                    <i class="fa fa-arrow-left"></i>
-                                    <span>Kembali ke Admin Panel JDIH</span>
-                                </a>
-                            @endif
-                            <a href="{{ route('partisipasi-publik') }}" target="_blank" class="ereg-public-link" title="Buka halaman Partisipasi Publik di Website Utama JDIH">
-                                <i class="fa fa-external-link-alt"></i>
-                                <span>Lihat Halaman Publik</span>
-                            </a>
-                            <span class="user-badge">
-                                <i class="fa fa-user-shield" style="margin-right: 4px;"></i>
-                                {{ auth()->user()->role === 'super_admin' ? 'Super Admin' : 'Admin / Operator' }}
-                                @if(auth()->user()->unit_kerja)
-                                    &middot; {{ auth()->user()->unit_kerja }}
-                                @endif
-                            </span>
-                        </div>
-                    </div>
                 @endauth
 
                 @unless(request()->routeIs('dashboard'))
@@ -1058,73 +1264,40 @@
         }, { passive: true });
     })();
 
-    // Floating / Sticky Desktop Sub-Navigation Bar saat di-scroll ke bawah
+    // Unified Top Bar Floating / Fixed at Top saat halaman di-scroll ke bawah
     (function () {
-        var subnav = document.getElementById('eregSubnavBar');
-        var placeholder = document.getElementById('eregSubnavPlaceholder');
-        var container = document.querySelector('.ereg-admin-container');
-        if (!subnav || !placeholder || !container) return;
+        var topbar = document.getElementById('eregUnifiedTopbar');
+        var placeholder = document.getElementById('eregTopbarPlaceholder');
+        var mainEl = document.querySelector('.main');
+        if (!topbar || !placeholder || !mainEl) return;
 
-        var triggerTop = 0;
         var isPinned = false;
 
-        function measureTriggerTop() {
-            if (!isPinned) {
-                var rect = subnav.getBoundingClientRect();
-                triggerTop = rect.top + window.pageYOffset - 12;
-            } else {
-                var pRect = placeholder.getBoundingClientRect();
-                triggerTop = pRect.top + window.pageYOffset - 12;
-            }
-        }
-
-        function syncFloatingState() {
-            if (window.innerWidth <= 768) {
-                if (isPinned) {
-                    isPinned = false;
-                    subnav.classList.remove('is-floating');
-                    subnav.style.width = '';
-                    subnav.style.left = '';
-                    placeholder.classList.remove('is-active');
-                    placeholder.style.height = '';
-                }
-                return;
-            }
-
-            if (triggerTop <= 0) {
-                measureTriggerTop();
-            }
-
+        function syncTopbarState() {
             var scrollY = window.pageYOffset || document.documentElement.scrollTop;
-            if (scrollY > triggerTop) {
-                var cRect = container.getBoundingClientRect();
+            if (scrollY > 4) {
+                var mRect = mainEl.getBoundingClientRect();
                 if (!isPinned) {
-                    placeholder.style.height = subnav.offsetHeight + 'px';
+                    placeholder.style.height = topbar.offsetHeight + 'px';
                     placeholder.classList.add('is-active');
-                    subnav.classList.add('is-floating');
+                    topbar.classList.add('is-floating');
                     isPinned = true;
                 }
-                subnav.style.width = cRect.width + 'px';
-                subnav.style.left = cRect.left + 'px';
+                topbar.style.width = mRect.width + 'px';
+                topbar.style.left = mRect.left + 'px';
             } else if (isPinned) {
                 isPinned = false;
-                subnav.classList.remove('is-floating');
-                subnav.style.width = '';
-                subnav.style.left = '';
+                topbar.classList.remove('is-floating');
+                topbar.style.width = '';
+                topbar.style.left = '';
                 placeholder.classList.remove('is-active');
                 placeholder.style.height = '';
             }
         }
 
-        window.addEventListener('load', function () {
-            measureTriggerTop();
-            syncFloatingState();
-        });
-        window.addEventListener('scroll', syncFloatingState, { passive: true });
-        window.addEventListener('resize', function () {
-            measureTriggerTop();
-            syncFloatingState();
-        });
+        window.addEventListener('load', syncTopbarState);
+        window.addEventListener('scroll', syncTopbarState, { passive: true });
+        window.addEventListener('resize', syncTopbarState);
     })();
 </script>
 

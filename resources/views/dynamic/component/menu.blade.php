@@ -213,7 +213,7 @@
       if (str_contains($norm, 'aksesibilitas')) {
         return [
           'icon' => '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="4" r="2"/><path d="m4.5 7.5 7.5 3.5 7.5-3.5"/><path d="M12 11v10"/><path d="m6 21 6-5 6 5"/></svg>',
-          'desc' => 'Fitur ramah disabilitas dan kemudahan akses'
+          'desc' => 'Kemudahan akses'
         ];
       }
       
@@ -264,7 +264,7 @@
                 $isExternal = ($itemHost && $itemHost !== $appHost && !in_array($itemHost, ['localhost', '127.0.0.1', 'jdih.kemenkopangan.go.id'])) || str_contains($child->fullUrl, 'regulasikemenkopangan.id');
               @endphp
               @if($subchilds->count() > 0)
-              <div class="jdihn-item jdihn-item-has-children @if(isset($menu) && (in_array($child->id, $menu->activeIds) || $subchilds->pluck('id')->intersect($menu->activeIds ?? [])->isNotEmpty())) active @endif">
+              <div class="jdihn-item jdihn-item-has-children @if(isset($menu) && (in_array($child->id, $menu->activeIds) || $subchilds->pluck('id')->intersect($menu->activeIds ?? [])->isNotEmpty())) active @endif" data-href="{{ $child->fullUrl }}" data-external="{{ $isExternal ? '1' : '0' }}" role="link" tabindex="0">
                 <a href="{{ $child->fullUrl }}" class="jdihn-item-icon-link" @if($isExternal) target="_blank" rel="noopener noreferrer" @endif>
                   <div class="jdihn-item-icon">
                     {!! $meta['icon'] !!}
@@ -274,7 +274,9 @@
                   <div class="jdihn-item-title-row">
                     <a href="{{ $child->fullUrl }}" class="jdihn-item-title" style="text-decoration: none;" @if($isExternal) target="_blank" rel="noopener noreferrer" @endif>{{ $child->label }}</a>
                   </div>
-                  <div class="jdihn-item-desc">{{ $meta['desc'] }}</div>
+                  @if(!empty($meta['desc']))
+                  <a href="{{ $child->fullUrl }}" class="jdihn-item-desc" style="text-decoration: none;" @if($isExternal) target="_blank" rel="noopener noreferrer" @endif>{{ $meta['desc'] }}</a>
+                  @endif
                   <div class="jdihn-subchild-links">
                     @foreach($subchilds as $sc)
                       @php
@@ -817,8 +819,8 @@
     left: 50% !important;
     transform: translateX(-50%) translateY(-10px) !important;
     z-index: 9999 !important;
-    min-width: 580px !important;
-    max-width: 680px !important;
+    min-width: min(580px, calc(100vw - 32px)) !important;
+    max-width: min(680px, calc(100vw - 32px)) !important;
     width: max-content !important;
     padding: 22px 26px !important;
     background: #ffffff !important;
@@ -833,6 +835,11 @@
                 visibility 0.22s,
                 background 0.3s ease,
                 border-color 0.3s ease !important;
+  }
+  @media (max-width: 680px) {
+    .jdihn-mega-grid {
+      grid-template-columns: 1fr !important;
+    }
   }
   header .child.jdihn-mega-menu::before,
   header .child.jdihn-mega-menu::after {
@@ -1351,6 +1358,49 @@
           child.dataset.jdihnBound = 'true';
           child.addEventListener('click', function(e) {
             e.stopPropagation();
+          });
+        }
+      });
+
+      // Pastikan seluruh kartu .jdihn-item-has-children dapat diklik secara responsif
+      document.querySelectorAll('.jdihn-item-has-children[data-href]').forEach(card => {
+        if (card.dataset.cardBound) return;
+        card.dataset.cardBound = 'true';
+        card.addEventListener('click', function(e) {
+          if (e.target.closest('a')) return;
+          const url = card.getAttribute('data-href');
+          const isExt = card.getAttribute('data-external') === '1';
+          if (url) {
+            if (isExt) {
+              window.open(url, '_blank', 'noopener,noreferrer');
+            } else {
+              window.location.href = url;
+            }
+          }
+        });
+        card.addEventListener('keydown', function(e) {
+          if ((e.key === 'Enter' || e.key === ' ') && !e.target.closest('a')) {
+            e.preventDefault();
+            card.click();
+          }
+        });
+      });
+
+      // Pada menu mobile (.menu-mobile), klik pada menu induk yang memiliki submenu membuka akordeon submenu
+      document.querySelectorAll('.menu-mobile nav ul > li').forEach(li => {
+        const childBox = li.querySelector('.child');
+        const mainLink = li.querySelector(':scope > a');
+        const chevron = li.querySelector(':scope > i');
+        if (childBox && mainLink && !mainLink.dataset.mobileSubBound) {
+          mainLink.dataset.mobileSubBound = 'true';
+          mainLink.addEventListener('click', function(e) {
+            e.preventDefault();
+            if (chevron) {
+              chevron.click();
+            } else {
+              const isShown = li.classList.toggle('show');
+              childBox.style.display = isShown ? 'block' : 'none';
+            }
           });
         }
       });
