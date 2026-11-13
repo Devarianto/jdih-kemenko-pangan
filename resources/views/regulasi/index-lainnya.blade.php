@@ -23,8 +23,7 @@
             <line x1="12" y1="8" x2="12" y2="12" />
             <line x1="12" y1="16" x2="12.01" y2="16" />
         </svg>
-        <span>Data di bawah adalah seluruh regulasi yang diajukan oleh unit kerja di lingkungan Kemenko Pangan. Halaman ini
-            bersifat <strong>hanya baca</strong>.</span>
+        <span>Data di bawah adalah seluruh regulasi yang diajukan oleh unit kerja di lingkungan Kemenko Pangan.</span>
     </div>
 
     {{-- FILTER BAR --}}

@@ -5,47 +5,6 @@
 
 @section('content')
 
-    {{-- ── Header & Filter Bar ── --}}
-    <form method="GET" action="{{ route('partisipasi-publik') }}" class="pub-filter-bar">
-        <div class="pub-section-title" style="margin-bottom: 0;">
-            <span class="pub-count-pill">
-                {{ $daftarUjiPublik->total() }} Rancangan
-            </span>
-        </div>
-
-        <div class="pub-filter-controls">
-            <input type="text" name="search" value="{{ request('search') }}" placeholder="Cari judul atau abstrak..." class="pub-search" id="searchInput">
-
-            <select name="status" class="pub-select" onchange="this.form.submit()">
-                <option value="">Semua Status Periode</option>
-                <option value="aktif" {{ request('status') === 'aktif' ? 'selected' : '' }}>Sedang Dibuka (Aktif)</option>
-                <option value="berakhir" {{ request('status') === 'berakhir' ? 'selected' : '' }}>Telah Berakhir</option>
-            </select>
-
-            <select name="jenis" class="pub-select" onchange="this.form.submit()">
-                <option value="">Semua Jenis Peraturan</option>
-                <option value="Peraturan Menteri Koordinator" {{ request('jenis') === 'Peraturan Menteri Koordinator' ? 'selected' : '' }}>Peraturan Menteri Koordinator</option>
-                <option value="Peraturan Presiden" {{ request('jenis') === 'Peraturan Presiden' ? 'selected' : '' }}>Peraturan Presiden</option>
-                <option value="Keputusan Menteri Koordinator" {{ request('jenis') === 'Keputusan Menteri Koordinator' ? 'selected' : '' }}>Keputusan Menteri Koordinator</option>
-                <option value="Instruksi Menteri Koordinator" {{ request('jenis') === 'Instruksi Menteri Koordinator' ? 'selected' : '' }}>Instruksi Menteri Koordinator</option>
-            </select>
-
-            <button type="submit" class="pub-filter-btn">Filter</button>
-
-            @if(request('search') || request('status') || request('jenis'))
-                <a href="{{ route('partisipasi-publik') }}" class="pub-reset-btn">✕ Reset</a>
-            @endif
-        </div>
-    </form>
-
-    {{-- ── Pesan pencarian instan kosong ── --}}
-    <div id="searchEmpty" style="display:none;">
-        <div class="pub-empty">
-            <span class="pub-empty-icon">🔍</span>
-            <p>Tidak ada rancangan peraturan yang cocok dengan kata kunci pencarian Anda.</p>
-        </div>
-    </div>
-
     {{-- ── Grid card ── --}}
     <div class="pub-grid" id="listContainer">
         @forelse($daftarUjiPublik as $item)
@@ -239,12 +198,20 @@
         }
 
         .pub-select {
-            padding: 10px 14px;
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            padding: 10px 38px 10px 14px;
             border: 1.5px solid #d8e0ee;
             border-radius: 8px;
             font-size: 13px;
             color: #1a1a2e;
-            background: #ffffff;
+            background-color: #ffffff;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23475569' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 12px center;
+            background-size: 15px 15px;
+            cursor: pointer;
             outline: none;
         }
 

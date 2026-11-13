@@ -429,6 +429,31 @@
             box-shadow: 0 0 0 3px rgba(0, 32, 96, 0.1);
         }
 
+        .ereg-admin-container select.form-control,
+        .ereg-admin-container .filter-select {
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23475569' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 12px center;
+            background-size: 15px 15px;
+            padding-right: 38px !important;
+            cursor: pointer;
+        }
+
+        .ereg-admin-container select.form-control.filter-select {
+            width: auto;
+            min-width: 210px;
+        }
+
+        @media (max-width: 640px) {
+            .ereg-admin-container select.form-control.filter-select {
+                width: 100%;
+                min-width: 0;
+            }
+        }
+
         .ereg-admin-container .upload-btn {
             display: inline-flex;
             align-items: center;
