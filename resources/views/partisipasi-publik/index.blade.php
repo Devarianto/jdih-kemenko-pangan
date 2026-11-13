@@ -5,43 +5,9 @@
 
 @section('content')
 
-    {{-- ── Alur & Prosedur Partisipasi Publik ── --}}
-    <div class="pub-procedure-card">
-        <div class="pub-procedure-header">
-            <div>
-                <span class="pub-procedure-eyebrow">Tata Cara Penyampaian Masukan</span>
-                <h3 class="pub-procedure-title">Bagaimana Berpartisipasi dalam Penyusunan Regulasi?</h3>
-            </div>
-        </div>
-        <div class="pub-procedure-steps">
-            <div class="pub-step-item">
-                <div class="pub-step-num">1</div>
-                <div class="pub-step-body">
-                    <strong>Pilih Rancangan Regulasi</strong>
-                    <p>Pilih rancangan peraturan yang sedang dalam masa konsultasi publik aktif pada daftar di bawah.</p>
-                </div>
-            </div>
-            <div class="pub-step-item">
-                <div class="pub-step-num">2</div>
-                <div class="pub-step-body">
-                    <strong>Pelajari Draf & Abstrak</strong>
-                    <p>Baca ringkasan materi muatan dan pratinjau dokumen PDF rancangan peraturan secara langsung.</p>
-                </div>
-            </div>
-            <div class="pub-step-item">
-                <div class="pub-step-num">3</div>
-                <div class="pub-step-body">
-                    <strong>Kirim Tanggapan / Aspirasi</strong>
-                    <p>Isi formulir tanggapan sebagai Masyarakat Umum atau Perwakilan Instansi/Akademisi untuk ditelaah tim penyusun.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-
     {{-- ── Header & Filter Bar ── --}}
     <form method="GET" action="{{ route('partisipasi-publik') }}" class="pub-filter-bar">
         <div class="pub-section-title" style="margin-bottom: 0;">
-            <span>🗁 Daftar Rancangan Peraturan</span>
             <span class="pub-count-pill">
                 {{ $daftarUjiPublik->total() }} Rancangan
             </span>
