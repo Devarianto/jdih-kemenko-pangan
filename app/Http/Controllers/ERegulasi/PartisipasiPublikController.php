@@ -89,24 +89,8 @@ class PartisipasiPublikController extends Controller
             ?? Menu::first();
     }
 
-    /**
-     * Memeriksa apakah fitur Partisipasi Publik aktif di web publik.
-     * Jika menu 35 dinonaktifkan (is_active = 0), fitur dianggap mati.
-     */
-    public static function isEnabled(): bool
-    {
-        return (bool) \Illuminate\Support\Facades\DB::table('menus')
-            ->where('id', 35)
-            ->where('is_active', 1)
-            ->exists();
-    }
-
     public function beranda()
     {
-        if (!self::isEnabled()) {
-            abort(404);
-        }
-
         $preview = $this->queryAll()
             ->take(3)
             ->get();
@@ -116,10 +100,6 @@ class PartisipasiPublikController extends Controller
 
     public function index(Request $request, $menu = null)
     {
-        if (!self::isEnabled()) {
-            abort(404);
-        }
-
         $menu = $this->resolvePublicMenu($menu);
 
         $daftarUjiPublik = $this->queryAll($request)
@@ -131,10 +111,6 @@ class PartisipasiPublikController extends Controller
 
     public function show($id)
     {
-        if (!self::isEnabled()) {
-            abort(404);
-        }
-
         $menu = $this->resolvePublicMenu();
 
         $ujiPublik = PartisipasiPublik::with(['regulasi', 'regulasi.tanggapan.user', 'regulasi.tanggapan.reviewer'])

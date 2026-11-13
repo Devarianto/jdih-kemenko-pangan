@@ -12,10 +12,6 @@ class TanggapanController extends Controller
 {
     public function store(Request $request, $id)
     {
-        if (!PartisipasiPublikController::isEnabled()) {
-            abort(404);
-        }
-
         // $id di sini adalah regulasi_id (atau partisipasi_publik.id jika dikirim dari rute lama)
         $ujiPublikAktif = PartisipasiPublik::where('regulasi_id', $id)
             ->where('is_active', true)

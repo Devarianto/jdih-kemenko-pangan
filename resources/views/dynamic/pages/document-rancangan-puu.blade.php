@@ -67,7 +67,7 @@
                   {{ lang::translate('document.read-more') }}
                 </a>
 
-                @if(\App\Http\Controllers\ERegulasi\PartisipasiPublikController::isEnabled() && $document->regulasi && $document->regulasi->partisipasiPublik)
+                @if($document->regulasi && $document->regulasi->partisipasiPublik)
                   <a href="{{ route('partisipasi-publik.show', $document->regulasi->partisipasiPublik->id) }}" class="button button-gradient" style="padding: 6px 14px; font-size: 13px; background: linear-gradient(135deg, #0d47a1 0%, #1976d2 100%); color: #fff;">
                     💬 Sampaikan Masukan Publik
                   </a>
