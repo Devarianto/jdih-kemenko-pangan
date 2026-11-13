@@ -43,7 +43,7 @@ class PageController extends Controller
         $gallery_image = Gallery::translate()->whereIsActive(1)->where('type', 'image')->orderBy('date', 'desc')->first();
         $gallery_video = Gallery::translate()->whereIsActive(1)->where('type', 'video')->orderBy('date', 'desc')->first();
 
-        $newest_documents = Document::translate()->whereIsActive(1)->orderBy('updated_at', 'desc')->orderBy('created_at', 'desc')->orderBy('id', 'desc')->limit(5)->get();
+        $newest_documents = Document::translate()->whereIsActive(1)->where('master_document_id', Document::PERATURAN)->orderBy('tanggal_penetapan', 'desc')->limit(5)->get();
         $popular_documents = Document::translate()->whereIsActive(1)->orderBy('view_count', 'desc')->limit(4)->get();
 
         $menus = [];
@@ -51,7 +51,7 @@ class PageController extends Controller
         $document_monografi = Document::translate()
             ->whereIsActive(1)
             ->where('master_document_id', Document::MONOGRAFI)
-            ->orderBy('updated_at', 'desc')->orderBy('created_at','desc');
+            ->orderBy('tahun_terbit', 'desc')->orderBy('created_at','desc');
         $monografi_count = $document_monografi->count();
         $document_monografi = $document_monografi->limit(4)
             ->get();
@@ -61,7 +61,7 @@ class PageController extends Controller
         $document_peraturan = Document::translate()
             ->whereIsActive(1)
             ->where('master_document_id', Document::PERATURAN)
-            ->orderBy('updated_at', 'desc')->orderBy('created_at', 'desc')->orderBy('id', 'desc');
+            ->orderBy('tanggal_penetapan', 'desc');
         $peraturan_count = $document_peraturan->count();
         $document_peraturan = $document_peraturan->limit(4)
             ->get();
@@ -487,7 +487,7 @@ class PageController extends Controller
             $documents = $documents->where('year', request()->query('year'));
         }
         
-        $documents = $documents->orderBy('updated_at', 'desc')->orderBy('created_at', 'desc')->orderBy('id', 'desc')->paginate(8);
+        $documents = $documents->orderBy('tanggal_penetapan', 'desc')->paginate(8);
 
         $rule_types = RuleType::whereIsActive(1)->get();
         $rule_themes = RuleTheme::whereIsActive(1)->get();
@@ -695,7 +695,7 @@ class PageController extends Controller
             $documents = $documents->whereYear('tanggal_berlaku', request()->query('year'));
         }
         
-        $documents = $documents->orderBy('updated_at', 'desc')->orderBy('created_at', 'desc')->orderBy('id', 'desc')->paginate(8);
+        $documents = $documents->orderBy('tanggal_berlaku', 'desc')->orderBy('id', 'desc')->paginate(8);
 
         $years = Document::selectRaw('YEAR(tanggal_berlaku) as year')
             ->whereIsActive(1)
@@ -740,7 +740,7 @@ class PageController extends Controller
             $documents = $documents->where('rule_type_id', $ruleType);
         }
         
-        $documents = $documents->orderBy('updated_at', 'desc')->orderBy('created_at', 'desc')->orderBy('id', 'desc')->paginate(8);
+        $documents = $documents->orderBy('tanggal_penetapan', 'desc')->orderBy('id', 'desc')->paginate(8);
 
         $years = Document::select('year')
             ->whereIsActive(1)
@@ -773,7 +773,7 @@ class PageController extends Controller
             $documents = $documents->where('title', 'like', '%'.request()->query('search').'%');
         }
         
-        $documents = $documents->orderBy('updated_at', 'desc')->orderBy('created_at', 'desc')->orderBy('id', 'desc')->paginate(8);
+        $documents = $documents->orderBy('tanggal_penetapan', 'desc')->orderBy('id', 'desc')->paginate(8);
         $years = collect();
         return view('dynamic.pages.document-program-penyusunan', compact('menu', 'documents', 'years'));
     }
@@ -786,7 +786,7 @@ class PageController extends Controller
             $documents = $documents->where('title', 'like', '%'.request()->query('search').'%');
         }
         
-        $documents = $documents->orderBy('updated_at', 'desc')->orderBy('created_at', 'desc')->orderBy('id', 'desc')->paginate(8);
+        $documents = $documents->orderBy('tanggal_penetapan', 'desc')->orderBy('id', 'desc')->paginate(8);
         $years = collect();
         return view('dynamic.pages.document-naskah-akademik', compact('menu', 'documents', 'years'));
     }
@@ -799,7 +799,7 @@ class PageController extends Controller
             $documents = $documents->where('title', 'like', '%'.request()->query('search').'%');
         }
         
-        $documents = $documents->orderBy('updated_at', 'desc')->orderBy('created_at', 'desc')->orderBy('id', 'desc')->paginate(8);
+        $documents = $documents->orderBy('tanggal_penetapan', 'desc')->orderBy('id', 'desc')->paginate(8);
         $years = collect();
         return view('dynamic.pages.document-analisis-evaluasi', compact('menu', 'documents', 'years'));
     }
@@ -812,7 +812,7 @@ class PageController extends Controller
             $documents = $documents->where('title', 'like', '%'.request()->query('search').'%');
         }
         
-        $documents = $documents->orderBy('updated_at', 'desc')->orderBy('created_at', 'desc')->orderBy('id', 'desc')->paginate(8);
+        $documents = $documents->orderBy('tanggal_penetapan', 'desc')->orderBy('id', 'desc')->paginate(8);
         $years = collect();
         return view('dynamic.pages.document-risalah-pembahasan', compact('menu', 'documents', 'years'));
     }
@@ -825,7 +825,7 @@ class PageController extends Controller
             $documents = $documents->where('title', 'like', '%'.request()->query('search').'%');
         }
         
-        $documents = $documents->orderBy('updated_at', 'desc')->orderBy('created_at', 'desc')->orderBy('id', 'desc')->paginate(8);
+        $documents = $documents->orderBy('tanggal_penetapan', 'desc')->orderBy('id', 'desc')->paginate(8);
         $years = collect();
         return view('dynamic.pages.document-kajian-hukum', compact('menu', 'documents', 'years'));
     }

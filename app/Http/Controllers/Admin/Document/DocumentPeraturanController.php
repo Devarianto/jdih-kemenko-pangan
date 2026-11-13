@@ -81,7 +81,7 @@ class DocumentPeraturanController extends Controller
 
     public function listingOrderDefault($res)
     {
-        return $res->orderBy('updated_at', 'desc')->orderBy('created_at', 'desc')->orderBy('id', 'desc');
+        return $res->orderBy('tanggal_penetapan', 'desc')->orderBy('id', 'desc');
     }
 
     public function listingFilters()

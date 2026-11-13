@@ -6,6 +6,34 @@ foreach(config('cadmin.menu') as $k=>$v) {
 }
 @endphp
 
+<style>
+    #sidebar .sidebar-nav > .sidebar-item > .sidebar-link {
+        display: flex !important;
+        align-items: center !important;
+        white-space: nowrap !important;
+        padding-left: 1.25rem !important;
+        padding-right: 2.2rem !important;
+    }
+    #sidebar .sidebar-nav > .sidebar-item > .sidebar-link i,
+    #sidebar .sidebar-nav > .sidebar-item > .sidebar-link svg {
+        margin-right: 0.6rem !important;
+        width: 18px;
+        text-align: center;
+        flex-shrink: 0 !important;
+    }
+    #sidebar .sidebar-nav > .sidebar-item > .sidebar-link > span.align-middle {
+        font-size: 0.82rem;
+        white-space: nowrap !important;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    #sidebar .sidebar-dropdown .sidebar-link {
+        white-space: nowrap !important;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        font-size: 0.81rem;
+    }
+</style>
 <nav id="sidebar" class="sidebar js-sidebar">
     <div class="sidebar-content js-simplebar">
         <a class="sidebar-brand be-load-logo" href="{{ url(ADMIN) }}" data-logo="{{ media::url($website->logo) }}" style="background-color: #076E95;">

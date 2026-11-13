@@ -100,6 +100,11 @@
       }
     }
     .wrap-filter {
+      position: relative;
+      z-index: 30;
+      .filter {
+        z-index: 40;
+      }
       a {
         color: white;
         &::after {
@@ -116,20 +121,21 @@
       margin-top: 24px;
       width: 100%;
       position: relative;
-      z-index: 2;
+      z-index: 1;
 
       &__row {
         display: flex;
         align-items: center;
         justify-content: center;
-        gap: 14px;
-        flex-wrap: wrap;
+        gap: 12px;
+        flex-wrap: nowrap;
       }
 
       &__item {
         display: inline-flex;
         align-items: center;
         gap: 9px;
+        white-space: nowrap;
         background: rgba(30, 48, 88, 0.55);
         backdrop-filter: blur(8px);
         -webkit-backdrop-filter: blur(8px);

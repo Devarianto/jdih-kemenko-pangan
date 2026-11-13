@@ -59,30 +59,36 @@
         </div>
 
         {{-- Card 4: Status Dokumen --}}
-        <div class="stat-card" style="background: #ffffff; color: #1e293b; padding: 24px; border-radius: 12px; border: 1px solid #e2e8f0; box-shadow: 0 10px 25px rgba(0, 0, 0, 0.04); position: relative;">
-          <span style="font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px; color: #64748b; font-weight: 600;">Status Keberlakuan</span>
-          <div style="display: flex; gap: 16px; margin-top: 14px;">
-            <div style="flex: 1;">
-              <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 4px;">
-                <span style="font-size: 12px; color: #16a34a; font-weight: 600;">Berlaku</span>
-                <span id="stat-kpi-berlaku-badge" style="font-size: 11px; background: #dcfce7; color: #166534; padding: 2px 6px; border-radius: 10px; font-weight: 600;">
+        <div class="stat-card" style="background: #ffffff; color: #1e293b; padding: 20px 22px; border-radius: 12px; border: 1px solid #e2e8f0; box-shadow: 0 10px 25px rgba(0, 0, 0, 0.04); position: relative; display: flex; flex-direction: column; justify-content: space-between;">
+          <span style="font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px; color: #64748b; font-weight: 600; display: block;">Status Keberlakuan</span>
+          <div style="display: grid; grid-template-columns: 1fr 1px 1fr; align-items: stretch; gap: 14px; margin-top: 12px;">
+            <div style="display: flex; flex-direction: column; justify-content: space-between; min-width: 0;">
+              <div style="display: flex; align-items: center; gap: 6px; margin-bottom: 8px; white-space: nowrap;">
+                <span style="width: 7px; height: 7px; border-radius: 50%; background: #16a34a; flex-shrink: 0;"></span>
+                <span style="font-size: 12px; color: #16a34a; font-weight: 600; white-space: nowrap;">Berlaku</span>
+              </div>
+              <div style="display: flex; align-items: center; justify-content: space-between; gap: 6px; white-space: nowrap;">
+                <div id="stat-kpi-berlaku-count" style="font-size: 22px; font-weight: 700; color: #0f172a; line-height: 1; white-space: nowrap;">
+                  {{ $stats['summary']['status_berlaku']['count'] }} <span style="font-size: 11px; font-weight: 400; color: #64748b;">dok</span>
+                </div>
+                <span id="stat-kpi-berlaku-badge" style="font-size: 11px; background: #dcfce7; color: #166534; padding: 2px 7px; border-radius: 999px; font-weight: 600; white-space: nowrap; line-height: 1.3;">
                   {{ $stats['summary']['status_berlaku']['percentage'] }}%
                 </span>
               </div>
-              <div id="stat-kpi-berlaku-count" style="font-size: 20px; font-weight: 700; color: #0f172a;">
-                {{ $stats['summary']['status_berlaku']['count'] }} <span style="font-size: 11px; font-weight: 400; color: #64748b;">dok</span>
-              </div>
             </div>
             <div style="width: 1px; background: #e2e8f0;"></div>
-            <div style="flex: 1;">
-              <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 4px;">
-                <span style="font-size: 12px; color: #dc2626; font-weight: 600;">Tdk Berlaku</span>
-                <span id="stat-kpi-tidak-berlaku-badge" style="font-size: 11px; background: #fee2e2; color: #991b1b; padding: 2px 6px; border-radius: 10px; font-weight: 600;">
+            <div style="display: flex; flex-direction: column; justify-content: space-between; min-width: 0;">
+              <div style="display: flex; align-items: center; gap: 6px; margin-bottom: 8px; white-space: nowrap;">
+                <span style="width: 7px; height: 7px; border-radius: 50%; background: #dc2626; flex-shrink: 0;"></span>
+                <span style="font-size: 12px; color: #dc2626; font-weight: 600; white-space: nowrap;">Tdk Berlaku</span>
+              </div>
+              <div style="display: flex; align-items: center; justify-content: space-between; gap: 6px; white-space: nowrap;">
+                <div id="stat-kpi-tidak-berlaku-count" style="font-size: 22px; font-weight: 700; color: #0f172a; line-height: 1; white-space: nowrap;">
+                  {{ $stats['summary']['status_tidak_berlaku']['count'] }} <span style="font-size: 11px; font-weight: 400; color: #64748b;">dok</span>
+                </div>
+                <span id="stat-kpi-tidak-berlaku-badge" style="font-size: 11px; background: #fee2e2; color: #991b1b; padding: 2px 7px; border-radius: 999px; font-weight: 600; white-space: nowrap; line-height: 1.3;">
                   {{ $stats['summary']['status_tidak_berlaku']['percentage'] }}%
                 </span>
-              </div>
-              <div id="stat-kpi-tidak-berlaku-count" style="font-size: 20px; font-weight: 700; color: #0f172a;">
-                {{ $stats['summary']['status_tidak_berlaku']['count'] }} <span style="font-size: 11px; font-weight: 400; color: #64748b;">dok</span>
               </div>
             </div>
           </div>

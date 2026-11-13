@@ -33,7 +33,7 @@ class SettingController extends Controller
                 'label' => 'Copyright',
                 'type' => 'text',
                 'attributes' => ['class' => 'required'],
-                'info' => 'available keywords:<br>[year] : current year<br>[webarq] : webarq copyright',
+                'info' => 'available keywords:<br>[year] : current year',
             ],
             /*'use-www' => [ //disabled as request, recommend redirect by htaccess / cpanel
                 'label' => 'Domain',

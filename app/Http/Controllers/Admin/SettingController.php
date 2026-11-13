@@ -44,7 +44,7 @@ class SettingController extends BaseController
                 'label' => 'Copyright',
                 'type' => 'text',
                 'attributes' => ['class' => 'required'],
-                'info' => 'available keywords:<br>[year] : current year<br>[webarq] : webarq copyright',
+                'info' => 'available keywords:<br>[year] : current year',
             ],
             'eregulasi-url' => [
                 'subtitle' => 'Integrasi Sistem e-Regulasi',

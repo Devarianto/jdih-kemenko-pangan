@@ -43,13 +43,7 @@
             @yield('content')
 
 		</div>
-		<div class="footer">
-            <div class="wrap-logo">
-				<div class="col">
-					<img src="{{ asset('nwcms/admin/custom/images/material/logo-wcms.png') }}" alt="">
-				</div>
-			</div>
-        </div>
+		<div class="footer" style="height: 24px;"></div>
 
 		<div class="login-logo">
 			

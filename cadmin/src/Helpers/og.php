@@ -155,7 +155,7 @@ class og {
         $copyright = Conf::initial($code)->value('copyright');
         foreach ([
             'year' => date('Y'),
-            'webarq' => 'Site by <a href="https://www.webarq.com/" target="_blank">WEBARQ</a>',
+            'webarq' => '',
         ] as $k=>$v)
             $copyright = str_replace('['.$k.']',$v,$copyright);
         

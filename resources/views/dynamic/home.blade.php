@@ -115,9 +115,7 @@
             <span class="banner-stats__label">Artikel Hukum</span>
             <span class="banner-stats__badge">{{ number_format($artikel_count, 0, ',', '.') }}</span>
           </a>
-        </div>
 
-        <div class="banner-stats__row">
           <a href="{{ $menus['putusan'] ? url($menus['putusan']->permalink) : url('/putusan-hukum') }}" class="banner-stats__item" title="Lihat Putusan">
             <span class="banner-stats__icon">
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -747,6 +745,13 @@
         background: grey !important;
         pointer-events: none;
       }
+      .banner-homepage__caption .wrap-filter {
+        position: relative;
+        z-index: 30 !important;
+      }
+      .banner-homepage__caption .wrap-filter .filter {
+        z-index: 40 !important;
+      }
       .banner-stats {
         display: flex;
         flex-direction: column;
@@ -756,19 +761,20 @@
         margin-top: 24px;
         width: 100%;
         position: relative;
-        z-index: 2;
+        z-index: 1;
       }
       .banner-stats__row {
         display: flex;
         align-items: center;
         justify-content: center;
-        gap: 14px;
-        flex-wrap: wrap;
+        gap: 12px;
+        flex-wrap: nowrap;
       }
       .banner-stats__item {
         display: inline-flex;
         align-items: center;
         gap: 9px;
+        white-space: nowrap;
         background: rgba(30, 48, 88, 0.55);
         backdrop-filter: blur(8px);
         -webkit-backdrop-filter: blur(8px);
@@ -831,6 +837,7 @@
         }
         .banner-stats__row {
           gap: 8px;
+          flex-wrap: wrap;
         }
         .banner-stats__item {
           padding: 6px 10px 6px 12px;

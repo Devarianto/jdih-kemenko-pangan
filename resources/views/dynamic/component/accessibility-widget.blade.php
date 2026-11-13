@@ -211,8 +211,13 @@
     position: fixed;
     bottom: 24px;
     left: 24px;
-    width: 52px;
-    height: 52px;
+    width: 52px !important;
+    height: 52px !important;
+    min-width: 52px !important;
+    min-height: 52px !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    line-height: 1 !important;
     background: #1a263f;
     color: #ffffff;
     border-radius: 50%;
@@ -235,8 +240,12 @@
     outline-offset: 3px;
   }
   #a11y-kemenkum-trigger svg {
-    width: 32px;
-    height: 32px;
+    width: 30px !important;
+    height: 30px !important;
+    min-width: 30px !important;
+    min-height: 30px !important;
+    flex-shrink: 0 !important;
+    display: block !important;
     fill: currentColor;
   }
   #a11y-kemenkum-trigger .active-dot {
@@ -312,21 +321,26 @@
     border: none;
     color: #ffffff;
     cursor: pointer;
-    width: 28px;
-    height: 28px;
+    width: 28px !important;
+    height: 28px !important;
+    min-width: 28px !important;
     display: flex;
     align-items: center;
     justify-content: center;
     border-radius: 6px;
-    padding: 0;
+    padding: 0 !important;
+    margin: 0 !important;
+    line-height: 1 !important;
     transition: background 0.15s ease;
   }
   .a11y-km-close:hover {
     background: rgba(255, 255, 255, 0.15);
   }
   .a11y-km-close svg {
-    width: 18px;
-    height: 18px;
+    width: 18px !important;
+    height: 18px !important;
+    min-width: 18px !important;
+    flex-shrink: 0 !important;
     stroke: currentColor;
     stroke-width: 2.2;
     fill: none;
@@ -371,7 +385,12 @@
     display: flex;
     align-items: center;
     gap: 14px;
-    padding: 12px 20px;
+    padding: 12px 20px !important;
+    margin: 0 !important;
+    height: auto !important;
+    line-height: 1.35 !important;
+    letter-spacing: normal !important;
+    text-transform: none !important;
     color: #1e293b;
     font-size: 14px;
     font-weight: 500;
@@ -459,9 +478,9 @@
 {{-- 1. Floating Launcher Button (Bottom-Left)                                 --}}
 {{-- ------------------------------------------------------------------------- --}}
 <button type="button" id="a11y-kemenkum-trigger" aria-haspopup="dialog" aria-expanded="false" aria-label="Menu Aksesibilitas (Alt+A)" title="Aksesibilitas (Alt + A)">
-  <svg viewBox="0 0 24 24" aria-hidden="true">
+  <svg width="30" height="30" viewBox="0 0 24 24" aria-hidden="true">
     <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.8" fill="none"/>
-    <circle cx="12" cy="7" r="1.8" fill="currentColor"/>
+    <circle cx="12" cy="6.8" r="1.8" fill="currentColor"/>
     <path d="M12 9.5c-2.8 0-4.8.8-5.3 1.1-.3.1-.4.5-.3.8.1.3.5.4.8.3.1 0 1.9-.7 4.8-.7s4.7.7 4.8.7c.3.1.7 0 .8-.3.1-.3 0-.7-.3-.8-.5-.3-2.5-1.1-5.3-1.1zm-1.8 3l.6 6.8c0 .3.3.6.6.6h1.2c.3 0 .6-.3.6-.6l.6-6.8h-3z" fill="currentColor"/>
   </svg>
   <span class="active-dot" id="a11y-km-badge"></span>
