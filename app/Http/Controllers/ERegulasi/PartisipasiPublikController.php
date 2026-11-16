@@ -16,7 +16,7 @@ class PartisipasiPublikController extends Controller
      * Sekaligus auto-deactivate record yang periodenya sudah habis, serta
      * memastikan setiap regulasi di tahap uji_publik memiliki record PartisipasiPublik.
      */
-    private function queryAll(Request $request = null)
+    private function queryAll(?Request $request = null)
     {
         // Auto-sync: jika ada regulasi dengan status 'partisipasi_publik' / stage 'uji_publik'
         // yang belum memiliki record di tabel partisipasi_publik, buatkan otomatis agar tidak terlewat.

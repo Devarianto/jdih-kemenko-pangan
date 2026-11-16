@@ -36,7 +36,7 @@ trait ImportCsvTrait
         
         $idx = 1;
         $res = fopen(Request::file('csv')->getPathName(), 'r');
-        while ($data = fgetcsv($res, 1024, $separator)) {
+        while ($data = fgetcsv($res, 1024, $separator, '"', '\\')) {
             $status = $this->importCallback($idx, $data);
             
             if ($status === true)

@@ -15,7 +15,7 @@ class StatisticDashboardController extends Controller
     /**
      * Dashboard Statistik Admin View
      */
-    public function getIndex(Request $request = null)
+    public function getIndex(?Request $request = null)
     {
         $request = $request ?: request();
         $year = $request->query('year');
@@ -34,7 +34,7 @@ class StatisticDashboardController extends Controller
     /**
      * AJAX endpoint to reload stats and matrix on filter change
      */
-    public function getData(Request $request = null)
+    public function getData(?Request $request = null)
     {
         $request = $request ?: request();
         $year = $request->query('year');

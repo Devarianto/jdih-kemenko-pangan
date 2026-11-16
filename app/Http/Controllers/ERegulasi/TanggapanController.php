@@ -152,7 +152,7 @@ class TanggapanController extends Controller
                 'Waktu Pengiriman',
                 'Diperiksa Oleh',
                 'Waktu Pemeriksaan',
-            ]);
+            ], ',', '"', '\\');
 
             foreach ($regulasi->tanggapan as $idx => $t) {
                 fputcsv($file, [
@@ -172,7 +172,7 @@ class TanggapanController extends Controller
                     $t->created_at ? $t->created_at->format('Y-m-d H:i:s') : '-',
                     $t->reviewer ? $t->reviewer->name : '-',
                     $t->reviewed_at ? $t->reviewed_at->format('Y-m-d H:i:s') : '-',
-                ]);
+                ], ',', '"', '\\');
             }
 
             fclose($file);

@@ -60,7 +60,7 @@ class helper
                 foreach ((array) $row AS $k => $s) {
                     $row[$k] = str_replace("\n", ':', str_replace("\r\n", ':', $s));
                 }
-                fputcsv($df, (array) $row, $sep);
+                fputcsv($df, (array) $row, $sep, '"', '\\');
             }
             fclose($df);
         };
