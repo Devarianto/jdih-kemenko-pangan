@@ -1,8 +1,9 @@
 <div class="wrapper">
-  <a href="{{ lang::url('/') }}" class="logo">
+  <div class="logo logo-multi">
     <img class="white" src="{{ media::initial(conf('site-setting')->value('logo'))->url }}" alt="{{ media::initial(conf('site-setting')->value('logo'))->alt }}">
     <img class="black" src="{{ media::initial(conf('site-setting')->value('logo-floating'))->url }}" alt="{{ media::initial(conf('site-setting')->value('logo-floating'))->alt }}">
-  </a>
+    @include('dynamic.component.logo-links', ['homeUrl' => lang::url('/')])
+  </div>
   <div class="right-header">
 @php
   if (!function_exists('getJdihnMenuMeta')) {

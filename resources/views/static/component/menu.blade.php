@@ -1,8 +1,9 @@
 <div class="wrapper">
-  <a href="{{ route('front.index') }}" class="logo">
+  <div class="logo logo-multi">
     <img class="white" src="{{asset('images/material/logo.png')}}" width="308" height="58" alt="">
     <img class="black" src="{{asset('images/material/logo-black.png')}}" width="308" height="58" alt="">
-  </a>
+    @include('dynamic.component.logo-links', ['homeUrl' => route('front.index')])
+  </div>
   <div class="right-header">
 @php
   if (!function_exists('getJdihnMenuMetaStatic')) {

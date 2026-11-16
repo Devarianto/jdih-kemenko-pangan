@@ -18,9 +18,10 @@
     <body>
         <!-- header -->
         <header class="undermaintenance">
-          <a href="" class="logo">
+          <div class="logo logo-multi">
             <img src="{{asset('images/material/logo-black.png')}}" alt="">
-          </a>
+            @include('dynamic.component.logo-links', ['homeUrl' => route('front.index')])
+          </div>
         </header>
         <!-- end of header -->
 

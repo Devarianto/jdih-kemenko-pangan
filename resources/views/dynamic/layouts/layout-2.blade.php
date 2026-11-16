@@ -16,9 +16,10 @@
     <body>
         <!-- header -->
         <header class="undermaintenance">
-          <a href="{{ lang::url('/') }}" class="logo">
+          <div class="logo logo-multi">
             <img class="black" src="{{ media::initial(conf('site-setting')->value('logo-floating'))->url }}" alt="{{ media::initial(conf('site-setting')->value('logo-floating'))->alt }}">
-          </a>
+            @include('dynamic.component.logo-links', ['homeUrl' => lang::url('/')])
+          </div>
         </header>
         <!-- end of header -->
 

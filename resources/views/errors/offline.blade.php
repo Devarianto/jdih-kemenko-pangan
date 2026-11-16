@@ -42,7 +42,10 @@
       @if($footer)
       <div class="top">
         <div class="box">
-          <div class="logo"><img src="{{ media::initial($footer->logo)->url }}" alt="{{ media::initial($footer->logo)->alt }}"></div>
+          <div class="logo logo-multi">
+            <img src="{{ media::initial($footer->logo)->url }}" alt="{{ media::initial($footer->logo)->alt }}">
+            @include('dynamic.component.logo-links', ['homeUrl' => lang::url('/')])
+          </div>
           <p>{{ $footer->translated('title') }}</p>
           <address>{!! nl2br(strip_tags($footer->address, '<br>')) !!}</address>
         </div>

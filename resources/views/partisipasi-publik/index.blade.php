@@ -23,14 +23,14 @@
         }
         body header.floating .logo .white,
         body header.white .logo .white,
-        html body header.floating:not(.show-burger) a.logo img.white,
-        html body header.white:not(.show-burger) a.logo img.white {
+        html body header.floating:not(.show-burger) .logo img.white,
+        html body header.white:not(.show-burger) .logo img.white {
             display: block !important;
         }
         body header.floating .logo .black,
         body header.white .logo .black,
-        html body header.floating:not(.show-burger) a.logo img.black,
-        html body header.white:not(.show-burger) a.logo img.black {
+        html body header.floating:not(.show-burger) .logo img.black,
+        html body header.white:not(.show-burger) .logo img.black {
             display: none !important;
         }
         body header.floating nav > ul > li > a,
