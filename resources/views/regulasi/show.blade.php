@@ -959,7 +959,7 @@
                                     $tgl = match ($key) {
                                         'pengajuan' => $regulasi->tgl_usulan?->format('d M Y'),
                                         'pembahasan' => $regulasi->proses->where('is_after_uji_publik', false)->first()?->tanggal?->format('d M Y'),
-                                        'uji_publik' => $regulasi->tgl_uji_publik?->format('d M Y') ?? null,
+                                        'uji_publik' => $regulasi->partisipasiPublik?->tgl_mulai?->format('d M Y') ?? null,
                                         'pasca_partisipasi' => $regulasi->proses->where('is_after_uji_publik', true)->first()?->tanggal?->format('d M Y') ?? null,
                                         'harmonisasi' => $regulasi->tgl_mulai_harmonisasi?->format('d M Y') ?? null,
                                         'penetapan' => $regulasi->tgl_mulai_penetapan?->format('d M Y') ?? null,
@@ -1348,8 +1348,25 @@
                                 @endif
 
                             @elseif($regulasi->isStageCompleted('uji_publik'))
-                                <div style="display:flex;align-items:center;gap:10px;padding:14px 16px;background:#f0f4ff;border-radius:10px;border:1px solid #c9d8f5;">
-                                    <p style="font-size:14px;color:#003580;margin:0;font-weight:600;">Tahap Partisipasi Publik telah selesai.</p>
+                                <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;padding:14px 16px;background:#f0f4ff;border-radius:10px;border:1px solid #c9d8f5;flex-wrap:wrap;">
+                                    <div>
+                                        <p style="font-size:14px;color:#003580;margin:0;font-weight:600;">Tahap Partisipasi Publik telah selesai.</p>
+                                        @if($regulasi->partisipasiPublik)
+                                            <p style="font-size:12.5px;color:#5066a3;margin:4px 0 0;">
+                                                Periode:
+                                                {{ \Carbon\Carbon::parse($regulasi->partisipasiPublik->tgl_mulai)->isoFormat('D MMM Y') }}
+                                                — {{ \Carbon\Carbon::parse($regulasi->partisipasiPublik->tgl_selesai)->isoFormat('D MMM Y') }}
+                                                @if($regulasi->partisipasiPublik->is_active && \Carbon\Carbon::parse($regulasi->partisipasiPublik->tgl_selesai)->endOfDay()->gte(now()))
+                                                    <span style="display:inline-block;margin-left:6px;background:#dcfce7;color:#166534;padding:1px 8px;border-radius:999px;font-size:11px;font-weight:700;">Aktif di Publik</span>
+                                                @else
+                                                    <span style="display:inline-block;margin-left:6px;background:#e2e8f0;color:#475569;padding:1px 8px;border-radius:999px;font-size:11px;font-weight:700;">Ditutup</span>
+                                                @endif
+                                            </p>
+                                        @endif
+                                    </div>
+                                    @if($isSuperAdmin)
+                                        <a href="{{ route('admin.partisipasi.show', $regulasi->id) }}" class="btn btn-primary" style="font-size:12.5px;padding:8px 14px;">🗂 Kelola Masukan</a>
+                                    @endif
                                 </div>
 
                                 {{-- Tetap tampilkan komentar meski sudah selesai --}}
@@ -1384,6 +1401,37 @@
                             @else
                                 <div class="empty-state">
                                     <p>Tahap ini belum dimulai. Selesaikan Pembahasan dan ajukan request terlebih dahulu.</p>
+                                </div>
+                            @endif
+
+                            {{-- Form Ubah Periode Partisipasi Publik (Khusus Super Admin) --}}
+                            @if($isSuperAdmin && !($regulasi->current_stage === 'pembahasan' && $regulasi->uji_publik_status === 'requested'))
+                                <div style="margin-top:18px;padding:18px 20px;background:#f8faff;border:1px solid #d8e4f8;border-radius:12px;">
+                                    <p style="font-size:12.5px;font-weight:700;color:#003580;text-transform:uppercase;letter-spacing:.06em;margin:0 0 10px;">
+                                        🗓️ Ubah Tanggal Periode Partisipasi Publik (Super Admin)
+                                    </p>
+                                    <form action="{{ route('regulasi.uji-publik.update-periode', $regulasi) }}" method="POST">
+                                        @csrf
+                                        <div class="add-proc-grid" style="grid-template-columns:1fr 1fr auto;gap:12px;">
+                                            <div class="form-group" style="margin:0;">
+                                                <label class="form-label">Tanggal Mulai *</label>
+                                                <input type="date" name="tgl_mulai" class="form-control"
+                                                    value="{{ old('tgl_mulai', $regulasi->partisipasiPublik?->tgl_mulai?->format('Y-m-d')) }}" required>
+                                            </div>
+                                            <div class="form-group" style="margin:0;">
+                                                <label class="form-label">Tanggal Selesai *</label>
+                                                <input type="date" name="tgl_selesai" class="form-control"
+                                                    value="{{ old('tgl_selesai', $regulasi->partisipasiPublik?->tgl_selesai?->format('Y-m-d')) }}" required>
+                                            </div>
+                                            <button type="submit" class="btn btn-primary"
+                                                style="padding:10px 18px;font-size:13px;white-space:nowrap;align-self:end;">
+                                                💾 Simpan Periode
+                                            </button>
+                                        </div>
+                                        <small style="display:block;color:#64748b;font-size:12px;margin-top:8px;">
+                                            Super Admin dapat memajukan atau memundurkan tanggal periode secara bebas. Tanggal selesai di masa lalu otomatis menutup status di halaman publik, sedangkan tanggal di masa depan membuka kembali partisipasi publik.
+                                        </small>
+                                    </form>
                                 </div>
                             @endif
                         </div>

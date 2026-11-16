@@ -512,6 +512,68 @@ class RegulasiController extends Controller
     }
 
     /**
+     * Khusus Super Admin: mengubah (memajukan atau memundurkan) tanggal periode
+     * Partisipasi Publik langsung dari timeline detail regulasi.
+     */
+    public function updatePeriodeUjiPublik(Request $request, Regulasi $regulasi)
+    {
+        $this->authorizeSuperAdmin();
+
+        $request->validate([
+            'tgl_mulai' => 'required|date',
+            'tgl_selesai' => 'required|date|after:tgl_mulai',
+        ], [
+            'tgl_mulai.required' => 'Tanggal mulai partisipasi publik wajib diisi.',
+            'tgl_selesai.required' => 'Tanggal selesai partisipasi publik wajib diisi.',
+            'tgl_selesai.after' => 'Tanggal selesai harus lebih besar dari tanggal mulai.',
+        ]);
+
+        $isPeriodActive = \Carbon\Carbon::parse($request->tgl_selesai)->endOfDay()->gte(now());
+
+        \App\Models\PartisipasiPublik::updateOrCreate(
+            ['regulasi_id' => $regulasi->id],
+            [
+                'tgl_mulai' => $request->tgl_mulai,
+                'tgl_selesai' => $request->tgl_selesai,
+                'is_active' => $isPeriodActive,
+            ]
+        );
+
+        $updateData = ['uji_publik_status' => 'approved'];
+        if ($isPeriodActive) {
+            if (in_array($regulasi->current_stage, ['pengajuan', 'pembahasan'])) {
+                $updateData['current_stage'] = 'uji_publik';
+            }
+            if ($regulasi->current_stage === 'uji_publik' || in_array($regulasi->current_stage, ['pengajuan', 'pembahasan'])) {
+                $updateData['status'] = 'partisipasi_publik';
+            }
+        } else {
+            if ($regulasi->current_stage === 'uji_publik' && $regulasi->status === 'partisipasi_publik') {
+                $updateData['status'] = 'proses';
+            }
+        }
+        $regulasi->update($updateData);
+
+        $tahapan = $regulasi->tahapans()->where('stage', 'uji_publik')->first();
+        $tahapanData = [
+            'status' => $isPeriodActive ? 'in_progress' : 'completed',
+            'started_at' => $request->tgl_mulai . ' 09:00:00',
+            'completed_at' => $isPeriodActive ? null : ($request->tgl_selesai . ' 17:00:00'),
+        ];
+        if ($tahapan) {
+            $tahapan->update($tahapanData);
+        } else {
+            RegulasiTahapan::create(array_merge(['regulasi_id' => $regulasi->id, 'stage' => 'uji_publik'], $tahapanData));
+        }
+
+        return redirect()->route('regulasi.show', $regulasi)
+            ->with('success', $isPeriodActive
+                ? 'Tanggal periode Partisipasi Publik berhasil diperbarui dan statusnya dibuka.'
+                : 'Tanggal periode Partisipasi Publik berhasil diperbarui (status ditutup karena tanggal selesai telah lewat).')
+            ->withFragment('tahap-uji_publik');
+    }
+
+    /**
      * Mengembalikan regulasi dari Uji Publik ke Pembahasan.
      */
     public function kembalikanKePembahasan(Regulasi $regulasi)

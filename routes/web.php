@@ -273,6 +273,9 @@ Route::middleware(['auth', 'role:admin_operator,super_admin'])->group(function (
     Route::post('/regulasi/{regulasi}/uji-publik/reject', [\App\Http\Controllers\ERegulasi\RegulasiController::class, 'rejectUjiPublik'])
         ->name('regulasi.uji-publik.reject');
 
+    Route::post('/regulasi/{regulasi}/uji-publik/periode', [\App\Http\Controllers\ERegulasi\RegulasiController::class, 'updatePeriodeUjiPublik'])
+        ->name('regulasi.uji-publik.update-periode');
+
     Route::post('/regulasi/{regulasi}/kembalikan-pembahasan', [\App\Http\Controllers\ERegulasi\RegulasiController::class, 'kembalikanKePembahasan'])
         ->name('regulasi.kembalikan-pembahasan');
 
