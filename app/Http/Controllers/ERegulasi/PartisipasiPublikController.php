@@ -43,8 +43,8 @@ class PartisipasiPublikController extends Controller
 
         $query = PartisipasiPublik::with(['regulasi', 'regulasi.tanggapan'])
             ->whereHas('regulasi')
-            ->orderByDesc('is_active')
-            ->orderByDesc('updated_at')
+            ->orderByDesc('tgl_mulai')
+            ->orderByDesc('tgl_selesai')
             ->orderByDesc('id');
 
         if ($request) {

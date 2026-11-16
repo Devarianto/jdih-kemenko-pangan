@@ -56,6 +56,7 @@
         $selesaiDate = \Carbon\Carbon::parse($ujiPublik->tgl_selesai)->endOfDay();
         $sisaHari = (int) now()->startOfDay()->diffInDays($selesaiDate->copy()->startOfDay(), false);
         $isPeriodOpen = $ujiPublik->is_active && $sisaHari >= 0;
+        $isUrgent = $isPeriodOpen && $sisaHari <= 7;
     @endphp
 
     <style>
@@ -483,16 +484,26 @@
                     <div class="pp-info-label">Status Partisipasi</div>
                     <div class="pp-info-val">
                         @if($isPeriodOpen)
-                            <span style="color: #15803d;">🟢 Dibuka ({{ $sisaHari === 0 ? 'Hari terakhir' : $sisaHari . ' hari lagi' }})</span>
+                            @if($isUrgent)
+                                <span style="display:inline-block; background:#fef9c3; color:#92400e; border:1px solid #fde047; padding:3px 10px; border-radius:999px; font-size:12.5px;">
+                                    ⏳ {{ $sisaHari === 0 ? 'Hari terakhir' : 'Hampir berakhir · ' . $sisaHari . ' hari lagi' }}
+                                </span>
+                            @else
+                                <span style="display:inline-block; background:#f0fdf4; color:#15803d; border:1px solid #bbf7d0; padding:3px 10px; border-radius:999px; font-size:12.5px;">
+                                    🟢 Dibuka ({{ $sisaHari }} hari lagi)
+                                </span>
+                            @endif
                         @else
-                            <span style="color: #475569;">🔒 Ditutup (Periode Berakhir)</span>
+                            <span style="display:inline-block; background:#fef2f2; color:#b91c1c; border:1px solid #fecaca; padding:3px 10px; border-radius:999px; font-size:12.5px;">
+                                🔒 Ditutup (Periode Berakhir)
+                            </span>
                         @endif
                     </div>
                 </div>
             </div>
 
             @if(!$isPeriodOpen)
-                <div class="pp-berakhir-notice" style="border-radius: 12px; line-height: 1.6;">
+                <div class="pp-berakhir-notice" style="border-radius: 12px; line-height: 1.6; background: #fef2f2; border-color: #fecaca; color: #991b1b;">
                     <span>🔒</span>
                     <span>Periode konsultasi publik untuk rancangan ini telah <strong>ditutup</strong>. Penyampaian masukan baru sudah tidak tersedia, namun Anda tetap dapat mempelajari detail serta mengunduh dokumen rancangan peraturan di bawah ini.</span>
                 </div>

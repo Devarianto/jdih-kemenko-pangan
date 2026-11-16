@@ -10,6 +10,52 @@
             display: none !important;
         }
 
+        /* Header tetap transparan & teks/logo tetap putih saat scrolldown di halaman ini */
+        body header.floating,
+        body header.white {
+            background: transparent !important;
+            box-shadow: none !important;
+        }
+        body header.floating::before,
+        body header.white::before {
+            height: 0 !important;
+            background-color: transparent !important;
+        }
+        body header.floating .logo .white,
+        body header.white .logo .white {
+            display: block !important;
+        }
+        body header.floating .logo .black,
+        body header.white .logo .black {
+            display: none !important;
+        }
+        body header.floating nav > ul > li > a,
+        body header.white nav > ul > li > a,
+        body header.floating nav > ul > li > a.nav-parent-link,
+        body header.white nav > ul > li > a.nav-parent-link {
+            color: #ffffff !important;
+        }
+        body header.floating nav > ul > li.active > a,
+        body header.white nav > ul > li.active > a {
+            color: #fbbf24 !important;
+        }
+        body header.floating .theme-toggle-btn,
+        body header.white .theme-toggle-btn {
+            border-color: rgba(255, 255, 255, 0.3) !important;
+            background: rgba(255, 255, 255, 0.12) !important;
+            color: #ffffff !important;
+        }
+        body header.floating .theme-toggle-btn:hover,
+        body header.white .theme-toggle-btn:hover {
+            background: rgba(255, 255, 255, 0.22) !important;
+            color: #ffffff !important;
+            border-color: rgba(255, 255, 255, 0.5) !important;
+        }
+        body header.floating .toggle-menu span,
+        body header.white .toggle-menu span {
+            background-color: #ffffff !important;
+        }
+
         .banner-middle.pub-hero-banner {
             position: fixed !important;
             top: 0;
@@ -96,12 +142,11 @@
                             @endif
                             @if($isActivePeriod)
                                 <span class="pub-tag-sisa {{ $isUrgent ? 'urgent' : '' }}">
-                                    {{ $isUrgent ? '⚠' : '🟢' }}
-                                    {{ $sisaHari === 0 ? 'Hari terakhir' : 'Dibuka · ' . $sisaHari . ' hari lagi' }}
+                                    {{ $isUrgent ? '⏳' : '🟢' }}
+                                    {{ $sisaHari === 0 ? 'Hari terakhir' : ($isUrgent ? 'Hampir berakhir · ' . $sisaHari . ' hari lagi' : 'Dibuka · ' . $sisaHari . ' hari lagi') }}
                                 </span>
                             @else
-                                <span class="pub-tag-sisa"
-                                    style="color:#475569; background:#f1f5f9; border-color:#cbd5e1;">🔒 Ditutup · Periode Berakhir</span>
+                                <span class="pub-tag-sisa ended">🔒 Ditutup · Periode Berakhir</span>
                             @endif
                             <span class="pub-masukan-count">
                                 <span class="pub-icon">💬</span> {{ $jumlahMasukan }} Masukan Publik
@@ -137,7 +182,7 @@
                         <div class="pub-card-periode">
                             <span>📅 {{ \Carbon\Carbon::parse($item->tgl_mulai)->isoFormat('D MMM Y') }}</span>
                             <span class="pub-periode-sep">s/d</span>
-                            <span class="{{ $isUrgent ? 'text-urgent' : '' }}">{{ $selesai->isoFormat('D MMM Y') }}</span>
+                            <span class="{{ $isUrgent ? 'text-urgent' : ($isBerakhir ? 'text-ended' : '') }}">{{ $selesai->isoFormat('D MMM Y') }}</span>
                         </div>
                     </div>
 
@@ -322,7 +367,29 @@
         }
 
         .pub-card-urgent {
-            border-left: 4px solid #c0392b !important;
+            border-left: 4px solid #eab308 !important;
+        }
+
+        .pub-tag-sisa.urgent {
+            color: #92400e !important;
+            background: #fef9c3 !important;
+            border-color: #fde047 !important;
+        }
+
+        .text-urgent {
+            color: #b45309 !important;
+            font-weight: 700;
+        }
+
+        .pub-tag-sisa.ended {
+            color: #b91c1c !important;
+            background: #fef2f2 !important;
+            border-color: #fecaca !important;
+        }
+
+        .text-ended {
+            color: #b91c1c !important;
+            font-weight: 700;
         }
 
         .pub-card-main {
@@ -404,6 +471,7 @@
 
         .pub-card-berakhir {
             background: #fafbfe;
+            border-left: 4px solid #dc2626 !important;
         }
 
         .pub-card-btn-ended {
