@@ -223,6 +223,30 @@ Route::get('/api/visitor/get', [VisitorController::class, 'getVisitor'])->name('
 
 Route::get('jdihn-json', [APIController::class, 'apiJDIH']);//->middleware('auth.basic.once');
 
+// Fallback public storage serving for shared cPanel hosting without symlink (php artisan storage:link)
+Route::get('/storage/{path}', function (string $path) {
+    if (str_contains($path, "\0") || str_contains($path, '..')) {
+        abort(404);
+    }
+
+    $baseDir = realpath(storage_path('app/public'));
+    $filePath = $baseDir ? realpath($baseDir . DIRECTORY_SEPARATOR . ltrim($path, '/\\')) : false;
+
+    if (
+        !$baseDir ||
+        !$filePath ||
+        !str_starts_with($filePath, $baseDir . DIRECTORY_SEPARATOR) ||
+        !is_file($filePath)
+    ) {
+        abort(404);
+    }
+
+    return response()->file($filePath, [
+        'X-Frame-Options' => 'SAMEORIGIN',
+        'X-Content-Type-Options' => 'nosniff',
+    ]);
+})->where('path', '.*')->name('storage.public');
+
 // ==========================================
 // E-REGULASI INTEGRATION ROUTES
 // ==========================================
