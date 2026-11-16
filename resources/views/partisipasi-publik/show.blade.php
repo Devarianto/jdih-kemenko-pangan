@@ -1,7 +1,54 @@
 @extends('public')
 
 @section('hero-title', $ujiPublik->regulasi->judul)
-@section('hero-desc', 'Detail rancangan peraturan perundang-undangan, dokumen draf naskah, dan ruang penyampaian masukan publik.')
+@section('hero-desc', 'Detail rancangan peraturan perundang-undangan dan dokumen draf naskah Kementerian Koordinator Bidang Pangan.')
+
+@push('head')
+    <style>
+        .banner-middle.pub-hero-banner {
+            height: auto !important;
+            min-height: 0 !important;
+            padding: 96px 0 42px !important;
+        }
+        .banner-middle.pub-hero-banner .wave {
+            bottom: -1px !important;
+            height: 36px !important;
+            overflow: hidden;
+            pointer-events: none;
+        }
+        .banner-middle.pub-hero-banner .wave svg {
+            height: 36px !important;
+            display: block;
+        }
+        .banner-middle.pub-hero-banner .pub-hero-text {
+            max-width: 880px;
+        }
+        .banner-middle.pub-hero-banner h2 {
+            font-size: 24px !important;
+            line-height: 1.38 !important;
+            margin-bottom: 10px !important;
+            letter-spacing: -0.01em;
+        }
+        .banner-middle.pub-hero-banner p {
+            font-size: 14px !important;
+            line-height: 1.6 !important;
+        }
+        section.middle {
+            padding: 20px 0 56px !important;
+        }
+        section.middle .pub-content {
+            padding-top: 8px !important;
+        }
+        @media (max-width: 768px) {
+            .banner-middle.pub-hero-banner {
+                padding: 84px 0 36px !important;
+            }
+            .banner-middle.pub-hero-banner h2 {
+                font-size: 19px !important;
+            }
+        }
+    </style>
+@endpush
 
 @section('content')
 
@@ -13,7 +60,7 @@
 
     <style>
         .pp-wrap {
-            max-width: 920px;
+            max-width: 980px;
             margin: 0 auto;
         }
 
@@ -60,39 +107,66 @@
 
         .pp-card {
             background: #fff;
-            border-radius: 14px;
-            padding: 26px;
-            margin-bottom: 24px;
+            border-radius: 20px;
+            padding: 28px 30px;
+            margin-bottom: 22px;
             border: 1px solid #e4eaf6;
-            box-shadow: 0 2px 10px rgba(0, 32, 96, .05);
+            box-shadow: 0 2px 12px rgba(0, 32, 96, .05);
         }
 
         .pp-info-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+            grid-template-columns: repeat(2, minmax(0, 1fr));
             gap: 14px;
         }
 
         .pp-info-box {
             background: #f8faff;
             border: 1px solid #e6edf8;
-            border-radius: 10px;
-            padding: 12px 14px;
+            border-radius: 12px;
+            padding: 14px 16px;
         }
 
         .pp-info-label {
             font-size: 11px;
             text-transform: uppercase;
-            letter-spacing: 0.05em;
+            letter-spacing: 0.06em;
             color: #64748b;
             font-weight: 700;
-            margin-bottom: 4px;
+            margin-bottom: 5px;
         }
 
         .pp-info-val {
-            font-size: 13.5px;
+            font-size: 14px;
             font-weight: 700;
             color: #0d1b3e;
+            line-height: 1.45;
+        }
+
+        .pp-abstrak-box {
+            background: #f8faff;
+            border: 1px solid #e2eaf8;
+            border-left: 4px solid #003580;
+            border-radius: 12px;
+            padding: 18px 22px;
+            margin-bottom: 22px;
+        }
+
+        .pp-abstrak-label {
+            font-size: 11.5px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: #003580;
+            margin-bottom: 8px;
+        }
+
+        .pp-abstrak-body {
+            font-size: 14.5px;
+            color: #334155;
+            line-height: 1.75;
+            margin: 0;
+            text-align: justify;
         }
 
         .pp-section-head {
@@ -346,11 +420,22 @@
         }
 
         @media (max-width: 640px) {
+            .pp-info-grid {
+                grid-template-columns: 1fr;
+            }
             .pp-form-row {
                 grid-template-columns: 1fr;
             }
             .pp-card {
-                padding: 18px;
+                padding: 20px;
+                border-radius: 16px;
+            }
+            .pp-abstrak-box {
+                padding: 15px 16px;
+            }
+            .pp-abstrak-body {
+                text-align: left;
+                font-size: 14px;
             }
         }
     </style>
@@ -400,16 +485,16 @@
                         @if($isPeriodOpen)
                             <span style="color: #15803d;">🟢 Dibuka ({{ $sisaHari === 0 ? 'Hari terakhir' : $sisaHari . ' hari lagi' }})</span>
                         @else
-                            <span style="color: #64748b;">🔒 Periode Berakhir</span>
+                            <span style="color: #475569;">🔒 Ditutup (Periode Berakhir)</span>
                         @endif
                     </div>
                 </div>
             </div>
 
             @if(!$isPeriodOpen)
-                <div class="pp-berakhir-notice">
+                <div class="pp-berakhir-notice" style="border-radius: 12px; line-height: 1.6;">
                     <span>🔒</span>
-                    <span>Periode partisipasi publik untuk rancangan ini telah berakhir. Pengiriman masukan baru telah ditutup, namun Anda tetap dapat membaca dokumen rancangan dan tanggapan publik yang telah masuk.</span>
+                    <span>Periode konsultasi publik untuk rancangan ini telah <strong>ditutup</strong>. Penyampaian masukan baru sudah tidak tersedia, namun Anda tetap dapat mempelajari detail serta mengunduh dokumen rancangan peraturan di bawah ini.</span>
                 </div>
             @endif
         </div>
@@ -436,13 +521,9 @@
             </div>
 
             @if($ujiPublik->regulasi->abstrak)
-                <div style="margin-bottom: 18px;">
-                    <div style="font-size: 12px; font-weight: 700; text-transform: uppercase; color: #64748b; margin-bottom: 6px;">
-                        Ringkasan / Abstrak Rancangan:
-                    </div>
-                    <p style="font-size: 14px; color: #334155; line-height: 1.7; margin: 0;">
-                        {{ $ujiPublik->regulasi->abstrak }}
-                    </p>
+                <div class="pp-abstrak-box">
+                    <div class="pp-abstrak-label">Ringkasan / Abstrak Rancangan</div>
+                    <p class="pp-abstrak-body">{{ $ujiPublik->regulasi->abstrak }}</p>
                 </div>
             @endif
 
@@ -526,55 +607,6 @@
                 </form>
             </div>
         @endif
-
-        {{-- DAFTAR TANGGAPAN PUBLIK --}}
-        @php
-            $daftarTanggapan = $ujiPublik->regulasi->tanggapan->where('is_hidden', false)->sortByDesc('created_at');
-        @endphp
-        <div class="pp-card">
-            <div class="pp-section-head">
-                <span>💬 Daftar Masukan & Tanggapan Publik ({{ $daftarTanggapan->count() }})</span>
-            </div>
-
-            @forelse($daftarTanggapan as $tanggapan)
-                @php
-                    $statusKey = $tanggapan->status_tindak_lanjut ?? 'menunggu';
-                @endphp
-                <div class="pp-tanggapan-item">
-                    <div class="pp-tanggapan-head">
-                        <div class="pp-tanggapan-name">
-                            <span>{{ $tanggapan->nama_pengirim }}</span>
-                            @if($tanggapan->tipe === 'masyarakat')
-                                <span class="pp-badge pp-badge-masyarakat">Masyarakat Umum</span>
-                            @else
-                                <span class="pp-badge pp-badge-instansi">Pemerintahan / Akademisi</span>
-                            @endif
-                            <span class="pp-status-pill pp-status-{{ $statusKey }}">
-                                {{ $tanggapan->label_status }}
-                            </span>
-                        </div>
-                        <span class="pp-tanggapan-time">{{ $tanggapan->created_at->isoFormat('D MMM Y, HH:mm') }} WIB</span>
-                    </div>
-
-                    @if($tanggapan->nama_instansi)
-                        <div class="pp-tanggapan-meta">🏛️ {{ $tanggapan->nama_instansi }}</div>
-                    @endif
-
-                    <div class="pp-tanggapan-body">{{ $tanggapan->isi_tanggapan }}</div>
-
-                    @if($tanggapan->tindak_lanjut)
-                        <div class="pp-tindak-lanjut-box">
-                            <strong>Tanggapan / Tindak Lanjut Tim Penyusun:</strong>
-                            <div>{{ $tanggapan->tindak_lanjut }}</div>
-                        </div>
-                    @endif
-                </div>
-            @empty
-                <div style="text-align: center; padding: 28px 16px; color: #94a3b8; font-size: 13.5px;">
-                    Belum ada tanggapan publik untuk rancangan peraturan ini. Jadilah yang pertama memberikan masukan!
-                </div>
-            @endforelse
-        </div>
 
     </div>
 

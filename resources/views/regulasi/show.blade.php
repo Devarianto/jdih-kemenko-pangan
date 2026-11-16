@@ -5,7 +5,8 @@
 @section('content')
 
     @php
-        $bisaKelola = auth()->user()->role === 'super_admin'
+        $isSuperAdmin = auth()->user()->role === 'super_admin';
+        $bisaKelola = $isSuperAdmin
             || $regulasi->unit_kerja === auth()->user()->unit_kerja;
 
         $stages = [
@@ -26,9 +27,10 @@
         $sudahLewatUjiPublik = in_array($regulasi->current_stage, ['harmonisasi', 'penetapan']);
         $pascaBisaDiisi = $pascaSudahDimulai || $sudahLewatUjiPublik;
 
-        // Bisa kelola (tambah/edit/hapus) pasca partisipasi HANYA saat masih di uji_publik
-        // DAN operator sudah klik "Lanjut ke Pasca Partisipasi Publik"
-        $prosceBisaKelola = $bisaKelola && $regulasi->current_stage === 'uji_publik' && $pascaSudahDimulai;
+        // Super Admin selalu dapat menambah/mengedit/menghapus proses di semua tahap,
+        // sedangkan operator hanya saat masih di uji_publik setelah klik "Lanjut ke Pasca Partisipasi Publik".
+        $prosceBisaKelola = $bisaKelola && ($isSuperAdmin || ($regulasi->current_stage === 'uji_publik' && $pascaSudahDimulai));
+        $pembahasanBisaKelola = $bisaKelola && ($isSuperAdmin || $regulasi->current_stage === 'pembahasan');
     @endphp
 
     <style>
@@ -1041,15 +1043,17 @@
                                 </div>
                             </div>
 
-                            @if($regulasi->current_stage === 'pengajuan' && $bisaKelola)
+                            @if(($isSuperAdmin || $regulasi->current_stage === 'pengajuan') && $bisaKelola)
                                 <div style="margin-top: 22px; padding-top: 18px; border-top: 1px solid #f0f3fa; display: flex; gap: 10px; flex-wrap: wrap;">
                                     <a href="{{ route('regulasi.edit', $regulasi) }}" class="btn"
-                                        style="font-size: 13px; border: 1px solid #003580; color: #003580;">✏ Edit Data Pengajuan</a>
-                                    <form action="{{ route('regulasi.mulai-pembahasan', $regulasi) }}" method="POST"
-                                        onsubmit="return confirmAction(event, this, 'Mulai tahap pembahasan untuk regulasi ini?')">
-                                        @csrf
-                                        <button type="submit" class="btn btn-primary" style="font-size: 13px;">➤ Mulai Pembahasan</button>
-                                    </form>
+                                        style="font-size: 13px; border: 1px solid #003580; color: #003580;">✏ Edit Data Rancangan</a>
+                                    @if($regulasi->current_stage === 'pengajuan')
+                                        <form action="{{ route('regulasi.mulai-pembahasan', $regulasi) }}" method="POST"
+                                            onsubmit="return confirmAction(event, this, 'Mulai tahap pembahasan untuk regulasi ini?')">
+                                            @csrf
+                                            <button type="submit" class="btn btn-primary" style="font-size: 13px;">➤ Mulai Pembahasan</button>
+                                        </form>
+                                    @endif
                                 </div>
                             @endif
                         </div>
@@ -1089,7 +1093,7 @@
                                             <th>Proses</th>
                                             <th>Tanggal</th>
                                             <th>Dokumen</th>
-                                            @if($bisaKelola && $regulasi->current_stage === 'pembahasan')
+                                            @if($pembahasanBisaKelola)
                                                 <th>Aksi</th>
                                             @endif
                                         </tr>
@@ -1110,7 +1114,7 @@
                                                         <span style="color:#ccc;font-size:12px;">—</span>
                                                     @endif
                                                 </td>
-                                                @if($bisaKelola && $regulasi->current_stage === 'pembahasan')
+                                                @if($pembahasanBisaKelola)
                                                     <td style="white-space:nowrap;">
                                                         <button type="button" onclick="toggleEditProses({{ $p->id }})" class="btn"
                                                             style="font-size:12px;padding:5px 10px;border:1px solid #003580;color:#003580;">✏ Edit</button>
@@ -1122,7 +1126,7 @@
                                                     </td>
                                                 @endif
                                             </tr>
-                                            @if($bisaKelola && $regulasi->current_stage === 'pembahasan')
+                                            @if($pembahasanBisaKelola)
                                                 <tr id="edit-proses-{{ $p->id }}" style="display:none;background:#f8faff;">
                                                     <td colspan="5" style="padding:16px;">
                                                         <form action="{{ route('regulasi.proses.update', [$regulasi, $p]) }}" method="POST" enctype="multipart/form-data">
@@ -1155,7 +1159,7 @@
                                 </div>
                             @endif
 
-                            @if($regulasi->current_stage === 'pembahasan' && $bisaKelola)
+                            @if($pembahasanBisaKelola)
                                 <div style="margin-top:20px;padding-top:18px;border-top:1px solid #f0f3fa;">
                                     <p style="font-size:12.5px;font-weight:700;color:#8a93a6;text-transform:uppercase;letter-spacing:.06em;margin-bottom:12px;">
                                         Tambah Proses/Notulensi/Risalah Rapat
@@ -1180,6 +1184,7 @@
                                     </form>
                                 </div>
 
+                                @if($regulasi->current_stage === 'pembahasan')
                                 <div style="margin-top:18px;padding-top:16px;border-top:1px solid #f0f3fa;">
                                     @if($regulasi->uji_publik_status === 'requested')
                                         {{-- Sudah request, tampilkan info menunggu --}}
@@ -1229,6 +1234,7 @@
                                         </form>
                                     @endif
                                 </div>
+                                @endif
                             @endif
                         </div>
 
@@ -1524,6 +1530,7 @@
                                     </div>
 
                                     {{-- Tombol lanjut ke Harmonisasi --}}
+                                    @if($regulasi->current_stage === 'uji_publik')
                                     <div style="margin-top:16px;padding-top:16px;border-top:1px solid #f0f3fa;">
                                         <form action="{{ route('regulasi.mulai-harmonisasi', $regulasi) }}" method="POST"
                                             onsubmit="return confirmAction(event, this, 'Lanjutkan ke tahap Harmonisasi? Pastikan semua proses pasca partisipasi sudah lengkap.')">
@@ -1533,6 +1540,7 @@
                                             </button>
                                         </form>
                                     </div>
+                                    @endif
                                 @elseif(in_array($regulasi->current_stage, ['harmonisasi', 'penetapan']))
                                     {{-- Pesan kunci untuk harmonisasi/penetapan --}}
                                     <div style="margin-top:16px;padding:12px 16px;background:#f4f6fb;border-radius:10px;border:1px solid #e0e7f4;">
@@ -1562,7 +1570,7 @@
                                 @endif
                             </div>
 
-                            @if(in_array($regulasi->current_stage, ['uji_publik', 'harmonisasi']) && $bisaKelola)
+                            @if(($isSuperAdmin || in_array($regulasi->current_stage, ['uji_publik', 'harmonisasi'])) && $bisaKelola)
                                 <form action="{{ route('regulasi.harmonisasi.update', $regulasi) }}" method="POST" enctype="multipart/form-data">
                                     @csrf
                                     <div class="form-group">
@@ -1667,7 +1675,7 @@
                                 @endif
                             </div>
 
-                            @if(in_array($regulasi->current_stage, ['harmonisasi', 'penetapan']) && $bisaKelola)
+                            @if(($isSuperAdmin || in_array($regulasi->current_stage, ['harmonisasi', 'penetapan'])) && $bisaKelola)
                                 <form action="{{ route('regulasi.penetapan.update', $regulasi) }}" method="POST" enctype="multipart/form-data">
                                     @csrf
                                     <div class="form-group">

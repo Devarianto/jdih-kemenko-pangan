@@ -101,7 +101,7 @@
                                 </span>
                             @else
                                 <span class="pub-tag-sisa"
-                                    style="color:#64748b; background:#f1f5f9; border-color:#cbd5e1;">Periode Berakhir</span>
+                                    style="color:#475569; background:#f1f5f9; border-color:#cbd5e1;">🔒 Ditutup · Periode Berakhir</span>
                             @endif
                             <span class="pub-masukan-count">
                                 <span class="pub-icon">💬</span> {{ $jumlahMasukan }} Masukan Publik
@@ -144,7 +144,7 @@
                     <div class="pub-card-cta-wrap">
                         @if($isBerakhir)
                             <a href="{{ route('partisipasi-publik.show', $item->id) }}" class="pub-card-btn pub-card-btn-ended">
-                                Lihat Draf & Tanggapan Publik ➤
+                                Lihat Detail Rancangan ➤
                             </a>
                         @else
                             <a href="{{ route('partisipasi-publik.show', $item->id) }}" class="pub-card-btn">

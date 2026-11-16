@@ -87,13 +87,15 @@ class RegulasiController extends Controller
 
     public function store(Request $request)
     {
+        $isSuperAdmin = auth()->user()->role === 'super_admin';
+
         $request->validate([
             'jenis' => 'required',
             'judul' => 'required|string|max:500',
             'abstrak' => 'required|string|max:2000',
             'tgl_usulan' => 'required|date',
             'unit_kerja' => 'nullable|string|max:255',
-            'file_permohonan' => 'required|file|mimes:pdf|max:10240',
+            'file_permohonan' => [$isSuperAdmin ? 'nullable' : 'required', 'file', 'mimes:pdf', 'max:10240'],
             'file_draft' => 'required|file|mimes:pdf,doc,docx|max:10240',
         ], [
             'file_permohonan.required' => 'Dokumen Permohonan wajib diunggah.',
@@ -132,14 +134,16 @@ class RegulasiController extends Controller
     }
 
     /**
-     * Form edit data pengajuan. Hanya bisa diakses selama regulasi masih
-     * di tahap Pengajuan (sebelum "Mulai Pembahasan" diklik).
+     * Form edit data rancangan.
+     * Operator hanya dapat mengedit di tahap Pengajuan; Super Admin dapat
+     * memperbarui data kapan saja termasuk setelah melewati tahap Partisipasi Publik.
      */
     public function edit(Regulasi $regulasi)
     {
         $this->authorizeUnitKerja($regulasi);
 
-        if ($regulasi->current_stage !== 'pengajuan') {
+        $isSuperAdmin = auth()->user()->role === 'super_admin';
+        if (!$isSuperAdmin && $regulasi->current_stage !== 'pengajuan') {
             return redirect()->route('regulasi.show', $regulasi)
                 ->with('error', 'Data pengajuan tidak dapat diubah lagi karena sudah memasuki tahap Pembahasan.');
         }
@@ -148,34 +152,43 @@ class RegulasiController extends Controller
     }
 
     /**
-     * Simpan perubahan data pengajuan. File lama dipertahankan jika tidak
+     * Simpan perubahan data rancangan. File lama dipertahankan jika tidak
      * ada file baru yang diupload.
      */
     public function update(Request $request, Regulasi $regulasi)
     {
         $this->authorizeUnitKerja($regulasi);
 
-        if ($regulasi->current_stage !== 'pengajuan') {
+        $isSuperAdmin = auth()->user()->role === 'super_admin';
+        if (!$isSuperAdmin && $regulasi->current_stage !== 'pengajuan') {
             return redirect()->route('regulasi.show', $regulasi)
                 ->with('error', 'Data pengajuan tidak dapat diubah lagi karena sudah memasuki tahap Pembahasan.');
         }
 
         $request->validate([
             'jenis' => 'required',
-            'judul' => 'required|string|max:255',
+            'judul' => 'required|string|max:500',
+            'abstrak' => 'nullable|string|max:2000',
+            'unit_kerja' => 'nullable|string|max:255',
             'tgl_usulan' => 'required|date',
-            'file_permohonan' => [$regulasi->file_permohonan ? 'nullable' : 'required', 'file', 'mimes:pdf', 'max:1024'],
-            'file_draft' => [$regulasi->file_draft ? 'nullable' : 'required', 'file', 'mimes:pdf,doc,docx', 'max:1024'],
+            'file_permohonan' => [$isSuperAdmin || $regulasi->file_permohonan ? 'nullable' : 'required', 'file', 'mimes:pdf', 'max:10240'],
+            'file_draft' => [$regulasi->file_draft ? 'nullable' : 'required', 'file', 'mimes:pdf,doc,docx', 'max:10240'],
         ], [
             'file_permohonan.required' => 'Dokumen Permohonan wajib diunggah.',
             'file_permohonan.mimes' => 'Dokumen Permohonan harus berformat PDF.',
-            'file_permohonan.max' => 'Ukuran Dokumen Permohonan tidak boleh lebih dari 1 MB.',
+            'file_permohonan.max' => 'Ukuran Dokumen Permohonan tidak boleh lebih dari 10 MB.',
             'file_draft.required' => 'Draft Awal Rancangan wajib diunggah.',
             'file_draft.mimes' => 'Draft Awal Rancangan harus berformat PDF, DOC, atau DOCX.',
-            'file_draft.max' => 'Ukuran Draft Awal Rancangan tidak boleh lebih dari 1 MB.',
+            'file_draft.max' => 'Ukuran Draft Awal Rancangan tidak boleh lebih dari 10 MB.',
         ]);
 
         $data = $request->only(['jenis', 'judul', 'tgl_usulan']);
+        if ($request->filled('abstrak')) {
+            $data['abstrak'] = $request->abstrak;
+        }
+        if ($isSuperAdmin && $request->filled('unit_kerja')) {
+            $data['unit_kerja'] = $request->unit_kerja;
+        }
 
         if ($request->hasFile('file_permohonan')) {
             if ($regulasi->file_permohonan) {
@@ -194,7 +207,7 @@ class RegulasiController extends Controller
         $regulasi->update($data);
 
         return redirect()->route('regulasi.show', $regulasi)
-            ->with('success', 'Data pengajuan berhasil diperbarui.')
+            ->with('success', 'Data rancangan regulasi berhasil diperbarui.')
             ->withFragment('tahap-pengajuan');
     }
 

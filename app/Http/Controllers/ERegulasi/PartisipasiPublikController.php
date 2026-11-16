@@ -113,10 +113,9 @@ class PartisipasiPublikController extends Controller
     {
         $menu = $this->resolvePublicMenu();
 
-        $ujiPublik = PartisipasiPublik::with(['regulasi', 'regulasi.tanggapan.user', 'regulasi.tanggapan.reviewer'])
-            ->where('id', $id)
-            ->orWhere('regulasi_id', $id)
-            ->firstOrFail();
+        $relations = ['regulasi', 'regulasi.tanggapan.user', 'regulasi.tanggapan.reviewer'];
+        $ujiPublik = PartisipasiPublik::with($relations)->where('id', $id)->first()
+            ?? PartisipasiPublik::with($relations)->where('regulasi_id', $id)->firstOrFail();
 
         return view('partisipasi-publik.show', compact('ujiPublik', 'menu'));
     }

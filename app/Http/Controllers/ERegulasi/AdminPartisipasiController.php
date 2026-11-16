@@ -78,32 +78,44 @@ class AdminPartisipasiController extends Controller
         ]);
 
         $regulasi = Regulasi::findOrFail($id);
+        $isPeriodActive = \Carbon\Carbon::parse($request->tgl_selesai)->endOfDay()->gte(now());
 
         PartisipasiPublik::updateOrCreate(
             ['regulasi_id' => $id],
             [
                 'tgl_mulai' => $request->tgl_mulai,
                 'tgl_selesai' => $request->tgl_selesai,
-                'is_active' => true,
+                'is_active' => $isPeriodActive,
             ]
         );
 
-        $regulasi->update([
-            'status' => 'partisipasi_publik',
-            'current_stage' => 'uji_publik',
-            'uji_publik_status' => 'approved',
-        ]);
+        // Hanya ubah current_stage ke uji_publik jika belum melewatinya (atau masih dibuka);
+        // Super Admin tetap bisa menyimpan periode historis yang sudah ditutup.
+        $updateData = ['uji_publik_status' => 'approved'];
+        if ($isPeriodActive) {
+            $updateData['status'] = 'partisipasi_publik';
+            if (in_array($regulasi->current_stage, ['pengajuan', 'pembahasan'])) {
+                $updateData['current_stage'] = 'uji_publik';
+            }
+        }
+        $regulasi->update($updateData);
 
         if (!$regulasi->tahapans()->where('stage', 'uji_publik')->exists()) {
             RegulasiTahapan::create([
                 'regulasi_id' => $regulasi->id,
                 'stage' => 'uji_publik',
-                'status' => 'in_progress',
-                'started_at' => now(),
+                'status' => $isPeriodActive ? 'in_progress' : 'completed',
+                'started_at' => $request->tgl_mulai . ' 09:00:00',
+                'completed_at' => $isPeriodActive ? null : ($request->tgl_selesai . ' 17:00:00'),
             ]);
         }
 
-        return back()->with('success', 'Periode Partisipasi Publik berhasil disimpan dan diaktifkan!');
+        return back()->with(
+            'success',
+            $isPeriodActive
+                ? 'Periode Partisipasi Publik berhasil disimpan dan diaktifkan!'
+                : 'Periode Partisipasi Publik historis (ditutup) berhasil disimpan!'
+        );
     }
 
     /**

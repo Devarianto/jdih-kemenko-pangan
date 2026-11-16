@@ -46,6 +46,8 @@
                             Peraturan Presiden</option>
                         <option value="Intruksi Presiden" {{ old('jenis') == 'Intruksi Presiden' ? 'selected' : '' }}>Intruksi
                             Presiden</option>
+                        <option value="Peraturan Menteri Koordinator" {{ old('jenis') == 'Peraturan Menteri Koordinator' ? 'selected' : '' }}>
+                            Peraturan Menteri Koordinator</option>
                         <option value="Peraturan Menteri" {{ old('jenis') == 'Peraturan Menteri' ? 'selected' : '' }}>
                             Peraturan Menteri</option>
                         <option value="Keputusan Menteri" {{ old('jenis') == 'Keputusan Menteri' ? 'selected' : '' }}>
@@ -104,15 +106,16 @@
                 <div class="form-section-title">Dokumen Pendukung</div>
 
                 <div class="form-group">
-                    <label class="form-label">Upload Dokumen Permohonan (Surat/Nota Dinas) *</label>
+                    @php $isSuperAdmin = auth()->user()->role === 'super_admin'; @endphp
+                    <label class="form-label">Upload Dokumen Permohonan (Surat/Nota Dinas) {{ $isSuperAdmin ? '(Opsional untuk Super Admin)' : '*' }}</label>
                     <label class="upload-btn" style="position:relative; display:inline-block; overflow:hidden;">
                         🗁 Pilih File Permohonan
-                        <input type="file" name="file_permohonan" id="filePermohonan" accept=".pdf" required
+                        <input type="file" name="file_permohonan" id="filePermohonan" accept=".pdf" @if(!$isSuperAdmin) required @endif
                             style="position:absolute; inset:0; width:100%; height:100%; opacity:0; cursor:pointer; margin:0; padding:0;"
                             onchange="handleFileChange(this, 'namaPermohonan')">
                     </label>
                     <div class="file-info" id="namaPermohonan">Belum ada file dipilih</div>
-                    <small style="color: #888; font-size: 12px;">Format: PDF · Maksimal 1 MB</small>
+                    <small style="color: #888; font-size: 12px;">Format: PDF · Maksimal 10 MB</small>
                     @error('file_permohonan')
                         <small class="file-error" style="display:block; color:#c0392b; font-size:12px; margin-top:4px;">⚠
                             {{ $message }}</small>

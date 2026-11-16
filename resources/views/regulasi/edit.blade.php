@@ -48,6 +48,8 @@
                             Peraturan Presiden</option>
                         <option value="Intruksi Presiden" {{ old('jenis', $regulasi->jenis) == 'Intruksi Presiden' ? 'selected' : '' }}>Intruksi
                             Presiden</option>
+                        <option value="Peraturan Menteri Koordinator" {{ old('jenis', $regulasi->jenis) == 'Peraturan Menteri Koordinator' ? 'selected' : '' }}>
+                            Peraturan Menteri Koordinator</option>
                         <option value="Peraturan Menteri" {{ old('jenis', $regulasi->jenis) == 'Peraturan Menteri' ? 'selected' : '' }}>
                             Peraturan Menteri</option>
                         <option value="Keputusan Menteri" {{ old('jenis', $regulasi->jenis) == 'Keputusan Menteri' ? 'selected' : '' }}>
@@ -68,6 +70,41 @@
                         value="{{ old('judul', $regulasi->judul) }}" required>
                 </div>
 
+                @if(auth()->user()->role === 'super_admin')
+                <div class="form-group">
+                    <label class="form-label">Unit Kerja Pengusul *</label>
+                    @php
+                        $unitOptions = [
+                            'Biro Hukum dan Kerja Sama',
+                            'Sekretariat Kementerian Koordinator Bidang Pangan',
+                            'Sekretariat Kementerian Koordinator',
+                            'Deputi Bidang Koordinasi Usaha Pangan dan Pertanian',
+                            'Deputi Bidang Koordinasi Keterjangkauan dan Keamanan Pangan',
+                            'Deputi Bidang Koordinasi Sumber Daya Maritim',
+                            'Deputi Bidang Koordinasi Tata Niaga dan Distribusi Pangan',
+                            'Inspektorat Kementerian Koordinator Bidang Pangan',
+                            'Inspektorat',
+                        ];
+                    @endphp
+                    <select name="unit_kerja" class="form-control" required>
+                        @foreach($unitOptions as $uOpt)
+                            <option value="{{ $uOpt }}" {{ old('unit_kerja', $regulasi->unit_kerja) == $uOpt ? 'selected' : '' }}>{{ $uOpt }}</option>
+                        @endforeach
+                        @if($regulasi->unit_kerja && !in_array($regulasi->unit_kerja, $unitOptions))
+                            <option value="{{ $regulasi->unit_kerja }}" selected>{{ $regulasi->unit_kerja }}</option>
+                        @endif
+                    </select>
+                </div>
+                @endif
+
+                <div class="form-group">
+                    <label class="form-label">Abstrak / Ringkasan Regulasi</label>
+                    <textarea name="abstrak" class="form-control" rows="4" maxlength="2000"
+                        placeholder="Tuliskan ringkasan singkat mengenai tujuan dan substansi regulasi ini..."
+                        style="resize: vertical;">{{ old('abstrak', $regulasi->abstrak) }}</textarea>
+                    <small style="color: #888; font-size: 12px;">Maksimal 2000 karakter</small>
+                </div>
+
                 <div class="form-group">
                     <label class="form-label">Tanggal Usulan *</label>
                     <input type="date" name="tgl_usulan" class="form-control"
@@ -80,9 +117,10 @@
                 <div class="form-section-title">Dokumen Pendukung</div>
 
                 <div class="form-group">
+                    @php $isSuperAdmin = auth()->user()->role === 'super_admin'; @endphp
                     <label class="form-label">
                         Dokumen Permohonan (Surat/Nota Dinas)
-                        @if(!$regulasi->file_permohonan) * @endif
+                        @if(!$regulasi->file_permohonan && !$isSuperAdmin) * @else (Opsional) @endif
                     </label>
                     @if($regulasi->file_permohonan)
                         <div class="file-info" style="margin-bottom: 8px;">
@@ -93,13 +131,13 @@
                     <label class="upload-btn" style="position:relative; display:inline-block; overflow:hidden;">
                         📁 {{ $regulasi->file_permohonan ? 'Ganti File Permohonan (opsional)' : 'Pilih File Permohonan' }}
                         <input type="file" name="file_permohonan" id="filePermohonan" accept=".pdf"
-                            @if(!$regulasi->file_permohonan) required @endif
+                            @if(!$regulasi->file_permohonan && !$isSuperAdmin) required @endif
                             style="position:absolute; inset:0; width:100%; height:100%; opacity:0; cursor:pointer; margin:0; padding:0;"
                             onchange="handleFileChange(this, 'namaPermohonan')">
                     </label>
                     <div class="file-info" id="namaPermohonan">Belum ada file baru dipilih</div>
                     <small style="color: #888; font-size: 12px;">
-                        Format: PDF · Maksimal 1 MB
+                        Format: PDF · Maksimal 10 MB
                         @if($regulasi->file_permohonan)
                             · Biarkan kosong jika tidak ingin mengganti file yang sudah diupload.
                         @endif
@@ -130,7 +168,7 @@
                     </label>
                     <div class="file-info" id="namaDraft">Belum ada file baru dipilih</div>
                     <small style="color: #888; font-size: 12px;">
-                        Format: PDF, DOC, DOCX · Maksimal 1 MB
+                        Format: PDF, DOC, DOCX · Maksimal 10 MB
                         @if($regulasi->file_draft)
                             · Biarkan kosong jika tidak ingin mengganti file yang sudah diupload.
                         @endif
@@ -167,9 +205,9 @@
     </div>
 
     <script>
-        const MAX_FILE_SIZE = 1024 * 1024; // 1 MB
+        const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10 MB
 
-        // Update nama file terpilih + tandai kalau lewat 1MB
+        // Update nama file terpilih + tandai kalau lewat 10MB
         function handleFileChange(input, infoId) {
             const infoEl = document.getElementById(infoId);
             const file = input.files[0];
@@ -182,7 +220,7 @@
 
             if (file.size > MAX_FILE_SIZE) {
                 const sizeMb = (file.size / (1024 * 1024)).toFixed(2);
-                infoEl.textContent = `⚠ ${file.name} (${sizeMb} MB) melebihi batas maksimal 1 MB`;
+                infoEl.textContent = `⚠ ${file.name} (${sizeMb} MB) melebihi batas maksimal 10 MB`;
                 infoEl.style.color = '#c0392b';
                 input.value = ''; // reset supaya tidak ikut ter-submit
             } else {
