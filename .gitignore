@@ -25,7 +25,6 @@ error.html
 /public/upload/*
 /public/uploads
 /public/uploads/*
-/public/build
 /public/build_*
 /public/storage
 /public/images/material/public_html
