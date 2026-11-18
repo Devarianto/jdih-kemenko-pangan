@@ -1,2 +1,3 @@
-*
-!.gitignore
+# Track storage/app/public/regulasi/draft PDFs for complete repository deployment
+.DS_Store
+Thumbs.db

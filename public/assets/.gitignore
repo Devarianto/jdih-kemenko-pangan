@@ -1,2 +1,3 @@
-*
-!.gitignore
+# Track assets/source for complete repository deployment
+.DS_Store
+Thumbs.db
