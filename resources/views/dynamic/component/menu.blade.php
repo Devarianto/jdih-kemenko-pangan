@@ -324,6 +324,11 @@
         </li>
         @endif
         @endforeach
+        @if(!collect($mainMenu)->contains(fn($m) => str_contains(strtolower($m->label ?? ''), 'kemenko pangan')))
+        <li>
+          <a href="https://kemenkopangan.go.id/" target="_blank" rel="noopener noreferrer" title="Website Resmi Kementerian Koordinator Bidang Pangan">Kemenko Pangan</a>
+        </li>
+        @endif
       </ul>
     </nav>
     <div class="right-header__theme">
@@ -549,6 +554,11 @@
       </li>
       @endif
       @endforeach
+      @if(!collect($mainMenu)->contains(fn($m) => str_contains(strtolower($m->label ?? ''), 'kemenko pangan')))
+      <li>
+        <a href="https://kemenkopangan.go.id/" target="_blank" rel="noopener noreferrer" title="Website Resmi Kementerian Koordinator Bidang Pangan">Kemenko Pangan</a>
+      </li>
+      @endif
     </ul>
   </nav>
   <div class="menu-mobile__bottom">
