@@ -46,6 +46,7 @@ jobs:
             .github/**
             **/.env*
             vendor/**
+            cadmin/**
             node_modules/**
             storage/**
             public/**
@@ -56,14 +57,14 @@ jobs:
             scratch/**
 
   deploy-public:
-    name: Sync Public Web Assets to /public_html/jdih.arthawisesa.com
+    name: Sync Public Build to /public_html/jdih.arthawisesa.com
     needs: deploy-app
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Sync public assets & Vite build via FTPS
+      - name: Sync public Vite build via FTPS
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
           server: cartenz.iixcp.rumahweb.net
@@ -84,5 +85,10 @@ jobs:
             error_log
             storage
             storage/**
-            assets/source/**
-            assets/.gitignore
+            assets/**
+            cfind/**
+            flags/**
+            images/**
+            nwcms/**
+            pdf/**
+            templates/**
