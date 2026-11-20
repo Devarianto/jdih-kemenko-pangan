@@ -5,18 +5,25 @@ on:
     branches:
       - main
   workflow_dispatch:
+    inputs:
+      commits_back:
+        description: 'Jumlah commit terakhir yang akan di-sync (untuk manual run)'
+        required: false
+        default: '5'
 
 concurrency:
   group: cpanel-deploy
   cancel-in-progress: false
 
 jobs:
-  deploy-app:
-    name: Sync Laravel App to /repositories/jdih-kemenko-pangan
+  deploy:
+    name: Incremental FTPS Deploy to cPanel
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 20
 
       - name: Check FTP_PASSWORD secret is configured
         env:
@@ -27,68 +34,100 @@ jobs:
             exit 1
           fi
 
-      - name: Sync Laravel core files via FTPS
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
-        with:
-          server: cartenz.iixcp.rumahweb.net
-          username: artn3432
-          password: ${{ secrets.FTP_PASSWORD }}
-          protocol: ftps
-          port: 21
-          security: loose
-          local-dir: ./
-          server-dir: /repositories/jdih-kemenko-pangan/
-          state-name: .ftp-deploy-sync-state-app.json
-          dangerous-clean-slate: false
-          exclude: |
-            **/.git*
-            **/.git*/**
-            .github/**
-            **/.env*
-            vendor/**
-            cadmin/**
-            node_modules/**
-            storage/**
-            public/**
-            bootstrap/cache/*.php
-            database/sql/**
-            docs/**
-            tests/**
-            scratch/**
+      - name: Upload changed files via FTPS (incremental)
+        env:
+          FTP_USER: artn3432
+          FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
+          FTP_SERVER: cartenz.iixcp.rumahweb.net
+          EVENT_NAME: ${{ github.event_name }}
+          BEFORE_SHA: ${{ github.event.before }}
+          CURRENT_SHA: ${{ github.sha }}
+          COMMITS_BACK: ${{ github.event.inputs.commits_back || '5' }}
+        run: |
+          python3 - <<'PY'
+          import os, subprocess, urllib.parse
 
-  deploy-public:
-    name: Sync Public Build to /public_html/jdih.arthawisesa.com
-    needs: deploy-app
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+          ftp_user = os.environ['FTP_USER']
+          ftp_pass = os.environ['FTP_PASSWORD']
+          ftp_server = os.environ['FTP_SERVER']
+          event_name = os.environ['EVENT_NAME']
+          before_sha = os.environ.get('BEFORE_SHA', '')
+          current_sha = os.environ['CURRENT_SHA']
+          commits_back = int(os.environ.get('COMMITS_BACK') or '5')
 
-      - name: Sync public Vite build via FTPS
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
-        with:
-          server: cartenz.iixcp.rumahweb.net
-          username: artn3432
-          password: ${{ secrets.FTP_PASSWORD }}
-          protocol: ftps
-          port: 21
-          security: loose
-          local-dir: ./public/
-          server-dir: /public_html/jdih.arthawisesa.com/
-          state-name: .ftp-deploy-sync-state-public.json
-          dangerous-clean-slate: false
-          exclude: |
-            index.php
-            .htaccess
-            .well-known/**
-            cgi-bin/**
-            error_log
-            storage
-            storage/**
-            assets/**
-            cfind/**
-            flags/**
-            images/**
-            nwcms/**
-            pdf/**
-            templates/**
+          def git_diff_files(base_ref):
+              out = subprocess.check_output(
+                  ['git', 'diff', '--name-only', '--diff-filter=ACMR', base_ref, current_sha],
+                  text=True
+              )
+              return [line.strip() for line in out.splitlines() if line.strip()]
+
+          if event_name == 'workflow_dispatch' or not before_sha or set(before_sha) == {'0'}:
+              base_ref = f'HEAD~{commits_back}'
+              changed = git_diff_files(base_ref)
+          else:
+              changed = git_diff_files(before_sha)
+              if '.github/workflows/deploy-cpanel.yml' in changed:
+                  # When workflow itself changes, also catch recent app/view commits
+                  changed = sorted(set(changed) | set(git_diff_files(f'HEAD~{commits_back}')))
+
+          app_skip_prefixes = (
+              '.git/', '.github/', 'vendor/', 'node_modules/', 'storage/',
+              'database/sql/', 'docs/', 'tests/', 'scratch/', 'bootstrap/cache/'
+          )
+          app_skip_exact = {
+              '.env', '.env.example', '.gitignore', '.gitattributes',
+              '.editorconfig', 'package.json', 'package-lock.json',
+              'phpunit.xml', 'vite.config.js', 'README.md'
+          }
+          pub_skip_prefixes = (
+              'public/.well-known/', 'public/cgi-bin/', 'public/storage/',
+              'public/assets/source/', 'public/assets/pdfjs/'
+          )
+          pub_skip_exact = {
+              'public/index.php', 'public/.htaccess', 'public/error_log',
+              'public/assets/.gitignore'
+          }
+
+          targets = []
+          for rel in changed:
+              if rel.startswith('public/'):
+                  if rel in pub_skip_exact or any(rel.startswith(p) for p in pub_skip_prefixes):
+                      continue
+                  sub = rel[len('public/'):]
+                  remote_path = f'/public_html/jdih.arthawisesa.com/{sub}'
+                  targets.append((rel, remote_path))
+              else:
+                  if rel in app_skip_exact or rel.startswith('.env') or any(rel.startswith(p) for p in app_skip_prefixes):
+                      continue
+                  remote_path = f'/repositories/jdih-kemenko-pangan/{rel}'
+                  targets.append((rel, remote_path))
+
+          if not targets:
+              print('No deployable file changes detected.')
+              raise SystemExit(0)
+
+          print(f'Deploying {len(targets)} changed file(s) via FTPS...')
+          creds = f'user = "{ftp_user}:{ftp_pass}"\n'
+          for local_path, remote_path in targets:
+              if not os.path.isfile(local_path):
+                  continue
+              encoded_path = '/'.join(urllib.parse.quote(seg) for seg in remote_path.split('/'))
+              url = f'ftp://{ftp_server}{encoded_path}'
+              print(f'  -> {local_path} => {remote_path}')
+              res = subprocess.run(
+                  [
+                      'curl', '--silent', '--show-error', '--fail',
+                      '--ssl-reqd', '--insecure', '--ftp-create-dirs',
+                      '--connect-timeout', '20', '--max-time', '120',
+                      '--retry', '3', '--retry-delay', '2',
+                      '-K', '-', '-T', local_path, url
+                  ],
+                  input=creds,
+                  text=True
+              )
+              if res.returncode != 0:
+                  raise SystemExit(res.returncode)
+
+          print('All changed files uploaded successfully.')
+          PY
