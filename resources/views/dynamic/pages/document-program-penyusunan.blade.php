@@ -1,7 +1,41 @@
 @extends('dynamic.layouts.layout')
 
 @section('content')
-  @include('dynamic.component.banner')
+  @php
+    $progsunBanners = $menu ? widget($menu->id, 'menu', 'banner') : [];
+  @endphp
+  @if(count($progsunBanners))
+    @include('dynamic.component.banner')
+  @else
+    <section class="banner-middle">
+      <figure>
+        <img
+          src="{{ asset('assets/source/assets/thumbs/images/banner/cover_1440x400_1145x318_0-307_2480995b44f96cf0fa812790a80f90f7.jpg.webp') }}"
+          data-img-large="{{ asset('assets/source/assets/thumbs/images/banner/cover_1440x400_1145x318_0-307_2480995b44f96cf0fa812790a80f90f7.jpg.webp') }}"
+          alt="Program Penyusunan PUU">
+      </figure>
+      <figcaption>
+        <small>{{ app()->getLocale() === 'en' ? 'Legislation Drafting Documents' : 'Dokumen Pembentukan PUU' }}</small>
+        <h2>{{ app()->getLocale() === 'en' ? 'Legislation Drafting Program' : 'Program Penyusunan PUU' }}</h2>
+      </figcaption>
+      <div class="wave">
+        <svg xmlns="http://www.w3.org/2000/svg"
+             width="100%" height="140"
+             viewBox="0 180 2500 200"
+             fill="#F8F8F8"
+             preserveAspectRatio="none">
+          <path class="st1"
+                d="M 0 250 C 1200 320 1200 100 3000 250 L 3000 550 L 0 550 L 0 250">
+            <animate attributeName="d" dur="5s"
+                     values="M 0 250 C 1200 320 1200 100 3000 250 L 3000 550 L 0 550 L 0 250;
+                             M 0 250 C 400 100 400 320 3000 250 L 3000 550 L 0 550 L 0 250;
+                             M 0 250 C 1200 280 1200 100 3000 250 L 3000 550 L 0 550 L 0 250"
+                     repeatCount="indefinite" />
+          </path>
+        </svg>
+      </div>
+    </section>
+  @endif
   <section class="middle">
     <div class="wrapper">
       <div class="middle__search">
@@ -36,8 +70,21 @@
             <figcaption>
               <div class="wrap-flex">
                 <div class="text">
-                  <span class="category" @if (!$document->status_berlaku) style="background-color: #C25A5A;" @endif>{{ $document->front_status_berlaku }}</span>
+                  <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-bottom: 6px;">
+                    <span class="category" @if (!$document->status_berlaku) style="background-color: #C25A5A;" @endif>{{ $document->rule_type->label ?? $document->front_status_berlaku }}</span>
+                    @if($document->year)
+                      <span style="font-size: 12px; font-weight: 600; color: #0d47a1;">Tahun {{ $document->year }}</span>
+                    @endif
+                    @if($document->date)
+                      <span style="font-size: 12px; color: #64748b;">{{ date2string($document->date) }}</span>
+                    @endif
+                  </div>
                   <p>{{ $document->translated('title') }}</p>
+                  @if($document->teu || $document->translated('unit_pemrakarsa') || $document->unit_pemrakarsa)
+                    <div style="font-size: 13px; color: #1e3a8a; font-weight: 600; margin: 4px 0 6px;">
+                      Unit Pemrakarsa: {{ $document->teu ?: ($document->translated('unit_pemrakarsa') ?: $document->unit_pemrakarsa) }}
+                    </div>
+                  @endif
                   <small>{{ $document->translated('intro') }}</small>
                 </div>
                 <a href="{{ url($document->permalink_document) }}" class="button button-outline">{{ lang::translate('document.read-more') }}</a>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Front;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Cactuar\Admin\Helpers\helper;
+use Cactuar\Admin\Helpers\og;
 
 use Cactuar\Admin\Models\Menu;
 use Cactuar\Admin\Models\Permalink;
@@ -767,14 +768,37 @@ class PageController extends Controller
 
     public function getProgramPenyusunanPuu($menu)
     {
+        $isEn = app()->getLocale() === 'en';
+        og::set(
+            'title',
+            $isEn ? 'Legislation Drafting Program' : 'Program Penyusunan PUU'
+        );
+        og::set(
+            'description',
+            $isEn
+                ? 'Legislation Drafting Program of the Coordinating Ministry for Food Affairs of the Republic of Indonesia'
+                : 'Program Penyusunan Peraturan Perundang-Undangan Kementerian Koordinator Bidang Pangan Republik Indonesia'
+        );
+
         $documents = Document::translate()->whereIsActive(1)->where('master_document_id', Document::PROGRAM_PENYUSUNAN);
 
         if (request()->query('search')) {
             $documents = $documents->where('title', 'like', '%'.request()->query('search').'%');
         }
-        
+
+        if (request()->query('year')) {
+            $documents = $documents->where('year', request()->query('year'));
+        }
+
         $documents = $documents->orderBy('tanggal_penetapan', 'desc')->orderBy('id', 'desc')->paginate(8);
-        $years = collect();
+        $years = Document::select('year')
+            ->whereIsActive(1)
+            ->where('master_document_id', Document::PROGRAM_PENYUSUNAN)
+            ->whereNotNull('year')
+            ->distinct()
+            ->orderBy('year', 'desc')
+            ->get();
+
         return view('dynamic.pages.document-program-penyusunan', compact('menu', 'documents', 'years'));
     }
 
