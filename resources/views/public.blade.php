@@ -398,10 +398,11 @@
                         var elYesterday = document.getElementById('visitor-yesterday');
                         var elMonth = document.getElementById('visitor-month');
                         var elTotal = document.getElementById('visitor-total');
-                        if (elToday) elToday.textContent = data.today;
-                        if (elYesterday) elYesterday.textContent = data.yesterday;
-                        if (elMonth) elMonth.textContent = data.month;
-                        if (elTotal) elTotal.textContent = data.total;
+                        var formatCount = function(n) { return Number(n || 0).toLocaleString('id-ID'); };
+                        if (elToday) elToday.textContent = formatCount(data.today);
+                        if (elYesterday) elYesterday.textContent = formatCount(data.yesterday);
+                        if (elMonth) elMonth.textContent = formatCount(data.month);
+                        if (elTotal) elTotal.textContent = formatCount(data.total);
                     })
                     .catch(() => {});
             }

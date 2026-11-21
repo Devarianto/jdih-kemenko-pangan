@@ -73,10 +73,13 @@
                     renderRecaptcha('.recaptcha-container');                    
                 }, 1000);
                 
-                document.getElementById('button-open-login').addEventListener('click', function (e) {
-                    resetRecaptcha('.recaptcha-container');
-                    openPopup('#popup-login')
-                })
+                const btnOpenLogin = document.getElementById('button-open-login');
+                if (btnOpenLogin) {
+                    btnOpenLogin.addEventListener('click', function () {
+                        resetRecaptcha('.recaptcha-container');
+                        openPopup('#popup-login');
+                    });
+                }
 
                 function updateVisitorCount() {
                 fetch('{{ route('api.visitor') }}')
@@ -85,10 +88,15 @@
                         return response.json();
                     })
                     .then(data => {
-                        document.getElementById('visitor-today').textContent = data.today;
-                        document.getElementById('visitor-yesterday').textContent = data.yesterday;
-                        document.getElementById('visitor-month').textContent = data.month;
-                        document.getElementById('visitor-total').textContent = data.total;
+                        const formatCount = (n) => Number(n || 0).toLocaleString('id-ID');
+                        const elToday = document.getElementById('visitor-today');
+                        const elYesterday = document.getElementById('visitor-yesterday');
+                        const elMonth = document.getElementById('visitor-month');
+                        const elTotal = document.getElementById('visitor-total');
+                        if (elToday) elToday.textContent = formatCount(data.today);
+                        if (elYesterday) elYesterday.textContent = formatCount(data.yesterday);
+                        if (elMonth) elMonth.textContent = formatCount(data.month);
+                        if (elTotal) elTotal.textContent = formatCount(data.total);
                     })
                     .catch(() => {
                         console.log('Gagal mengambil data visitor');
@@ -99,14 +107,15 @@
                 updateVisitorCount();
 
                 const form = document.getElementById('frm-search-global');
-
-                form.addEventListener('keypress', function(event) {
-                    // Cek apakah tombol yang ditekan adalah Enter (key code 13)
-                    if (event.key === 'Enter') {
-                        event.preventDefault(); // Hindari submit default (jika ada input lain)
-                        form.submit(); // Submit form secara otomatis
-                    }
-                });
+                if (form) {
+                    form.addEventListener('keypress', function(event) {
+                        // Cek apakah tombol yang ditekan adalah Enter (key code 13)
+                        if (event.key === 'Enter') {
+                            event.preventDefault(); // Hindari submit default (jika ada input lain)
+                            form.submit(); // Submit form secara otomatis
+                        }
+                    });
+                }
             })
         </script>
 

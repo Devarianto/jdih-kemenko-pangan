@@ -663,18 +663,18 @@
     max-width: 100% !important;
     width: 100% !important;
     margin: 0 !important;
-    padding: 0 clamp(14px, 1.8vw, 36px) !important;
+    padding: 0 clamp(18px, 2.2vw, 40px) !important;
     box-sizing: border-box !important;
     display: flex !important;
     align-items: center !important;
     justify-content: space-between !important;
-    gap: 12px !important;
+    gap: clamp(14px, 1.8vw, 28px) !important;
   }
   header .logo {
     flex-shrink: 0 !important;
     display: inline-flex !important;
     align-items: center !important;
-    margin-right: auto !important;
+    margin-right: 0 !important;
     padding: 8px 0 !important;
   }
   header .logo img {
@@ -714,25 +714,43 @@
     display: none !important;
   }
   header .right-header {
-    margin-left: auto !important;
+    margin-left: 0 !important;
+    flex: 1 1 auto !important;
     display: flex !important;
     align-items: center !important;
-    gap: clamp(10px, 1.15vw, 18px) !important;
+    justify-content: flex-end !important;
+    gap: clamp(14px, 1.4vw, 22px) !important;
     min-width: 0 !important;
-    flex-shrink: 1 !important;
   }
-  header nav > ul {
-    display: flex !important;
-    align-items: center !important;
-    flex-wrap: nowrap !important;
-    gap: clamp(10px, 1.15vw, 22px) !important;
+  @media (min-width: 1200px) {
+    header .right-header > nav {
+      flex: 1 1 auto !important;
+      display: flex !important;
+      justify-content: center !important;
+      margin: 0 clamp(10px, 1.2vw, 22px) !important;
+      min-width: 0 !important;
+    }
+    header nav > ul {
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      flex-wrap: nowrap !important;
+      gap: clamp(14px, 1.45vw, 24px) !important;
+    }
+    header .right-header__theme {
+      margin-left: clamp(8px, 1vw, 18px) !important;
+      flex-shrink: 0 !important;
+    }
+    header .right-header__lang {
+      flex-shrink: 0 !important;
+    }
   }
   header nav > ul > li {
     flex-shrink: 0 !important;
   }
   header nav > ul > li > a:not(.nav-kemenko-btn) {
     white-space: nowrap !important;
-    font-size: clamp(12.5px, 0.96vw, 14.5px) !important;
+    font-size: clamp(13px, 0.98vw, 14.5px) !important;
     letter-spacing: -0.01em !important;
   }
   header nav > ul > li > a.nav-kemenko-btn,
@@ -741,7 +759,7 @@
     align-items: center !important;
     justify-content: center !important;
     gap: 6px !important;
-    padding: 5px 10px !important;
+    padding: 6px 12px !important;
     border-radius: 8px !important;
     border: 1px solid rgba(255, 255, 255, 0.38) !important;
     background: rgba(255, 255, 255, 0.14) !important;
@@ -752,13 +770,14 @@
     box-sizing: border-box !important;
   }
   .nav-kemenko-btn__text {
-    display: flex !important;
-    flex-direction: column !important;
-    align-items: flex-start !important;
-    line-height: 1.08 !important;
-    font-size: clamp(11px, 0.82vw, 12px) !important;
+    display: inline-flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    gap: 4px !important;
+    line-height: 1.1 !important;
+    font-size: clamp(12.5px, 0.95vw, 14px) !important;
     font-weight: 600 !important;
-    letter-spacing: 0.01em !important;
+    letter-spacing: -0.01em !important;
   }
   .nav-kemenko-btn__arrow {
     flex-shrink: 0 !important;

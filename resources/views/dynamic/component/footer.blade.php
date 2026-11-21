@@ -44,23 +44,24 @@
         <a href="{{ $menu->fullUrl }}">{{ $menu->label }}</a>
         @endforeach
       </div>
+       @php($visitorStats = \App\Http\Controllers\Front\VisitorController::getStats())
        <div class="box">
         <h6>{{ lang::translate('global.visitor.title') }}</h6>
         <div class="info">
           <label>{{ lang::translate('global.visitor.today') }}</label>
-          <span id="visitor-today">{{ lang::translate('global.visitor.loading') }}</span>
+          <span id="visitor-today">{{ number_format($visitorStats['today'], 0, ',', '.') }}</span>
         </div>
           <div class="info">
           <label>{{ lang::translate('global.visitor.yesterday') }}</label>
-          <span id="visitor-yesterday">{{ lang::translate('global.visitor.loading') }}</span>
+          <span id="visitor-yesterday">{{ number_format($visitorStats['yesterday'], 0, ',', '.') }}</span>
         </div>
           <div class="info">
           <label>{{ lang::translate('global.visitor.month') }}</label>
-          <span id="visitor-month">{{ lang::translate('global.visitor.loading') }}</span>
+          <span id="visitor-month">{{ number_format($visitorStats['month'], 0, ',', '.') }}</span>
         </div>
         <div class="info">
           <label>{{ lang::translate('global.visitor.total') }}</label>
-          <span id="visitor-total">{{ lang::translate('global.visitor.loading') }}</span>
+          <span id="visitor-total">{{ number_format($visitorStats['total'], 0, ',', '.') }}</span>
         </div>
       </div>
     </div>
