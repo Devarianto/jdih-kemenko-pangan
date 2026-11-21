@@ -32,8 +32,7 @@
       <div class="listing-rules">
         @forelse($documents as $document)
           <div class="listing-rules__item" style="border-radius: 8px; margin-bottom: 24px; box-shadow: 0 2px 8px rgba(0,0,0,0.06);">
-            <figure><img src="{{ media::initial($document->thumbnail)->url }}" alt="{{ media::initial($document->thumbnail)->alt }}"></figure>
-            <figcaption>
+            <figcaption style="flex: 1 1 100%; max-width: 100%; width: 100%;">
               <div class="wrap-flex" style="align-items: flex-start;">
                 <div class="text" style="width: 100%;">
                   <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-bottom: 6px;">

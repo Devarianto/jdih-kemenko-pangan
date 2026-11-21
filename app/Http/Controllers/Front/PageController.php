@@ -910,7 +910,7 @@ class PageController extends Controller
         }
 
         $documents = $documents->with('regulasi')
-            ->orderBy('documents.updated_at', 'desc')
+            ->orderByRaw('COALESCE(documents.date, DATE(documents.created_at)) DESC')
             ->orderBy('documents.created_at', 'desc')
             ->orderBy('documents.id', 'desc')
             ->paginate(8);

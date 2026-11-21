@@ -16,7 +16,9 @@ class RegulasiController extends Controller
     {
         $user = auth()->user();
 
-        $query = Regulasi::orderBy('updated_at', 'desc')->orderBy('created_at', 'desc')->orderBy('id', 'desc');
+        $query = Regulasi::orderByRaw('COALESCE(tgl_usulan, DATE(created_at)) DESC')
+            ->orderBy('created_at', 'desc')
+            ->orderBy('id', 'desc');
 
         // Super Admin melihat regulasi dari SEMUA unit kerja.
         // Operator hanya melihat regulasi unit kerjanya sendiri.
@@ -58,7 +60,10 @@ class RegulasiController extends Controller
             return redirect()->route('regulasi.index');
         }
 
-        $query = Regulasi::where('unit_kerja', '!=', $user->unit_kerja)->orderBy('updated_at', 'desc')->orderBy('created_at', 'desc')->orderBy('id', 'desc');
+        $query = Regulasi::where('unit_kerja', '!=', $user->unit_kerja)
+            ->orderByRaw('COALESCE(tgl_usulan, DATE(created_at)) DESC')
+            ->orderBy('created_at', 'desc')
+            ->orderBy('id', 'desc');
 
         if ($request->filled('filter_status')) {
             if ($request->filter_status === 'selesai') {
@@ -109,8 +114,8 @@ class RegulasiController extends Controller
         $data = $request->only(['jenis', 'judul', 'abstrak', 'tgl_usulan']);
         $data['unit_kerja'] = auth()->user()->unit_kerja ?: ($request->input('unit_kerja') ?: 'Biro Hukum dan Kerja Sama');
         $data['created_by'] = auth()->id();
-        $data['status'] = 'draft';
-        $data['current_stage'] = 'pengajuan';
+        $data['status'] = 'proses';
+        $data['current_stage'] = 'pembahasan';
 
         if ($request->hasFile('file_permohonan')) {
             $data['file_permohonan'] = $request->file('file_permohonan')->store('regulasi/permohonan', 'public');
@@ -121,7 +126,7 @@ class RegulasiController extends Controller
 
         $regulasi = Regulasi::create($data);
 
-        // Catat histori tahap pertama
+        // Pengajuan selesai otomatis dan langsung memasuki tahap Pembahasan tanpa perlu ACC Super Admin
         RegulasiTahapan::create([
             'regulasi_id' => $regulasi->id,
             'stage' => 'pengajuan',
@@ -130,12 +135,21 @@ class RegulasiController extends Controller
             'completed_at' => now(),
         ]);
 
-        return redirect()->route('regulasi.index')->with('success', 'Regulasi berhasil diajukan!');
+        RegulasiTahapan::create([
+            'regulasi_id' => $regulasi->id,
+            'stage' => 'pembahasan',
+            'status' => 'in_progress',
+            'started_at' => now(),
+        ]);
+
+        return redirect()->route('regulasi.show', $regulasi)
+            ->with('success', 'Regulasi berhasil diajukan dan langsung memasuki tahap Pembahasan.')
+            ->withFragment('tahap-pembahasan');
     }
 
     /**
      * Form edit data rancangan.
-     * Operator hanya dapat mengedit di tahap Pengajuan; Super Admin dapat
+     * Operator hanya dapat mengedit di tahap Pengajuan/Pembahasan; Super Admin dapat
      * memperbarui data kapan saja termasuk setelah melewati tahap Partisipasi Publik.
      */
     public function edit(Regulasi $regulasi)
@@ -143,9 +157,9 @@ class RegulasiController extends Controller
         $this->authorizeUnitKerja($regulasi);
 
         $isSuperAdmin = auth()->user()->role === 'super_admin';
-        if (!$isSuperAdmin && $regulasi->current_stage !== 'pengajuan') {
+        if (!$isSuperAdmin && !in_array($regulasi->current_stage, ['pengajuan', 'pembahasan'])) {
             return redirect()->route('regulasi.show', $regulasi)
-                ->with('error', 'Data pengajuan tidak dapat diubah lagi karena sudah memasuki tahap Pembahasan.');
+                ->with('error', 'Data pengajuan tidak dapat diubah lagi karena sudah melewati tahap Pembahasan.');
         }
 
         return view('regulasi.edit', compact('regulasi'));
@@ -160,9 +174,9 @@ class RegulasiController extends Controller
         $this->authorizeUnitKerja($regulasi);
 
         $isSuperAdmin = auth()->user()->role === 'super_admin';
-        if (!$isSuperAdmin && $regulasi->current_stage !== 'pengajuan') {
+        if (!$isSuperAdmin && !in_array($regulasi->current_stage, ['pengajuan', 'pembahasan'])) {
             return redirect()->route('regulasi.show', $regulasi)
-                ->with('error', 'Data pengajuan tidak dapat diubah lagi karena sudah memasuki tahap Pembahasan.');
+                ->with('error', 'Data pengajuan tidak dapat diubah lagi karena sudah melewati tahap Pembahasan.');
         }
 
         $request->validate([
@@ -302,6 +316,22 @@ class RegulasiController extends Controller
     public function tambahProses(Request $request, Regulasi $regulasi)
     {
         $this->authorizeUnitKerja($regulasi);
+
+        if ($regulasi->current_stage === 'pengajuan') {
+            $regulasi->update([
+                'current_stage' => 'pembahasan',
+                'status' => 'proses',
+            ]);
+
+            if (!$regulasi->tahapans()->where('stage', 'pembahasan')->exists()) {
+                RegulasiTahapan::create([
+                    'regulasi_id' => $regulasi->id,
+                    'stage' => 'pembahasan',
+                    'status' => 'in_progress',
+                    'started_at' => now(),
+                ]);
+            }
+        }
 
         $request->validate([
             'judul' => 'required|string|max:255',

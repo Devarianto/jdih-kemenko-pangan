@@ -68,6 +68,7 @@ class UserManagementController extends Controller
 
         $user->update([
             'name' => $validated['name'],
+            'display_name' => $validated['name'],
             'email' => $validated['email'],
             'role' => $validated['role'],
             'unit_kerja' => $validated['role'] === 'super_admin' ? null : $validated['unit_kerja'],

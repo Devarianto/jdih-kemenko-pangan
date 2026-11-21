@@ -62,9 +62,12 @@
     @endphp
 
     @php
-        $jam = (int) $now->format('G');
-        $sapaan = $jam < 11 ? 'Selamat pagi' : ($jam < 15 ? 'Selamat siang' : ($jam < 19 ? 'Selamat sore' : 'Selamat malam'));
         $rawNama = $user->display_name ?: $user->name;
+        if (!$rawNama || stripos($rawNama, 'ibnu') !== false) {
+            $rawNama = ($user->name && stripos($user->name, 'ibnu') === false)
+                ? $user->name
+                : ($isSuperAdmin ? 'Super Admin' : 'Operator e-Regulasi');
+        }
         $namaUser = trim(preg_replace('/\s*\([^)]*\)/', '', $rawNama)) ?: $rawNama;
         $inisial = collect(preg_split('/\s+/', $namaUser))
             ->map(fn($w) => preg_replace('/[^a-zA-Z0-9]/u', '', $w))
@@ -85,7 +88,7 @@
                 <div class="dash-hero-avatar" aria-hidden="true">{{ $inisial ?: 'U' }}</div>
                 <div class="dash-hero-text">
                     <div class="dash-hero-date">{{ $now->locale('id')->isoFormat('dddd, D MMMM Y') }}</div>
-                    <h2 class="dash-hero-title">{{ $sapaan }}, {{ $namaUser }}!</h2>
+                    <h2 class="dash-hero-title">Selamat Datang!</h2>
                     <div class="dash-hero-meta">
                         <span class="hero-chip">{{ $isSuperAdmin ? 'Super Admin' : 'Operator e-Regulasi' }}</span>
                         @if(!$isSuperAdmin && $user->unit_kerja)

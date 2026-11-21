@@ -96,20 +96,65 @@
       </div>
 
       {{-- DUAL FILTER BAR WITH PDF EXPORT --}}
-      <div class="stat-filter-bar" style="background: #ffffff; padding: 18px 24px; border-radius: 10px; border: 1px solid #e2e8f0; box-shadow: 0 4px 15px rgba(0,0,0,0.03); margin-bottom: 35px;">
-        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
-          <div style="display: flex; align-items: center; gap: 8px;">
+      <style>
+        .stat-filter-row {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 14px;
+          flex-wrap: nowrap;
+        }
+        .stat-filter-title {
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+          white-space: nowrap;
+          flex-shrink: 0;
+        }
+        .stat-filter-controls {
+          display: flex;
+          align-items: center;
+          justify-content: flex-end;
+          gap: 10px;
+          flex-wrap: nowrap;
+          flex: 1 1 auto;
+          min-width: 0;
+        }
+        .stat-filter-group {
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+          min-width: 0;
+        }
+        .stat-filter-select,
+        .stat-filter-btn {
+          height: 38px;
+          margin: 0 !important;
+          box-sizing: border-box;
+          white-space: nowrap;
+        }
+        @media (max-width: 991px) {
+          .stat-filter-row,
+          .stat-filter-controls {
+            flex-wrap: wrap;
+            justify-content: flex-start;
+          }
+        }
+      </style>
+      <div class="stat-filter-bar" style="background: #ffffff; padding: 16px 20px; border-radius: 10px; border: 1px solid #e2e8f0; box-shadow: 0 4px 15px rgba(0,0,0,0.03); margin-bottom: 35px;">
+        <div class="stat-filter-row">
+          <div class="stat-filter-title">
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon>
             </svg>
             <span style="font-weight: 600; color: #1e293b; font-size: 14px;">Filter Statistik:</span>
           </div>
 
-          <div style="display: flex; gap: 14px; align-items: center; flex-wrap: wrap; flex: 1; justify-content: flex-end;">
+          <div class="stat-filter-controls">
             {{-- Filter Tahun --}}
-            <div style="display: flex; align-items: center; gap: 8px;">
+            <div class="stat-filter-group">
               <label for="filter-tahun" style="font-size: 13px; color: #475569; font-weight: 500; white-space: nowrap;">Tahun:</label>
-              <select id="filter-tahun" style="padding: 8px 14px; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 13px; color: #1e293b; background: #f8fafc; min-width: 130px; cursor: pointer;">
+              <select id="filter-tahun" class="stat-filter-select" style="padding: 0 12px; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 13px; color: #1e293b; background: #f8fafc; min-width: 125px; cursor: pointer;">
                 <option value="all">Semua Tahun</option>
                 @foreach ($stats['filters']['available_years'] as $yr)
                   <option value="{{ $yr }}" @selected($stats['filters']['selected_year'] == $yr)>{{ $yr }}</option>
@@ -118,9 +163,9 @@
             </div>
 
             {{-- Filter Jenis Peraturan --}}
-            <div style="display: flex; align-items: center; gap: 8px;">
+            <div class="stat-filter-group">
               <label for="filter-jenis" style="font-size: 13px; color: #475569; font-weight: 500; white-space: nowrap;">Jenis:</label>
-              <select id="filter-jenis" style="padding: 8px 14px; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 13px; color: #1e293b; background: #f8fafc; min-width: 180px; cursor: pointer;">
+              <select id="filter-jenis" class="stat-filter-select" style="padding: 0 12px; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 13px; color: #1e293b; background: #f8fafc; min-width: 165px; max-width: 220px; cursor: pointer;">
                 <option value="all">Semua Jenis Peraturan</option>
                 @foreach ($stats['filters']['available_rule_types'] as $rt)
                   <option value="{{ $rt['id'] }}" @selected($stats['filters']['selected_rule_type_id'] == $rt['id'])>{{ $rt['label'] }}</option>
@@ -129,7 +174,7 @@
             </div>
 
             {{-- Reset Button --}}
-            <button id="btn-reset-filters" type="button" style="padding: 8px 14px; border: 1px solid #e2e8f0; background: #ffffff; color: #64748b; font-size: 12px; font-weight: 500; border-radius: 6px; cursor: pointer; display: inline-flex; align-items: center; gap: 6px;">
+            <button id="btn-reset-filters" type="button" class="stat-filter-btn" style="padding: 0 14px; border: 1px solid #e2e8f0; background: #ffffff; color: #64748b; font-size: 12px; font-weight: 500; border-radius: 6px; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; flex-shrink: 0;">
               <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path>
                 <path d="M3 3v5h5"></path>
@@ -138,7 +183,7 @@
             </button>
 
             {{-- PDF Export Button --}}
-            <button id="btn-export-pdf" type="button" onclick="exportPublicPdf()" style="padding: 8px 16px; border: none; background: #2563eb; color: #ffffff; font-size: 12px; font-weight: 600; border-radius: 6px; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; box-shadow: 0 2px 6px rgba(37,99,235,0.3);">
+            <button id="btn-export-pdf" type="button" class="stat-filter-btn" onclick="exportPublicPdf()" style="padding: 0 16px; border: none; background: #2563eb; color: #ffffff; font-size: 12px; font-weight: 600; border-radius: 6px; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; box-shadow: 0 2px 6px rgba(37,99,235,0.3); flex-shrink: 0;">
               <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
                 <polyline points="14 2 14 8 20 8"></polyline>

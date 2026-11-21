@@ -932,9 +932,16 @@
     <div class="main">
         @if(!request()->get('opener') && auth()->check())
             @php
-                $rawTopName = trim(preg_replace('/\s*\(.*?\)\s*/', '', auth()->user()->display_name ?? auth()->user()->username ?? 'User'));
+                $authUser = auth()->user();
+                $cleanDisplayName = $authUser->display_name;
+                if (!$cleanDisplayName || stripos($cleanDisplayName, 'ibnu') !== false) {
+                    $cleanDisplayName = ($authUser->name && stripos($authUser->name, 'ibnu') === false)
+                        ? $authUser->name
+                        : ($authUser->role === 'super_admin' ? 'Super Admin' : 'Operator e-Regulasi');
+                }
+                $rawTopName = trim(preg_replace('/\s*\(.*?\)\s*/', '', $cleanDisplayName ?: ($authUser->username ?? 'User')));
                 if ($rawTopName === '') {
-                    $rawTopName = auth()->user()->display_name ?? 'User';
+                    $rawTopName = $cleanDisplayName ?: 'User';
                 }
                 $topAvatarInitial = mb_strtoupper(mb_substr($rawTopName, 0, 1));
             @endphp
@@ -1012,7 +1019,7 @@
                     <div class="dropdown ereg-profile-dropdown">
                         <a class="ereg-profile-trigger dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             <span class="ereg-profile-avatar">{{ $topAvatarInitial }}</span>
-                            <span class="ereg-profile-name">{{ auth()->user()->display_name }}</span>
+                            <span class="ereg-profile-name">{{ $cleanDisplayName }}</span>
                             <i class="fa fa-chevron-down ereg-profile-caret"></i>
                         </a>
                         <div class="dropdown-menu dropdown-menu-end shadow-sm" style="min-width: 220px; border-radius: 12px; border: 1px solid #e2e8f0; padding: 6px;">

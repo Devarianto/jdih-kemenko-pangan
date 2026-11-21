@@ -48,7 +48,7 @@
                         </option>
                     </select>
                     <small style="color: #64748b; font-size: 12px; display: block; margin-top: 4px;">
-                        • <strong>Operator e-Regulasi</strong>: Diberikan kepada unit kerja (misal: Mas Ibnu) untuk menyusun regulasi. Login langsung masuk ke e-Regulasi dan tidak dapat mengakses menu internal JDIH.<br>
+                        • <strong>Operator e-Regulasi</strong>: Diberikan kepada unit kerja untuk menyusun regulasi. Login langsung masuk ke e-Regulasi dan tidak dapat mengakses menu internal JDIH.<br>
                         • <strong>Super Admin</strong>: Memiliki kendali penuh untuk mengelola regulasi, publikasi, menu JDIH, dan manajemen user.
                     </small>
                 </div>

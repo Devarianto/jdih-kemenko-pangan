@@ -319,14 +319,37 @@
           </div>
         </li>
         @else
+        @php($isKemenkoPangan = str_contains(strtolower($main->label ?? ''), 'kemenko pangan'))
         <li>
+          @if($isKemenkoPangan)
+          <a href="{{ $main->fullUrl ?: 'https://kemenkopangan.go.id/' }}" class="nav-kemenko-btn" target="_blank" rel="noopener noreferrer" title="Website Resmi Kementerian Koordinator Bidang Pangan">
+            <span class="nav-kemenko-btn__text">
+              <span>Kemenko</span>
+              <span>Pangan</span>
+            </span>
+            <svg class="nav-kemenko-btn__arrow" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <line x1="7" y1="17" x2="17" y2="7"></line>
+              <polyline points="7 7 17 7 17 17"></polyline>
+            </svg>
+          </a>
+          @else
           <a href="{{ $main->fullUrl }}" @class(['active' => (isset($menu) && in_array($main->id, $menu->activeIds)) || ($main->type == 'home' && (request()->is('/') || request()->is(lang::active()) || (isset($home) && !isset($menu)) || request()->routeIs('home')))])>{{ $main->label }}</a>
+          @endif
         </li>
         @endif
         @endforeach
         @if(!collect($mainMenu)->contains(fn($m) => str_contains(strtolower($m->label ?? ''), 'kemenko pangan')))
         <li>
-          <a href="https://kemenkopangan.go.id/" target="_blank" rel="noopener noreferrer" title="Website Resmi Kementerian Koordinator Bidang Pangan">Kemenko Pangan</a>
+          <a href="https://kemenkopangan.go.id/" class="nav-kemenko-btn" target="_blank" rel="noopener noreferrer" title="Website Resmi Kementerian Koordinator Bidang Pangan">
+            <span class="nav-kemenko-btn__text">
+              <span>Kemenko</span>
+              <span>Pangan</span>
+            </span>
+            <svg class="nav-kemenko-btn__arrow" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <line x1="7" y1="17" x2="17" y2="7"></line>
+              <polyline points="7 7 17 7 17 17"></polyline>
+            </svg>
+          </a>
         </li>
         @endif
       </ul>
@@ -549,14 +572,37 @@
         </div>
       </li>
       @else
+      @php($isKemenkoPangan = str_contains(strtolower($main->label ?? ''), 'kemenko pangan'))
       <li>
+        @if($isKemenkoPangan)
+        <a href="{{ $main->fullUrl ?: 'https://kemenkopangan.go.id/' }}" class="nav-kemenko-btn nav-kemenko-btn--mobile" target="_blank" rel="noopener noreferrer" title="Website Resmi Kementerian Koordinator Bidang Pangan">
+          <span class="nav-kemenko-btn__text">
+            <span>Kemenko</span>
+            <span>Pangan</span>
+          </span>
+          <svg class="nav-kemenko-btn__arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="7" y1="17" x2="17" y2="7"></line>
+            <polyline points="7 7 17 7 17 17"></polyline>
+          </svg>
+        </a>
+        @else
         <a href="{{ $main->fullUrl }}" @class(['active' => (isset($menu) && in_array($main->id, $menu->activeIds)) || ($main->type == 'home' && (request()->is('/') || request()->is(lang::active()) || (isset($home) && !isset($menu)) || request()->routeIs('home')))])>{{ $main->label }}</a>
+        @endif
       </li>
       @endif
       @endforeach
       @if(!collect($mainMenu)->contains(fn($m) => str_contains(strtolower($m->label ?? ''), 'kemenko pangan')))
       <li>
-        <a href="https://kemenkopangan.go.id/" target="_blank" rel="noopener noreferrer" title="Website Resmi Kementerian Koordinator Bidang Pangan">Kemenko Pangan</a>
+        <a href="https://kemenkopangan.go.id/" class="nav-kemenko-btn nav-kemenko-btn--mobile" target="_blank" rel="noopener noreferrer" title="Website Resmi Kementerian Koordinator Bidang Pangan">
+          <span class="nav-kemenko-btn__text">
+            <span>Kemenko</span>
+            <span>Pangan</span>
+          </span>
+          <svg class="nav-kemenko-btn__arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="7" y1="17" x2="17" y2="7"></line>
+            <polyline points="7 7 17 7 17 17"></polyline>
+          </svg>
+        </a>
       </li>
       @endif
     </ul>
@@ -617,22 +663,23 @@
     max-width: 100% !important;
     width: 100% !important;
     margin: 0 !important;
-    padding: 0 clamp(16px, 2.5vw, 48px) !important;
+    padding: 0 clamp(14px, 1.8vw, 36px) !important;
     box-sizing: border-box !important;
     display: flex !important;
     align-items: center !important;
     justify-content: space-between !important;
+    gap: 12px !important;
   }
   header .logo {
     flex-shrink: 0 !important;
     display: inline-flex !important;
     align-items: center !important;
     margin-right: auto !important;
-    padding: 10px 0 !important;
+    padding: 8px 0 !important;
   }
   header .logo img {
     height: auto !important;
-    max-height: 48px !important;
+    max-height: clamp(34px, 3vw, 46px) !important;
     width: auto !important;
   }
   /* Default Transparent Header: Show White logo, Hide Black logo */
@@ -670,11 +717,92 @@
     margin-left: auto !important;
     display: flex !important;
     align-items: center !important;
-    gap: clamp(14px, 1.8vw, 24px) !important;
+    gap: clamp(10px, 1.15vw, 18px) !important;
     min-width: 0 !important;
+    flex-shrink: 1 !important;
   }
   header nav > ul {
-    gap: clamp(14px, 1.5vw, 28px) !important;
+    display: flex !important;
+    align-items: center !important;
+    flex-wrap: nowrap !important;
+    gap: clamp(10px, 1.15vw, 22px) !important;
+  }
+  header nav > ul > li {
+    flex-shrink: 0 !important;
+  }
+  header nav > ul > li > a:not(.nav-kemenko-btn) {
+    white-space: nowrap !important;
+    font-size: clamp(12.5px, 0.96vw, 14.5px) !important;
+    letter-spacing: -0.01em !important;
+  }
+  header nav > ul > li > a.nav-kemenko-btn,
+  .nav-kemenko-btn {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 6px !important;
+    padding: 5px 10px !important;
+    border-radius: 8px !important;
+    border: 1px solid rgba(255, 255, 255, 0.38) !important;
+    background: rgba(255, 255, 255, 0.14) !important;
+    color: #ffffff !important;
+    text-decoration: none !important;
+    white-space: nowrap !important;
+    transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease, color 0.2s ease !important;
+    box-sizing: border-box !important;
+  }
+  .nav-kemenko-btn__text {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    line-height: 1.08 !important;
+    font-size: clamp(11px, 0.82vw, 12px) !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.01em !important;
+  }
+  .nav-kemenko-btn__arrow {
+    flex-shrink: 0 !important;
+    transition: transform 0.2s ease !important;
+  }
+  .nav-kemenko-btn:hover {
+    background: rgba(245, 158, 11, 0.22) !important;
+    border-color: #f59e0b !important;
+    color: #ffffff !important;
+    transform: translateY(-1px);
+  }
+  .nav-kemenko-btn:hover .nav-kemenko-btn__arrow {
+    transform: translate(1.5px, -1.5px);
+  }
+  header.floating .nav-kemenko-btn,
+  header.white .nav-kemenko-btn {
+    background: #eff6ff !important;
+    border-color: #bfdbfe !important;
+    color: #003580 !important;
+  }
+  header.floating .nav-kemenko-btn:hover,
+  header.white .nav-kemenko-btn:hover {
+    background: #dbeafe !important;
+    border-color: #003580 !important;
+    color: #002766 !important;
+  }
+  [data-theme="dark"] .nav-kemenko-btn,
+  [data-theme="dark"] header.floating .nav-kemenko-btn,
+  [data-theme="dark"] header.white .nav-kemenko-btn {
+    background: rgba(255, 255, 255, 0.1) !important;
+    border-color: rgba(255, 255, 255, 0.28) !important;
+    color: #f8fafc !important;
+  }
+  [data-theme="dark"] .nav-kemenko-btn:hover,
+  [data-theme="dark"] header.floating .nav-kemenko-btn:hover,
+  [data-theme="dark"] header.white .nav-kemenko-btn:hover {
+    background: rgba(251, 191, 36, 0.2) !important;
+    border-color: #fbbf24 !important;
+    color: #fde68a !important;
+  }
+  .nav-kemenko-btn--mobile {
+    width: fit-content !important;
+    margin-top: 6px !important;
+    padding: 8px 14px !important;
   }
 
   /* ==========================================================================
@@ -1343,7 +1471,7 @@
 
       items.forEach(li => {
         checkAlign(li);
-        const trigger = li.querySelector('.nav-parent-link, > a');
+        const trigger = li.querySelector('.nav-parent-link') || li.querySelector(':scope > a');
         if (!trigger) return;
 
         if (trigger.dataset.jdihnBound) return;

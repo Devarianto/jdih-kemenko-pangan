@@ -30,7 +30,7 @@
         // Super Admin selalu dapat menambah/mengedit/menghapus proses di semua tahap,
         // sedangkan operator hanya saat masih di uji_publik setelah klik "Lanjut ke Pasca Partisipasi Publik".
         $prosceBisaKelola = $bisaKelola && ($isSuperAdmin || ($regulasi->current_stage === 'uji_publik' && $pascaSudahDimulai));
-        $pembahasanBisaKelola = $bisaKelola && ($isSuperAdmin || $regulasi->current_stage === 'pembahasan');
+        $pembahasanBisaKelola = $bisaKelola && ($isSuperAdmin || in_array($regulasi->current_stage, ['pengajuan', 'pembahasan']));
     @endphp
 
     <style>
@@ -1043,7 +1043,7 @@
                                 </div>
                             </div>
 
-                            @if(($isSuperAdmin || $regulasi->current_stage === 'pengajuan') && $bisaKelola)
+                            @if(($isSuperAdmin || in_array($regulasi->current_stage, ['pengajuan', 'pembahasan'])) && $bisaKelola)
                                 <div style="margin-top: 22px; padding-top: 18px; border-top: 1px solid #f0f3fa; display: flex; gap: 10px; flex-wrap: wrap;">
                                     <a href="{{ route('regulasi.edit', $regulasi) }}" class="btn"
                                         style="font-size: 13px; border: 1px solid #003580; color: #003580;">✏ Edit Data Rancangan</a>
