@@ -15,6 +15,21 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
     {!! og::render() !!}
+    @php
+        $ogTitle = og::get('title');
+        $ogDesc = og::get('description');
+        $ogUrl = og::get('url') ?: url()->current();
+        $ogRawImg = html_entity_decode((string) og::get('image'), ENT_QUOTES, 'UTF-8');
+        $ogImg = (!empty($ogRawImg) && !str_ends_with(strtolower(strtok($ogRawImg, '?')), '.svg'))
+            ? $ogRawImg
+            : url('images/herobanner-full-small.jpg');
+    @endphp
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="{{ $ogTitle }}">
+    <meta property="og:description" content="{{ $ogDesc }}">
+    <meta property="og:url" content="{{ $ogUrl }}">
+    <meta property="og:image" content="{{ $ogImg }}">
+    <meta property="og:image:secure_url" content="{{ $ogImg }}">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

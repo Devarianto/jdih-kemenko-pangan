@@ -117,6 +117,15 @@ class PartisipasiPublikController extends Controller
         $ujiPublik = PartisipasiPublik::with($relations)->where('id', $id)->first()
             ?? PartisipasiPublik::with($relations)->where('regulasi_id', $id)->firstOrFail();
 
+        if ($ujiPublik->regulasi) {
+            \Cactuar\Admin\Helpers\og::set('title', $ujiPublik->regulasi->judul, true);
+            $abstrak = trim(strip_tags((string) ($ujiPublik->regulasi->abstrak ?: $ujiPublik->regulasi->judul)));
+            if ($abstrak !== '') {
+                \Cactuar\Admin\Helpers\og::set('description', \Illuminate\Support\Str::limit($abstrak, 160), true);
+            }
+            \Cactuar\Admin\Helpers\og::set('image', url('images/herobanner-full-small.jpg'), true);
+        }
+
         return view('partisipasi-publik.show', compact('ujiPublik', 'menu'));
     }
 }

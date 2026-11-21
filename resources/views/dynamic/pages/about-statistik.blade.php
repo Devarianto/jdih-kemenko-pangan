@@ -133,11 +133,36 @@
           box-sizing: border-box;
           white-space: nowrap;
         }
+        .stat-filter-select {
+          line-height: 36px;
+          appearance: none;
+          -webkit-appearance: none;
+          padding-top: 0 !important;
+          padding-bottom: 0 !important;
+        }
         @media (max-width: 991px) {
           .stat-filter-row,
           .stat-filter-controls {
             flex-wrap: wrap;
             justify-content: flex-start;
+          }
+          .stat-filter-group {
+            width: 100%;
+          }
+          .stat-filter-select {
+            flex: 1 1 auto !important;
+            max-width: 100% !important;
+          }
+          .statistik {
+            flex-direction: column !important;
+            gap: 24px !important;
+          }
+          .statistik__left,
+          .statistik__right {
+            flex: 1 1 100% !important;
+            max-width: 100% !important;
+            width: 100% !important;
+            padding-left: 0 !important;
           }
         }
         [data-theme="dark"] .stat-filter-bar,

@@ -18,6 +18,18 @@
       [data-theme="dark"] .rancangan-title-text {
         color: #f8fafc !important;
       }
+      .middle__search select {
+        appearance: none !important;
+        -webkit-appearance: none !important;
+      }
+      @media (max-width: 767px) {
+        .middle__search {
+          padding: 16px !important;
+        }
+        .listing-rules__item figcaption {
+          padding: 18px !important;
+        }
+      }
     </style>
     <div class="wrapper">
       <div class="middle__search">

@@ -149,8 +149,7 @@ Route::group(['middleware' => ['web','front', 'visitor-count', 'csp']],function(
             return app(PageController::class)->getInformasiGaleri($menu);
         })->name('gallery');
         Route::get('/videografis', function() {
-            $menu = \Cactuar\Admin\Models\Menu::find(40) ?? \Cactuar\Admin\Models\Menu::first();
-            return app(PageController::class)->getVideografis($menu);
+            return redirect()->route('aksesibilitas');
         })->name('videografis');
         Route::get('/aksesibilitas', [PageController::class, 'getAksesibilitas'])->name('aksesibilitas');
         Route::get('/statistik-produk-hukum', function() {
@@ -183,6 +182,7 @@ Route::group(['middleware' => ['web','front', 'visitor-count', 'csp']],function(
                 ->firstOrFail();
             $document->view_count += 1;
             $document->save();
+            DocumentController::applyDocumentShareMeta($document);
             $menu = \Cactuar\Admin\Models\Menu::fe()->whereIsActive(1)->where('type', 'putusan-hukum')->first();
             return view('dynamic.pages.document-putusan-detail', compact('document', 'menu'));
         })->name('putusan.detail');

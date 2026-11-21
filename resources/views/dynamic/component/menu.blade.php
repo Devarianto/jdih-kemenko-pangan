@@ -290,7 +290,13 @@
                         $code = $isMk ? 'MK' : 'MA';
                         $shortLabel = $isCourtDecision ? ($isMk ? 'Mahkamah Konstitusi' : 'Mahkamah Agung') : $sc->label;
                       @endphp
-                      <a href="{{ $sc->fullUrl }}" class="jdihn-subchild-chip @if($scIsActive) active @endif @if($isCourtDecision) @if($isMk) is-mk @else is-ma @endif @endif" @if($scIsExt) target="_blank" rel="noopener noreferrer" @endif>
+                      @php
+                        $rawScUrl = $sc->fullUrl;
+                        if (str_contains(strtolower($sc->label ?? ''), 'videografis') || str_contains(strtolower((string)$rawScUrl), '/videografis')) {
+                          $rawScUrl = lang::url('/aksesibilitas');
+                        }
+                      @endphp
+                      <a href="{{ $rawScUrl }}" class="jdihn-subchild-chip @if($scIsActive) active @endif @if($isCourtDecision) @if($isMk) is-mk @else is-ma @endif @endif" @if($scIsExt) target="_blank" rel="noopener noreferrer" @endif>
                         @if($isCourtDecision)
                           <span class="chip-code">{{ $code }}</span>
                         @endif
@@ -566,7 +572,8 @@
           <a href="{{ $child->fullUrl }}" @class(['active' => isset($menu) && in_array($child->id, $menu->activeIds)]) @if($isChildExt) target="_blank" rel="noopener noreferrer" @endif>{{ $child->label }}</a>
           @php($subchilds = $child->childs()->fe()->get())
           @foreach($subchilds as $sc)
-          <a href="{{ $sc->fullUrl }}" class="subchild-item" style="padding-left: 28px !important; font-size: 13px !important; opacity: 0.88 !important;">↳ {{ $sc->label }}</a>
+          @php($scMobUrl = (str_contains(strtolower($sc->label ?? ''), 'videografis') || str_contains(strtolower((string)$sc->fullUrl), '/videografis')) ? lang::url('/aksesibilitas') : $sc->fullUrl)
+          <a href="{{ $scMobUrl }}" class="subchild-item" style="padding-left: 28px !important; font-size: 13px !important; opacity: 0.88 !important;">↳ {{ $sc->label }}</a>
           @endforeach
           @endforeach
         </div>
@@ -951,10 +958,127 @@
     align-items: center !important;
     gap: 8px !important;
     font-size: 13px !important;
-    font-weight: 500 !important;
-    border: 1px solid rgba(255, 255, 255, 0.3) !important;
-    background: rgba(255, 255, 255, 0.1) !important;
-    color: #ffffff !important;
+    font-weight: 600 !important;
+    border: 1px solid #cbd5e1 !important;
+    background: #f1f5f9 !important;
+    color: #0f172a !important;
+  }
+  [data-theme="dark"] .theme-toggle-btn--mobile {
+    border-color: #334155 !important;
+    background: #1e293b !important;
+    color: #fbbf24 !important;
+  }
+
+  /* ==========================================================================
+     MOBILE & TABLET RESPONSIVENESS OPTIMIZATIONS
+     ========================================================================== */
+  @media (max-width: 1199px) {
+    html, body {
+      overflow-x: clip !important;
+      max-width: 100% !important;
+    }
+    header .wrapper {
+      padding: 0 16px !important;
+      gap: 10px !important;
+    }
+    header .logo {
+      padding: 8px 0 !important;
+    }
+    header .logo img {
+      max-height: 36px !important;
+    }
+    header .right-header {
+      gap: 12px !important;
+      justify-content: flex-end !important;
+    }
+    header.floating,
+    header.white {
+      background: #ffffff !important;
+      box-shadow: 0 4px 16px rgba(15, 23, 42, 0.08) !important;
+    }
+    .menu-mobile {
+      padding-bottom: 24px !important;
+    }
+    .menu-mobile nav > ul > li > a {
+      padding: 11px 0 !important;
+      font-size: 15px !important;
+    }
+    .menu-mobile nav > ul > li > a.active,
+    .menu-mobile nav > ul > li.show > a,
+    .menu-mobile nav > ul > li .child a.active {
+      color: #003580 !important;
+      font-weight: 700 !important;
+    }
+    .menu-mobile__bottom {
+      margin-top: 16px !important;
+      padding-top: 16px !important;
+      border-top: 1px solid #e2e8f0 !important;
+      gap: 12px !important;
+    }
+    .menu-mobile__bottom .lang select {
+      appearance: none !important;
+      -webkit-appearance: none !important;
+      padding-right: 22px !important;
+    }
+    .document__listing.swiper {
+      width: 100% !important;
+      max-width: 100% !important;
+      overflow: hidden !important;
+      box-sizing: border-box !important;
+    }
+    .animating-scroll {
+      opacity: 1 !important;
+      transform: none !important;
+      visibility: visible !important;
+    }
+  }
+  @media (max-width: 767px) {
+    .banner-homepage {
+      min-height: 490px !important;
+    }
+    .banner-homepage__caption {
+      width: 100% !important;
+      padding: 78px 16px 64px !important;
+      box-sizing: border-box !important;
+    }
+    .banner-homepage__caption h1 {
+      font-size: 16px !important;
+      margin-bottom: 20px !important;
+      line-height: 1.4 !important;
+    }
+    .tema {
+      height: auto !important;
+      min-height: 0 !important;
+      padding: 52px 0 44px !important;
+    }
+    .list-title {
+      gap: 10px !important;
+      align-items: center !important;
+    }
+    .list-title h5 {
+      font-size: 15.5px !important;
+      line-height: 1.3 !important;
+    }
+    .list-title .readmore {
+      white-space: nowrap !important;
+      flex-shrink: 0 !important;
+      font-size: 13px !important;
+    }
+    #a11y-kemenkum-trigger {
+      width: 44px !important;
+      height: 44px !important;
+      bottom: 16px !important;
+      left: 14px !important;
+    }
+    #a11y-kemenkum-trigger svg {
+      width: 24px !important;
+      height: 24px !important;
+      min-width: 24px !important;
+      min-height: 24px !important;
+    }
+    footer {
+      padding-bottom: 72px !important;
+    }
   }
   .theme-toggle-btn--mobile .theme-text-dark {
     display: none;

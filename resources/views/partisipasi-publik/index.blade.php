@@ -173,7 +173,9 @@
 
         @media (max-width: 768px) {
             .banner-middle.pub-hero-banner {
-                padding: 78px 0 28px !important;
+                position: relative !important;
+                top: auto !important;
+                padding: 86px 0 24px !important;
             }
             .banner-middle.pub-hero-banner h2 {
                 font-size: 20px !important;
@@ -185,6 +187,40 @@
             }
             .banner-middle.pub-hero-banner .pub-hero-label {
                 margin-bottom: 8px !important;
+                font-size: 10.5px !important;
+                padding: 4px 10px !important;
+            }
+            section.middle {
+                padding-top: 22px !important;
+                padding-bottom: 40px !important;
+                min-height: auto !important;
+            }
+            .pub-card {
+                padding: 18px !important;
+                gap: 14px !important;
+            }
+            html body header.floating,
+            html body header.white {
+                background: #ffffff !important;
+                box-shadow: 0 4px 16px rgba(15, 23, 42, 0.08) !important;
+            }
+            html body header.floating:not(.show-burger) .logo img.white,
+            html body header.white:not(.show-burger) .logo img.white {
+                display: none !important;
+            }
+            html body header.floating:not(.show-burger) .logo img.black,
+            html body header.white:not(.show-burger) .logo img.black {
+                display: block !important;
+            }
+            html body header.floating .toggle-menu span,
+            html body header.white .toggle-menu span {
+                background-color: #0f172a !important;
+            }
+            html body header.floating .theme-toggle-btn,
+            html body header.white .theme-toggle-btn {
+                border-color: #cbd5e1 !important;
+                background: #f1f5f9 !important;
+                color: #0f172a !important;
             }
         }
     </style>
@@ -669,7 +705,11 @@
             var hero = document.querySelector('.banner-middle.pub-hero-banner');
             var middle = document.querySelector('section.middle');
             if (hero && middle) {
-                middle.style.setProperty('padding-top', (hero.offsetHeight + 24) + 'px', 'important');
+                if (window.innerWidth <= 768) {
+                    middle.style.setProperty('padding-top', '22px', 'important');
+                } else {
+                    middle.style.setProperty('padding-top', (hero.offsetHeight + 24) + 'px', 'important');
+                }
             }
         }
 
