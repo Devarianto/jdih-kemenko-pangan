@@ -140,6 +140,92 @@
             justify-content: flex-start;
           }
         }
+        [data-theme="dark"] .stat-filter-bar,
+        [data-theme="dark"] #tableStatistikWrapper {
+          background: #111c2d !important;
+          border-color: #243247 !important;
+          box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35) !important;
+        }
+        [data-theme="dark"] .stat-filter-title span,
+        [data-theme="dark"] .stat-filter-group label,
+        [data-theme="dark"] .middle__subtitle h5,
+        [data-theme="dark"] #stat-table-body td,
+        [data-theme="dark"] #stat-table-body a {
+          color: #e2e8f0 !important;
+        }
+        [data-theme="dark"] .middle__subtitle small {
+          color: #94a3b8 !important;
+        }
+        [data-theme="dark"] .stat-filter-select,
+        [data-theme="dark"] #btn-reset-filters {
+          background: #0f172a !important;
+          border-color: #334155 !important;
+          color: #f1f5f9 !important;
+        }
+        [data-theme="dark"] #table thead tr {
+          background: #0f172a !important;
+          border-bottom-color: #243247 !important;
+        }
+        [data-theme="dark"] #table thead th {
+          color: #93c5fd !important;
+        }
+        [data-theme="dark"] #stat-table-body tr {
+          border-bottom-color: #1e293b !important;
+        }
+        [data-theme="dark"] section.middle div[style*="background: #ffffff"],
+        [data-theme="dark"] section.middle div[style*="background:#ffffff"],
+        [data-theme="dark"] section.middle div[style*="background: #fff"],
+        [data-theme="dark"] section.middle div[style*="background:#fff"] {
+          background: #111c2d !important;
+          border-color: #243247 !important;
+          color: #e2e8f0 !important;
+        }
+        [data-theme="dark"] section.middle h2,
+        [data-theme="dark"] section.middle h3,
+        [data-theme="dark"] section.middle h4,
+        [data-theme="dark"] section.middle h5 {
+          color: #f8fafc !important;
+        }
+        [data-theme="dark"] section.middle p,
+        [data-theme="dark"] section.middle th,
+        [data-theme="dark"] section.middle td {
+          color: #cbd5e1 !important;
+        }
+        [data-theme="dark"] #stat-kpi-berlaku-count,
+        [data-theme="dark"] #stat-kpi-tidak-berlaku-count {
+          color: #f8fafc !important;
+        }
+        [data-theme="dark"] #stat-kpi-berlaku-count span,
+        [data-theme="dark"] #stat-kpi-tidak-berlaku-count span {
+          color: #94a3b8 !important;
+        }
+        [data-theme="dark"] #matrixWrapper {
+          background: #111c2d !important;
+          border-color: #243247 !important;
+        }
+        [data-theme="dark"] #matrixWrapper thead tr,
+        [data-theme="dark"] #matrixWrapper tfoot tr {
+          background: #0f172a !important;
+          border-color: #243247 !important;
+        }
+        [data-theme="dark"] #matrixWrapper th,
+        [data-theme="dark"] #matrixWrapper td,
+        [data-theme="dark"] #matrixWrapper tfoot td {
+          background-color: transparent !important;
+          color: #e2e8f0 !important;
+          border-color: #1e293b !important;
+        }
+        [data-theme="dark"] #matrixWrapper thead th:last-child,
+        [data-theme="dark"] #matrixWrapper tbody td:last-child {
+          background: #17253b !important;
+          color: #93c5fd !important;
+        }
+        [data-theme="dark"] #matrixWrapper button,
+        [data-theme="dark"] #stat-table-body button {
+          background: rgba(37, 99, 235, 0.22) !important;
+          border-color: rgba(96, 165, 250, 0.4) !important;
+          color: #93c5fd !important;
+        }
       </style>
       <div class="stat-filter-bar" style="background: #ffffff; padding: 16px 20px; border-radius: 10px; border: 1px solid #e2e8f0; box-shadow: 0 4px 15px rgba(0,0,0,0.03); margin-bottom: 35px;">
         <div class="stat-filter-row">

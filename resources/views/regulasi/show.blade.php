@@ -1985,6 +1985,43 @@
                             });
                         });
 
+                        // Auto-isi Tanggal Selesai (+14 hari) saat Tanggal Mulai diubah, tetap bisa diedit manual
+                        function addDaysIso(dateStr, days) {
+                            const parts = (dateStr || '').split('-').map(Number);
+                            if (parts.length !== 3 || parts.some(isNaN)) return '';
+                            const dt = new Date(Date.UTC(parts[0], parts[1] - 1, parts[2] + days));
+                            return dt.toISOString().slice(0, 10);
+                        }
+
+                        function bindAutoPeriod14(startSelector, endSelector) {
+                            document.querySelectorAll(startSelector).forEach(function (startInput) {
+                                const form = startInput.closest('form');
+                                const endInput = form ? form.querySelector(endSelector) : null;
+                                if (!endInput) return;
+
+                                if (startInput.value) {
+                                    endInput.min = startInput.value;
+                                    if (!endInput.value) {
+                                        endInput.value = addDaysIso(startInput.value, 14);
+                                    }
+                                }
+
+                                const syncEnd = function () {
+                                    if (!startInput.value) return;
+                                    endInput.min = startInput.value;
+                                    const nextEnd = addDaysIso(startInput.value, 14);
+                                    if (nextEnd) {
+                                        endInput.value = nextEnd;
+                                    }
+                                };
+
+                                startInput.addEventListener('change', syncEnd);
+                            });
+                        }
+
+                        bindAutoPeriod14('input[name="tgl_mulai_uji_publik"]', 'input[name="tgl_selesai_uji_publik"]');
+                        bindAutoPeriod14('input[name="tgl_mulai"]', 'input[name="tgl_selesai"]');
+
                         // Auto-dismiss toast notifications after a few seconds
                         document.querySelectorAll('#toast-stack .toast').forEach(function (toast, idx) {
                             setTimeout(function () {

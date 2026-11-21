@@ -3,6 +3,22 @@
 @section('content')
   @include('dynamic.component.banner')
   <section class="middle">
+    <style>
+      [data-theme="dark"] .rancangan-unit-row {
+        color: #93c5fd !important;
+      }
+      [data-theme="dark"] .rancangan-abstrak-box {
+        background: #0f172a !important;
+        border-left-color: #38bdf8 !important;
+        color: #cbd5e1 !important;
+      }
+      [data-theme="dark"] .rancangan-abstrak-box strong {
+        color: #f1f5f9 !important;
+      }
+      [data-theme="dark"] .rancangan-title-text {
+        color: #f8fafc !important;
+      }
+    </style>
     <div class="wrapper">
       <div class="middle__search">
         <form action="">
@@ -44,16 +60,16 @@
                     </span>
                   </div>
 
-                  <p style="font-size: 16px; font-weight: 700; color: #0f172a; line-height: 1.4; margin-bottom: 6px;">
+                  <p class="rancangan-title-text" style="font-size: 16px; font-weight: 700; color: #0f172a; line-height: 1.4; margin-bottom: 6px;">
                     {{ $document->translated('title') }}
                   </p>
 
-                  <div style="font-size: 13px; color: #1e3a8a; font-weight: 600; margin-bottom: 8px;">
+                  <div class="rancangan-unit-row" style="font-size: 13px; color: #1e3a8a; font-weight: 600; margin-bottom: 8px;">
                     🏛️ Unit Pengusul: {{ $document->translated('unit_pemrakarsa') ?: ($document->unit_pemrakarsa ?: 'Kementerian Koordinator Bidang Pangan') }}
                   </div>
 
                   @if($document->translated('intro'))
-                    <div style="font-size: 13px; color: #334155; line-height: 1.5; background: #f8fafc; border-left: 3px solid #2563eb; padding: 8px 12px; border-radius: 4px; margin-bottom: 10px;">
+                    <div class="rancangan-abstrak-box" style="font-size: 13px; color: #334155; line-height: 1.5; background: #f8fafc; border-left: 3px solid #2563eb; padding: 8px 12px; border-radius: 4px; margin-bottom: 10px;">
                       <strong style="color: #0f172a; font-size: 12px;">Keterangan / Abstrak Rancangan:</strong><br>
                       {{ Str::limit($document->translated('intro'), 280) }}
                     </div>

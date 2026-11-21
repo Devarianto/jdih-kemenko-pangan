@@ -106,6 +106,45 @@
             text-decoration: none !important;
         }
 
+        [data-theme="dark"] section.middle {
+            background-color: #0b1120 !important;
+        }
+        [data-theme="dark"] .pp-back-link {
+            background: #111c2d !important;
+            border-color: #334155 !important;
+            color: #93c5fd !important;
+        }
+        [data-theme="dark"] .pp-card {
+            background: #111c2d !important;
+            border-color: #243247 !important;
+            color: #e2e8f0 !important;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35) !important;
+        }
+        [data-theme="dark"] .pp-info-box,
+        [data-theme="dark"] .pp-abstrak-box {
+            background: #0f172a !important;
+            border-color: #243247 !important;
+        }
+        [data-theme="dark"] .pp-info-label,
+        [data-theme="dark"] .pp-form-desc {
+            color: #94a3b8 !important;
+        }
+        [data-theme="dark"] .pp-info-val,
+        [data-theme="dark"] .pp-section-head,
+        [data-theme="dark"] .pp-form-title,
+        [data-theme="dark"] .pp-abstrak-label,
+        [data-theme="dark"] .pp-abstrak-body,
+        [data-theme="dark"] .pp-form-group label {
+            color: #f1f5f9 !important;
+        }
+        [data-theme="dark"] .pp-form-group input,
+        [data-theme="dark"] .pp-form-group select,
+        [data-theme="dark"] .pp-form-group textarea {
+            background: #0f172a !important;
+            border-color: #334155 !important;
+            color: #f8fafc !important;
+        }
+
         .pp-card {
             background: #fff;
             border-radius: 20px;

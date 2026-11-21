@@ -717,6 +717,38 @@
             panel.style.display = (panel.style.display === 'none' || !panel.style.display) ? 'block' : 'none';
         }
 
+        // Auto-isi Tanggal Selesai (+14 hari) saat Tanggal Mulai diubah, tetap bisa diedit manual
+        (function () {
+            function addDaysIso(dateStr, days) {
+                var parts = (dateStr || '').split('-').map(Number);
+                if (parts.length !== 3 || parts.some(isNaN)) return '';
+                var dt = new Date(Date.UTC(parts[0], parts[1] - 1, parts[2] + days));
+                return dt.toISOString().slice(0, 10);
+            }
+
+            document.querySelectorAll('.set-uji-publik-card input[name="tgl_mulai"]').forEach(function (startInput) {
+                var form = startInput.closest('form');
+                var endInput = form ? form.querySelector('input[name="tgl_selesai"]') : null;
+                if (!endInput) return;
+
+                if (startInput.value) {
+                    endInput.min = startInput.value;
+                    if (!endInput.value) {
+                        endInput.value = addDaysIso(startInput.value, 14);
+                    }
+                }
+
+                startInput.addEventListener('change', function () {
+                    if (!startInput.value) return;
+                    endInput.min = startInput.value;
+                    var nextEnd = addDaysIso(startInput.value, 14);
+                    if (nextEnd) {
+                        endInput.value = nextEnd;
+                    }
+                });
+            });
+        })();
+
         (function () {
             var searchInput = document.getElementById('filterSearchTanggapan');
             var statusSelect = document.getElementById('filterStatusTanggapan');

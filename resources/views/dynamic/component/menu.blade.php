@@ -651,10 +651,10 @@
      HEADER FULL WIDTH & LOGO FAR LEFT CORNER ALIGNMENT
      ========================================================================== */
   header {
-    z-index: 100 !important;
+    z-index: 5000 !important;
   }
   header .menu-mobile {
-    z-index: 100 !important;
+    z-index: 5000 !important;
   }
   .popup {
     z-index: 99990 !important;
@@ -1278,10 +1278,183 @@
   /* ==========================================================================
      GLOBAL WEBSITE DARK MODE STYLES
      ========================================================================== */
-  [data-theme="dark"] body {
+  [data-theme="dark"] body,
+  [data-theme="dark"] section.middle {
     background-color: #0b1120 !important;
     color: #cbd5e1 !important;
     transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  /* Hero Sections in Dark Mode: No Hero Image, Rich Dark Palette */
+  [data-theme="dark"] .banner-homepage {
+    min-height: clamp(500px, 68vh, 660px) !important;
+    background: radial-gradient(circle at 78% 22%, rgba(16, 185, 129, 0.16), transparent 48%),
+                radial-gradient(circle at 18% 80%, rgba(37, 99, 235, 0.18), transparent 52%),
+                linear-gradient(135deg, #040914 0%, #0b192c 52%, #09261d 100%) !important;
+    border-bottom: 1px solid rgba(56, 189, 248, 0.1) !important;
+  }
+  [data-theme="dark"] .banner-middle,
+  [data-theme="dark"] .banner-middle.pub-hero-banner {
+    background: radial-gradient(circle at 82% 20%, rgba(16, 185, 129, 0.15), transparent 46%),
+                radial-gradient(circle at 14% 75%, rgba(37, 99, 235, 0.16), transparent 50%),
+                linear-gradient(135deg, #040914 0%, #0d1f36 55%, #09261d 100%) !important;
+  }
+  [data-theme="dark"] .banner-homepage > figure img,
+  [data-theme="dark"] .banner-middle > figure img,
+  [data-theme="dark"] .tema .bg img {
+    opacity: 0 !important;
+    visibility: hidden !important;
+  }
+  [data-theme="dark"] .banner-homepage > figure {
+    min-height: clamp(500px, 68vh, 660px) !important;
+  }
+  [data-theme="dark"] .tema {
+    background: radial-gradient(circle at 20% 30%, rgba(16, 185, 129, 0.14), transparent 50%),
+                linear-gradient(135deg, #061021 0%, #0d2138 55%, #08231c 100%) !important;
+  }
+  [data-theme="dark"] .banner-homepage .wave svg,
+  [data-theme="dark"] .banner-homepage .wave path,
+  [data-theme="dark"] .banner-middle .wave svg,
+  [data-theme="dark"] .banner-middle .wave path,
+  [data-theme="dark"] .tema .wave svg,
+  [data-theme="dark"] .tema .wave path,
+  [data-theme="dark"] footer .wave svg,
+  [data-theme="dark"] footer .wave path {
+    fill: #0b1120 !important;
+  }
+  [data-theme="dark"] section.document,
+  [data-theme="dark"] .document,
+  [data-theme="dark"] section.artikel,
+  [data-theme="dark"] .artikel,
+  [data-theme="dark"] section.news,
+  [data-theme="dark"] .news {
+    background: #0b1120 !important;
+    background-image: none !important;
+  }
+  [data-theme="dark"] .document__title .arrow .swiper-arrow {
+    filter: brightness(0) invert(1) !important;
+  }
+  [data-theme="dark"] header.floating,
+  [data-theme="dark"] header.white {
+    background: #0f172a !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6) !important;
+  }
+  [data-theme="dark"] .document__title h4,
+  [data-theme="dark"] .artikel__right-title h5,
+  [data-theme="dark"] .list-title h5,
+  [data-theme="dark"] .tema__title h3 {
+    color: #f8fafc !important;
+  }
+  [data-theme="dark"] .tema__title p {
+    color: #94a3b8 !important;
+  }
+  [data-theme="dark"] .document__listing--item {
+    background: #111c2d !important;
+    border: 1px solid #243247 !important;
+  }
+  [data-theme="dark"] .document__listing--item:hover {
+    border-color: #38bdf8 !important;
+  }
+  [data-theme="dark"] .document__listing--item p,
+  [data-theme="dark"] .document__listing--item figcaption p {
+    color: #f1f5f9 !important;
+  }
+  [data-theme="dark"] .document__listing--item small,
+  [data-theme="dark"] .listing-card__item small {
+    color: #94a3b8 !important;
+  }
+  [data-theme="dark"] .tema__listing--item figcaption {
+    background: rgba(15, 23, 42, 0.9) !important;
+  }
+  [data-theme="dark"] .tema__listing--item figcaption h6 {
+    color: #f8fafc !important;
+  }
+  [data-theme="dark"] .news .grid__item {
+    background: #111c2d !important;
+    border-color: #243247 !important;
+  }
+  [data-theme="dark"] .news .highlight-item {
+    background: #0f172a !important;
+    border-color: #243247 !important;
+  }
+  [data-theme="dark"] .news .grid__item h4,
+  [data-theme="dark"] .news .grid__item p,
+  [data-theme="dark"] .news .highlight-item p {
+    color: #f1f5f9 !important;
+  }
+  [data-theme="dark"] .news .date {
+    color: #94a3b8 !important;
+  }
+  [data-theme="dark"] .banner-homepage__caption h3,
+  [data-theme="dark"] .banner-middle figcaption small {
+    color: #93c5fd !important;
+  }
+  [data-theme="dark"] .banner-homepage__caption h1,
+  [data-theme="dark"] .banner-middle figcaption h2 {
+    color: #f8fafc !important;
+    text-shadow: 0 2px 14px rgba(0, 0, 0, 0.35);
+  }
+  [data-theme="dark"] .banner-homepage__caption .wrap-input {
+    background: #111c2d !important;
+    border: 1px solid #2b3b55 !important;
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.45) !important;
+  }
+  [data-theme="dark"] .banner-homepage__caption .wrap-input input {
+    background: transparent !important;
+    color: #f8fafc !important;
+  }
+  [data-theme="dark"] .banner-homepage__caption .wrap-input input::placeholder {
+    color: #94a3b8 !important;
+  }
+  [data-theme="dark"] .banner-stats a {
+    background: rgba(15, 23, 42, 0.78) !important;
+    border: 1px solid rgba(148, 163, 184, 0.25) !important;
+    color: #e2e8f0 !important;
+  }
+  [data-theme="dark"] .banner-stats a:hover {
+    background: rgba(30, 41, 59, 0.95) !important;
+    border-color: #38bdf8 !important;
+  }
+  [data-theme="dark"] .middle__search,
+  [data-theme="dark"] .listing-rules__item,
+  [data-theme="dark"] .listing-rules__item figcaption,
+  [data-theme="dark"] .content-pages {
+    background-color: #111c2d !important;
+    color: #cbd5e1 !important;
+    border-color: #243247 !important;
+  }
+  [data-theme="dark"] .middle__search input,
+  [data-theme="dark"] .middle__search select,
+  [data-theme="dark"] section.middle input[type="text"],
+  [data-theme="dark"] section.middle input[type="email"],
+  [data-theme="dark"] section.middle select,
+  [data-theme="dark"] section.middle textarea {
+    background-color: #0f172a !important;
+    border-color: #334155 !important;
+    color: #f1f5f9 !important;
+  }
+  [data-theme="dark"] .middle__search label {
+    color: #94a3b8 !important;
+  }
+  [data-theme="dark"] .listing-rules__item p,
+  [data-theme="dark"] .listing-rules__item a:not(.button) {
+    color: #f1f5f9 !important;
+  }
+  [data-theme="dark"] .listing-rules__item small,
+  [data-theme="dark"] .listing-rules__item .bottom {
+    color: #94a3b8 !important;
+    border-color: #243247 !important;
+  }
+  [data-theme="dark"] .button.button-outline {
+    border-color: #38bdf8 !important;
+    color: #7dd3fc !important;
+  }
+  [data-theme="dark"] .button.button-outline:hover {
+    background-color: #0284c7 !important;
+    color: #ffffff !important;
+  }
+  [data-theme="dark"] footer {
+    background: linear-gradient(180deg, #081226 0%, #050b18 100%) !important;
   }
 
   /* Floating Header in Dark Mode */

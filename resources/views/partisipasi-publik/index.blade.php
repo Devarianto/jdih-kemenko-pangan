@@ -11,52 +11,64 @@
         }
 
         /* Header tetap transparan & teks/logo tetap putih saat scrolldown di halaman ini */
-        body header.floating,
-        body header.white {
+        html body header.floating,
+        html body header.white,
+        html[data-theme="dark"] body header.floating,
+        html[data-theme="dark"] body header.white {
             background: transparent !important;
             box-shadow: none !important;
         }
-        body header.floating::before,
-        body header.white::before {
+        html body header.floating::before,
+        html body header.white::before {
             height: 0 !important;
             background-color: transparent !important;
         }
-        body header.floating .logo .white,
-        body header.white .logo .white,
+        html body header.floating:not(.show-burger) .logo .white,
+        html body header.white:not(.show-burger) .logo .white,
         html body header.floating:not(.show-burger) .logo img.white,
         html body header.white:not(.show-burger) .logo img.white {
             display: block !important;
         }
-        body header.floating .logo .black,
-        body header.white .logo .black,
+        html body header.floating:not(.show-burger) .logo .black,
+        html body header.white:not(.show-burger) .logo .black,
         html body header.floating:not(.show-burger) .logo img.black,
         html body header.white:not(.show-burger) .logo img.black {
             display: none !important;
         }
-        body header.floating nav > ul > li > a,
-        body header.white nav > ul > li > a,
-        body header.floating nav > ul > li > a.nav-parent-link,
-        body header.white nav > ul > li > a.nav-parent-link {
+        html body header.floating nav > ul > li > a,
+        html body header.white nav > ul > li > a,
+        html body header.floating nav > ul > li > a.nav-parent-link,
+        html body header.white nav > ul > li > a.nav-parent-link {
             color: #ffffff !important;
         }
-        body header.floating nav > ul > li.active > a,
-        body header.white nav > ul > li.active > a {
+        html body header.floating nav > ul > li > a.nav-kemenko-btn,
+        html body header.white nav > ul > li > a.nav-kemenko-btn {
+            background: rgba(255, 255, 255, 0.14) !important;
+            border-color: rgba(255, 255, 255, 0.38) !important;
+            color: #ffffff !important;
+        }
+        html body header.floating nav > ul > li.active > a,
+        html body header.white nav > ul > li.active > a {
             color: #fbbf24 !important;
         }
-        body header.floating .theme-toggle-btn,
-        body header.white .theme-toggle-btn {
+        html body header.floating .theme-toggle-btn,
+        html body header.white .theme-toggle-btn {
             border-color: rgba(255, 255, 255, 0.3) !important;
             background: rgba(255, 255, 255, 0.12) !important;
             color: #ffffff !important;
         }
-        body header.floating .theme-toggle-btn:hover,
-        body header.white .theme-toggle-btn:hover {
+        html body header.floating .theme-toggle-btn:hover,
+        html body header.white .theme-toggle-btn:hover {
             background: rgba(255, 255, 255, 0.22) !important;
             color: #ffffff !important;
             border-color: rgba(255, 255, 255, 0.5) !important;
         }
-        body header.floating .toggle-menu span,
-        body header.white .toggle-menu span {
+        html body header.floating .right-header__lang::before,
+        html body header.white .right-header__lang::before {
+            background-color: rgba(255, 255, 255, 0.3) !important;
+        }
+        html body header.floating .toggle-menu span,
+        html body header.white .toggle-menu span {
             background-color: #ffffff !important;
         }
 
@@ -99,7 +111,72 @@
 
         footer {
             position: relative;
-            z-index: 45;
+            z-index: 20 !important;
+        }
+
+        [data-theme="dark"] section.middle {
+            background-color: #0b1120 !important;
+        }
+        [data-theme="dark"] .pub-content {
+            color: #e2e8f0 !important;
+        }
+        [data-theme="dark"] .pub-section-title {
+            color: #f8fafc !important;
+        }
+        [data-theme="dark"] .pub-search,
+        [data-theme="dark"] .pub-filter-select {
+            background: #0f172a !important;
+            border-color: #334155 !important;
+            color: #f1f5f9 !important;
+        }
+        [data-theme="dark"] .pub-card {
+            background: #111c2d !important;
+            border-color: #243247 !important;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35) !important;
+        }
+        [data-theme="dark"] .pub-card:hover {
+            border-color: #38bdf8 !important;
+        }
+        [data-theme="dark"] .pub-card-title a {
+            color: #f8fafc !important;
+        }
+        [data-theme="dark"] .pub-card-title a:hover {
+            color: #60a5fa !important;
+        }
+        [data-theme="dark"] .pub-abstrak-text {
+            color: #cbd5e1 !important;
+        }
+        [data-theme="dark"] .pub-abstrak-toggle {
+            color: #60a5fa !important;
+        }
+        [data-theme="dark"] .pub-tag-unit,
+        [data-theme="dark"] .pub-tag-jenis {
+            background: #1e293b !important;
+            border-color: #334155 !important;
+            color: #93c5fd !important;
+        }
+        [data-theme="dark"] .pub-masukan-count {
+            background: rgba(37, 99, 235, 0.18) !important;
+            border-color: rgba(96, 165, 250, 0.35) !important;
+            color: #93c5fd !important;
+        }
+        [data-theme="dark"] .pub-card-aside {
+            border-color: #243247 !important;
+        }
+        [data-theme="dark"] .pub-card-periode-box {
+            background: #0f172a !important;
+            border-color: #243247 !important;
+        }
+        [data-theme="dark"] .pub-periode-label {
+            color: #94a3b8 !important;
+        }
+        [data-theme="dark"] .pub-card-periode {
+            color: #e2e8f0 !important;
+        }
+        [data-theme="dark"] .pub-empty {
+            background: #111c2d !important;
+            border-color: #243247 !important;
+            color: #94a3b8 !important;
         }
 
         @media (max-width: 768px) {
