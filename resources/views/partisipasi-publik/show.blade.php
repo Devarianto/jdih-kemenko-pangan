@@ -8,17 +8,10 @@
         .banner-middle.pub-hero-banner {
             height: auto !important;
             min-height: 0 !important;
-            padding: 96px 0 42px !important;
+            padding: 96px 0 32px !important;
         }
         .banner-middle.pub-hero-banner .wave {
-            bottom: -1px !important;
-            height: 36px !important;
-            overflow: hidden;
-            pointer-events: none;
-        }
-        .banner-middle.pub-hero-banner .wave svg {
-            height: 36px !important;
-            display: block;
+            display: none !important;
         }
         .banner-middle.pub-hero-banner .pub-hero-text {
             max-width: 880px;
@@ -34,14 +27,14 @@
             line-height: 1.6 !important;
         }
         section.middle {
-            padding: 20px 0 56px !important;
+            padding: 28px 0 56px !important;
         }
         section.middle .pub-content {
-            padding-top: 8px !important;
+            padding-top: 4px !important;
         }
         @media (max-width: 768px) {
             .banner-middle.pub-hero-banner {
-                padding: 84px 0 36px !important;
+                padding: 82px 0 26px !important;
             }
             .banner-middle.pub-hero-banner h2 {
                 font-size: 19px !important;

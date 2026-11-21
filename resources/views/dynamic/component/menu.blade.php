@@ -824,6 +824,31 @@
     padding: 8px 14px !important;
   }
 
+  /* Kontras Menu Aktif pada Header Putih (.floating / .white) */
+  header.floating nav > ul > li > a.active,
+  header.white nav > ul > li > a.active,
+  header.floating nav > ul > li.active > a,
+  header.white nav > ul > li.active > a {
+    color: #003580 !important;
+    font-weight: 700 !important;
+  }
+  [data-theme="dark"] header.floating nav > ul > li > a.active,
+  [data-theme="dark"] header.white nav > ul > li > a.active,
+  [data-theme="dark"] header.floating nav > ul > li.active > a,
+  [data-theme="dark"] header.white nav > ul > li.active > a {
+    color: #fbbf24 !important;
+  }
+
+  /* Penyesuaian Warna Tombol Aksesibilitas agar Senada dengan Tombol Cari */
+  #a11y-kemenkum-trigger {
+    background: linear-gradient(94deg, #1840aa 3.44%, #091d77 100.03%) !important;
+    box-shadow: 0 4px 16px rgba(24, 64, 170, 0.42) !important;
+  }
+  #a11y-kemenkum-trigger:hover {
+    background: linear-gradient(94deg, #1e4ed8 0%, #0d268f 100%) !important;
+    box-shadow: 0 6px 22px rgba(24, 64, 170, 0.56) !important;
+  }
+
   /* ==========================================================================
      THEME TOGGLE BUTTON STYLES
      ========================================================================== */

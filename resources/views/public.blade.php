@@ -358,11 +358,6 @@
                 <p>@yield('hero-desc', 'Sampaikan masukan, tanggapan, dan aspirasi Anda terhadap rancangan peraturan perundang-undangan Kementerian Koordinator Bidang Pangan.')</p>
             </div>
         </div>
-        <div class="wave">
-            <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="80" viewBox="0 180 2500 200" fill="#F8F8F8" preserveAspectRatio="none">
-                <path class="st1" d="M 0 250 C 1200 320 1200 100 3000 250 L 3000 550 L 0 550 L 0 250"></path>
-            </svg>
-        </div>
     </section>
 
     <!-- Main Content -->

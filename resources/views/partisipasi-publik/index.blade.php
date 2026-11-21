@@ -80,20 +80,12 @@
             z-index: 40;
             height: auto !important;
             min-height: 0 !important;
-            padding: 96px 0 36px !important;
-            box-shadow: 0 8px 24px rgba(0, 32, 96, 0.12);
+            padding: 94px 0 28px !important;
+            box-shadow: 0 8px 24px rgba(0, 32, 96, 0.14);
         }
 
         .banner-middle.pub-hero-banner .wave {
-            bottom: -1px !important;
-            height: 32px !important;
-            overflow: hidden;
-            pointer-events: none;
-        }
-
-        .banner-middle.pub-hero-banner .wave svg {
-            height: 32px !important;
-            display: block;
+            display: none !important;
         }
 
         section.middle {
@@ -105,7 +97,7 @@
         }
 
         section.middle .pub-content {
-            padding-top: 8px !important;
+            padding-top: 12px !important;
             padding-bottom: 24px !important;
         }
 
@@ -677,7 +669,7 @@
             var hero = document.querySelector('.banner-middle.pub-hero-banner');
             var middle = document.querySelector('section.middle');
             if (hero && middle) {
-                middle.style.setProperty('padding-top', (hero.offsetHeight + 14) + 'px', 'important');
+                middle.style.setProperty('padding-top', (hero.offsetHeight + 24) + 'px', 'important');
             }
         }
 
