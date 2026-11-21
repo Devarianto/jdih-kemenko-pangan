@@ -331,6 +331,7 @@ Route::middleware(['auth', 'role:admin_operator,super_admin'])->group(function (
 
 // Super Admin User Management for e-Regulasi
 Route::middleware(['auth', 'role:super_admin'])->prefix('admin')->group(function () {
+    Route::post('/partisipasi-publik/{id}/masukan-count', [\App\Http\Controllers\ERegulasi\AdminPartisipasiController::class, 'adjustMasukan'])->name('admin.partisipasi.adjust-masukan');
     Route::get('/users', [\App\Http\Controllers\ERegulasi\UserManagementController::class, 'index'])->name('users.index');
     Route::get('/users/create', [\App\Http\Controllers\ERegulasi\UserManagementController::class, 'create'])->name('users.create');
     Route::post('/users', [\App\Http\Controllers\ERegulasi\UserManagementController::class, 'store'])->name('users.store');

@@ -61,13 +61,13 @@
                 </div>
               </div>
 
-              <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-top: 10px;">
-                <a href="{{ url($document->permalink_document) }}" class="button button-outline" style="padding: 6px 14px; font-size: 13px;">
+              <div style="display: flex; gap: 8px; flex-wrap: wrap; align-items: center; margin-top: 10px;">
+                <a href="{{ url($document->permalink_document) }}" class="button button-outline" style="display: inline-flex; align-items: center; justify-content: center; height: auto; min-height: 36px; line-height: 1.25; padding: 8px 18px; font-size: 13px;">
                   {{ lang::translate('document.read-more') }}
                 </a>
 
                 @if($document->regulasi && $document->regulasi->partisipasiPublik)
-                  <a href="{{ route('partisipasi-publik.show', $document->regulasi->partisipasiPublik->id) }}" class="button button-gradient" style="padding: 6px 14px; font-size: 13px; background: linear-gradient(135deg, #0d47a1 0%, #1976d2 100%); color: #fff;">
+                  <a href="{{ route('partisipasi-publik.show', $document->regulasi->partisipasiPublik->id) }}" class="button button-gradient" style="display: inline-flex; align-items: center; justify-content: center; gap: 6px; height: auto; min-height: 36px; line-height: 1.25; padding: 8px 18px; font-size: 13px; background: linear-gradient(135deg, #0d47a1 0%, #1976d2 100%); color: #fff;">
                     💬 Sampaikan Masukan Publik
                   </a>
                 @endif
@@ -93,7 +93,7 @@
                 </div>
                 @if (!is_null($document->pdf))
                 <div class="bottom__right">
-                  <a href="{{ route('document.download', ['type' => 'pdf', 'id' => $document->id]) }}?token={{ Str::random(15) }}" class="button button-outline button-icon" target="__BLANK" style="padding: 4px 10px; font-size: 12px;">
+                  <a href="{{ route('document.download', ['type' => 'pdf', 'id' => $document->id]) }}?token={{ Str::random(15) }}" class="button button-outline button-icon" target="__BLANK" style="display: inline-flex; align-items: center; justify-content: center; gap: 6px; height: auto; min-height: 32px; line-height: 1.25; padding: 6px 12px; font-size: 12px;">
                     {{ lang::translate('document.download.pdf') }}
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
                       <path fill-rule="evenodd" clip-rule="evenodd" d="M14.6663 10.6663V13.333C14.6663 14.0694 14.0694 14.6663 13.333 14.6663H2.66634C1.92996 14.6663 1.33301 14.0694 1.33301 13.333V10.6663H2.66634V13.333H13.333V10.6663H14.6663ZM8.66634 8.3902L10.8616 6.19494L11.8044 7.13775L7.99967 10.9425L4.19494 7.13775L5.13775 6.19494L7.33301 8.3902V1.33301H8.66634V8.3902Z" fill="#2063D2"/>

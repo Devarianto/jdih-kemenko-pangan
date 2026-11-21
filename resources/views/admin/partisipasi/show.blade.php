@@ -133,6 +133,58 @@
             @endif
         </div>
 
+        {{-- KHUSUS SUPER ADMIN: SESUAIKAN JUMLAH MASUKAN YANG TAMPIL DI HALAMAN PUBLIK --}}
+        @if(auth()->user()->role === 'super_admin')
+            @php
+                $realVisibleMasukan = $allTanggapan->where('is_hidden', false)->count();
+                $masukanTambahan = (int) ($regulasi->partisipasiPublik->masukan_tambahan ?? 0);
+                $displayedMasukan = $regulasi->partisipasiPublik
+                    ? $regulasi->partisipasiPublik->displayMasukanCount($realVisibleMasukan)
+                    : $realVisibleMasukan;
+            @endphp
+            <div class="form-card" style="border-left: 4px solid #0d47a1;">
+                <div class="form-section-title" style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px;">
+                    <span>💬 Penyesuaian Jumlah Masukan Halaman Publik <span style="font-size: 11px; font-weight: 700; color: #0d47a1; background: #e8f0fe; padding: 2px 8px; border-radius: 999px; margin-left: 6px;">Khusus Super Admin</span></span>
+                </div>
+                <p style="font-size: 13px; color: #475569; margin: 6px 0 14px; line-height: 1.5;">
+                    Atur jumlah masukan yang ditampilkan pada badge <strong>"Masukan Publik"</strong> di halaman publik Partisipasi Publik (misal untuk menambahkan masukan offline/surat/rapat).
+                    Saat ini tercatat <strong>{{ $realVisibleMasukan }}</strong> masukan online aktif{{ $masukanTambahan !== 0 ? ' (penyesuaian: ' . ($masukanTambahan > 0 ? '+' . $masukanTambahan : $masukanTambahan) . ')' : '' }}.
+                </p>
+
+                <form action="{{ route('admin.partisipasi.adjust-masukan', $regulasi->id) }}" method="POST"
+                    style="display: flex; align-items: flex-end; gap: 12px; flex-wrap: wrap;">
+                    @csrf
+                    <div class="form-group" style="margin-bottom: 0; min-width: 210px;">
+                        <label class="form-label">Jumlah Tampil di Publik *</label>
+                        <input type="number" name="target_masukan" id="inputTargetMasukan" min="0" max="1000000"
+                            class="form-control" value="{{ old('target_masukan', $displayedMasukan) }}" required
+                            style="font-weight: 700; color: #0f172a;">
+                    </div>
+                    <div style="display: flex; gap: 6px; flex-wrap: wrap; align-items: center;">
+                        <button type="button" class="btn btn-outline" style="font-size: 12px; padding: 8px 11px;"
+                            onclick="var el=document.getElementById('inputTargetMasukan'); el.value=Math.max(0, (parseInt(el.value||0,10)+1));">+1</button>
+                        <button type="button" class="btn btn-outline" style="font-size: 12px; padding: 8px 11px;"
+                            onclick="var el=document.getElementById('inputTargetMasukan'); el.value=Math.max(0, (parseInt(el.value||0,10)+5));">+5</button>
+                        <button type="button" class="btn btn-outline" style="font-size: 12px; padding: 8px 11px;"
+                            onclick="var el=document.getElementById('inputTargetMasukan'); el.value=Math.max(0, (parseInt(el.value||0,10)+10));">+10</button>
+                        <button type="submit" class="btn btn-primary" style="font-size: 13px; padding: 9px 18px;">
+                            Simpan Jumlah Tampil
+                        </button>
+                    </div>
+                </form>
+
+                @if($masukanTambahan !== 0)
+                    <form action="{{ route('admin.partisipasi.adjust-masukan', $regulasi->id) }}" method="POST" style="margin-top: 10px;">
+                        @csrf
+                        <input type="hidden" name="reset" value="1">
+                        <button type="submit" class="btn btn-outline" style="font-size: 12px; padding: 6px 12px; color: #b91c1c; border-color: #fecaca; background: #fef2f2;">
+                            ↺ Reset ke Jumlah Asli ({{ $realVisibleMasukan }})
+                        </button>
+                    </form>
+                @endif
+            </div>
+        @endif
+
         {{-- DAFTAR TANGGAPAN & MODERASI --}}
         <div class="card">
             <div class="tanggapan-toolbar">

@@ -132,7 +132,8 @@
                 $isActivePeriod = $item->is_active && $sisaHari >= 0;
                 $isUrgent = $isActivePeriod && $sisaHari <= 7;
                 $isBerakhir = !$isActivePeriod;
-                $jumlahMasukan = $item->regulasi->tanggapan->where('is_hidden', false)->count();
+                $realMasukan = $item->regulasi->tanggapan->where('is_hidden', false)->count();
+                $jumlahMasukan = $item->displayMasukanCount($realMasukan);
             @endphp
             <div class="pub-card {{ $isUrgent ? 'pub-card-urgent' : '' }} {{ $isBerakhir ? 'pub-card-berakhir' : '' }}"
                 data-search="{{ strtolower($item->regulasi->judul . ' ' . $item->regulasi->jenis . ' ' . $item->regulasi->unit_kerja) }}">

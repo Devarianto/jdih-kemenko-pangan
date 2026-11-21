@@ -105,7 +105,19 @@
                                 @endif
                             </td>
                             <td>
+                                @php
+                                    $realVisibleRow = $reg->tanggapan->where('is_hidden', false)->count();
+                                    $tampilRow = $reg->partisipasiPublik
+                                        ? $reg->partisipasiPublik->displayMasukanCount($realVisibleRow)
+                                        : $realVisibleRow;
+                                    $adjRow = (int) ($reg->partisipasiPublik->masukan_tambahan ?? 0);
+                                @endphp
                                 <strong>{{ $reg->tanggapan->count() }}</strong> masukan
+                                @if(auth()->user()->role === 'super_admin' && $adjRow !== 0)
+                                    <div style="font-size: 11px; color: #0d47a1; font-weight: 600; margin-top: 2px;">
+                                        Tampil di publik: {{ $tampilRow }}
+                                    </div>
+                                @endif
                             </td>
                             <td>
                                 @if($canAccess)
