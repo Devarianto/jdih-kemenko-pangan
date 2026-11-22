@@ -199,23 +199,28 @@
                 padding: 18px !important;
                 gap: 14px !important;
             }
+            html body header,
             html body header.floating,
             html body header.white {
                 background: #ffffff !important;
                 box-shadow: 0 4px 16px rgba(15, 23, 42, 0.08) !important;
             }
-            html body header.floating:not(.show-burger) .logo img.white,
-            html body header.white:not(.show-burger) .logo img.white {
+            html body header .logo img.white,
+            html body header.floating .logo img.white,
+            html body header.white .logo img.white {
                 display: none !important;
             }
-            html body header.floating:not(.show-burger) .logo img.black,
-            html body header.white:not(.show-burger) .logo img.black {
+            html body header .logo img.black,
+            html body header.floating .logo img.black,
+            html body header.white .logo img.black {
                 display: block !important;
             }
+            html body header .toggle-menu span,
             html body header.floating .toggle-menu span,
             html body header.white .toggle-menu span {
-                background-color: #0f172a !important;
+                background-color: #1440a4 !important;
             }
+            html body header .theme-toggle-btn,
             html body header.floating .theme-toggle-btn,
             html body header.white .theme-toggle-btn {
                 border-color: #cbd5e1 !important;
