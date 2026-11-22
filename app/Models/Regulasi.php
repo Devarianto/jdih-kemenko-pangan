@@ -117,12 +117,70 @@ class Regulasi extends Model
         return $doc;
     }
 
+    /**
+     * Kumpulkan semua path file fisik (disk 'public') milik regulasi ini dan seluruh prosesnya.
+     */
+    public function collectPublicStorageFiles(): array
+    {
+        $paths = [];
+        if (!empty($this->file_permohonan)) {
+            $paths[] = $this->file_permohonan;
+        }
+        if (!empty($this->file_draft)) {
+            $paths[] = $this->file_draft;
+        }
+
+        foreach ($this->proses()->get(['file_dokumen']) as $proses) {
+            foreach ((array) $proses->file_dokumen as $file) {
+                if (!empty($file) && is_string($file)) {
+                    $paths[] = $file;
+                }
+            }
+        }
+
+        return array_values(array_unique($paths));
+    }
+
+    /**
+     * Hapus entri Rancangan PUU di JDIH publik (documents, documents_lang, permalinks, relasi/metadata)
+     * yang tersinkron dengan regulasi ini.
+     */
+    public function deleteSyncedJdihDocuments(): void
+    {
+        $docs = Document::where('regulasi_id', $this->id)->get();
+        foreach ($docs as $doc) {
+            \DB::table('permalinks')
+                ->where('module', 'puu-rancangan')
+                ->where('uniqid', (string) $doc->id)
+                ->delete();
+
+            \DB::table('documents_lang')
+                ->where('base_id', $doc->id)
+                ->delete();
+
+            \DB::table('document_metadata_values')
+                ->where('document_id', $doc->id)
+                ->delete();
+
+            \DB::table('document_relations')
+                ->where('source_document_id', $doc->id)
+                ->orWhere('related_document_id', $doc->id)
+                ->delete();
+
+            $doc->delete();
+        }
+    }
+
     protected static function booted()
     {
         static::saved(function ($regulasi) {
             try {
                 $regulasi->syncToJdihDocument();
             } catch (\Throwable $e) {}
+        });
+
+        static::deleting(function ($regulasi) {
+            $regulasi->deleteSyncedJdihDocuments();
         });
     }
 

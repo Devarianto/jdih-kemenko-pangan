@@ -8,6 +8,7 @@ use App\Models\Regulasi;
 use App\Models\RegulasiProses;
 use App\Models\RegulasiTahapan;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
 class RegulasiController extends Controller
@@ -300,13 +301,17 @@ class RegulasiController extends Controller
     {
         $this->authorizeUnitKerja($regulasi);
 
-        if ($regulasi->file_permohonan)
-            Storage::disk('public')->delete($regulasi->file_permohonan);
-        if ($regulasi->file_draft)
-            Storage::disk('public')->delete($regulasi->file_draft);
+        $publicFiles = $regulasi->collectPublicStorageFiles();
 
-        $regulasi->delete();
-        return redirect()->route('regulasi.index')->with('success', 'Regulasi berhasil dihapus.');
+        DB::transaction(function () use ($regulasi) {
+            $regulasi->delete();
+        });
+
+        foreach ($publicFiles as $path) {
+            Storage::disk('public')->delete($path);
+        }
+
+        return redirect()->route('regulasi.index')->with('success', 'Regulasi dan seluruh berkas terkait berhasil dihapus.');
     }
 
     /**
