@@ -182,7 +182,6 @@ Route::group(['middleware' => ['web','front', 'visitor-count', 'csp']],function(
                 ->firstOrFail();
             $document->view_count += 1;
             $document->save();
-            DocumentController::applyDocumentShareMeta($document);
             $menu = \Cactuar\Admin\Models\Menu::fe()->whereIsActive(1)->where('type', 'putusan-hukum')->first();
             return view('dynamic.pages.document-putusan-detail', compact('document', 'menu'));
         })->name('putusan.detail');

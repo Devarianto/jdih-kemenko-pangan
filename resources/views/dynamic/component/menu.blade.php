@@ -1436,7 +1436,7 @@
 
   /* Hero Sections in Dark Mode: No Hero Image, Rich Dark Palette */
   [data-theme="dark"] .banner-homepage {
-    min-height: clamp(500px, 68vh, 660px) !important;
+    min-height: clamp(430px, 54vh, 480px) !important;
     background: radial-gradient(circle at 78% 22%, rgba(16, 185, 129, 0.16), transparent 48%),
                 radial-gradient(circle at 18% 80%, rgba(37, 99, 235, 0.18), transparent 52%),
                 linear-gradient(135deg, #040914 0%, #0b192c 52%, #09261d 100%) !important;
@@ -1455,7 +1455,7 @@
     visibility: hidden !important;
   }
   [data-theme="dark"] .banner-homepage > figure {
-    min-height: clamp(500px, 68vh, 660px) !important;
+    min-height: clamp(430px, 54vh, 480px) !important;
   }
   [data-theme="dark"] .tema {
     background: radial-gradient(circle at 20% 30%, rgba(16, 185, 129, 0.14), transparent 50%),

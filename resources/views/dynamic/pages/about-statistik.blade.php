@@ -2,7 +2,33 @@
 
 @section('content')
   @include('dynamic.component.banner')
-  
+
+  <style>
+    .banner-middle {
+      height: clamp(270px, 32vh, 320px) !important;
+    }
+    .banner-middle figcaption {
+      top: 56% !important;
+    }
+    .banner-middle .wave {
+      bottom: -1px !important;
+      line-height: 0 !important;
+    }
+    .banner-middle .wave svg {
+      height: 48px !important;
+      display: block !important;
+    }
+    section.middle {
+      padding-top: 16px !important;
+    }
+    section.middle .middle__title {
+      margin-bottom: 16px !important;
+    }
+    section.middle .stat-summary-cards {
+      margin: 16px 0 28px !important;
+    }
+  </style>
+
   <section class="middle">
     <div class="wrapper-content">
       @foreach(widget($menu->id, 'menu', 'content') as $content)

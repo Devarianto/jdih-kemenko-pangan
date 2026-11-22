@@ -5,12 +5,8 @@ namespace App\Http\Controllers\Front;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Cactuar\Admin\Helpers\helper;
-use Cactuar\Admin\Helpers\media;
-use Cactuar\Admin\Helpers\og;
-use Cactuar\Admin\Models\Conf;
 
 use Cactuar\Admin\Models\Menu;
-use Cactuar\Admin\Models\MetaData;
 use Cactuar\Admin\Models\Permalink;
 
 use App\Models\Document;
@@ -19,46 +15,6 @@ use App\Models\RuleTheme;
 
 class DocumentController extends Controller
 {
-    /**
-     * Terapkan meta title, deskripsi, dan gambar pratinjau dokumen saat tautan dibagikan (WhatsApp/OG).
-     */
-    public static function applyDocumentShareMeta(Document $document): void
-    {
-        $siteDefaultTitle = '';
-        try {
-            $siteDefaultTitle = (string) Conf::initial('site-setting')->translated('meta-title');
-        } catch (\Throwable $e) {
-        }
-
-        $docTitle = trim((string) $document->translated('title'));
-        $currentOgTitle = html_entity_decode((string) og::get('title'), ENT_QUOTES, 'UTF-8');
-        if ($currentOgTitle === '' || ($siteDefaultTitle !== '' && $currentOgTitle === $siteDefaultTitle)) {
-            if ($docTitle !== '') {
-                og::set('title', $docTitle, true);
-            }
-        }
-
-        $docIntro = trim(strip_tags((string) ($document->translated('intro') ?: $docTitle)));
-        if ($docIntro !== '' && og::get('description') === '') {
-            og::set('description', \Illuminate\Support\Str::limit($docIntro, 160), true);
-        }
-
-        $currentImage = (string) og::get('image');
-        $isUsableRaster = fn (?string $u): bool => !empty($u) && !str_ends_with(strtolower(strtok($u, '?')), '.svg');
-
-        if (!$isUsableRaster($currentImage) && !empty($document->thumbnail)) {
-            $thumbUrl = media::initial($document->thumbnail)->url ?? '';
-            if ($isUsableRaster($thumbUrl)) {
-                og::set('image', $thumbUrl, true);
-                return;
-            }
-        }
-
-        if (!$isUsableRaster((string) og::get('image'))) {
-            og::set('image', url('images/herobanner-full-small.jpg'), true);
-        }
-    }
-
     public function getPeraturanHukumDetail()
     {
         $id = Permalink::active()->uniqid;
@@ -66,8 +22,7 @@ class DocumentController extends Controller
         $document->timestamps = false;
         $document->view_count += 1;
         $document->save();
-
-        self::applyDocumentShareMeta($document);
+        
         $menu = Menu::fe()->whereIsActive(1)->where('type', 'peraturan-hukum')->first();
 
         return view('dynamic.pages.document-peraturan-detail', compact('document', 'menu'));
@@ -80,8 +35,7 @@ class DocumentController extends Controller
         $document->timestamps = false;
         $document->view_count += 1;
         $document->save();
-
-        self::applyDocumentShareMeta($document);
+        
         $menu = Menu::fe()->whereIsActive(1)->where('type', 'jurnal-hukum')->first();
 
         return view('dynamic.pages.document-jurnal-detail', compact('document', 'menu'));
@@ -94,8 +48,7 @@ class DocumentController extends Controller
         $document->timestamps = false;
         $document->view_count += 1;
         $document->save();
-
-        self::applyDocumentShareMeta($document);
+        
         $menu = Menu::fe()->whereIsActive(1)->where('type', 'kliping-hukum')->first();
 
         return view('dynamic.pages.document-kliping-detail', compact('document', 'menu'));
@@ -108,8 +61,7 @@ class DocumentController extends Controller
         $document->timestamps = false;
         $document->view_count += 1;
         $document->save();
-
-        self::applyDocumentShareMeta($document);
+        
         $menu = Menu::fe()->whereIsActive(1)->where('type', 'majalah-hukum')->first();
 
         return view('dynamic.pages.document-article-detail', compact('document', 'menu'));
@@ -122,8 +74,7 @@ class DocumentController extends Controller
         $document->timestamps = false;
         $document->view_count += 1;
         $document->save();
-
-        self::applyDocumentShareMeta($document);
+        
         $menu = Menu::fe()->whereIsActive(1)->where('type', 'putusan-hukum')->first();
 
         return view('dynamic.pages.document-putusan-detail', compact('document', 'menu'));
@@ -136,8 +87,7 @@ class DocumentController extends Controller
         $document->timestamps = false;
         $document->view_count += 1;
         $document->save();
-
-        self::applyDocumentShareMeta($document);
+        
         $menu = Menu::fe()->whereIsActive(1)->where('type', 'monografi-hukum')->first();
 
         return view('dynamic.pages.document-monografi-detail', compact('document', 'menu'));
@@ -150,8 +100,7 @@ class DocumentController extends Controller
         $document->timestamps = false;
         $document->view_count += 1;
         $document->save();
-
-        self::applyDocumentShareMeta($document);
+        
         $menu = Menu::fe()->whereIsActive(1)->where('type', 'naskah-hukum')->first();
 
         return view('dynamic.pages.document-naskah-detail', compact('document', 'menu'));
@@ -164,8 +113,6 @@ class DocumentController extends Controller
         $document->timestamps = false;
         $document->view_count += 1;
         $document->save();
-
-        self::applyDocumentShareMeta($document);
 
         $menu = null;
         if ($menuType) {

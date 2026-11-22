@@ -851,6 +851,48 @@
           padding: 2px 7px;
         }
       }
+      @media (min-width: 992px) {
+        .banner-homepage {
+          height: clamp(430px, 54vh, 480px) !important;
+          min-height: 430px !important;
+          max-height: 480px !important;
+          overflow: hidden !important;
+        }
+        .banner-homepage > figure {
+          height: 100% !important;
+          min-height: 0 !important;
+        }
+        .banner-homepage > figure img {
+          height: 100% !important;
+          object-fit: cover !important;
+          object-position: center !important;
+        }
+        .banner-homepage .wave {
+          bottom: -1px !important;
+          line-height: 0 !important;
+        }
+        .banner-homepage .wave svg {
+          height: 54px !important;
+          display: block !important;
+        }
+        .banner-homepage__caption {
+          padding-top: 52px !important;
+          padding-bottom: 36px !important;
+        }
+        .banner-homepage__caption h1 {
+          margin-bottom: 18px !important;
+        }
+        .banner-homepage .banner-stats {
+          margin-top: 16px !important;
+        }
+        section.document {
+          padding-top: 10px !important;
+          padding-bottom: 28px !important;
+        }
+        section.document .document__title {
+          margin-bottom: 16px !important;
+        }
+      }
     </style>
   @endpush
   @push('footer')
