@@ -177,7 +177,7 @@
               {{ lang::active() == 'en' ? 'No translated regulations found.' : 'Belum ada peraturan terjemahan yang ditemukan.' }}
             </h4>
             <p style="font-size: 13px; color: #64748b; max-width: 480px; margin: 0 auto;">
-              {{ lang::active() == 'en' ? 'Regulations with English translation will appear here once translated versions are published.' : 'Peraturan hukum dengan terjemahan Bahasa Inggris akan ditampilkan di sini setelah versi terjemahan diunggah melalui Admin Panel.' }}
+              {{ lang::active() == 'en' ? 'Regulations with English translation will appear here once translated versions are published.' : 'Peraturan hukum dengan terjemahan Bahasa Inggris akan ditampilkan di sini.' }}
             </p>
           </div>
         @endforelse
