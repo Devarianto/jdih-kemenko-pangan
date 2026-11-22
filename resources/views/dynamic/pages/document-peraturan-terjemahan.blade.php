@@ -10,9 +10,9 @@
   @else
     <section class="banner-middle">
       <figure>
-        <img src="{{ asset('assets/thumbs/images/banner/cover_1440_400_banner-peraturan-new.jpg.webp') }}" 
+        <img src="{{ asset('images/content/banner-peraturan.webp') }}" 
              alt="{{ lang::active() == 'en' ? 'Translated Regulations' : 'Peraturan Terjemahan' }}"
-             onerror="this.src='/images/material/banner-default.jpg';">
+             onerror="this.onerror=null; this.src='{{ asset('images/content/banner-hukum.webp') }}';">
       </figure>
       <figcaption>
         <small>{{ lang::active() == 'en' ? 'LEGAL DOCUMENTS' : 'DOKUMEN HUKUM' }}</small>
@@ -76,7 +76,7 @@
             <figure>
               <img src="{{ media::initial($document->thumbnail)->url }}" 
                    alt="{{ $document->translation_title ?: $document->translated('title') }}"
-                   onerror="this.src='/images/material/document-placeholder.png';">
+                   onerror="this.onerror=null; this.src='{{ asset('images/material/pdf-icon.svg') }}';">
             </figure>
             <figcaption>
               <div class="wrap-flex">

@@ -1,7 +1,7 @@
 @extends('dynamic.layouts.layout')
 
 @php
-  $hasEnTranslation = !empty($document->has_translation) || !empty($document->translation_pdf) || !empty($document->translation_title);
+  $hasEnTranslation = !empty($document->has_translation);
   $idTitle = $document->translated('title');
   $enTitle = $document->translation_title ?: $document->translated('title');
   $idIntro = $document->translated('intro');
@@ -195,34 +195,37 @@
     <link rel="stylesheet" type="text/css" href="{{ Vite::asset('resources/assets/sass/pages/document.scss')}}" preload>
   @endpush
   @push('footer')
+    @php
+      $docLangPayload = [
+        'id' => [
+          'title' => $idTitle,
+          'intro' => $idIntro,
+          'no_peraturan' => $idNoPeraturan,
+          'bahasa' => $document->translated('bahasa') ?: 'Indonesia',
+          'pdf_stream' => route('document.stream', ['type' => 'pdf', 'id' => $document->id]) . '#toolbar=1&navpanes=0&scrollbar=1',
+          'pdf_download' => route('document.download', ['type' => 'pdf', 'id' => $document->id]) . '?token=' . Str::random(15),
+          'pdf_name' => $document->translated('pdf_name') ?: ($document->no_peraturan . '.pdf'),
+          'pdf_label' => lang::translate('document.file.button.download-pdf'),
+          'read_label' => lang::translate('document.read-rule'),
+          'info_version' => lang::translate('document.file.info-peraturan'),
+        ],
+        'en' => [
+          'title' => $enTitle,
+          'intro' => $enIntro,
+          'no_peraturan' => $enNoPeraturan,
+          'bahasa' => 'English (Terjemahan Resmi)',
+          'pdf_stream' => ($hasTranslationPdf ? route('document.stream', ['type' => 'translation_pdf', 'id' => $document->id]) : route('document.stream', ['type' => 'pdf', 'id' => $document->id])) . '#toolbar=1&navpanes=0&scrollbar=1',
+          'pdf_download' => ($hasTranslationPdf ? route('document.download', ['type' => 'translation_pdf', 'id' => $document->id]) : route('document.download', ['type' => 'pdf', 'id' => $document->id])) . '?token=' . Str::random(15),
+          'pdf_name' => $hasTranslationPdf ? basename($document->translation_pdf) : ($document->translated('pdf_name') ?: ($document->no_peraturan . '.pdf')),
+          'pdf_label' => $hasTranslationPdf ? 'Download English Version PDF' : 'Download Document PDF (Indonesian)',
+          'read_label' => 'Read English Regulation',
+          'info_version' => $hasTranslationPdf ? 'Official English Translation Document' : 'Original Indonesian Document (English Translation PDF not uploaded yet)',
+        ],
+      ];
+    @endphp
     <script type="module" async type="text/javascript" src="{{ Vite::asset('resources/assets/js/document.js') }}"></script>
     <script>
-      const docLangData = {
-        id: {
-          title: @json($idTitle),
-          intro: @json($idIntro),
-          no_peraturan: @json($idNoPeraturan),
-          bahasa: @json($document->translated('bahasa') ?: 'Indonesia'),
-          pdf_stream: "{{ route('document.stream', ['type' => 'pdf', 'id' => $document->id]) }}#toolbar=1&navpanes=0&scrollbar=1",
-          pdf_download: "{{ route('document.download', ['type' => 'pdf', 'id' => $document->id]) }}?token={{ Str::random(15) }}",
-          pdf_name: @json($document->translated('pdf_name') ?: ($document->no_peraturan . '.pdf')),
-          pdf_label: "Unduh Dokumen PDF (Bahasa Indonesia)",
-          read_label: "Baca Peraturan",
-          info_version: "Dokumen Naskah Asli Bahasa Indonesia"
-        },
-        en: {
-          title: @json($enTitle),
-          intro: @json($enIntro),
-          no_peraturan: @json($enNoPeraturan),
-          bahasa: "English (Terjemahan Resmi)",
-          pdf_stream: "{{ $hasTranslationPdf ? route('document.stream', ['type' => 'translation_pdf', 'id' => $document->id]) . '#toolbar=1&navpanes=0&scrollbar=1' : route('document.stream', ['type' => 'pdf', 'id' => $document->id]) . '#toolbar=1&navpanes=0&scrollbar=1' }}",
-          pdf_download: "{{ $hasTranslationPdf ? route('document.download', ['type' => 'translation_pdf', 'id' => $document->id]) . '?token=' . Str::random(15) : route('document.download', ['type' => 'pdf', 'id' => $document->id]) . '?token=' . Str::random(15) }}",
-          pdf_name: @json($hasTranslationPdf ? basename($document->translation_pdf) : ($document->no_peraturan . '_EN.pdf')),
-          pdf_label: "Download English Version PDF",
-          read_label: "Read English Regulation",
-          info_version: "{{ $hasTranslationPdf ? 'Official English Translation Document' : 'Original Indonesian Document (English Translation in process)' }}"
-        }
-      };
+      const docLangData = @json($docLangPayload);
 
       function setDocumentLanguage(lang) {
         if (!docLangData[lang]) return;

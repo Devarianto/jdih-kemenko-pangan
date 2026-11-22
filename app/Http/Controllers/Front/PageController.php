@@ -716,11 +716,7 @@ class PageController extends Controller
                 $query->where('master_document_id', Document::PERATURAN_TERJEMAHAN)
                     ->orWhere(function($sub) {
                         $sub->whereIn('master_document_id', [Document::PERATURAN, Document::PERATURAN_TERJEMAHAN])
-                            ->where(function($t) {
-                                $t->where('has_translation', 1)
-                                  ->orWhereNotNull('translation_title')
-                                  ->orWhereNotNull('translation_pdf');
-                            });
+                            ->where('has_translation', 1);
                     });
             });
 
@@ -749,11 +745,7 @@ class PageController extends Controller
                 $query->where('master_document_id', Document::PERATURAN_TERJEMAHAN)
                     ->orWhere(function($sub) {
                         $sub->whereIn('master_document_id', [Document::PERATURAN, Document::PERATURAN_TERJEMAHAN])
-                            ->where(function($t) {
-                                $t->where('has_translation', 1)
-                                  ->orWhereNotNull('translation_title')
-                                  ->orWhereNotNull('translation_pdf');
-                            });
+                            ->where('has_translation', 1);
                     });
             })
             ->whereNotNull('year')

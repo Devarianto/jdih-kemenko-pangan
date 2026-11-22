@@ -81,12 +81,16 @@ class Document {
                 $post['main']['translation_intro'] = !empty(trim($request['translation_intro'])) ? trim($request['translation_intro']) : null;
             }
 
-            // Translation availability flag
-            $hasTranslationInput = !empty($request['has_translation']) || !empty($post['main']['translation_title']) || !empty($post['main']['translation_pdf']);
-            if ($type == 'edit' && !$hasTranslationInput && !empty($item->translation_pdf) && empty($request['delete_translation_pdf'])) {
-                $hasTranslationInput = true;
+            // Translation availability flag: respect explicit toggle state from the form when sent
+            if (array_key_exists('has_translation', $request)) {
+                $post['main']['has_translation'] = !empty($request['has_translation']) ? 1 : 0;
+            } else {
+                $hasTranslationInput = !empty($post['main']['translation_title']) || !empty($post['main']['translation_pdf']);
+                if ($type == 'edit' && !$hasTranslationInput && !empty($item->translation_pdf) && empty($request['delete_translation_pdf'])) {
+                    $hasTranslationInput = true;
+                }
+                $post['main']['has_translation'] = $hasTranslationInput ? 1 : 0;
             }
-            $post['main']['has_translation'] = $hasTranslationInput ? 1 : 0;
 
             // Handling delete file when editing
             foreach (['pdf', 'abstract', 'attachment', 'translation_pdf', 'translation_attachment'] as $fieldKey) {
@@ -141,15 +145,15 @@ class Document {
             );
         }
 
-        // Sync English translation to documents_lang if available
-        if ($item && ($item->has_translation || !empty($item->translation_title) || !empty($item->translation_pdf))) {
+        // Sync English translation to documents_lang only when translation availability is active
+        if ($item && !empty($item->has_translation)) {
             try {
                 \DB::table('documents_lang')->updateOrInsert(
                     ['base_id' => $item->id, 'lang' => 'en'],
                     [
-                        'title' => $item->translation_title ?: $item->title,
-                        'intro' => $item->translation_intro ?: $item->intro,
-                        'pdf_name' => $item->translation_pdf ?: $item->pdf,
+                        'title' => $item->translation_title ?: $item->translated('title'),
+                        'intro' => $item->translation_intro ?: $item->translated('intro'),
+                        'pdf_name' => $item->translation_pdf ? basename($item->translation_pdf) : ($item->translated('pdf_name') ?: $item->pdf),
                         'lampiran' => $item->translation_attachment ?: $item->attachment
                     ]
                 );
