@@ -137,6 +137,16 @@
             border-color: #334155 !important;
             color: #f8fafc !important;
         }
+        [data-theme="dark"] .pp-berakhir-notice {
+            background: rgba(220, 38, 38, 0.16) !important;
+            border-color: rgba(248, 113, 113, 0.35) !important;
+            color: #fecaca !important;
+        }
+        [data-theme="dark"] .pp-empty-draft {
+            background: #0f172a !important;
+            color: #94a3b8 !important;
+            border: 1px solid #243247 !important;
+        }
 
         .pp-card {
             background: #fff;
@@ -576,13 +586,13 @@
                         title="Pratinjau Dokumen Rancangan Peraturan"></iframe>
                 </div>
             @elseif($hasDraft)
-                <div style="padding: 16px; background: #f8faff; border-radius: 10px; border: 1px solid #e4eaf6;">
+                <div class="pp-empty-draft" style="padding: 16px; background: #f8faff; border-radius: 10px; border: 1px solid #e4eaf6;">
                     <a href="{{ $draftUrl }}" download class="pp-doc-link">
                         ⬇ Unduh Dokumen Rancangan
                     </a>
                 </div>
             @else
-                <div style="padding: 20px; text-align: center; color: #64748b; background: #f8fafc; border-radius: 10px;">
+                <div class="pp-empty-draft" style="padding: 20px; text-align: center; color: #64748b; background: #f8fafc; border-radius: 10px;">
                     Dokumen pratinjau draf sedang dipersiapkan oleh unit pemrakarsa.
                 </div>
             @endif

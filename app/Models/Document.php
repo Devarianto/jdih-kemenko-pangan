@@ -44,15 +44,22 @@ class Document extends Model
     public function getStageLabelAttribute()
     {
         if ($this->regulasi) {
+            if ($this->regulasi->status === 'selesai') {
+                return 'Selesai';
+            }
+            if ($this->regulasi->current_stage === 'uji_publik' && $this->regulasi->pasca_partisipasi_dimulai) {
+                return 'Pasca Partisipasi Publik';
+            }
             $stage = $this->regulasi->current_stage ?: $this->regulasi->status;
             $labels = [
                 'pengajuan' => 'Tahap Pengajuan',
                 'pembahasan' => 'Tahap Pembahasan',
-                'uji_publik' => 'Tahap Uji Publik / Partisipasi',
+                'uji_publik' => 'Partisipasi Publik',
+                'pasca_partisipasi' => 'Pasca Partisipasi Publik',
                 'harmonisasi' => 'Tahap Harmonisasi',
                 'penetapan' => 'Tahap Penetapan',
                 'proses' => 'Dalam Proses Penyusunan',
-                'selesai' => 'Selesai Ditetapkan'
+                'selesai' => 'Selesai',
             ];
             return $labels[$stage] ?? ('Tahap ' . ucfirst(str_replace('_', ' ', $stage)));
         }

@@ -887,29 +887,98 @@ class PageController extends Controller
 
     public function getRancanganPuu($menu)
     {
-        $documents = Document::translate()->whereIsActive(1)->where('master_document_id', Document::RANCANGAN_PUU);
+        try {
+            \App\Models\Regulasi::doesntHave('document')->get()->each->syncToJdihDocument();
+        } catch (\Throwable $e) {}
+
+        $candidates = Document::translate()
+            ->whereIsActive(1)
+            ->where('master_document_id', Document::RANCANGAN_PUU)
+            ->whereNotNull('documents.regulasi_id')
+            ->whereHas('regulasi');
 
         if (request()->query('search')) {
-            $documents = $documents->where('title', 'like', '%'.request()->query('search').'%');
+            $candidates = $candidates->where('title', 'like', '%'.request()->query('search').'%');
         }
 
         if (request()->query('year')) {
-            $documents = $documents->where('year', request()->query('year'));
+            $candidates = $candidates->where('year', request()->query('year'));
         }
 
         if (request()->query('tahapan')) {
-            $documents = $documents->where('tahapan_puu_id', request()->query('tahapan'));
+            $candidates = $candidates->where('tahapan_puu_id', request()->query('tahapan'));
         }
 
-        $documents = $documents->with('regulasi')
-            ->orderByRaw('COALESCE(documents.date, DATE(documents.created_at)) DESC')
-            ->orderBy('documents.created_at', 'desc')
-            ->orderBy('documents.id', 'desc')
-            ->paginate(8);
+        $allCandidates = $candidates->with(['regulasi.partisipasiPublik'])->get();
+
+        // Pastikan tiap judul rancangan hanya tampil 1x dengan tahapan/status update terakhir dari e-Regulasi
+        $pickedByTitle = [];
+        foreach ($allCandidates as $doc) {
+            $reg = $doc->regulasi;
+            if (!$reg) {
+                continue;
+            }
+
+            $rawTitle = $doc->translated('title') ?: $reg->judul ?: '';
+            $normTitle = mb_strtolower(trim(preg_replace('/\s+/', ' ', strip_tags($rawTitle))));
+            if ($normTitle === '') {
+                $normTitle = 'regulasi-' . $reg->id;
+            }
+
+            $stageRank = $reg->stagePriority();
+            $updatedTs = $reg->updated_at ? $reg->updated_at->timestamp : 0;
+            $regId = (int) $reg->id;
+
+            if (!isset($pickedByTitle[$normTitle])) {
+                $pickedByTitle[$normTitle] = $doc;
+            } else {
+                $existingReg = $pickedByTitle[$normTitle]->regulasi;
+                $exStage = $existingReg ? $existingReg->stagePriority() : 0;
+                $exUpdated = ($existingReg && $existingReg->updated_at) ? $existingReg->updated_at->timestamp : 0;
+                $exId = $existingReg ? (int) $existingReg->id : 0;
+
+                $isNewer = ($stageRank > $exStage)
+                    || ($stageRank === $exStage && $updatedTs > $exUpdated)
+                    || ($stageRank === $exStage && $updatedTs === $exUpdated && $regId > $exId);
+
+                if ($isNewer) {
+                    $pickedByTitle[$normTitle] = $doc;
+                }
+            }
+        }
+
+        // Urutkan sesuai Daftar Pengajuan PUU (tanggal usulan terbaru -> status update terakhir -> id terbaru)
+        $uniqueDocs = collect(array_values($pickedByTitle))->sort(function ($a, $b) {
+            $regA = $a->regulasi;
+            $regB = $b->regulasi;
+            $dateA = $regA && $regA->tgl_usulan ? $regA->tgl_usulan->format('Y-m-d') : ($regA && $regA->created_at ? $regA->created_at->format('Y-m-d') : '1970-01-01');
+            $dateB = $regB && $regB->tgl_usulan ? $regB->tgl_usulan->format('Y-m-d') : ($regB && $regB->created_at ? $regB->created_at->format('Y-m-d') : '1970-01-01');
+            if ($dateA !== $dateB) {
+                return strcmp($dateB, $dateA);
+            }
+            $updA = $regA && $regA->updated_at ? $regA->updated_at->timestamp : 0;
+            $updB = $regB && $regB->updated_at ? $regB->updated_at->timestamp : 0;
+            if ($updA !== $updB) {
+                return $updB <=> $updA;
+            }
+            return ($regB->id ?? 0) <=> ($regA->id ?? 0);
+        })->values();
+
+        $perPage = 8;
+        $currentPage = \Illuminate\Pagination\LengthAwarePaginator::resolveCurrentPage();
+        $documents = new \Illuminate\Pagination\LengthAwarePaginator(
+            $uniqueDocs->forPage($currentPage, $perPage)->values(),
+            $uniqueDocs->count(),
+            $perPage,
+            $currentPage,
+            ['path' => request()->url(), 'query' => request()->query()]
+        );
 
         $years = Document::select('year')
             ->whereIsActive(1)
             ->where('master_document_id', Document::RANCANGAN_PUU)
+            ->whereNotNull('documents.regulasi_id')
+            ->whereHas('regulasi')
             ->whereNotNull('year')
             ->distinct()
             ->orderBy('year', 'desc')

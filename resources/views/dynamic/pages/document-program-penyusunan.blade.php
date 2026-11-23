@@ -73,15 +73,15 @@
                   <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-bottom: 6px;">
                     <span class="category" @if (!$document->status_berlaku) style="background-color: #C25A5A;" @endif>{{ $document->rule_type->label ?? $document->front_status_berlaku }}</span>
                     @if($document->year)
-                      <span style="font-size: 12px; font-weight: 600; color: #0d47a1;">Tahun {{ $document->year }}</span>
+                      <span class="progsun-year" style="font-size: 12px; font-weight: 600; color: #0d47a1;">Tahun {{ $document->year }}</span>
                     @endif
                     @if($document->date)
-                      <span style="font-size: 12px; color: #64748b;">{{ date2string($document->date) }}</span>
+                      <span class="progsun-date" style="font-size: 12px; color: #64748b;">{{ date2string($document->date) }}</span>
                     @endif
                   </div>
                   <p>{{ $document->translated('title') }}</p>
                   @if($document->teu || $document->translated('unit_pemrakarsa') || $document->unit_pemrakarsa)
-                    <div style="font-size: 13px; color: #1e3a8a; font-weight: 600; margin: 4px 0 6px;">
+                    <div class="progsun-unit" style="font-size: 13px; color: #1e3a8a; font-weight: 600; margin: 4px 0 6px;">
                       Unit Pemrakarsa: {{ $document->teu ?: ($document->translated('unit_pemrakarsa') ?: $document->unit_pemrakarsa) }}
                     </div>
                   @endif
@@ -130,6 +130,11 @@
   
   @push('head')
     <link rel="stylesheet" type="text/css" href="{{ Vite::asset('resources/assets/sass/pages/document.scss')}}" preload>
+    <style>
+      [data-theme="dark"] .progsun-year { color: #93c5fd !important; }
+      [data-theme="dark"] .progsun-date { color: #94a3b8 !important; }
+      [data-theme="dark"] .progsun-unit { color: #cbd5e1 !important; }
+    </style>
   @endpush
   @push('footer')
     {{-- <script type="module" async type="text/javascript" src="{{ Vite::asset('resources/assets/js/.js') }}"></script> --}}

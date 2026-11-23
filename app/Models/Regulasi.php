@@ -189,6 +189,30 @@ class Regulasi extends Model
         return $this->hasMany(Tanggapan::class);
     }
 
+    public function getEffectiveStageKey(): string
+    {
+        if ($this->status === 'selesai') {
+            return 'selesai';
+        }
+        if ($this->current_stage === 'uji_publik' && $this->pasca_partisipasi_dimulai) {
+            return 'pasca_partisipasi';
+        }
+        return $this->current_stage ?: 'pengajuan';
+    }
+
+    public function stagePriority(): int
+    {
+        return match ($this->getEffectiveStageKey()) {
+            'selesai' => 7,
+            'penetapan' => 6,
+            'harmonisasi' => 5,
+            'pasca_partisipasi' => 4,
+            'uji_publik' => 3,
+            'pembahasan' => 2,
+            default => 1,
+        };
+    }
+
     public function getStageIndex(): int
     {
         return array_search($this->current_stage, self::STAGES) ?: 0;

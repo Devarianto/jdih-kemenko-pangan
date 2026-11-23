@@ -96,22 +96,22 @@
                   </div>
 
                   @if(!empty($document->no_peraturan) || !empty($document->translation_no_peraturan))
-                    <div style="font-size: 13px; font-weight: 700; color: #002060; margin-bottom: 4px;">
+                    <div class="terjemahan-no" style="font-size: 13px; font-weight: 700; color: #002060; margin-bottom: 4px;">
                       {{ $document->translation_no_peraturan ?: $document->no_peraturan }} &middot; Tahun {{ $document->year }}
                     </div>
                   @endif
 
-                  <h3 style="font-size: 17px; font-weight: 700; color: #1e293b; margin: 4px 0 6px 0; line-height: 1.45;">
+                  <h3 class="terjemahan-title" style="font-size: 17px; font-weight: 700; color: #1e293b; margin: 4px 0 6px 0; line-height: 1.45;">
                     {{ $document->translation_title ?: $document->translated('title') }}
                   </h3>
 
                   @if(!empty($document->translation_title) && $document->translated('title') && $document->translation_title !== $document->translated('title'))
-                    <small style="color: #64748b; font-size: 12.5px; display: block; margin-bottom: 6px; font-style: italic;">
+                    <small class="terjemahan-orig" style="color: #64748b; font-size: 12.5px; display: block; margin-bottom: 6px; font-style: italic;">
                       <strong>Judul Asli (ID):</strong> {{ $document->translated('title') }}
                     </small>
                   @endif
 
-                  <small style="color: #475569; font-size: 13px; line-height: 1.5; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">
+                  <small class="terjemahan-intro" style="color: #475569; font-size: 13px; line-height: 1.5; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">
                     {{ $document->translation_intro ?: $document->translated('intro') }}
                   </small>
                 </div>
@@ -144,7 +144,7 @@
                 <div class="bottom__right" style="display: flex; gap: 8px; flex-wrap: wrap;">
                   @if (!empty($document->translation_pdf))
                     <a href="{{ route('document.download', ['type' => 'translation_pdf', 'id' => $document->id]) }}?token={{ Str::random(15) }}" 
-                       class="button button-outline button-icon" 
+                       class="button button-outline button-icon terjemahan-btn-en" 
                        target="_blank" 
                        style="background: #eef2ff; color: #1e40af; border-color: #bfdbfe;"
                        title="Download English Version PDF">
@@ -171,7 +171,7 @@
             </figcaption>
           </div>
         @empty
-          <div style="text-align: center; padding: 48px 20px; background: #ffffff; border-radius: 12px; border: 1px solid #e2e8f0; margin: 20px 0;">
+          <div class="terjemahan-empty" style="text-align: center; padding: 48px 20px; background: #ffffff; border-radius: 12px; border: 1px solid #e2e8f0; margin: 20px 0;">
             <i class="fa fa-folder-open" style="font-size: 38px; color: #94a3b8; margin-bottom: 12px; display: block;"></i>
             <h4 style="font-size: 16px; font-weight: 600; color: #475569; margin-bottom: 6px;">
               {{ lang::active() == 'en' ? 'No translated regulations found.' : 'Belum ada peraturan terjemahan yang ditemukan.' }}
@@ -189,5 +189,23 @@
   
   @push('head')
     <link rel="stylesheet" type="text/css" href="{{ Vite::asset('resources/assets/sass/pages/document.scss')}}" preload>
+    <style>
+      [data-theme="dark"] .terjemahan-no { color: #93c5fd !important; }
+      [data-theme="dark"] .terjemahan-title { color: #f1f5f9 !important; }
+      [data-theme="dark"] .terjemahan-orig { color: #94a3b8 !important; }
+      [data-theme="dark"] .terjemahan-intro { color: #cbd5e1 !important; }
+      [data-theme="dark"] .terjemahan-btn-en {
+        background: rgba(37, 99, 235, 0.22) !important;
+        color: #93c5fd !important;
+        border-color: rgba(96, 165, 250, 0.4) !important;
+      }
+      [data-theme="dark"] .terjemahan-btn-en svg path { fill: #93c5fd !important; }
+      [data-theme="dark"] .terjemahan-empty {
+        background: #0f172a !important;
+        border-color: #1e293b !important;
+      }
+      [data-theme="dark"] .terjemahan-empty h4 { color: #f8fafc !important; }
+      [data-theme="dark"] .terjemahan-empty p { color: #94a3b8 !important; }
+    </style>
   @endpush
 @endsection

@@ -371,6 +371,8 @@ class RegulasiController extends Controller
             'created_by' => auth()->id(),
         ]);
 
+        $regulasi->touch();
+
         return redirect()->route('regulasi.show', $regulasi)
             ->with('success', $forcePasca
                 ? 'Proses pasca partisipasi publik berhasil ditambahkan.'

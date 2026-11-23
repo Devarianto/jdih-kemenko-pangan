@@ -1960,6 +1960,193 @@
   [data-theme="dark"] .after-login__drop a {
     color: #f1f5f9 !important;
   }
+
+  /* =========================================================
+     EXTENDED DARK MODE VISIBILITY & CONTRAST FIXES
+     ========================================================= */
+  [data-theme="dark"] .menu-mobile__bottom {
+    background-color: #0b1120 !important;
+    border-top: 1px solid #1e293b !important;
+  }
+  [data-theme="dark"] .menu-mobile nav ul li i,
+  [data-theme="dark"] .menu-mobile nav ul li .child a {
+    color: #93c5fd !important;
+  }
+  [data-theme="dark"] .menu-mobile nav ul li .child a {
+    color: #cbd5e1 !important;
+  }
+
+  /* News, gallery & general cards whose figcaption had white bg */
+  [data-theme="dark"] .listing-card__item figcaption {
+    background-color: #0f172a !important;
+    color: #f1f5f9 !important;
+  }
+  [data-theme="dark"] .listing-card__item figcaption p {
+    color: #f1f5f9 !important;
+  }
+  [data-theme="dark"] .listing-card__item figcaption .date,
+  [data-theme="dark"] .listing-card__item .tag {
+    color: #94a3b8 !important;
+  }
+  [data-theme="dark"] .listing-card__item:hover figcaption p {
+    color: #60a5fa !important;
+  }
+  [data-theme="dark"] .listing-card__item span.link,
+  [data-theme="dark"] .listing-card__item span.link b {
+    color: #60a5fa !important;
+  }
+  [data-theme="dark"] .other-listing {
+    background-color: #080d1a !important;
+    border-top: 1px solid #1e293b !important;
+  }
+
+  /* Document detail & PDF container (box-detail-page, list-pdf) */
+  [data-theme="dark"] .box-detail-page .wrapper-content {
+    background-color: #0f172a !important;
+    border: 1px solid #1e293b !important;
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.45) !important;
+    color: #e2e8f0 !important;
+  }
+  [data-theme="dark"] .box-detail-page h5 {
+    color: #f8fafc !important;
+  }
+  [data-theme="dark"] .box-detail-page table th,
+  [data-theme="dark"] .box-detail-page table td:first-child {
+    color: #94a3b8 !important;
+  }
+  [data-theme="dark"] .box-detail-page table td,
+  [data-theme="dark"] .box-detail-page table td:last-child {
+    color: #f1f5f9 !important;
+  }
+  [data-theme="dark"] .box-detail-page table td:last-child::before {
+    color: #64748b !important;
+  }
+  [data-theme="dark"] .box-detail-page table td a {
+    color: #60a5fa !important;
+  }
+  [data-theme="dark"] .box-detail-page.with-border hr,
+  [data-theme="dark"] .box-detail-page__pdf {
+    border-color: #1e293b !important;
+  }
+  [data-theme="dark"] .box-detail-page__pdf nav a {
+    color: #cbd5e1 !important;
+  }
+  [data-theme="dark"] .box-detail-page__pdf nav a.active,
+  [data-theme="dark"] .box-detail-page__pdf nav a:hover {
+    background: rgba(59, 130, 246, 0.22) !important;
+    color: #93c5fd !important;
+  }
+  [data-theme="dark"] .box-detail-page__pdf .wrap-iframe::after {
+    background: linear-gradient(180deg, rgba(15, 23, 42, 0) 0%, #0f172a 100%) !important;
+  }
+  [data-theme="dark"] .list-pdf span {
+    color: #94a3b8 !important;
+  }
+  [data-theme="dark"] .list-pdf span::before {
+    background-color: #64748b !important;
+  }
+  [data-theme="dark"] .list-pdf .inner {
+    background: #111c2d !important;
+    border-color: #243247 !important;
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.35) !important;
+  }
+  [data-theme="dark"] .list-pdf .inner h6 {
+    color: #f8fafc !important;
+  }
+
+  /* Forms, search, filters & sorting labels */
+  [data-theme="dark"] section.middle label,
+  [data-theme="dark"] .box-form label,
+  [data-theme="dark"] .middle__search label,
+  [data-theme="dark"] .filter-right label {
+    color: #cbd5e1 !important;
+  }
+  [data-theme="dark"] .middle__search {
+    background: #0f172a !important;
+    border: 1px solid #1e293b !important;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4) !important;
+  }
+  [data-theme="dark"] .middle__search input,
+  [data-theme="dark"] .middle__search select,
+  [data-theme="dark"] .box-form input,
+  [data-theme="dark"] .box-form textarea,
+  [data-theme="dark"] .box-form select,
+  [data-theme="dark"] .filter-right select {
+    background-color: #0b1120 !important;
+    border-color: #334155 !important;
+    color: #f8fafc !important;
+  }
+  [data-theme="dark"] .middle__search input::placeholder,
+  [data-theme="dark"] .box-form input::placeholder,
+  [data-theme="dark"] .box-form textarea::placeholder {
+    color: #64748b !important;
+  }
+  [data-theme="dark"] .wrap-filter > a {
+    color: #cbd5e1 !important;
+    opacity: 1 !important;
+  }
+  [data-theme="dark"] .wrap-filter > a::after {
+    filter: brightness(0) invert(0.85) !important;
+  }
+  [data-theme="dark"] .filter-galeri nav ul li a {
+    color: #cbd5e1 !important;
+  }
+  [data-theme="dark"] .filter-galeri nav ul li a.active,
+  [data-theme="dark"] .filter-galeri nav ul li a:hover {
+    background: rgba(59, 130, 246, 0.25) !important;
+    color: #93c5fd !important;
+  }
+
+  /* About / FAQ / Kamus Hukum / Detail Berita / Generic Empty States */
+  [data-theme="dark"] .box-shadow,
+  [data-theme="dark"] .accordion__list,
+  [data-theme="dark"] .listing-kamus__item {
+    background: #0f172a !important;
+    border: 1px solid #1e293b !important;
+    color: #e2e8f0 !important;
+  }
+  [data-theme="dark"] .box-shadow p,
+  [data-theme="dark"] .organisasi p,
+  [data-theme="dark"] .misi,
+  [data-theme="dark"] .content-pages,
+  [data-theme="dark"] .content-pages p,
+  [data-theme="dark"] .content-pages li,
+  [data-theme="dark"] .content-pages span {
+    color: #cbd5e1 !important;
+  }
+  [data-theme="dark"] .content-pages a {
+    color: #60a5fa !important;
+  }
+  [data-theme="dark"] .accordion__list--button h5,
+  [data-theme="dark"] .listing-kamus__item h6,
+  [data-theme="dark"] .detail-pages--title h3,
+  [data-theme="dark"] .detail-pages--top .back,
+  [data-theme="dark"] .detail-pages--top .medsos label {
+    color: #f8fafc !important;
+  }
+  [data-theme="dark"] .listing-kamus__item p,
+  [data-theme="dark"] .detail-pages--title .date {
+    color: #94a3b8 !important;
+  }
+  [data-theme="dark"] .wrap-result {
+    border-bottom-color: #1e293b !important;
+  }
+  [data-theme="dark"] section.middle .empty-state,
+  [data-theme="dark"] .listing-rules > div[style*="background: #fff"],
+  [data-theme="dark"] .listing-rules > div[style*="background: #ffffff"] {
+    background: #0f172a !important;
+    border-color: #1e293b !important;
+    color: #e2e8f0 !important;
+  }
+  [data-theme="dark"] section.middle .empty-state h4,
+  [data-theme="dark"] section.middle .empty-state h5,
+  [data-theme="dark"] .listing-rules > div[style*="background: #ffffff"] h4 {
+    color: #f8fafc !important;
+  }
+  [data-theme="dark"] section.middle .empty-state p,
+  [data-theme="dark"] .listing-rules > div[style*="background: #ffffff"] p {
+    color: #94a3b8 !important;
+  }
 </style>
 
 <script>

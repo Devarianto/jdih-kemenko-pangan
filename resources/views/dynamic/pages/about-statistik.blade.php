@@ -277,6 +277,84 @@
           border-color: rgba(96, 165, 250, 0.4) !important;
           color: #93c5fd !important;
         }
+        .stat-doc-row {
+          border-bottom: 1px solid #f1f5f9;
+          transition: background 0.15s ease;
+        }
+        .stat-doc-row:hover {
+          background: #f8fafc;
+        }
+        [data-theme="dark"] .stat-doc-row {
+          border-bottom-color: #1e293b !important;
+        }
+        [data-theme="dark"] .stat-doc-row:hover {
+          background: #1e293b !important;
+        }
+        [data-theme="dark"] #public-docs-tbody td {
+          color: #cbd5e1 !important;
+        }
+        [data-theme="dark"] #public-docs-tbody td a.stat-doc-title {
+          color: #f1f5f9 !important;
+        }
+        [data-theme="dark"] #public-docs-tbody td a.stat-doc-title:hover {
+          color: #60a5fa !important;
+        }
+        [data-theme="dark"] #public-docs-tbody td .stat-doc-type-pill {
+          background: #1e293b !important;
+          color: #cbd5e1 !important;
+        }
+        [data-theme="dark"] #public-docs-tbody td .stat-doc-status-berlaku {
+          background: rgba(22, 163, 74, 0.22) !important;
+          color: #86efac !important;
+        }
+        [data-theme="dark"] #public-docs-tbody td .stat-doc-status-tdk {
+          background: rgba(220, 38, 38, 0.22) !important;
+          color: #fca5a5 !important;
+        }
+        [data-theme="dark"] #public-docs-tbody td .stat-doc-btn-detail {
+          background: rgba(37, 99, 235, 0.22) !important;
+          color: #93c5fd !important;
+        }
+        [data-theme="dark"] #public-docs-tbody td .stat-doc-btn-pdf {
+          background: rgba(220, 38, 38, 0.22) !important;
+          color: #fca5a5 !important;
+        }
+        [data-theme="dark"] #drilldown-container thead tr {
+          background: #0f172a !important;
+          border-bottom-color: #243247 !important;
+        }
+        [data-theme="dark"] #drilldown-container thead th {
+          color: #93c5fd !important;
+        }
+        [data-theme="dark"] #publicDocSort {
+          background: #0f172a !important;
+          border-color: #334155 !important;
+          color: #f8fafc !important;
+        }
+        [data-theme="dark"] #publicDocSearch {
+          background: #0f172a !important;
+          border-color: #334155 !important;
+          color: #f8fafc !important;
+        }
+        [data-theme="dark"] #public-docs-page-info {
+          color: #94a3b8 !important;
+        }
+        [data-theme="dark"] .stat-page-btn.inactive {
+          background: #0f172a !important;
+          border-color: #334155 !important;
+          color: #e2e8f0 !important;
+        }
+        [data-theme="dark"] .stat-page-btn.inactive span {
+          color: #e2e8f0 !important;
+        }
+        [data-theme="dark"] .stat-page-btn.disabled {
+          background: #111c2d !important;
+          border-color: #1e293b !important;
+          color: #64748b !important;
+        }
+        [data-theme="dark"] .stat-page-ellipsis {
+          color: #94a3b8 !important;
+        }
       </style>
       <div class="stat-filter-bar" style="background: #ffffff; padding: 16px 20px; border-radius: 10px; border: 1px solid #e2e8f0; box-shadow: 0 4px 15px rgba(0,0,0,0.03); margin-bottom: 35px;">
         <div class="stat-filter-row">
@@ -731,7 +809,38 @@
         fetchPublicDocuments(1);
       });
 
+      function getStatChartColors() {
+        const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+        return {
+          xTick: isDark ? '#cbd5e1' : '#475569',
+          xTickStatus: isDark ? '#cbd5e1' : '#334155',
+          yTick: isDark ? '#94a3b8' : '#64748b',
+          grid: isDark ? 'rgba(148, 163, 184, 0.14)' : '#f1f5f9',
+          legend: isDark ? '#cbd5e1' : '#475569'
+        };
+      }
+
+      if (typeof MutationObserver !== 'undefined') {
+        new MutationObserver(() => {
+          const c = getStatChartColors();
+          if (typeof chartPeraturan !== 'undefined' && chartPeraturan) {
+            chartPeraturan.options.scales.x.ticks.color = c.xTick;
+            chartPeraturan.options.scales.y.ticks.color = c.yTick;
+            chartPeraturan.options.scales.y.grid.color = c.grid;
+            chartPeraturan.update('none');
+          }
+          if (typeof chartStatus !== 'undefined' && chartStatus) {
+            chartStatus.options.scales.x.ticks.color = c.xTickStatus;
+            chartStatus.options.scales.y.ticks.color = c.yTick;
+            chartStatus.options.scales.y.grid.color = c.grid;
+            chartStatus.options.plugins.legend.labels.color = c.legend;
+            chartStatus.update('none');
+          }
+        }).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+      }
+
       function initChartPeraturan(byTypeData) {
+        const tc = getStatChartColors();
         const ctx = document.getElementById('chartPeraturan').getContext('2d');
         const displayData = byTypeData.filter(item => item.count > 0);
         const labels = displayData.map(item => item.label);
@@ -783,7 +892,7 @@
               x: {
                 ticks: {
                   font: { size: 11 },
-                  color: '#475569',
+                  color: tc.xTick,
                   maxRotation: 35,
                   minRotation: 0,
                   callback: function(val) {
@@ -795,8 +904,8 @@
               },
               y: {
                 beginAtZero: true,
-                ticks: { precision: 0, font: { size: 11 }, color: '#64748b' },
-                grid: { color: '#f1f5f9' }
+                ticks: { precision: 0, font: { size: 11 }, color: tc.yTick },
+                grid: { color: tc.grid }
               }
             },
             onClick: (event, elements) => {
@@ -812,6 +921,7 @@
       }
 
       function initChartStatus(byYearData) {
+        const tc = getStatChartColors();
         const ctx2 = document.getElementById('statusChart').getContext('2d');
         const labels = byYearData.map(item => item.year);
         const berlakuData = byYearData.map(item => item.berlaku_count);
@@ -842,11 +952,11 @@
             responsive: true,
             maintainAspectRatio: false,
             scales: {
-              x: { grid: { display: false }, ticks: { font: { size: 12, weight: '500' }, color: "#334155" } },
-              y: { beginAtZero: true, grid: { color: "#f1f5f9" }, ticks: { precision: 0, font: { size: 11 }, color: "#64748b" } }
+              x: { grid: { display: false }, ticks: { font: { size: 12, weight: '500' }, color: tc.xTickStatus } },
+              y: { beginAtZero: true, grid: { color: tc.grid }, ticks: { precision: 0, font: { size: 11 }, color: tc.yTick } }
             },
             plugins: {
-              legend: { position: "bottom" },
+              legend: { position: "bottom", labels: { color: tc.legend } },
               tooltip: {
                 backgroundColor: 'rgba(15, 23, 42, 0.95)',
                 titleColor: '#ffffff',
@@ -1090,23 +1200,23 @@
         items.forEach((item, index) => {
           const no = offset + index;
           const statusHtml = item.status_berlaku === 1
-            ? `<span style="background: #dcfce7; color: #166534; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 600;">Berlaku</span>`
-            : `<span style="background: #fee2e2; color: #991b1b; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 600;">Tdk Berlaku</span>`;
+            ? `<span class="stat-doc-status-berlaku" style="background: #dcfce7; color: #166534; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 600;">Berlaku</span>`
+            : `<span class="stat-doc-status-tdk" style="background: #fee2e2; color: #991b1b; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 600;">Tdk Berlaku</span>`;
 
           html += `
-            <tr style="border-bottom: 1px solid #f1f5f9; transition: background 0.15s ease;" onmouseover="this.style.background='#f8fafc'" onmouseout="this.style.background='transparent'">
+            <tr class="stat-doc-row">
               <td style="padding: 12px 14px; text-align: center; color: #64748b;">${no}</td>
               <td style="padding: 12px 14px; font-weight: 600; color: #0f172a;">${item.no_peraturan || '-'}</td>
-              <td style="padding: 12px 14px; color: #475569;"><span style="background: #f1f5f9; padding: 2px 6px; border-radius: 4px; font-size: 11px;">${item.rule_type_name}</span></td>
+              <td style="padding: 12px 14px; color: #475569;"><span class="stat-doc-type-pill" style="background: #f1f5f9; padding: 2px 6px; border-radius: 4px; font-size: 11px;">${item.rule_type_name}</span></td>
               <td style="padding: 12px 14px; font-weight: 500; color: #1e293b; line-height: 1.35;">
-                ${item.public_url ? `<a href="${item.public_url}" style="color: #1e293b; text-decoration: none;" target="_blank">${escapeHtml(item.title)}</a>` : escapeHtml(item.title)}
+                ${item.public_url ? `<a class="stat-doc-title" href="${item.public_url}" style="color: #1e293b; text-decoration: none;" target="_blank">${escapeHtml(item.title)}</a>` : escapeHtml(item.title)}
               </td>
               <td style="padding: 12px 14px; text-align: center; font-weight: 600;">${item.year}</td>
               <td style="padding: 12px 14px; text-align: center; color: #64748b; font-size: 12px;">${item.tanggal_penetapan_formatted || '-'}</td>
               <td style="padding: 12px 14px; text-align: center;">${statusHtml}</td>
               <td style="padding: 12px 14px; text-align: center; white-space: nowrap;">
-                ${item.public_url ? `<a href="${item.public_url}" target="_blank" style="padding: 4px 8px; background: #eff6ff; color: #2563eb; border-radius: 4px; font-size: 11px; text-decoration: none; font-weight: 600; margin-right: 4px;">Detail</a>` : ''}
-                ${item.pdf_url ? `<a href="${item.pdf_url}" target="_blank" style="padding: 4px 8px; background: #fef2f2; color: #dc2626; border-radius: 4px; font-size: 11px; text-decoration: none; font-weight: 600;">PDF</a>` : ''}
+                ${item.public_url ? `<a class="stat-doc-btn-detail" href="${item.public_url}" target="_blank" style="padding: 4px 8px; background: #eff6ff; color: #2563eb; border-radius: 4px; font-size: 11px; text-decoration: none; font-weight: 600; margin-right: 4px;">Detail</a>` : ''}
+                ${item.pdf_url ? `<a class="stat-doc-btn-pdf" href="${item.pdf_url}" target="_blank" style="padding: 4px 8px; background: #fef2f2; color: #dc2626; border-radius: 4px; font-size: 11px; text-decoration: none; font-weight: 600;">PDF</a>` : ''}
               </td>
             </tr>
           `;
@@ -1129,10 +1239,10 @@
           return;
         }
 
-        const btnBase = "display:inline-flex !important;align-items:center !important;justify-content:center !important;width:36px !important;min-width:36px !important;height:36px !important;padding:0 !important;font-size:13px !important;font-weight:700 !important;line-height:1 !important;border-radius:6px !important;text-decoration:none !important;box-sizing:border-box !important;vertical-align:middle !important;";
-        const btnActive = btnBase + "background:#1e40af !important;border:1px solid #1e40af !important;color:#ffffff !important;box-shadow:0 2px 4px rgba(30,64,175,0.2) !important;cursor:default !important;";
-        const btnInactive = btnBase + "background:#ffffff !important;border:1px solid #cbd5e1 !important;color:#1e293b !important;cursor:pointer !important;";
-        const btnDisabled = btnBase + "background:#f8fafc !important;border:1px solid #e2e8f0 !important;color:#cbd5e1 !important;cursor:not-allowed !important;pointer-events:none !important;opacity:0.6 !important;";
+        const btnBase = "display:inline-flex;align-items:center;justify-content:center;width:36px;min-width:36px;height:36px;padding:0;font-size:13px;font-weight:700;line-height:1;border-radius:6px;text-decoration:none;box-sizing:border-box;vertical-align:middle;";
+        const btnActive = btnBase + "background:#1e40af;border:1px solid #1e40af;color:#ffffff;box-shadow:0 2px 4px rgba(30,64,175,0.2);cursor:default;";
+        const btnInactive = btnBase + "background:#ffffff;border:1px solid #cbd5e1;color:#1e293b;cursor:pointer;";
+        const btnDisabled = btnBase + "background:#f8fafc;border:1px solid #e2e8f0;color:#cbd5e1;cursor:not-allowed;pointer-events:none;opacity:0.6;";
 
         const prevIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:middle;"><polyline points="15 18 9 12 15 6"></polyline></svg>`;
         const nextIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:middle;"><polyline points="9 18 15 12 9 6"></polyline></svg>`;
@@ -1149,9 +1259,9 @@
         // Helper untuk render nomor halaman
         const renderPageNum = (p) => {
           if (p === curr) {
-            return `<a href="javascript:void(0)" class="stat-page-btn active" style="${btnActive}" title="Halaman ${p}" aria-current="page"><span style="color:#ffffff !important;font-weight:700 !important;font-size:13px !important;line-height:1 !important;">${p}</span></a>`;
+            return `<a href="javascript:void(0)" class="stat-page-btn active" style="${btnActive}" title="Halaman ${p}" aria-current="page"><span style="color:#ffffff;font-weight:700;font-size:13px;line-height:1;">${p}</span></a>`;
           } else {
-            return `<a href="javascript:void(0)" class="stat-page-btn inactive" style="${btnInactive}" onclick="fetchPublicDocuments(${p}, true); return false;" title="Halaman ${p}"><span style="color:#1e293b !important;font-weight:700 !important;font-size:13px !important;line-height:1 !important;">${p}</span></a>`;
+            return `<a href="javascript:void(0)" class="stat-page-btn inactive" style="${btnInactive}" onclick="fetchPublicDocuments(${p}, true); return false;" title="Halaman ${p}"><span style="color:#1e293b;font-weight:700;font-size:13px;line-height:1;">${p}</span></a>`;
           }
         };
 
