@@ -338,12 +338,19 @@
 
         {{-- ═══ REGULASI TERBARU ═══ --}}
         <div class="dash-card">
-            <div style="display:flex; justify-content: space-between; align-items: center;">
+            <div style="display:flex; justify-content: space-between; align-items: center; gap: 8px; flex-wrap: wrap;">
                 <div class="dash-card-title" id="regulasiTerbaruTitle">
                     Regulasi Terbaru{{ $isSuperAdmin ? ' — Semua Unit' : ' — ' . $user->unit_kerja }}
                 </div>
-                <button type="button" class="filter-reset-btn" id="filterResetBtn" style="display:none;">✕ Hapus
-                    Filter</button>
+                <div style="display:flex; align-items: center; gap: 8px;">
+                    @if(count($regulasiTerbaru) > 5)
+                        <button type="button" class="filter-reset-btn" id="toggleShowAllBtn">
+                            Lihat Semua ({{ count($regulasiTerbaru) }})
+                        </button>
+                    @endif
+                    <button type="button" class="filter-reset-btn" id="filterResetBtn" style="display:none;">✕ Hapus
+                        Filter</button>
+                </div>
             </div>
 
             <div class="regulasi-list" id="regulasiTable">
@@ -1538,10 +1545,25 @@
             };
 
             var resetBtn = document.getElementById('filterResetBtn');
+            var toggleAllBtn = document.getElementById('toggleShowAllBtn');
             var emptyMsg = document.getElementById('filterEmptyMsg');
             var list = document.getElementById('regulasiTable');
             var activeCards = document.querySelectorAll('.dash-stat.is-clickable');
             var currentFilter = 'all';
+            var showingAll = false;
+            var totalRowsCount = list ? list.querySelectorAll('.regulasi-row[data-row-stage]').length : 0;
+
+            function syncToggleAllBtn() {
+                if (!toggleAllBtn) return;
+                if (currentFilter !== 'all' || totalRowsCount <= DEFAULT_SHOW) {
+                    toggleAllBtn.style.display = 'none';
+                    return;
+                }
+                toggleAllBtn.style.display = 'inline-block';
+                toggleAllBtn.textContent = showingAll
+                    ? 'Tampilkan ' + DEFAULT_SHOW + ' Terbaru'
+                    : 'Lihat Semua (' + totalRowsCount + ')';
+            }
 
             function updateUnitKerja(filterKey, matchedStages) {
                 var allRows = list.querySelectorAll('.regulasi-row[data-row-unit]');
@@ -1578,7 +1600,7 @@
                     var show;
                     if (filterKey === 'all') {
                         var idx = Array.from(rows).indexOf(row);
-                        show = idx < DEFAULT_SHOW;
+                        show = showingAll || idx < DEFAULT_SHOW;
                     } else {
                         show = matchedStages.indexOf(stage) !== -1;
                     }
@@ -1589,6 +1611,7 @@
                 emptyMsg.style.display = (visibleCount === 0 && filterKey !== 'all') ? 'block' : 'none';
                 list.style.display = (visibleCount === 0 && filterKey !== 'all') ? 'none' : '';
                 resetBtn.style.display = filterKey === 'all' ? 'none' : 'inline-block';
+                syncToggleAllBtn();
 
                 activeCards.forEach(function (card) {
                     card.classList.toggle('is-active-filter',
@@ -1611,6 +1634,13 @@
             });
 
             resetBtn.addEventListener('click', function () { applyFilter('all'); });
+
+            if (toggleAllBtn) {
+                toggleAllBtn.addEventListener('click', function () {
+                    showingAll = !showingAll;
+                    applyFilter('all');
+                });
+            }
 
             // ── Dim effect bar chart ──
             var barChart = document.getElementById('barChart');
@@ -1642,6 +1672,7 @@
                     emptyMsg.style.display = visibleCount === 0 ? 'block' : 'none';
                     list.style.display = visibleCount === 0 ? 'none' : '';
                     resetBtn.style.display = 'inline-block';
+                    syncToggleAllBtn();
                     activeCards.forEach(function (c) { c.classList.remove('is-active-filter'); });
                     updateUnitKerja(stage, [stage]);
                     document.getElementById('regulasiTerbaruTitle').scrollIntoView({ behavior: 'smooth', block: 'center' });
