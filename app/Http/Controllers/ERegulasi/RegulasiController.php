@@ -783,9 +783,10 @@ class RegulasiController extends Controller
         $dokumenHarmon = ['harmon_surat_permohonan', 'harmon_naskah_urgensi', 'harmon_draft_rancangan'];
         foreach ($dokumenHarmon as $field) {
             if (!$regulasi->$field && !$request->hasFile($field)) {
-                return back()
+                return redirect()->route('regulasi.show', $regulasi)
                     ->withErrors([$field => 'File ini wajib diupload.'])
-                    ->withInput();
+                    ->withInput()
+                    ->withFragment('tahap-harmonisasi');
             }
         }
 
@@ -854,9 +855,10 @@ class RegulasiController extends Controller
         ];
         foreach ($dokumenPenetapan as $field) {
             if (!$regulasi->$field && !$request->hasFile($field)) {
-                return back()
+                return redirect()->route('regulasi.show', $regulasi)
                     ->withErrors([$field => 'File ini wajib diupload.'])
-                    ->withInput();
+                    ->withInput()
+                    ->withFragment('tahap-penetapan');
             }
         }
 

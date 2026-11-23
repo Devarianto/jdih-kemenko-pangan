@@ -27,9 +27,17 @@ class Regulasi extends Model
         'tgl_mulai_harmonisasi',
         'tgl_selesai_harmonisasi',
         'catatan_harmonisasi',
+        'harmon_surat_permohonan',
+        'harmon_naskah_urgensi',
+        'harmon_draft_rancangan',
         'tgl_mulai_penetapan',
         'tgl_selesai_penetapan',
         'catatan_penetapan',
+        'tapan_surat_permohonan',
+        'tapan_surat_selesai_harmon',
+        'tapan_ba_harmon',
+        'tapan_softcopy_harmon',
+        'tapan_draft_akhir',
     ];
 
     protected $casts = [
@@ -123,11 +131,22 @@ class Regulasi extends Model
     public function collectPublicStorageFiles(): array
     {
         $paths = [];
-        if (!empty($this->file_permohonan)) {
-            $paths[] = $this->file_permohonan;
-        }
-        if (!empty($this->file_draft)) {
-            $paths[] = $this->file_draft;
+        $fileColumns = [
+            'file_permohonan',
+            'file_draft',
+            'harmon_surat_permohonan',
+            'harmon_naskah_urgensi',
+            'harmon_draft_rancangan',
+            'tapan_surat_permohonan',
+            'tapan_surat_selesai_harmon',
+            'tapan_ba_harmon',
+            'tapan_softcopy_harmon',
+            'tapan_draft_akhir',
+        ];
+        foreach ($fileColumns as $col) {
+            if (!empty($this->$col)) {
+                $paths[] = $this->$col;
+            }
         }
 
         foreach ($this->proses()->get(['file_dokumen']) as $proses) {
