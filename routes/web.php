@@ -270,7 +270,7 @@ Route::middleware('front')->group(function () {
 });
 
 // Admin & Operator e-Regulasi
-Route::middleware(['auth', 'role:admin_operator,super_admin'])->group(function () {
+Route::middleware(['auth', 'role:admin_operator,operator_eregulasi,super_admin'])->group(function () {
     Route::get('/dashboard', [\App\Http\Controllers\ERegulasi\DashboardController::class, 'index'])->name('dashboard');
     Route::get('/regulasi-lainnya', [\App\Http\Controllers\ERegulasi\RegulasiController::class, 'indexLainnya'])->name('regulasi.lainnya');
     Route::resource('/regulasi', \App\Http\Controllers\ERegulasi\RegulasiController::class);

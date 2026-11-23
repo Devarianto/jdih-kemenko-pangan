@@ -7,7 +7,7 @@
     @php
         $isSuperAdmin = auth()->user()->role === 'super_admin';
         $bisaKelola = $isSuperAdmin
-            || $regulasi->unit_kerja === auth()->user()->unit_kerja;
+            || strcasecmp(trim((string) $regulasi->unit_kerja), trim((string) auth()->user()->unit_kerja)) === 0;
 
         $stages = [
             'pengajuan' => ['label' => 'Pengajuan', 'icon' => '📋'],
@@ -1137,11 +1137,11 @@
                                                                 <div><label class="form-label">Tanggal</label><input type="date" name="tanggal" class="form-control" value="{{ $p->tanggal->format('Y-m-d') }}" required></div>
                                                             </div>
                                                             <div style="margin-bottom:10px;">
-                                                                <label class="form-label">Ganti Dokumen <span style="color:#b0bbcc;font-weight:400;">(opsional · maks 1MB per file)</span></label>
+                                                                <label class="form-label">Ganti Dokumen <span style="color:#b0bbcc;font-weight:400;">(opsional · maks 10MB per file)</span></label>
                                                                 <input type="file" name="file_dokumen[]" multiple class="form-control"
                                                                     id="dok-edit-pembahasan-{{ $p->id }}"
                                                                     onchange="checkMultiFileSize(this, 'warn-edit-pembahasan-{{ $p->id }}')"
-                                                                    accept=".pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx" style="padding:7px 12px;font-size:13px;">
+                                                                    accept=".pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.jpg,.jpeg,.png" style="padding:7px 12px;font-size:13px;">
                                                                 <small id="warn-edit-pembahasan-{{ $p->id }}" style="display:block;color:#c0392b;font-size:12px;margin-top:4px;"></small>
                                                             </div>
                                                             <div style="display:flex;gap:8px;flex-wrap:wrap;">
@@ -1164,18 +1164,23 @@
                                     <p style="font-size:12.5px;font-weight:700;color:#8a93a6;text-transform:uppercase;letter-spacing:.06em;margin-bottom:12px;">
                                         Tambah Proses/Notulensi/Risalah Rapat
                                     </p>
+                                    @if($errors->any() && in_array($regulasi->current_stage, ['pengajuan', 'pembahasan']))
+                                        <div class="alert alert-danger" style="font-size:13px;margin-bottom:12px;border-radius:8px;">
+                                            <strong>Gagal menyimpan:</strong> {{ $errors->first() }}
+                                        </div>
+                                    @endif
                                     <form action="{{ route('regulasi.proses.store', $regulasi) }}" method="POST" enctype="multipart/form-data">
                                         @csrf
                                         <div class="add-proc-grid">
-                                            <div class="form-group" style="margin:0;"><label class="form-label">Judul</label><input type="text" name="judul" class="form-control" required></div>
-                                            <div class="form-group" style="margin:0;"><label class="form-label">Proses</label><input type="text" name="proses" class="form-control" placeholder="Contoh: Rapat Internal" required></div>
-                                            <div class="form-group" style="margin:0;"><label class="form-label">Tanggal</label><input type="date" name="tanggal" class="form-control" required></div>
+                                            <div class="form-group" style="margin:0;"><label class="form-label">Judul</label><input type="text" name="judul" class="form-control" value="{{ old('judul') }}" required></div>
+                                            <div class="form-group" style="margin:0;"><label class="form-label">Proses</label><input type="text" name="proses" class="form-control" value="{{ old('proses') }}" placeholder="Contoh: Rapat Internal" required></div>
+                                            <div class="form-group" style="margin:0;"><label class="form-label">Tanggal</label><input type="date" name="tanggal" class="form-control" value="{{ old('tanggal') }}" required></div>
                                             <div class="form-group" style="margin:0;grid-column:1/-1;">
-                                                <label class="form-label">Dokumen Pendukung <span style="color:#b0bbcc;font-weight:400;">(wajib · bisa lebih dari 1 · PDF/Word/Excel/PPT · maks 1MB per file)</span></label>
-                                                <input type="file" name="file_dokumen[]" multiple class="form-control" required
+                                                <label class="form-label">Dokumen Pendukung <span style="color:#b0bbcc;font-weight:400;">(opsional · bisa lebih dari 1 · PDF/Word/Excel/PPT/Gambar · maks 10MB per file)</span></label>
+                                                <input type="file" name="file_dokumen[]" multiple class="form-control"
                                                     id="dok-tambah-pembahasan"
                                                     onchange="checkMultiFileSize(this, 'warn-tambah-pembahasan')"
-                                                    accept=".pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx" style="padding:7px 12px;font-size:13px;">
+                                                    accept=".pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.jpg,.jpeg,.png" style="padding:7px 12px;font-size:13px;">
                                                 <small id="warn-tambah-pembahasan" style="display:block;color:#c0392b;font-size:12px;margin-top:4px;"></small>
                                             </div>
                                             <button type="submit" class="btn btn-primary"
@@ -1528,11 +1533,11 @@
                                                                     <div><label class="form-label">Tanggal</label><input type="date" name="tanggal" class="form-control" value="{{ $p->tanggal->format('Y-m-d') }}" required></div>
                                                                 </div>
                                                                 <div style="margin-bottom:10px;">
-                                                                    <label class="form-label">Ganti Dokumen <span style="color:#b0bbcc;font-weight:400;">(opsional · maks 1MB per file)</span></label>
+                                                                    <label class="form-label">Ganti Dokumen <span style="color:#b0bbcc;font-weight:400;">(opsional · maks 10MB per file)</span></label>
                                                                     <input type="file" name="file_dokumen[]" multiple class="form-control"
                                                                         id="dok-edit-pasca-{{ $p->id }}"
                                                                         onchange="checkMultiFileSize(this, 'warn-edit-pasca-{{ $p->id }}')"
-                                                                        accept=".pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx" style="padding:7px 12px;font-size:13px;">
+                                                                        accept=".pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.jpg,.jpeg,.png" style="padding:7px 12px;font-size:13px;">
                                                                     <small id="warn-edit-pasca-{{ $p->id }}" style="display:block;color:#c0392b;font-size:12px;margin-top:4px;"></small>
                                                                 </div>
                                                                 <div style="display:flex;gap:8px;flex-wrap:wrap;">
@@ -1560,15 +1565,15 @@
                                             @csrf
                                             <input type="hidden" name="force_pasca" value="1">
                                             <div class="add-proc-grid">
-                                                <div class="form-group" style="margin:0;"><label class="form-label">Judul</label><input type="text" name="judul" class="form-control" required></div>
-                                                <div class="form-group" style="margin:0;"><label class="form-label">Proses</label><input type="text" name="proses" class="form-control" placeholder="Contoh: Rapat Internal" required></div>
-                                                <div class="form-group" style="margin:0;"><label class="form-label">Tanggal</label><input type="date" name="tanggal" class="form-control" required></div>
+                                                <div class="form-group" style="margin:0;"><label class="form-label">Judul</label><input type="text" name="judul" class="form-control" value="{{ old('judul') }}" required></div>
+                                                <div class="form-group" style="margin:0;"><label class="form-label">Proses</label><input type="text" name="proses" class="form-control" value="{{ old('proses') }}" placeholder="Contoh: Rapat Internal" required></div>
+                                                <div class="form-group" style="margin:0;"><label class="form-label">Tanggal</label><input type="date" name="tanggal" class="form-control" value="{{ old('tanggal') }}" required></div>
                                                 <div class="form-group" style="margin:0;grid-column:1/-1;">
-                                                    <label class="form-label">Dokumen Pendukung <span style="color:#b0bbcc;font-weight:400;">(wajib · bisa lebih dari 1 · PDF/Word/Excel/PPT · maks 1MB per file)</span></label>
-                                                    <input type="file" name="file_dokumen[]" multiple class="form-control" required
+                                                    <label class="form-label">Dokumen Pendukung <span style="color:#b0bbcc;font-weight:400;">(opsional · bisa lebih dari 1 · PDF/Word/Excel/PPT/Gambar · maks 10MB per file)</span></label>
+                                                    <input type="file" name="file_dokumen[]" multiple class="form-control"
                                                         id="dok-tambah-pasca"
                                                         onchange="checkMultiFileSize(this, 'warn-tambah-pasca')"
-                                                        accept=".pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx" style="padding:7px 12px;font-size:13px;">
+                                                        accept=".pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.jpg,.jpeg,.png" style="padding:7px 12px;font-size:13px;">
                                                     <small id="warn-tambah-pasca" style="display:block;color:#c0392b;font-size:12px;margin-top:4px;"></small>
                                                 </div>
                                                 <button type="submit" class="btn btn-primary"
@@ -1659,7 +1664,7 @@
                                                                 accept=".pdf,.doc,.docx"
                                                                 style="padding:7px 12px;font-size:13px;"
                                                                 {{ !$regulasi->$field ? 'required' : '' }}>
-                                                            <small style="color:#888;font-size:12px;">PDF / Word · maks 1MB</small>
+                                                            <small style="color:#888;font-size:12px;">PDF / Word · maks 10MB</small>
                                                             <small id="warn-{{ $field }}" style="display:block;color:#c0392b;font-size:12px;margin-top:4px;"></small>
                                                             @error($field)
                                                                 <div class="field-error">{{ $message }}</div>
@@ -1770,7 +1775,7 @@
                                                                 accept=".pdf,.doc,.docx"
                                                                 style="padding:7px 12px;font-size:13px;"
                                                                 {{ !$regulasi->$field ? 'required' : '' }}>
-                                                            <small style="color:#888;font-size:12px;">PDF / Word · maks 1MB</small>
+                                                            <small style="color:#888;font-size:12px;">PDF / Word · maks 10MB</small>
                                                             <small id="warn-{{ $field }}" style="display:block;color:#c0392b;font-size:12px;margin-top:4px;"></small>
                                                             @error($field)
                                                                 <div class="field-error">{{ $message }}</div>
@@ -1827,7 +1832,7 @@
 
                 <script>
                     const stages = ['pengajuan', 'pembahasan', 'uji_publik', 'pasca_partisipasi', 'harmonisasi', 'penetapan'];
-                    const MAX_FILE_SIZE = 1024 * 1024; // 1 MB
+                    const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10 MB
 
                     function formatMb(bytes) {
                         return (bytes / (1024 * 1024)).toFixed(2);
@@ -1843,7 +1848,7 @@
                             return;
                         }
                         if (file.size > MAX_FILE_SIZE) {
-                            warnEl.textContent = `⚠ ${file.name} (${formatMb(file.size)} MB) melebihi batas maksimal 1 MB`;
+                            warnEl.textContent = `⚠ ${file.name} (${formatMb(file.size)} MB) melebihi batas maksimal 10 MB`;
                             input.value = ''; // reset supaya tidak ikut ter-submit
                         } else {
                             warnEl.textContent = '';
@@ -1862,7 +1867,7 @@
                         const oversized = files.filter(f => f.size > MAX_FILE_SIZE);
                         if (oversized.length > 0) {
                             const daftar = oversized.map(f => `${f.name} (${formatMb(f.size)} MB)`).join(', ');
-                            warnEl.textContent = `⚠ File berikut melebihi batas maksimal 1 MB, silakan pilih ulang: ${daftar}`;
+                            warnEl.textContent = `⚠ File berikut melebihi batas maksimal 10 MB, silakan pilih ulang: ${daftar}`;
                             input.value = ''; // reset semua file yang dipilih
                         } else {
                             warnEl.textContent = '';

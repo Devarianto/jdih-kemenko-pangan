@@ -314,6 +314,28 @@ class RegulasiController extends Controller
         return redirect()->route('regulasi.index')->with('success', 'Regulasi dan seluruh berkas terkait berhasil dihapus.');
     }
 
+    private function prosesValidationRules(): array
+    {
+        return [
+            'judul' => 'required|string|max:255',
+            'proses' => 'required|string|max:255',
+            'tanggal' => 'required|date',
+            'file_dokumen' => 'nullable|array',
+            'file_dokumen.*' => 'nullable|file|mimes:pdf,doc,docx,xls,xlsx,ppt,pptx,jpg,jpeg,png|max:10240',
+        ];
+    }
+
+    private function prosesValidationMessages(): array
+    {
+        return [
+            'judul.required' => 'Judul proses wajib diisi.',
+            'proses.required' => 'Nama/jenis proses wajib diisi.',
+            'tanggal.required' => 'Tanggal proses wajib diisi.',
+            'file_dokumen.*.max' => 'Ukuran setiap file tidak boleh lebih dari 10 MB.',
+            'file_dokumen.*.mimes' => 'File harus berformat PDF, Word, Excel, PowerPoint, atau Gambar (JPG/PNG).',
+        ];
+    }
+
     /**
      * Operator menambah baris baru di tabel proses pembahasan.
      * Mendukung multiple file upload.
@@ -321,6 +343,23 @@ class RegulasiController extends Controller
     public function tambahProses(Request $request, Regulasi $regulasi)
     {
         $this->authorizeUnitKerja($regulasi);
+
+        // force_pasca = dari form Pasca Partisipasi Publik, selalu ditandai is_after_uji_publik
+        $forcePasca = $request->boolean('force_pasca');
+        $targetFragment = $forcePasca ? 'tahap-pasca_partisipasi' : 'tahap-pembahasan';
+
+        $validator = \Illuminate\Support\Facades\Validator::make(
+            $request->all(),
+            $this->prosesValidationRules(),
+            $this->prosesValidationMessages()
+        );
+
+        if ($validator->fails()) {
+            return redirect()->route('regulasi.show', $regulasi)
+                ->withErrors($validator)
+                ->withInput()
+                ->withFragment($targetFragment);
+        }
 
         if ($regulasi->current_stage === 'pengajuan') {
             $regulasi->update([
@@ -338,26 +377,16 @@ class RegulasiController extends Controller
             }
         }
 
-        $request->validate([
-            'judul' => 'required|string|max:255',
-            'proses' => 'required|string|max:255',
-            'tanggal' => 'required|date',
-            'file_dokumen.*' => 'nullable|file|mimes:pdf,doc,docx,xls,xlsx,ppt,pptx|max:1024',
-        ], [
-            'file_dokumen.*.max' => 'Ukuran setiap file tidak boleh lebih dari 1 MB.',
-            'file_dokumen.*.mimes' => 'File harus berformat PDF, Word, Excel, atau PowerPoint.',
-        ]);
-
-        // force_pasca = dari form Pasca Partisipasi Publik, selalu ditandai is_after_uji_publik
-        $forcePasca = $request->boolean('force_pasca');
         $sudahPernahUjiPublik = $forcePasca || $regulasi->tahapans()
             ->where('stage', 'uji_publik')
             ->exists();
 
         $filePaths = [];
         if ($request->hasFile('file_dokumen')) {
-            foreach ($request->file('file_dokumen') as $file) {
-                $filePaths[] = $file->store('proses-dokumen', 'public');
+            foreach ((array) $request->file('file_dokumen') as $file) {
+                if ($file && $file->isValid()) {
+                    $filePaths[] = $file->store('proses-dokumen', 'public');
+                }
             }
         }
 
@@ -377,7 +406,7 @@ class RegulasiController extends Controller
             ->with('success', $forcePasca
                 ? 'Proses pasca partisipasi publik berhasil ditambahkan.'
                 : 'Proses pembahasan berhasil ditambahkan.')
-            ->withFragment($forcePasca ? 'tahap-pasca_partisipasi' : 'tahap-pembahasan');
+            ->withFragment($targetFragment);
     }
 
     /**
@@ -388,15 +417,19 @@ class RegulasiController extends Controller
     {
         $this->authorizeUnitKerja($regulasi);
 
-        $request->validate([
-            'judul' => 'required|string|max:255',
-            'proses' => 'required|string|max:255',
-            'tanggal' => 'required|date',
-            'file_dokumen.*' => 'nullable|file|mimes:pdf,doc,docx,xls,xlsx,ppt,pptx|max:1024',
-        ], [
-            'file_dokumen.*.max' => 'Ukuran setiap file tidak boleh lebih dari 1 MB.',
-            'file_dokumen.*.mimes' => 'File harus berformat PDF, Word, Excel, atau PowerPoint.',
-        ]);
+        $targetFragment = $proses->is_after_uji_publik ? 'tahap-pasca_partisipasi' : 'tahap-pembahasan';
+        $validator = \Illuminate\Support\Facades\Validator::make(
+            $request->all(),
+            $this->prosesValidationRules(),
+            $this->prosesValidationMessages()
+        );
+
+        if ($validator->fails()) {
+            return redirect()->route('regulasi.show', $regulasi)
+                ->withErrors($validator)
+                ->withInput()
+                ->withFragment($targetFragment);
+        }
 
         $data = $request->only(['judul', 'proses', 'tanggal']);
 
@@ -721,15 +754,15 @@ class RegulasiController extends Controller
         $request->validate([
             'tgl_mulai_harmonisasi' => 'required|date',
             'tgl_selesai_harmonisasi' => 'nullable|date|after_or_equal:tgl_mulai_harmonisasi',
-            'harmon_surat_permohonan' => 'nullable|file|mimes:pdf,doc,docx|max:1024',
-            'harmon_naskah_urgensi' => 'nullable|file|mimes:pdf,doc,docx|max:1024',
-            'harmon_draft_rancangan' => 'nullable|file|mimes:pdf,doc,docx|max:1024',
+            'harmon_surat_permohonan' => 'nullable|file|mimes:pdf,doc,docx|max:10240',
+            'harmon_naskah_urgensi' => 'nullable|file|mimes:pdf,doc,docx|max:10240',
+            'harmon_draft_rancangan' => 'nullable|file|mimes:pdf,doc,docx|max:10240',
         ], [
-            'harmon_surat_permohonan.max' => 'Ukuran file tidak boleh lebih dari 1 MB.',
+            'harmon_surat_permohonan.max' => 'Ukuran file tidak boleh lebih dari 10 MB.',
             'harmon_surat_permohonan.mimes' => 'File harus berformat PDF, DOC, atau DOCX.',
-            'harmon_naskah_urgensi.max' => 'Ukuran file tidak boleh lebih dari 1 MB.',
+            'harmon_naskah_urgensi.max' => 'Ukuran file tidak boleh lebih dari 10 MB.',
             'harmon_naskah_urgensi.mimes' => 'File harus berformat PDF, DOC, atau DOCX.',
-            'harmon_draft_rancangan.max' => 'Ukuran file tidak boleh lebih dari 1 MB.',
+            'harmon_draft_rancangan.max' => 'Ukuran file tidak boleh lebih dari 10 MB.',
             'harmon_draft_rancangan.mimes' => 'File harus berformat PDF, DOC, atau DOCX.',
         ]);
 
@@ -869,7 +902,7 @@ class RegulasiController extends Controller
             return;
         }
 
-        if ($regulasi->unit_kerja !== $user->unit_kerja) {
+        if (strcasecmp(trim((string) $regulasi->unit_kerja), trim((string) $user->unit_kerja)) !== 0) {
             abort(403, 'Anda tidak memiliki akses ke regulasi ini.');
         }
     }
