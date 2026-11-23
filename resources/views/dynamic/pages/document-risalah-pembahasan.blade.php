@@ -32,13 +32,26 @@
       <div class="listing-rules">
         @forelse($documents as $document)
           <div class="listing-rules__item">
-            <figure><img src="{{ media::initial($document->thumbnail)->url }}" alt="{{ media::initial($document->thumbnail)->alt }}"></figure>
-            <figcaption>
+            <figcaption style="flex: 1 1 100%; max-width: 100%; width: 100%;">
               <div class="wrap-flex">
                 <div class="text">
-                  <span class="category" @if (!$document->status_berlaku) style="background-color: #C25A5A;" @endif>{{ $document->front_status_berlaku }}</span>
+                  @if($document->date || $document->tempat_penetapan)
+                    <div class="risalah-meta-row" style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 8px;">
+                      @if($document->date)
+                        <small style="color: #64748b; font-size: 12.5px; display: inline-flex; align-items: center; gap: 4px; margin: 0;">
+                          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                          {{ date2string($document->date) }}
+                        </small>
+                      @endif
+                      @if($document->tempat_penetapan)
+                        <small style="color: #64748b; font-size: 12.5px; margin: 0;">{{ $document->tempat_penetapan }}</small>
+                      @endif
+                    </div>
+                  @endif
                   <p>{{ $document->translated('title') }}</p>
-                  <small>{{ $document->translated('intro') }}</small>
+                  @if($document->translated('intro'))
+                    <small>{{ \Illuminate\Support\Str::limit(trim(strip_tags(html_entity_decode((string) $document->translated('intro')))), 240) }}</small>
+                  @endif
                 </div>
                 <a href="{{ url($document->permalink_document) }}" class="button button-outline">{{ lang::translate('document.read-more') }}</a>
               </div>
@@ -83,6 +96,11 @@
   
   @push('head')
     <link rel="stylesheet" type="text/css" href="{{ Vite::asset('resources/assets/sass/pages/document.scss')}}" preload>
+    <style>
+      [data-theme="dark"] .risalah-meta-row small {
+        color: #94a3b8 !important;
+      }
+    </style>
   @endpush
   @push('footer')
     {{-- <script type="module" async type="text/javascript" src="{{ Vite::asset('resources/assets/js/.js') }}"></script> --}}
