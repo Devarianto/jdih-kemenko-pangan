@@ -956,11 +956,14 @@
                                         && !$pascaSudahDimulaiTl
                                         && $regulasi->current_stage === 'uji_publik';
 
+                                    $showUjiPublikDate = !in_array($regulasi->current_stage, ['pengajuan', 'pembahasan']);
+                                    $showPascaDate = $pascaSudahDimulaiTl || $sudahHarmonisasiTl;
+
                                     $tgl = match ($key) {
                                         'pengajuan' => $regulasi->tgl_usulan?->format('d M Y'),
                                         'pembahasan' => $regulasi->proses->where('is_after_uji_publik', false)->first()?->tanggal?->format('d M Y'),
-                                        'uji_publik' => $regulasi->partisipasiPublik?->tgl_mulai?->format('d M Y') ?? null,
-                                        'pasca_partisipasi' => $regulasi->proses->where('is_after_uji_publik', true)->first()?->tanggal?->format('d M Y') ?? null,
+                                        'uji_publik' => $showUjiPublikDate ? ($regulasi->partisipasiPublik?->tgl_mulai?->format('d M Y') ?? null) : null,
+                                        'pasca_partisipasi' => $showPascaDate ? ($regulasi->proses->where('is_after_uji_publik', true)->first()?->tanggal?->format('d M Y') ?? null) : null,
                                         'harmonisasi' => $regulasi->tgl_mulai_harmonisasi?->format('d M Y') ?? null,
                                         'penetapan' => $regulasi->tgl_mulai_penetapan?->format('d M Y') ?? null,
                                         default => null,
@@ -1164,7 +1167,7 @@
                                     <p style="font-size:12.5px;font-weight:700;color:#8a93a6;text-transform:uppercase;letter-spacing:.06em;margin-bottom:12px;">
                                         Tambah Proses/Notulensi/Risalah Rapat
                                     </p>
-                                    @if($errors->any() && in_array($regulasi->current_stage, ['pengajuan', 'pembahasan']))
+                                    @if($errors->hasAny(['judul', 'proses', 'tanggal', 'file_dokumen', 'file_dokumen.*']) && in_array($regulasi->current_stage, ['pengajuan', 'pembahasan']))
                                         <div class="alert alert-danger" style="font-size:13px;margin-bottom:12px;border-radius:8px;">
                                             <strong>Gagal menyimpan:</strong> {{ $errors->first() }}
                                         </div>
@@ -1217,6 +1220,11 @@
                                         <p style="font-size:12.5px;font-weight:700;color:#8a93a6;text-transform:uppercase;letter-spacing:.06em;margin-bottom:12px;">
                                             Usulkan Periode Partisipasi Publik
                                         </p>
+                                        @if($errors->hasAny(['tgl_mulai_uji_publik', 'tgl_selesai_uji_publik']))
+                                            <div class="alert alert-danger" style="font-size:13px;margin-bottom:12px;border-radius:8px;">
+                                                <strong>Gagal menyimpan:</strong> {{ $errors->first('tgl_mulai_uji_publik') ?: $errors->first('tgl_selesai_uji_publik') }}
+                                            </div>
+                                        @endif
                                         <form action="{{ route('regulasi.uji-publik.request', $regulasi) }}" method="POST">
                                             @csrf
                                             <div class="add-proc-grid" style="grid-template-columns:1fr 1fr auto;">
@@ -1452,14 +1460,12 @@
                                     <div class="pane-head-title">Pasca Partisipasi Publik</div>
                                     <div class="pane-head-sub">Pembahasan lanjutan setelah periode partisipasi publik selesai</div>
                                 </div>
-                                @if(in_array($regulasi->current_stage, ['harmonisasi', 'penetapan']) && $prosePasca->isNotEmpty())
+                                @if(!$pascaBisaDiisi)
+                                    <span class="stage-status locked"  style="margin-left:auto;">🔒 Terkunci</span>
+                                @elseif(in_array($regulasi->current_stage, ['harmonisasi', 'penetapan']))
                                     <span class="stage-status done"    style="margin-left:auto;">✓ Selesai</span>
                                 @elseif($prosePasca->isNotEmpty())
                                     <span class="stage-status active"  style="margin-left:auto;">● Aktif</span>
-                                @elseif(!$pascaBisaDiisi)
-                                    <span class="stage-status locked"  style="margin-left:auto;">🔒 Terkunci</span>
-                                @elseif(in_array($regulasi->current_stage, ['harmonisasi', 'penetapan']))
-                                    <span class="stage-status locked"  style="margin-left:auto;">🔒 Terkunci</span>
                                 @else
                                     <span class="stage-status pending" style="margin-left:auto;">— Belum Ada Catatan</span>
                                 @endif
@@ -1561,6 +1567,11 @@
                                         <p style="font-size:12.5px;font-weight:700;color:#8a93a6;text-transform:uppercase;letter-spacing:.06em;margin-bottom:12px;">
                                             Tambah Proses Pasca Partisipasi
                                         </p>
+                                        @if($errors->hasAny(['judul', 'proses', 'tanggal', 'file_dokumen', 'file_dokumen.*']) && $regulasi->current_stage === 'uji_publik')
+                                            <div class="alert alert-danger" style="font-size:13px;margin-bottom:12px;border-radius:8px;">
+                                                <strong>Gagal menyimpan:</strong> {{ $errors->first() }}
+                                            </div>
+                                        @endif
                                         <form action="{{ route('regulasi.proses.store', $regulasi) }}" method="POST" enctype="multipart/form-data">
                                             @csrf
                                             <input type="hidden" name="force_pasca" value="1">

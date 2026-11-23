@@ -377,9 +377,10 @@ class RegulasiController extends Controller
             }
         }
 
-        $sudahPernahUjiPublik = $forcePasca || $regulasi->tahapans()
-            ->where('stage', 'uji_publik')
-            ->exists();
+        $isAfterUjiPublik = $forcePasca && (
+            in_array($regulasi->current_stage, ['uji_publik', 'harmonisasi', 'penetapan'])
+            || $regulasi->pasca_partisipasi_dimulai
+        );
 
         $filePaths = [];
         if ($request->hasFile('file_dokumen')) {
@@ -396,7 +397,7 @@ class RegulasiController extends Controller
             'proses' => $request->proses,
             'tanggal' => $request->tanggal,
             'file_dokumen' => !empty($filePaths) ? $filePaths : null,
-            'is_after_uji_publik' => $sudahPernahUjiPublik,
+            'is_after_uji_publik' => $isAfterUjiPublik,
             'created_by' => auth()->id(),
         ]);
 
@@ -494,18 +495,27 @@ class RegulasiController extends Controller
             return back()->with('error', 'Request uji publik hanya bisa dilakukan saat regulasi di tahap Pembahasan.');
         }
 
-        if ($regulasi->proses()->count() === 0) {
-            return back()->with('error', 'Tambahkan minimal satu proses pembahasan sebelum request uji publik.');
+        if ($regulasi->proses()->where('is_after_uji_publik', false)->count() === 0) {
+            return redirect()->route('regulasi.show', $regulasi)
+                ->with('error', 'Tambahkan minimal satu proses pembahasan sebelum request uji publik.')
+                ->withFragment('tahap-pembahasan');
         }
 
-        $request->validate([
-            'tgl_mulai_uji_publik' => 'required|date|after_or_equal:today',
+        $validator = \Illuminate\Support\Facades\Validator::make($request->all(), [
+            'tgl_mulai_uji_publik' => 'required|date',
             'tgl_selesai_uji_publik' => 'required|date|after:tgl_mulai_uji_publik',
         ], [
             'tgl_mulai_uji_publik.required' => 'Tanggal mulai partisipasi publik wajib diisi.',
             'tgl_selesai_uji_publik.required' => 'Tanggal selesai partisipasi publik wajib diisi.',
-            'tgl_selesai_uji_publik.after' => 'Tanggal selesai harus setelah tanggal mulai.',
+            'tgl_selesai_uji_publik.after' => 'Tanggal selesai harus lebih besar dari tanggal mulai.',
         ]);
+
+        if ($validator->fails()) {
+            return redirect()->route('regulasi.show', $regulasi)
+                ->withErrors($validator)
+                ->withInput()
+                ->withFragment('tahap-pembahasan');
+        }
 
         \App\Models\PartisipasiPublik::updateOrCreate(
             ['regulasi_id' => $regulasi->id],
@@ -662,8 +672,11 @@ class RegulasiController extends Controller
         $regulasi->update([
             'current_stage' => 'pembahasan',
             'uji_publik_status' => null,
+            'pasca_partisipasi_dimulai' => false,
             'status' => 'proses',
         ]);
+
+        $regulasi->partisipasiPublik?->update(['is_active' => false]);
 
         RegulasiTahapan::create([
             'regulasi_id' => $regulasi->id,
