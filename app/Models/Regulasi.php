@@ -80,12 +80,22 @@ class Regulasi extends Model
 
     public function document()
     {
-        return $this->hasOne(Document::class, 'regulasi_id');
+        return $this->hasOne(Document::class, 'regulasi_id')
+            ->where('master_document_id', Document::RANCANGAN_PUU);
+    }
+
+    public function naskahUrgensiDocument()
+    {
+        return $this->hasOne(Document::class, 'regulasi_id')
+            ->where('master_document_id', Document::NASKAH_AKADEMIK);
     }
 
     public function syncToJdihDocument()
     {
-        $doc = Document::firstOrNew(['regulasi_id' => $this->id]);
+        $doc = Document::firstOrNew([
+            'regulasi_id' => $this->id,
+            'master_document_id' => Document::RANCANGAN_PUU,
+        ]);
         $doc->master_document_id = Document::RANCANGAN_PUU;
         $doc->date = $this->tgl_usulan ? $this->tgl_usulan->format('Y-m-d') : $this->created_at->format('Y-m-d');
         $doc->year = $this->tgl_usulan ? $this->tgl_usulan->format('Y') : $this->created_at->format('Y');
@@ -118,6 +128,84 @@ class Regulasi extends Model
                     'label' => \Illuminate\Support\Str::limit($this->judul, 250, ''),
                     'description' => $this->abstrak,
                     'is_active' => 1
+                ]
+            );
+        }
+
+        $this->syncNaskahUrgensiDocument($doc);
+
+        return $doc;
+    }
+
+    /**
+     * Sinkronisasi file harmon_naskah_urgensi dari tahap Harmonisasi e-Regulasi
+     * ke halaman publik /naskah-urgensiakademik (Document::NASKAH_AKADEMIK).
+     */
+    public function syncNaskahUrgensiDocument(?Document $rancanganDoc = null): ?Document
+    {
+        $filePath = trim((string) ($this->harmon_naskah_urgensi ?? ''));
+
+        if ($filePath === '') {
+            Document::where('regulasi_id', $this->id)
+                ->where('master_document_id', Document::NASKAH_AKADEMIK)
+                ->each(function ($oldDoc) {
+                    \DB::table('permalinks')
+                        ->whereIn('module', ['puu-naskah-urgensi', 'naskah-akademik'])
+                        ->where('uniqid', (string) $oldDoc->id)
+                        ->delete();
+                    \DB::table('documents_lang')->where('base_id', $oldDoc->id)->delete();
+                    $oldDoc->delete();
+                });
+            return null;
+        }
+
+        $docDate = $this->tgl_mulai_harmonisasi ?: ($this->tgl_usulan ?: ($this->created_at ?: now()));
+        $unit = $this->unit_kerja ?: (optional($this->pemohon)->name ?? 'Kementerian Koordinator Bidang Pangan');
+        $rancanganId = $rancanganDoc?->id ?? optional($this->document()->first())->id;
+
+        $doc = Document::firstOrNew([
+            'regulasi_id' => $this->id,
+            'master_document_id' => Document::NASKAH_AKADEMIK,
+        ]);
+        $doc->master_document_id = Document::NASKAH_AKADEMIK;
+        $doc->related_document_id = $rancanganId;
+        $doc->date = $docDate->format('Y-m-d');
+        $doc->tanggal_penetapan = $docDate->format('Y-m-d');
+        $doc->year = $docDate->format('Y');
+        $doc->lokasi = $unit;
+        $doc->pdf = $filePath;
+        $doc->is_active = 1;
+        $doc->status_berlaku = 1;
+        $doc->created_at = $doc->created_at ?: ($this->created_at ?: now());
+        $doc->updated_at = $this->updated_at ?: now();
+        $doc->save();
+
+        $title = 'Naskah Urgensi ' . $this->judul;
+        $pdfName = basename($filePath);
+
+            foreach (['id', 'en'] as $lang) {
+            \DB::table('documents_lang')->updateOrInsert(
+                ['base_id' => $doc->id, 'lang' => $lang],
+                [
+                    'title' => $title,
+                    'intro' => $this->abstrak,
+                    'teu' => $unit,
+                    'bahasa' => 'Indonesia',
+                    'unit_pemrakarsa' => $unit,
+                    'pdf_name' => $pdfName,
+                ]
+            );
+        }
+
+        $slug = \Illuminate\Support\Str::limit(\Illuminate\Support\Str::slug($this->judul), 190, '');
+        foreach (['id', 'en'] as $lang) {
+            \DB::table('permalinks')->updateOrInsert(
+                ['module' => 'puu-naskah-urgensi', 'uniqid' => $doc->id, 'lang' => $lang],
+                [
+                    'permalink' => 'naskah-urgensi-' . $slug . ($lang === 'en' ? '-en' : '') . '-' . $doc->id,
+                    'label' => \Illuminate\Support\Str::limit($title, 250, ''),
+                    'description' => $this->abstrak,
+                    'is_active' => 1,
                 ]
             );
         }
@@ -169,7 +257,7 @@ class Regulasi extends Model
         $docs = Document::where('regulasi_id', $this->id)->get();
         foreach ($docs as $doc) {
             \DB::table('permalinks')
-                ->where('module', 'puu-rancangan')
+                ->whereIn('module', ['puu-rancangan', 'puu-naskah-urgensi', 'naskah-akademik'])
                 ->where('uniqid', (string) $doc->id)
                 ->delete();
 
