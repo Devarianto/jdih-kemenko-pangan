@@ -23,9 +23,9 @@
 
     <meta name="robots" content="noindex">
 		
-    @if ($website->favicon)
-        <link rel="icon" href="{{ media::url($website->favicon) }}">
-    @endif
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}?v=kemenko">
+    <link rel="shortcut icon" href="{{ asset('favicon.ico') }}?v=kemenko">
+    <link rel="apple-touch-icon" href="{{ asset('images/logokemenko.png') }}">
 </head>
 <body>
     

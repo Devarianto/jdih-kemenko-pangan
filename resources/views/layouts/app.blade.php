@@ -28,11 +28,9 @@
 
     <meta name="robots" content="noindex">
 
-    @if (isset($website) && $website && $website->favicon)
-        <link rel="icon" href="{{ media::url($website->favicon) }}">
-    @else
-        <link rel="icon" type="image/x-icon" href="/favicon.ico">
-    @endif
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}?v=kemenko">
+    <link rel="shortcut icon" href="{{ asset('favicon.ico') }}?v=kemenko">
+    <link rel="apple-touch-icon" href="{{ asset('images/logokemenko.png') }}">
 
     <style>
         /* Scoped e-Regulasi Module Styles inside JDIH Admin Panel */

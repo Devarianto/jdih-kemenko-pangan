@@ -92,17 +92,11 @@ class og {
             }            
         }
         
-		$favicon = $config->favicon;
-		
-		//if (media::source($favicon)) {
-		//	if (strtolower(pathinfo(media::source($favicon), PATHINFO_EXTENSION)) == 'png') {
-		//		$og .= '<link rel="icon" type="image/png" href="'.media::thumb($favicon, 'favicon').'" sizes="32x32">'.PHP_EOL;
-		//	}
-			
-		//	if (strtolower(pathinfo(media::source($favicon), PATHINFO_EXTENSION)) == 'ico') {
-				$og .= '<link rel="icon" href="'.media::url($favicon).'">'.PHP_EOL;
-		//	}
-		//}
+		$iconUrl = asset('favicon.ico') . '?v=kemenko';
+		$appleIconUrl = asset('images/logokemenko.png');
+		$og .= '<link rel="icon" type="image/x-icon" href="' . e($iconUrl) . '">' . PHP_EOL;
+		$og .= '<link rel="shortcut icon" href="' . e($iconUrl) . '">' . PHP_EOL;
+		$og .= '<link rel="apple-touch-icon" href="' . e($appleIconUrl) . '">' . PHP_EOL;
         
         if (array_key_exists('canonical',self::$og))
             $og .= '<link rel="canonical" href="'.e(url(self::$og['canonical'])).'" />'.PHP_EOL;
