@@ -625,5 +625,79 @@ class Document extends Model
             return '-';
         }
     }
-    
+
+    /**
+     * Ambil opsi dropdown Rancangan PUU aktif dari e-Regulasi, unik per judul (tanpa duplikasi).
+     */
+    public static function rancanganDropdownOptions(): array
+    {
+        return self::dropdownOptions(self::RANCANGAN_PUU);
+    }
+
+    /**
+     * Ambil opsi dropdown dokumen untuk form admin, ter-deduplikasi per judul dan urut abjad.
+     * Untuk RANCANGAN_PUU hanya mengambil dokumen aktif yang tersinkron dengan tabel regulasi.
+     */
+    public static function dropdownOptions(array|int $masterIds): array
+    {
+        $ids = (array) $masterIds;
+        $hasRancangan = in_array(self::RANCANGAN_PUU, $ids, true);
+
+        if ($hasRancangan) {
+            Regulasi::doesntHave('document')->get()->each->syncToJdihDocument();
+        }
+
+        $nonRancanganIds = array_values(array_diff($ids, [self::RANCANGAN_PUU]));
+
+        $docs = self::translate()
+            ->with('regulasi')
+            ->where(function ($q) use ($hasRancangan, $nonRancanganIds) {
+                if ($hasRancangan) {
+                    $q->orWhere(function ($rq) {
+                        $rq->where('master_document_id', self::RANCANGAN_PUU)
+                            ->where('documents.is_active', 1)
+                            ->whereNotNull('documents.regulasi_id')
+                            ->whereHas('regulasi');
+                    });
+                }
+                if (!empty($nonRancanganIds)) {
+                    $q->orWhere(function ($nq) use ($nonRancanganIds) {
+                        $nq->whereIn('master_document_id', $nonRancanganIds)
+                            ->where('documents.is_active', 1);
+                    });
+                }
+            })
+            ->select('documents.*', 'documents_lang.title')
+            ->get()
+            ->sort(function ($a, $b) {
+                $pa = $a->regulasi ? $a->regulasi->stagePriority() : 0;
+                $pb = $b->regulasi ? $b->regulasi->stagePriority() : 0;
+                if ($pa !== $pb) {
+                    return $pb <=> $pa;
+                }
+                return ($b->updated_at?->timestamp ?? 0) <=> ($a->updated_at?->timestamp ?? 0)
+                    ?: ($b->id <=> $a->id);
+            });
+
+        $options = [];
+        $seenTitles = [];
+
+        foreach ($docs as $doc) {
+            $title = trim(preg_replace('/\s+/', ' ', (string) ($doc->title ?? '')));
+            if ($title === '') {
+                continue;
+            }
+            $key = mb_strtolower($title);
+            if (isset($seenTitles[$key])) {
+                continue;
+            }
+            $seenTitles[$key] = true;
+            $options[$doc->id] = $title;
+        }
+
+        asort($options, SORT_NATURAL | SORT_FLAG_CASE);
+
+        return $options;
+    }
+
 }

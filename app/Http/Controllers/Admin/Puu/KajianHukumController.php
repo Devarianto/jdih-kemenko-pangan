@@ -107,11 +107,11 @@ class KajianHukumController extends Controller
 
     public function formFields($type)
     {
-        // Opsi dokumen peraturan terkait
-        $relatedDocs = Document::translate()->whereIn('master_document_id', [
+        // Opsi dokumen peraturan terkait (unik per judul)
+        $relatedDocs = Document::dropdownOptions([
             Document::PERATURAN,
             Document::RANCANGAN_PUU
-        ])->pluck('title', 'documents.id')->toArray();
+        ]);
 
         $form = [
             'title' => [

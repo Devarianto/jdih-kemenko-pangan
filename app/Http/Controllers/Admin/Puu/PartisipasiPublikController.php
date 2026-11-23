@@ -112,10 +112,8 @@ class PartisipasiPublikController extends Controller
 
     public function formFields($type)
     {
-        // Opsi Rancangan PUU yang dikonsultasikan
-        $rancanganList = Document::translate()->where('master_document_id', Document::RANCANGAN_PUU)
-            ->pluck('title', 'documents.id')
-            ->toArray();
+        // Opsi Rancangan PUU yang dikonsultasikan (unik per judul, tersinkron dari e-Regulasi)
+        $rancanganList = Document::rancanganDropdownOptions();
 
         $form = [
             'title' => [

@@ -98,12 +98,12 @@ class NaskahUrgensiController extends Controller
 
     public function formFields($type)
     {
-        // Dokumen PUU / Peraturan terkait untuk dropdown
-        $relatedDocs = Document::translate()->whereIn('master_document_id', [
+        // Dokumen PUU / Peraturan terkait untuk dropdown (unik per judul)
+        $relatedDocs = Document::dropdownOptions([
             Document::PERATURAN,
             Document::RANCANGAN_PUU,
             Document::PROGRAM_PENYUSUNAN
-        ])->pluck('title', 'documents.id')->toArray();
+        ]);
 
         $form = [
             'title' => [
