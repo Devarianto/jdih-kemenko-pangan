@@ -841,9 +841,20 @@ class PageController extends Controller
         if (request()->query('search')) {
             $documents = $documents->where('title', 'like', '%'.request()->query('search').'%');
         }
-        
-        $documents = $documents->orderBy('tanggal_penetapan', 'desc')->orderBy('id', 'desc')->paginate(8);
-        $years = collect();
+        if (request()->query('year')) {
+            $documents = $documents->where('documents.year', request()->query('year'));
+        }
+
+        $documents = $documents->orderByRaw('COALESCE(documents.tanggal_penetapan, documents.date, DATE(documents.created_at)) DESC')
+            ->orderBy('documents.id', 'desc')
+            ->paginate(8);
+        $years = Document::whereIsActive(1)
+            ->where('master_document_id', Document::ANALISIS_EVALUASI)
+            ->whereNotNull('year')
+            ->select('year')
+            ->distinct()
+            ->orderBy('year', 'desc')
+            ->get();
         return view('dynamic.pages.document-analisis-evaluasi', compact('menu', 'documents', 'years'));
     }
 
