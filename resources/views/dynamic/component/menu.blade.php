@@ -1952,6 +1952,17 @@
     border-color: #334155 !important;
   }
 
+  /* Partner / Institution Logo Slider in Dark Mode */
+  [data-theme="dark"] .partner .logo-slider::before {
+    background: linear-gradient(-90deg, rgba(11, 17, 32, 0) 0%, #0b1120 100%) !important;
+  }
+  [data-theme="dark"] .partner .logo-slider::after {
+    background: linear-gradient(90deg, rgba(11, 17, 32, 0) 0%, #0b1120 100%) !important;
+  }
+  [data-theme="dark"] .partner .logo-slider .swiper-arrow {
+    filter: brightness(0) invert(1) !important;
+  }
+
   /* Popups in Dark Mode */
   [data-theme="dark"] .popup__box {
     background-color: #1e293b !important;

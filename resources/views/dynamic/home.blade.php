@@ -1002,6 +1002,103 @@
           });
         }
 
+        // --- PARTNER INSTITUTION LOGOS DARK MODE WHITE TEXT ---
+        function processPartnerLogosForDarkMode() {
+          const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+          const imgs = document.querySelectorAll('.partner .logo-slider .swiper-slide img');
+          imgs.forEach(img => {
+            if (!img.dataset.origSrc) {
+              img.dataset.origSrc = img.getAttribute('src');
+            }
+            if (!isDark) {
+              if (img.getAttribute('src') !== img.dataset.origSrc) {
+                img.setAttribute('src', img.dataset.origSrc);
+              }
+              return;
+            }
+            if (img.dataset.darkSrc) {
+              if (img.getAttribute('src') !== img.dataset.darkSrc) {
+                img.setAttribute('src', img.dataset.darkSrc);
+              }
+              return;
+            }
+            const buildDarkLogo = (sourceImg) => {
+              try {
+                const w = sourceImg.naturalWidth;
+                const h = sourceImg.naturalHeight;
+                if (!w || !h) return;
+                const canvas = document.createElement('canvas');
+                canvas.width = w;
+                canvas.height = h;
+                const ctx2d = canvas.getContext('2d');
+                ctx2d.drawImage(sourceImg, 0, 0);
+                const imgData = ctx2d.getImageData(0, 0, w, h);
+                const data = imgData.data;
+
+                // Find transparent vertical gap separating left emblem from right text
+                let splitX = -1;
+                if (w > 130) {
+                  for (let x = 42; x < Math.min(100, Math.floor(w * 0.55)); x++) {
+                    let maxAlpha = 0;
+                    for (let y = 0; y < h; y++) {
+                      const a = data[(y * w + x) * 4 + 3];
+                      if (a > maxAlpha) maxAlpha = a;
+                    }
+                    if (maxAlpha < 16) {
+                      splitX = x;
+                      break;
+                    }
+                  }
+                }
+
+                for (let y = 0; y < h; y++) {
+                  for (let x = 0; x < w; x++) {
+                    const idx = (y * w + x) * 4;
+                    const a = data[idx + 3];
+                    if (a < 15) continue;
+                    const r = data[idx];
+                    const g = data[idx + 1];
+                    const b = data[idx + 2];
+
+                    if (splitX > 0 && x >= splitX) {
+                      const lum = 0.299 * r + 0.587 * g + 0.114 * b;
+                      if (lum < 145) {
+                        data[idx] = 255;
+                        data[idx + 1] = 255;
+                        data[idx + 2] = 255;
+                      }
+                    } else if (splitX === -1 && y > h * 0.62) {
+                      const lum = 0.299 * r + 0.587 * g + 0.114 * b;
+                      if (lum < 130) {
+                        data[idx] = 255;
+                        data[idx + 1] = 255;
+                        data[idx + 2] = 255;
+                      }
+                    }
+                  }
+                }
+
+                ctx2d.putImageData(imgData, 0, 0);
+                const dataUrl = canvas.toDataURL('image/png');
+                img.dataset.darkSrc = dataUrl;
+                if (document.documentElement.getAttribute('data-theme') === 'dark') {
+                  img.setAttribute('src', dataUrl);
+                }
+              } catch (err) {}
+            };
+
+            const tmp = new Image();
+            tmp.crossOrigin = 'anonymous';
+            tmp.onload = () => buildDarkLogo(tmp);
+            tmp.src = img.dataset.origSrc;
+          });
+        }
+
+        processPartnerLogosForDarkMode();
+        setTimeout(processPartnerLogosForDarkMode, 800);
+        const themeObserver = new MutationObserver(() => processPartnerLogosForDarkMode());
+        themeObserver.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+
         const ctx = $("#statusChart");
         new Chart(ctx, {
           type: "bar",
