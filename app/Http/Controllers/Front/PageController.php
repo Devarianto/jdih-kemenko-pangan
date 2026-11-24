@@ -373,6 +373,67 @@ class PageController extends Controller
 
     public function getInformasiInfografis($menu)
     {
+        try {
+            $hasTataNaskah = \Cactuar\Admin\Models\Permalink::where('module', 'information-infografis')
+                ->where('permalink', 'tata-naskah-dinas-kementerian-koordinator-bidang-pangan')
+                ->exists();
+            if (!$hasTataNaskah) {
+                $item = new Infografis;
+                $item->thumbnail = json_encode([
+                    'path' => 'images/infografis/tata-naskah-dinas-cover.jpg.webp',
+                    'alt_id' => 'Tata Naskah Dinas Kementerian Koordinator Bidang Pangan',
+                    'alt_en' => 'Official Document Management of the Coordinating Ministry for Food Affairs',
+                ]);
+                $item->date = '2026-08-26';
+                $item->view_count = 0;
+                $item->is_active = 1;
+                $item->created_by = 'superadmin';
+                $item->updated_by = 'superadmin';
+                $item->save();
+
+                $descId = '<p>Kementerian Koordinator Bidang Pangan telah menetapkan Peraturan Menteri Koordinator Bidang Pangan Nomor 5 Tahun 2026 tentang Tata Naskah Dinas Kementerian Koordinator Bidang Pangan.</p><p>Peraturan ini menjadi pedoman dalam penyelenggaraan Tata Naskah Dinas, mulai dari jenis, susunan, dan bentuk Naskah Dinas, pembuatan, pengamanan, pejabat penandatangan, hingga pengendalian Naskah Dinas untuk mendukung tertib administrasi dan komunikasi kedinasan di lingkungan Kementerian Koordinator Bidang Pangan.</p>';
+                $descEn = '<p>The Coordinating Ministry for Food Affairs has enacted Regulation of the Coordinating Minister for Food Affairs Number 5 of 2026 concerning Official Document Management of the Coordinating Ministry for Food Affairs.</p><p>This regulation serves as a guideline for organizing Official Document Management, covering types, structure, and format of Official Documents, drafting, security, signing officials, and control of Official Documents to support administrative order and official communication within the Coordinating Ministry for Food Affairs.</p>';
+
+                \DB::table('infografis_lang')->insert([
+                    [
+                        'parent_id' => $item->id,
+                        'lang' => 'id',
+                        'title' => 'Tata Naskah Dinas Kementerian Koordinator Bidang Pangan',
+                        'description' => $descId,
+                    ],
+                    [
+                        'parent_id' => $item->id,
+                        'lang' => 'en',
+                        'title' => 'Official Document Management of the Coordinating Ministry for Food Affairs',
+                        'description' => $descEn,
+                    ],
+                ]);
+
+                \Cactuar\Admin\Models\Permalink::insert([
+                    [
+                        'uniqid' => $item->id,
+                        'module' => 'information-infografis',
+                        'lang' => 'id',
+                        'permalink' => 'tata-naskah-dinas-kementerian-koordinator-bidang-pangan',
+                        'searchable' => 'Tata Naskah Dinas Kementerian Koordinator Bidang Pangan',
+                        'created_at' => now(),
+                        'updated_at' => now(),
+                    ],
+                    [
+                        'uniqid' => $item->id,
+                        'module' => 'information-infografis',
+                        'lang' => 'en',
+                        'permalink' => 'tata-naskah-dinas-kementerian-koordinator-bidang-pangan-en',
+                        'searchable' => 'Official Document Management of the Coordinating Ministry for Food Affairs',
+                        'created_at' => now(),
+                        'updated_at' => now(),
+                    ],
+                ]);
+            }
+        } catch (\Throwable $e) {
+            \Log::warning('Sync Tata Naskah Dinas Infografis failed: ' . $e->getMessage());
+        }
+
         $infografis = Infografis::translate()->whereIsActive(1);
 
         if (request()->query('sort') == 'latest') {
