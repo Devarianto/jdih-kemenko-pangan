@@ -12,8 +12,15 @@
       <div class="slider-caption with-pagination swiper">
         <div class="swiper-wrapper">
           @foreach(widget($infografis->id, 'information-infografis', 'image') as $image)
+            <?php
+              $rawImg = media::initial($image->image)->url;
+              $origImg = str_replace(['/thumbs/', 'cover_990_1022_', 'cover_283_365_'], ['/', '', ''], $rawImg);
+              if (substr($origImg, -5) === '.webp' && (strpos($origImg, '.jpg.webp') !== false || strpos($origImg, '.png.webp') !== false || strpos($origImg, '.jpeg.webp') !== false)) {
+                $origImg = substr($origImg, 0, -5);
+              }
+            ?>
             <div class="swiper-slide">
-              <figure><img src="{{ media::initial($image->image)->url }}" alt="{{ media::initial($image->image)->alt }}"></figure>
+              <figure style="display:flex;align-items:center;justify-content:center;background:#0b1120;border-radius:12px;overflow:hidden;"><img src="{{ $origImg }}" onerror="if(this.src!=='{{ $rawImg }}'){this.src='{{ $rawImg }}';}" alt="{{ media::initial($image->image)->alt }}" style="max-height:78vh;width:auto;height:auto;object-fit:contain !important;margin:0 auto;"></figure>
             </div>
           @endforeach
         </div>

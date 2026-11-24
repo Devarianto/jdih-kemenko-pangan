@@ -76,27 +76,26 @@ class InfografisController extends Controller
                 'type' => 'permalink'
             ],
             'thumbnail' => [
-                'label' => 'Thumbnail',
+                'label' => 'Thumbnail (Sampul)',
                 'type' => 'text',
                 'attributes' => [
                     'class' => 'required cfind',
                     'cfind-type' => 'image',
-                    'cfind-thumb' => '283x365',
                     'cfind-convert' => 'webp',
                     'cfind-alt' => 1,
-                ]
+                ],
+                'info' => 'Pilih gambar sampul (rasio asli tetap utuh tanpa terpotong).'
             ],
             'image' => [
-                'subtitle' => 'Image',
+                'subtitle' => 'Image Slide (Opsional jika sudah mengisi Link Instagram di Description)',
                 'type' => 'widget',
                 'widgets' => [
                     'image' => [
                         'label' => 'Image Detail',
                         'type' => 'text',
                         'attributes' => [
-                            'class' => 'required cfind',
+                            'class' => 'cfind',
                             'cfind-type' => 'image',
-                            'cfind-thumb' => '990x1022',
                             'cfind-convert' => 'webp',
                             'cfind-alt' => 1,
                         ]
@@ -112,12 +111,13 @@ class InfografisController extends Controller
                 ]
             ],
             'description' => [
-                'label' => 'Description',
+                'label' => 'Description / Link Instagram',
                 'type' => 'textarea',
                 'multilang' => true,
                 'attributes' => [
                     'class' => 'required ckeditor'
                 ],
+                'info' => 'Sertakan URL Instagram (misal: https://www.instagram.com/p/DaebQhEmTzd/) di dalam deskripsi agar popup carousel Instagram otomatis tampil tanpa perlu mengunggah slide satu per satu.',
                 'ai' => ['translate','correction'],
             ],
             'meta' => [
