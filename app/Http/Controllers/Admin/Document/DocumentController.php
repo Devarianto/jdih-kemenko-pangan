@@ -142,6 +142,13 @@ class DocumentController extends Controller
         $category = $request->input('category', 'all');
         $excludeId = $request->input('exclude_id');
 
+        // Pastikan seluruh Rancangan PUU dari e-Regulasi ikut tersinkron agar dapat dicari di relasi
+        try {
+            \App\Models\Regulasi::doesntHave('document')->get()->each->syncToJdihDocument();
+        } catch (\Throwable $e) {
+            \Log::warning('Regulasi sync in apiSearchRelated failed: ' . $e->getMessage());
+        }
+
         $query = Document::translate()->with(['master_document', 'rule_type']);
 
         if (!empty($excludeId)) {
@@ -149,13 +156,28 @@ class DocumentController extends Controller
         }
 
         if ($category === 'peraturan') {
-            $query->where('documents.master_document_id', Document::PERATURAN);
+            $query->whereIn('documents.master_document_id', [
+                Document::PERATURAN,
+                Document::RANCANGAN_PUU,
+            ]);
         } else if ($category === 'dokumen') {
             $query->where('documents.master_document_id', '!=', Document::PERATURAN);
         }
 
+        // Untuk Rancangan PUU, tampilkan hanya yang aktif agar duplikat/draft lama nonaktif tidak muncul
+        $query->where(function ($sub) {
+            $sub->where('documents.master_document_id', '!=', Document::RANCANGAN_PUU)
+                ->orWhere(function ($rq) {
+                    $rq->where('documents.master_document_id', Document::RANCANGAN_PUU)
+                        ->where('documents.is_active', 1);
+                });
+        });
+
         if (!empty($year)) {
-            $query->whereYear('documents.date', (int)$year);
+            $query->where(function($y) use ($year) {
+                $y->where('documents.year', (int)$year)
+                    ->orWhereYear('documents.date', (int)$year);
+            });
         }
 
         if (!empty($q)) {
@@ -163,19 +185,34 @@ class DocumentController extends Controller
                 $sub->where('documents_lang.title', 'LIKE', "%{$q}%")
                     ->orWhere('documents.no_peraturan', 'LIKE', "%{$q}%")
                     ->orWhere('documents.nomor_perjanjian', 'LIKE', "%{$q}%")
-                    ->orWhere('documents.no_putusan', 'LIKE', "%{$q}%");
+                    ->orWhere('documents.no_putusan', 'LIKE', "%{$q}%")
+                    ->orWhere('documents.year', 'LIKE', "%{$q}%");
             });
         }
 
-        $results = $query->orderBy('documents.date', 'desc')
+        $results = $query
+            ->orderByRaw('CASE WHEN documents.master_document_id = ? AND documents.regulasi_id IS NOT NULL THEN 0 WHEN documents.master_document_id = ? THEN 1 ELSE 0 END ASC', [Document::RANCANGAN_PUU, Document::RANCANGAN_PUU])
+            ->orderByDesc('documents.date')
+            ->orderByDesc('documents.updated_at')
             ->select('documents.*')
-            ->limit(30)
-            ->get();
+            ->limit(60)
+            ->get()
+            ->unique(function ($doc) {
+                $titleKey = mb_strtolower(trim(preg_replace('/\s+/', ' ', (string) ($doc->translated('title') ?: $doc->title))));
+                return $doc->master_document_id . '|' . $titleKey;
+            })
+            ->take(30)
+            ->values();
 
         $data = $results->map(function($doc) {
-            $year = $doc->date ? date('Y', strtotime($doc->date)) : '-';
+            $year = $doc->year ?: ($doc->date ? date('Y', strtotime($doc->date)) : '-');
             $catLabel = optional($doc->master_document)->label ?? 'Dokumen';
-            $typeLabel = optional($doc->rule_type)->label ?? $catLabel;
+            if ((int) $doc->master_document_id === Document::RANCANGAN_PUU) {
+                $catLabel = 'Rancangan PUU';
+                $typeLabel = 'Rancangan PUU' . (optional($doc->rule_type)->label ? ' (' . $doc->rule_type->label . ')' : '');
+            } else {
+                $typeLabel = optional($doc->rule_type)->label ?? $catLabel;
+            }
             $number = $doc->no_peraturan ?? $doc->nomor_perjanjian ?? $doc->no_putusan ?? '-';
 
             return [
@@ -185,7 +222,7 @@ class DocumentController extends Controller
                 'year' => $year,
                 'category_label' => $catLabel,
                 'type_label' => $typeLabel,
-                'is_regulation' => ($doc->master_document_id == Document::PERATURAN),
+                'is_regulation' => in_array((int) $doc->master_document_id, [Document::PERATURAN, Document::RANCANGAN_PUU], true),
             ];
         });
 

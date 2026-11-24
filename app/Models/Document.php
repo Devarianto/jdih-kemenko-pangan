@@ -232,14 +232,17 @@ class Document extends Model
             }
             $doc = $rel->relatedDocument;
             if (!$doc) continue;
+            $jenis = (int) $doc->master_document_id === self::RANCANGAN_PUU
+                ? ('Rancangan PUU' . (optional($doc->rule_type)->label ? ' (' . $doc->rule_type->label . ')' : ''))
+                : (optional($doc->rule_type)->label ?? optional($doc->master_document)->label ?? 'Peraturan');
             $list[] = [
                 'id' => $rel->id,
                 'is_external' => false,
                 'document_id' => $doc->id,
                 'title' => $doc->translated('title') ?: $doc->title,
                 'no_peraturan' => $doc->no_peraturan ?? '-',
-                'year' => $doc->date ? date('Y', strtotime($doc->date)) : '-',
-                'jenis_peraturan' => optional($doc->rule_type)->label ?? optional($doc->master_document)->label ?? 'Peraturan',
+                'year' => $doc->year ?: ($doc->date ? date('Y', strtotime($doc->date)) : '-'),
+                'jenis_peraturan' => $jenis,
                 'relationship_type' => $rel->relationship_type,
                 'relation_label' => $rel->type_label,
                 'colors' => $rel->type_colors,
@@ -260,13 +263,16 @@ class Document extends Model
             $doc = $rel->sourceDocument;
             if (!$doc) continue;
             $reciprocalType = \App\Models\DocumentRelation::getReciprocal($rel->relationship_type);
+            $jenis = (int) $doc->master_document_id === self::RANCANGAN_PUU
+                ? ('Rancangan PUU' . (optional($doc->rule_type)->label ? ' (' . $doc->rule_type->label . ')' : ''))
+                : (optional($doc->rule_type)->label ?? optional($doc->master_document)->label ?? 'Peraturan');
             $list[] = [
                 'id' => $rel->id,
                 'document_id' => $doc->id,
                 'title' => $doc->translated('title') ?: $doc->title,
                 'no_peraturan' => $doc->no_peraturan ?? '-',
-                'year' => $doc->date ? date('Y', strtotime($doc->date)) : '-',
-                'jenis_peraturan' => optional($doc->rule_type)->label ?? optional($doc->master_document)->label ?? 'Peraturan',
+                'year' => $doc->year ?: ($doc->date ? date('Y', strtotime($doc->date)) : '-'),
+                'jenis_peraturan' => $jenis,
                 'relationship_type' => $reciprocalType,
                 'relation_label' => \App\Models\DocumentRelation::TYPE_LABELS[$reciprocalType] ?? ucfirst(str_replace('_', ' ', $reciprocalType)),
                 'colors' => \App\Models\DocumentRelation::TYPE_COLORS[$reciprocalType] ?? ['bg' => '#f8fafc', 'text' => '#475569', 'border' => '#e2e8f0'],
@@ -346,7 +352,7 @@ class Document extends Model
                 'title' => $doc->translated('title') ?: $doc->title,
                 'kategori' => optional($doc->master_document)->label ?? 'Dokumen Hukum',
                 'nomor' => $doc->no_peraturan ?? $doc->nomor_perjanjian ?? $doc->no_putusan ?? '-',
-                'year' => $doc->date ? date('Y', strtotime($doc->date)) : '-',
+                'year' => $doc->year ?: ($doc->date ? date('Y', strtotime($doc->date)) : '-'),
                 'relationship_type' => $rel->relationship_type,
                 'relation_label' => $rel->type_label,
                 'colors' => $rel->type_colors,
@@ -464,7 +470,7 @@ class Document extends Model
         } else if ($master_document == self::PARTISIPASI_PUBLIK) {
             return $this->customPermalink('puu-partisipasi-publik') ?: $this->customPermalink('partisipasi-publik');
         } else if ($master_document == self::RANCANGAN_PUU) {
-            return $this->customPermalink('puu-rancangan');
+            return $this->customPermalink('puu-rancangan') ?: $this->customPermalink('rancangan-puu');
         }
 
         $module = \DB::table('permalinks')

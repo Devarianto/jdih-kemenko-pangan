@@ -37,9 +37,9 @@
                     'relation_label' => $rel->type_label,
                     'title' => $doc->translated('title') ?: $doc->title,
                     'no_peraturan' => $doc->no_peraturan ?? $doc->nomor_perjanjian ?? $doc->no_putusan ?? '-',
-                    'year' => $doc->date ? date('Y', strtotime($doc->date)) : '-',
+                    'year' => $doc->year ?: ($doc->date ? date('Y', strtotime($doc->date)) : '-'),
                     'category_label' => optional($doc->master_document)->label ?? 'Dokumen',
-                    'type_label' => optional($doc->rule_type)->label ?? (optional($doc->master_document)->label ?? 'Peraturan'),
+                    'type_label' => ((int) $doc->master_document_id === \App\Models\Document::RANCANGAN_PUU ? 'Rancangan PUU' . (optional($doc->rule_type)->label ? ' (' . $doc->rule_type->label . ')' : '') : (optional($doc->rule_type)->label ?? (optional($doc->master_document)->label ?? 'Peraturan'))),
                     'note' => $rel->note ?? '',
                     'colors' => $rel->type_colors,
                 ];
@@ -104,9 +104,9 @@
         <div id="panel_reg_internal">
             <div class="row" style="margin-bottom:10px;">
                 <div class="col-md-5" style="position:relative;">
-                    <label style="font-size:12px; font-weight:600; color:#334155; margin-bottom:4px; display:block;">Cari Peraturan Internal (Judul / Nomor / Tahun)</label>
+                    <label style="font-size:12px; font-weight:600; color:#334155; margin-bottom:4px; display:block;">Cari Peraturan / Rancangan Internal (Judul / Nomor / Tahun)</label>
                     <div style="position:relative;">
-                        <input type="text" id="input_search_reg" class="form-control" placeholder="Ketik kata kunci judul, nomor, atau tahun..." autocomplete="off">
+                        <input type="text" id="input_search_reg" class="form-control" placeholder="Ketik kata kunci judul peraturan/rancangan, nomor, atau tahun..." autocomplete="off">
                         <span id="loading_reg" style="position:absolute; right:10px; top:8px; display:none;"><i class="fa fa-spinner fa-spin text-muted"></i></span>
                     </div>
                     <div id="results_reg" class="jdih-search-results"></div>

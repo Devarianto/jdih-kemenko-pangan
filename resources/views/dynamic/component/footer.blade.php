@@ -24,7 +24,17 @@
           <img src="{{ media::initial($footer->logo)->url }}" alt="{{ media::initial($footer->logo)->alt }}">
           @include('dynamic.component.logo-links', ['homeUrl' => lang::url('/')])
         </div>
-        <p>{{ $footer->translated('title') }}</p>
+        <p class="footer-org-title">
+          @if(lang::active() == 'en')
+            Legal Documentation and Information Network<br>
+            Coordinating Ministry for Food Affairs<br>
+            Republic of Indonesia
+          @else
+            Jaringan Dokumentasi dan Informasi Hukum<br>
+            Kementerian Koordinator Bidang Pangan<br>
+            Republik Indonesia
+          @endif
+        </p>
         <address>{!! nl2br(strip_tags($footer->address, '<br>')) !!}</address>
         <a href="tel:{{ preg_replace('/\D/', '', $footer->phone) }}" class="button button-icon button-outline ">
           <i class="wa-icon wa-ic-phone-solid"></i>
