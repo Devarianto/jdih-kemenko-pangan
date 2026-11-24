@@ -215,7 +215,7 @@
 
 <script src="{{ asset('nwcms/admin/jquery-swapsies.js') }}"></script>
 <script src="{{ asset('nwcms/admin/c.js')}}"></script>
-<script src="{{ asset('nwcms/admin/adminC.js')}}?v=20261124"></script>
+<script src="{{ asset('nwcms/admin/adminC.js')}}?v=20261124b"></script>
 <script src="{{ asset('nwcms/webarq-icons/script.js')}}"></script>
 
 @stack('assets')

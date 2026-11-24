@@ -1278,11 +1278,22 @@ $(document).on('click', '.delete-file', function () {
 });
 
 $(document).on('change','.title',function() {
+	var rawSlug = slug($(this).val());
 	if ($(this).attr('lang')) { console.log('permalink');
-		$('input.permalink[lang=' + $(this).attr('lang') + ']').val(slug($(this).val()));
-		$('input[origin=meta_title][lang=' + $(this).attr('lang') + ']').val($(this).val());
+		var langCode = $(this).attr('lang');
+		if (langCode !== 'id') {
+			var idSlug = ($('input.permalink[lang="id"]').val() || '').slice(0, 200);
+			var cand = rawSlug.slice(0, 200);
+			if (cand && cand === idSlug) {
+				cand = rawSlug.slice(0, Math.max(1, 200 - (langCode.length + 1))).replace(/-+$/, '') + '-' + langCode;
+			}
+			$('input.permalink[lang=' + langCode + ']').val(cand);
+		} else {
+			$('input.permalink[lang=' + langCode + ']').val(rawSlug.slice(0, 200));
+		}
+		$('input[origin=meta_title][lang=' + langCode + ']').val($(this).val());
 	} else {
-		$('input.permalink').val(slug($(this).val()));
+		$('input.permalink').val(rawSlug.slice(0, 200));
 		$('input[origin=meta_title]').val($(this).val());
 	}
 });

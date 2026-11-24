@@ -345,7 +345,7 @@ class adminForm
                     $o->module = $this->module;
                     $o->uniqid = $res->id;
                     $o->lang = $lang;
-                    $o->permalink = $permalink;
+                    $o->permalink = Permalink::ensureUnique($permalink, (string) $lang);
                     $o->compileMeta($res);
                 }
             }

@@ -127,6 +127,45 @@ class Permalink extends Model
         $this->save();
     }
 
+    /**
+     * Ensure permalink fits within 200 characters and does not collide with an
+     * existing row in `permalinks` (including another language of the same record).
+     */
+    public static function ensureUnique(string $slug, string $lang = ''): string
+    {
+        $slug = trim($slug, '/');
+        if (strlen($slug) > 200) {
+            $slug = trim(substr($slug, 0, 200), '/-');
+        }
+        if ($slug === '') {
+            return '';
+        }
+
+        if (!self::wherePermalink($slug)->exists()) {
+            return $slug;
+        }
+
+        $defaultLang = config('cadmin.lang.default', 'id');
+        $langSuffix = ($lang !== '' && $lang !== $defaultLang) ? ('-' . $lang) : '';
+
+        $attempt = 0;
+        while (true) {
+            $attempt++;
+            $suffix = ($attempt === 1 && $langSuffix !== '')
+                ? $langSuffix
+                : ($langSuffix . '-' . ($langSuffix !== '' ? $attempt : ($attempt + 1)));
+            $maxBaseLen = max(1, 200 - strlen($suffix));
+            $base = trim(substr($slug, 0, $maxBaseLen), '/-');
+            if ($base === '') {
+                $base = 'item';
+            }
+            $candidate = $base . $suffix;
+            if (!self::wherePermalink($candidate)->exists()) {
+                return $candidate;
+            }
+        }
+    }
+
     public static function sitemapXML($statics = [], $freq = 'monthly', $priority = '0.8')
     {
         $urls = [];
