@@ -144,11 +144,34 @@ cfind.afterSet = function(obj, json) {
     }
 }
 
-cfind.set = function(cfind) {
+cfind.set = function(cfind, isResize) {
     this.obj.val(cfind);
     this.obj.parent().parent().find('.cfind-alt').val('');
 	this.afterSet(this.obj,cfind);
 }
+
+var _cfindLastDeliveredTs = 0;
+function _cfindHandleExternalDelivery(msg) {
+    if (!msg || !msg.str || !cfind.obj) return;
+    if (msg.ts && msg.ts === _cfindLastDeliveredTs) return;
+    _cfindLastDeliveredTs = msg.ts || Date.now();
+    cfind.set(msg.str, !!msg.isResize);
+}
+
+try {
+    var _cfindBroadcast = new BroadcastChannel('cfind_opener');
+    _cfindBroadcast.onmessage = function(ev) {
+        _cfindHandleExternalDelivery(ev.data);
+    };
+} catch (e) {}
+
+window.addEventListener('storage', function(ev) {
+    if (ev.key === 'cfind_opener_payload' && ev.newValue) {
+        try {
+            _cfindHandleExternalDelivery(JSON.parse(ev.newValue));
+        } catch (e) {}
+    }
+});
 
 cfind.setImage = function(obj, path) {
     obj.css('background-image', 'url("' + $mediaPath + '/' + path + '")');

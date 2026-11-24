@@ -92,7 +92,15 @@ $('.cfind-use-cfind').click(function() {
     
     var str = JSON.stringify(json);
     
-    window.opener.cfind.set(str);
+    if (window.opener && window.opener.cfind) {
+        window.opener.cfind.set(str);
+    } else if (window.parent && window.parent !== window && window.parent.cfind) {
+        window.parent.cfind.set(str);
+    } else {
+        var msg = { ts: Date.now(), str: str, isResize: false };
+        try { localStorage.setItem('cfind_opener_payload', JSON.stringify(msg)); } catch (e) {}
+        try { var ch = new BroadcastChannel('cfind_opener'); ch.postMessage(msg); ch.close(); } catch (e) {}
+    }
 	window.close();
 });
 

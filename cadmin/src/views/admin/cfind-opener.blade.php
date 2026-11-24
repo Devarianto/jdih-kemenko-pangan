@@ -263,5 +263,5 @@ if (!function_exists('query')) {
 @if(request()->get('opener'))
 <script src="{{ asset('nwcms/base/plugins/jquery/jquery.min.js') }}"></script>
 @endif
-<script src="{{ asset('cfind/assets/js/cfind.js') }}"></script>
+<script src="{{ asset('cfind/assets/js/cfind.js') }}?v=20261124"></script>
 <script type="text/javascript" src="{{ asset('cfind/imgAreaSelection/scripts/jquery.imgareaselect.pack.js') }}"></script>

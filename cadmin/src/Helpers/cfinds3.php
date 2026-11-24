@@ -604,7 +604,7 @@ class cfinds3
             } catch(\Exception $e) {}
         }
         //dd($json);
-		return  '<script>window.opener.cfind.set(\''.json_encode($json).'\', true);window.close()</script>';
+		return cfind::openerScript($json);
     }
 
     private function realName($path)

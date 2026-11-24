@@ -666,6 +666,29 @@ class cfind
             } catch(\Exception $e) {}
         }
         
-		return  '<script>window.opener.cfind.set(\''.json_encode($json).'\', true);window.close()</script>';
+		return self::openerScript($json);
+    }
+
+    /**
+     * Build script that delivers selected/resized cfind media back to parent form,
+     * falling back to window.parent, BroadcastChannel, or localStorage when window.opener is null.
+     */
+    public static function openerScript(array $json): string
+    {
+        $payload = json_encode($json);
+        $encoded = json_encode($payload);
+
+        return '<script>(function(){'
+            . 'var str=' . $encoded . ';'
+            . 'if(window.opener&&window.opener.cfind){window.opener.cfind.set(str,true);}'
+            . 'else if(window.parent&&window.parent!==window&&window.parent.cfind){window.parent.cfind.set(str,true);}'
+            . 'else{'
+            . 'var msg={ts:Date.now(),str:str,isResize:true};'
+            . 'try{localStorage.setItem("cfind_opener_payload",JSON.stringify(msg));}catch(e){}'
+            . 'try{var ch=new BroadcastChannel("cfind_opener");ch.postMessage(msg);ch.close();}catch(e){}'
+            . '}'
+            . 'window.close();'
+            . '})();</script>'
+            . '<p style="font-family:sans-serif;padding:20px;">Gambar berhasil dipilih. Anda dapat menutup tab ini jika tidak tertutup otomatis.</p>';
     }
 }
