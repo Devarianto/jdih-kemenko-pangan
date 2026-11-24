@@ -233,6 +233,15 @@
       ];
     }
   }
+
+  $currentActiveIds = [];
+  if (isset($menu)) {
+    if (is_object($menu) && isset($menu->activeIds)) {
+      $currentActiveIds = (array) $menu->activeIds;
+    } elseif (is_array($menu) && isset($menu['activeIds'])) {
+      $currentActiveIds = (array) $menu['activeIds'];
+    }
+  }
 @endphp
 
     <nav>
@@ -248,7 +257,7 @@
         @endphp
         @if($childs->count() > 0)
         <li class="have-child">
-          <a href="{{ $main->fullUrl }}" class="nav-parent-link @if(isset($menu) && in_array($main->id, $menu->activeIds)) active @endif">
+          <a href="{{ $main->fullUrl }}" class="nav-parent-link @if(in_array($main->id, $currentActiveIds)) active @endif">
             <span>{{ $main->label }}</span>
             <svg class="nav-chevron" width="12" height="12" viewBox="0 0 12 12" fill="none">
               <path d="M2.5 4.5L6 8L9.5 4.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
@@ -265,7 +274,7 @@
                 $isExternal = ($itemHost && $itemHost !== $appHost && !in_array($itemHost, ['localhost', '127.0.0.1', 'jdih.kemenkopangan.go.id'])) || str_contains($child->fullUrl, 'regulasikemenkopangan.id');
               @endphp
               @if($subchilds->count() > 0)
-              <div class="jdihn-item jdihn-item-has-children @if(isset($menu) && (in_array($child->id, $menu->activeIds) || $subchilds->pluck('id')->intersect($menu->activeIds ?? [])->isNotEmpty())) active @endif" data-href="{{ $child->fullUrl }}" data-external="{{ $isExternal ? '1' : '0' }}" role="link" tabindex="0">
+              <div class="jdihn-item jdihn-item-has-children @if(in_array($child->id, $currentActiveIds) || $subchilds->pluck('id')->intersect($currentActiveIds)->isNotEmpty()) active @endif" data-href="{{ $child->fullUrl }}" data-external="{{ $isExternal ? '1' : '0' }}" role="link" tabindex="0">
                 <a href="{{ $child->fullUrl }}" class="jdihn-item-icon-link" @if($isExternal) target="_blank" rel="noopener noreferrer" @endif>
                   <div class="jdihn-item-icon">
                     {!! $meta['icon'] !!}
@@ -283,7 +292,7 @@
                       @php
                         $scHost = parse_url($sc->fullUrl, PHP_URL_HOST);
                         $scIsExt = ($scHost && $scHost !== $appHost && !in_array($scHost, ['localhost', '127.0.0.1', 'jdih.kemenkopangan.go.id'])) || str_contains($sc->fullUrl, 'regulasikemenkopangan.id');
-                        $scIsActive = isset($menu) && in_array($sc->id, $menu->activeIds ?? []);
+                        $scIsActive = in_array($sc->id, $currentActiveIds);
                         $urlOrLabel = strtoupper($sc->fullUrl . ' ' . $sc->label);
                         $isCourtDecision = str_contains(strtoupper($child->label), 'PUTUSAN');
                         $isMk = str_contains($urlOrLabel, 'KONSTITUSI') || str_contains($urlOrLabel, 'CONSTITUTIONAL') || str_contains($urlOrLabel, '(MK)') || str_contains($urlOrLabel, 'MAHKAMAH-KONSTITUSI');
@@ -308,7 +317,7 @@
                 </div>
               </div>
               @else
-              <a href="{{ $child->fullUrl }}" class="jdihn-item @if(isset($menu) && in_array($child->id, $menu->activeIds)) active @endif" @if($isExternal) target="_blank" rel="noopener noreferrer" @endif>
+              <a href="{{ $child->fullUrl }}" class="jdihn-item @if(in_array($child->id, $currentActiveIds)) active @endif" @if($isExternal) target="_blank" rel="noopener noreferrer" @endif>
                 <div class="jdihn-item-icon">
                   {!! $meta['icon'] !!}
                 </div>
@@ -339,7 +348,7 @@
             </svg>
           </a>
           @else
-          <a href="{{ $main->fullUrl }}" @class(['active' => (isset($menu) && in_array($main->id, $menu->activeIds)) || ($main->type == 'home' && (request()->is('/') || request()->is(lang::active()) || (isset($home) && !isset($menu)) || request()->routeIs('home')))])>{{ $main->label }}</a>
+          <a href="{{ $main->fullUrl }}" @class(['active' => in_array($main->id, $currentActiveIds) || ($main->type == 'home' && (request()->is('/') || request()->is(lang::active()) || (isset($home) && !isset($menu)) || request()->routeIs('home')))])>{{ $main->label }}</a>
           @endif
         </li>
         @endif
@@ -564,12 +573,12 @@
       @php($childs = $main->childs()->fe()->get())
       @if($childs->count() > 0)
       <li>
-        <a href="{{ $main->fullUrl }}" @class(['active' => isset($menu) && in_array($main->id, $menu->activeIds)])>{{ $main->label }}</a>
+        <a href="{{ $main->fullUrl }}" @class(['active' => in_array($main->id, $currentActiveIds)])>{{ $main->label }}</a>
         <i class="wa-icon wa-ic-chevron-down-solid"></i>
         <div class="child">
           @foreach($childs as $child)
           @php($isChildExt = $child->type == 'url' || str_starts_with($child->fullUrl, 'http://') || str_starts_with($child->fullUrl, 'https://') || str_contains($child->fullUrl, 'pengajuan-puu'))
-          <a href="{{ $child->fullUrl }}" @class(['active' => isset($menu) && in_array($child->id, $menu->activeIds)]) @if($isChildExt) target="_blank" rel="noopener noreferrer" @endif>{{ $child->label }}</a>
+          <a href="{{ $child->fullUrl }}" @class(['active' => in_array($child->id, $currentActiveIds)]) @if($isChildExt) target="_blank" rel="noopener noreferrer" @endif>{{ $child->label }}</a>
           @php($subchilds = $child->childs()->fe()->get())
           @foreach($subchilds as $sc)
           @php($scMobUrl = (str_contains(strtolower($sc->label ?? ''), 'videografis') || str_contains(strtolower((string)$sc->fullUrl), '/videografis')) ? lang::url('/aksesibilitas') : $sc->fullUrl)
@@ -593,7 +602,7 @@
           </svg>
         </a>
         @else
-        <a href="{{ $main->fullUrl }}" @class(['active' => (isset($menu) && in_array($main->id, $menu->activeIds)) || ($main->type == 'home' && (request()->is('/') || request()->is(lang::active()) || (isset($home) && !isset($menu)) || request()->routeIs('home')))])>{{ $main->label }}</a>
+        <a href="{{ $main->fullUrl }}" @class(['active' => in_array($main->id, $currentActiveIds) || ($main->type == 'home' && (request()->is('/') || request()->is(lang::active()) || (isset($home) && !isset($menu)) || request()->routeIs('home')))])>{{ $main->label }}</a>
         @endif
       </li>
       @endif
@@ -2075,6 +2084,33 @@
     background-color: #0b1120 !important;
     border-color: #334155 !important;
     color: #f8fafc !important;
+  }
+  .middle__search:not(.putusan-search-card) {
+    padding: 30px 50px 38px !important;
+  }
+  .middle__search .wrap-filter {
+    margin-bottom: 0 !important;
+  }
+  @media (max-width: 1200px) {
+    .middle__search:not(.putusan-search-card) {
+      padding: 28px 40px 34px !important;
+    }
+  }
+  @media (max-width: 1023px) {
+    .middle__search:not(.putusan-search-card) {
+      padding: 26px 24px 32px !important;
+    }
+  }
+  @media (max-width: 767px) {
+    .middle__search:not(.putusan-search-card) {
+      padding: 20px 16px 24px !important;
+    }
+  }
+  .middle__search select {
+    appearance: none !important;
+    -webkit-appearance: none !important;
+    background-repeat: no-repeat !important;
+    padding-right: 34px !important;
   }
   [data-theme="dark"] .middle__search input::placeholder,
   [data-theme="dark"] .box-form input::placeholder,

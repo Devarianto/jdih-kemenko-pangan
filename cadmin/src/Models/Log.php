@@ -10,14 +10,18 @@ class Log extends Model
     
     public static function write($module, $act, $unique = null, $uniqueLabel = null)
     {
+        $limit255 = static function ($value) {
+            return is_null($value) ? null : mb_substr((string) $value, 0, 255);
+        };
+
         $res = new Log();
         $res->user_id = Auth::user()->id;
-        $res->username = Auth::user()->name;
-        $res->user_display_name = Auth::user()->display_name;
-        $res->module = $module;
-        $res->act = $act;
-        $res->unique_id = $unique;
-        $res->unique_label = $uniqueLabel;
+        $res->username = $limit255(Auth::user()->name);
+        $res->user_display_name = $limit255(Auth::user()->display_name);
+        $res->module = $limit255($module);
+        $res->act = $limit255($act);
+        $res->unique_id = $limit255($unique);
+        $res->unique_label = $limit255($uniqueLabel);
         $res->post = json_encode(self::postData());
         
         $res->save();
