@@ -24,9 +24,11 @@
           'organisasi-dan-tata-kerja-kementerian-koordinator-bidang-pangan' => 'DTSfCL3kYkF',
           'tata-kerja-tim-terpadu-pengendalian-alih-fungsi-lahan-sawah-dan-tim-pelaksana-pengendalian-alih-fungsi-lahan-sawah' => 'DXwHaflkf78',
           'percepatan-pelaksanaan-penyediaan-infrastruktur-pascapanen-dalam-rangka-ketahanan-pangan-nasional' => 'DaebQhEmTzd',
+          'percepatan-pelaksanaan-penyediaan-infrastruktur-pascapanen' => 'DaebQhEmTzd',
           'piagam-pengawasan-intern-di-kementerian-koordinator-bidang-pangan' => 'DakK8NJlZGN',
           'keterlibatan-tim-koordinasi-penyelenggaraan-program-makan-bergizi-gratis-dalam-pelaksanaan-penyelenggaraan-program-makan-bergizi-gratis' => 'Dawj47SkYob',
           'perubahan-atas-peraturan-pemerintah-nomor-86-tahun-2019-tentang-keamanan-pangan' => 'Da4rL-HEU87',
+          'perubahan-pp-86-2019-keamanan-pangan' => 'Da4rL-HEU87',
           'arti-dan-makna-logo-kementerian-koordinator-bidang-pangan' => 'DbAmWAvEd4D',
         ];
       ?>
@@ -290,8 +292,8 @@
              data-date="{{ date2string($data->date) }}"
              data-permalink="{{ $data->permalink }}"
              data-ig="{{ $igCode }}"
-             data-slides="{{ json_encode($slideUrls) }}"
-             data-desc="{{ e($descHtml) }}">
+             data-slides="{{ json_encode($slideUrls) }}">
+            <template class="js-infografis-desc-tpl">{!! $descHtml !!}</template>
             <figure>
               <span class="infografis-badge-slide">
                 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M8 12h8M12 8v8"/></svg>
@@ -451,7 +453,8 @@
         function openInfografisModal(card) {
           titleEl.textContent = card.getAttribute('data-title') || '';
           dateEl.textContent = card.getAttribute('data-date') || '';
-          descEl.innerHTML = card.getAttribute('data-desc') || '';
+          const descTpl = card.querySelector('.js-infografis-desc-tpl');
+          descEl.innerHTML = descTpl ? descTpl.innerHTML : (card.getAttribute('data-desc') || '');
           detailLinkEl.href = card.getAttribute('data-permalink') || '#';
           currentIgCode = card.getAttribute('data-ig') || '';
 
