@@ -19,7 +19,7 @@
         </div>
         <div class="custom-pagination">
           <span class="current-slide">1</span>/
-          <span class="total-slide">4</span>
+          <span class="total-slide">{{ $total_slide }}</span>
         </div>
         @if ($total_slide > 1)
         <div class="slider-caption__utils">
@@ -33,6 +33,41 @@
       <div class="content-pages">
         {!! $infografis->translated('description') !!}
       </div>
+      @php
+        $igMap = [
+          'rencana-strategis-kementerian-koordinator-bidang-pangan-tahun-2025-2029' => 'DTRpxvIEWYx',
+          'pedoman-pelaksanaan-neraca-komoditas-pangan' => 'DTRrNEIEVWb',
+          'pedoman-pemantauan-dan-evaluasi-serta-penyesuaian-rencana-aksi-percepatan-pembangunan-pergaraman-nasional-' => 'DTRrzgbEegn',
+          'pelaksanaan-pemberian-tunjangan-kinerja-bagi-pegawai-di-lingkungan-kementerian-koordinator-bidang-pangan-' => 'DTRsdxPEf3J',
+          'organisasi-dan-tata-kerja-kementerian-koordinator-bidang-pangan' => 'DTSfCL3kYkF',
+          'tata-kerja-tim-terpadu-pengendalian-alih-fungsi-lahan-sawah-dan-tim-pelaksana-pengendalian-alih-fungsi-lahan-sawah' => 'DXwHaflkf78',
+          'percepatan-pelaksanaan-penyediaan-infrastruktur-pascapanen-dalam-rangka-ketahanan-pangan-nasional' => 'DaebQhEmTzd',
+          'piagam-pengawasan-intern-di-kementerian-koordinator-bidang-pangan' => 'DakK8NJlZGN',
+          'keterlibatan-tim-koordinasi-penyelenggaraan-program-makan-bergizi-gratis-dalam-pelaksanaan-penyelenggaraan-program-makan-bergizi-gratis' => 'Dawj47SkYob',
+          'perubahan-atas-peraturan-pemerintah-nomor-86-tahun-2019-tentang-keamanan-pangan' => 'Da4rL-HEU87',
+          'arti-dan-makna-logo-kementerian-koordinator-bidang-pangan' => 'DbAmWAvEd4D',
+        ];
+        $currentSlug = trim(request()->path(), '/');
+        $igCode = $igMap[$currentSlug] ?? null;
+        if (!$igCode && preg_match('/instagram\.com\/(?:p|reel)\/([A-Za-z0-9_-]+)/i', (string) $infografis->translated('description'), $m)) {
+          $igCode = $m[1];
+        }
+      @endphp
+      @if($igCode)
+      <div class="ig-source-card" style="margin-top:20px;padding:14px 18px;border-radius:12px;border:1px solid rgba(30,58,138,0.18);background:rgba(30,58,138,0.04);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;">
+        <div style="display:flex;align-items:center;gap:10px;font-size:14px;font-weight:500;">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:#E1306C;flex-shrink:0;"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+          <span>Infografis ini juga dipublikasikan di Instagram resmi <strong>@jdih.kemenkopangan</strong></span>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
+          <button type="button" onclick="var box=document.getElementById('ig-embed-box-{{ $igCode }}');var frame=document.getElementById('ig-embed-frame-{{ $igCode }}');if(box.style.display==='none'){box.style.display='block';if(!frame.src){frame.src=frame.getAttribute('data-src');}this.innerText='Sembunyikan Embed Instagram';}else{box.style.display='none';this.innerText='Tampilkan Postingan Instagram';}" style="padding:8px 14px;border-radius:8px;border:1px solid rgba(30,58,138,0.3);background:transparent;color:inherit;font-size:13px;font-weight:600;cursor:pointer;">Tampilkan Postingan Instagram</button>
+          <a href="https://www.instagram.com/p/{{ $igCode }}/" target="_blank" rel="noopener noreferrer" style="padding:8px 14px;border-radius:8px;background:linear-gradient(45deg,#f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%);color:#fff;font-size:13px;font-weight:600;text-decoration:none;display:inline-flex;align-items:center;gap:6px;">Buka di Instagram &nearr;</a>
+        </div>
+      </div>
+      <div id="ig-embed-box-{{ $igCode }}" style="display:none;margin-top:16px;max-width:540px;margin-left:auto;margin-right:auto;border-radius:12px;overflow:hidden;border:1px solid rgba(148,163,184,0.25);background:#fff;">
+        <iframe id="ig-embed-frame-{{ $igCode }}" data-src="https://www.instagram.com/p/{{ $igCode }}/embed/captioned/" width="100%" height="680" frameborder="0" scrolling="no" allowtransparency="true" loading="lazy" style="display:block;width:100%;border:0;"></iframe>
+      </div>
+      @endif
       <div class="detail-pages--top bottom-version">
         <a href="{{ $menu->permalink }}" class="back">{{ lang::translate('infografis.back-to-infografis') }}</a>
         <div class="medsos">
