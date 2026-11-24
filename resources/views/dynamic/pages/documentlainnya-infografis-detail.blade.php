@@ -55,6 +55,7 @@
           'perubahan-atas-peraturan-pemerintah-nomor-86-tahun-2019-tentang-keamanan-pangan' => 'Da4rL-HEU87',
           'perubahan-pp-86-2019-keamanan-pangan' => 'Da4rL-HEU87',
           'arti-dan-makna-logo-kementerian-koordinator-bidang-pangan' => 'DbAmWAvEd4D',
+          'tata-naskah-dinas-kementerian-koordinator-bidang-pangan' => 'DcgA3aAlAyY',
         ];
         $currentSlug = trim(request()->path(), '/');
         $igCode = isset($igMap[$currentSlug]) ? $igMap[$currentSlug] : null;
