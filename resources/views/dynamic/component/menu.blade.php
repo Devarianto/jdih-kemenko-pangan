@@ -1716,8 +1716,18 @@
   [data-theme="dark"] .listing-card__item small {
     color: #94a3b8 !important;
   }
+  [data-theme="dark"] .tema__listing--item {
+    position: relative;
+    isolation: isolate;
+    z-index: 1;
+  }
+  [data-theme="dark"] .tema__listing--item > figure {
+    z-index: 0 !important;
+  }
   [data-theme="dark"] .tema__listing--item figcaption {
-    background: rgba(15, 23, 42, 0.9) !important;
+    background: transparent !important;
+    position: relative;
+    z-index: 2 !important;
   }
   [data-theme="dark"] .tema__listing--item figcaption h6 {
     color: #f8fafc !important;
@@ -1725,9 +1735,31 @@
   [data-theme="dark"] .news .grid__item {
     background: #111c2d !important;
     border-color: #243247 !important;
+    position: relative;
+    isolation: isolate;
+    z-index: 1;
+  }
+  [data-theme="dark"] .news .grid__item > figure {
+    z-index: 0 !important;
+    margin: 0 !important;
+  }
+  [data-theme="dark"] .news .grid__item > figure > img {
+    opacity: 1 !important;
+    visibility: visible !important;
+    display: block !important;
+  }
+  [data-theme="dark"] .news .grid__item .tag,
+  [data-theme="dark"] .news .grid__item .grid__item--caption,
+  [data-theme="dark"] .news .grid__item > figcaption,
+  [data-theme="dark"] .news .grid__item .highlight {
+    position: relative;
+    z-index: 2 !important;
+  }
+  [data-theme="dark"] .news .grid__item .icon-play {
+    z-index: 3 !important;
   }
   [data-theme="dark"] .news .highlight-item {
-    background: #0f172a !important;
+    background: transparent !important;
     border-color: #243247 !important;
   }
   [data-theme="dark"] .news .grid__item h4,
