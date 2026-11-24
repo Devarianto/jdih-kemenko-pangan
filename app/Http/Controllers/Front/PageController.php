@@ -378,57 +378,56 @@ class PageController extends Controller
                 ->where('permalink', 'tata-naskah-dinas-kementerian-koordinator-bidang-pangan')
                 ->exists();
             if (!$hasTataNaskah) {
-                $item = new Infografis;
-                $item->thumbnail = json_encode([
-                    'path' => 'images/infografis/tata-naskah-dinas-cover.jpg.webp',
-                    'alt_id' => 'Tata Naskah Dinas Kementerian Koordinator Bidang Pangan',
-                    'alt_en' => 'Official Document Management of the Coordinating Ministry for Food Affairs',
-                ]);
-                $item->date = '2026-08-26';
-                $item->view_count = 0;
-                $item->is_active = 1;
-                $item->created_by = 'superadmin';
-                $item->updated_by = 'superadmin';
-                $item->save();
+                $existingRow = \DB::table('infografis')->where('date', '2026-08-26')->where('thumbnail', 'like', '%tata-naskah-dinas%')->first();
+                if ($existingRow) {
+                    $itemId = $existingRow->id;
+                } else {
+                    $item = new Infografis;
+                    $item->thumbnail = json_encode([
+                        'path' => 'images/infografis/tata-naskah-dinas-cover.jpg.webp',
+                        'alt_id' => 'Tata Naskah Dinas Kementerian Koordinator Bidang Pangan',
+                        'alt_en' => 'Official Document Management of the Coordinating Ministry for Food Affairs',
+                    ]);
+                    $item->date = '2026-08-26';
+                    $item->view_count = 0;
+                    $item->is_active = 1;
+                    $item->save();
+                    $itemId = $item->id;
+                }
 
                 $descId = '<p>Kementerian Koordinator Bidang Pangan telah menetapkan Peraturan Menteri Koordinator Bidang Pangan Nomor 5 Tahun 2026 tentang Tata Naskah Dinas Kementerian Koordinator Bidang Pangan.</p><p>Peraturan ini menjadi pedoman dalam penyelenggaraan Tata Naskah Dinas, mulai dari jenis, susunan, dan bentuk Naskah Dinas, pembuatan, pengamanan, pejabat penandatangan, hingga pengendalian Naskah Dinas untuk mendukung tertib administrasi dan komunikasi kedinasan di lingkungan Kementerian Koordinator Bidang Pangan.</p>';
                 $descEn = '<p>The Coordinating Ministry for Food Affairs has enacted Regulation of the Coordinating Minister for Food Affairs Number 5 of 2026 concerning Official Document Management of the Coordinating Ministry for Food Affairs.</p><p>This regulation serves as a guideline for organizing Official Document Management, covering types, structure, and format of Official Documents, drafting, security, signing officials, and control of Official Documents to support administrative order and official communication within the Coordinating Ministry for Food Affairs.</p>';
 
+                \DB::table('infografis_lang')->where('base_id', $itemId)->delete();
                 \DB::table('infografis_lang')->insert([
                     [
-                        'parent_id' => $item->id,
+                        'base_id' => $itemId,
                         'lang' => 'id',
                         'title' => 'Tata Naskah Dinas Kementerian Koordinator Bidang Pangan',
                         'description' => $descId,
                     ],
                     [
-                        'parent_id' => $item->id,
+                        'base_id' => $itemId,
                         'lang' => 'en',
                         'title' => 'Official Document Management of the Coordinating Ministry for Food Affairs',
                         'description' => $descEn,
                     ],
                 ]);
 
-                \Cactuar\Admin\Models\Permalink::insert([
-                    [
-                        'uniqid' => $item->id,
-                        'module' => 'information-infografis',
-                        'lang' => 'id',
-                        'permalink' => 'tata-naskah-dinas-kementerian-koordinator-bidang-pangan',
-                        'searchable' => 'Tata Naskah Dinas Kementerian Koordinator Bidang Pangan',
-                        'created_at' => now(),
-                        'updated_at' => now(),
-                    ],
-                    [
-                        'uniqid' => $item->id,
-                        'module' => 'information-infografis',
-                        'lang' => 'en',
-                        'permalink' => 'tata-naskah-dinas-kementerian-koordinator-bidang-pangan-en',
-                        'searchable' => 'Official Document Management of the Coordinating Ministry for Food Affairs',
-                        'created_at' => now(),
-                        'updated_at' => now(),
-                    ],
-                ]);
+                foreach ([
+                    'id' => ['tata-naskah-dinas-kementerian-koordinator-bidang-pangan', 'Tata Naskah Dinas Kementerian Koordinator Bidang Pangan'],
+                    'en' => ['tata-naskah-dinas-kementerian-koordinator-bidang-pangan-en', 'Official Document Management of the Coordinating Ministry for Food Affairs'],
+                ] as $langCode => $pData) {
+                    $p = new \Cactuar\Admin\Models\Permalink;
+                    $p->uniqid = $itemId;
+                    $p->module = 'information-infografis';
+                    $p->lang = $langCode;
+                    $p->permalink = $pData[0];
+                    $p->label = $pData[1];
+                    $p->description = '';
+                    $p->searchable = $pData[1];
+                    $p->save();
+                }
             }
         } catch (\Throwable $e) {
             \Log::warning('Sync Tata Naskah Dinas Infografis failed: ' . $e->getMessage());
