@@ -147,7 +147,6 @@
                         name="translation_pdf"
                         id="translation_pdf"
                         class="form-control"
-                        accept=".pdf"
                         onchange="updateFileName(this, 'label_translation_pdf')"
                         style="font-size: 13px;"
                     >
@@ -180,7 +179,6 @@
                         name="translation_attachment"
                         id="translation_attachment"
                         class="form-control"
-                        accept=".pdf,.doc,.docx,.xls,.xlsx,.zip,.rar"
                         onchange="updateFileName(this, 'label_translation_attachment')"
                         style="font-size: 13px;"
                     >
