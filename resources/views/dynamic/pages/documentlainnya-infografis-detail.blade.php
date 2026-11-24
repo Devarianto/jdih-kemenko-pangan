@@ -33,7 +33,7 @@
       <div class="content-pages">
         {!! $infografis->translated('description') !!}
       </div>
-      @php
+      <?php
         $igMap = [
           'rencana-strategis-kementerian-koordinator-bidang-pangan-tahun-2025-2029' => 'DTRpxvIEWYx',
           'pedoman-pelaksanaan-neraca-komoditas-pangan' => 'DTRrNEIEVWb',
@@ -48,16 +48,16 @@
           'arti-dan-makna-logo-kementerian-koordinator-bidang-pangan' => 'DbAmWAvEd4D',
         ];
         $currentSlug = trim(request()->path(), '/');
-        $igCode = $igMap[$currentSlug] ?? null;
+        $igCode = isset($igMap[$currentSlug]) ? $igMap[$currentSlug] : null;
         if (!$igCode && preg_match('/instagram\.com\/(?:p|reel)\/([A-Za-z0-9_-]+)/i', (string) $infografis->translated('description'), $m)) {
           $igCode = $m[1];
         }
-      @endphp
+      ?>
       @if($igCode)
       <div class="ig-source-card" style="margin-top:20px;padding:14px 18px;border-radius:12px;border:1px solid rgba(30,58,138,0.18);background:rgba(30,58,138,0.04);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;">
         <div style="display:flex;align-items:center;gap:10px;font-size:14px;font-weight:500;">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:#E1306C;flex-shrink:0;"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
-          <span>Infografis ini juga dipublikasikan di Instagram resmi <strong>@jdih.kemenkopangan</strong></span>
+          <span>Infografis ini juga dipublikasikan di Instagram resmi <strong>{{ '@'.'jdih.kemenkopangan' }}</strong></span>
         </div>
         <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
           <button type="button" onclick="var box=document.getElementById('ig-embed-box-{{ $igCode }}');var frame=document.getElementById('ig-embed-frame-{{ $igCode }}');if(box.style.display==='none'){box.style.display='block';if(!frame.src){frame.src=frame.getAttribute('data-src');}this.innerText='Sembunyikan Embed Instagram';}else{box.style.display='none';this.innerText='Tampilkan Postingan Instagram';}" style="padding:8px 14px;border-radius:8px;border:1px solid rgba(30,58,138,0.3);background:transparent;color:inherit;font-size:13px;font-weight:600;cursor:pointer;">Tampilkan Postingan Instagram</button>
