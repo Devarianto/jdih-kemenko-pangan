@@ -265,8 +265,8 @@ class RegulasiController extends Controller
         $regulasi->load(['tanggapan.user']);
 
         // Auto-transisi: kalau masih di Uji Publik tapi periodenya sudah lewat tanggal
-        // selesai, otomatis majukan ke Harmonisasi tanpa perlu aksi manual.
-        if ($regulasi->isUjiPublikKedaluwarsa()) {
+        // selesai, otomatis majukan ke Harmonisasi (kecuali untuk Super Admin atau saat baru saja masuk Uji Publik via Tidak Ada Pembahasan).
+        if ($regulasi->isUjiPublikKedaluwarsa() && auth()->user()?->role !== 'super_admin') {
             $regulasi->tahapans()
                 ->where('stage', 'uji_publik')
                 ->whereNull('completed_at')
@@ -502,14 +502,30 @@ class RegulasiController extends Controller
         }
 
         if ($skipPembahasan) {
+            $validator = \Illuminate\Support\Facades\Validator::make($request->all(), [
+                'tgl_mulai_uji_publik' => 'required|date',
+                'tgl_selesai_uji_publik' => 'required|date|after:tgl_mulai_uji_publik',
+            ], [
+                'tgl_mulai_uji_publik.required' => 'Silakan isi Tanggal Mulai Partisipasi Publik terlebih dahulu.',
+                'tgl_selesai_uji_publik.required' => 'Silakan isi Tanggal Selesai Partisipasi Publik terlebih dahulu.',
+                'tgl_selesai_uji_publik.after' => 'Tanggal selesai harus lebih besar dari tanggal mulai.',
+            ]);
+
+            if ($validator->fails()) {
+                return redirect()->route('regulasi.show', $regulasi)
+                    ->withErrors($validator)
+                    ->withInput()
+                    ->withFragment('tahap-pembahasan');
+            }
+
             // Tutup tahap pengajuan/pembahasan yang masih terbuka
             $regulasi->tahapans()
                 ->whereIn('stage', ['pengajuan', 'pembahasan'])
                 ->whereNull('completed_at')
                 ->update(['status' => 'completed', 'completed_at' => now()]);
 
-            $tglMulai = $request->input('tgl_mulai_uji_publik') ?: ($regulasi->partisipasiPublik?->tgl_mulai?->format('Y-m-d') ?: now()->format('Y-m-d'));
-            $tglSelesai = $request->input('tgl_selesai_uji_publik') ?: ($regulasi->partisipasiPublik?->tgl_selesai?->format('Y-m-d') ?: now()->addDays(14)->format('Y-m-d'));
+            $tglMulai = $request->input('tgl_mulai_uji_publik');
+            $tglSelesai = $request->input('tgl_selesai_uji_publik');
             $isPeriodActive = \Carbon\Carbon::parse($tglSelesai)->endOfDay()->gte(now());
 
             \App\Models\PartisipasiPublik::updateOrCreate(
@@ -530,15 +546,15 @@ class RegulasiController extends Controller
             RegulasiTahapan::updateOrCreate(
                 ['regulasi_id' => $regulasi->id, 'stage' => 'uji_publik'],
                 [
-                    'status' => $isPeriodActive ? 'in_progress' : 'completed',
+                    'status' => 'in_progress',
                     'started_at' => now(),
-                    'completed_at' => $isPeriodActive ? null : now(),
+                    'completed_at' => null,
                     'notes' => 'Tidak ada pembahasan — dilanjutkan langsung ke tahap Partisipasi Publik oleh Super Admin.',
                 ]
             );
 
             return redirect()->route('regulasi.show', $regulasi)
-                ->with('success', 'Tahap Pembahasan dilewati (Tidak Ada Pembahasan). Regulasi telah masuk ke tahap Partisipasi Publik — silakan sesuaikan tanggal periode bila diperlukan.')
+                ->with('success', 'Tahap Pembahasan dilewati (Tidak Ada Pembahasan). Regulasi telah masuk ke tahap Partisipasi Publik dengan periode tanggal yang Anda tentukan.')
                 ->withFragment('tahap-uji_publik');
         }
 
@@ -667,15 +683,15 @@ class RegulasiController extends Controller
         );
 
         $updateData = ['uji_publik_status' => 'approved'];
+        if (in_array($regulasi->current_stage, ['pengajuan', 'pembahasan', 'harmonisasi']) && empty($regulasi->tgl_mulai_harmonisasi)) {
+            $updateData['current_stage'] = 'uji_publik';
+        }
         if ($isPeriodActive) {
-            if (in_array($regulasi->current_stage, ['pengajuan', 'pembahasan'])) {
-                $updateData['current_stage'] = 'uji_publik';
-            }
-            if ($regulasi->current_stage === 'uji_publik' || in_array($regulasi->current_stage, ['pengajuan', 'pembahasan'])) {
+            if (($updateData['current_stage'] ?? $regulasi->current_stage) === 'uji_publik') {
                 $updateData['status'] = 'partisipasi_publik';
             }
         } else {
-            if ($regulasi->current_stage === 'uji_publik' && $regulasi->status === 'partisipasi_publik') {
+            if (($updateData['current_stage'] ?? $regulasi->current_stage) === 'uji_publik') {
                 $updateData['status'] = 'proses';
             }
         }

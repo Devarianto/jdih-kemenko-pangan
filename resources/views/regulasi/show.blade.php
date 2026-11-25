@@ -1206,19 +1206,49 @@
                                         </div>
                                     @elseif($prosePembahasan->isEmpty())
                                         {{-- Belum ada proses, tampilkan panduan --}}
-                                        <div style="padding:14px 16px;background:#f8faff;border-radius:10px;border:1px solid #e8edf6;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;">
-                                            <p style="font-size:13px;color:#8a93a6;margin:0;">
-                                                Tambahkan minimal <strong>1 proses pembahasan</strong> di atas sebelum bisa mengajukan request Partisipasi Publik.
-                                            </p>
-                                            @if($isSuperAdmin)
-                                                <form action="{{ route('regulasi.uji-publik.request', $regulasi) }}" method="POST"
-                                                    onsubmit="return confirmAction(event, this, 'Lewati tahap Pembahasan (Tidak Ada Pembahasan) dan lanjut ke tahap Partisipasi Publik?')">
-                                                    @csrf
-                                                    <input type="hidden" name="skip_pembahasan" value="1">
-                                                    <button type="submit" class="btn btn-primary" style="font-size:13px;white-space:nowrap;">
+                                        <div style="padding:14px 16px;background:#f8faff;border-radius:10px;border:1px solid #e8edf6;">
+                                            <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;">
+                                                <p style="font-size:13px;color:#8a93a6;margin:0;">
+                                                    Tambahkan minimal <strong>1 proses pembahasan</strong> di atas sebelum bisa mengajukan request Partisipasi Publik.
+                                                </p>
+                                                @if($isSuperAdmin)
+                                                    <button type="button" class="btn btn-primary" style="font-size:13px;white-space:nowrap;"
+                                                        onclick="var box=document.getElementById('box-skip-pembahasan');box.style.display=(box.style.display==='none'?'block':'none');">
                                                         ➤ Tidak Ada Pembahasan
                                                     </button>
-                                                </form>
+                                                @endif
+                                            </div>
+                                            @if($isSuperAdmin)
+                                                <div id="box-skip-pembahasan" style="display:{{ $errors->hasAny(['tgl_mulai_uji_publik', 'tgl_selesai_uji_publik']) ? 'block' : 'none' }};margin-top:14px;padding-top:14px;border-top:1px dashed #cbd5e1;">
+                                                    <p style="font-size:12.5px;font-weight:700;color:#003580;text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px;">
+                                                        Isi Tanggal Periode Partisipasi Publik (Tanpa Pembahasan)
+                                                    </p>
+                                                    @if($errors->hasAny(['tgl_mulai_uji_publik', 'tgl_selesai_uji_publik']))
+                                                        <div class="alert alert-danger" style="font-size:13px;margin-bottom:12px;border-radius:8px;">
+                                                            <strong>Gagal menyimpan:</strong> {{ $errors->first('tgl_mulai_uji_publik') ?: $errors->first('tgl_selesai_uji_publik') }}
+                                                        </div>
+                                                    @endif
+                                                    <form action="{{ route('regulasi.uji-publik.request', $regulasi) }}" method="POST">
+                                                        @csrf
+                                                        <input type="hidden" name="skip_pembahasan" value="1">
+                                                        <div class="add-proc-grid" style="grid-template-columns:1fr 1fr auto;">
+                                                            <div class="form-group" style="margin:0;">
+                                                                <label class="form-label">Tanggal Mulai *</label>
+                                                                <input type="date" name="tgl_mulai_uji_publik" class="form-control"
+                                                                    value="{{ old('tgl_mulai_uji_publik', $regulasi->partisipasiPublik?->tgl_mulai?->format('Y-m-d')) }}" required>
+                                                            </div>
+                                                            <div class="form-group" style="margin:0;">
+                                                                <label class="form-label">Tanggal Selesai *</label>
+                                                                <input type="date" name="tgl_selesai_uji_publik" class="form-control"
+                                                                    value="{{ old('tgl_selesai_uji_publik', $regulasi->partisipasiPublik?->tgl_selesai?->format('Y-m-d')) }}" required>
+                                                            </div>
+                                                            <button type="submit" class="btn btn-primary"
+                                                                style="padding:10px 16px;font-size:13px;white-space:nowrap;align-self:end;">
+                                                                ➤ Lanjut ke Partisipasi Publik
+                                                            </button>
+                                                        </div>
+                                                    </form>
+                                                </div>
                                             @endif
                                         </div>
                                     @else
@@ -1258,18 +1288,36 @@
                                     @endif
                                 </div>
                                 @elseif($isSuperAdmin && $regulasi->current_stage === 'pengajuan')
-                                <div style="margin-top:18px;padding-top:16px;border-top:1px solid #f0f3fa;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;">
-                                    <span style="font-size:13px;color:#8a93a6;">
-                                        Super Admin dapat melewati tahap Pembahasan dan langsung masuk ke tahap <strong>Partisipasi Publik</strong>.
-                                    </span>
-                                    <form action="{{ route('regulasi.uji-publik.request', $regulasi) }}" method="POST"
-                                        onsubmit="return confirmAction(event, this, 'Lewati tahap Pembahasan (Tidak Ada Pembahasan) dan lanjut ke tahap Partisipasi Publik?')">
-                                        @csrf
-                                        <input type="hidden" name="skip_pembahasan" value="1">
-                                        <button type="submit" class="btn btn-primary" style="font-size:13px;white-space:nowrap;">
+                                <div style="margin-top:18px;padding-top:16px;border-top:1px solid #f0f3fa;">
+                                    <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;">
+                                        <span style="font-size:13px;color:#8a93a6;">
+                                            Super Admin dapat melewati tahap Pembahasan dan langsung masuk ke tahap <strong>Partisipasi Publik</strong>.
+                                        </span>
+                                        <button type="button" class="btn btn-primary" style="font-size:13px;white-space:nowrap;"
+                                            onclick="var box=document.getElementById('box-skip-pembahasan-pengajuan');box.style.display=(box.style.display==='none'?'block':'none');">
                                             ➤ Tidak Ada Pembahasan
                                         </button>
-                                    </form>
+                                    </div>
+                                    <div id="box-skip-pembahasan-pengajuan" style="display:none;margin-top:14px;padding-top:14px;border-top:1px dashed #cbd5e1;">
+                                        <form action="{{ route('regulasi.uji-publik.request', $regulasi) }}" method="POST">
+                                            @csrf
+                                            <input type="hidden" name="skip_pembahasan" value="1">
+                                            <div class="add-proc-grid" style="grid-template-columns:1fr 1fr auto;">
+                                                <div class="form-group" style="margin:0;">
+                                                    <label class="form-label">Tanggal Mulai *</label>
+                                                    <input type="date" name="tgl_mulai_uji_publik" class="form-control" required>
+                                                </div>
+                                                <div class="form-group" style="margin:0;">
+                                                    <label class="form-label">Tanggal Selesai *</label>
+                                                    <input type="date" name="tgl_selesai_uji_publik" class="form-control" required>
+                                                </div>
+                                                <button type="submit" class="btn btn-primary"
+                                                    style="padding:10px 16px;font-size:13px;white-space:nowrap;align-self:end;">
+                                                    ➤ Lanjut ke Partisipasi Publik
+                                                </button>
+                                            </div>
+                                        </form>
+                                    </div>
                                 </div>
                                 @endif
                             @endif
