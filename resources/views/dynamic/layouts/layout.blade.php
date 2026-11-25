@@ -15,6 +15,31 @@
                 } catch(e) {
                     document.documentElement.setAttribute('data-theme', 'light');
                 }
+                // Sinkronkan halaman aktif dengan jdih.kemenkopangan.go.id saat dibuka di dalam iframe wrapper
+                try {
+                    var curFull = window.location.pathname + window.location.search + window.location.hash;
+                    if (window.self !== window.top) {
+                        var lastSubPath = sessionStorage.getItem('jdih_iframe_last_path');
+                        var explicitHome = sessionStorage.getItem('jdih_iframe_explicit_home') === '1';
+                        sessionStorage.removeItem('jdih_iframe_explicit_home');
+                        if (curFull === '/' && lastSubPath && lastSubPath !== '/' && !explicitHome) {
+                            window.location.replace(lastSubPath);
+                            return;
+                        }
+                        sessionStorage.setItem('jdih_iframe_last_path', curFull);
+                        window.parent.postMessage({ type: 'JDIH_ROUTE_CHANGE', path: curFull, title: document.title }, '*');
+                        document.addEventListener('click', function(ev) {
+                            var a = ev.target && ev.target.closest ? ev.target.closest('a[href]') : null;
+                            if (!a) return;
+                            try {
+                                var u = new URL(a.href, window.location.origin);
+                                if (u.origin === window.location.origin && (u.pathname === '/' || u.pathname === '/en')) {
+                                    sessionStorage.setItem('jdih_iframe_explicit_home', '1');
+                                }
+                            } catch(err) {}
+                        }, true);
+                    }
+                } catch(e) {}
             })();
         </script>
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
