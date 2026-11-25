@@ -84,7 +84,7 @@ class NaskahUrgensiController extends Controller
 
     public function formCallbackBefore($post, $item, $type)
     {
-        if ($type == 'create') {
+        if ($type == 'create' && empty($post['main']['master_document_id'])) {
             $post['main']['master_document_id'] = $this->masterId;
         }
 
@@ -124,6 +124,16 @@ class NaskahUrgensiController extends Controller
                 'attributes' => [
                     'class' => 'select2'
                 ]
+            ],
+            'master_document_id' => [
+                'label' => 'Kategori / Halaman Tipe Dokumen',
+                'type' => 'select',
+                'options' => Document::masterDocumentPageOptions(),
+                'value' => $type === 'create' ? Document::NASKAH_AKADEMIK : null,
+                'attributes' => [
+                    'class' => 'select2'
+                ],
+                'info' => 'Jika dipilih, dokumen akan otomatis muncul di halaman publik tipe dokumen yang dipilih.'
             ],
             'related_document_id' => [
                 'label' => 'Peraturan / Rancangan PUU Terkait (Opsional)',

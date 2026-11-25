@@ -720,8 +720,37 @@ class PageController extends Controller
         return $this->getPutusanHukum($menu, 'MK');
     }
 
+    private function migrateMonografiNaskahUrgensi(): void
+    {
+        try {
+            $toMove = Document::where('master_document_id', Document::MONOGRAFI)
+                ->whereExists(function ($q) {
+                    $q->select(\DB::raw(1))
+                      ->from('documents_lang')
+                      ->whereColumn('documents_lang.base_id', 'documents.id')
+                      ->where('documents_lang.title', 'like', 'Naskah Urgensi%');
+                })
+                ->get();
+
+            foreach ($toMove as $doc) {
+                $doc->master_document_id = Document::NASKAH_AKADEMIK;
+                if (empty($doc->year) && !empty($doc->tahun_terbit)) {
+                    $doc->year = (int) $doc->tahun_terbit;
+                }
+                if (empty($doc->date) && $doc->created_at) {
+                    $doc->date = $doc->created_at->format('Y-m-d');
+                }
+                $doc->save();
+                Document::syncPermalinkModule($doc);
+            }
+        } catch (\Throwable $e) {
+            \Log::warning('migrateMonografiNaskahUrgensi failed: ' . $e->getMessage());
+        }
+    }
+
     public function getMonografiHukum($menu)
     {
+        $this->migrateMonografiNaskahUrgensi();
         $documents = Document::translate()->whereIsActive(1)->where('master_document_id', Document::MONOGRAFI);
 
         if (request()->query('search')) {
@@ -856,6 +885,8 @@ class PageController extends Controller
 
     public function getNaskahAkademik($menu)
     {
+        $this->migrateMonografiNaskahUrgensi();
+
         // Otomatis tarik harmon_naskah_urgensi dari e-Regulasi yang belum tersinkron ke NASKAH_AKADEMIK
         \App\Models\Regulasi::whereNotNull('harmon_naskah_urgensi')
             ->where('harmon_naskah_urgensi', '!=', '')
