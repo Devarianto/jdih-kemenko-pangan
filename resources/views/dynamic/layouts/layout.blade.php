@@ -5,11 +5,16 @@
         <script>
             (function() {
                 try {
+                    if (localStorage.getItem('jdih_theme_default_light_v1') !== '1') {
+                        localStorage.setItem('jdih_theme', 'light');
+                        localStorage.setItem('jdih_theme_default_light_v1', '1');
+                    }
                     var saved = localStorage.getItem('jdih_theme');
-                    var sysDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-                    var theme = saved ? saved : (sysDark ? 'dark' : 'light');
+                    var theme = (saved === 'dark' || saved === 'light') ? saved : 'light';
                     document.documentElement.setAttribute('data-theme', theme);
-                } catch(e) {}
+                } catch(e) {
+                    document.documentElement.setAttribute('data-theme', 'light');
+                }
             })();
         </script>
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
