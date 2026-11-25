@@ -115,9 +115,6 @@ class Document {
 
     public static function formCallbackAfter($item, $type)
     {
-        // Sync permalink module when master_document_id is chosen/changed
-        DocumentModel::syncPermalinkModule($item);
-
         // Always touch updated_at so newly created or edited documents appear at the very top of page 1
         try {
             $item->touch();
@@ -206,16 +203,6 @@ class Document {
                 'attributes' => [
                     'class' => 'required select2'
                 ]
-            ],
-            'master_document_id' => [
-                'label' => 'Kategori / Halaman Tipe Dokumen',
-                'type' => 'select',
-                'options' => DocumentModel::masterDocumentPageOptions(),
-                'value' => $type === 'create' ? DocumentModel::getId($document) : null,
-                'attributes' => [
-                    'class' => 'select2'
-                ],
-                'info' => 'Jika dipilih, dokumen akan otomatis muncul di halaman publik tipe dokumen yang dipilih.'
             ],
         ];
 

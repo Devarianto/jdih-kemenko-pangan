@@ -157,16 +157,6 @@ class DocumentMonografiController extends Controller
                     'class' => 'required select2'
                 ]
             ],
-            'master_document_id' => [
-                'label' => 'Kategori / Halaman Tipe Dokumen',
-                'type' => 'select',
-                'options' => Document::masterDocumentPageOptions(),
-                'value' => $type === 'create' ? Document::MONOGRAFI : null,
-                'attributes' => [
-                    'class' => 'select2'
-                ],
-                'info' => 'Jika dipilih, dokumen akan otomatis muncul di halaman publik tipe dokumen yang dipilih.'
-            ],
         ];
 
         $form += [

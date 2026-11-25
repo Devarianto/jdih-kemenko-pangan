@@ -720,10 +720,12 @@ class PageController extends Controller
         return $this->getPutusanHukum($menu, 'MK');
     }
 
-    private function migrateMonografiNaskahUrgensi(): void
+    private function restoreMonografiNaskahUrgensi(): void
     {
         try {
-            $toMove = Document::where('master_document_id', Document::MONOGRAFI)
+            $toRestore = Document::where('master_document_id', Document::NASKAH_AKADEMIK)
+                ->whereNull('regulasi_id')
+                ->whereNotNull('tahun_terbit')
                 ->whereExists(function ($q) {
                     $q->select(\DB::raw(1))
                       ->from('documents_lang')
@@ -732,25 +734,22 @@ class PageController extends Controller
                 })
                 ->get();
 
-            foreach ($toMove as $doc) {
-                $doc->master_document_id = Document::NASKAH_AKADEMIK;
-                if (empty($doc->year) && !empty($doc->tahun_terbit)) {
-                    $doc->year = (int) $doc->tahun_terbit;
-                }
-                if (empty($doc->date) && $doc->created_at) {
-                    $doc->date = $doc->created_at->format('Y-m-d');
-                }
+            foreach ($toRestore as $doc) {
+                $doc->master_document_id = Document::MONOGRAFI;
                 $doc->save();
-                Document::syncPermalinkModule($doc);
+                \DB::table('permalinks')
+                    ->where('uniqid', $doc->id)
+                    ->whereIn('module', ['puu-naskah-urgensi', 'naskah-akademik', 'document-monografi'])
+                    ->update(['module' => 'document-monografi']);
             }
         } catch (\Throwable $e) {
-            \Log::warning('migrateMonografiNaskahUrgensi failed: ' . $e->getMessage());
+            \Log::warning('restoreMonografiNaskahUrgensi failed: ' . $e->getMessage());
         }
     }
 
     public function getMonografiHukum($menu)
     {
-        $this->migrateMonografiNaskahUrgensi();
+        $this->restoreMonografiNaskahUrgensi();
         $documents = Document::translate()->whereIsActive(1)->where('master_document_id', Document::MONOGRAFI);
 
         if (request()->query('search')) {
@@ -885,7 +884,7 @@ class PageController extends Controller
 
     public function getNaskahAkademik($menu)
     {
-        $this->migrateMonografiNaskahUrgensi();
+        $this->restoreMonografiNaskahUrgensi();
 
         // Otomatis tarik harmon_naskah_urgensi dari e-Regulasi yang belum tersinkron ke NASKAH_AKADEMIK
         \App\Models\Regulasi::whereNotNull('harmon_naskah_urgensi')
