@@ -17,11 +17,11 @@ use App\Models\Document;
 use App\Http\Controllers\APIController;
 
 if (\Str::contains(request()->getRequestUri(), 'index.php') || \Str::contains(request()->getRequestUri(), '//')) {
-    $replace = \Str::contains(request()->getRequestUri(), 'index.php') ? 'index.php' : '//';
-    $url = str_replace($replace, '', request()->getRequestUri());
-    $base = $replace == 'index.php' ? substr(url()->to('/'),0,-10).$url : url()->to('/');
+    $uri = preg_replace('#/index\.php(/|$)#', '/', request()->getRequestUri());
+    $uri = preg_replace('#/+#', '/', $uri);
+    $base = rtrim(url()->to('/'), '/') . '/' . ltrim($uri, '/');
 
-    if (strlen($base) > 0) {
+    if (strlen($base) > 0 && $base !== request()->fullUrl()) {
         header("Location: $base", true, 301);
         exit;
     }

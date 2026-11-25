@@ -500,6 +500,13 @@
           modal.classList.add('is-open');
           modal.setAttribute('aria-hidden', 'false');
           document.body.style.overflow = 'hidden';
+
+          const pLink = (card.getAttribute('data-permalink') || '').replace(/^\/+|\/+$/g, '');
+          if (pLink && window.history && window.history.replaceState) {
+            const urlObj = new URL(window.location.href);
+            urlObj.searchParams.set('open', pLink);
+            window.history.replaceState({}, '', urlObj.toString());
+          }
         }
 
         function closeInfografisModal() {
@@ -507,6 +514,24 @@
           modal.setAttribute('aria-hidden', 'true');
           iframeEl.src = '';
           document.body.style.overflow = '';
+          if (window.history && window.history.replaceState) {
+            const urlObj = new URL(window.location.href);
+            if (urlObj.searchParams.has('open')) {
+              urlObj.searchParams.delete('open');
+              window.history.replaceState({}, '', urlObj.toString());
+            }
+          }
+        }
+
+        // Jika halaman di-refresh saat popup terbuka (?open=slug), buka kembali popup yang sama otomatis
+        const initialOpenSlug = new URL(window.location.href).searchParams.get('open');
+        if (initialOpenSlug) {
+          document.querySelectorAll('.js-infografis-popup-trigger').forEach(function(card) {
+            const cSlug = (card.getAttribute('data-permalink') || '').replace(/^\/+|\/+$/g, '');
+            if (cSlug === initialOpenSlug) {
+              openInfografisModal(card);
+            }
+          });
         }
 
         document.querySelectorAll('.js-infografis-popup-trigger').forEach(function(card) {
