@@ -1206,10 +1206,20 @@
                                         </div>
                                     @elseif($prosePembahasan->isEmpty())
                                         {{-- Belum ada proses, tampilkan panduan --}}
-                                        <div style="padding:14px 16px;background:#f8faff;border-radius:10px;border:1px solid #e8edf6;">
+                                        <div style="padding:14px 16px;background:#f8faff;border-radius:10px;border:1px solid #e8edf6;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;">
                                             <p style="font-size:13px;color:#8a93a6;margin:0;">
                                                 Tambahkan minimal <strong>1 proses pembahasan</strong> di atas sebelum bisa mengajukan request Partisipasi Publik.
                                             </p>
+                                            @if($isSuperAdmin)
+                                                <form action="{{ route('regulasi.uji-publik.request', $regulasi) }}" method="POST"
+                                                    onsubmit="return confirmAction(event, this, 'Lewati tahap Pembahasan (Tidak Ada Pembahasan) dan lanjut ke tahap Partisipasi Publik?')">
+                                                    @csrf
+                                                    <input type="hidden" name="skip_pembahasan" value="1">
+                                                    <button type="submit" class="btn btn-primary" style="font-size:13px;white-space:nowrap;">
+                                                        ➤ Tidak Ada Pembahasan
+                                                    </button>
+                                                </form>
+                                            @endif
                                         </div>
                                     @else
                                         {{-- Ada proses, tampilkan form request --}}
@@ -1246,6 +1256,20 @@
                                             <small style="color:#888;font-size:12px;">Periode ini akan otomatis aktif begitu Super Admin menyetujui request.</small>
                                         </form>
                                     @endif
+                                </div>
+                                @elseif($isSuperAdmin && $regulasi->current_stage === 'pengajuan')
+                                <div style="margin-top:18px;padding-top:16px;border-top:1px solid #f0f3fa;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;">
+                                    <span style="font-size:13px;color:#8a93a6;">
+                                        Super Admin dapat melewati tahap Pembahasan dan langsung masuk ke tahap <strong>Partisipasi Publik</strong>.
+                                    </span>
+                                    <form action="{{ route('regulasi.uji-publik.request', $regulasi) }}" method="POST"
+                                        onsubmit="return confirmAction(event, this, 'Lewati tahap Pembahasan (Tidak Ada Pembahasan) dan lanjut ke tahap Partisipasi Publik?')">
+                                        @csrf
+                                        <input type="hidden" name="skip_pembahasan" value="1">
+                                        <button type="submit" class="btn btn-primary" style="font-size:13px;white-space:nowrap;">
+                                            ➤ Tidak Ada Pembahasan
+                                        </button>
+                                    </form>
                                 </div>
                                 @endif
                             @endif

@@ -486,16 +486,63 @@ class RegulasiController extends Controller
      * periode tanggal mulai & selesai partisipasi publik. Data periode
      * langsung disimpan ke tabel partisipasi_publik (is_active = false)
      * supaya operator tidak lupa mengisinya nanti di halaman terpisah.
+     *
+     * Khusus Super Admin: juga dapat langsung melewati tahap Pembahasan
+     * ("Tidak Ada Pembahasan") tanpa wajib mengisi proses pembahasan terlebih dahulu.
      */
     public function requestUjiPublik(Request $request, Regulasi $regulasi)
     {
         $this->authorizeUnitKerja($regulasi);
 
-        if ($regulasi->current_stage !== 'pembahasan') {
+        $isSuperAdmin = auth()->user()?->role === 'super_admin';
+        $skipPembahasan = $isSuperAdmin && $request->boolean('skip_pembahasan');
+
+        if (!in_array($regulasi->current_stage, $isSuperAdmin ? ['pengajuan', 'pembahasan'] : ['pembahasan'], true)) {
             return back()->with('error', 'Request uji publik hanya bisa dilakukan saat regulasi di tahap Pembahasan.');
         }
 
-        if ($regulasi->proses()->where('is_after_uji_publik', false)->count() === 0) {
+        if ($skipPembahasan) {
+            // Tutup tahap pengajuan/pembahasan yang masih terbuka
+            $regulasi->tahapans()
+                ->whereIn('stage', ['pengajuan', 'pembahasan'])
+                ->whereNull('completed_at')
+                ->update(['status' => 'completed', 'completed_at' => now()]);
+
+            $tglMulai = $request->input('tgl_mulai_uji_publik') ?: ($regulasi->partisipasiPublik?->tgl_mulai?->format('Y-m-d') ?: now()->format('Y-m-d'));
+            $tglSelesai = $request->input('tgl_selesai_uji_publik') ?: ($regulasi->partisipasiPublik?->tgl_selesai?->format('Y-m-d') ?: now()->addDays(14)->format('Y-m-d'));
+            $isPeriodActive = \Carbon\Carbon::parse($tglSelesai)->endOfDay()->gte(now());
+
+            \App\Models\PartisipasiPublik::updateOrCreate(
+                ['regulasi_id' => $regulasi->id],
+                [
+                    'tgl_mulai' => $tglMulai,
+                    'tgl_selesai' => $tglSelesai,
+                    'is_active' => $isPeriodActive,
+                ]
+            );
+
+            $regulasi->update([
+                'current_stage' => 'uji_publik',
+                'uji_publik_status' => 'approved',
+                'status' => $isPeriodActive ? 'partisipasi_publik' : 'proses',
+            ]);
+
+            RegulasiTahapan::updateOrCreate(
+                ['regulasi_id' => $regulasi->id, 'stage' => 'uji_publik'],
+                [
+                    'status' => $isPeriodActive ? 'in_progress' : 'completed',
+                    'started_at' => now(),
+                    'completed_at' => $isPeriodActive ? null : now(),
+                    'notes' => 'Tidak ada pembahasan — dilanjutkan langsung ke tahap Partisipasi Publik oleh Super Admin.',
+                ]
+            );
+
+            return redirect()->route('regulasi.show', $regulasi)
+                ->with('success', 'Tahap Pembahasan dilewati (Tidak Ada Pembahasan). Regulasi telah masuk ke tahap Partisipasi Publik — silakan sesuaikan tanggal periode bila diperlukan.')
+                ->withFragment('tahap-uji_publik');
+        }
+
+        if (!$isSuperAdmin && $regulasi->proses()->where('is_after_uji_publik', false)->count() === 0) {
             return redirect()->route('regulasi.show', $regulasi)
                 ->with('error', 'Tambahkan minimal satu proses pembahasan sebelum request uji publik.')
                 ->withFragment('tahap-pembahasan');
