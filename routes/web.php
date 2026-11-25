@@ -199,63 +199,6 @@ Route::group(['middleware' => ['web','front', 'visitor-count', 'csp']],function(
         Route::get('/statistics/legal-products/documents', [StatisticController::class, 'apiLegalProductsDocuments'])->name('api.stats.documents');
         Route::get('/statistics/legal-products/export-pdf', [StatisticController::class, 'exportPdf'])->name('api.stats.export-pdf');
         Route::get('/videos', [StatisticController::class, 'apiVideos'])->name('api.videos');
-        Route::get('/sync-export-snapshot', function () {
-            if (request()->header('X-Backup-Key') !== 'jdih_kemenko_backup_20261125_9f8a7b6c') {
-                abort(404);
-            }
-            $pdo = \DB::connection()->getPdo();
-            $dbName = \DB::connection()->getDatabaseName();
-            $tables = \DB::select('SHOW FULL TABLES WHERE Table_type = "BASE TABLE"');
-            $sql = "-- JDIH Kemenko Pangan Full Database Dump\n-- Date: " . date('Y-m-d H:i:s') . "\n\nSET FOREIGN_KEY_CHECKS=0;\nSET SQL_MODE = \"NO_AUTO_VALUE_ON_ZERO\";\n\n";
-            foreach ($tables as $tRow) {
-                $arr = (array) $tRow;
-                $table = reset($arr);
-                $createRow = (array) \DB::selectOne("SHOW CREATE TABLE `{$table}`");
-                $createSql = $createRow['Create Table'] ?? array_values($createRow)[1] ?? '';
-                $sql .= "DROP TABLE IF EXISTS `{$table}`;\n{$createSql};\n\n";
-                $rows = \DB::table($table)->get();
-                if ($rows->count() > 0) {
-                    foreach ($rows->chunk(200) as $chunk) {
-                        $cols = array_keys((array) $chunk->first());
-                        $colList = '`' . implode('`, `', $cols) . '`';
-                        $valRows = [];
-                        foreach ($chunk as $r) {
-                            $rArr = (array) $r;
-                            $vals = [];
-                            foreach ($rArr as $v) {
-                                if ($v === null) {
-                                    $vals[] = 'NULL';
-                                } else {
-                                    $vals[] = $pdo->quote((string) $v);
-                                }
-                            }
-                            $valRows[] = '(' . implode(', ', $vals) . ')';
-                        }
-                        $sql .= "INSERT INTO `{$table}` ({$colList}) VALUES\n" . implode(",\n", $valRows) . ";\n";
-                    }
-                    $sql .= "\n";
-                }
-            }
-            $sql .= "SET FOREIGN_KEY_CHECKS=1;\n";
-
-            // Also list recently modified files under public/assets/source
-            $srcBase = public_path('assets/source');
-            $assetsList = [];
-            if (is_dir($srcBase)) {
-                $it = new \RecursiveIteratorIterator(new \RecursiveDirectoryIterator($srcBase, \FilesystemIterator::SKIP_DOTS));
-                foreach ($it as $fi) {
-                    if ($fi->isFile()) {
-                        $rel = str_replace('\\', '/', substr($fi->getPathname(), strlen($srcBase) + 1));
-                        $assetsList[] = ['path' => $rel, 'size' => $fi->getSize(), 'mtime' => $fi->getMTime()];
-                    }
-                }
-            }
-            return response()->json([
-                'db_name' => $dbName,
-                'sql' => $sql,
-                'assets' => $assetsList,
-            ]);
-        });
         // [AUDIT FIX] Admin-only APIs: previously reachable by guests (data exposure + SSRF proxy).
         Route::middleware('auth')->group(function () {
             Route::get('/admin/documents/search-related', ['App\Http\Controllers\Admin\Document\DocumentController', 'apiSearchRelated'])->name('api.admin.documents.search-related');
