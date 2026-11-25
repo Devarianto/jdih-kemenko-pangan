@@ -263,11 +263,6 @@
         @foreach ($infografis as $data)
           <?php
             $rawThumb = media::initial($data->thumbnail)->url;
-            // Utamakan gambar asli tanpa potongan cover_283_365_ jika ada di source
-            $origThumb = str_replace(['/thumbs/', 'cover_283_365_', 'cover_990_1022_'], ['/', '', ''], $rawThumb);
-            if (substr($origThumb, -5) === '.webp' && (strpos($origThumb, '.jpg.webp') !== false || strpos($origThumb, '.png.webp') !== false || strpos($origThumb, '.jpeg.webp') !== false)) {
-              $origThumb = substr($origThumb, 0, -5);
-            }
             $slideUrls = [];
             foreach (widget($data->id, 'information-infografis', 'image') as $imgRow) {
               $u = media::initial($imgRow->image)->url;
@@ -300,7 +295,7 @@
                 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M8 12h8M12 8v8"/></svg>
                 {{ count($slideUrls) > 1 ? count($slideUrls).' Slide' : ($igCode ? 'Carousel IG' : 'Lihat Slide') }}
               </span>
-              <img src="{{ $origThumb }}" onerror="if(this.src!=='{{ $rawThumb }}'){this.src='{{ $rawThumb }}';}" alt="{{ media::initial($data->thumbnail)->alt }}">
+              <img src="{{ $rawThumb }}" alt="{{ media::initial($data->thumbnail)->alt }}">
             </figure>
             <figcaption>
               <p>{{ $data->translated('title') }}</p>
@@ -418,13 +413,7 @@
           if (!currentSlides.length) return;
           currentIdx = (idx + currentSlides.length) % currentSlides.length;
           const rawUrl = currentSlides[currentIdx];
-          const uncropped = toUncroppedUrl(rawUrl);
-          mainImg.onerror = function() {
-            if (mainImg.src !== rawUrl) {
-              mainImg.src = rawUrl;
-            }
-          };
-          mainImg.src = uncropped;
+          mainImg.src = rawUrl;
           counterEl.textContent = (currentIdx + 1) + ' / ' + currentSlides.length;
           prevBtn.style.display = currentSlides.length > 1 ? 'inline-flex' : 'none';
           nextBtn.style.display = currentSlides.length > 1 ? 'inline-flex' : 'none';

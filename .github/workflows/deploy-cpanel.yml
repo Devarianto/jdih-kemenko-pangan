@@ -95,8 +95,8 @@ jobs:
                   if rel in pub_skip_exact or any(rel.startswith(p) for p in pub_skip_prefixes):
                       continue
                   sub = rel[len('public/'):]
-                  remote_path = f'/public_html/jdih.arthawisesa.com/{sub}'
-                  targets.append((rel, remote_path))
+                  targets.append((rel, f'/public_html/jdih.kemenkopangan.go.id/{sub}'))
+                  targets.append((rel, f'/public_html/jdih.arthawisesa.com/{sub}'))
               else:
                   if rel in app_skip_exact or rel.startswith('.env') or any(rel.startswith(p) for p in app_skip_prefixes):
                       continue
