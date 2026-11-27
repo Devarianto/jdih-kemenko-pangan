@@ -1036,96 +1036,102 @@ class PageController extends Controller
                 ]);
 
             foreach ($items as $row) {
-                $existingPerm = \Cactuar\Admin\Models\Permalink::where('module', 'puu-risalah')
-                    ->where('permalink', $row['slug'])
-                    ->first();
+                try {
+                    $existingPerm = \Cactuar\Admin\Models\Permalink::where('module', 'puu-risalah')
+                        ->where('permalink', $row['slug'])
+                        ->first();
 
-                if ($existingPerm) {
-                    $doc = Document::find($existingPerm->uniqid);
-                    if (!$doc) {
-                        continue;
+                    if ($existingPerm) {
+                        $doc = Document::find($existingPerm->uniqid);
+                        if (!$doc) {
+                            continue;
+                        }
+                    } else {
+                        $doc = new Document;
+                        $doc->master_document_id = Document::RISALAH_PEMBAHASAN;
+                        $doc->related_document_id = $row['related_rancangan_id'];
+                        $doc->date = $row['date'];
+                        $doc->tanggal_penetapan = $row['date'];
+                        $doc->year = (string) $row['year'];
+                        $doc->tempat_penetapan = $row['tempat_penetapan'];
+                        $doc->pihak_internal = $row['pihak_internal'];
+                        $doc->pdf = $row['pdf'];
+                        $doc->is_active = 1;
+                        $doc->status_berlaku = 1;
+                        $doc->view_count = 0;
+                        $doc->download_pdf_count = 0;
+                        $doc->save();
+
+                        foreach (['id', 'en'] as $lang) {
+                            \DB::table('documents_lang')->updateOrInsert(
+                                ['base_id' => $doc->id, 'lang' => $lang],
+                                [
+                                    'title' => $row['title'],
+                                    'teu' => $row['teu'],
+                                    'intro' => $row['intro'],
+                                    'rekomendasi' => $row['rekomendasi'],
+                                    'pdf_name' => $row['pdf_name'],
+                                    'bahasa' => 'Indonesia',
+                                    'bidang_hukum' => 'Hukum Administrasi',
+                                    'subjek' => $row['subjek'],
+                                    'unit_pemrakarsa' => $row['unit_penanggungjawab'],
+                                ]
+                            );
+
+                            $p = new \Cactuar\Admin\Models\Permalink;
+                            $p->uniqid = (string) $doc->id;
+                            $p->module = 'puu-risalah';
+                            $p->lang = $lang;
+                            $p->permalink = $lang === 'en' ? ($row['slug'] . '-en') : $row['slug'];
+                            $p->label = \Illuminate\Support\Str::limit($row['title'], 250, '');
+                            $p->description = strip_tags($row['intro']);
+                            $p->searchable = $row['title'] . ' ' . $row['subjek'];
+                            $p->is_active = 1;
+                            $p->save();
+                        }
                     }
-                } else {
-                    $doc = new Document;
-                    $doc->master_document_id = Document::RISALAH_PEMBAHASAN;
-                    $doc->related_document_id = $row['related_rancangan_id'];
-                    $doc->date = $row['date'];
-                    $doc->tanggal_penetapan = $row['date'];
-                    $doc->year = (string) $row['year'];
-                    $doc->tempat_penetapan = $row['tempat_penetapan'];
-                    $doc->pihak_internal = $row['pihak_internal'];
-                    $doc->pdf = $row['pdf'];
-                    $doc->is_active = 1;
-                    $doc->status_berlaku = 1;
-                    $doc->view_count = 0;
-                    $doc->download_pdf_count = 0;
-                    $doc->save();
 
-                    foreach (['id', 'en'] as $lang) {
-                        \DB::table('documents_lang')->updateOrInsert(
-                            ['base_id' => $doc->id, 'lang' => $lang],
-                            [
-                                'title' => $row['title'],
-                                'teu' => $row['teu'],
-                                'intro' => $row['intro'],
-                                'rekomendasi' => $row['rekomendasi'],
-                                'pdf_name' => $row['pdf_name'],
-                                'bahasa' => 'Indonesia',
-                                'bidang_hukum' => 'Hukum Administrasi',
-                                'subjek' => $row['subjek'],
-                                'unit_pemrakarsa' => $row['unit_penanggungjawab'],
-                            ]
-                        );
-
-                        $p = new \Cactuar\Admin\Models\Permalink;
-                        $p->uniqid = (string) $doc->id;
-                        $p->module = 'puu-risalah';
-                        $p->lang = $lang;
-                        $p->permalink = $lang === 'en' ? ($row['slug'] . '-en') : $row['slug'];
-                        $p->label = \Illuminate\Support\Str::limit($row['title'], 250, '');
-                        $p->description = strip_tags($row['intro']);
-                        $p->searchable = $row['title'] . ' ' . $row['subjek'];
-                        $p->is_active = 1;
-                        $p->save();
+                    // Isi CMS Dynamic Metadata (field_id 48..57 untuk master_document_id = 12)
+                    $metaMap = [
+                        48 => 'Risalah Pembahasan PUU',
+                        49 => '-',
+                        50 => $row['tempat_penetapan'],
+                        51 => $row['unit_penanggungjawab'],
+                        52 => (string) $row['year'],
+                        53 => '-',
+                        54 => $row['subjek'],
+                        55 => 'Indonesia',
+                        56 => 'Hukum Administrasi',
+                        57 => '-',
+                    ];
+                    foreach ($metaMap as $fieldId => $val) {
+                        try {
+                            \DB::table('document_metadata_values')->updateOrInsert(
+                                ['document_id' => $doc->id, 'field_id' => $fieldId],
+                                ['value' => $val, 'created_at' => now(), 'updated_at' => now()]
+                            );
+                        } catch (\Throwable $eMeta) {}
                     }
-                }
 
-                // Isi CMS Dynamic Metadata (field_id 48..57 untuk master_document_id = 12)
-                $metaMap = [
-                    48 => 'Risalah Pembahasan PUU',
-                    49 => '-',
-                    50 => $row['tempat_penetapan'],
-                    51 => $row['unit_penanggungjawab'],
-                    52 => (string) $row['year'],
-                    53 => '-',
-                    54 => $row['subjek'],
-                    55 => 'Indonesia',
-                    56 => 'Hukum Administrasi',
-                    57 => '-',
-                ];
-                foreach ($metaMap as $fieldId => $val) {
-                    \DB::table('document_metadata_values')->updateOrInsert(
-                        ['document_id' => $doc->id, 'field_id' => $fieldId],
-                        ['value' => $val, 'created_at' => now(), 'updated_at' => now()]
-                    );
-                }
-
-                // Hubungkan Peraturan Terkait di document_relations
-                if (!empty($row['related_peraturan_id'])) {
-                    \DB::table('document_relations')->updateOrInsert(
-                        [
-                            'source_document_id' => $doc->id,
-                            'related_document_id' => $row['related_peraturan_id'],
-                            'category' => 'peraturan_terkait',
-                        ],
-                        [
-                            'relationship_type' => 'terkait',
-                            'is_external' => 0,
-                            'note' => '',
-                            'created_at' => now(),
-                            'updated_at' => now(),
-                        ]
-                    );
+                    // Hubungkan Peraturan Terkait di document_relations
+                    if (!empty($row['related_peraturan_id'])) {
+                        try {
+                            \App\Models\DocumentRelation::firstOrCreate(
+                                [
+                                    'source_document_id' => $doc->id,
+                                    'related_document_id' => $row['related_peraturan_id'],
+                                    'category' => 'peraturan_terkait',
+                                ],
+                                [
+                                    'relationship_type' => 'terkait',
+                                    'is_external' => false,
+                                    'note' => '',
+                                ]
+                            );
+                        } catch (\Throwable $eRel) {}
+                    }
+                } catch (\Throwable $eItem) {
+                    \Log::warning('syncRisalahPembahasan2026 item failed: ' . $eItem->getMessage());
                 }
             }
         } catch (\Throwable $e) {
