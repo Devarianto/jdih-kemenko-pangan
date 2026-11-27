@@ -1036,52 +1036,58 @@ class PageController extends Controller
                 ]);
 
             foreach ($items as $row) {
-                $exists = \Cactuar\Admin\Models\Permalink::where('module', 'puu-risalah')
+                $existingPerm = \Cactuar\Admin\Models\Permalink::where('module', 'puu-risalah')
                     ->where('permalink', $row['slug'])
-                    ->exists();
-                if ($exists) {
-                    continue;
-                }
+                    ->first();
 
-                $doc = new Document;
-                $doc->master_document_id = Document::RISALAH_PEMBAHASAN;
-                $doc->related_document_id = $row['related_rancangan_id'];
-                $doc->date = $row['date'];
-                $doc->tanggal_penetapan = $row['date'];
-                $doc->year = (string) $row['year'];
-                $doc->tempat_penetapan = $row['tempat_penetapan'];
-                $doc->pihak_internal = $row['pihak_internal'];
-                $doc->pdf = $row['pdf'];
-                $doc->is_active = 1;
-                $doc->status_berlaku = 1;
-                $doc->view_count = 0;
-                $doc->download_pdf_count = 0;
-                $doc->save();
+                if ($existingPerm) {
+                    $doc = Document::find($existingPerm->uniqid);
+                    if (!$doc) {
+                        continue;
+                    }
+                } else {
+                    $doc = new Document;
+                    $doc->master_document_id = Document::RISALAH_PEMBAHASAN;
+                    $doc->related_document_id = $row['related_rancangan_id'];
+                    $doc->date = $row['date'];
+                    $doc->tanggal_penetapan = $row['date'];
+                    $doc->year = (string) $row['year'];
+                    $doc->tempat_penetapan = $row['tempat_penetapan'];
+                    $doc->pihak_internal = $row['pihak_internal'];
+                    $doc->pdf = $row['pdf'];
+                    $doc->is_active = 1;
+                    $doc->status_berlaku = 1;
+                    $doc->view_count = 0;
+                    $doc->download_pdf_count = 0;
+                    $doc->save();
 
-                foreach (['id', 'en'] as $lang) {
-                    \DB::table('documents_lang')->insert([
-                        'base_id' => $doc->id,
-                        'lang' => $lang,
-                        'title' => $row['title'],
-                        'teu' => $row['teu'],
-                        'intro' => $row['intro'],
-                        'rekomendasi' => $row['rekomendasi'],
-                        'pdf_name' => $row['pdf_name'],
-                        'bahasa' => 'Indonesia',
-                        'bidang_hukum' => 'Hukum Administrasi',
-                        'subjek' => $row['subjek'],
-                        'unit_pemrakarsa' => $row['unit_penanggungjawab'],
-                    ]);
+                    foreach (['id', 'en'] as $lang) {
+                        \DB::table('documents_lang')->updateOrInsert(
+                            ['base_id' => $doc->id, 'lang' => $lang],
+                            [
+                                'title' => $row['title'],
+                                'teu' => $row['teu'],
+                                'intro' => $row['intro'],
+                                'rekomendasi' => $row['rekomendasi'],
+                                'pdf_name' => $row['pdf_name'],
+                                'bahasa' => 'Indonesia',
+                                'bidang_hukum' => 'Hukum Administrasi',
+                                'subjek' => $row['subjek'],
+                                'unit_pemrakarsa' => $row['unit_penanggungjawab'],
+                            ]
+                        );
 
-                    $p = new \Cactuar\Admin\Models\Permalink;
-                    $p->uniqid = $doc->id;
-                    $p->module = 'puu-risalah';
-                    $p->lang = $lang;
-                    $p->permalink = $lang === 'en' ? ($row['slug'] . '-en') : $row['slug'];
-                    $p->label = \Illuminate\Support\Str::limit($row['title'], 250, '');
-                    $p->description = strip_tags($row['intro']);
-                    $p->searchable = $row['title'] . ' ' . $row['subjek'];
-                    $p->save();
+                        $p = new \Cactuar\Admin\Models\Permalink;
+                        $p->uniqid = (string) $doc->id;
+                        $p->module = 'puu-risalah';
+                        $p->lang = $lang;
+                        $p->permalink = $lang === 'en' ? ($row['slug'] . '-en') : $row['slug'];
+                        $p->label = \Illuminate\Support\Str::limit($row['title'], 250, '');
+                        $p->description = strip_tags($row['intro']);
+                        $p->searchable = $row['title'] . ' ' . $row['subjek'];
+                        $p->is_active = 1;
+                        $p->save();
+                    }
                 }
 
                 // Isi CMS Dynamic Metadata (field_id 48..57 untuk master_document_id = 12)
@@ -1110,12 +1116,12 @@ class PageController extends Controller
                         [
                             'source_document_id' => $doc->id,
                             'related_document_id' => $row['related_peraturan_id'],
-                            'relation_group' => 'peraturan_terkait',
+                            'category' => 'peraturan_terkait',
                         ],
                         [
-                            'relation_type' => 'terkait',
+                            'relationship_type' => 'terkait',
                             'is_external' => 0,
-                            'notes' => '',
+                            'note' => '',
                             'created_at' => now(),
                             'updated_at' => now(),
                         ]
@@ -1149,8 +1155,8 @@ class PageController extends Controller
             ->paginate(8);
         $years = Document::whereIsActive(1)
             ->where('master_document_id', Document::RISALAH_PEMBAHASAN)
-            ->selectRaw('COALESCE(year, YEAR(date)) as year')
-            ->whereRaw('COALESCE(year, YEAR(date)) IS NOT NULL')
+            ->selectRaw('COALESCE(NULLIF(year, ""), YEAR(date)) as year')
+            ->whereRaw('COALESCE(NULLIF(year, ""), YEAR(date)) IS NOT NULL')
             ->distinct()
             ->orderBy('year', 'desc')
             ->get();
