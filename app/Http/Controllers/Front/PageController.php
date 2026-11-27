@@ -1035,13 +1035,39 @@ class PageController extends Controller
                     'tanggal_penetapan' => '2025-12-31',
                 ]);
 
+            // Bersihkan duplikat Risalah Pembahasan (pertahankan 1 dokumen unik per judul/tanggal)
+            $allRisalah = Document::where('master_document_id', Document::RISALAH_PEMBAHASAN)
+                ->orderBy('id', 'asc')
+                ->get();
+            $seenKeys = [];
+            foreach ($allRisalah as $rDoc) {
+                $rTitle = trim((string) \DB::table('documents_lang')->where('base_id', $rDoc->id)->where('lang', 'id')->value('title'));
+                $dedupKey = ($rDoc->date ?: '') . '|' . mb_strtolower($rTitle);
+                if (isset($seenKeys[$dedupKey])) {
+                    \DB::table('permalinks')->where('module', 'puu-risalah')->where('uniqid', (string) $rDoc->id)->delete();
+                    \DB::table('documents_lang')->where('base_id', $rDoc->id)->delete();
+                    \DB::table('document_metadata_values')->where('document_id', $rDoc->id)->delete();
+                    \DB::table('document_relations')->where('source_document_id', $rDoc->id)->orWhere('related_document_id', $rDoc->id)->delete();
+                    $rDoc->delete();
+                } else {
+                    $seenKeys[$dedupKey] = $rDoc->id;
+                }
+            }
+
             foreach ($items as $row) {
                 try {
-                    $existingPerm = \Cactuar\Admin\Models\Permalink::where('module', 'puu-risalah')
-                        ->where('permalink', $row['slug'])
-                        ->first();
+                    $existingDocId = \DB::table('documents')
+                        ->join('documents_lang', 'documents.id', '=', 'documents_lang.base_id')
+                        ->where('documents.master_document_id', Document::RISALAH_PEMBAHASAN)
+                        ->where('documents_lang.lang', 'id')
+                        ->where(function ($q) use ($row) {
+                            $q->where('documents.pdf', $row['pdf'])
+                              ->orWhere('documents_lang.title', $row['title']);
+                        })
+                        ->orderBy('documents.id', 'asc')
+                        ->value('documents.id');
 
-                    $doc = $existingPerm ? Document::find($existingPerm->uniqid) : null;
+                    $doc = $existingDocId ? Document::find($existingDocId) : null;
                     if (!$doc) {
                         $doc = new Document;
                         $doc->master_document_id = Document::RISALAH_PEMBAHASAN;
@@ -1075,18 +1101,19 @@ class PageController extends Controller
                             ]
                         );
 
-                        $targetSlug = $lang === 'en' ? ($row['slug'] . '-en') : $row['slug'];
-                        $p = \Cactuar\Admin\Models\Permalink::firstOrNew([
-                            'module' => 'puu-risalah',
-                            'permalink' => $targetSlug,
-                        ]);
-                        $p->uniqid = (string) $doc->id;
-                        $p->lang = $lang;
-                        $p->label = \Illuminate\Support\Str::limit($row['title'], 250, '');
-                        $p->description = strip_tags($row['intro']);
-                        $p->searchable = $row['title'] . ' ' . $row['subjek'];
-                        $p->is_active = 1;
-                        $p->save();
+                        $baseSlug = \Illuminate\Support\Str::limit($row['slug'], 190, '');
+                        $targetSlug = $lang === 'en' ? ($baseSlug . '-en') : $baseSlug;
+                        \DB::table('permalinks')->updateOrInsert(
+                            ['module' => 'puu-risalah', 'uniqid' => (string) $doc->id, 'lang' => $lang],
+                            [
+                                'permalink' => $targetSlug,
+                                'label' => \Illuminate\Support\Str::limit($row['title'], 250, ''),
+                                'description' => strip_tags($row['intro']),
+                                'searchable' => $row['title'] . ' ' . $row['subjek'],
+                                'is_active' => 1,
+                                'updated_at' => now(),
+                            ]
+                        );
                     }
 
                     // Isi CMS Dynamic Metadata (field_id 48..57 untuk master_document_id = 12)
