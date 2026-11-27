@@ -900,7 +900,10 @@ class PageController extends Controller
             $items = [
                 [
                     'slug' => 'analisis-dan-evaluasi-penyusunan-peraturan-presiden-nomor-113-tahun-2025-tentang-perubahan-atas-peraturan-presiden-nomor-6-tahun-2025-tentang-tata-kelola-pupuk-bersubsidi',
-                    'title' => 'Analisis Dan Evaluasi Penyusunan Peraturan Presiden Nomor 113 Tahun 2025 tentang Perubahan atas Peraturan Presiden Nomor 6 Tahun 2025 tentang Tata Kelola Pupuk Bersubsidi',
+                    'title' => 'Analisis dan Evaluasi Penyusunan Peraturan Presiden Nomor 113 Tahun 2025 tentang Perubahan atas Peraturan Presiden Nomor 6 Tahun 2025 tentang Tata Kelola Pupuk Bersubsidi',
+                    'legacy_titles' => [
+                        'Analisis Dan Evaluasi Penyusunan Peraturan Presiden Nomor 113 Tahun 2025 tentang Perubahan atas Peraturan Presiden Nomor 6 Tahun 2025 tentang Tata Kelola Pupuk Bersubsidi',
+                    ],
                     'date' => '2026-08-24',
                     'year' => 2026,
                     'periode_evaluasi' => '2026',
@@ -908,10 +911,10 @@ class PageController extends Controller
                     'teu' => 'Tim Anev Pupuk',
                     'unit_penanggungjawab' => 'Biro Hukum dan Kerja Sama, Kemenko Bidang Pangan',
                     'pdf' => 'pdf/anev/anev-perpres-113-tahun-2025-pupuk.pdf',
-                    'pdf_name' => 'Laporan Anev Perpres Nomor 113 Tahun 2025',
+                    'pdf_name' => 'Anev Perpres Nomor 113 Tahun 2025',
                     'subjek' => 'ANALISIS DAN EVALUASI - TATA KELOLA PUPUK BERSUBSIDI - PERPRES NOMOR 113 TAHUN 2025',
                     'metode_evaluasi' => 'Dimensi Kejelasan Rumusan & Efektivitas Pelaksanaan Peraturan Perundang-undangan (Pedoman Anev BPHN)',
-                    'intro' => '<p>Laporan Analisis dan Evaluasi terhadap Peraturan Presiden Nomor 113 Tahun 2025 tentang Perubahan atas Peraturan Presiden Nomor 6 Tahun 2025 tentang Tata Kelola Pupuk Bersubsidi, khususnya terkait koordinasi Sistem Informasi Pupuk Bersubsidi yang terintegrasi (Pasal 15 ayat (3)) serta tata cara penagihan, verifikasi penyaluran, dan pemeriksaan pembayaran Pupuk Bersubsidi (Pasal 14B ayat (1), ayat (4), dan ayat (7)).</p>',
+                    'intro' => '<p>Analisis dan Evaluasi terhadap Peraturan Presiden Nomor 113 Tahun 2025 tentang Perubahan atas Peraturan Presiden Nomor 6 Tahun 2025 tentang Tata Kelola Pupuk Bersubsidi, khususnya terkait koordinasi Sistem Informasi Pupuk Bersubsidi yang terintegrasi (Pasal 15 ayat (3)) serta tata cara penagihan, verifikasi penyaluran, dan pemeriksaan pembayaran Pupuk Bersubsidi (Pasal 14B ayat (1), ayat (4), dan ayat (7)).</p>',
                     'kesimpulan' => '<p>Secara umum pengaturan mengenai Tata Kelola Pupuk Bersubsidi telah sesuai dengan ketentuan peraturan perundang-undangan, namun diperlukan pedoman koordinasi terkait Sistem Informasi Pupuk Bersubsidi yang terintegrasi, penegasan tahapan verifikasi penagihan dan definisi pemeriksa yang berwenang, serta penyesuaian peraturan pelaksana mengenai tata cara penagihan dan pembayaran pupuk bersubsidi.</p>',
                     'rekomendasi' => '<p>1. Koordinasi lebih lanjut antara Asisten Deputi Pengelolaan Sarana dan Prasarana Produksi Pertanian, Kementerian Pertanian, dan unit kerja terkait di Kemenko Bidang Pangan dalam penyusunan pedoman koordinasi Sistem Informasi Pupuk Bersubsidi yang terintegrasi;<br>2. Perbaikan rumusan norma pada Pasal 14B ayat (1) agar tidak menimbulkan ambiguitas objek verifikasi serta penegasan definisi pemeriksa yang berwenang pada Pasal 14B ayat (4); dan<br>3. Penyusunan atau penyesuaian pengaturan lebih lanjut mengenai Tata Cara Penagihan dan Pembayaran Pupuk Bersubsidi sebagaimana diamanatkan Pasal 14B ayat (7).</p>',
                     'tindak_lanjut' => 'Sudah ditindaklanjuti',
@@ -920,8 +923,11 @@ class PageController extends Controller
                     'related_peraturan_ids' => [34, 30],
                 ],
                 [
-                    'slug' => 'laporan-hasil-analisis-dan-evaluasi-terhadap-peraturan-presiden-nomor-109-tahun-2025-tentang-penanganan-sampah-perkotaan-melalui-pengolahan-sampah-menjadi-energi-terbarukan-berbasis-teknologi-ramah-lingkungan',
-                    'title' => 'Laporan Hasil Analisis dan Evaluasi (Anev) terhadap Peraturan Presiden Nomor 109 Tahun 2025 tentang Penanganan Sampah Perkotaan Melalui Pengolahan Sampah Menjadi Energi Terbarukan Berbasis Teknologi Ramah Lingkungan',
+                    'slug' => 'analisis-dan-evaluasi-peraturan-presiden-nomor-109-tahun-2025-tentang-penanganan-sampah-perkotaan-melalui-pengolahan-sampah-menjadi-energi-terbarukan-berbasis-teknologi-ramah-lingkungan',
+                    'title' => 'Analisis dan Evaluasi Peraturan Presiden Nomor 109 Tahun 2025 tentang Penanganan Sampah Perkotaan Melalui Pengolahan Sampah Menjadi Energi Terbarukan Berbasis Teknologi Ramah Lingkungan',
+                    'legacy_titles' => [
+                        'Laporan Hasil Analisis dan Evaluasi (Anev) terhadap Peraturan Presiden Nomor 109 Tahun 2025 tentang Penanganan Sampah Perkotaan Melalui Pengolahan Sampah Menjadi Energi Terbarukan Berbasis Teknologi Ramah Lingkungan',
+                    ],
                     'date' => '2026-08-27',
                     'year' => 2026,
                     'periode_evaluasi' => '2026',
@@ -929,10 +935,10 @@ class PageController extends Controller
                     'teu' => 'Tim Anev Perpres PSEL (Biro Hukum dan Kerja Sama)',
                     'unit_penanggungjawab' => 'Biro Hukum dan Kerja Sama & Asisten Deputi Ekonomi Sirkuler dan Dampak Lingkungan',
                     'pdf' => 'pdf/anev/anev-perpres-109-tahun-2025-psel.pdf',
-                    'pdf_name' => 'Laporan Anev Perpres Nomor 109 Tahun 2025',
+                    'pdf_name' => 'Anev Perpres Nomor 109 Tahun 2025',
                     'subjek' => 'ANALISIS DAN EVALUASI - PENANGANAN SAMPAH PERKOTAAN (PSEL) - PERPRES NOMOR 109 TAHUN 2025',
                     'metode_evaluasi' => 'Dimensi Efektivitas Pelaksanaan, Disharmoni Pengaturan, Kejelasan Rumusan, dan Ketepatan Jenis PUU (Pedoman Anev BPHN)',
-                    'intro' => '<p>Laporan Hasil Analisis dan Evaluasi (Anev) hukum terhadap Peraturan Presiden Nomor 109 Tahun 2025 tentang Penanganan Sampah Perkotaan Melalui Pengolahan Sampah Menjadi Energi Terbarukan Berbasis Teknologi Ramah Lingkungan (PSEL), mencakup 6 pokok temuan terkait syarat minimum volume sampah 1.000 ton/hari, mekanisme pemanfaatan lahan BMN/D, kriteria permasalahan teknis di luar kendali BUPP PSEL, dukungan perizinan, insentif fiskal/non-fiskal, dan ketepatan materi muatan Perpres.</p>',
+                    'intro' => '<p>Analisis dan Evaluasi terhadap Peraturan Presiden Nomor 109 Tahun 2025 tentang Penanganan Sampah Perkotaan Melalui Pengolahan Sampah Menjadi Energi Terbarukan Berbasis Teknologi Ramah Lingkungan (PSEL), mencakup 6 pokok temuan terkait syarat minimum volume sampah 1.000 ton/hari, mekanisme pemanfaatan lahan BMN/D, kriteria permasalahan teknis di luar kendali BUPP PSEL, dukungan perizinan, insentif fiskal/non-fiskal, dan ketepatan materi muatan Perpres.</p>',
                     'kesimpulan' => '<p>Berdasarkan hasil analisis dan evaluasi terhadap Peraturan Presiden Nomor 109 Tahun 2025, meskipun terdapat 6 (enam) temuan normatif dan implementatif, untuk saat ini direkomendasikan tetap dipertahankan karena Perpres dimaksud baru mulai berlaku pada 10 Oktober 2025 dan memerlukan waktu untuk mengevaluasi implementasi serta efektivitas pelaksanaannya secara lebih objektif.</p>',
                     'rekomendasi' => '<p>Direkomendasikan tetap dipertahankan disertai tindak lanjut koordinasi oleh Asisten Deputi Ekonomi Sirkuler dan Dampak Lingkungan bersama Kementerian Lingkungan Hidup (KLH), Kementerian Dalam Negeri, dan K/L terkait mengenai: (1) fasilitasi kerja sama antar Pemda terkait pemenuhan volume sampah 1.000 ton/hari; (2) penyesuaian mekanisme pemanfaatan lahan BMN/D menjadi sewa atau BGS/BSG; (3) penegasan kriteria permasalahan teknis di luar kendali BUPP PSEL; (4) penyusunan daftar perizinan dan penyederhanaannya; serta (5) pemetaan daftar PUU terkait insentif fiskal dan non-fiskal PSEL.</p>',
                     'tindak_lanjut' => 'Sudah ditindaklanjuti',
@@ -941,8 +947,11 @@ class PageController extends Controller
                     'related_peraturan_ids' => [32],
                 ],
                 [
-                    'slug' => 'laporan-kegiatan-rapat-finalisasi-dokumen-analisis-dan-evaluasi-regulasi-pupuk-psel-dan-garam-serta-fgd-analisis-dan-evaluasi-peraturan-perundang-undangan',
-                    'title' => 'Laporan Kegiatan Rapat Finalisasi Dokumen Analisis dan Evaluasi Regulasi Terkait dari Masing-Masing Tema Kebijakan (Pupuk, PSEL, dan Garam) serta Forum Group Discussion Analisis dan Evaluasi Peraturan Perundang-Undangan',
+                    'slug' => 'analisis-dan-evaluasi-regulasi-terkait-dari-masing-masing-tema-kebijakan-pupuk-psel-dan-garam-serta-forum-group-discussion-analisis-dan-evaluasi-peraturan-perundang-undangan',
+                    'title' => 'Analisis dan Evaluasi Regulasi Terkait dari Masing-Masing Tema Kebijakan (Pupuk, PSEL, dan Garam) serta Forum Group Discussion Analisis dan Evaluasi Peraturan Perundang-Undangan',
+                    'legacy_titles' => [
+                        'Laporan Kegiatan Rapat Finalisasi Dokumen Analisis dan Evaluasi Regulasi Terkait dari Masing-Masing Tema Kebijakan (Pupuk, PSEL, dan Garam) serta Forum Group Discussion Analisis dan Evaluasi Peraturan Perundang-Undangan',
+                    ],
                     'date' => '2026-08-27',
                     'year' => 2026,
                     'periode_evaluasi' => '2026',
@@ -950,10 +959,10 @@ class PageController extends Controller
                     'teu' => 'Biro Hukum dan Kerja Sama & Biro Manajemen Kinerja, Data, dan Informasi',
                     'unit_penanggungjawab' => 'Biro Hukum dan Kerja Sama, Kemenko Bidang Pangan',
                     'pdf' => 'pdf/anev/laporan-fgd-anev-bogor-2026-08-27.pdf',
-                    'pdf_name' => 'Laporan FGD & Finalisasi Anev Regulasi (Pupuk, PSEL, dan Garam)',
+                    'pdf_name' => 'Anev Regulasi (Pupuk, PSEL, dan Garam) & FGD Anev PUU',
                     'subjek' => 'ANALISIS DAN EVALUASI - FGD ANEV REGULASI - PUPUK BERSUBSIDI, GARAM, DAN PSEL',
                     'metode_evaluasi' => 'Focus Group Discussion (FGD) & Matriks 6 Dimensi Penilaian Anev BPHN',
-                    'intro' => '<p>Laporan Kegiatan Rapat Finalisasi Dokumen Analisis dan Evaluasi (ANEV) Regulasi serta Focus Group Discussion (FGD) Analisis dan Evaluasi Peraturan Perundang-Undangan di Bogor pada 27 Agustus 2026 atas tiga kebijakan strategis, yaitu Tata Kelola Pupuk Bersubsidi (Perpres Nomor 6 Tahun 2025 jo. Perpres Nomor 113 Tahun 2025), Percepatan Pembangunan Pergaraman Nasional (Perpres Nomor 17 Tahun 2025 jo. Permenko Pangan Nomor 3 Tahun 2025), dan Pengelolaan Sampah Perkotaan/PSEL (Perpres Nomor 109 Tahun 2025), bersama narasumber BPHN Kementerian Hukum dan Fakultas Hukum Universitas Padjadjaran.</p>',
+                    'intro' => '<p>Analisis dan Evaluasi Regulasi serta Focus Group Discussion (FGD) Analisis dan Evaluasi Peraturan Perundang-Undangan di Bogor pada 27 Agustus 2026 atas tiga kebijakan strategis, yaitu Tata Kelola Pupuk Bersubsidi (Perpres Nomor 6 Tahun 2025 jo. Perpres Nomor 113 Tahun 2025), Percepatan Pembangunan Pergaraman Nasional (Perpres Nomor 17 Tahun 2025 jo. Permenko Pangan Nomor 3 Tahun 2025), dan Pengelolaan Sampah Perkotaan/PSEL (Perpres Nomor 109 Tahun 2025), bersama narasumber BPHN Kementerian Hukum dan Fakultas Hukum Universitas Padjadjaran.</p>',
                     'kesimpulan' => '<p>Hasil Analisis dan Evaluasi masing-masing kedeputian diselaraskan dengan perspektif lintas regulasi untuk mengidentifikasi potensi disharmoni, tumpang tindih, dan kekosongan pengaturan. Disepakati bahwa hasil Anev menjadi rujukan penggantian Peraturan Presiden apabila jumlah pasal yang direvisi lebih dari 50%, atau perubahan pasal tertentu apabila kurang dari 50%.</p>',
                     'rekomendasi' => '<p>1. Penyelarasan matriks dan bukti dukung Anev pada tiga tema kebijakan (Pupuk Bersubsidi, Pergaraman Nasional, dan PSEL);<br>2. Pemisahan secara tegas antara rekomendasi perubahan regulasi, pembentukan peraturan pelaksanaan, perbaikan tata kelola/koordinasi, dan langkah kebijakan/nonregulasi; serta<br>3. Pertimbangan penerapan mekanisme evaluasi berkala (review clause) pada regulasi strategis lintas sektor di lingkungan Kemenko Bidang Pangan.</p>',
                     'tindak_lanjut' => 'Sudah ditindaklanjuti',
@@ -964,6 +973,7 @@ class PageController extends Controller
                 [
                     'slug' => 'analisis-dan-evaluasi-peraturan-menteri-koordinator-bidang-pangan-nomor-1-tahun-2024-tentang-susunan-organisasi-dan-tata-kerja-kementerian-koordinator-bidang-pangan',
                     'title' => 'Analisis dan Evaluasi Peraturan Menteri Koordinator Bidang Pangan Nomor 1 Tahun 2024 tentang Susunan Organisasi dan Tata Kerja Kementerian Koordinator Bidang Pangan',
+                    'legacy_titles' => [],
                     'date' => '2026-11-01',
                     'year' => 2026,
                     'periode_evaluasi' => 'Semester II 2026',
@@ -971,10 +981,10 @@ class PageController extends Controller
                     'teu' => 'Biro Hukum dan Kerja Sama & Biro Sumber Daya Manusia dan Organisasi',
                     'unit_penanggungjawab' => 'Biro Sumber Daya Manusia dan Organisasi, Kemenko Bidang Pangan',
                     'pdf' => 'pdf/anev/anev-permenko-1-tahun-2024-otk.pdf',
-                    'pdf_name' => 'Lembar Kerja Anev Permenko Pangan Nomor 1 Tahun 2024 tentang OTK',
+                    'pdf_name' => 'Anev Permenko Pangan Nomor 1 Tahun 2024 tentang OTK',
                     'subjek' => 'ANALISIS DAN EVALUASI - ORGANISASI DAN TATA KERJA (OTK) - PERMENKO NOMOR 1 TAHUN 2024',
                     'metode_evaluasi' => 'Dimensi Efektivitas Pelaksanaan, Disharmoni Pengaturan, Pancasila, dan Kejelasan Rumusan',
-                    'intro' => '<p>Lembar Kerja Analisis dan Evaluasi terhadap Peraturan Menteri Koordinator Bidang Pangan Nomor 1 Tahun 2024 tentang Organisasi dan Tata Kerja Kementerian Koordinator Bidang Pangan, meliputi evaluasi atas Pasal 4 huruf h (efektivitas sinkronisasi, koordinasi, dan evaluasi kebijakan pangan lintas K/L), Pasal 7 (pengaturan jabatan Wakil Menteri Koordinator sesuai Perpres Nomor 147 Tahun 2024), serta Pasal 11 dan Pasal 21 (pemisahan Biro Keuangan dan BMN dengan Biro Umum dan Hubungan Masyarakat).</p>',
+                    'intro' => '<p>Analisis dan Evaluasi terhadap Peraturan Menteri Koordinator Bidang Pangan Nomor 1 Tahun 2024 tentang Organisasi dan Tata Kerja Kementerian Koordinator Bidang Pangan, meliputi evaluasi atas Pasal 4 huruf h (efektivitas sinkronisasi, koordinasi, dan evaluasi kebijakan pangan lintas K/L), Pasal 7 (pengaturan jabatan Wakil Menteri Koordinator sesuai Perpres Nomor 147 Tahun 2024), serta Pasal 11 dan Pasal 21 (pemisahan Biro Keuangan dan BMN dengan Biro Umum dan Hubungan Masyarakat).</p>',
                     'kesimpulan' => '<p>Struktur organisasi lama yang menggabungkan fungsi keuangan, BMN, pengadaan, kerumahtanggaan, dan komunikasi dalam satu biro menimbulkan beban rentang kendali dan potensi disharmoni kewenangan, sehingga diperlukan penataan ulang susunan organisasi Sekretariat melalui perubahan Pasal 11 dan Pasal 21 agar lebih efektif, efisien, dan akuntabel.</p>',
                     'rekomendasi' => '<p>1. Perubahan Pasal 11 dan Pasal 21 Permenko Nomor 1 Tahun 2024 melalui pemisahan fungsi Biro Keuangan dan BMN serta Biro Umum dan Hubungan Masyarakat;<br>2. Penyusunan SOP, Analisis Jabatan (Anjab), dan Analisis Beban Kerja (ABK) serta penguatan pengaturan hubungan kerja antarbiro sebagai tindak lanjut perubahan struktur organisasi; dan<br>3. Penyusunan pedoman teknis pemantauan dan evaluasi kebijakan pangan lintas Kementerian/Lembaga.</p>',
                     'tindak_lanjut' => 'Sudah ditindaklanjuti',
@@ -994,14 +1004,14 @@ class PageController extends Controller
                 }
             }
 
-            // Bersihkan duplikat Analisis dan Evaluasi (pertahankan 1 dokumen unik per judul)
+            // Bersihkan duplikat Analisis dan Evaluasi (pertahankan 1 dokumen unik per judul/pdf)
             $allAnev = Document::where('master_document_id', Document::ANALISIS_EVALUASI)
                 ->orderBy('id', 'asc')
                 ->get();
             $seenKeys = [];
             foreach ($allAnev as $aDoc) {
                 $aTitle = trim((string) \DB::table('documents_lang')->where('base_id', $aDoc->id)->where('lang', 'id')->value('title'));
-                $dedupKey = mb_strtolower($aTitle);
+                $dedupKey = mb_strtolower($aDoc->pdf ?: $aTitle);
                 if ($dedupKey !== '' && isset($seenKeys[$dedupKey])) {
                     \DB::table('permalinks')->whereIn('module', ['puu-analisis-evaluasi', 'analisis-evaluasi', 'anev-puu'])->where('uniqid', (string) $aDoc->id)->delete();
                     \DB::table('documents_lang')->where('base_id', $aDoc->id)->delete();
@@ -1015,39 +1025,67 @@ class PageController extends Controller
 
             foreach ($items as $row) {
                 try {
+                    $matchTitles = array_merge([$row['title']], $row['legacy_titles'] ?? []);
                     $existingDocId = \DB::table('documents')
                         ->join('documents_lang', 'documents.id', '=', 'documents_lang.base_id')
                         ->where('documents.master_document_id', Document::ANALISIS_EVALUASI)
                         ->where('documents_lang.lang', 'id')
-                        ->where(function ($q) use ($row) {
+                        ->where(function ($q) use ($row, $matchTitles) {
                             $q->where('documents.pdf', $row['pdf'])
-                              ->orWhere('documents_lang.title', $row['title']);
+                              ->orWhereIn('documents_lang.title', $matchTitles);
                         })
                         ->orderBy('documents.id', 'asc')
                         ->value('documents.id');
 
+                    $isNew = false;
                     $doc = $existingDocId ? Document::find($existingDocId) : null;
                     if (!$doc) {
+                        $isNew = true;
                         $doc = new Document;
                         $doc->master_document_id = Document::ANALISIS_EVALUASI;
+                        $doc->related_document_id = $row['related_document_id'];
+                        $doc->date = $row['date'];
+                        $doc->tanggal_penetapan = $row['date'];
+                        $doc->year = (string) $row['year'];
+                        $doc->periode_evaluasi = $row['periode_evaluasi'];
+                        $doc->tempat_penetapan = $row['tempat_terbit'];
+                        $doc->pdf = $row['pdf'];
+                        $doc->is_active = 1;
+                        $doc->status_berlaku = 1;
                         $doc->view_count = 0;
                         $doc->download_pdf_count = 0;
+                        $doc->save();
+                    } else {
+                        // Hanya lengkapi kolom yang masih kosong agar edit manual dari Admin tidak tertimpa
+                        $dirty = false;
+                        if (empty($doc->related_document_id)) { $doc->related_document_id = $row['related_document_id']; $dirty = true; }
+                        if (empty($doc->date)) { $doc->date = $row['date']; $dirty = true; }
+                        if (empty($doc->tanggal_penetapan)) { $doc->tanggal_penetapan = $row['date']; $dirty = true; }
+                        if (empty($doc->year) || $doc->year === '2025') { $doc->year = (string) $row['year']; $dirty = true; }
+                        if (empty($doc->periode_evaluasi) || $doc->periode_evaluasi === '2025') { $doc->periode_evaluasi = $row['periode_evaluasi']; $dirty = true; }
+                        if (empty($doc->tempat_penetapan)) { $doc->tempat_penetapan = $row['tempat_terbit']; $dirty = true; }
+                        if (empty($doc->pdf) || $doc->pdf === 'upload/pdf/ND Hasil Anev Perpres Nomor 113 Tahun 2025.pdf') { $doc->pdf = $row['pdf']; $dirty = true; }
+                        if ($dirty) {
+                            $doc->save();
+                        }
                     }
-                    $doc->related_document_id = $row['related_document_id'];
-                    $doc->date = $row['date'];
-                    $doc->tanggal_penetapan = $row['date'];
-                    $doc->year = (string) $row['year'];
-                    $doc->periode_evaluasi = $row['periode_evaluasi'];
-                    $doc->tempat_penetapan = $row['tempat_terbit'];
-                    $doc->pdf = $row['pdf'];
-                    $doc->is_active = 1;
-                    $doc->status_berlaku = 1;
-                    $doc->save();
 
                     foreach (['id', 'en'] as $lang) {
-                        \DB::table('documents_lang')->updateOrInsert(
-                            ['base_id' => $doc->id, 'lang' => $lang],
-                            [
+                        $existingLang = \DB::table('documents_lang')
+                            ->where('base_id', $doc->id)
+                            ->where('lang', $lang)
+                            ->first();
+
+                        $currentTitle = $existingLang ? trim((string) $existingLang->title) : '';
+                        $shouldUpdateTitle = $isNew
+                            || $currentTitle === ''
+                            || in_array($currentTitle, $row['legacy_titles'] ?? [], true)
+                            || stripos($currentTitle, 'Laporan ') === 0;
+
+                        if (!$existingLang) {
+                            \DB::table('documents_lang')->insert([
+                                'base_id' => $doc->id,
+                                'lang' => $lang,
                                 'title' => $row['title'],
                                 'teu' => $row['teu'],
                                 'unit_pemrakarsa' => $row['unit_penanggungjawab'],
@@ -1059,27 +1097,62 @@ class PageController extends Controller
                                 'bahasa' => 'Indonesia',
                                 'bidang_hukum' => 'Hukum Administrasi Negara',
                                 'subjek' => $row['subjek'],
-                            ]
-                        );
+                            ]);
+                        } else {
+                            $langUpdates = [];
+                            if ($shouldUpdateTitle) {
+                                $langUpdates['title'] = $row['title'];
+                            }
+                            if (empty($existingLang->teu)) { $langUpdates['teu'] = $row['teu']; }
+                            if (empty($existingLang->unit_pemrakarsa)) { $langUpdates['unit_pemrakarsa'] = $row['unit_penanggungjawab']; }
+                            if (empty($existingLang->intro) || stripos((string) $existingLang->intro, '<p>Laporan ') === 0 || stripos((string) $existingLang->intro, '<p>Lembar Kerja ') === 0) {
+                                $langUpdates['intro'] = $row['intro'];
+                            }
+                            if (empty($existingLang->metode_evaluasi)) { $langUpdates['metode_evaluasi'] = $row['metode_evaluasi']; }
+                            if (empty($existingLang->kesimpulan)) { $langUpdates['kesimpulan'] = $row['kesimpulan']; }
+                            if (empty($existingLang->rekomendasi)) { $langUpdates['rekomendasi'] = $row['rekomendasi']; }
+                            if (empty($existingLang->pdf_name) || stripos((string) $existingLang->pdf_name, 'Laporan ') === 0 || stripos((string) $existingLang->pdf_name, 'Lembar Kerja ') === 0) {
+                                $langUpdates['pdf_name'] = $row['pdf_name'];
+                            }
+                            if (empty($existingLang->bahasa)) { $langUpdates['bahasa'] = 'Indonesia'; }
+                            if (empty($existingLang->bidang_hukum)) { $langUpdates['bidang_hukum'] = 'Hukum Administrasi Negara'; }
+                            if (empty($existingLang->subjek)) { $langUpdates['subjek'] = $row['subjek']; }
 
-                        $baseSlug = \Illuminate\Support\Str::limit($row['slug'], 190, '');
-                        $targetSlug = $lang === 'en' ? ($baseSlug . '-en') : $baseSlug;
-                        \DB::table('permalinks')->updateOrInsert(
-                            ['module' => 'puu-analisis-evaluasi', 'uniqid' => (string) $doc->id, 'lang' => $lang],
-                            [
-                                'permalink' => $targetSlug,
-                                'label' => \Illuminate\Support\Str::limit($row['title'], 250, ''),
-                                'description' => strip_tags($row['intro']),
-                                'searchable' => $row['title'] . ' ' . $row['subjek'],
-                                'is_active' => 1,
-                                'updated_at' => now(),
-                            ]
-                        );
+                            if (!empty($langUpdates)) {
+                                \DB::table('documents_lang')
+                                    ->where('base_id', $doc->id)
+                                    ->where('lang', $lang)
+                                    ->update($langUpdates);
+                            }
+                        }
+
+                        $existingPerm = \DB::table('permalinks')
+                            ->where('module', 'puu-analisis-evaluasi')
+                            ->where('uniqid', (string) $doc->id)
+                            ->where('lang', $lang)
+                            ->first();
+
+                        if (!$existingPerm || $shouldUpdateTitle) {
+                            $finalTitle = $shouldUpdateTitle ? $row['title'] : ($currentTitle ?: $row['title']);
+                            $baseSlug = \Illuminate\Support\Str::limit(\Illuminate\Support\Str::slug($finalTitle), 190, '');
+                            $targetSlug = $lang === 'en' ? ($baseSlug . '-en') : $baseSlug;
+                            \DB::table('permalinks')->updateOrInsert(
+                                ['module' => 'puu-analisis-evaluasi', 'uniqid' => (string) $doc->id, 'lang' => $lang],
+                                [
+                                    'permalink' => $targetSlug,
+                                    'label' => \Illuminate\Support\Str::limit($finalTitle, 250, ''),
+                                    'description' => strip_tags($row['intro']),
+                                    'searchable' => $finalTitle . ' ' . $row['subjek'],
+                                    'is_active' => 1,
+                                    'updated_at' => now(),
+                                ]
+                            );
+                        }
                     }
 
-                    // Isi CMS Dynamic Metadata (field_id 35..46 untuk master_document_id = 11)
+                    // Isi CMS Dynamic Metadata (field_id 35..46 untuk master_document_id = 11) hanya jika belum diisi atau masih '-'
                     $metaMap = [
-                        35 => 'Laporan Analisis dan Evaluasi PUU',
+                        35 => 'Analisis dan Evaluasi PUU',
                         36 => '-',
                         37 => $row['tempat_terbit'],
                         38 => $row['unit_penanggungjawab'],
@@ -1094,10 +1167,16 @@ class PageController extends Controller
                     ];
                     foreach ($metaMap as $fieldId => $val) {
                         try {
-                            \DB::table('document_metadata_values')->updateOrInsert(
-                                ['document_id' => $doc->id, 'field_id' => $fieldId],
-                                ['value' => $val, 'created_at' => now(), 'updated_at' => now()]
-                            );
+                            $curMeta = \DB::table('document_metadata_values')
+                                ->where('document_id', $doc->id)
+                                ->where('field_id', $fieldId)
+                                ->value('value');
+                            if ($curMeta === null || $curMeta === '' || $curMeta === '-' || $curMeta === 'Laporan Analisis dan Evaluasi PUU') {
+                                \DB::table('document_metadata_values')->updateOrInsert(
+                                    ['document_id' => $doc->id, 'field_id' => $fieldId],
+                                    ['value' => $val, 'created_at' => now(), 'updated_at' => now()]
+                                );
+                            }
                         } catch (\Throwable $eMeta) {}
                     }
 
@@ -1308,8 +1387,10 @@ class PageController extends Controller
                         ->orderBy('documents.id', 'asc')
                         ->value('documents.id');
 
+                    $isNew = false;
                     $doc = $existingDocId ? Document::find($existingDocId) : null;
                     if (!$doc) {
+                        $isNew = true;
                         $doc = new Document;
                         $doc->master_document_id = Document::RISALAH_PEMBAHASAN;
                         $doc->related_document_id = $row['related_rancangan_id'];
@@ -1327,9 +1408,14 @@ class PageController extends Controller
                     }
 
                     foreach (['id', 'en'] as $lang) {
-                        \DB::table('documents_lang')->updateOrInsert(
-                            ['base_id' => $doc->id, 'lang' => $lang],
-                            [
+                        $existingLang = \DB::table('documents_lang')
+                            ->where('base_id', $doc->id)
+                            ->where('lang', $lang)
+                            ->first();
+                        if (!$existingLang) {
+                            \DB::table('documents_lang')->insert([
+                                'base_id' => $doc->id,
+                                'lang' => $lang,
                                 'title' => $row['title'],
                                 'teu' => $row['teu'],
                                 'intro' => $row['intro'],
@@ -1339,25 +1425,32 @@ class PageController extends Controller
                                 'bidang_hukum' => 'Hukum Administrasi',
                                 'subjek' => $row['subjek'],
                                 'unit_pemrakarsa' => $row['unit_penanggungjawab'],
-                            ]
-                        );
+                            ]);
+                        }
 
-                        $baseSlug = \Illuminate\Support\Str::limit($row['slug'], 190, '');
-                        $targetSlug = $lang === 'en' ? ($baseSlug . '-en') : $baseSlug;
-                        \DB::table('permalinks')->updateOrInsert(
-                            ['module' => 'puu-risalah', 'uniqid' => (string) $doc->id, 'lang' => $lang],
-                            [
-                                'permalink' => $targetSlug,
-                                'label' => \Illuminate\Support\Str::limit($row['title'], 250, ''),
-                                'description' => strip_tags($row['intro']),
-                                'searchable' => $row['title'] . ' ' . $row['subjek'],
-                                'is_active' => 1,
-                                'updated_at' => now(),
-                            ]
-                        );
+                        $existingPerm = \DB::table('permalinks')
+                            ->where('module', 'puu-risalah')
+                            ->where('uniqid', (string) $doc->id)
+                            ->where('lang', $lang)
+                            ->first();
+                        if (!$existingPerm) {
+                            $baseSlug = \Illuminate\Support\Str::limit($row['slug'], 190, '');
+                            $targetSlug = $lang === 'en' ? ($baseSlug . '-en') : $baseSlug;
+                            \DB::table('permalinks')->updateOrInsert(
+                                ['module' => 'puu-risalah', 'uniqid' => (string) $doc->id, 'lang' => $lang],
+                                [
+                                    'permalink' => $targetSlug,
+                                    'label' => \Illuminate\Support\Str::limit($row['title'], 250, ''),
+                                    'description' => strip_tags($row['intro']),
+                                    'searchable' => $row['title'] . ' ' . $row['subjek'],
+                                    'is_active' => 1,
+                                    'updated_at' => now(),
+                                ]
+                            );
+                        }
                     }
 
-                    // Isi CMS Dynamic Metadata (field_id 48..57 untuk master_document_id = 12)
+                    // Isi CMS Dynamic Metadata (field_id 48..57 untuk master_document_id = 12) hanya jika belum diisi
                     $metaMap = [
                         48 => 'Risalah Pembahasan PUU',
                         49 => '-',
@@ -1372,10 +1465,16 @@ class PageController extends Controller
                     ];
                     foreach ($metaMap as $fieldId => $val) {
                         try {
-                            \DB::table('document_metadata_values')->updateOrInsert(
-                                ['document_id' => $doc->id, 'field_id' => $fieldId],
-                                ['value' => $val, 'created_at' => now(), 'updated_at' => now()]
-                            );
+                            $curMeta = \DB::table('document_metadata_values')
+                                ->where('document_id', $doc->id)
+                                ->where('field_id', $fieldId)
+                                ->value('value');
+                            if ($curMeta === null || $curMeta === '') {
+                                \DB::table('document_metadata_values')->updateOrInsert(
+                                    ['document_id' => $doc->id, 'field_id' => $fieldId],
+                                    ['value' => $val, 'created_at' => now(), 'updated_at' => now()]
+                                );
+                            }
                         } catch (\Throwable $eMeta) {}
                     }
 
