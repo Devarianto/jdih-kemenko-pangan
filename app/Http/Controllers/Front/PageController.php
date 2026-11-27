@@ -918,16 +918,242 @@ class PageController extends Controller
         return view('dynamic.pages.document-analisis-evaluasi', compact('menu', 'documents', 'years'));
     }
 
+    private function syncRisalahPembahasan2026(): void
+    {
+        try {
+            $items = [
+                [
+                    'slug' => 'risalah-rapat-harmonisasi-r-permenko-bidang-pangan-tentang-tata-kerja-tim-terpadu-dan-tim-pelaksana-pengendalian-alih-fungsi-lahan-sawah',
+                    'title' => 'Risalah Rapat Harmonisasi R-Permenko Bidang Pangan tentang Tata Kerja Tim Terpadu Pengendalian Alih Fungsi Lahan Sawah dan Tim Pelaksana Pengendalian Alih Fungsi Lahan Sawah',
+                    'date' => '2026-03-05',
+                    'year' => 2026,
+                    'tempat_penetapan' => 'Jakarta',
+                    'pihak_internal' => 'Kemenko Bidang Pangan, Kementerian Hukum, Kemenko Infrastruktur dan Pembangunan Kewilayahan, Kemenko Perekonomian, Kemensetneg, Kementerian ATR/BPN, Kementerian Pertanian, Kementerian Kehutanan, Kementerian Lingkungan Hidup, Kementerian PPN/Bappenas, Kemendagri, Kementerian Keuangan, Kementerian PKP, Kementerian Transmigrasi, BPS, BIG, dan KPK',
+                    'teu' => 'Deputi Bidang Koordinasi Usaha Pangan dan Pertanian',
+                    'unit_penanggungjawab' => 'Biro Hukum dan Kerja Sama',
+                    'subjek' => 'Pengendalian Alih Fungsi Lahan Sawah (LSD)',
+                    'pdf' => 'pdf/risalah/risalah-harmonisasi-permenko-afls-2026-03-05.pdf',
+                    'pdf_name' => 'Risalah Pembahasan 2/2026',
+                    'related_rancangan_id' => 171,
+                    'related_peraturan_id' => 58,
+                    'intro' => '<p>Rapat Harmonisasi Rancangan Peraturan Menteri Koordinator Bidang Pangan tentang Tata Kerja Tim Terpadu Pengendalian Alih Fungsi Lahan Sawah dan Tim Pelaksana Pengendalian Alih Fungsi Lahan Sawah yang dilaksanakan pada tanggal 5 Maret 2026 dan 9 Maret 2026 menindaklanjuti Surat Dinas Nomor PPE.PP.01.05-718 oleh Direktorat Jenderal Peraturan Perundang-undangan Kementerian Hukum RI sebagai pelaksanaan Pasal 5 Peraturan Presiden Nomor 4 Tahun 2026.</p>',
+                    'rekomendasi' => '<p>Disepakati rumusan ruang lingkup tata kerja Tim Terpadu dan Tim Pelaksana Pengendalian Alih Fungsi Lahan Sawah yang meliputi koordinasi pelaksanaan dan verifikasi penetapan, sinkronisasi hasil verifikasi peta Lahan Sawah yang Dilindungi (LSD), pengusulan dan penetapan peta LSD, pemberian insentif, pemberdayaan LSD, serta pemantauan dan evaluasi.</p>',
+                ],
+                [
+                    'slug' => 'risalah-rapat-harmonisasi-r-permenko-bidang-pangan-tentang-tata-naskah-dinas',
+                    'title' => 'Risalah Rapat Harmonisasi R-Permenko Bidang Pangan tentang Tata Naskah Dinas di Lingkungan Kementerian Koordinator Bidang Pangan',
+                    'date' => '2026-04-29',
+                    'year' => 2026,
+                    'tempat_penetapan' => 'Bogor',
+                    'pihak_internal' => 'Seluruh Biro, Inspektorat, Sekretariat Deputi, dan Pejabat Fungsional Arsiparis di Lingkungan Kementerian Koordinator Bidang Pangan',
+                    'teu' => 'Biro Umum dan Hubungan Masyarakat / Biro Hukum dan Kerja Sama',
+                    'unit_penanggungjawab' => 'Biro Hukum dan Kerja Sama',
+                    'subjek' => 'Tata Naskah Dinas Kementerian Koordinator Bidang Pangan',
+                    'pdf' => 'pdf/risalah/risalah-harmonisasi-permenko-tata-naskah-dinas-2026-04-29.pdf',
+                    'pdf_name' => 'Risalah Pembahasan 3/2026',
+                    'related_rancangan_id' => 183,
+                    'related_peraturan_id' => 61,
+                    'intro' => '<p>Rapat Pembahasan Harmonisasi dan Finalisasi Rancangan Peraturan Menteri Koordinator Bidang Pangan tentang Tata Naskah Dinas di Lingkungan Kementerian Koordinator Bidang Pangan dilaksanakan pada tanggal 29–30 April 2026 berdasarkan Surat Dinas Nomor 191/KA.01.00/2026 guna menyeragamkan pedoman administrasi persuratan dan pengelolaan arsip di seluruh unit kerja.</p>',
+                    'rekomendasi' => '<p>Disepakati pedoman Tata Naskah Dinas yang mengatur jenis dan format naskah dinas, kewenangan penandatanganan, penggunaan kode klasifikasi arsip, pembedaan penggunaan memorandum dan nota dinas, serta penerapan template seragam melalui aplikasi Srikandi di seluruh unit kerja Kemenko Bidang Pangan.</p>',
+                ],
+                [
+                    'slug' => 'risalah-rapat-harmonisasi-r-permenko-bidang-pangan-tentang-piagam-pengawasan-intern',
+                    'title' => 'Risalah Rapat Harmonisasi R-Permenko Bidang Pangan tentang Piagam Pengawasan Intern Kementerian Koordinator Bidang Pangan',
+                    'date' => '2026-05-04',
+                    'year' => 2026,
+                    'tempat_penetapan' => 'Jakarta',
+                    'pihak_internal' => 'Inspektorat Kemenko Bidang Pangan, Biro Hukum dan Kerja Sama Kemenko Bidang Pangan, dan Direktorat Jenderal Peraturan Perundang-undangan Kementerian Hukum',
+                    'teu' => 'Inspektorat Kementerian Koordinator Bidang Pangan',
+                    'unit_penanggungjawab' => 'Biro Hukum dan Kerja Sama',
+                    'subjek' => 'Piagam Pengawasan Intern (Internal Audit Charter)',
+                    'pdf' => 'pdf/risalah/risalah-harmonisasi-permenko-piagam-pengawasan-intern-2026-05-04.pdf',
+                    'pdf_name' => 'Risalah Pembahasan 4/2026',
+                    'related_rancangan_id' => 172,
+                    'related_peraturan_id' => 59,
+                    'intro' => '<p>Rapat Harmonisasi Rancangan Peraturan Menteri Koordinator Bidang Pangan tentang Piagam Pengawasan Intern Kementerian Koordinator Bidang Pangan dilaksanakan pada Senin, 4 Mei 2026 berdasarkan Surat Dinas Nomor B-54/INS.M.PANGAN/UND/04/2025 untuk memperkuat fungsi pengawasan intern pemerintah (APIP) yang kompeten, independen, objektif, dan akuntabel.</p>',
+                    'rekomendasi' => '<p>Harmonisasi dinyatakan selesai dengan penyempurnaan konsiderans Menimbang serta penyesuaian lampiran mengenai kedudukan, peran, kewenangan, kode etik, dan penilaian berkala Inspektorat sesuai Standar Audit Intern Pemerintah Indonesia.</p>',
+                ],
+                [
+                    'slug' => 'risalah-rapat-harmonisasi-r-permenko-bidang-pangan-tentang-keterlibatan-tim-koordinasi-penyelenggaraan-program-makan-bergizi-gratis',
+                    'title' => 'Risalah Rapat Harmonisasi R-Permenko Bidang Pangan tentang Keterlibatan Tim Koordinasi Penyelenggaraan Program Makan Bergizi Gratis',
+                    'date' => '2026-05-11',
+                    'year' => 2026,
+                    'tempat_penetapan' => 'Bogor',
+                    'pihak_internal' => 'Kemenko Bidang Pangan, Kemenko PMK, Kemenko Pemberdayaan Masyarakat, Kementerian Hukum, Kemensetneg, Kemendagri, Kementerian Keuangan, Kementerian PPN/Bappenas, Kementerian PANRB, dan Badan Gizi Nasional',
+                    'teu' => 'Deputi Bidang Koordinasi Keterjangkauan dan Keamanan Pangan',
+                    'unit_penanggungjawab' => 'Biro Hukum dan Kerja Sama',
+                    'subjek' => 'Koordinasi Penyelenggaraan Program Makan Bergizi Gratis (MBG)',
+                    'pdf' => 'pdf/risalah/risalah-harmonisasi-permenko-tim-koordinasi-mbg-2026-05-11.pdf',
+                    'pdf_name' => 'Risalah Pembahasan 5/2026',
+                    'related_rancangan_id' => 173,
+                    'related_peraturan_id' => 60,
+                    'intro' => '<p>Rapat Pengharmonisasian Rancangan Peraturan Menteri Koordinator Bidang Pangan tentang Keterlibatan Tim Koordinasi Penyelenggaraan Program Makan Bergizi Gratis dilaksanakan pada Senin, 11 Mei 2026 di Bogor menindaklanjuti Surat Undangan Direktorat Jenderal Peraturan Perundang-undangan Kementerian Hukum Nomor PPE.PP.01.05.1508.</p>',
+                    'rekomendasi' => '<p>Disepakati pengaturan mekanisme sinkronisasi, koordinasi, pemantauan, evaluasi, serta pelaporan Tim Koordinasi Penyelenggaraan Program Makan Bergizi Gratis lintas kementerian/lembaga dan pemerintah daerah.</p>',
+                ],
+                [
+                    'slug' => 'risalah-rapat-harmonisasi-r-permenko-bidang-pangan-tentang-perubahan-kedua-atas-permenko-nomor-1-tahun-2024-tentang-organisasi-dan-tata-kerja',
+                    'title' => 'Risalah Rapat Harmonisasi R-Permenko Bidang Pangan tentang Perubahan Kedua atas Peraturan Menteri Koordinator Bidang Pangan Nomor 1 Tahun 2024 tentang Organisasi dan Tata Kerja Kementerian Koordinator Bidang Pangan',
+                    'date' => '2026-09-08',
+                    'year' => 2026,
+                    'tempat_penetapan' => 'Jakarta',
+                    'pihak_internal' => 'Kementerian Koordinator Bidang Pangan, Kementerian Hukum, Kementerian PANRB, dan Badan Kepegawaian Negara',
+                    'teu' => 'Biro Sumber Daya Manusia dan Organisasi / Biro Hukum dan Kerja Sama',
+                    'unit_penanggungjawab' => 'Biro Hukum dan Kerja Sama',
+                    'subjek' => 'Perubahan Kedua Organisasi dan Tata Kerja Kemenko Bidang Pangan',
+                    'pdf' => 'pdf/risalah/risalah-harmonisasi-permenko-perubahan-kedua-otk-2026-09-08.pdf',
+                    'pdf_name' => 'Risalah Pembahasan 6/2026',
+                    'related_rancangan_id' => 184,
+                    'related_peraturan_id' => 64,
+                    'intro' => '<p>Rapat Harmonisasi Rancangan Peraturan Menteri Koordinator Bidang Pangan tentang Perubahan Kedua atas Peraturan Menteri Koordinator Bidang Pangan Nomor 1 Tahun 2024 tentang Organisasi dan Tata Kerja Kementerian Koordinator Bidang Pangan dilaksanakan di Jakarta pada tanggal 8 September 2026 menindaklanjuti surat Direktorat Jenderal Peraturan Perundang-undangan Kementerian Hukum Nomor PPE.PP.01.05-3173.</p>',
+                    'rekomendasi' => '<p>Disepakati penyempurnaan struktur organisasi dan tata kerja Kemenko Bidang Pangan yang mencakup penegasan tugas dan kewenangan Wakil Menteri Koordinator, konsistensi pembagian fungsi antarunit kerja, serta kesesuaian nomenklatur berdasarkan persetujuan Menteri PANRB.</p>',
+                ],
+                [
+                    'slug' => 'risalah-rapat-harmonisasi-r-permenko-bidang-pangan-tentang-pemberian-tunjangan-kinerja-pegawai',
+                    'title' => 'Risalah Rapat Harmonisasi R-Permenko Bidang Pangan tentang Perubahan atas Peraturan Menteri Koordinator Bidang Pangan Nomor 4 Tahun 2025 tentang Pelaksanaan Pemberian Tunjangan Kinerja bagi Pegawai di Lingkungan Kementerian Koordinator Bidang Pangan',
+                    'date' => '2026-09-11',
+                    'year' => 2026,
+                    'tempat_penetapan' => 'Jakarta',
+                    'pihak_internal' => 'Kementerian Koordinator Bidang Pangan, Kementerian Hukum, Kementerian Keuangan, Kementerian PANRB, dan Badan Kepegawaian Negara',
+                    'teu' => 'Biro Sumber Daya Manusia dan Organisasi',
+                    'unit_penanggungjawab' => 'Biro Hukum dan Kerja Sama',
+                    'subjek' => 'Pelaksanaan Pemberian Tunjangan Kinerja Pegawai',
+                    'pdf' => 'pdf/risalah/risalah-harmonisasi-permenko-tunjangan-kinerja-2026-09-11.pdf',
+                    'pdf_name' => 'Risalah Pembahasan 7/2026',
+                    'related_rancangan_id' => 176,
+                    'related_peraturan_id' => 63,
+                    'intro' => '<p>Rapat Harmonisasi Rancangan Peraturan Menteri Koordinator Bidang Pangan tentang Perubahan atas Peraturan Menteri Koordinator Bidang Pangan Nomor 4 Tahun 2025 tentang Pelaksanaan Pemberian Tunjangan Kinerja bagi Pegawai di Lingkungan Kementerian Koordinator Bidang Pangan dilaksanakan pada tanggal 11 September 2026 menindaklanjuti surat Direktorat Jenderal Peraturan Perundang-undangan Kementerian Hukum Nomor PPE.PP.01.05-3254.</p>',
+                    'rekomendasi' => '<p>Disepakati penyesuaian ketentuan pemberian dan pembayaran tunjangan kinerja di lingkungan Kementerian Koordinator Bidang Pangan sehubungan dengan perkembangan struktur kelembagaan dan pengangkatan Wakil Menteri Koordinator Bidang Pangan.</p>',
+                ],
+            ];
+
+            // Pastikan dokumen #185 yang sudah ada memiliki year=2025 dan tanggal_penetapan=2025-12-31
+            \DB::table('documents')
+                ->where('id', 185)
+                ->where('master_document_id', Document::RISALAH_PEMBAHASAN)
+                ->update([
+                    'year' => '2025',
+                    'tanggal_penetapan' => '2025-12-31',
+                ]);
+
+            foreach ($items as $row) {
+                $exists = \Cactuar\Admin\Models\Permalink::where('module', 'puu-risalah')
+                    ->where('permalink', $row['slug'])
+                    ->exists();
+                if ($exists) {
+                    continue;
+                }
+
+                $doc = new Document;
+                $doc->master_document_id = Document::RISALAH_PEMBAHASAN;
+                $doc->related_document_id = $row['related_rancangan_id'];
+                $doc->date = $row['date'];
+                $doc->tanggal_penetapan = $row['date'];
+                $doc->year = (string) $row['year'];
+                $doc->tempat_penetapan = $row['tempat_penetapan'];
+                $doc->pihak_internal = $row['pihak_internal'];
+                $doc->pdf = $row['pdf'];
+                $doc->is_active = 1;
+                $doc->status_berlaku = 1;
+                $doc->view_count = 0;
+                $doc->download_pdf_count = 0;
+                $doc->save();
+
+                foreach (['id', 'en'] as $lang) {
+                    \DB::table('documents_lang')->insert([
+                        'base_id' => $doc->id,
+                        'lang' => $lang,
+                        'title' => $row['title'],
+                        'teu' => $row['teu'],
+                        'intro' => $row['intro'],
+                        'rekomendasi' => $row['rekomendasi'],
+                        'pdf_name' => $row['pdf_name'],
+                        'bahasa' => 'Indonesia',
+                        'bidang_hukum' => 'Hukum Administrasi',
+                        'subjek' => $row['subjek'],
+                        'unit_pemrakarsa' => $row['unit_penanggungjawab'],
+                    ]);
+
+                    $p = new \Cactuar\Admin\Models\Permalink;
+                    $p->uniqid = $doc->id;
+                    $p->module = 'puu-risalah';
+                    $p->lang = $lang;
+                    $p->permalink = $lang === 'en' ? ($row['slug'] . '-en') : $row['slug'];
+                    $p->label = \Illuminate\Support\Str::limit($row['title'], 250, '');
+                    $p->description = strip_tags($row['intro']);
+                    $p->searchable = $row['title'] . ' ' . $row['subjek'];
+                    $p->save();
+                }
+
+                // Isi CMS Dynamic Metadata (field_id 48..57 untuk master_document_id = 12)
+                $metaMap = [
+                    48 => 'Risalah Pembahasan PUU',
+                    49 => '-',
+                    50 => $row['tempat_penetapan'],
+                    51 => $row['unit_penanggungjawab'],
+                    52 => (string) $row['year'],
+                    53 => '-',
+                    54 => $row['subjek'],
+                    55 => 'Indonesia',
+                    56 => 'Hukum Administrasi',
+                    57 => '-',
+                ];
+                foreach ($metaMap as $fieldId => $val) {
+                    \DB::table('document_metadata_values')->updateOrInsert(
+                        ['document_id' => $doc->id, 'field_id' => $fieldId],
+                        ['value' => $val, 'created_at' => now(), 'updated_at' => now()]
+                    );
+                }
+
+                // Hubungkan Peraturan Terkait di document_relations
+                if (!empty($row['related_peraturan_id'])) {
+                    \DB::table('document_relations')->updateOrInsert(
+                        [
+                            'source_document_id' => $doc->id,
+                            'related_document_id' => $row['related_peraturan_id'],
+                            'relation_group' => 'peraturan_terkait',
+                        ],
+                        [
+                            'relation_type' => 'terkait',
+                            'is_external' => 0,
+                            'notes' => '',
+                            'created_at' => now(),
+                            'updated_at' => now(),
+                        ]
+                    );
+                }
+            }
+        } catch (\Throwable $e) {
+            \Log::warning('syncRisalahPembahasan2026 failed: ' . $e->getMessage());
+        }
+    }
+
     public function getRisalahPembahasan($menu)
     {
+        $this->syncRisalahPembahasan2026();
+
         $documents = Document::translate()->whereIsActive(1)->where('master_document_id', Document::RISALAH_PEMBAHASAN);
 
         if (request()->query('search')) {
             $documents = $documents->where('title', 'like', '%'.request()->query('search').'%');
         }
+        if (request()->query('year')) {
+            $documents = $documents->where(function ($q) {
+                $y = request()->query('year');
+                $q->where('documents.year', $y)
+                  ->orWhereRaw('YEAR(documents.date) = ?', [$y]);
+            });
+        }
         
-        $documents = $documents->orderBy('tanggal_penetapan', 'desc')->orderBy('id', 'desc')->paginate(8);
-        $years = collect();
+        $documents = $documents->orderByRaw('COALESCE(documents.date, documents.tanggal_penetapan, DATE(documents.created_at)) DESC')
+            ->orderBy('documents.id', 'desc')
+            ->paginate(8);
+        $years = Document::whereIsActive(1)
+            ->where('master_document_id', Document::RISALAH_PEMBAHASAN)
+            ->selectRaw('COALESCE(year, YEAR(date)) as year')
+            ->whereRaw('COALESCE(year, YEAR(date)) IS NOT NULL')
+            ->distinct()
+            ->orderBy('year', 'desc')
+            ->get();
         return view('dynamic.pages.document-risalah-pembahasan', compact('menu', 'documents', 'years'));
     }
 
