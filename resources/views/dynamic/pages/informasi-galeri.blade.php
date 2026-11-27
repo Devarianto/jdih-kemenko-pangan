@@ -77,9 +77,12 @@
   <div class="popup popup-video" id="popup-video">
     <div class="popup__overlay"></div>
     <div class="popup__box popup__box--large">
+      <div class="popup__close">
+        <i class="wa-icon wa-ic-close-solid"></i>
+      </div>
       <div class="popup__content">
         <div class="wrap-video">
-          <iframe src="" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+          <iframe src="" title="Video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
         </div>
       </div>
     </div>
@@ -128,6 +131,24 @@
   </div>
   @push('head')
     <link rel="stylesheet" type="text/css" href="{{ Vite::asset('resources/assets/sass/pages/document.scss')}}" preload>
+    <style>
+      #popup-video.is-instagram .popup__box {
+        max-width: 440px !important;
+        width: 92vw !important;
+      }
+      #popup-video.is-instagram .wrap-video {
+        padding-bottom: 0 !important;
+        height: min(720px, 84vh) !important;
+        background: #fff;
+        border-radius: 12px;
+        overflow: hidden;
+      }
+      #popup-video.is-instagram .wrap-video iframe {
+        position: static !important;
+        width: 100% !important;
+        height: 100% !important;
+      }
+    </style>
   @endpush
   @push('footer')
     <script type="module" async type="text/javascript" src="{{ Vite::asset('resources/assets/js/document.js') }}"></script>
@@ -172,6 +193,31 @@
             applyFilter(filter);
           });
         });
+
+        // Sesuaikan ukuran popup video untuk Instagram Reels (rasio vertikal)
+        const popupVideo = document.getElementById('popup-video');
+        document.querySelectorAll('.listing-galeri__item .icon-play').forEach(function(btn) {
+          btn.addEventListener('click', function() {
+            const card = this.closest('.listing-galeri__item');
+            const videoUrl = card ? (card.dataset.video || '') : '';
+            if (popupVideo) {
+              if (videoUrl.indexOf('instagram.com') !== -1) {
+                popupVideo.classList.add('is-instagram');
+              } else {
+                popupVideo.classList.remove('is-instagram');
+              }
+            }
+          });
+        });
+        if (popupVideo) {
+          popupVideo.querySelectorAll('.popup__overlay, .popup__close').forEach(function(el) {
+            el.addEventListener('click', function() {
+              const ifr = popupVideo.querySelector('iframe');
+              if (ifr) ifr.setAttribute('src', '');
+              popupVideo.classList.remove('is-instagram');
+            });
+          });
+        }
       });
     </script>
   @endpush

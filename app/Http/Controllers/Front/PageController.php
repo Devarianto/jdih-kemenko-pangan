@@ -335,8 +335,158 @@ class PageController extends Controller
         return ['berlaku' => $arr_year_berlaku, 'tidak-berlaku' => $arr_year_tidak_berlaku];
     }
 
+    private function syncInstagramReels2026(): void
+    {
+        try {
+            $reels = [
+                [
+                    'code' => 'DfERKn4RQiF',
+                    'embed_url' => 'https://www.instagram.com/reel/DfERKn4RQiF/embed/',
+                    'date' => '2026-10-27',
+                    'thumb' => 'images/gallery/reel-fgd-policy-brief-ketahanan-pangan-2026-10-27.jpg',
+                    'slug' => 'fgd-penyusunan-policy-brief-nasional-isu-ketahanan-pangan',
+                    'title_id' => 'FGD Penyusunan Policy Brief Nasional Isu Ketahanan Pangan',
+                    'title_en' => 'FGD on Drafting National Policy Brief on Food Security Issues',
+                    'gallery_desc_id' => 'Biro Hukum dan Kerja Sama Kemenko Bidang Pangan menghadiri Focus Group Discussion (FGD) Penyusunan Policy Brief Nasional Isu Ketahanan Pangan pada 27 Oktober 2026.',
+                    'gallery_desc_en' => 'The Legal and Cooperation Bureau of the Coordinating Ministry for Food Affairs attended the FGD on Drafting National Policy Brief on Food Security Issues on October 27, 2026.',
+                    'news_desc_id' => '<p><strong>JAKARTA</strong> – Biro Hukum dan Kerja Sama Kementerian Koordinator Bidang Pangan menghadiri kegiatan <em>Focus Group Discussion</em> (FGD) Penyusunan <em>Policy Brief</em> Nasional Isu Ketahanan Pangan pada tanggal 27 Oktober 2026.</p><p>Forum ini membahas penguatan tata kelola, sinkronisasi regulasi, integrasi data, serta rantai nilai pangan nasional bersama para pemangku kepentingan lintas kementerian/lembaga guna mendukung ketahanan pangan yang berkelanjutan.</p><p>Melalui kolaborasi lintas lembaga ini, diharapkan rumusan kebijakan dan regulasi di bidang pangan semakin responsif, terpadu, dan memberikan kepastian hukum bagi seluruh pelaku sektor pangan.</p>',
+                    'news_desc_en' => '<p><strong>JAKARTA</strong> – The Legal and Cooperation Bureau of the Coordinating Ministry for Food Affairs participated in the Focus Group Discussion (FGD) on Drafting the National Policy Brief on Food Security Issues on October 27, 2026.</p><p>The forum discussed strengthening governance, regulatory synchronization, data integration, and the national food value chain with cross-ministerial and institutional stakeholders to support sustainable food security.</p>',
+                ],
+                [
+                    'code' => 'DfHyKhOBVJp',
+                    'embed_url' => 'https://www.instagram.com/reel/DfHyKhOBVJp/embed/',
+                    'date' => '2026-10-28',
+                    'thumb' => 'images/gallery/reel-bimtek-penyusunan-abstrak-puu-2026-10-28.jpg',
+                    'slug' => 'bimbingan-teknis-penyusunan-abstrak-peraturan-perundang-undangan-jdih-kemenko-pangan',
+                    'title_id' => 'Bimbingan Teknis Penyusunan Abstrak Peraturan Perundang-undangan (PUU) JDIH Kemenko Pangan',
+                    'title_en' => 'Technical Guidance on Drafting Legal Regulation Abstracts for JDIH Kemenko Pangan',
+                    'gallery_desc_id' => 'Biro Hukum dan Kerja Sama Kemenko Bidang Pangan menyelenggarakan Bimbingan Teknis Penyusunan Abstrak PUU bersama narasumber BPHN Kementerian Hukum pada Rabu, 28 Oktober 2026.',
+                    'gallery_desc_en' => 'The Legal and Cooperation Bureau organized Technical Guidance on Drafting Legal Regulation Abstracts with BPHN Ministry of Law on October 28, 2026.',
+                    'news_desc_id' => '<p><strong>JAKARTA</strong> – Biro Hukum dan Kerja Sama Kementerian Koordinator Bidang Pangan menyelenggarakan kegiatan Bimbingan Teknis Penyusunan Abstrak Peraturan Perundang-undangan (PUU) bagi tim pengelola JDIH di lingkungan Kementerian Koordinator Bidang Pangan pada Rabu, 28 Oktober 2026.</p><p>Kegiatan ini menghadirkan narasumber dari Badan Pembinaan Hukum Nasional (BPHN), Kementerian Hukum, yang memaparkan teknik serta standar penyusunan abstrak peraturan perundang-undangan sesuai Standar Pengelolaan JDIHN.</p><p>Melalui bimbingan teknis ini, kualitas pengolahan dokumen hukum pada portal JDIH Kemenko Pangan diharapkan semakin meningkat sehingga informasi hukum dapat lebih mudah dicari, dibaca, dan dipahami oleh masyarakat.</p>',
+                    'news_desc_en' => '<p><strong>JAKARTA</strong> – The Legal and Cooperation Bureau of the Coordinating Ministry for Food Affairs held Technical Guidance on Drafting Legal Regulation Abstracts for the JDIH management team on Wednesday, October 28, 2026.</p><p>Featuring resource persons from the National Law Development Agency (BPHN), Ministry of Law, the session covered techniques and standards for drafting legal abstracts in accordance with JDIHN Management Standards to enhance public access to legal information.</p>',
+                ],
+                [
+                    'code' => 'DfqmJenPiyY',
+                    'embed_url' => 'https://www.instagram.com/reel/DfqmJenPiyY/embed/',
+                    'date' => '2026-11-06',
+                    'thumb' => 'images/gallery/reel-konsultasi-publik-peta-jalan-perdagangan-karbon-2026-11-06.jpg',
+                    'slug' => 'konsultasi-publik-rancangan-permenko-peta-jalan-perdagangan-karbon-nasional-pjpkn',
+                    'title_id' => 'Konsultasi Publik Rancangan Permenko Bidang Pangan tentang Tata Cara Penyusunan dan Penetapan Peta Jalan Perdagangan Karbon Nasional (PJPKN)',
+                    'title_en' => 'Public Consultation on Draft Coordinating Minister Regulation on National Carbon Trading Roadmap (PJPKN)',
+                    'gallery_desc_id' => 'Kementerian Koordinator Bidang Pangan menggelar Konsultasi Publik Rancangan Permenko tentang Peta Jalan Perdagangan Karbon Nasional (PJPKN) di Jakarta pada Jumat, 6 November 2026.',
+                    'gallery_desc_en' => 'The Coordinating Ministry for Food Affairs held a Public Consultation on the Draft Regulation on the National Carbon Trading Roadmap (PJPKN) in Jakarta on November 6, 2026.',
+                    'news_desc_id' => '<p><strong>JAKARTA</strong> – Kementerian Koordinator Bidang Pangan menggelar Konsultasi Publik Rancangan Peraturan Menteri Koordinator Bidang Pangan tentang Tata Cara Penyusunan dan Penetapan Peta Jalan Perdagangan Karbon Nasional (PJPKN) di Jakarta pada Jumat, 6 November 2026.</p><p>Kegiatan ini merupakan tindak lanjut amanat Pasal 58 ayat (7) Peraturan Presiden Nomor 110 Tahun 2025, sekaligus forum lintas kementerian/lembaga dan mitra pembangunan untuk menjaring masukan publik serta memperkuat substansi regulasi sesuai prinsip <em>meaningful participation</em>.</p><p>Melalui tata kelola yang jelas dan kolaboratif, Pemerintah terus mendorong terwujudnya ekosistem perdagangan karbon nasional yang berintegritas dan berkualitas tinggi guna mendukung target pengendalian emisi gas rumah kaca nasional.</p>',
+                    'news_desc_en' => '<p><strong>JAKARTA</strong> – The Coordinating Ministry for Food Affairs held a Public Consultation on the Draft Regulation of the Coordinating Minister for Food Affairs concerning Procedures for Drafting and Establishing the National Carbon Trading Roadmap (PJPKN) in Jakarta on Friday, November 6, 2026.</p><p>Implementing Article 58 paragraph (7) of Presidential Regulation Number 110 of 2025, the cross-ministerial forum gathered stakeholder input based on meaningful participation principles to build a high-integrity national carbon trading ecosystem.</p>',
+                ],
+            ];
+
+            $galeriClassId = \DB::table('video_classifications')->where('code', 'galeri')->value('id') ?: 1;
+
+            foreach ($reels as $reel) {
+                $thumbJson = json_encode([
+                    'path' => $reel['thumb'],
+                    'alt_id' => $reel['title_id'],
+                    'alt_en' => $reel['title_en'],
+                ]);
+
+                // 1. Sync ke Galeri (Video)
+                $existingGallery = Gallery::where('type', 'video')
+                    ->where('iframe', $reel['embed_url'])
+                    ->first();
+                if (!$existingGallery) {
+                    $g = new Gallery;
+                    $g->thumbnail = $thumbJson;
+                    $g->type = 'video';
+                    $g->iframe = $reel['embed_url'];
+                    $g->date = $reel['date'];
+                    $g->sort_id = 0;
+                    $g->is_active = 1;
+                    $g->save();
+
+                    \DB::table('galleries_lang')->insertOrIgnore([
+                        [
+                            'base_id' => $g->id,
+                            'lang' => 'id',
+                            'title' => $reel['title_id'],
+                            'description' => $reel['gallery_desc_id'],
+                        ],
+                        [
+                            'base_id' => $g->id,
+                            'lang' => 'en',
+                            'title' => $reel['title_en'],
+                            'description' => $reel['gallery_desc_en'],
+                        ],
+                    ]);
+
+                    \DB::table('gallery_video_classifications')->insertOrIgnore([
+                        'gallery_id' => $g->id,
+                        'classification_id' => $galeriClassId,
+                        'created_at' => now(),
+                        'updated_at' => now(),
+                    ]);
+                }
+
+                // 2. Sync ke Berita (News) beserta embed video Reels di dalam konten berita
+                $hasNewsPerm = \DB::table('permalinks')
+                    ->where('module', 'information-news')
+                    ->where('permalink', $reel['slug'])
+                    ->exists();
+                if (!$hasNewsPerm) {
+                    $n = new News;
+                    $n->thumbnail = $thumbJson;
+                    $n->thumbnail_home_small = $thumbJson;
+                    $n->thumbnail_home_large = $thumbJson;
+                    $n->image = $thumbJson;
+                    $n->date = $reel['date'];
+                    $n->is_active = 1;
+                    $n->save();
+
+                    $embedHtml = '<div style="margin:24px auto;max-width:420px;text-align:center;">'
+                        . '<iframe src="' . $reel['embed_url'] . '" width="100%" height="640" frameborder="0" scrolling="no" allowtransparency="true" allowfullscreen style="border-radius:12px;border:1px solid #e2e8f0;background:#fff;"></iframe>'
+                        . '</div>';
+
+                    \DB::table('news_lang')->insertOrIgnore([
+                        [
+                            'base_id' => $n->id,
+                            'lang' => 'id',
+                            'title' => $reel['title_id'],
+                            'description' => $reel['news_desc_id'] . $embedHtml,
+                        ],
+                        [
+                            'base_id' => $n->id,
+                            'lang' => 'en',
+                            'title' => $reel['title_en'],
+                            'description' => $reel['news_desc_en'] . $embedHtml,
+                        ],
+                    ]);
+
+                    foreach ([
+                        'id' => [$reel['slug'], $reel['title_id'], $reel['news_desc_id']],
+                        'en' => [$reel['slug'] . '-en', $reel['title_en'], $reel['news_desc_en']],
+                    ] as $langCode => $pInfo) {
+                        \DB::table('permalinks')->updateOrInsert(
+                            ['module' => 'information-news', 'uniqid' => (string) $n->id, 'lang' => $langCode],
+                            [
+                                'permalink' => $pInfo[0],
+                                'label' => \Illuminate\Support\Str::limit($pInfo[1], 250, ''),
+                                'description' => \Illuminate\Support\Str::limit(strip_tags($pInfo[2]), 250, ''),
+                                'searchable' => $pInfo[1] . ' ' . strip_tags($pInfo[2]),
+                                'is_active' => 1,
+                                'created_at' => now(),
+                                'updated_at' => now(),
+                            ]
+                        );
+                    }
+                }
+            }
+        } catch (\Throwable $e) {
+            \Log::warning('syncInstagramReels2026 failed: ' . $e->getMessage());
+        }
+    }
+
     public function getInformasiGaleri($menu)
     {
+        $this->syncInstagramReels2026();
         $galleries = Gallery::translate()->whereIsActive(1);
 
         $filter = request()->query('filter', 'all');
@@ -468,6 +618,7 @@ class PageController extends Controller
 
     public function getNews($menu)
     {
+        $this->syncInstagramReels2026();
         $news = News::translate()->whereIsActive(1);
 
 
