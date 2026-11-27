@@ -928,7 +928,7 @@ class PageController extends Controller
                     'date' => '2026-03-05',
                     'year' => 2026,
                     'tempat_penetapan' => 'Jakarta',
-                    'pihak_internal' => 'Kemenko Bidang Pangan, Kementerian Hukum, Kemenko Infrastruktur dan Pembangunan Kewilayahan, Kemenko Perekonomian, Kemensetneg, Kementerian ATR/BPN, Kementerian Pertanian, Kementerian Kehutanan, Kementerian Lingkungan Hidup, Kementerian PPN/Bappenas, Kemendagri, Kementerian Keuangan, Kementerian PKP, Kementerian Transmigrasi, BPS, BIG, dan KPK',
+                    'pihak_internal' => 'Kemenko Bidang Pangan, Kementerian Hukum, Kemenko Infrastruktur, Kemenko Perekonomian, Kemensetneg, Kementerian ATR/BPN, Kementan, Kemenhut, KLH, Bappenas, Kemendagri, Kemenkeu, BPS, BIG, dan KPK',
                     'teu' => 'Deputi Bidang Koordinasi Usaha Pangan dan Pertanian',
                     'unit_penanggungjawab' => 'Biro Hukum dan Kerja Sama',
                     'subjek' => 'Pengendalian Alih Fungsi Lahan Sawah (LSD)',
@@ -1041,12 +1041,8 @@ class PageController extends Controller
                         ->where('permalink', $row['slug'])
                         ->first();
 
-                    if ($existingPerm) {
-                        $doc = Document::find($existingPerm->uniqid);
-                        if (!$doc) {
-                            continue;
-                        }
-                    } else {
+                    $doc = $existingPerm ? Document::find($existingPerm->uniqid) : null;
+                    if (!$doc) {
                         $doc = new Document;
                         $doc->master_document_id = Document::RISALAH_PEMBAHASAN;
                         $doc->related_document_id = $row['related_rancangan_id'];
@@ -1061,34 +1057,36 @@ class PageController extends Controller
                         $doc->view_count = 0;
                         $doc->download_pdf_count = 0;
                         $doc->save();
+                    }
 
-                        foreach (['id', 'en'] as $lang) {
-                            \DB::table('documents_lang')->updateOrInsert(
-                                ['base_id' => $doc->id, 'lang' => $lang],
-                                [
-                                    'title' => $row['title'],
-                                    'teu' => $row['teu'],
-                                    'intro' => $row['intro'],
-                                    'rekomendasi' => $row['rekomendasi'],
-                                    'pdf_name' => $row['pdf_name'],
-                                    'bahasa' => 'Indonesia',
-                                    'bidang_hukum' => 'Hukum Administrasi',
-                                    'subjek' => $row['subjek'],
-                                    'unit_pemrakarsa' => $row['unit_penanggungjawab'],
-                                ]
-                            );
+                    foreach (['id', 'en'] as $lang) {
+                        \DB::table('documents_lang')->updateOrInsert(
+                            ['base_id' => $doc->id, 'lang' => $lang],
+                            [
+                                'title' => $row['title'],
+                                'teu' => $row['teu'],
+                                'intro' => $row['intro'],
+                                'rekomendasi' => $row['rekomendasi'],
+                                'pdf_name' => $row['pdf_name'],
+                                'bahasa' => 'Indonesia',
+                                'bidang_hukum' => 'Hukum Administrasi',
+                                'subjek' => $row['subjek'],
+                                'unit_pemrakarsa' => $row['unit_penanggungjawab'],
+                            ]
+                        );
 
-                            $p = new \Cactuar\Admin\Models\Permalink;
-                            $p->uniqid = (string) $doc->id;
-                            $p->module = 'puu-risalah';
-                            $p->lang = $lang;
-                            $p->permalink = $lang === 'en' ? ($row['slug'] . '-en') : $row['slug'];
-                            $p->label = \Illuminate\Support\Str::limit($row['title'], 250, '');
-                            $p->description = strip_tags($row['intro']);
-                            $p->searchable = $row['title'] . ' ' . $row['subjek'];
-                            $p->is_active = 1;
-                            $p->save();
-                        }
+                        $targetSlug = $lang === 'en' ? ($row['slug'] . '-en') : $row['slug'];
+                        $p = \Cactuar\Admin\Models\Permalink::firstOrNew([
+                            'module' => 'puu-risalah',
+                            'permalink' => $targetSlug,
+                        ]);
+                        $p->uniqid = (string) $doc->id;
+                        $p->lang = $lang;
+                        $p->label = \Illuminate\Support\Str::limit($row['title'], 250, '');
+                        $p->description = strip_tags($row['intro']);
+                        $p->searchable = $row['title'] . ' ' . $row['subjek'];
+                        $p->is_active = 1;
+                        $p->save();
                     }
 
                     // Isi CMS Dynamic Metadata (field_id 48..57 untuk master_document_id = 12)
