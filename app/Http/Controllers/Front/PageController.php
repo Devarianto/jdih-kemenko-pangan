@@ -383,6 +383,13 @@ class PageController extends Controller
             $galeriClassId = \DB::table('video_classifications')->where('code', 'galeri')->value('id') ?: 1;
 
             foreach ($reels as $reel) {
+                $srcThumb = public_path($reel['thumb']);
+                $dstThumb = public_path('assets/source/' . $reel['thumb']);
+                if (file_exists($srcThumb) && !file_exists($dstThumb)) {
+                    @mkdir(dirname($dstThumb), 0755, true);
+                    @copy($srcThumb, $dstThumb);
+                }
+
                 $thumbJson = json_encode([
                     'path' => $reel['thumb'],
                     'alt_id' => $reel['title_id'],
